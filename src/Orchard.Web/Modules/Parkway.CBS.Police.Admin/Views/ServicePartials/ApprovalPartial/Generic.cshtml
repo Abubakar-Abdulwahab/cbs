@@ -1,0 +1,6 @@
+﻿@model Parkway.CBS.Police.Core.VM.GenericRequestDetailsVM
+@using (Html.BeginRouteForm(Parkway.CBS.Police.Admin.RouteName.PSSGenericApproval.ApproveRequest))
+{
+    @Html.Partial("\\ServicePartials\\ApprovalPartial\\ApprovalComment", Model,
+    new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object> ("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSGenericApproval).Name) } })
+}

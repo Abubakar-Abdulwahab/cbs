@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="PayeeProcessor" namespace="PayeeProcessor.DAL.Model" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="TenantCBSSettings" table="Parkway_CBS_Core_TenantCBSSettings" lazy="true" >
+    <id name="Id" column="Id" generator="native" />
+    <property name="Identifier" column="Identifier" />
+    <property name="StateName" column="StateName" />
+    <property name="StateId" column="StateId" />
+    <property name="CountryId" column="CountryId" />
+    <property name="CountryName" column="CountryName" />
+    <property name="AddedBy_Id" column="AddedBy_Id" />
+    <property name="LastUpdatedBy_Id" column="LastUpdatedBy_Id" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

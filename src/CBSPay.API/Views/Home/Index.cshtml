@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+
+@section HomePageWelcome{
+    @*<section class="banner">
+        <div class="container">
+            <h1 class="heading wow fadeInDown">Edo Revenue Administration System</h1>
+            <hr>
+            <p class="wow fadeInUp">
+                We have made knowing about your taxes and paying them very easy to understand and manage, through a new administration system from EIRS. Kindly pay your taxes to help grow Edo State.
+            </p>
+        </div>
+    </section>*@
+    <section class="banner" style="margin-bottom: 35px;">
+        <div class="row" style="background-color:#f0f8ff; width:100%">
+            <h1 class="heading wow fadeInDown">Edo Revenue Administration System</h1>
+            <hr>
+            <p class="wow fadeInUp">
+                We have made knowing about your taxes and paying them very easy to understand and manage, through a new administration system from EIRS. Kindly pay your taxes to help grow Edo State.
+            </p>
+            @*<a href="@Url.Action("SignUp","Login")" class="btn btn-redtheme btn-lg"> Start Here </a>*@
+        </div>
+    </section>
+}
+
+<div class="col-sm-4">
+    <div class="portlet light" style="min-height: 280px">
+        <div class="portlet-title">
+            <div class="caption">Tax Education &amp; Awareness</div>
+        </div>
+        <div class="portlet-body">
+            <div class="link-box-data">
+                <p>
+                    Edo State Internal Revenue Service is here to help you understand and pay your taxes.
+                </p>
+                <ul>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">What are taxes and available types</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">How do I register to pay taxes</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">How do I make payment</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">I need to speak with someone in EIRS</a>
+                    </li>
+                    <li class="clearfix">
+                        <a href="" class="btn btn-theme pull-right">
+                            View All <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="portlet light" style="min-height: 280px">
+        <div class="portlet-title">
+            <div class="caption">
+                Tax Payer Registration
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="link-box-data">
+                <p>
+                    Register to obtain your own Edo State Revenue Identification Number (RIN).
+                </p>
+                <ul>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Individual Tax Payers - Registration</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Corporate Tax Payers - Registration</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Update Residential Address</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Update workplace Address</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="portlet light" style="min-height: 280px">
+        <div class="portlet-title">
+            <div class="caption">Register Your Assets</div>
+        </div>
+        <div class="portlet-body">
+            <div class="link-box-data">
+                <p>
+                    Register your assets to prevent double taxation and to know what taxes apply.
+                </p>
+                <ul>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Vehicles - cars, buses or trucks</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Business - formal or informal</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Property - operational or not</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="">Land - developed or underdeveloped</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section HomePageFooter{
+    <section class="bordered highlight">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("GetReferenceItems", "Home", FormMethod.Post))
+                {
+                    <div class="col-sm-4 text-justify">
+                        If you have received a notification of assessment or a service bill, please enter the reference number here to make payment.
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" autocomplete="off" required="" class="form-control mt12" id="txtMobileNumber" name="phoneNumber" placeholder="Tax Payer Mobile Number">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" autocomplete="off" required="" class="form-control mt12" id="txtReferenceNumber" name="ReferenceNumber" placeholder="Enter 10 Digit Reference ID">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-theme btn-block mt12">Retrieve</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+}
+

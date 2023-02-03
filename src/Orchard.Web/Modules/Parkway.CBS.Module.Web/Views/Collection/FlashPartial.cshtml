@@ -1,0 +1,6 @@
+﻿@model string
+
+<div class="alert alert-danger alert-dismissible" style="max-width:400px;@(string.IsNullOrEmpty(Model)?"display:none":"")">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> @Model.
+</div>

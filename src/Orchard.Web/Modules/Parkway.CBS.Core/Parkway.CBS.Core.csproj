@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B02ED5F-5616-492F-8B66-190795D4BEE9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Core</RootNamespace>
+    <AssemblyName>Parkway.CBS.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
+    <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
+    <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
+    <SccProvider>Mercurial Source Control Package</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CRONBaker">
+      <HintPath>..\..\..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\CRONBaker.dll</HintPath>
+    </Reference>
+    <Reference Include="Faker.NET4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="InfoGRID.Pulse.SDK">
+      <HintPath>..\..\..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\InfoGRID.Pulse.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Web.Helpers.Mvc.2.0.20710.0\lib\net40\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.Cashflow.Ng">
+      <HintPath>..\..\..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\Parkway.Cashflow.Ng.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.CBS.ReferenceData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Parkway.CBS.ReferenceData\bin\Debug\Parkway.CBS.ReferenceData.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=3.0.4.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Quartz.3.0.4\lib\net452\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Simple.ImageResizer.2.1.0\lib\net40\Simple.ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ZXing.Net.0.16.5\lib\net45\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ZXing.Net.0.16.5\lib\net45\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configs\IPPISSettlement.cs" />
+    <Compile Include="Connected Services\NationalIdentityVerifcationSystem\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ReadyCashService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DataFilters\AssessmentReport\IInvoiceAssessmentsReportFilter.cs" />
+    <Compile Include="DataFilters\AssessmentReport\InvoiceAssessmentsReportFilter.cs" />
+    <Compile Include="DataFilters\AssessmentReport\SearchFilters\IInvoiceAssessmentSearchFilter.cs" />
+    <Compile Include="DataFilters\AssessmentReport\SearchFilters\IRFilters.cs" />
+    <Compile Include="DataFilters\BillingFrequency\BaseFrequency.cs" />
+    <Compile Include="DataFilters\BillingFrequency\Contracts\IBillingFrequencyFilter.cs" />
+    <Compile Include="DataFilters\BillingFrequency\DailyFrequency.cs" />
+    <Compile Include="DataFilters\BillingFrequency\MonthlyFrequency.cs" />
+    <Compile Include="DataFilters\BillingFrequency\WeeklyFrequency.cs" />
+    <Compile Include="DataFilters\BillingFrequency\YearlyFrequency.cs" />
+    <Compile Include="DataFilters\CBSUserTaxEntityProfileLocationReport\CBSUserTaxEntityProfileLocationFilter.cs" />
+    <Compile Include="DataFilters\CBSUserTaxEntityProfileLocationReport\Contracts\ICBSUserTaxEntityProfileLocationFilter.cs" />
+    <Compile Include="DataFilters\CBSUserTaxEntityProfileLocationReport\SearchFilters\CBSUserTaxEntityProfileLocationSearchFilter.cs" />
+    <Compile Include="DataFilters\CBSUserTaxEntityProfileLocationReport\SearchFilters\Contracts\ICBSUserTaxEntityProfileLocationSearchFilter.cs" />
+    <Compile Include="DataFilters\CollectionReport\CollectionReportingFilter.cs" />
+    <Compile Include="DataFilters\CollectionReport\ICollectionReportFilter.cs" />
+    <Compile Include="DataFilters\CollectionReport\SearchFilters\CollectionSearchParameters.cs" />
+    <Compile Include="DataFilters\CollectionReport\SearchFilters\ICollectionReportFilters.cs" />
+    <Compile Include="DataFilters\DirectAssessmentReport\Contracts\IDirectAssessmentRequestReportFilter.cs" />
+    <Compile Include="DataFilters\DirectAssessmentReport\DirectAssessmentRequestReportFilter.cs" />
+    <Compile Include="DataFilters\DirectAssessmentReport\SearchFilters\Contracts\IDirectAssessmentRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\DirectAssessmentReport\SearchFilters\DirectAssessmentRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\MDAReport\Order\IMDAReportOrder.cs" />
+    <Compile Include="DataFilters\MDAReport\SortCriteria\IMDAReportSortCriteria.cs" />
+    <Compile Include="DataFilters\MDA\Filter\AllFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\DisabledFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\EnabledFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\IMDAFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\VisibleFilter.cs" />
+    <Compile Include="DataFilters\MDA\Order\CodeOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\CreatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\IMDAOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\NameOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\UpdatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\PAYEBatchItemReceiptReport\Contracts\IPAYEBatchItemReceiptFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchItemReceiptReport\PAYEBatchItemReceiptFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchItemReceiptReport\SearchFilters\Contracts\IPAYEBatchItemReceiptSearchFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchItemReceiptReport\SearchFilters\PAYEBatchItemReceiptSearchFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchRecord\Contracts\IPAYEBatchRecordFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchRecord\PAYEBatchRecordFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchRecord\SearchFilters\Contracts\IPAYEBatchRecordSearchFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchRecord\SearchFilters\PAYEBatchRecordSearchFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchItems\Contracts\IPAYEBatchItemsFilter.cs" />
+    <Compile Include="DataFilters\PAYEBatchItems\PAYEBatchItemsFilter.cs" />
+    <Compile Include="DataFilters\PAYEReceiptUtilizationReport\Contracts\IPAYEReceiptUtilizationFilter.cs" />
+    <Compile Include="DataFilters\PAYEReceiptUtilizationReport\PAYEReceiptUtilizationFilter.cs" />
+    <Compile Include="DataFilters\PAYEReceiptUtilizationReport\SearchFilters\Contracts\IPAYEReceiptUtilizationSearchFilter.cs" />
+    <Compile Include="DataFilters\PAYEReceiptUtilizationReport\SearchFilters\PAYEReceiptUtilizationSearchFilter.cs" />
+    <Compile Include="DataFilters\PaymentProvider\IPaymentProviderFilter.cs" />
+    <Compile Include="DataFilters\PaymentProvider\PaymentProviderFilter.cs" />
+    <Compile Include="DataFilters\PaymentProvider\SearchFilters\IPaymentProviderSearchFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\AllFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\DisabledFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\EnabledFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\IRevenueHeadFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\CodeOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\CreatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\IRevenueHeadOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\NameOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\UpdatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\SettlementRules\ISettlementRulesFilter.cs" />
+    <Compile Include="DataFilters\SettlementRules\SearchFilters\ISettlementRulesSearchFilter.cs" />
+    <Compile Include="DataFilters\SettlementRules\SearchFilters\SettlementRulesSearchParameters.cs" />
+    <Compile Include="DataFilters\SettlementRules\SettlementRulesFilter.cs" />
+    <Compile Include="DataFilters\TaxEntityProfileLocationReport\Contracts\ITaxEntityProfileLocationFilter.cs" />
+    <Compile Include="DataFilters\TaxEntityProfileLocationReport\SearchFilters\Contracts\ITaxEntityProfileLocationSearchFilter.cs" />
+    <Compile Include="DataFilters\TaxEntityProfileLocationReport\SearchFilters\TaxEntityProfileLocationSearchFilter.cs" />
+    <Compile Include="DataFilters\TaxEntityProfileLocationReport\TaxEntityProfileLocationFilter.cs" />
+    <Compile Include="DataFilters\TaxPayerReport\ITaxPayerReportFilter.cs" />
+    <Compile Include="DataFilters\TaxPayerReport\ProfileSearchFilters\IProfileSearchFilters.cs" />
+    <Compile Include="DataFilters\TaxPayerReport\ProfileSearchFilters\ProfileSearchFilters.cs" />
+    <Compile Include="DataFilters\TaxPayerReport\TaxPayerReportingFilter.cs" />
+    <Compile Include="DataFilters\TCCReport\Contracts\ITCCRequestReportFilter.cs" />
+    <Compile Include="DataFilters\TCCReport\SearchFilters\Contracts\ITCCRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\TCCReport\SearchFilters\TCCRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\TCCReport\TCCRequestReportFilter.cs" />
+    <Compile Include="ErrorCode.cs" />
+    <Compile Include="Events\BVNValidationResponseNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\Contracts\IInvoiceCreatedEventHandler.cs" />
+    <Compile Include="Events\Contracts\IRevenueHeadStatisticsHandler.cs" />
+    <Compile Include="Events\DirectBatchRecordNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\GeneralBatchReferenceNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\InvoiceCreatedEventHandler.cs" />
+    <Compile Include="Events\NINValidationResponseNhibernatePersistenceConfiguration.cs" />
+    <Compile Include="Events\TaxClearanceCertificateNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TaxEntityProfileLocationNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TaxPayerEnumerationNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TransactionLogSettlementAmountNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PaymentReferenceNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PAYEBatchItemReceiptNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TaxEntityNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\ReceiptNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TCCApplicationNumberNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\TransactionLogNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\InvoiceNhibernatePersistenceConfiguration.cs" />
+    <Compile Include="Events\NAGISDataBatchRecordNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\InvoiceItemsNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\ReferenceDataBatchRecordNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\RevenueHeadStatisticsHandler.cs" />
+    <Compile Include="Exceptions\AlreadyHasBillingException.cs" />
+    <Compile Include="Exceptions\AuthorizedUserNotFoundException.cs" />
+    <Compile Include="Exceptions\BillingHasEndedException.cs" />
+    <Compile Include="Exceptions\BillingIsNotAllowedException.cs" />
+    <Compile Include="Exceptions\CannotConnectToCashFlowException.cs" />
+    <Compile Include="Exceptions\CannotCreateReceiptException.cs" />
+    <Compile Include="Exceptions\CannotCreateStartSetupProcessBecauseRevenueHeadHasSubRevenueHeadsException.cs" />
+    <Compile Include="Exceptions\CannotEditFormBecauseRevenueHeadFormHasNotBeenCreatedException.cs" />
+    <Compile Include="Exceptions\CannotFindRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CannotSaveBillingException.cs" />
+    <Compile Include="Exceptions\CannotSaveMDARecordException.cs" />
+    <Compile Include="Exceptions\CannotSaveRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CannotSaveTaxEntityException.cs" />
+    <Compile Include="Exceptions\CannotSaveTenantSettings.cs" />
+    <Compile Include="Exceptions\CannotUpdateRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CannotUpdateTenantSettingsException.cs" />
+    <Compile Include="Exceptions\CannotVerifyNetPayTransaction.cs" />
+    <Compile Include="Exceptions\CashFlowAdminSettingsNotFoundException.cs" />
+    <Compile Include="Exceptions\CBSUserAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\CBSUserNotFoundException.cs" />
+    <Compile Include="Exceptions\ControlNotFoundException.cs" />
+    <Compile Include="Exceptions\CouldNotGenerateCashFlowInvoiceException.cs" />
+    <Compile Include="Exceptions\CouldNotGeneratePINs.cs" />
+    <Compile Include="Exceptions\CouldNotParseStringValueException.cs" />
+    <Compile Include="Exceptions\CouldNotSaveCustomerDetails.cs" />
+    <Compile Include="Exceptions\CouldNotSaveCustomerRecord.cs" />
+    <Compile Include="Exceptions\CouldNotSaveFormRevenueHeadControls.cs" />
+    <Compile Include="Exceptions\CouldNotSaveInvoiceOnCentralBillingException.cs" />
+    <Compile Include="Exceptions\CouldNotSaveStatsException.cs" />
+    <Compile Include="Exceptions\CouldNotSaveTaxPayerException.cs" />
+    <Compile Include="Exceptions\DateTimeCouldNotBeParsedException.cs" />
+    <Compile Include="Exceptions\DependenciesAreDisabledException.cs" />
+    <Compile Include="Exceptions\DirectAssessmentModelException.cs" />
+    <Compile Include="Exceptions\InvoiceAlreadyPaidForException.cs" />
+    <Compile Include="Exceptions\InvoiceHasPaymentException.cs" />
+    <Compile Include="Exceptions\LGANotFoundException.cs" />
+    <Compile Include="Exceptions\ModuleIsNotEnabledException.cs" />
+    <Compile Include="Exceptions\NIBSSCredentialsCouldNotBeUpdatedException.cs" />
+    <Compile Include="Exceptions\NoBankDetailsOnCashflowFoundException.cs" />
+    <Compile Include="Exceptions\NoBillingTypeSpecifiedException.cs" />
+    <Compile Include="Exceptions\BillingDurationException.cs" />
+    <Compile Include="Exceptions\NoCategoryFoundException.cs" />
+    <Compile Include="Exceptions\NoDueDateTypeFoundException.cs" />
+    <Compile Include="Exceptions\NoFrequencyTypeFoundException.cs" />
+    <Compile Include="Exceptions\NoRecordFoundException.cs" />
+    <Compile Include="Exceptions\NoReferenceDataFoundException.cs" />
+    <Compile Include="Exceptions\PartPaymentNotAllowedException.cs" />
+    <Compile Include="Exceptions\PayeRevenueHeadAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\PaymentProvider404.cs" />
+    <Compile Include="Exceptions\PhoneNumberHasBeenTakenException.cs" />
+    <Compile Include="Exceptions\RecordAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\StartDateHasPastedException.cs" />
+    <Compile Include="Exceptions\StartDateIsGreaterThanEndDateException.cs" />
+    <Compile Include="Exceptions\StateNotFoundException.cs" />
+    <Compile Include="Exceptions\TaxPayerTypeNotFoundException.cs" />
+    <Compile Include="Exceptions\DirtyFormDataException.cs" />
+    <Compile Include="Exceptions\FormFieldDoesNotExistsException.cs" />
+    <Compile Include="Exceptions\HasNoBillingException.cs" />
+    <Compile Include="Exceptions\IntegrationHandlerNotFound.cs" />
+    <Compile Include="Exceptions\MDARecordCouldNotBeUpdatedException.cs" />
+    <Compile Include="Exceptions\MDARecordNotFoundException.cs" />
+    <Compile Include="Exceptions\NoBillingDetailAddedYetException.cs" />
+    <Compile Include="Exceptions\NoBillingInformationFound.cs" />
+    <Compile Include="Exceptions\NoInvoicesMatchingTheParametersFoundException.cs" />
+    <Compile Include="Exceptions\NoSearchFilterExceptionFound.cs" />
+    <Compile Include="Exceptions\NotValidDiscountTypeException.cs" />
+    <Compile Include="Exceptions\RevenueHeadCannotAddSubRevenueHeadBecauseSetupHasAlreadyStartedException.cs" />
+    <Compile Include="Exceptions\SectorNotFoundException.cs" />
+    <Compile Include="Exceptions\TenantNotFoundException.cs" />
+    <Compile Include="Exceptions\TenantStateHasAlreadyBeenSetException.cs" />
+    <Compile Include="Exceptions\TINNumberNotFound.cs" />
+    <Compile Include="Exceptions\TriedAccessingANoneDatabaseModelException.cs" />
+    <Compile Include="Exceptions\TriedCheckingForTheUniquenessOfANoneDatabaseModelException.cs" />
+    <Compile Include="Exceptions\UserNotAuthorizedForThisActionException.cs" />
+    <Compile Include="Exceptions\UserNotVerifiedException.cs" />
+    <Compile Include="Exceptions\VaribaleBillingFrequencyException.cs" />
+    <Compile Include="FormControlsComposition\FormControlsCompositionModel.cs" />
+    <Compile Include="FormControlsComposition\IFormControlsComposition.cs" />
+    <Compile Include="FormControlsComposition\Implementations\BaseFormControlsComposition.cs" />
+    <Compile Include="FormControlsComposition\Implementations\BusinessSizeDropDown.cs" />
+    <Compile Include="FormControlsComposition\Implementations\LGADropDown.cs" />
+    <Compile Include="FormControlsComposition\Implementations\BusinessTypeDropDown.cs" />
+    <Compile Include="FormControlsComposition\Implementations\StateDropDown.cs" />
+    <Compile Include="FormControlsComposition\Implementations\YearDropDown.cs" />
+    <Compile Include="HelperModels\AccountStatementItemModel.cs" />
+    <Compile Include="HelperModels\AccountStatementModel.cs" />
+    <Compile Include="HelperModels\AccountVerificationEmailNotificationModel.cs" />
+    <Compile Include="HelperModels\AdditionalDetails.cs" />
+    <Compile Include="HelperModels\AdditionalDetailsHelperModel.cs" />
+    <Compile Include="HelperModels\AssessmentModel.cs" />
+    <Compile Include="HelperModels\AssignExternalPaymentProviderVM.cs" />
+    <Compile Include="HelperModels\BankViewModel.cs" />
+    <Compile Include="HelperModels\BankVM.cs" />
+    <Compile Include="HelperModels\BaseInvoiceGenerationResponse.cs" />
+    <Compile Include="HelperModels\BaseRequestResponse.cs" />
+    <Compile Include="HelperModels\BaseVerificationCodeVM.cs" />
+    <Compile Include="HelperModels\BatchStats.cs" />
+    <Compile Include="HelperModels\BillingCreatedModel.cs" />
+    <Compile Include="HelperModels\BillingDemandNotice.cs" />
+    <Compile Include="HelperModels\BillingFrequencyModel.cs" />
+    <Compile Include="HelperModels\APIResponse.cs" />
+    <Compile Include="HelperModels\BillingModelVM.cs" />
+    <Compile Include="HelperModels\BVNValidationResponseHelperModel.cs" />
+    <Compile Include="HelperModels\CashflowBatchCustomerAndInvoicesResponse.cs" />
+    <Compile Include="HelperModels\CashflowCreateCustomerAndGenerateInvoiceResponseModel.cs" />
+    <Compile Include="HelperModels\CashFlowCustomerAndStatus.cs" />
+    <Compile Include="HelperModels\CashflowCustomerAndTempData.cs" />
+    <Compile Include="HelperModels\CashflowCustomerCreationAttemptsModel.cs" />
+    <Compile Include="HelperModels\CashFlowCustomerTaxPayerModel.cs" />
+    <Compile Include="HelperModels\CashFlowRequestModelAndRefDataItem.cs" />
+    <Compile Include="HelperModels\CBSUserTaxEntityProfileLocationReportSearchParams.cs" />
+    <Compile Include="HelperModels\CBSUserTaxEntityProfileLocationVM.cs" />
+    <Compile Include="HelperModels\CBSUserVM.cs" />
+    <Compile Include="HelperModels\ChangePasswordModel.cs" />
+    <Compile Include="HelperModels\CollectionDetailReport.cs" />
+    <Compile Include="HelperModels\CollectionFormControlsViewModel.cs" />
+    <Compile Include="HelperModels\BillingHelperModel.cs" />
+    <Compile Include="HelperModels\CollectionInvoiceGenerationResult.cs" />
+    <Compile Include="HelperModels\CollectionReportStats.cs" />
+    <Compile Include="HelperModels\CollectionReportViewModel.cs" />
+    <Compile Include="HelperModels\CollectionSearchParams.cs" />
+    <Compile Include="HelperModels\CountryVM.cs" />
+    <Compile Include="HelperModels\CreateCompanyResponse.cs" />
+    <Compile Include="HelperModels\CreateCustomerRequest.cs" />
+    <Compile Include="HelperModels\CreateCustomerResponse.cs" />
+    <Compile Include="HelperModels\CreateFormControls.cs" />
+    <Compile Include="HelperModels\CreateStateTINModel.cs" />
+    <Compile Include="HelperModels\CreateStateTINResponse.cs" />
+    <Compile Include="HelperModels\DeploymentAllowanceSettlementItemsVM.cs" />
+    <Compile Include="HelperModels\DeploymentAllowanceSettlementVM.cs" />
+    <Compile Include="HelperModels\DirectAssessmentSearchParams.cs" />
+    <Compile Include="HelperModels\EmailNotificationModel.cs" />
+    <Compile Include="HelperModels\EthnicityVM.cs" />
+    <Compile Include="HelperModels\FormControlRevenueHeadValueVM.cs" />
+    <Compile Include="HelperModels\FourCoreBVNValidationResponse.cs" />
+    <Compile Include="HelperModels\InvoiceProceedVMForPayeAssessment.cs" />
+    <Compile Include="HelperModels\InvoiceStatusVM.cs" />
+    <Compile Include="HelperModels\LatestNINValidationResponseVM.cs" />
+    <Compile Include="HelperModels\LGAVM.cs" />
+    <Compile Include="HelperModels\MDARevenueHeadsVM.cs" />
+    <Compile Include="HelperModels\NIBSSIntegrationCredentialVM.cs" />
+    <Compile Include="HelperModels\NINValidationImplResponseModel.cs" />
+    <Compile Include="HelperModels\PAYEAPIBatchItemsRefVM.cs" />
+    <Compile Include="HelperModels\PAYEAPIRequestBatchDetailVM.cs" />
+    <Compile Include="HelperModels\PAYEAddBatchItemsRequestModel.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemSearchParams.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemsListVM.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemsModel.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemsVM.cs" />
+    <Compile Include="HelperModels\PAYEBatchRecordSearchParams.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemVM.cs" />
+    <Compile Include="HelperModels\PAYEBatchRecordStagingVM.cs" />
+    <Compile Include="HelperModels\PAYEBatchRecordVM.cs" />
+    <Compile Include="HelperModels\PAYEIntializeBatchRequestModel.cs" />
+    <Compile Include="HelperModels\PasswordGeneratorOptions.cs" />
+    <Compile Include="HelperModels\PageToken.cs" />
+    <Compile Include="HelperModels\PAYEDirectAssessmentReportVM.cs" />
+    <Compile Include="HelperModels\PAYEDirectAssessmentTypeVM.cs" />
+    <Compile Include="HelperModels\PAYENoSchedule.cs" />
+    <Compile Include="HelperModels\PAYEReceiptItems.cs" />
+    <Compile Include="HelperModels\PAYEReceiptObj.cs" />
+    <Compile Include="HelperModels\PAYEReceiptReportVM.cs" />
+    <Compile Include="HelperModels\PAYEReceiptSearchParams.cs" />
+    <Compile Include="HelperModels\PAYEBatchItemReceiptViewModel.cs" />
+    <Compile Include="HelperModels\PAYEReceiptUtilizationReportObj.cs" />
+    <Compile Include="HelperModels\PAYEReceiptUtilizationReportVM.cs" />
+    <Compile Include="HelperModels\PAYEReceiptVM.cs" />
+    <Compile Include="HelperModels\PAYEScheduleListVM.cs" />
+    <Compile Include="HelperModels\PAYESearchByBatchRefVM.cs" />
+    <Compile Include="HelperModels\PAYEValidateBatchModel.cs" />
+    <Compile Include="HelperModels\PaymentProviderListVM.cs" />
+    <Compile Include="HelperModels\PaymentProviderSearchParams.cs" />
+    <Compile Include="HelperModels\PaymentProviderValidationConstraintsVM.cs" />
+    <Compile Include="HelperModels\PaymentProviderVM.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersUploadBatchItemsStagingReportSearchParams.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersUploadBatchStagingReportSearchParams.cs" />
+    <Compile Include="HelperModels\RDCBillerCreateInvoiceModel.cs" />
+    <Compile Include="HelperModels\CreateInvoiceHelper.cs" />
+    <Compile Include="HelperModels\CreateInvoiceModel.cs" />
+    <Compile Include="HelperModels\CreateInvoiceRequest.cs" />
+    <Compile Include="HelperModels\CreateInvoiceResponse.cs" />
+    <Compile Include="HelperModels\CreateInvoiceUserInputModel.cs" />
+    <Compile Include="HelperModels\CreateMDAModel.cs" />
+    <Compile Include="HelperModels\CreateProductRequest.cs" />
+    <Compile Include="HelperModels\CreateProductResponse.cs" />
+    <Compile Include="HelperModels\CreateReceiptDocumentVM.cs" />
+    <Compile Include="HelperModels\CreateRevenueHeadRequestModel.cs" />
+    <Compile Include="HelperModels\CreateRevenueHeadsModel.cs" />
+    <Compile Include="HelperModels\DashboardStats.cs" />
+    <Compile Include="HelperModels\DashboardStatsSearchParams.cs" />
+    <Compile Include="HelperModels\DetailReport.cs" />
+    <Compile Include="HelperModels\DirectAssessmentModel.cs" />
+    <Compile Include="HelperModels\DiscountModel.cs" />
+    <Compile Include="HelperModels\DueDateModel.cs" />
+    <Compile Include="HelperModels\EditMDAModel.cs" />
+    <Compile Include="HelperModels\EditRevenueHeadModel.cs" />
+    <Compile Include="HelperModels\EmailDetailVM.cs" />
+    <Compile Include="HelperModels\ErrorModel.cs" />
+    <Compile Include="HelperModels\ExpectationReport.cs" />
+    <Compile Include="HelperModels\ExpertSystemListViewModel.cs" />
+    <Compile Include="HelperModels\ExpertSystemPermissions.cs" />
+    <Compile Include="HelperModels\ExpertSystemVM.cs" />
+    <Compile Include="HelperModels\ExternalPaymentProviderVM.cs" />
+    <Compile Include="HelperModels\ExternalRedirect.cs" />
+    <Compile Include="HelperModels\FailedAtCashflowModel.cs" />
+    <Compile Include="HelperModels\FileProcessModel.cs" />
+    <Compile Include="HelperModels\FileUploadReport.cs" />
+    <Compile Include="HelperModels\FlashObj.cs" />
+    <Compile Include="HelperModels\FormControlRevenueHeadMetaData.cs" />
+    <Compile Include="HelperModels\FormControlViewModel.cs" />
+    <Compile Include="HelperModels\FormHelperModel.cs" />
+    <Compile Include="HelperModels\GenerateInvoiceConfirmTaxPayer.cs" />
+    <Compile Include="HelperModels\GenerateInvoiceModel.cs" />
+    <Compile Include="HelperModels\GenerateInvoiceRequestModel.cs" />
+    <Compile Include="HelperModels\GenerateInvoiceStepsModel.cs" />
+    <Compile Include="HelperModels\HasCashflowCustomerAndHasNot.cs" />
+    <Compile Include="HelperModels\HeaderObj.cs" />
+    <Compile Include="HelperModels\InvalidateInvoiceVM.cs" />
+    <Compile Include="HelperModels\InvoiceDetails.cs" />
+    <Compile Include="HelperModels\InvoiceDetailsHelperModel.cs" />
+    <Compile Include="HelperModels\InvoiceGeneratedResponse.cs" />
+    <Compile Include="HelperModels\InvoiceGeneratedResponseExtn.cs" />
+    <Compile Include="HelperModels\InvoiceGeneratedResponseLite.cs" />
+    <Compile Include="HelperModels\InvoiceGenerationResponse.cs" />
+    <Compile Include="HelperModels\InvoiceItemsAndPosition.cs" />
+    <Compile Include="HelperModels\InvoiceItemsSummary.cs" />
+    <Compile Include="HelperModels\InvoiceProceedVMForOSGOF.cs" />
+    <Compile Include="HelperModels\InvoiceStatusDetailsVM.cs" />
+    <Compile Include="HelperModels\InvoiceValidationResponseModelForBankCollect.cs" />
+    <Compile Include="HelperModels\MDAVM.cs" />
+    <Compile Include="HelperModels\PayDirectWebPaymentRequestModel.cs" />
+    <Compile Include="HelperModels\PayDirectWebPaymentValidationResponse.cs" />
+    <Compile Include="HelperModels\PaymentNotification.cs" />
+    <Compile Include="HelperModels\PaymentRefCheckModel.cs" />
+    <Compile Include="HelperModels\PaymentReferenceVM.cs" />
+    <Compile Include="HelperModels\ReadycashInvoiceValidationModel.cs" />
+    <Compile Include="HelperModels\ReadycashInvoiceValidationResponseModel.cs" />
+    <Compile Include="HelperModels\ReadyCashPaymentNotificationResponseModel.cs" />
+    <Compile Include="HelperModels\ReadyCashPaymentNotification.cs" />
+    <Compile Include="HelperModels\ReceiptUtilizationVM.cs" />
+    <Compile Include="HelperModels\ReceiptViewModel.cs" />
+    <Compile Include="HelperModels\ReceiptVM.cs" />
+    <Compile Include="HelperModels\RegisterBusinessModel.cs" />
+    <Compile Include="HelperModels\RegisterBusinessObj.cs" />
+    <Compile Include="HelperModels\RegisterCBSUserObj.cs" />
+    <Compile Include="HelperModels\ReportStatsVM.cs" />
+    <Compile Include="HelperModels\RevenueHeadCombinedHelper.cs" />
+    <Compile Include="HelperModels\RevenueHeadForInvoiceGenerationHelper.cs" />
+    <Compile Include="HelperModels\RevenueHeadGroupVM.cs" />
+    <Compile Include="HelperModels\AssignRevenueHeadPermissionConstraintsVM.cs" />
+    <Compile Include="HelperModels\RevenueHeadPermissionsConstraintsVM.cs" />
+    <Compile Include="HelperModels\RevenueHeadPermissionVM.cs" />
+    <Compile Include="HelperModels\RevenueHeadRequestValidationObject.cs" />
+    <Compile Include="HelperModels\RevenueHeadUserInputModel.cs" />
+    <Compile Include="HelperModels\RevenueHeadVM.cs" />
+    <Compile Include="HelperModels\InvoiceAssessmentSearchParams.cs" />
+    <Compile Include="HelperModels\LogInObj.cs" />
+    <Compile Include="HelperModels\SettlementFrequencyModel.cs" />
+    <Compile Include="HelperModels\SettlementRuleLite.cs" />
+    <Compile Include="HelperModels\SettlementRulesSearchParams.cs" />
+    <Compile Include="HelperModels\SettlementRuleVerboseDetailsVM.cs" />
+    <Compile Include="HelperModels\SettlementRuleVM.cs" />
+    <Compile Include="HelperModels\SettlementsViewModel.cs" />
+    <Compile Include="HelperModels\SMSDetailVM.cs" />
+    <Compile Include="HelperModels\StateModelVM.cs" />
+    <Compile Include="HelperModels\StateTINValidationVM.cs" />
+    <Compile Include="HelperModels\TaxCategoryPermissionsVM.cs" />
+    <Compile Include="HelperModels\TaxCategoryTaxCategoryPermissionsVM.cs" />
+    <Compile Include="HelperModels\TaxEntityCategorySettings.cs" />
+    <Compile Include="HelperModels\TaxEntityCategoryVM.cs" />
+    <Compile Include="HelperModels\TaxEntityProfileLocationReportSearchParams.cs" />
+    <Compile Include="HelperModels\TaxEntityProfileLocationVM.cs" />
+    <Compile Include="HelperModels\TaxPayerEnumerationLine.cs" />
+    <Compile Include="HelperModels\TaxPayerEnumerationReportVM.cs" />
+    <Compile Include="HelperModels\TaxPayerEnumerationVM.cs" />
+    <Compile Include="HelperModels\TaxPayersWithDetails.cs" />
+    <Compile Include="HelperModels\MDACreatedModel.cs" />
+    <Compile Include="HelperModels\MDAExpectationViewModel.cs" />
+    <Compile Include="HelperModels\MDAMonthlyPaymentPerRevenueViewModel.cs" />
+    <Compile Include="HelperModels\MDAMonthlyPaymentViewModel.cs" />
+    <Compile Include="HelperModels\MDAReport.cs" />
+    <Compile Include="HelperModels\MDAReportViewModel.cs" />
+    <Compile Include="HelperModels\MDASettingsHelper.cs" />
+    <Compile Include="HelperModels\NetPayModel.cs" />
+    <Compile Include="HelperModels\PaymentAcknowledgeMentModel.cs" />
+    <Compile Include="HelperModels\PaymentOptions.cs" />
+    <Compile Include="HelperModels\PaymentPerRevenueReport.cs" />
+    <Compile Include="HelperModels\PaymentReport.cs" />
+    <Compile Include="HelperModels\PenaltyModel.cs" />
+    <Compile Include="HelperModels\ProceedWithInvoiceGenerationVM.cs" />
+    <Compile Include="HelperModels\ProcessingReportVM.cs" />
+    <Compile Include="HelperModels\ProcessPayeModel.cs" />
+    <Compile Include="HelperModels\ProductModel.cs" />
+    <Compile Include="HelperModels\ProfileRouteToVM.cs" />
+    <Compile Include="HelperModels\ReceiptItems.cs" />
+    <Compile Include="HelperModels\ReceiptObj.cs" />
+    <Compile Include="HelperModels\RefDataDistinctGroupModel.cs" />
+    <Compile Include="HelperModels\ReferenceDataViewModel.cs" />
+    <Compile Include="HelperModels\RegisterCBSUserModel.cs" />
+    <Compile Include="HelperModels\RegisterUserResponse.cs" />
+    <Compile Include="HelperModels\RemitaPaymentNotification.cs" />
+    <Compile Include="HelperModels\InvoiceValidationResponseModel.cs" />
+    <Compile Include="HelperModels\RemitaValidationResponseModel.cs" />
+    <Compile Include="HelperModels\ReportOptions.cs" />
+    <Compile Include="HelperModels\RequestModel.cs" />
+    <Compile Include="HelperModels\RevenueHeadAndInvoices.cs" />
+    <Compile Include="HelperModels\RevenueHeadDetails.cs" />
+    <Compile Include="HelperModels\RevenueHeadDropDownListViewModel.cs" />
+    <Compile Include="HelperModels\RevenueHeadEssentials.cs" />
+    <Compile Include="HelperModels\RevenueHeadLite.cs" />
+    <Compile Include="HelperModels\RevenueHeadModel.cs" />
+    <Compile Include="HelperModels\RevenueHeadsCreatedModel.cs" />
+    <Compile Include="HelperModels\SavedAndUnsavedTaxEntities.cs" />
+    <Compile Include="HelperModels\ScheduleModel.cs" />
+    <Compile Include="HelperModels\SetStateViewModel.cs" />
+    <Compile Include="HelperModels\StatsContext.cs" />
+    <Compile Include="HelperModels\SuccessfulCashflowResponses.cs" />
+    <Compile Include="HelperModels\TaxEntityAndHeader.cs" />
+    <Compile Include="HelperModels\TaxEntityInvoice.cs" />
+    <Compile Include="HelperModels\TaxEntityProfileHelper.cs" />
+    <Compile Include="HelperModels\TaxEntityRefDataJoinModel.cs" />
+    <Compile Include="HelperModels\TaxEntityViewModel.cs" />
+    <Compile Include="HelperModels\TaxPayersReferenceDataRequestModel.cs" />
+    <Compile Include="HelperModels\TaxPaymentDetailVM.cs" />
+    <Compile Include="HelperModels\TaxProfileFormVM.cs" />
+    <Compile Include="HelperModels\TaxProfileReportStats.cs" />
+    <Compile Include="HelperModels\TaxEntityReportDetail.cs" />
+    <Compile Include="HelperModels\TaxProfileSearchReport.cs" />
+    <Compile Include="HelperModels\TaxProfilesSearchParams.cs" />
+    <Compile Include="HelperModels\TCCApprovalLogVM.cs" />
+    <Compile Include="HelperModels\TCCAuthorizedSignatureVM.cs" />
+    <Compile Include="HelperModels\TCCCertificateStatsVM.cs" />
+    <Compile Include="HelperModels\TCCertificateDetailsVM.cs" />
+    <Compile Include="HelperModels\TCCertificateVM.cs" />
+    <Compile Include="HelperModels\TCCReportSearchParams.cs" />
+    <Compile Include="HelperModels\TCCRequestApprovalLogVM.cs" />
+    <Compile Include="HelperModels\TCCRequestAttachmentVM.cs" />
+    <Compile Include="HelperModels\TCCRequestDetailVM.cs" />
+    <Compile Include="HelperModels\TCCApplicationRequestVM.cs" />
+    <Compile Include="HelperModels\TCCRequestVM.cs" />
+    <Compile Include="HelperModels\TCCTemplateVM.cs" />
+    <Compile Include="HelperModels\TCCYearlyTaxSummary.cs" />
+    <Compile Include="HelperModels\TenantSettingsViewModel.cs" />
+    <Compile Include="HelperModels\PaymentChannelVM.cs" />
+    <Compile Include="HelperModels\TINApplicantReportModel.cs" />
+    <Compile Include="HelperModels\TokenExpiryResponse.cs" />
+    <Compile Include="HelperModels\TransactionLogGroup.cs" />
+    <Compile Include="HelperModels\TransactionLogInvoiceDetails.cs" />
+    <Compile Include="HelperModels\TransactionLogInvoiceStatusVM.cs" />
+    <Compile Include="HelperModels\TransactionLogVM.cs" />
+    <Compile Include="HelperModels\UploadedFileAndName.cs" />
+    <Compile Include="HelperModels\UserCollectionFormView.cs" />
+    <Compile Include="HelperModels\UserDetailsModel.cs" />
+    <Compile Include="HelperModels\UserFormDetails.cs" />
+    <Compile Include="HelperModels\UtilizedReceiptsVM.cs" />
+    <Compile Include="HelperModels\ValidateInvoiceVM.cs" />
+    <Compile Include="HelperModels\ValidateInvoiceConfirmModel.cs" />
+    <Compile Include="HelperModels\ValidateTCCVM.cs" />
+    <Compile Include="HelperModels\ValidationRequest.cs" />
+    <Compile Include="HelperModels\VerificationCodeVM.cs" />
+    <Compile Include="HelperModels\VerificationItemVM.cs" />
+    <Compile Include="HelperModels\VerifyAccountModel.cs" />
+    <Compile Include="HelperModels\VerTokenResult.cs" />
+    <Compile Include="HelperModels\ViewToShowVM.cs" />
+    <Compile Include="HelperModels\WorkflowApproverDetailVM.cs" />
+    <Compile Include="HTTP\Handlers\Billing\BaseBilling.cs" />
+    <Compile Include="HTTP\Handlers\Billing\Contracts\IBillingTypes.cs" />
+    <Compile Include="HTTP\Handlers\Billing\DirectAssessment.cs" />
+    <Compile Include="HTTP\Handlers\Billing\FileUpload.cs" />
+    <Compile Include="HTTP\Handlers\Billing\Fixed.cs" />
+    <Compile Include="HTTP\Handlers\Billing\FixedAmountAssessment.cs" />
+    <Compile Include="HTTP\Handlers\Billing\OneOff.cs" />
+    <Compile Include="HTTP\Handlers\Billing\SelfAssessment.cs" />
+    <Compile Include="HTTP\Handlers\Billing\Variable.cs" />
+    <Compile Include="Exceptions\CannotSaveRecordException.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreBillingScheduleService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreBillingService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreBVNValidationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreCBSUserTaxEntityProfileLocationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreCBSUserVerification.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreCollectionService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreCountryService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreDirectAssessmentBatchRecord.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreDirectAssessmentPayeeRecord.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreFourCoreBVNValidationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreNINValidationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreNotificationLoggingService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICorePaymentProviderValidationConstraintService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreEthnicityService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreExternalPaymentProviderService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreFileUploadService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreFormService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreHelperService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreInvoiceService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreInvoiceServiceRefDataExtension.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreIPPISBatchService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreMDARevenueAccessRestrictionsStagingService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreMDAService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreMDARevenueHeadService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreNotificationMessageService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICorePAYEBatchItemReceiptService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICorePAYEService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICorePaymentService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreReadyCashService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreReceiptService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreReceiptUtilizationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreReferenceDataBatchService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreReportingService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreRevenueHeadPermissionService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreRevenueHeadService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreSettingsService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreSettlementRuleService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreStateAndLGA.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreTaxClearanceCertificateRequestService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreTaxEntityProfileLocationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreTaxPayerEnumerationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreTaxPayerService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreThirdPartyPaymentNotificationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreTINValidationService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreUserService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICorePAYEPaymentService.cs" />
+    <Compile Include="HTTP\Handlers\Contracts\ICoreNIBSSIntegrationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreCBSUserTaxEntityProfileLocationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreCountryService.cs" />
+    <Compile Include="HTTP\Handlers\CoreEthnicityService.cs" />
+    <Compile Include="HTTP\Handlers\CoreFourCoreBVNValidationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreHelperService.cs" />
+    <Compile Include="HTTP\Handlers\CoreBaseService.cs" />
+    <Compile Include="HTTP\Handlers\CoreBillingScheduleService.cs" />
+    <Compile Include="HTTP\Handlers\CoreBillingService.cs" />
+    <Compile Include="HTTP\Handlers\CoreBVNValidationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreCBSUserVerification.cs" />
+    <Compile Include="HTTP\Handlers\CoreCollectionService.cs" />
+    <Compile Include="HTTP\Handlers\CoreDirectAssessmentBatchRecord.cs" />
+    <Compile Include="HTTP\Handlers\CoreDirectAssessmentPayeeRecord.cs" />
+    <Compile Include="HTTP\Handlers\CoreFileUploadService.cs" />
+    <Compile Include="HTTP\Handlers\CoreFormService.cs" />
+    <Compile Include="HTTP\Handlers\CoreInvoiceService.cs" />
+    <Compile Include="HTTP\Handlers\CoreInvoiceServiceRefDataExtension.cs" />
+    <Compile Include="HTTP\Handlers\CoreIPPISBatchService.cs" />
+    <Compile Include="HTTP\Handlers\CoreMDARevenueAccessRestrictionsStagingService.cs" />
+    <Compile Include="HTTP\Handlers\CoreMDAService.cs" />
+    <Compile Include="HTTP\Handlers\CoreMDARevenueHeadService.cs" />
+    <Compile Include="HTTP\Handlers\CoreNINValidationRESTService.cs" />
+    <Compile Include="HTTP\Handlers\CoreNINValidationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreNotificationLoggingService.cs" />
+    <Compile Include="HTTP\Handlers\CoreNotificationMessageService.cs" />
+    <Compile Include="HTTP\Handlers\CoreNumberToWordsService.cs" />
+    <Compile Include="HTTP\Handlers\CorePAYEBatchItemReceiptService.cs" />
+    <Compile Include="HTTP\Handlers\CorePAYEPaymentService.cs" />
+    <Compile Include="HTTP\Handlers\CorePAYEService.cs" />
+    <Compile Include="HTTP\Handlers\CorePaymentProviderValidationConstraintService.cs" />
+    <Compile Include="HTTP\Handlers\CorePaymentProviderService.cs" />
+    <Compile Include="HTTP\Handlers\CorePaymentService.cs" />
+    <Compile Include="HTTP\Handlers\CoreReadyCashService.cs" />
+    <Compile Include="HTTP\Handlers\CoreReceiptService.cs" />
+    <Compile Include="HTTP\Handlers\CoreReceiptUtilizationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreReferenceDataBatchService.cs" />
+    <Compile Include="HTTP\Handlers\CoreReportingService.cs" />
+    <Compile Include="HTTP\Handlers\CoreRevenueHeadPermissionService.cs" />
+    <Compile Include="HTTP\Handlers\CoreRevenueHeadService.cs" />
+    <Compile Include="HTTP\Handlers\CoreSettingsService.cs" />
+    <Compile Include="HTTP\Handlers\CoreSettlementRuleService.cs" />
+    <Compile Include="HTTP\Handlers\CoreStateAndLGA.cs" />
+    <Compile Include="HTTP\Handlers\CoreTaxClearanceCertificateRequestService.cs" />
+    <Compile Include="HTTP\Handlers\CoreTaxEntityProfileLocationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreTaxPayerEnumerationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreTaxPayerService.cs" />
+    <Compile Include="Exceptions\NoScheduleStatusFoundException.cs" />
+    <Compile Include="Exceptions\NoScheduleFoundException.cs" />
+    <Compile Include="Exceptions\CouldNotSaveBillingScheduleException.cs" />
+    <Compile Include="Exceptions\HasFormControlsException.cs" />
+    <Compile Include="HTTP\Handlers\CoreThirdPartyPaymentNotificationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreTINValidationService.cs" />
+    <Compile Include="HTTP\Handlers\CoreUserService.cs" />
+    <Compile Include="Exceptions\CouldNotSaveRecord.cs" />
+    <Compile Include="HTTP\Handlers\CoreUserVerification.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\BaseInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\Contracts\IInvoiceGenerationType.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\DirectAssessmentInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\FileUploadAssessmentInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\FixedAmountAssessmentInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\FixedAssessmentInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\OneOffAssessmentInvoiceGeneration.cs" />
+    <Compile Include="Exceptions\PaymentNoficationAlreadyExistsException.cs" />
+    <Compile Include="HTTP\Handlers\Invoicing\SelfAssessmentInvoiceGeneration.cs" />
+    <Compile Include="HTTP\Handlers\CoreNIBSSIntegrationService.cs" />
+    <Compile Include="HTTP\RemoteClient\Contracts\IRemoteClient.cs" />
+    <Compile Include="HTTP\RemoteClient\RemoteClient.cs" />
+    <Compile Include="Integration\Contract\IBaseIntegration.cs" />
+    <Compile Include="Lang\Lang.cs" />
+    <Compile Include="Lang\ErrorLang.cs" />
+    <Compile Include="Lang\ResponseCodeLang.cs" />
+    <Compile Include="Mail\Admin\AdminMailService.cs" />
+    <Compile Include="Mail\Admin\IAdminMailService.cs" />
+    <Compile Include="Mail\Contracts\IEmailNotification.cs" />
+    <Compile Include="Mail\Provider\Contracts\IEmailProvider.cs" />
+    <Compile Include="Migrations\BankMigrations.cs" />
+    <Compile Include="Migrations\ActivityPermissionMigrations.cs" />
+    <Compile Include="Migrations\BVNValidationResponseMigrations.cs" />
+    <Compile Include="Migrations\CBSUserTaxEntityProfileLocationMigrations.cs" />
+    <Compile Include="Migrations\CountryMigrations.cs" />
+    <Compile Include="Migrations\EthnicityMigrations.cs" />
+    <Compile Include="Migrations\HangfireJobReferenceMigrations.cs" />
+    <Compile Include="Migrations\NibssIntegrationCredentialMigrations.cs" />
+    <Compile Include="Migrations\NINValidationResponseMigrations.cs" />
+    <Compile Include="Migrations\NotificationMessageLogMigrations.cs" />
+    <Compile Include="Migrations\PAYEAPIBatchItemsPagesTrackerMigrations.cs" />
+    <Compile Include="Migrations\PAYEAPIBatchItemsRefMigrations.cs" />
+    <Compile Include="Migrations\PAYEAPIRequestMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemExemptionStagingMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemReceiptMigrations.cs" />
+    <Compile Include="Migrations\MDARevenueAccessRestrictionsMigrations.cs" />
+    <Compile Include="Migrations\MDARevenueAccessRestrictionsStagingMigrations.cs" />
+    <Compile Include="Migrations\MDARevenueHeadEntryStagingMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemsMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemsStagingValidationMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemsStagingMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemsStagingPivotMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchRecordInvoiceMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchRecordMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchRecordStagingMigrations.cs" />
+    <Compile Include="Migrations\FormControlRevenueHeadValueMigrations.cs" />
+    <Compile Include="Migrations\PAYEBusinessSizeMigrations.cs" />
+    <Compile Include="Migrations\PAYEBusinessTypeAndSizeMigrations.cs" />
+    <Compile Include="Migrations\PAYEBusinessTypeMigrations.cs" />
+    <Compile Include="Migrations\PAYEDirectAssessmentRecordMigrations.cs" />
+    <Compile Include="Migrations\PAYEDirectAssessmentTypeMigrations.cs" />
+    <Compile Include="Migrations\PAYEExemptionTypeMigrations.cs" />
+    <Compile Include="Migrations\PAYEReceiptTransactionLogMigrations.cs" />
+    <Compile Include="Migrations\PAYEBatchItemExemptionMigrations.cs" />
+    <Compile Include="Migrations\RevenueHeadPermissionMigrations.cs" />
+    <Compile Include="Migrations\RevenueHeadPermissionConstraintsMigrations.cs" />
+    <Compile Include="Migrations\PAYEPaymentUtilizationMigrations.cs" />
+    <Compile Include="Migrations\PAYEReceiptMigrations.cs" />
+    <Compile Include="Migrations\SettlementLineConstraintMigrations.cs" />
+    <Compile Include="Migrations\SettlementRuleDetailsStagingMigrations.cs" />
+    <Compile Include="Migrations\SettlementRuleStagingMigrations.cs" />
+    <Compile Include="Migrations\SettlementRuleMigrations.cs" />
+    <Compile Include="Migrations\SettlementRuleDetailsMigrations.cs" />
+    <Compile Include="Migrations\SettlementTaskLogMigrations.cs" />
+    <Compile Include="Migrations\TaxCategoryPermissionsMigrations.cs" />
+    <Compile Include="Migrations\TaxCategoryTaxCategoryPermissionsMigrations.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateAuthorizedSignaturesMigrations.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateMigrations.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateRequestApprovalLogMigrations.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateRequestApproverMigration.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateRequestFilesMigrations.cs" />
+    <Compile Include="Migrations\TaxClearanceCertificateRequestMigrations.cs" />
+    <Compile Include="Migrations\TaxEntityProfileLocationMigrations.cs" />
+    <Compile Include="Migrations\TaxPayerEnumerationItemsStagingMigrations.cs" />
+    <Compile Include="Migrations\TaxPayerEnumerationMigration.cs" />
+    <Compile Include="Migrations\TaxPayerEnumerationItemsMigrations.cs" />
+    <Compile Include="Migrations\UserNotificationItemMigration.cs" />
+    <Compile Include="Migrations\UserNotificationMigration.cs" />
+    <Compile Include="Migrations\TINValidationResponseMigrations.cs" />
+    <Compile Include="Migrations\VerificationCodeItemsMigrations.cs" />
+    <Compile Include="Migrations\VerificationCodeMigrations.cs" />
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\ActivityPermission.cs" />
+    <Compile Include="Models\BVNValidationResponse.cs" />
+    <Compile Include="Models\CBSUserTaxEntityProfileLocation.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Ethnicity.cs" />
+    <Compile Include="Models\HangfireJobReference.cs" />
+    <Compile Include="Models\NibssIntegrationCredentials.cs" />
+    <Compile Include="Models\NINValidationResponse.cs" />
+    <Compile Include="Models\NotificationMessageLog.cs" />
+    <Compile Include="Models\PAYEDirectAssessmentRecord.cs" />
+    <Compile Include="Models\PAYEAPIRequest.cs" />
+    <Compile Include="Models\PAYEAPIBatchItemsPagesTracker.cs" />
+    <Compile Include="Models\PAYEAPIBatchItemsRef.cs" />
+    <Compile Include="Models\PAYEBatchItemExemptionStaging.cs" />
+    <Compile Include="Models\PAYEBatchItemReceipt.cs" />
+    <Compile Include="Models\MDARevenueAccessRestrictions.cs" />
+    <Compile Include="Models\MDARevenueAccessRestrictionsStaging.cs" />
+    <Compile Include="Models\MDARevenueHeadEntryStaging.cs" />
+    <Compile Include="Models\PAYEBatchItems.cs" />
+    <Compile Include="Models\PAYEBatchItemsStagingValidation.cs" />
+    <Compile Include="Models\PAYEBatchItemsStagingPivot.cs" />
+    <Compile Include="Models\PAYEBatchItemsStaging.cs" />
+    <Compile Include="Models\PAYEBatchRecordInvoice.cs" />
+    <Compile Include="Models\PAYEBatchRecord.cs" />
+    <Compile Include="Models\PAYEBatchRecordStaging.cs" />
+    <Compile Include="Models\FormControlRevenueHeadValue.cs" />
+    <Compile Include="Models\PAYEBusinessSize.cs" />
+    <Compile Include="Models\PAYEBusinessType.cs" />
+    <Compile Include="Models\PAYEBusinessTypeAndSize.cs" />
+    <Compile Include="Models\PAYEDirectAssessmentType.cs" />
+    <Compile Include="Models\PAYEPaymentUtilization.cs" />
+    <Compile Include="Models\PAYEReceipt.cs" />
+    <Compile Include="Models\PAYEReceiptTransactionLog.cs" />
+    <Compile Include="Models\PAYEBatchItemExemption.cs" />
+    <Compile Include="Models\RevenueHeadPermission.cs" />
+    <Compile Include="Models\RevenueHeadPermissionConstraints.cs" />
+    <Compile Include="Models\SettlementBatch.cs" />
+    <Compile Include="Models\SettlementLineConstraint.cs" />
+    <Compile Include="Models\SettlementRuleDetailsStaging.cs" />
+    <Compile Include="Models\SettlementRuleStaging.cs" />
+    <Compile Include="Models\SettlementRule.cs" />
+    <Compile Include="Models\SettlementRuleDetails.cs" />
+    <Compile Include="Models\TaxCategoryPermissions.cs" />
+    <Compile Include="Models\TaxCategoryTaxCategoryPermissions.cs" />
+    <Compile Include="Models\TaxClearanceCertificate.cs" />
+    <Compile Include="Models\TaxClearanceCertificateAuthorizedSignatures.cs" />
+    <Compile Include="Models\TaxClearanceCertificateRequest.cs" />
+    <Compile Include="Models\TaxClearanceCertificateRequestApprover.cs" />
+    <Compile Include="Models\TaxClearanceCertificateRequestFiles.cs" />
+    <Compile Include="Models\PAYEExemptionType.cs" />
+    <Compile Include="Models\TaxEntityProfileLocation.cs" />
+    <Compile Include="Models\TaxPayerEnumeration.cs" />
+    <Compile Include="Models\TaxPayerEnumerationItems.cs" />
+    <Compile Include="Models\TaxClearanceCertificateRequestApprovalLog.cs" />
+    <Compile Include="Models\TaxPayerEnumerationItemsStaging.cs" />
+    <Compile Include="Models\UserNotificationItem.cs" />
+    <Compile Include="Models\UserNotification.cs" />
+    <Compile Include="Models\TINValidationResponse.cs" />
+    <Compile Include="Models\VerificationCode.cs" />
+    <Compile Include="Models\VerificationCodeItems.cs" />
+    <Compile Include="Seeds\Contracts\ICountrySeeds.cs" />
+    <Compile Include="Seeds\Contracts\IEthnicitySeeds.cs" />
+    <Compile Include="Seeds\Contracts\IActivityPermissionSeeds.cs" />
+    <Compile Include="Seeds\CountrySeeds.cs" />
+    <Compile Include="Seeds\EthnicitySeeds.cs" />
+    <Compile Include="Services\BankManager.cs" />
+    <Compile Include="Seeds\ActivityPermissionSeeds.cs" />
+    <Compile Include="Services\BVNValidationResponseManager.cs" />
+    <Compile Include="Services\CBSUserTaxEntityProfileLocationManager.cs" />
+    <Compile Include="Services\Contracts\IBankManager.cs" />
+    <Compile Include="Services\Contracts\IBVNValidationResponseManager.cs" />
+    <Compile Include="Services\Contracts\ICBSUserTaxEntityProfileLocationManager.cs" />
+    <Compile Include="Services\Contracts\ICountryManager.cs" />
+    <Compile Include="Services\Contracts\IEthnicityManager.cs" />
+    <Compile Include="Services\Contracts\IHangfireJobReferenceManager.cs" />
+    <Compile Include="Services\Contracts\IMDARevenueAccessRestrictionsManager.cs" />
+    <Compile Include="Services\Contracts\INibssIntegrationCredentialsManager.cs" />
+    <Compile Include="Services\Contracts\ININValidationResponseManager.cs" />
+    <Compile Include="Services\Contracts\INotificationMessageLogManager.cs" />
+    <Compile Include="Services\Contracts\IActivityPermissionManager.cs" />
+    <Compile Include="Services\Contracts\ISettlementRuleDetailsStagingManager.cs" />
+    <Compile Include="Services\Contracts\ISettlementRuleStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEExemptionTypeManager.cs" />
+    <Compile Include="Services\Contracts\ITaxCategoryPermissionsManager.cs" />
+    <Compile Include="Services\Contracts\ITaxCategoryTaxCategoryPermissionsManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateRequestApprovalLogManager.cs" />
+    <Compile Include="Services\Contracts\ITaxEntityProfileLocationManager.cs" />
+    <Compile Include="Services\Contracts\ITaxPayerEnumerationItemsManager.cs" />
+    <Compile Include="Services\Contracts\ITaxPayerEnumerationItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\ITaxPayerEnumerationManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEDirectAssessmentTypeManager.cs" />
+    <Compile Include="Services\Contracts\ITINValidationResponseManager.cs" />
+    <Compile Include="Services\Contracts\IUserRolesPartRecordManager.cs" />
+    <Compile Include="Services\CountryManager.cs" />
+    <Compile Include="Services\EthnicityManager.cs" />
+    <Compile Include="Services\HangfireJobReferenceManager.cs" />
+    <Compile Include="Services\MDARevenueAccessRestrictionsManager.cs" />
+    <Compile Include="Services\MDARevenueAccessRestrictionsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IMDARevenueAccessRestrictionsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IFormControlRevenueHeadValueManager.cs" />
+    <Compile Include="Services\Contracts\IMDARevenueHeadEntryStagingManager.cs" />
+    <Compile Include="Services\Contracts\INotificationMessageItemsManager.cs" />
+    <Compile Include="Services\Contracts\INotificationMessageManager.cs" />
+    <Compile Include="Mail\Provider\GmailProvider.cs" />
+    <Compile Include="Mail\IMailerBuilder.cs" />
+    <Compile Include="Mail\Mailer.cs" />
+    <Compile Include="Mail\MailerBuilder.cs" />
+    <Compile Include="Services\Contracts\IPAYEAddBatchManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEAPIRequestManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchItemsRefManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchItemsPagesTrackerManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEReceiptTransactionLogManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchItemsManager.cs" />
+    <Compile Include="Services\Contracts\IRevenueHeadPermissionConstraintsManager.cs" />
+    <Compile Include="Services\Contracts\IRevenueHeadPermissionManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchItemReceiptManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchRecordStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchRecordInvoiceManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEPaymentUtilizationManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEReceiptManager.cs" />
+    <Compile Include="Services\Contracts\ISettlementManager.cs" />
+    <Compile Include="Services\Contracts\ISettlementRuleDetailsManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateAuthorizedSignaturesManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateRequestApproverManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateRequestFilesManager.cs" />
+    <Compile Include="Services\Contracts\ITaxClearanceCertificateRequestManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPAYEBatchRecordManager.cs" />
+    <Compile Include="Services\Contracts\IVerificationCodeItemsManager.cs" />
+    <Compile Include="Services\Contracts\IVerificationCodeManager.cs" />
+    <Compile Include="Services\FormControlRevenueHeadValueManager.cs" />
+    <Compile Include="Services\MDARevenueHeadEntryStagingManager.cs" />
+    <Compile Include="Services\NibssIntegrationCredentialsManager.cs" />
+    <Compile Include="Services\NINValidationResponseManager.cs" />
+    <Compile Include="Services\NotificationMessageItemsManager.cs" />
+    <Compile Include="Services\NotificationMessageLogManager.cs" />
+    <Compile Include="Services\NotificationMessageManager.cs" />
+    <Compile Include="Mail\Provider\PulseProvider.cs" />
+    <Compile Include="Migrations\AddressMigration.cs" />
+    <Compile Include="Migrations\APIRequestMigrations.cs" />
+    <Compile Include="Migrations\ApplicantMigration.cs" />
+    <Compile Include="Migrations\AssetMigration.cs" />
+    <Compile Include="Migrations\AuditTrailMigrations.cs" />
+    <Compile Include="Migrations\BankDetailsMigrations.cs" />
+    <Compile Include="Migrations\BatchInvoiceResponseMigrations.cs" />
+    <Compile Include="Migrations\BillingModelMigrations.cs" />
+    <Compile Include="Migrations\BillingScheduleMigrations.cs" />
+    <Compile Include="Migrations\CBSPermissionMigrations.cs" />
+    <Compile Include="Migrations\CBSRoleMigrations.cs" />
+    <Compile Include="Migrations\CBSRolePermissionMigrations.cs" />
+    <Compile Include="Migrations\CBSUserRoleMigrations.cs" />
+    <Compile Include="Migrations\DirectAssessmentBatchRecordMigrations.cs" />
+    <Compile Include="Migrations\DirectAssessmentPayeeMigrations.cs" />
+    <Compile Include="Migrations\ExternalPaymentProviderMigrations.cs" />
+    <Compile Include="Migrations\FormControlRevenueHeadMigration.cs" />
+    <Compile Include="Migrations\GeneralBatchReferenceMigrations.cs" />
+    <Compile Include="Migrations\InvoiceItemsMigrations.cs" />
+    <Compile Include="Migrations\IPPISBatchMigrations.cs" />
+    <Compile Include="Migrations\IPPISBatchRecordsInvoiceMigrations.cs" />
+    <Compile Include="Migrations\IPPISRecordsMigrations.cs" />
+    <Compile Include="Migrations\IPPISTaxPayerSummaryMigrations.cs" />
+    <Compile Include="Migrations\LGAMigrations.cs" />
+    <Compile Include="Migrations\NagisDataBatchMigrations.cs" />
+    <Compile Include="Migrations\NagisOldCustomersMigrations.cs" />
+    <Compile Include="Migrations\NagisOldInvoiceCustomerResponseMigrations.cs" />
+    <Compile Include="Migrations\NagisOldInvoiceResponseStagingMigrations.cs" />
+    <Compile Include="Migrations\NagisOldInvoicesMigrations.cs" />
+    <Compile Include="Migrations\NagisOldInvoiceStagingHelperMigrations.cs" />
+    <Compile Include="Migrations\NagisOldInvoiceSummaryMigrations.cs" />
+    <Compile Include="Migrations\NotificationMessageItemsMigrations.cs" />
+    <Compile Include="Migrations\NotificationMessageMigration.cs" />
+    <Compile Include="Migrations\PaymentReferenceMigrations.cs" />
+    <Compile Include="Migrations\PaymentProviderValidationConstraintMigrations.cs" />
+    <Compile Include="Migrations\RefDataDescriptionMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataAssetMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataBatchMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataBuildingPropertiesMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataBusinessPremisesMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataRecordsInvoiceMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataRecordsMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataTaxEntityStagingMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataTypeOfTaxPaidMappingMigrations.cs" />
+    <Compile Include="Migrations\ReferenceDataWithHoldingTaxOnRentMigrations.cs" />
+    <Compile Include="Migrations\RevenueHeadGroupMigrations.cs" />
+    <Compile Include="Migrations\AccessRoleMigrations.cs" />
+    <Compile Include="Migrations\AccessRoleMDARevenueHeadMigrations.cs" />
+    <Compile Include="Migrations\AccessRoleUserMigrations.cs" />
+    <Compile Include="Migrations\SettlementEngineDetailsMigrations.cs" />
+    <Compile Include="Migrations\StateModelMigrations.cs" />
+    <Compile Include="Migrations\ThirdPartyPaymentNotificationMigrations.cs" />
+    <Compile Include="Migrations\ReceiptMigration.cs" />
+    <Compile Include="Migrations\RefDataTempMigrations.cs" />
+    <Compile Include="Migrations\RequireLoginUserMigrations.cs" />
+    <Compile Include="Migrations\TaxEntityMigrations.cs" />
+    <Compile Include="Migrations\FormControlsMigrations.cs" />
+    <Compile Include="Migrations\InvoiceMigrations.cs" />
+    <Compile Include="Migrations\MDAMigrations.cs" />
+    <Compile Include="Migrations\MDASettingsMigrations.cs" />
+    <Compile Include="Migrations\RevenueHeadMigrations.cs" />
+    <Compile Include="Migrations\ScheduleLogMigrations.cs" />
+    <Compile Include="Migrations\TaxEntityCategoryMigrations.cs" />
+    <Compile Include="Migrations\StatsMigrations.cs" />
+    <Compile Include="Migrations\ExpertSystemSettingsMigrations.cs" />
+    <Compile Include="Migrations\TaxPayerAccountMigrations.cs" />
+    <Compile Include="Migrations\TenantCBSSettingsMigrations.cs" />
+    <Compile Include="Migrations\TestRefDataTINMigration.cs" />
+    <Compile Include="Migrations\TINRegistrationFormMigration.cs" />
+    <Compile Include="Migrations\TransactionLogMigration.cs" />
+    <Compile Include="HelperModels\GetTaxPayersModel.cs" />
+    <Compile Include="Migrations\UnreconciledPayePaymentsMigrations.cs" />
+    <Compile Include="Migrations\WebPaymentRequestMigrations.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\APIRequest.cs" />
+    <Compile Include="Models\Applicant.cs" />
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\AuditTrail.cs" />
+    <Compile Include="Models\BankDetails.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\BatchInvoiceResponse.cs" />
+    <Compile Include="Models\BillingModel.cs" />
+    <Compile Include="Models\BillingSchedule.cs" />
+    <Compile Include="Models\CBSModel.cs" />
+    <Compile Include="Models\CBSPermission.cs" />
+    <Compile Include="Models\CBSRole.cs" />
+    <Compile Include="Models\CBSRolePermission.cs" />
+    <Compile Include="Models\CBSUserRole.cs" />
+    <Compile Include="Models\DirectAssessmentBatchRecord.cs" />
+    <Compile Include="Models\DirectAssessmentPayee.cs" />
+    <Compile Include="Models\ExpertSystemSettings.cs" />
+    <Compile Include="Models\Enums\BillingEnum.cs" />
+    <Compile Include="Models\Enums\Enums.cs" />
+    <Compile Include="Models\ExternalPaymentProvider.cs" />
+    <Compile Include="Models\FormControl.cs" />
+    <Compile Include="Models\FormControlRevenueHead.cs" />
+    <Compile Include="Models\GeneralBatchReference.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceAmountDueSummary.cs" />
+    <Compile Include="Models\InvoiceItems.cs" />
+    <Compile Include="Models\IPPISBatch.cs" />
+    <Compile Include="Models\IPPISBatchRecordsInvoice.cs" />
+    <Compile Include="Models\IPPISBatchRecords.cs" />
+    <Compile Include="Models\IPPISTaxPayerSummary.cs" />
+    <Compile Include="Models\LGA.cs" />
+    <Compile Include="Models\MDA.cs" />
+    <Compile Include="Models\MDARevenueHead.cs" />
+    <Compile Include="Models\MDASettings.cs" />
+    <Compile Include="Models\NagisDataBatch.cs" />
+    <Compile Include="Models\NagisOldCustomers.cs" />
+    <Compile Include="Models\NagisOldInvoiceCustomerResponse.cs" />
+    <Compile Include="Models\NagisOldInvoiceResponseStaging.cs" />
+    <Compile Include="Models\NagisOldInvoices.cs" />
+    <Compile Include="Models\NagisOldInvoiceStagingHelper.cs" />
+    <Compile Include="Models\NagisOldInvoiceSummary.cs" />
+    <Compile Include="HelperModels\NetPayTransactionVM.cs" />
+    <Compile Include="Models\NotificationMessage.cs" />
+    <Compile Include="Models\NotificationMessageItems.cs" />
+    <Compile Include="Models\PaymentReference.cs" />
+    <Compile Include="Models\PaymentProviderValidationConstraint.cs" />
+    <Compile Include="Models\RefDataDescription.cs" />
+    <Compile Include="Models\ReferenceDataAsset.cs" />
+    <Compile Include="Models\ReferenceDataBatch.cs" />
+    <Compile Include="Models\ReferenceDataBuildingProperties.cs" />
+    <Compile Include="Models\ReferenceDataBusinessPremises.cs" />
+    <Compile Include="Models\ReferenceDataRecords.cs" />
+    <Compile Include="Models\ReferenceDataRecordsInvoice.cs" />
+    <Compile Include="Models\ReferenceDataTaxEntityStaging.cs" />
+    <Compile Include="Models\ReferenceDataTypeOfTaxPaidMapping.cs" />
+    <Compile Include="Models\ReferenceDataWithHoldingTaxOnRent.cs" />
+    <Compile Include="Models\RevenueHeadGroup.cs" />
+    <Compile Include="Models\AccessRole.cs" />
+    <Compile Include="Models\AccessRoleMDARevenueHead.cs" />
+    <Compile Include="Models\AccessRoleUser.cs" />
+    <Compile Include="Models\SettlementEngineDetails.cs" />
+    <Compile Include="Models\StateModel.cs" />
+    <Compile Include="Models\ThirdPartyPaymentNotification.cs" />
+    <Compile Include="Models\Receipt.cs" />
+    <Compile Include="Models\RefDataTemp.cs" />
+    <Compile Include="Models\CBSUser.cs" />
+    <Compile Include="Models\RevenueHead.cs" />
+    <Compile Include="Models\ScheduleLog.cs" />
+    <Compile Include="Models\Stats.cs" />
+    <Compile Include="Models\TaxEntity.cs" />
+    <Compile Include="Models\TaxEntityAccount.cs" />
+    <Compile Include="Models\TaxEntityCategory.cs" />
+    <Compile Include="Models\TenantCBSSettings.cs" />
+    <Compile Include="Models\TIN.cs" />
+    <Compile Include="Models\TINRegistrationForm.cs" />
+    <Compile Include="Models\TransactionLog.cs" />
+    <Compile Include="Models\UnreconciledPayePayments.cs" />
+    <Compile Include="Models\WebPaymentRequest.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
+    <Compile Include="Notifications\Contracts\INotifications.cs" />
+    <Compile Include="Notifications\Contracts\IPaymentNotifications.cs" />
+    <Compile Include="Notifications\PaymentNofications.cs" />
+    <Compile Include="Payee\PayeeAssessmentConfiguration.cs" />
+    <Compile Include="Payee\PayeeAssessmentCollection.cs" />
+    <Compile Include="Payee\PayeeAssessments\Contracts\IPayeeAssessmentInterface.cs" />
+    <Compile Include="Payee\PayeeAssessments\ParkwayPayeeAssessment.cs" />
+    <Compile Include="PaymentProviderHandlers\BaseHandler.cs" />
+    <Compile Include="PaymentProviderHandlers\Contracts\IPaymentProviderHandler.cs" />
+    <Compile Include="PaymentProviderHandlers\PaymentProviderHandler.cs" />
+    <Compile Include="PaymentProviderHandlers\ReadyCashPaymentProviderHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedulers\BillingScheduler.cs" />
+    <Compile Include="Schedulers\BillingTask.cs" />
+    <Compile Include="Schedulers\Contracts\IBillingScheduler.cs" />
+    <Compile Include="Seeds\ACL.cs" />
+    <Compile Include="Seeds\Contracts\IACL.cs" />
+    <Compile Include="Seeds\Contracts\ICBSUserSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IFormControlsSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ILGASeeds.cs" />
+    <Compile Include="Seeds\Contracts\ISectorSeed.cs" />
+    <Compile Include="Seeds\Contracts\IStatesSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ITaxAccountSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ITaxEntitySeeds.cs" />
+    <Compile Include="Seeds\Contracts\ITINSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ITranxLog.cs" />
+    <Compile Include="Seeds\FormControlsSeeds.cs" />
+    <Compile Include="Seeds\CBSUserSeeds.cs" />
+    <Compile Include="Seeds\LGASeeds.cs" />
+    <Compile Include="Seeds\SectorSeeds.cs" />
+    <Compile Include="Seeds\StatesSeeds.cs" />
+    <Compile Include="Seeds\StatsSeeds.cs" />
+    <Compile Include="Seeds\TaxAccountSeeds.cs" />
+    <Compile Include="Seeds\TaxEntitySeeds.cs" />
+    <Compile Include="Seeds\TINSeeds.cs" />
+    <Compile Include="Seeds\TranxLogSeeds.cs" />
+    <Compile Include="Services\AdminSettingManager.cs" />
+    <Compile Include="Services\APIRequestManager.cs" />
+    <Compile Include="Services\ApplicantManager.cs" />
+    <Compile Include="Services\AuditTrailManager.cs" />
+    <Compile Include="Services\BaseManager.cs" />
+    <Compile Include="Services\BillingModelManager.cs" />
+    <Compile Include="Services\BillingScheduleManager.cs" />
+    <Compile Include="Services\CBSRoleManager.cs" />
+    <Compile Include="Services\CBSUserManager.cs" />
+    <Compile Include="Services\Contracts\IAdminSettingManager.cs" />
+    <Compile Include="Services\Contracts\IAPIRequestManager.cs" />
+    <Compile Include="Services\Contracts\IApplicantManager.cs" />
+    <Compile Include="Services\Contracts\IAuditTrailManager.cs" />
+    <Compile Include="Services\Contracts\IBaseManager.cs" />
+    <Compile Include="Services\Contracts\IBillingModelManager.cs" />
+    <Compile Include="Services\Contracts\IBillingScheduleManager.cs" />
+    <Compile Include="Services\Contracts\ICBSRoleManager.cs" />
+    <Compile Include="Services\Contracts\ICBSUserManager.cs" />
+    <Compile Include="Services\Contracts\IDirectAssessmentBatchRecord.cs" />
+    <Compile Include="Services\Contracts\IExternalPaymentProviderManager.cs" />
+    <Compile Include="Services\Contracts\IFormControlsManager.cs" />
+    <Compile Include="Services\Contracts\IFormControlRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\IInvoiceItemsManager.cs" />
+    <Compile Include="Services\Contracts\IInvoiceManager.cs" />
+    <Compile Include="Services\Contracts\IInvoiceStatisticsManager.cs" />
+    <Compile Include="Services\Contracts\IInvoicingService.cs" />
+    <Compile Include="Services\Contracts\IIPPISBatchManager.cs" />
+    <Compile Include="Services\Contracts\IIPPISRecordsManager.cs" />
+    <Compile Include="Services\Contracts\ILGAManager.cs" />
+    <Compile Include="Services\Contracts\IMDAManager.cs" />
+    <Compile Include="Services\Contracts\IMDASettingsManager.cs" />
+    <Compile Include="Services\Contracts\IPaymentReferenceManager.cs" />
+    <Compile Include="Services\Contracts\IPaymentProviderValidationConstraintManager.cs" />
+    <Compile Include="Services\Contracts\IReferenceDataBatchManager.cs" />
+    <Compile Include="Services\Contracts\IRoleManager.cs" />
+    <Compile Include="Services\Contracts\IRoleRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\IRoleUserManager.cs" />
+    <Compile Include="Services\Contracts\IStateModelManager.cs" />
+    <Compile Include="Services\Contracts\IUnreconciledPayePaymentsManager.cs" />
+    <Compile Include="Services\InvoiceItemsManager.cs" />
+    <Compile Include="Services\LGAManager.cs" />
+    <Compile Include="Services\IPPISBatchManager.cs" />
+    <Compile Include="Services\Contracts\IPrepaidPinManager.cs" />
+    <Compile Include="Services\Contracts\IQRTZ_TRIGGERSManager.cs" />
+    <Compile Include="Services\Contracts\IReceiptManager.cs" />
+    <Compile Include="Services\Contracts\IRefDataTempManager.cs" />
+    <Compile Include="Services\Contracts\IRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\ITaxEntityAccountManager.cs" />
+    <Compile Include="Services\Contracts\ITaxEntityManager.cs" />
+    <Compile Include="Services\Contracts\ITaxPayerCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IStatsManager.cs" />
+    <Compile Include="Services\Contracts\ITenantStateSettings.cs" />
+    <Compile Include="Services\Contracts\IThirdPartyPaymentNotificationManager.cs" />
+    <Compile Include="Services\Contracts\ITINFormManager.cs" />
+    <Compile Include="Services\Contracts\ITINManager.cs" />
+    <Compile Include="Services\Contracts\ITransactionLogManager.cs" />
+    <Compile Include="Services\Contracts\IWebPaymentRequestManager.cs" />
+    <Compile Include="Services\DirectAssessmentBatchRecordManager.cs" />
+    <Compile Include="Services\FormControlsManager.cs" />
+    <Compile Include="Services\FormControlRevenueHeadManager.cs" />
+    <Compile Include="Services\InvoiceManager.cs" />
+    <Compile Include="Services\InvoiceStatisticsManager.cs" />
+    <Compile Include="Services\InvoicingService.cs" />
+    <Compile Include="Services\IPPISRecordsManager.cs" />
+    <Compile Include="Services\MdaManager.cs" />
+    <Compile Include="Services\MDASettingsManager.cs" />
+    <Compile Include="Services\ExternalPaymentProviderManager.cs" />
+    <Compile Include="Services\PAYEAddBatchManager.cs" />
+    <Compile Include="Services\PAYEAPIRequestManager.cs" />
+    <Compile Include="Services\PAYEBatchItemReceiptManager.cs" />
+    <Compile Include="Services\PAYEBatchItemsPagesTrackerManager.cs" />
+    <Compile Include="Services\PAYEBatchItemsRefManager.cs" />
+    <Compile Include="Services\PAYEBatchItemsManager.cs" />
+    <Compile Include="Services\PAYEBatchItemsStagingManager.cs" />
+    <Compile Include="Services\PAYEBatchRecordInvoiceManager.cs" />
+    <Compile Include="Services\PAYEBatchRecordManager.cs" />
+    <Compile Include="Services\PAYEBatchRecordStagingManager.cs" />
+    <Compile Include="Services\PAYEExemptionTypeManager.cs" />
+    <Compile Include="Services\PAYEPaymentUtilizationManager.cs" />
+    <Compile Include="Services\PAYEReceiptManager.cs" />
+    <Compile Include="Services\PAYEReceiptTransactionLogManager.cs" />
+    <Compile Include="Services\PAYEDirectAssessmentTypeManager.cs" />
+    <Compile Include="Services\PaymentReferenceManager.cs" />
+    <Compile Include="Services\PaymentProviderValidationConstraintManager.cs" />
+    <Compile Include="Services\ActivityPermissionManager.cs" />
+    <Compile Include="Services\ReceiptManager.cs" />
+    <Compile Include="Services\RefDataTempManager.cs" />
+    <Compile Include="Services\ReferenceDataBatchManager.cs" />
+    <Compile Include="Services\RevenueHeadManager.cs" />
+    <Compile Include="Services\RevenueHeadPermissionConstraintsManager.cs" />
+    <Compile Include="Services\RevenueHeadPermissionManager.cs" />
+    <Compile Include="Services\RoleManager.cs" />
+    <Compile Include="Services\RoleRevenueHeadManager.cs" />
+    <Compile Include="Services\RoleUserManager.cs" />
+    <Compile Include="Services\SettlementManager.cs" />
+    <Compile Include="Services\SettlementRuleDetailsManager.cs" />
+    <Compile Include="Services\SettlementRuleDetailsStagingManager.cs" />
+    <Compile Include="Services\SettlementRuleStagingManager.cs" />
+    <Compile Include="Services\StateModelManager.cs" />
+    <Compile Include="Services\TaxCategoryPermissionsManager.cs" />
+    <Compile Include="Services\TaxCategoryTaxCategoryPermissionsManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateAuthorizedSignaturesManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateRequestApprovalLogManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateRequestApproverManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateRequestFilesManager.cs" />
+    <Compile Include="Services\TaxClearanceCertificateRequestManager.cs" />
+    <Compile Include="Services\TaxEntityAccountManager.cs" />
+    <Compile Include="Services\TaxEntityCategoryManager.cs" />
+    <Compile Include="Services\TaxEntityManager.cs" />
+    <Compile Include="Services\StatsManager.cs" />
+    <Compile Include="Services\TaxEntityProfileLocationManager.cs" />
+    <Compile Include="Services\TaxPayerEnumerationItemsManager.cs" />
+    <Compile Include="Services\TaxPayerEnumerationItemsStagingManager.cs" />
+    <Compile Include="Services\TaxPayerEnumerationManager.cs" />
+    <Compile Include="Services\TenantStateSettingsManager.cs" />
+    <Compile Include="Services\ThirdPartyPaymentNotificationManager.cs" />
+    <Compile Include="Services\TINFormManager.cs" />
+    <Compile Include="Services\TINManager.cs" />
+    <Compile Include="Services\TINValidationResponseManager.cs" />
+    <Compile Include="Services\TransactionLogManager.cs" />
+    <Compile Include="Services\UnreconciledPayePaymentsManager.cs" />
+    <Compile Include="Services\UserRolesPartRecordManager.cs" />
+    <Compile Include="Services\VerificationCodeItemsManager.cs" />
+    <Compile Include="Services\VerificationCodeManager.cs" />
+    <Compile Include="Services\WebPaymentRequestManager.cs" />
+    <Compile Include="SMS\Provider\Contracts\ISMSProvider.cs" />
+    <Compile Include="SMS\Provider\PulseProvider.cs" />
+    <Compile Include="StateConfig\CBSStates.cs" />
+    <Compile Include="Utilities\AppSettingsConfigurations.cs" />
+    <Compile Include="Utilities\CacheProvider.cs" />
+    <Compile Include="Utilities\CronGenerator.cs" />
+    <Compile Include="Utilities\FormControlsEqualityComparer.cs" />
+    <Compile Include="Utilities\ICronGenerator.cs" />
+    <Compile Include="Utilities\InvoiceUtil.cs" />
+    <Compile Include="Utilities\TaxPayerEqualityComparer.cs" />
+    <Compile Include="Utilities\Util.cs" />
+    <Compile Include="Validations\CollectionValidationModel.cs" />
+    <Compile Include="Validations\Contracts\IValidator.cs" />
+    <Compile Include="Validations\FormValidators\BaseValidator.cs" />
+    <Compile Include="Validations\FormValidators\BusinessSizeValidator.cs" />
+    <Compile Include="Validations\FormValidators\Contracts\IComplexFormValidator.cs" />
+    <Compile Include="Validations\FormValidators\Contracts\IFormValidator.cs" />
+    <Compile Include="Validations\FormValidators\InputBoxValidator.cs" />
+    <Compile Include="Validations\FormValidators\LGADropDownValidator.cs" />
+    <Compile Include="Validations\FormValidators\Properties\FormValidatorModel.cs" />
+    <Compile Include="Validations\FormValidators\Properties\InputBoxProps.cs" />
+    <Compile Include="Validations\FormValidators\BusinessTypeValidator.cs" />
+    <Compile Include="Validations\FormValidators\StateDropDownValidator.cs" />
+    <Compile Include="Validations\FormValidators\YearDropDownValidator.cs" />
+    <Compile Include="Validations\ResultCount.cs" />
+    <Compile Include="Validations\Rules\BaseCollectionValidate.cs" />
+    <Compile Include="Validations\Rules\Contracts\ICollectionValidator.cs" />
+    <Compile Include="Validations\Rules\Contracts\IUniqueness.cs" />
+    <Compile Include="Validations\Rules\Uniqueness.cs" />
+    <Compile Include="Validations\Rules\ValidateEmail.cs" />
+    <Compile Include="Validations\Rules\ValidateText.cs" />
+    <Compile Include="Validations\UniqueValidationModel.cs" />
+    <Compile Include="Validations\Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <None Include="Connected Services\NationalIdentityVerifcationSystem\configuration91.svcinfo" />
+    <None Include="Connected Services\NationalIdentityVerifcationSystem\configuration.svcinfo" />
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.changePasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.createTokenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.createTokenStringResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.demoMapPermission.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.getPermissionByLevelResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.loginMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByDemoPhoneResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByDemoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByDocumentNumberResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByFingerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByNINResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchByPhotoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.searchResponseDemo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.tokenObject.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.updateUserSELFResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.verifyFingerWithDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\NationalIdentityVerifcationSystem\Parkway.CBS.Core.NationalIdentityVerifcationSystem.verifyPhotoWithDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\NationalIdentityVerifcationSystem\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ReadyCashService\configuration91.svcinfo" />
+    <None Include="Connected Services\ReadyCashService\configuration.svcinfo" />
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.activateCustomerResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.cardHolder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.clearSecretCodeResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.disableCutomerResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findAgentTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findCustomerByPhoneResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findCustomersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findCustomerTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findMerchantResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.findTerminalTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.getAgentBalanceResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.getAllCutomersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.getCustomerBalanceResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.getTerminalResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.glEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.merchant.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.resetPINResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.searchTranLogResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.terminal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.tranLog.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ReadyCashService\Parkway.CBS.Core.ReadyCashService.updateCustomerResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ReadyCashService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Orchard.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Orchard.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Orchard.Framework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Orchard.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CBSWinServiceScheduler\Parkway.Scheduler.Interface\Parkway.Scheduler.Interface.csproj">
+      <Project>{bdf5977d-4bd9-4cd6-8b62-f21a7ed277ff}</Project>
+      <Name>Parkway.Scheduler.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.CacheProvider\Parkway.CBS.CacheProvider.csproj">
+      <Project>{1636072F-E60D-42FE-8F89-7E78F57ECFFB}</Project>
+      <Name>Parkway.CBS.CacheProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Entities\Parkway.CBS.Entities.csproj">
+      <Project>{9872DCF4-A38E-43F6-BBF6-3E855119FC88}</Project>
+      <Name>Parkway.CBS.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.FileUpload\Parkway.CBS.FileUpload.csproj">
+      <Project>{f50948aa-154f-4f1d-922a-06f6a0ce49fd}</Project>
+      <Name>Parkway.CBS.FileUpload</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.HangFireInterface\Parkway.CBS.HangFireInterface.csproj">
+      <Project>{1ECA1ED8-4BB3-4DBA-8D5F-22AF1D93E4FD}</Project>
+      <Name>Parkway.CBS.HangFireInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Payee\Parkway.CBS.Payee.csproj">
+      <Project>{09D19D8E-FD27-43ED-931B-ED1549E658C1}</Project>
+      <Name>Parkway.CBS.Payee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Payee\Parkway.CBS.Payee.csproj">
+      <Project>{09d19d8e-fd27-43ed-931b-ed1549e658c1}</Project>
+      <Name>Parkway.CBS.Payee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.ReferenceData\Parkway.CBS.ReferenceData.csproj">
+      <Project>{9AD39F88-36F5-45D3-909C-BAE3D1CC84C3}</Project>
+      <Name>Parkway.CBS.ReferenceData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.DataExporter\Parkway.DataExporter.csproj">
+      <Project>{3590F60E-8887-4BD8-B60B-CBF981ED917C}</Project>
+      <Name>Parkway.DataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.EbillsPay\Parkway.EbillsPay.csproj">
+      <Project>{35E408A9-1475-44C4-8435-FA6A53CC8038}</Project>
+      <Name>Parkway.EbillsPay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.ThirdParty.Payment.Processor\Parkway.ThirdParty.Payment.Processor.csproj">
+      <Project>{51A8F13A-6423-421C-AC92-558D9151C514}</Project>
+      <Name>Parkway.ThirdParty.Payment.Processor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Autoroute\Orchard.Autoroute.csproj">
+      <Project>{66FCCD76-2761-47E3-8D11-B45D0001DDAA}</Project>
+      <Name>Orchard.Autoroute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Email\Orchard.Email.csproj">
+      <Project>{05660f47-d649-48bd-9ded-df4e01e7cff9}</Project>
+      <Name>Orchard.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.MediaLibrary\Orchard.MediaLibrary.csproj">
+      <Project>{73a7688a-5bd3-4f7e-adfa-ce36c5a10e3b}</Project>
+      <Name>Orchard.MediaLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Modules\Orchard.Modules.csproj">
+      <Project>{17F86780-9A1F-4AA1-86F1-875EEC2730C7}</Project>
+      <Name>Orchard.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Roles\Orchard.Roles.csproj">
+      <Project>{D10AD48F-407D-4DB5-A328-173EC7CB010F}</Project>
+      <Name>Orchard.Roles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79aed36e-abd0-4747-93d3-8722b042454b}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports_RDLC\AssessmentReport.rdlc" />
+    <None Include="Connected Services\NationalIdentityVerifcationSystem\IdentitySearch.wsdl" />
+    <None Include="Connected Services\NationalIdentityVerifcationSystem\IdentitySearch.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReadyCashService\ThirdpartyServiceService.wsdl" />
+    <None Include="Connected Services\ReadyCashService\vams.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\NationalIdentityVerifcationSystem\" />
+    <WCFMetadataStorage Include="Connected Services\ReadyCashService\" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

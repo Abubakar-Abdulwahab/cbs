@@ -1,0 +1,168 @@
+﻿@model Parkway.CBS.Police.Admin.VM.PSSBranchDetailsVM
+@{
+    Layout.Title = "Upload Branches: View Entity Details & File Upload";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.Upload.Branch.Sub.Users.Script");
+}
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        position: relative;
+        word-break: break-word;
+    }
+
+    .upload-info {
+        color: #333333;
+        font-size: 18px;
+        letter-spacing: 0.31px;
+        line-height: 21px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    label.upload-label {
+        flex-direction: column;
+        height: 200px;
+        border: 2px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 100% !important;
+        cursor: pointer;
+    }
+
+        label.upload-label img {
+            height: 50px;
+            width: auto;
+        }
+
+    .upload-caption {
+        color: #333333;
+        font-size: 13px;
+        line-height: 19px;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+        .upload-caption a {
+            color: #00b05f;
+        }
+
+    #upload {
+        display: none;
+    }
+
+    #saveBtn {
+        margin-top: 15px;
+    }
+
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+</style>
+
+<div class="container" style="width:100%">
+    <div class="container-fluid" style="padding:0">
+        <a href="@Url.Action("GenerateRequestForDefaultBranchWithoutOfficersUpload","GenerateRequestWithoutOfficers", new { profileId = Model.EntityDetails.PayerId })" style="float:right">@T("Generate Corporate Super-Invoice")</a>
+    </div>
+    <div class="row" style="padding:15px">
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Recipient")</b>
+            <p>@Model.EntityDetails.Recipient</p>
+            @Html.Hint(T("The name of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Phone number")</b>
+            <p>@Model.EntityDetails.PhoneNumber</p>
+            @Html.Hint(T("Phone number of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Category")</b>
+            <p>@Model.EntityDetails.CategoryName</p>
+            @Html.Hint(T("Category of recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Email")</b>
+            <p>@Model.EntityDetails.Email</p>
+            @Html.Hint(T("Email of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Address")</b>
+            <p>@Model.EntityDetails.Address</p>
+            @Html.Hint(T("Address of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Profile ID")</b>
+            <p>@Model.EntityDetails.PayerId</p>
+            @Html.Hint(T("Profile ID of recipient"))
+        </div>
+    </div>
+    <br />
+    @using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSBranchSubUsersUpload.FileUploadValidation), FormMethod.Post, new { @id = "uploadBranchSubUsersForm", @name = "uploadBranchSubUsersForm", @enctype = "multipart/form-data" }))
+    {
+        <div class="col-12 px-0" style="padding-bottom:10px">
+            <label class="upload-label" for="upload">
+                <span style="font-size:14px;font-weight: lighter;" id="fileName"></span>
+                <img src="/media//cbspolice/Images/upload-black.svg" alt="" id="uploadImg" />
+                <span class="upload-caption" id="uploadInfo">Upload branch sub users file here. (max size 2mb).</span>
+            </label>
+            <input type="file" id="upload" name="branchSubUsersFile" accept=".xls,.xlsx">
+        </div>
+        <fieldset>
+            <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Proceed To Upload")</button>
+        </fieldset>
+    }
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col">@T("Branch Name")</th>
+                <th scope="col">@T("Branch Address")</th>
+                <th scope="col">@T("Branch State")</th>
+                <th scope="col">@T("Branch LGA")</th>
+                <th scope="col">@T("Branch Code")</th>
+                <th scope="col">@T("Actions")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Branches != null && Model.Branches.Any())
+            {
+                foreach (var branch in Model.Branches)
+                {
+                    <tr>
+                        <td>
+                            @branch.Name
+                        </td>
+                        <td>
+                            @branch.Address
+                        </td>
+                        <td>
+                            @branch.StateName
+                        </td>
+                        <td>
+                            @branch.LGAName
+                        </td>
+                        <td>
+                            @branch.Code
+                        </td>
+                        <td><a href="@Url.Action("BranchProfileDetail","BranchOfficer", new { id = branch.Id })">Add Officers (With AP No.)</a> | <a href="@Url.Action("GenerateRequestForBranchWithoutOfficersUpload","GenerateRequestWithoutOfficers", new { branchId = branch.Id })">Add Officers (Count)</a></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">No branches found</td></tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+@Display(Model.Pager)

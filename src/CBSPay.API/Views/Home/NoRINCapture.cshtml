@@ -1,0 +1,151 @@
+﻿@{
+    Layout = "~/Views/Shared/_EIRSHomePayLayout.cshtml";
+}
+@*<div class="col-sm-3">
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                Central Billing
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/Home/Pay"><i class="fa fa-angle-right"></i> Pay A Bill</a>
+                </li>
+                <li>
+                    <a href="~/Home/PayOnAccount"><i class="fa fa-angle-right"></i>  Pay On Account</a>
+                </li>
+                <li>
+                    <a href="~/Home/RegisterForRIN"><i class="fa fa-angle-right"></i>  MDA Service Hub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>*@
+
+<div class="col-sm-12">
+    <div class="title">
+        <h1>
+            Pay On Account - Tax Services
+        </h1>
+        <hr>
+    </div>
+
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                Step 1: No Records Capture - All Fields Neccessary
+            </div>
+        </div>
+        <div class="portlet-body" id="">
+            <div class="row">
+                @using (Html.BeginForm("RegisterForRIN", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-sm-6 form-horizontal">
+
+                        <div class="form-group">
+                            <label for="TaxPayerType" class="control-label col-sm-3">Tax Payer Type</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("TaxPayerType", (IEnumerable<SelectListItem>)ViewBag.TaxPayerTypes, "Select one option", new { @class = "form-control", @id = "TaxPayerTypeSelect" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TaxPayerName" class="control-label col-sm-3">Tax Payer Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="TaxPayerName" id="" class="form-control" placeholder="Enter tax payer name" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PhoneNumber" class="control-label col-sm-3">Mobile Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="PhoneNumber" id="" class="form-control" placeholder="Enter tax payer mobile number" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Email" class="control-label col-sm-3">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" name="Email" id="" class="form-control" placeholder="Enter Email" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="EconomicActivity" class="control-label col-sm-3">Economic Activity</label>
+                            <div class="col-sm-9" id="economicActivityGroup">
+                                <select class="form-control" id="ecoActivity" name="EconomicActivity" required><option disabled hidden selected>Select an option</option></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Address" class="control-label col-sm-3">Address</label>
+                            <div class="col-sm-9">
+                                <textarea name="Address" id="" class="form-control" placeholder="Enter Address" value="" required></textarea>
+                            </div>
+                        </div>
+
+
+
+                        <input type="hidden" name="PaymentChannel" id="PaymentChannel" value="3" />
+                        <input type="hidden" name="ClientId" id="ClientId" value="6817ab2b-4351-6017-5099-358F01bb9558" />
+                        <input type="hidden" name="ClientSecret" id="ClientSecret" value="t+i61Vo71Y4T8nIcjxZMMMYy4YlAxrE/vSEWPlDdVMYHgFdVAsLbRDypDpzjki7LE" />
+                    </div>
+                    <div class="col-sm-6 form-horizontal">
+
+                        <div class="form-group">
+                            <label for="RevenueStream" class="control-label col-sm-3">Select Revenue Stream</label>
+                            <div class="col-sm-9" id="">
+                                @Html.DropDownList("RevenueStream", (IEnumerable<SelectListItem>)ViewBag.RevenueStreamItems, "Select Revenue stream", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="RevenueSubStream" class="control-label col-sm-3">Select Revenue Sub Stream</label>
+                            <div class="col-sm-9" id="">
+                                @Html.DropDownList("RevenueSubStream", (IEnumerable<SelectListItem>)ViewBag.RevenueSubStreamItems, "Select Revenue Sub Stream", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="AmountPaid" class="control-label col-sm-3">Enter Amount You Want To Pay</label>
+                            <div class="col-sm-9" id="">
+                                <input type="text" name="AmountPaid" class="form-control" placeholder="<<Enter Amount>>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="OtherInformation" class="control-label col-sm-3">Tell us anything else</label>
+                            <div class="col-sm-9" id="">
+                                <textarea name="OtherInformation" id="" class="form-control" placeholder="<<Notes>>" value="" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-right row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-theme btn-block" id=""> Pay </button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <br />
+                            .A RIN will be generated for you once your payment has been confirmed.
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts
+    {
+
+    <script src="@Url.Content("~/Scripts/EIRSNoRINCapture.js")"></script>
+}
+

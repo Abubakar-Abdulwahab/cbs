@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.PSSBranchSubUsersUploadBatchStaging, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSBranchSubUsersUploadBatchStaging" lazy="false" >
+		<id name="Id" column="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="Status" column="Status" />
+		<property name="FilePath" column="FilePath" />
+		<property name="FileName" column="FileName" />
+		<property name="HasError" column="HasError" />
+		<property name="ErrorMessage" column="ErrorMessage" />
+		<property name="CreatedAtUtc" column="CreatedAtUtc" />
+		<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+		<many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+	</class>
+</hibernate-mapping>

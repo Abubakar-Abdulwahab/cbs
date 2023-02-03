@@ -1,0 +1,227 @@
+﻿@model Parkway.CBS.Client.Web.ViewModels.ValidateBvnVM
+
+@{
+    Layout.Title = "BVN Validation";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.Bvn.Validation.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+</script>
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .tiny-loader-caption {
+        display: none;
+        margin: unset;
+        padding: unset;
+        font-size: 12px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+@using (Html.BeginFormAntiForgeryPost(Url.AppendModulePrefixToRouteName("C.BvnValidation"), FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="validate-bvn wrapper-payment">
+        <div class="top-banner alt">
+            <div class="banner-bottom">
+                <h3>Bank Verification Number Validation</h3>
+            </div>
+        </div>
+        <div class="container breadcrumbs">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container-fluid">
+            <div class="container-fluid bvn-input-field-container">
+                @if (Model.Error)
+                {
+                    <div class="container-fluid px-0">
+                        <div id="ErrorFlash" class="container alert-msg">
+                            <small class="message"><span id="closeModalFlash" style="float:right;cursor:pointer">&times;</span><small id="loginErrorMsg" style="white-space: pre-wrap;">@Model.ErrorMessage</small></small>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="container-fluid px-0">
+                        <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda">
+                            <small class="message" style="color:#155724;"><span id="closeFlash" style="float:right;cursor:pointer">&times;</span><small style="white-space: pre-wrap;">@Model.Message</small></small>
+                        </div>
+                    </div>
+                }
+                <div class="bvn-input-field">
+                    <h6 class="mb-4">Kindly enter your BVN to proceed</h6>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="bvnField" maxlength="11" placeholder="00000000000" />
+                        <span class="help-text">Please ensure your BVN is safe and secure at all times</span>
+                        <br />
+                        <span class="error-text"></span>
+                    </div>
+                    <button type="button" class="btn btn-block" id="submitBtn">
+                        Validate BVN
+                        <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10;top:2px"></span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="container-fluid complete-reg-form-container">
+                @if (Model.Error)
+                {
+                    <div class="container-fluid px-0">
+                        <div id="ErrorFlashTwo" class="container alert-msg">
+                            <small class="message"><span id="closeModalFlashTwo" style="float:right;cursor:pointer">&times;</span><small id="loginErrorMsg" style="white-space: pre-wrap;">@Model.ErrorMessage</small></small>
+                        </div>
+                    </div>
+                }
+                <div class="complete-reg-form">
+                    <div class="heading">
+                        @*<h6>Complete registration by providing the following info.</h6>*@
+                    </div>
+                    <div class="row px-0 mx-0">
+                        <div class="form-group">
+                            <input type="radio" class="form-control" id="taxtPayerType" name="TaxPayerType" value="1" checked hidden />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="bvn" name="RegisterCBSUserModel.BVN" value="@Model.RegisterCBSUserModel.BVN" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="fname">Full Name<span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="fname" name="RegisterCBSUserModel.Name" value="@Model.RegisterCBSUserModel.Name" readonly required />
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Name", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="username">Username<span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="username" name="RegisterCBSUserModel.UserName" value="@Model.RegisterCBSUserModel.UserName" required />
+                            <span class="help-text">Specify your username</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.UserName", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="email">Email<span class="required-symbol">*</span></label>
+                            <input type="email" class="form-control" id="email" name="RegisterCBSUserModel.Email" value="@Model.RegisterCBSUserModel.Email" required />
+                            <span class="help-text">Specify your Email address</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Email", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="phoneNumber">Phone Number<span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="phoneNumber" name="RegisterCBSUserModel.PhoneNumber" value="@Model.RegisterCBSUserModel.PhoneNumber" readonly required />
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.PhoneNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="state">State<span class="required-symbol">*</span></label>
+                            <select class="custom-select" name="RegisterCBSUserModel.SelectedState" id="state" required>
+                                <option selected disabled value="">Select a State</option>
+                                @foreach (var item in Model.StateLGAs)
+                                {
+                                    <option value="@item.Id" @(Model.RegisterCBSUserModel.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+                                }
+                            </select>
+                            <span class="help-text">Select residential state.</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.SelectedState", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="lga">Local Government Area<span class="required-symbol">*</span></label>
+                            <select class="custom-select" name="RegisterCBSUserModel.SelectedStateLGA" id="lga" required>
+                                <option selected disabled value="">Select an LGA</option>
+                                @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                                {
+                                    foreach (var item in Model.ListLGAs)
+                                    {
+                                        <option value="@item.Id" @(Model.RegisterCBSUserModel.SelectedStateLGA == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <span class="help-text">Select your residential LGA.</span>
+                            <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.SelectedStateLGA", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="address">Address<span class="required-symbol">*</span></label>
+                            <textarea class="form-control" id="address" name="RegisterCBSUserModel.Address" required>@Model.RegisterCBSUserModel.Address</textarea>
+                            <span class="help-text">Specify your address</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="password">Password<span class="required-symbol">*</span></label>
+                            <input type="password" class="form-control" id="password" name="RegisterCBSUserModel.Password" required />
+                            <span class="help-text">Specify your password</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Password", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="cpassword">Confirm Password<span class="required-symbol">*</span></label>
+                            <input type="password" class="form-control" id="cpassword" name="RegisterCBSUserModel.ConfirmPassword" required />
+                            <span class="help-text">Specify the password entered above</span>
+                            <div class="container-fluid px-0 validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.ConfirmPassword", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block">Submit</button>
+                    @*<input type="submit" class="btn btn-block" value="Submit"/>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@Html.Partial("Partials\\FooterPartial")
+
+<script>
+    $("#closeFlash").click(function (e) {
+        $('#infoFlashMsg').hide();
+    });
+    $("#closeModalFlash").click(function (e) {
+        $('#ErrorFlash').hide();
+    });
+
+    $("#closeFlashTwo").click(function (e) {
+        $('#infoFlashMsgTwo').hide();
+    });
+    $("#closeModalFlashTwo").click(function (e) {
+        $('#ErrorFlashTwo').hide();
+    });
+</script>

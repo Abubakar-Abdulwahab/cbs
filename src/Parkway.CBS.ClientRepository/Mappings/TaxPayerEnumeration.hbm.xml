@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.TaxPayerEnumeration, Parkway.CBS.Core" table="Parkway_CBS_Core_TaxPayerEnumeration" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="BatchRef" column="BatchRef" />
+    <property name="ProcessingStage" column="ProcessingStage" />
+    <property name="UploadType" column="UploadType" />
+    <property name="UploadTypeCode" column="UploadTypeCode" />
+    <property name="UploadedByAdmin" column="UploadedByAdmin" />
+    <property name="UploadedByUser" column="UploadedByUser" />
+    <property name="FileName" column="FileName" />
+    <property name="FilePath" column="FilePath" />
+    <property name="IsActive" column="IsActive" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="Employer" column="Employer_Id"/>
+  </class>
+</hibernate-mapping>

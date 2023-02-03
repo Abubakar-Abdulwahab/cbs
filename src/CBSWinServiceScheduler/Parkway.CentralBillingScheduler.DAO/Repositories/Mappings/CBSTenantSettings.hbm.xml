@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CentralBillingScheduler.DAO.Models.CBSTenantSettings, Parkway.CentralBillingScheduler.DAO" table="Parkway_CBS_Core_CBSTenantSettings" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="CompanyEmail" column="CompanyEmail" />
+    <property name="CompanyAddress" column="CompanyAddress" />
+    <property name="StateID" column="StateID" />
+    <property name="CountryID" column="CountryID" />
+    <property name="CompanyName" column="CompanyName" />
+    <property name="CompanyMobile" column="CompanyMobile" />
+    <property name="BusinessNature" column="BusinessNature" />
+    <property name="ReferenceDataSourceType" column="ReferenceDataSourceType" />
+    <property name="ReferenceDataSourceName" column="ReferenceDataSourceName" />
+    <property name="AdapterClassName" column="AdapterClassName" />
+    <property name="LogoPath" column="LogoPath" />
+    <property name="SignaturePath" column="SignaturePath" />
+    <property name="TSA" column="TSA" />
+    <property name="TSABankNumber" column="TSABankNumber" />
+    <property name="StateName" column="StateName" />
+    <property name="ClientId" column="ClientId" />
+    <property name="ClientSecret" column="ClientSecret" />
+    <property name="BillingSchedulerIdentifier" column="BillingSchedulerIdentifier" />
+    <property name="BankCode" column="BankCode" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+﻿@model Parkway.CBS.Core.HelperModels.ExternalPaymentProviderVM
+
+@{ Layout.Title = "Create External Payment Provider";
+    Style.Require("CBS.MDA.Style");
+}
+
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Create"), FormMethod.Post, new { }))
+{
+
+    <fieldset>
+        <div><button type="submit">@T("Save")</button> </div>
+    </fieldset>
+    
+    <div id="container">
+            <input type="hidden" id="Indexer" value="1" />
+            <table class="items" id="tab_0">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">External Payment Provider</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label id="mdaName">@T("Payment Provider Name")</label>
+                            <input type="text" class="text large" name="Name" value="@Model.Name" required />
+                            @Html.Hint(T("Add the name of your payment provider here. For example {0}.", "ReadyCash Bank"))
+                            @Html.ValidationMessage("Name", new { @style = "color:#990808" })
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+}
+@{ Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.General.Script").AtFoot();
+}

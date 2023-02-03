@@ -1,0 +1,8 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group">
+    <label for="DateOfBirth">Date of Birth<span class="required-sym">*</span></label>
+    <input type="text" name="DateOfBirth" class="form-control pickyNoFutureDatePast14Years" id="DateOfBirth" value="@Model.DateOfBirth" autocomplete="off" placeholder="DD/MM/YYYY" required />
+    <small class="form-text text-muted">Select your date of birth.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("DateOfBirth", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

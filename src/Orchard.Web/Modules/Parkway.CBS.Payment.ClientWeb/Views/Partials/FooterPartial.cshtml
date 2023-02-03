@@ -1,0 +1,30 @@
+﻿<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/CBS Logo@4x.png"))" alt="">
+                <p class="logo-caption">                    
+                    @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/FooterText.cshtml"))
+                </p>
+            </div>
+            <div class="col-md-2 quick-links">
+                <h3></h3>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">State News</a>
+            </div>
+            <div class="col-md-2 quick-links">
+                <h3>QUICK LINKS</h3>
+                <a href="#">Downloads</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="col-md-4">
+                <h3>CONNECT WITH US</h3>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/instagram.png"))" alt=""></a>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/facebook.png"))" alt=""></a>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/twitter.png"))" alt=""></a>
+                <p class="copyright">Copyright © @DateTime.Now.ToLocalTime().Year by central billing system</p>
+            </div>
+        </div>
+    </div>
+</div>

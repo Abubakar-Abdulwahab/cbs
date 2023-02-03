@@ -1,0 +1,22 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestDetailsVM
+@using (Html.BeginRouteForm(Parkway.CBS.Police.Admin.RouteName.PSSCharacterCertificateApproval.ApproveRequest))
+{
+    if (Model.IsLastApprover){ @Html.Partial("\\ServicePartials\\ApprovalPartial\\GetCentralRegistraPartial") }
+    if (string.IsNullOrEmpty(Model.RefNumber) && Model.ShowReferenceNumberForm)
+    {
+        <div style="padding:5px 0">
+            <label for="refNumber">Policy File Reference Number</label>
+            <input name="RefNumber" type="text" value="@Model.RefNumber" class="extend-width" placeholder="Enter reference number here" required />
+        </div>
+    }
+    if (Model.CanInviteApplicant)
+    {
+        @Html.Partial("\\ServicePartials\\ApprovalPartial\\CharacterCertificateInviteApplicantPartial", Model,
+        new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSCharacterCertificateApproval).Name) } })
+    }
+    else
+    {
+        @Html.Partial("\\ServicePartials\\ApprovalPartial\\ApprovalComment", Model,
+        new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSCharacterCertificateApproval).Name) } })
+    }
+}

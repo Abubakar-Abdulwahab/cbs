@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.PSSBranchOfficersUploadBatchItemsStaging, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSBranchOfficersUploadBatchItemsStaging" lazy="false" >
+		<id name="Id" column="Id" type="Int64">
+			<generator class="identity"/>
+		</id>
+		<property name="BranchCode" column="BranchCode" />
+		<property name="BranchCodeValue" column="BranchCodeValue" />
+		<property name="HasError" column="HasError" />
+		<property name="ErrorMessage" column="ErrorMessage" />
+		<property name="APNumber" column="APNumber" />
+
+		<many-to-one name="PSSBranchOfficersUploadBatchStaging" column="PSSBranchOfficersUploadBatchStaging_Id" />
+	</class>
+</hibernate-mapping>

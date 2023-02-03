@@ -1,0 +1,353 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateBiometricsVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+
+    Layout.Title = T("Biometric Details").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.UserCreation.Script").AtFoot();
+
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .fingerprint-cell-Width {
+        width: 100%;
+        height: 120px;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .img-formation-4 {
+        height: auto;
+        width: 100%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .fingerprint-table-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .image-container {
+        display: inline-block;
+        width: 90px;
+        border-left: 3px dotted;
+        border-left-color: black;
+        margin-left: 2px;
+    }
+
+    .left-hand-table{ border-right: 1px solid black; }
+    .right-hand-table{ border-left: 1px solid black; }
+
+    table.left-hand-table tr td:nth-of-type(1), table.left-hand-table tr td:nth-of-type(2), table.left-hand-table tr td:nth-of-type(3), table.right-hand-table tr td:nth-of-type(2), table.right-hand-table tr td:nth-of-type(3), table.right-hand-table tr td:nth-of-type(4) {
+        border-right: 1.5px dashed black;
+    }
+
+    table.left-hand-table tr td:nth-of-type(4), table.right-hand-table tr td:nth-of-type(1) {
+        border-right: 1px solid black;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 0;
+        padding-top: 2px;
+    }
+
+    table.left-hand-table tr td:nth-of-type(1), table.left-hand-table tr td:nth-of-type(2), table.left-hand-table tr td:nth-of-type(3), table.left-hand-table tr td:nth-of-type(5), table.right-hand-table tr td:nth-of-type(2), table.right-hand-table tr td:nth-of-type(3), table.right-hand-table tr td:nth-of-type(4), table.right-hand-table tr td:nth-of-type(5) {
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 0;
+        padding-top: 2px;
+    }
+
+    .fingerprint-table-container div h4:nth-child(1){
+        text-align:center;
+    }
+
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+
+    td label{ width:100% !important; }
+
+    thead tr th { background-color: #f5f5f5; }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+
+<div class="container-fluid" style="text-align:center">
+    <img src="@String.Format("data:image/png;base64,{0}", @Model.PassportImage)" style="height: auto; width: 45%;" />
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader" colspan="2">APPLICANT INFORMATION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="name" class="heading-text">Name</label>
+                            <p class="extend-width">@Model.ApplicantName</p>
+                        </td>
+                        <td>
+                            <label for="email">File Number</label>
+                            <p class="extend-width"> @Model.FileNumber </p>
+                        </td>
+                    </tr>
+                        </tbody>
+                </table>
+        </div>
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                RIGHT THUMB FINGER
+                            </th>
+                            <th>
+                                RIGHT INDEX FINGER
+                            </th>
+                            <th>
+                                RIGHT MIDDLE FINGER
+                            </th>
+                            <th>
+                                RIGHT RING FINGER
+                            </th>
+                            <th>
+                                RIGHT LITTLE FINGER
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        <tr>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.RightThumb)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.RightIndex)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.RightMiddle)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.RightRing)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.RightPinky)" class="img-formation-4" />
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                LEFT THUMB FINGER
+                            </th>
+                            <th>
+                                LEFT INDEX FINGER
+                            </th>
+                            <th>
+                                LEFT MIDDLE FINGER
+                            </th>
+                            <th>
+                                LEFT RING FINGER
+                            </th>
+                            <th>
+                                LEFT LITTLE FINGER
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        <tr>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftThumb)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftIndex)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftMiddle)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftRing)" class="img-formation-4" />
+                            </td>
+                            <td>
+                                <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftPinky)" class="img-formation-4" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+
+    <div class="fingerprint-table-container container-fluid">
+        <div style="width:50%">
+            <h4 style="font-size:35px"> LEFT HAND </h4>
+            <table class="table table-striped table-hover left-hand-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">
+                            Plain impressions of four fingers simultaneously
+                        </th>
+                        <th>
+                            <span style="font-size:12px">
+                                LEFT THUMB
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:#EEEEEE;">
+                    <tr>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftPinky)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftRing)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftMiddle)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftIndex)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.LeftThumb)" class="fingerprint-cell-Width" />
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div style="width:50%">
+            <h4 style="font-size:35px">
+                RIGHT HAND
+            </h4>
+            <table class="table table-striped table-hover right-hand-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span style="font-size:12px">
+                                RIGHT THUMB
+                            </span>
+
+                        </th>
+                        <th colspan="4">
+                            Plain impressions of four fingers simultaneously
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:#EEEEEE;">
+                    <tr>
+
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.RightThumb)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.RightIndex)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.RightMiddle)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.RightRing)" class="fingerprint-cell-Width" />
+                        </td>
+                        <td>
+                            <img src="@String.Format("data:image/png;base64,{0}", @Model.RightPinky)" class="fingerprint-cell-Width" />
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>

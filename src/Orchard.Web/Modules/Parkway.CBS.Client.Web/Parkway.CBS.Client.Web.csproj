@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02BBCE8F-B0DC-4EDC-8FF5-8F94B3C6CAE4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Client.Web</RootNamespace>
+    <AssemblyName>Parkway.CBS.Client.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Parkway.CBS.ClientFileServices\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AjaxValidateBvnController.cs" />
+    <Compile Include="Controllers\BvnValidationController.cs" />
+    <Compile Include="Controllers\ClientCollectionAjaxController.cs" />
+    <Compile Include="Controllers\ClientCollectionController.cs" />
+    <Compile Include="Controllers\ClientFileUploadController.cs" />
+    <Compile Include="Controllers\ClientReceiptController.cs" />
+    <Compile Include="Controllers\ClientTaxProfileController.cs" />
+    <Compile Include="Controllers\Handlers\BvnValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\CommonHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IBvnValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEBatchItemSearchHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEFileUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ICommonHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEBatchItemReceiptHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEBatchItemReceiptValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEReceiptUtilizationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEScheduleHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEWithNoScheduleUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRegisterBusinessHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IStateTINValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITaxPayerEnumerationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITaxReceiptUtilizationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITCCRequestHistoryHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEBatchItemReceiptHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEBatchItemReceiptValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITCCValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEBatchItemSearchHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEFileUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEReceiptUtilizationHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEScheduleHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEWithNoScheduleUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\RegisterBusinessHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITCCApplicationHandler.cs" />
+    <Compile Include="Controllers\Handlers\StateTINValidationHandler.cs" />
+    <Compile Include="Controllers\Handlers\TaxPayerEnumerationHandler.cs" />
+    <Compile Include="Controllers\Handlers\TaxReceiptUtilizationHandler.cs" />
+    <Compile Include="Controllers\Handlers\TCCApplicationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEOnscreenHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPAYEWithScheduleHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEOnscreenHandler.cs" />
+    <Compile Include="Controllers\Handlers\PAYEWithScheduleHandler.cs" />
+    <Compile Include="Controllers\Handlers\TCCRequestHistoryHandler.cs" />
+    <Compile Include="Controllers\Handlers\TCCValidationHandler.cs" />
+    <Compile Include="Controllers\InvoiceConfirmationController.cs" />
+    <Compile Include="Controllers\PAYEBatchItemSearchAJAXController.cs" />
+    <Compile Include="Controllers\PAYEBatchItemSearchController.cs" />
+    <Compile Include="Controllers\PAYEReceiptAJAXController.cs" />
+    <Compile Include="Controllers\PAYEController.cs" />
+    <Compile Include="Controllers\PAYEBatchItemReceiptAJAXController.cs" />
+    <Compile Include="Controllers\PAYEBatchItemReceiptController.cs" />
+    <Compile Include="Controllers\PAYEBatchItemReceiptValidationController.cs" />
+    <Compile Include="Controllers\PAYENoScheduleUploadController.cs" />
+    <Compile Include="Controllers\PAYEScheduleAJAXController.cs" />
+    <Compile Include="Controllers\PAYEScheduleController.cs" />
+    <Compile Include="Controllers\PAYEScheduleValidationController.cs" />
+    <Compile Include="Controllers\PAYEWithScheduleAJAXController.cs" />
+    <Compile Include="Controllers\PAYEWithNoScheduleUploadFileUploadController.cs" />
+    <Compile Include="Controllers\PAYEWithScheduleFileUploadController.cs" />
+    <Compile Include="Controllers\PAYEWithNoScheduleUploadOnscreenController.cs" />
+    <Compile Include="Controllers\PAYEWithScheduleOnscreenController.cs" />
+    <Compile Include="Controllers\PAYEWithScheduleController.cs" />
+    <Compile Include="Controllers\PAYENoScheduleController.cs" />
+    <Compile Include="Controllers\RegisterBusinessController.cs" />
+    <Compile Include="Controllers\TaxPayerEnumerationAJAXController.cs" />
+    <Compile Include="Controllers\TaxPayerEnumerationController.cs" />
+    <Compile Include="Controllers\TaxReceiptUtilizationAJAXController.cs" />
+    <Compile Include="Controllers\PAYEReceiptUtilizationReportController.cs" />
+    <Compile Include="Controllers\TaxReceiptUtilizationController.cs" />
+    <Compile Include="Controllers\TCCApplicationAJAXController.cs" />
+    <Compile Include="Controllers\TCCApplicationController.cs" />
+    <Compile Include="Controllers\TCCRequestHistoryAjaxController.cs" />
+    <Compile Include="Controllers\TCCRequestHistoryController.cs" />
+    <Compile Include="Controllers\TCCValidationController.cs" />
+    <Compile Include="Controllers\ValidateStateTinController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteName\BvnValidation.cs" />
+    <Compile Include="RouteName\PAYE.cs" />
+    <Compile Include="RouteName\PAYEBatchItemReceipt.cs" />
+    <Compile Include="RouteName\PAYEBatchItemSearch.cs" />
+    <Compile Include="RouteName\PAYENoScheduleUpload.cs" />
+    <Compile Include="RouteName\PAYESchedule.cs" />
+    <Compile Include="RouteName\PAYEScheduleValidation.cs" />
+    <Compile Include="RouteName\PAYEWithNoScheduleUploadFileUpload.cs" />
+    <Compile Include="RouteName\PAYEWithNoScheduleUploadOnscreen.cs" />
+    <Compile Include="RouteName\PAYEWithScheduleFileUpload.cs" />
+    <Compile Include="RouteName\PAYEWithScheduleOnscreen.cs" />
+    <Compile Include="RouteName\PAYENoSchedule.cs" />
+    <Compile Include="RouteName\PAYEBatchItemReceiptValidation.cs" />
+    <Compile Include="RouteName\PAYEWithScheduleAJAX.cs" />
+    <Compile Include="RouteName\PAYEWithSchedule.cs" />
+    <Compile Include="RouteName\PAYEReceiptUtilizationReport.cs" />
+    <Compile Include="RouteName\TaxPayerEnumeration.cs" />
+    <Compile Include="RouteName\TaxPayerEnumerationAJAX.cs" />
+    <Compile Include="RouteName\TaxReceiptUtilization.cs" />
+    <Compile Include="RouteName\TCCRequestHistory.cs" />
+    <Compile Include="RouteName\TCCValidation.cs" />
+    <Compile Include="RouteName\StateTINValidation.cs" />
+    <Compile Include="RouteName\TCCApplication.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="ViewModels\RequestHistoryDataModel.cs" />
+    <Compile Include="ViewModels\TCCRequestHistoryVM.cs" />
+    <Compile Include="ViewModels\ValidateBvnVM.cs" />
+    <Compile Include="ViewModels\Class1.cs" />
+    <Compile Include="ViewModels\ReportModelForPayeAssessment.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\BvnValidation\ValidateBvn.cshtml" />
+    <Content Include="Views\TCCApplication\TCCApplication.cshtml" />
+    <Content Include="Views\ValidateStateTin\ValidateStateTin.cshtml" />
+    <Content Include="Views\ValidateStateTin\StateTINDetails.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\WithScheduleOption.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\WithScheduleOption - Copy.cshtml" />
+    <Content Include="Views\TaxReceiptUtilization\List.cshtml" />
+    <Content Include="Views\TCCRequestHistory\RequestHistory.cshtml" />
+    <Content Include="Views\Collection\PayeeAssessmentReport.cshtml" />
+    <Content Include="Views\PAYEBatchItemReceiptValidation\ValidateReceipt.cshtml" />
+    <Content Include="Views\PAYEBatchItemReceiptValidation\ReceiptDetails.cshtml" />
+    <Content Include="Views\PAYEBatchItemReceipt\Receipt.cshtml" />
+    <Content Include="Views\TCCValidation\ValidateTCC.cshtml" />
+    <Content Include="Views\TCCValidation\TCCDetails.cshtml" />
+    <Content Include="Views\PAYEBatchItemReceipt\Receipts.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\NoScheduleUploadOption.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\NoScheduleUploadShowScheduleResult.cshtml" />
+    <Content Include="Views\PAYE\Schedule\ShowScheduleResult.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\Schedule\BreadCrumbs.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\Schedule\EmployerDetails.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\Schedule\SubmitForm.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\Schedule\BreadCrumbs.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\Schedule\EmployerDetails.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\Schedule\SubmitForm.cshtml" />
+    <Content Include="Views\PAYE\AddSchedule\ScheduleOption.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\AddSchedule\BreadCrumbs.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\AddSchedule\BreadCrumbs.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\AddSchedule\EmployerDetails.cshtml" />
+    <Content Include="Views\PAYENoScheduleUpload\AddSchedule\EmployerDetails.cshtml" />
+    <Content Include="Views\TaxReceiptUtilization\ReceiptUtilization.cshtml" />
+    <Content Include="Views\PAYEReceiptUtilizationReport\ReceiptUtilizations.cshtml" />
+    <Content Include="Views\PAYEReceiptUtilizationReport\Receipts.cshtml" />
+    <Content Include="Views\PAYESchedule\PAYESchedules.cshtml" />
+    <Content Include="Views\PAYESchedule\PAYEScheduleUtilizedReceipts.cshtml" />
+    <Content Include="Views\PAYEBatchItemSearch\PAYEBatchValidation.cshtml" />
+    <Content Include="Views\PAYEBatchItemSearch\PAYEBatchItems.cshtml" />
+    <Content Include="Views\PAYEScheduleValidation\ValidatePAYESchedule.cshtml" />
+    <Content Include="Views\TaxPayerEnumeration\UploadSchedule.cshtml" />
+    <Content Include="Views\TaxPayerEnumeration\ShowScheduleResult.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.ClientFileServices\Parkway.CBS.ClientFileServices.csproj">
+      <Project>{D6206A92-CD85-4BEC-A07B-D9DDB869578C}</Project>
+      <Name>Parkway.CBS.ClientFileServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Payee\Parkway.CBS.Payee.csproj">
+      <Project>{09D19D8E-FD27-43ED-931B-ED1549E658C1}</Project>
+      <Name>Parkway.CBS.Payee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Services\Parkway.CBS.Services.csproj">
+      <Project>{79B06181-9877-4CF5-8687-167BBFC509FF}</Project>
+      <Name>Parkway.CBS.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.TaxPayerEnumerationService\Parkway.CBS.TaxPayerEnumerationService.csproj">
+      <Project>{A6BC07AD-1608-445C-907A-1C46EF4415FC}</Project>
+      <Name>Parkway.CBS.TaxPayerEnumerationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Core\Parkway.CBS.Core.csproj">
+      <Project>{7B02ED5F-5616-492F-8B66-190795D4BEE9}</Project>
+      <Name>Parkway.CBS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.ETCC.Admin\Parkway.CBS.ETCC.Admin.csproj">
+      <Project>{0E0907EF-C48B-4025-BAD6-7E9DC8444E64}</Project>
+      <Name>Parkway.CBS.ETCC.Admin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Module.Web\Parkway.CBS.Module.Web.csproj">
+      <Project>{90144FBB-EB3B-4254-AFDD-BC156017C891}</Project>
+      <Name>Parkway.CBS.Module.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Collection\UserLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Collection\Index.cshtml" />
+    <Content Include="Views\Collection\PayeeAssessment.cshtml" />
+    <Content Include="Views\PAYEWithSchedule\ShowScheduleResult.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\RegisterBusiness\RegisterBusiness.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\PAYE\SelectPAYEOption.cshtml" />
+    <Content Include="Views\PAYENoSchedule\NoScheduleOption.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

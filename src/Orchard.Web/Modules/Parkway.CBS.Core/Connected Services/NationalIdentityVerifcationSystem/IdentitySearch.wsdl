@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://IdentitySearch.nimc/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="IdentitySearch" targetNamespace="http://IdentitySearch.nimc/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://10.254.253.19:8080/nvs/IdentitySearch?xsd=1" namespace="http://IdentitySearch.nimc/" />
+    </xsd:schema>
+  </types>
+  <message name="searchByPhoto">
+    <part name="parameters" element="tns:searchByPhoto" />
+  </message>
+  <message name="searchByPhotoResponse">
+    <part name="parameters" element="tns:searchByPhotoResponse" />
+  </message>
+  <message name="searchByDocumentNumber">
+    <part name="parameters" element="tns:searchByDocumentNumber" />
+  </message>
+  <message name="searchByDocumentNumberResponse">
+    <part name="parameters" element="tns:searchByDocumentNumberResponse" />
+  </message>
+  <message name="getPermissionByLevel">
+    <part name="parameters" element="tns:getPermissionByLevel" />
+  </message>
+  <message name="getPermissionByLevelResponse">
+    <part name="parameters" element="tns:getPermissionByLevelResponse" />
+  </message>
+  <message name="changePassword">
+    <part name="parameters" element="tns:changePassword" />
+  </message>
+  <message name="changePasswordResponse">
+    <part name="parameters" element="tns:changePasswordResponse" />
+  </message>
+  <message name="searchByDemo">
+    <part name="parameters" element="tns:searchByDemo" />
+  </message>
+  <message name="searchByDemoResponse">
+    <part name="parameters" element="tns:searchByDemoResponse" />
+  </message>
+  <message name="searchByNIN">
+    <part name="parameters" element="tns:searchByNIN" />
+  </message>
+  <message name="searchByNINResponse">
+    <part name="parameters" element="tns:searchByNINResponse" />
+  </message>
+  <message name="createToken">
+    <part name="parameters" element="tns:createToken" />
+  </message>
+  <message name="createTokenResponse">
+    <part name="parameters" element="tns:createTokenResponse" />
+  </message>
+  <message name="searchByFinger">
+    <part name="parameters" element="tns:searchByFinger" />
+  </message>
+  <message name="searchByFingerResponse">
+    <part name="parameters" element="tns:searchByFingerResponse" />
+  </message>
+  <message name="createTokenString">
+    <part name="parameters" element="tns:createTokenString" />
+  </message>
+  <message name="createTokenStringResponse">
+    <part name="parameters" element="tns:createTokenStringResponse" />
+  </message>
+  <message name="verifyPhotoWithData">
+    <part name="parameters" element="tns:verifyPhotoWithData" />
+  </message>
+  <message name="verifyPhotoWithDataResponse">
+    <part name="parameters" element="tns:verifyPhotoWithDataResponse" />
+  </message>
+  <message name="verifyFingerWithData">
+    <part name="parameters" element="tns:verifyFingerWithData" />
+  </message>
+  <message name="verifyFingerWithDataResponse">
+    <part name="parameters" element="tns:verifyFingerWithDataResponse" />
+  </message>
+  <message name="searchByDemoPhone">
+    <part name="parameters" element="tns:searchByDemoPhone" />
+  </message>
+  <message name="searchByDemoPhoneResponse">
+    <part name="parameters" element="tns:searchByDemoPhoneResponse" />
+  </message>
+  <message name="updateUserSELF">
+    <part name="parameters" element="tns:updateUserSELF" />
+  </message>
+  <message name="updateUserSELFResponse">
+    <part name="parameters" element="tns:updateUserSELFResponse" />
+  </message>
+  <portType name="IdentitySearch">
+    <operation name="searchByPhoto">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByPhotoRequest" message="tns:searchByPhoto" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByPhotoResponse" message="tns:searchByPhotoResponse" />
+    </operation>
+    <operation name="searchByDocumentNumber">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDocumentNumberRequest" message="tns:searchByDocumentNumber" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDocumentNumberResponse" message="tns:searchByDocumentNumberResponse" />
+    </operation>
+    <operation name="getPermissionByLevel">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/getPermissionByLevelRequest" message="tns:getPermissionByLevel" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/getPermissionByLevelResponse" message="tns:getPermissionByLevelResponse" />
+    </operation>
+    <operation name="changePassword">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/changePasswordRequest" message="tns:changePassword" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/changePasswordResponse" message="tns:changePasswordResponse" />
+    </operation>
+    <operation name="searchByDemo">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDemoRequest" message="tns:searchByDemo" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDemoResponse" message="tns:searchByDemoResponse" />
+    </operation>
+    <operation name="searchByNIN">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByNINRequest" message="tns:searchByNIN" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByNINResponse" message="tns:searchByNINResponse" />
+    </operation>
+    <operation name="createToken">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/createTokenRequest" message="tns:createToken" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/createTokenResponse" message="tns:createTokenResponse" />
+    </operation>
+    <operation name="searchByFinger">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByFingerRequest" message="tns:searchByFinger" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByFingerResponse" message="tns:searchByFingerResponse" />
+    </operation>
+    <operation name="createTokenString">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/createTokenStringRequest" message="tns:createTokenString" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/createTokenStringResponse" message="tns:createTokenStringResponse" />
+    </operation>
+    <operation name="verifyPhotoWithData">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/verifyPhotoWithDataRequest" message="tns:verifyPhotoWithData" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/verifyPhotoWithDataResponse" message="tns:verifyPhotoWithDataResponse" />
+    </operation>
+    <operation name="verifyFingerWithData">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/verifyFingerWithDataRequest" message="tns:verifyFingerWithData" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/verifyFingerWithDataResponse" message="tns:verifyFingerWithDataResponse" />
+    </operation>
+    <operation name="searchByDemoPhone">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDemoPhoneRequest" message="tns:searchByDemoPhone" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/searchByDemoPhoneResponse" message="tns:searchByDemoPhoneResponse" />
+    </operation>
+    <operation name="updateUserSELF">
+      <input wsam:Action="http://IdentitySearch.nimc/IdentitySearch/updateUserSELFRequest" message="tns:updateUserSELF" />
+      <output wsam:Action="http://IdentitySearch.nimc/IdentitySearch/updateUserSELFResponse" message="tns:updateUserSELFResponse" />
+    </operation>
+  </portType>
+  <binding name="IdentitySearchPortBinding" type="tns:IdentitySearch">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="searchByPhoto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchByDocumentNumber">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getPermissionByLevel">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="changePassword">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchByDemo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchByNIN">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="createToken">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchByFinger">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="createTokenString">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="verifyPhotoWithData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="verifyFingerWithData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchByDemoPhone">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="updateUserSELF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="IdentitySearch">
+    <port name="IdentitySearchPort" binding="tns:IdentitySearchPortBinding">
+      <soap:address location="http://10.254.253.19:8080/nvs/IdentitySearch" />
+    </port>
+  </service>
+</definitions>

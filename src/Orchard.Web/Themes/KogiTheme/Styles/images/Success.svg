@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="231px" height="231px" viewBox="0 0 231 231" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Success" transform="translate(-568.000000, -192.000000)">
+            <g id="Group" transform="translate(568.000000, 192.000000)">
+                <circle id="Oval-2" fill="#C0F5DD" cx="115.5" cy="115.5" r="115.5"></circle>
+                <circle id="Oval-2" fill="#92EEC4" cx="115.5" cy="116.5" r="104.5"></circle>
+                <circle id="Oval-2" fill="#00B05F" cx="115" cy="117" r="94"></circle>
+                <g id="check-mark" transform="translate(68.000000, 80.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <path d="M43.0026695,67.7617398 C38.6955428,72.0794201 31.7068554,72.0794201 27.4018074,67.7617398 L3.23034507,43.5310519 C-1.07678169,39.2154555 -1.07678169,32.2096443 3.23034507,27.8940479 C7.5353931,23.5763677 14.5240804,23.5763677 18.8312072,27.8940479 L33.2326426,42.3286863 C34.3198179,43.4164417 36.084659,43.4164417 37.173913,42.3286863 L76.1687928,3.23826015 C80.4738408,-1.07942005 87.4625282,-1.07942005 91.7696549,3.23826015 C93.8379904,5.31166354 95,8.1248239 95,11.0567622 C95,13.9887004 93.8379904,16.8018608 91.7696549,18.8752641 L43.0026695,67.7617398 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

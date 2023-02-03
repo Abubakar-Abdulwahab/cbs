@@ -1,0 +1,24 @@
+﻿
+@{
+    Script.Require("DateTimePicker");
+    Script.Require("TINRegistration");
+
+    Script.Require("Plugin");
+
+    Script.Require("EregistryFormWizard");
+
+    Style.Require("font-awesome");
+    Style.Require("Registration");
+    Style.Require("DateTimePicker");
+    Style.Require("FormWizard");
+    var reference = ViewBag.Reference as string;
+}
+
+<div class="container">
+    <div class="col-sm-12">
+        <p class="text-center">Reference</p>
+        <h1 class="text-center">@reference</h1>
+        <p class="text-center">Thanks for using ERegistry. </p>
+        <p class="text-center"> Kindly visit the nearest EIRS office to capture your biometrics using the reference number below.</p>
+    </div>
+</div>

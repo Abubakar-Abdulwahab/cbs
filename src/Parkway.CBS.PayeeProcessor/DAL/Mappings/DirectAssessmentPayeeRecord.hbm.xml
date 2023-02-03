@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Parkway.CBS.PayeeProcessor" namespace="Parkway.CBS.PayeeProcessor.DAL.Model" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway_CBS_Core_DirectAssessmentPayeeRecord" table="Parkway_CBS_Core_DirectAssessmentPayeeRecord" lazy="true" >
+    <id name="Id" column="Id" generator="native" />
+    <property name="GrossAnnual" column="GrossAnnual" />
+    <property name="Exemptions" column="Exemptions" />
+    <property name="IncomeTaxPerMonth" column="IncomeTaxPerMonth" />
+    <property name="IncomeTaxPerMonthValue" column="IncomeTaxPerMonthValue" />
+    <property name="TIN" column="TIN" />
+    <property name="Month" column="Month" />
+    <property name="Year" column="Year" />
+    <property name="Email" column="Email" />
+    <property name="PhoneNumber" column="PhoneNumber" />
+    <property name="PayeeName" column="PayeeName" />
+    <property name="Address" column="Address" />
+    <property name="LGA" column="LGA" />
+    <property name="HasErrors" column="HasErrors" />
+    <property name="ErrorMessages" column="ErrorMessages" />
+    <property name="DirectAssessmentBatchRecord_Id" column="DirectAssessmentBatchRecord_Id" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="AssessmentDate" column ="AssessmentDate"/>
+  </class>
+</hibernate-mapping>

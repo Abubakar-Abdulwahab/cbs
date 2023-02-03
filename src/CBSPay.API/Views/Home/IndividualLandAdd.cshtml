@@ -1,0 +1,396 @@
+﻿
+@{
+    ViewBag.Title = "Individual Land Add";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+<div class="title">
+    <h1>
+        Individual Tax Payer: Add Land
+    </h1>
+    <hr>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Individual Tax Payer Information
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn btn-redtheme dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" data-target="#divTaxPayerModal">View Details</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/NewIndividualAdd">Edit Detail</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row view-form">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer Type: </label>
+                <div class="form-control-static">
+                    Individual
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer TIN: </label>
+                <div class="form-control-static">
+                    TIN
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Mobile Number: </label>
+                <div class="form-control-static">
+                    Mobile Number
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer Name: </label>
+                <div class="form-control-static">
+                    Name
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer RIN: </label>
+                <div class="form-control-static">
+                    RIN
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Contact  Address: </label>
+                <div class="form-control-static">
+                    Contact  Address
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Add Land
+        </div>
+        <div class="actions">
+            <a href="~/Home/IndividualTaxPayerDetails" class="btn btn-redtheme"> Cancel </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Asset Type </label>
+                    <input type="text" disabled class="form-control" placeholder="Vehicles" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Tax Payer Role  </label>
+                    <select class="form-control bs-select">
+                        <option>Select Tax Payer Role </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Plot Number</label>
+                    <input type="text" class="form-control" placeholder="Plot Number" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Street Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Street Name" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Town</label>
+                    <input type="text" class="form-control" placeholder="Enter Town" />
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Land LGA</label>
+                    <select class="form-control bs-select">
+                        <option>Land LGA</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Ward </label>
+                    <select class="form-control bs-select">
+                        <option>Select Ward </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Length</label>
+                    <input type="text" class="form-control" placeholder="Enter Length" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Width </label>
+                    <input type="text" class="form-control" placeholder="Enter Width" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Land Use </label>
+                    <input type="text" class="form-control" placeholder="Enter Land Use" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Cof-O-Ref</label>
+                    <input type="text" class="form-control" placeholder="Enter Cof-O-Ref" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Land Purpose</label>
+                    <select class="form-control bs-select">
+                        <option>Select Land Purpose</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Land Function</label>
+                    <select class="form-control bs-select">
+                        <option>Select Land Function</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Land Ownership </label>
+                    <select class="form-control bs-select">
+                        <option>Select Land Ownership</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Land Development</label>
+                    <select class="form-control bs-select">
+                        <option>Select Land Development</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Length</label>
+                    <input type="text" class="form-control" placeholder="Enter Length" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Width </label>
+                    <input type="text" class="form-control" placeholder="Enter Width" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Latitude</label>
+                    <input type="text" class="form-control" placeholder="Enter Latitude" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Longitude</label>
+                    <input type="text" class="form-control" placeholder="Enter Longitude" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Street Condition</label>
+                    <input type="text" class="form-control" placeholder="Enter Street Condition" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Value of Land</label>
+                    <input type="text" class="form-control" placeholder="Enter Value of Land" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">Neighborhood </label>
+                <input type="text" class="form-control" placeholder="Enter Neighborhood " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right col-sm-12">
+                <div class="form-group">
+                    <br />
+                    <a href="~/Home/IndividualTaxPayerDetails" class="btn-theme btn"> Save </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--modal section-->
+<div class="modal fade" id="divTaxPayerModal" tabindex="-1" role="dialog" aria-labelledby="divTaxPayerModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="divTaxPayerModalLabel">Individual Tax Payer Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Payer Type</label>
+                            <div>Individual</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Gender</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Title</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">First Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Last Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Middle Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Date of Birth</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">TIN</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 2</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Email Address 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Email Address 2</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Biometric Details</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Office</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Marital Status</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Nationality</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Economic Activity</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Preferred Notification</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Contact Address</label>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

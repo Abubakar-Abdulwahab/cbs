@@ -1,0 +1,142 @@
+﻿@model Parkway.CBS.Police.Admin.VM.GenerateRequestWithoutOfficersDetail
+
+@{
+    Layout.Title = "Generate Request Detail";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+}
+
+<style>
+    span.status-false {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: red;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    span.status-true {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: forestgreen;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    .summary {
+        text-align: right;
+        margin-top: 25px;
+        padding-bottom: 10px;
+    }
+
+    .summary-details {
+        display: inline-block;
+    }
+
+    .numbers {
+        border-bottom: 2px solid #D5D5D5;
+        font-size: 15px;
+        padding-bottom: 5px;
+    }
+
+        .numbers > span {
+            margin-left: 10px;
+        }
+
+            .numbers > span.blue {
+                color: blue;
+            }
+
+            .numbers > span.green {
+                color: green;
+            }
+
+            .numbers > span.red {
+                color: red;
+            }
+
+            .numbers > span span.bigger {
+                font-size: 20px;
+            }
+</style>
+
+@Html.Partial("\\ServicePartials\\PSSBranchDetailPartial", Model.BranchTaxEntityProfileLocation)
+
+<div>
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col">@T("Branch Code")</th>
+                <th scope="col">@T("Number of Officers")</th>
+                <th scope="col">@T("Command Code")</th>
+                <th scope="col">@T("Command")</th>
+                <th scope="col">@T("Command Type")</th>
+                <th scope="col">@T("Day Type")</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.OfficersRequests != null && Model.OfficersRequests.Any())
+            {
+                foreach (var item in Model.OfficersRequests)
+                {
+                    <tr>
+                        <td>@item.BranchCode</td>
+                        <td>@item.NumberOfOfficersValue</td>
+                        <td>@item.CommandCode</td>
+                        <td>@item.CommandName</td>
+                        <td>@item.CommandTypeValue</td>
+                        <td>@item.DayTypeValue</td>
+                        <td>
+                            @if (item.HasError)
+                            {<span class="status-false" data-toggle="tooltip" data-html="true" data-placement="top" title="@item.ErrorMessage">i</span> }
+                            else
+                            { <span class="status-true" data-toggle="tooltip" data-placement="top">&#10003;</span>}
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="4">No records found</td></tr>
+            }
+        </tbody>
+    </table>
+
+    <small id="errorMessage"></small>
+
+    @Display(Model.Pager)
+    <div class="summary">
+        <div class="summary-details">
+            <h4 class="numbers">
+                <span class="blue" id="totalenttp" data-toggle="tooltip" data-html="true"><span class="bigger" id="totalent"></span> @Model.GenerateRequestWithoutOfficersUploadBatchItemsReport.StringNumberOfRecords Total Entries</span>
+                <span class="green" id="totalvaltp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalval"></span>@Model.GenerateRequestWithoutOfficersUploadBatchItemsReport.StringNumberOfValidRecords Valid Entries</span>
+                <span class="red" id="totalinvtp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalinv"></span> @Model.GenerateRequestWithoutOfficersUploadBatchItemsReport.StringNumberOfInvalidRecords Invalid Entries</span>
+            </h4>
+        </div>
+    </div>
+
+    @using (Html.BeginFormAntiForgeryPost())
+    {
+        <div class="row">
+            <div class="col-lg-6">
+                <button class="btn btn-primary btn-block" formaction="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.GenerateRequestWithoutOfficersFileExport.GenerateBranchRequestWithoutOfficersDownload, new { batchId = Model.BatchId, profileId = Model.ProfileId, format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel })">@T("Download Request Excel")</button>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-danger btn-block" formaction="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.GenerateRequestWithoutOfficersFileExport.GenerateBranchRequestWithoutOfficersDownload, new { batchId = Model.BatchId, profileId = Model.ProfileId, format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">@T("Download Request PDF")</button>
+            </div>
+        </div>
+    }
+</div>

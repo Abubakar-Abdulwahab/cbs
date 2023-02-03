@@ -1,0 +1,37 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortRequestDetailsVM
+
+@using (Html.BeginRouteForm(Parkway.CBS.Police.Admin.RouteName.POSSAPSecretariatRouting.RouteForEscort, FormMethod.Post, new { @id = "escortRoutingForm" }))
+{
+    @Html.AntiForgeryToken()
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader">Choose the stage to route the request to</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="requestStages">Request Stages</label>
+                    <select id="requestStages" class="extend-width" name="SelectedRequestStage">
+                        <option value="0" selected disabled>Select a stage</option>
+                        @if (Model.RequestStages != null && Model.RequestStages.Any())
+                        {
+                            foreach (var stage in Model.RequestStages)
+                            {
+                                <option value="@stage.Id">@stage.Name</option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <label for="comment">Comment</label>
+<textarea class="extend-width" name="Comment" placeholder="Leave a comment" id="comment" required></textarea>
+<input name="RequestId" value="@Model.RequestId" hidden />
+    <div class="page-submit-btns">
+        <button class="btn btn-success" style="width:100%" formaction="@Url.Action("RouteForEscort", "POSSAPSecretariatRouting")">Submit</button>
+    </div>
+}

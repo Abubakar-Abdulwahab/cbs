@@ -1,0 +1,64 @@
+﻿@model Parkway.CBS.Police.Admin.VM.GenerateEscortRequestForWithoutOfficersVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Layout.Title = "Add Officers(Count): Generate Request";
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+}
+<style>
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+<h3>MAIN BRANCH DETAILS</h3>
+<div class="row" style="padding:15px">
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Recipient")</b>
+        <p>@Model.BranchDetails.TaxEntity.Recipient</p>
+        @Html.Hint(T("The name of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Phone number")</b>
+        <p>@Model.BranchDetails.TaxEntity.PhoneNumber</p>
+        @Html.Hint(T("Phone number of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Category")</b>
+        <p>@Model.BranchDetails.TaxEntity.CategoryName</p>
+        @Html.Hint(T("Category of recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Email")</b>
+        <p>@Model.BranchDetails.TaxEntity.Email</p>
+        @Html.Hint(T("Email of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Address")</b>
+        <p>@Model.BranchDetails.TaxEntity.Address</p>
+        @Html.Hint(T("Address of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Profile ID")</b>
+        <p>@Model.BranchDetails.TaxEntity.PayerId</p>
+        @Html.Hint(T("Profile ID of recipient"))
+    </div>
+</div>
+<br />
+
+@Html.Partial("\\ServicePartials\\PSSBranchDetailPartial", Model.BranchDetails)
+<br />
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.Partial("\\ServicePartials\\GenerateEscortRequestWithoutOfficersFormPartial", Model)
+    <input name="BranchDetails.Id" type="hidden" value="@Model.BranchDetails.Id" />
+}

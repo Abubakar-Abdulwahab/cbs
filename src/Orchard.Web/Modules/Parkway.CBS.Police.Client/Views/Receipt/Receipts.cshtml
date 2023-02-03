@@ -1,0 +1,181 @@
+﻿@model Parkway.CBS.Police.Core.VM.ReceiptDisplayVM
+
+@{
+    Layout.Title = "Invoice Receipts";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Select.Service.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid receipts-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Home</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Invoice Receipts</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Invoice Receipts</a></div>
+        </div>
+
+        <div class="container receipts-content-container">
+
+            <div class="container receipts-content">
+                <div class="container no-padding form-title">
+                    <span class="float-left">Invoice Number:@Model.InvoiceNumber</span>
+                    @*<span class="float-right" style="color:#E12222">
+                            <a style="text-decoration:none" href="@Url.RouteUrl("P.Make.Payment",new { invoiceNumber = Model.InvoiceNumber})" name="viewInvoice">View Invoice</a>
+                        </span>*@
+                </div>
+                <hr />
+                <div class="container no-padding">
+                    <div class="row no-padding">
+                        <div class="col-md-3">
+                            <p class="til">Name</p>
+                            <p class="ans">@Model.Recipient</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">Email</p>
+                            <p class="ans">@Model.Email</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">Phone No</p>
+                            <p class="ans">@Model.PhoneNumber</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">Payer ID</p>
+                            <p class="ans">@Model.PayerId</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">Service Paid For</p>
+                            <p class="ans">@Model.ServiceName</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">File Number</p>
+                            <p class="ans">@Model.FileNumber</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="til">Invoice Amount Due <span style="font-size:70%">(after&nbsp;discount)</span></p>
+                            <p class="ans">&#x20A6;@String.Format("{0:n2}", @Model.AmountDue)</p>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <div class="container-fluid no-padding">
+                        <div class="table-responsive mt-4">
+                            <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;margin-top:10%;display:none"></div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Date
+                                        </th>
+                                        <th>
+                                            Receipt Number
+                                        </th>
+                                        <th>
+                                            Payment Description
+                                        </th>
+                                        <th>
+                                            Payment Reference
+                                        </th>
+                                        <th style="text-align:right">
+                                            Amount Paid(&#X20A6;)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @if (Model.Transactions != null && Model.Transactions.Any())
+                                    {
+                                        foreach (var item in Model.Transactions)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.PaymentDate
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.RouteUrl("P.ReceiptDetails",new { invoiceNumber = Model.InvoiceNumber, receiptNumber = @item.ReceiptNumber})" style="color:#2F4CB0" name="viewReceipt">@item.ReceiptNumber</a>
+                                                </td>
+                                                <td>
+                                                    @item.InvoiceDesc
+                                                </td>
+                                                <td>
+                                                    @item.PaymentReference
+                                                </td>
+                                                <td style="text-align:right">
+                                                    @String.Format("{0:n2}", @item.AmountPaid)
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5">No payments found</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

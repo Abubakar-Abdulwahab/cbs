@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CentralBillingScheduler.DAO.Models.TaxEntity, Parkway.CentralBillingScheduler.DAO" table="Parkway_CBS_Core_TaxEntity" lazy="false" >
+    <id name="Id" column="Id"/>
+    <property name="Recipient" column="Recipient" />
+    <property name="Address" column="Address" />
+    <property name="TaxPayerIdentificationNumber" column="TaxPayerIdentificationNumber" />
+    <property name="Email" column="Email" />
+    <property name="PhoneNumber" column="PhoneNumber" />
+    <property name="TaxEntityType" column="TaxEntityType" />
+    <property name="CashflowCustomerId" column="CashflowCustomerId" />
+    <property name="PrimaryContactId" column="PrimaryContactId" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="TaxEntityCategory" column="TaxEntityCategory"/>
+  </class>
+</hibernate-mapping>

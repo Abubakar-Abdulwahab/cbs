@@ -1,0 +1,76 @@
+﻿@{
+    Script.Require("PSS.Get.Central.Registrar.Partial.Script").AtFoot();
+}
+
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 50%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="7">CENTRAL REGISTRAR TO PROVIDE THE SERVICE</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                <label for="serviceNumber">AP/Force No.</label>
+                <input class="extend-width" type="text" name="serviceNumber" id="serviceNumber" style="height:20px" />
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                <div id="serviceNumberError" style="color:red"></div>
+            </td>
+            <td>
+                <fieldset>
+                    <button type="button" id="addOfficerBtn" style="position: absolute; top: 31px;">+ Add</button>
+                </fieldset>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="centralRegistrarTable">
+    <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Command</th>
+        <th>Force Number</th>
+        <th>IPPIS</th>
+        <th>Account Number</th>
+        <th></th>
+    </tr>
+</table>
+

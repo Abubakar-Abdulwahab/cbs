@@ -1,0 +1,92 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.OSGOF.Admin.ViewModels.SiteOperatorViewModel
+
+@{
+    Layout.Title = T("Add Operator").ToString();
+    Style.Require("CBS.Billing.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Operator's Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label id="lblName">@T("Name") </label>
+                        @Html.TextBoxFor(b => b.Name, new { @class = "text large", @required = "true" })
+                        @Html.Hint(T("Enter the Name here."))
+                        @Html.ValidationMessage("Name", "Name is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblTIN">@T("Username") </label>
+                        @Html.TextBoxFor(b => b.Username, new { @class = "text large", @required = "true" })
+                        @Html.Hint(T("Enter username here."))
+                        @Html.ValidationMessage("Username", "Username is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblTIN">@T("TIN") </label>
+                        @Html.TextBoxFor(b => b.TIN, new { @class = "text large", @required = "true" })
+                        @Html.Hint(T("Enter the TIN here."))
+                        @Html.ValidationMessage("TIN", "TIN is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblName">@T("RCNumber") </label>
+                        @Html.TextBoxFor(b => b.RCNumber, new { @class = "text large" })
+                        @Html.Hint(T("Enter the RCNumber here."))
+                        @Html.ValidationMessage("RCNumber", "RCNumber is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblEmail">@T("Email") </label>
+                        @Html.TextBoxFor(b => b.Email, new { @class = "text large", @required = "true", @type = "email" })
+                        @Html.Hint(T("Enter the Email here."))
+                        @Html.ValidationMessage("Email", "Email is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblPhoneNumber">@T("Phone Number") </label>
+                        @Html.TextBoxFor(b => b.PhoneNumber, new { @class = "text large", @required = "true" })
+                        @Html.Hint(T("Enter the Phone Number here."))
+                        @Html.ValidationMessage("PhoneNumber", "Phone Number is required", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblCategory">@T("Category") </label>
+                        <select name="CategoryId" aria-required="true" id="CategoryId" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach (var item in Model.Categories)
+                            {
+                                if (item.Id.ToString() == Model.CategoryId)
+                                {
+                                    <option value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                        @Html.Hint(T("Select Category."))
+                    </div>
+                    @*<div class="col-md-6 form-group">
+                        <label id="lblCellSites">@T("Cell Sites")</label>
+                        @Html.TextBox("CellSitesPath", null, new { @class = "text large", @type = "file", @accept = "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" })
+                        @Html.Hint(T("Upload Cell Sites."))
+                        @Html.ValidationMessage("CellSitesPath", null, new { @style = "color:#990808" })
+                    </div>*@
+                    <div class="col-md-6 form-group">
+                        <label id="lblAddress">@T("Address") </label>
+                        @Html.TextAreaFor(b => b.Address, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Enter the Address here."))
+                        @Html.ValidationMessage("Address", "Address is required", new { @style = "color:#ff0000 " })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">@T("Save")</button>
+            </div>
+        </div>
+    </div>
+}

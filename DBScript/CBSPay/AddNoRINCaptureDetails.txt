@@ -1,0 +1,21 @@
+Use CBSPaymentEngine
+
+ALTER TABLE paymenthistory
+  ADD TaxPayerType nvarchar(255),
+      Email nvarchar(255),
+	  EconomicActivity nvarchar(255),
+	  RevenueStream nvarchar(255),
+	  RevenueSubStream nvarchar(255),
+OtherInformation nvarchar(255),
+Address nvarchar(255);
+
+
+
+ALTER TABLE EIRSPaymentRequest
+  ADD TaxPayerType nvarchar(255),
+      Email nvarchar(255),
+	  EconomicActivity nvarchar(255),
+	  RevenueStream nvarchar(255),
+	  RevenueSubStream nvarchar(255),
+OtherInformation nvarchar(255),
+Address nvarchar(255);

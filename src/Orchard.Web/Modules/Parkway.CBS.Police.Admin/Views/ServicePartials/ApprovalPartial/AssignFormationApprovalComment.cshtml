@@ -1,0 +1,25 @@
+﻿@model Parkway.CBS.Police.Core.VM.CanApproveEscortVM
+@Html.AntiForgeryToken()
+@{ 
+    Script.Require("PSS.Admin.Formation.Approval.Comment.Script").AtFoot();
+}
+<script>
+    var approvalMessage = @Html.Raw(Json.Encode(Model.Message));
+</script>
+<label for="comment">Comment</label>
+<textarea class="extend-width" name="Comment" placeholder="Leave a comment" id="comment" required></textarea>
+
+<div class="action-btns page-submit-btns">
+    <div>
+        <button class="btn btn-primary" formaction="@Url.Action("ApproveRequest", (string)ViewData["ControllerName"])">@T("Submit")</button>
+    </div>
+    @if (Model.CanApprove)
+    {
+    <div style="padding-left:5px">
+        <button class="btn btn-success" id="aigApprovalBtn" formaction="@Url.Action("ApproveRequest", (string)ViewData["CustomControllerName"])">@T("Approve")</button>
+    </div>
+    }
+    <div style="padding-left:5px">
+        <button class="btn btn-danger" formaction="@Url.Action("RejectRequest", (string)ViewData["ControllerName"])" formnovalidate>@T("Reject")</button>
+    </div>
+</div>

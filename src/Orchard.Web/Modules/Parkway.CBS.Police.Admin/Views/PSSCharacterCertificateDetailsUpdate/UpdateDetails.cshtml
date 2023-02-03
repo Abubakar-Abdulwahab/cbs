@@ -1,0 +1,180 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Police.Core.HelperModels.CharacterCertificateDetailsUpdateVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Layout.Title = "Update PCC Details".ToString();
+}
+<style>
+
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+        width: unset !important;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 50%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+
+</script>
+
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSCharacterCertificateDetailsUpdate.UpdateDetails)))
+{
+<div id="container">
+    <table class="items" id="settings">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader" colspan="3">Search Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="name" class="heading-text">Name</label>
+                    <p class="extend-width">@Model.CustomerName</p>
+                </td>
+                <td>
+                    <label for="extReason">Request Reason</label>
+                    <p class="extend-width">@Model.ReasonForInquiry</p>
+                </td>
+                <td>
+                    <label for="extReason">File Number</label>
+                    <p class="extend-width">@Model.FileNumber</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="dateOfBirth">Date Of Birth</label>
+                    <p class="extend-width">@Model.DateOfBirth</p>
+                </td>
+                <td>
+                    <label for="placeOfBirth">Passport Place Of Issuance</label>
+                    <p class="extend-width">@Model.PlaceOfIssuance</p>
+                </td>
+                <td>
+                    <label for="destCountry">Destination Country</label>
+                    <p class="extend-width">@Model.DestinationCountry</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="countryOfPassport">Country Of Passport</label>
+                    <p class="extend-width">@Model.CountryOfPassport</p>
+                </td>
+                <td>
+                    <label for="passportNumber">Passport Number</label>
+                    <p class="extend-width">@Model.PassportNumber</p>
+                </td>
+                <td>
+                    <label for="dateOfIssuance">Date of Issuance</label>
+                    <p class="extend-width">@Model.DateOfIssuance.Value.ToString("dd/MM/yyyy")</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b>Passport Date of Issuance</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.DateOfIssuance.Value.ToString("dd/MM/yyyy")" name="DateOfIssuanceString" required />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b>Passport Number</b>
+                @Html.TextBox("PassportNumber", Model.PassportNumber, new { @class = "form-control", @placeholder = "Passport Number", required = "required" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b>Select Destination Country</b>
+                <select name="DestinationCountryId" class="form-control selectBox">
+                    <option value="" disabled>Select Destination Country</option>
+                    @foreach (var item in Model.Countries)
+                    {
+                        <option value="@item.Id" @(Model.DestinationCountryId == item.Id ? "selected" : "")>@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b>Passport Number</b>
+                @Html.TextBox("PlaceOfIssuance", Model.PlaceOfIssuance, new { @class = "form-control", @placeholder = "Place Of Issuance", required = "required" })
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="@Model.CharacterCertificateDetailsId" name="CharacterCertificateDetailsId" />
+    <input type="hidden" value="@Model.CountryOfPassportId" name="CountryOfPassportId" />
+</div>
+    <fieldset>
+        <button type="submit">@T("Update")</button>
+    </fieldset>
+}

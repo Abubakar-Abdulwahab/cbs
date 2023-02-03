@@ -1,0 +1,11 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group" style="margin-top:30px">
+    <label for="uploadPassportPhotograph">Upload Current Passport Photograph<span class="required-sym">*</span></label>
+    <div class="upload-file-container">
+        <input type="file" id="uploadPassportPhotograph" name="passportPhotographFile" accept=".png, .jpeg, .jpg" required>
+        <div class="uploaded-passport-thumbnail preview-document"><img src='/media/images/placeholder_image.jpg' id="passportThumbnail" alt='uploaded passport' /></div>
+    </div>
+    <small class="form-text text-muted">Add your current passport photograph file here. <br /><span id="passportRequirementsTooltipToggle" data-toggle="tooltip" style="color: #E12222;font-size:12px;cursor:pointer" data-placement="right" data-html="true" title="<img src='/media/images/passport_sample_image.jpeg' alt=''><p style='color:#212529;margin:0'>Passport photo information:<br />Kindly note that acceptable passport photographs are:</p><ul style='color:#212529;padding-left:20px'><li>Submit a color photo, taken within the last 6 months</li><li>Use a clear image of your face. Do not use filters commonly used on social media</li><li>Have someone else take your photo, No selfies</li><li>Take off your eyeglasses for your photo</li><li>Use plain white or off-white background</li><li>No face mask(s)</li><li>No headscarf</li><li>The applicant’s ear must be visible</li><li>Full face without smiles</li></ul>">Sample Photo</span><span style="color: #E12222;font-size:12px;cursor:pointer" id="passportRequirementsModalToggle">Sample Photo</span> Maximum size: 2MB</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PassportPhotographFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

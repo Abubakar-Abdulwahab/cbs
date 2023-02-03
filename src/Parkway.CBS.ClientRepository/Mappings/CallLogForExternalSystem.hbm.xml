@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.POSSAP.Scheduler.Models.CallLogForExternalSystem, Parkway.CBS.POSSAP.Scheduler" table="Parkway_CBS_POSSAP_Scheduler_CallLogForExternalSystem" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="URL" column="URL" />
+    <property name="CallDescription" column="CallDescription" />
+    <property name="CallStatus" column="CallStatus" />
+    <property name="JSONCallParameters" column="JSONCallParameters" />
+    <property name="CallIsSuccessful" column="CallIsSuccessful" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="ExternalDataSourceConfigurationSetting" column="ExternalDataSourceConfigurationSetting_Id"/>
+  </class>
+</hibernate-mapping>

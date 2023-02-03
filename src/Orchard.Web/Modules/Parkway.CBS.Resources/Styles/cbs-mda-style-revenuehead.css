@@ -1,0 +1,119 @@
+ body{
+     background: #F3F3F3;
+ }
+div.container-fluid {
+    background: #FFFFFF;
+    margin-top: 25px;
+    /*width:1042px;*/
+}
+/* .dates{
+     width:130px;
+ }*/
+ div.row1{
+     margin-top: 20px;
+ }
+ .selectWrapper{
+     width: 260px;
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    /*background:#cccccc;*/
+    background: white;
+    border:1px solid #cccccc;
+}
+#mda_0 {
+    border:none;
+}
+.selectBox {
+    width: 270px !important;
+    /*height:40px;*/
+    height: 33px;
+    border: none;
+    outline: none;
+}
+div.form-group{
+    margin-right:20px;
+}
+#pickyDate2, #pickyDate {
+    /* border-radius:36px;*/
+    width: 140px !important;
+}
+.btn-primary{
+    width: 95px;
+    border-radius:36px;
+    background-color:#4DADEA;
+    border-color: #4DADEA;
+    margin-bottom:5px;
+}
+.btn-primary:hover{
+    background-color:#4dadea !important;
+}
+.table>tbody>tr>td{
+    border-bottom:0 !important;
+}
+.table>thead>tr>th{
+    border-bottom:0 !important;
+}
+thead tr{
+    border:1px solid white ;
+    background:white ;
+}
+tbody > tr > td{
+    border:none !important;;
+}
+th{
+    font-weight:bold !important;
+}
+p.pull-right{
+    display:block;
+    width:100%;
+    text-align:end;
+    font-weight:bold;
+}
+/*tbody{
+    border:1px solid #e3e3e3 ;
+}*/
+.pager li > a {
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 2px 8px;
+}
+
+.pager li > span {
+    padding: 2px 8px;
+    border-radius: 0px !important;
+    border: 0;
+}
+
+button {
+    box-shadow: none !important;
+}
+
+div.reportsummary {
+    direction: rtl;
+}
+
+.btn-danger, .btn-success {
+    border-radius: 26px;
+}
+label{
+    display:inline !important;
+}
+a.btn-success,a.btn-danger{
+    color: white !important;
+}
+button.btn-primary {
+    border:none;
+}
+    button.btn-primary:hover {
+        background: #116cd6;
+       
+        border: none;
+    }
+    svg>text:last-child{
+        display:none;
+    }
+/*button:hover {
+    background: inherit !important;
+    border:none !important;
+}*/

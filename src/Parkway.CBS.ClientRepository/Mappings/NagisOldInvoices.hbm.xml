@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.NagisOldInvoices, Parkway.CBS.Core" table="Parkway_CBS_Core_NagisOldInvoices" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="CustomerName" column="CustomerName" />
+    <property name="Address" column="Address" />
+    <property name="PhoneNumber" column="PhoneNumber" />
+    <property name="CustomerId" column="CustomerId"/>
+    <property name="Amount" column="Amount" />
+    <property name="TIN" column="TIN" />
+    <property name="NagisInvoiceNumber" column="NagisInvoiceNumber" />
+    <property name="NagisInvoiceCreationDate" column="NagisInvoiceCreationDate"/>
+    <property name="ExternalRefId" column="ExternalRefId" />
+    <property name="InvoiceDescription" column="InvoiceDescription" />
+    <property name="AmountDue" column="AmountDue"/>
+    <property name="Quantity" column="Quantity" />
+    <property name="Status" column="Status" />
+    <property name="GroupId" column="GroupId" />    
+
+    <many-to-one name="NagisDataBatch" column="NagisDataBatch_Id"/>
+    <many-to-one name="RevenueHead" column="RevenueHead_Id"/>
+    <many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+    <many-to-one name="TaxEntityCategory" column="TaxEntityCategory_Id"/>
+  </class>
+</hibernate-mapping>

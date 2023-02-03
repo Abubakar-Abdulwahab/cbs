@@ -1,0 +1,200 @@
+﻿@model Parkway.CBS.Core.HelperModels.TaxProfileFormVM
+
+@{
+    Layout.Title = "Tax Payer Profile";
+
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.Fetch.Lgas.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+
+
+}
+
+<style>
+    .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #317896;
+        border-right: 6px solid #f0ad4e;
+        border-bottom: 6px solid #317896;
+        border-left: 6px solid #f0ad4e;
+        width: 50px;
+        height: 50px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        top: 49px;
+        position: relative;
+        z-index: 30;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    </style>
+
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Payer Profile</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="@Url.RouteUrl("C.SelfAssessment")">Select Identity</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payer Profile</li>
+            </ol>
+        </nav>
+    </div>
+    @Html.Partial("Partials\\FlashPartial", (string.IsNullOrEmpty(Model.ErrorMessage) ? "" : Model.ErrorMessage))
+    <div class="content-payment">
+        <div class="container form-container">
+            @using (Html.BeginFormAntiForgeryPost(Url.Action("PayerProfile"), FormMethod.Post, new { @class = "main-form payment-form" }))
+            {
+                int counter = 0;
+                <h3 class="form-title">You are @Model.CategoryName, you are paying for @Model.RevenueHeadName bill (@Model.MDAName). kindly fill the rest of the form to proceed.</h3>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="" class="title">Full Name<small style="color:red; font-weight:bolder">*</small></label>
+                        <input type="text" name="TaxEntityViewModel.Recipient" class="form-control" placeholder="Enter your full name here" value="@Model.TaxEntityViewModel.Recipient" required>
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.Recipient, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="" class="title">Email</label>
+                        <input type="email" name="TaxEntityViewModel.Email" class="form-control" placeholder="Enter your email here" value="@Model.TaxEntityViewModel.Email">
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.Email, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="" class="title">Phone Number</label>
+                        <input type="text" name="TaxEntityViewModel.PhoneNumber" class="form-control" placeholder="Enter your phone number here" value="@Model.TaxEntityViewModel.PhoneNumber">
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.PhoneNumber, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="" class="title">TIN</label>
+                        <input type="text" name="TaxEntityViewModel.TaxPayerIdentificationNumber" class="form-control" placeholder="Enter your TIN here" value="@Model.TaxEntityViewModel.TaxPayerIdentificationNumber">
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.TaxPayerIdentificationNumber, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-12  mb-4">
+                        <label for="" class="title">If you have a bill from @Model.RevenueHeadName (@Model.MDAName), Enter the bill number here</label>
+                        <input type="text" class="form-control" value="@Model.TaxEntityViewModel.ExternalBillNumber" placeholder="@Model.RevenueHeadName (@Model.MDAName) bill number" name="TaxEntityViewModel.ExternalBillNumber">
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.ExternalBillNumber, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                        <span class="tiny-caption">This field is optional</span>
+                    </div>
+                    <div class="col-md-12  mb-4" style="padding:unset;display:flex;flex-flow:row nowrap">
+                        <div class="col-6">
+                            <label for="" class="title">State<small style="color:red; font-weight:bolder">*</small></label>
+                            <select class="form-control" name="TaxEntityViewModel.SelectedState" id="selectedState">
+                                @foreach (Parkway.CBS.Core.Models.StateModel State in Model.AllStates)
+                                {
+                                    if (Model.TaxEntityViewModel.SelectedState != 0 && Model.TaxEntityViewModel.SelectedState == State.Id)
+                                    {
+                                        <option value="@State.Id" selected>@State.Name</option>
+                                    }
+                                    else
+                                    {
+                                        if (State.Id == Model.TenantState)
+                                        {
+                                            <option value="@State.Id" selected>@State.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@State.Id">@State.Name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                            <span class="tiny-caption">State of Residence</span>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="title">LGA<small style="color:red; font-weight:bolder">*</small></label>
+                            <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                            <select class="form-control" name="TaxEntityViewModel.SelectedStateLGA" id="lgaslist">
+                                @foreach (Parkway.CBS.Core.Models.LGA Lga in Model.AllLgas)
+                                {
+                                    <option value="@Lga.Id">@Lga.Name</option>
+                                }
+                            </select>
+                            <span class="tiny-caption">LGA of Residence</span>
+                            @Html.ValidationMessageFor(m => m.TaxEntityViewModel.SelectedStateLGA, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                        </div>
+                    </div>
+                    <div class="col-md-12  mb-4">
+                        <label for="" class="title">Address<small style="color:red; font-weight:bolder">*</small></label>
+                        <textarea class="form-control" name="TaxEntityViewModel.Address" placeholder="Enter your address here" required>@Model.TaxEntityViewModel.Address</textarea>
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.Address, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+
+                    @if (Model.CollectionFormVM != null && Model.CollectionFormVM.Any())
+                    {
+                        foreach (var item in Model.CollectionFormVM)
+                        {
+                            <div class="col-md-12">
+                                @Html.Label(item.FormLabel, new { @class = "title" })
+                                @Html.TextBox("[" + counter + "].FormValue", item.FormValue, new { @class = "form-control mb-4", @required = true, @placeholder = "Enter your " + item.FormLabel })
+                                @Html.ValidationMessage("[" + counter + "].FormValue", new { @class = "tiny-caption", @style = "color:#ff0000" })
+
+                                @Html.Hidden("[" + counter + "].FormIdentifier", item.FormIdentifier)
+                                @Html.Hidden("[" + counter + "].FormLabel", item.FormLabel)
+                            </div>
+                        }
+                    }
+                </div>
+                <button type="submit" class="btn">Proceed</button>
+            }
+        </div>
+    </div>
+    <script>
+        var lgaObj = { };
+        var stateId = $('#selectedState').val();
+        var loadedBefore = false;
+        var stateSelectedPrev = @Html.Raw(Json.Encode(Model.TaxEntityViewModel.SelectedState));
+        var lgaSelectedPrev = @Html.Raw(Json.Encode(Model.TaxEntityViewModel.SelectedStateLGA));
+
+        lgaObj[stateId] = { "Lgas": @Html.Raw(Json.Encode(Model.AllLgas)) };
+        if (stateSelectedPrev != 0) { loadedBefore = true; }
+    </script>
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

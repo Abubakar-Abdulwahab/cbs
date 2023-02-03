@@ -1,0 +1,11 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group" style="margin-top:30px">
+    <label for="fingerPrint">Upload Finger Print<span class="required-sym">*</span></label>
+    <div class="upload-file-container">
+        <input type="file" id="fingerPrint" name="fingerPrintFile" accept=".pdf">
+        <div class="finger-print-thumbnail finger-print-preview-document-embed"><span class="embed-overlay"></span><embed src='/media/images/cloud_upload.svg' id="fingerPrintThumbnail" /></div>
+    </div>
+    <small class="form-text text-muted">Download the fingerprint template here. You are required to follow the instructions on the template file provide.<br /><span class="upload-caption" style="color: red; text-decoration:none"><a download="/media/sample/PCC_FINGERPRINT_TEMPLATE_FOR_DIASPORA.pdf" style="text-decoration:none;" href="/media/sample/PCC_FINGERPRINT_TEMPLATE_FOR_DIASPORA.pdf">fingerprint template</a></span></small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("FingerPrintfile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

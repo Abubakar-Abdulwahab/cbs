@@ -1,0 +1,31 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group">
+    <label for="originCountryData">Country of Origin<span class="required-sym">*</span></label>
+    <input required type="text" placeholder="Enter the country you're from" class="form-control" list="originCountries" id="originCountryData" name="originCountryData" spellcheck="false" autocomplete="off" value="@((Model.SelectedCountryOfOrigin > 0) ? Model.Countries.Where(x => x.Id == Model.SelectedCountryOfOrigin).SingleOrDefault().Name : "")" />
+    <datalist id="originCountries" name="originCountries">
+        @if (Model.Countries != null && Model.Countries.Any())
+        {
+            foreach (var country in Model.Countries)
+            {
+                <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+            }
+        }
+    </datalist>
+    <input type="hidden" name="SelectedCountryOfOrigin" id="originCountryIdentifier" />
+    <small class="form-text text-muted">Select your country of origin.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCountryOfOrigin", "Selected country of origin value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+
+<div class="form-group" id="stateOfOriginContainer" style="display:@((Model.SelectedCountryOfOrigin > 0) && (Model.Countries.Where(x => x.Id == Model.SelectedCountryOfOrigin).SingleOrDefault().Name.ToLower() == "nigeria") ? "block" : "none")">
+    <label for="stateOfOrigin">State of Origin<span class="required-sym">*</span></label>
+    <select class="custom-select" name="SelectedStateOfOrigin" id="stateOfOrigin">
+        <option selected disabled value="">Select a State</option>
+        @foreach (var item in Model.StateLGAs)
+        {
+            <option value="@item.Id" @(Model.SelectedStateOfOrigin == item.Id ? "selected" : "")>@item.Name</option>
+        }
+    </select>
+    <small class="form-text text-muted">Select your state of origin.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedStateOfOrigin", "Selected State of origin value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

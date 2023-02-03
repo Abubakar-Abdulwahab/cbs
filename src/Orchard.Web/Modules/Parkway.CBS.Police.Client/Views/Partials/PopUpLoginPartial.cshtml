@@ -1,0 +1,47 @@
+﻿<div class="container-fluid login-modal no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <h3>Login</h3>
+                <p>Welcome Back!</p>
+                <form>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="username">Username</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/user.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Username" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="pwd">Password</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/lock.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="pwd" placeholder="Enter Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/visible.svg"))"></div>
+                        </div>
+                    </div>
+                    <div class="row no-margin no-padding">
+                        <div class="col no-margin no-padding">
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input"> Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col no-margin no-padding" style="text-align:right">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+            </div>
+            <div class="container-fluid login-modal-bottom-section no-margin no-padding">
+                <p>Don't have an account? <span class="signup-toggle">Signup</span></p>
+            </div>
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />
+        </div>
+    </div>
+</div>

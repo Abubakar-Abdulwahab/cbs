@@ -1,0 +1,16 @@
+﻿@{
+    Script.Require("PSS.Terms.Of.Use.Modal.Script").AtFoot();
+}
+
+<div class="terms-modal" id="termsModal">
+    <div class="row no-margin no-padding terms-modal-content" id="termsContent" style="width:100%">
+        <div class="col-md-10">
+            <p>
+            By using this website www.possap.gov.ng, any of our websites and/or services, you agree to these <a class="decorated-active-link" href="@Url.RouteUrl("P.Terms.Of.Use")">Terms of Use</a>. The website <a class="decorated-active-link" href="@Url.RouteUrl("P.Privacy.Policy")">Privacy Policy</a> is incorporated by reference into these <a class="decorated-active-link" href="@Url.RouteUrl("P.Terms.Of.Use")">Terms of Use</a>.</p>
+        </div>
+        <div class="col-md-2">
+            <button class="btn blue-btn btn-block" id="confirmTerms">Ok</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,8 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group">
+    <label for="placeOfIssuance">Place of Issuance<span class="required-sym">*</span></label>
+    <input type="text" name="PlaceOfIssuance" class="form-control" id="placeOfIssuance" value="@Model.PlaceOfIssuance" maxlength="50" placeholder="Enter place of issuance here" />
+    <small class="form-text text-muted">Specify where your passport was issued.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PlaceOfIssuance", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

@@ -1,0 +1,155 @@
+﻿@Model Parkway.CBS.Core.HelperModels.CollectionReportViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body, td, th, div, p {
+            font-family: 'Open Sans', Arial;
+            font-size: 8px;
+            direction: ltr;
+            line-height: 1.65;
+        }
+
+        body {
+            color: #000;
+            padding: 0px !important;
+            margin: 0px !important;
+            background-color: #fff;
+            display: block;
+        }
+
+        .container {
+            position: relative;
+            margin-right: 0;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        p {
+            padding-top: 10px;
+            line-height: 1.85;
+        }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        .bolder {
+            font-weight: 800;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
+
+        .no-margin {
+            margin: 0;
+        }
+
+        .no-border {
+            border: none;
+        }
+
+        .border-left {
+            border: 0;
+            border-color: #999999;
+            border-left-color: #999999;
+            border-left-width: 1px;
+            border-left-style: solid;
+        }
+
+        .border-right {
+            border: 0;
+            border-color: #999999;
+            border-right-color: #999999;
+            border-right-width: 1px;
+            border-right-style: solid;
+        }
+
+        .border-bottom {
+            border: 0;
+            border-color: #999999;
+            border-bottom-color: #999999;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+
+        .border-top {
+            border: 0;
+            border-color: #999999;
+            border-top-color: #999999;
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+
+        td {            
+            vertical-align: top;
+            text-transform:capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <!-- The logo path has to be absolute path -->
+                    <td align="center" width="109" style="padding: 10px;"><img src="@Model.LogoURL" width="83px" alt="" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td align="center" style="padding: 10px;font-size:12px;"><strong>@Model.TenantName Central Billing System Collection Report</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            <table style="width:100%;" cellpadding="3" cellspacing="0">
+                <tbody>
+                    <tr style="font-weight: bold">
+                        <td class="border-top border-bottom" nowrap style="white-space: nowrap; width:9%;">Payment Date</td>
+                        <td class="border-top border-bottom" style="width:10%;">Receipt Number</td>
+                        <td class="border-top border-bottom" style="width:10%;">Payer Name</td>
+                        <td class="border-top border-bottom" style="width:10%;">Payer TIN</td>
+                        <td class="border-top border-bottom" style="width:13%;">Revenue Head</td>
+                        <td class="border-top border-bottom" style="width:10%;">Payment Reference</td>
+                        <td class="border-top border-bottom" style="width:10%;">Payment Provider</td>
+                        <td class="border-top border-bottom" style="width:10%;">Payment Channel</td>
+                        <td class="border-top border-bottom" nowrap style="white-space: nowrap; width:10%;">Invoice Number</td>
+                        <td class="border-top border-bottom" style="width:10%;">Bank</td>
+                        <td class="border-top border-bottom" style="width:8%;">Amount</td>
+                    </tr>
+                    @foreach (var item in Model.ReportRecords)
+                    {
+                        <tr>
+                            <td class="border-top">@item.PaymentDate.ToString("MMM d, yyyy")</td>
+                            <td class="border-top">@item.ReceiptNumber</td>
+                            <td class="border-top">@item.TaxPayerName</td>
+                            <td class="border-top">@item.TaxPayerTIN</td>
+                            <td class="border-top">@item.RevenueHeadName</td>
+                            <td class="border-top">@item.PaymentRef</td>
+                            <td class="border-top">@item.PaymentProvider</td>
+                            <td class="border-top">@item.Channel</td>
+                            <td class="border-top">@item.InvoiceNumber</td>
+                            <td class="border-top">@item.Bank</td>
+                            <td class="border-top">@string.Format("{0:n}", item.Amount)</td>
+                        </tr>
+                    }
+                    <tr><td colspan="10" class="border-top">&nbsp;</td></tr>
+                </tbody>
+            </table>
+        </p>
+        <p style="text-align:center; padding-top:5px;">
+            <i>This report was generated @DateTime.Now.ToString("MMM d, yyyy @ HH:mm:ss") on @Model.TenantName Central Billing System</i><br />
+        </p>
+    </div>
+</body>
+</html>

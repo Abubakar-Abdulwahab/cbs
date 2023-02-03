@@ -1,0 +1,316 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+@{
+    Layout.Title = "Home";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Script.Require("PSS.Home.Carousel.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    .bg-row-image#img1 {
+        background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/LiousEdetHouse1.png")));
+    }
+
+    .bg-row-image#img2 {
+        background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/airwing2.png")));
+    }
+
+    .bg-row-image#img3 {
+         background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/policecar3.png")));
+    }
+
+    .bg-row-image#img4 {
+        background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/policeExtract4.png")));
+    }
+
+    .bg-row-image#img5 {
+        background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/characterCertificate5.png")));
+    }
+
+    .bg-row-image#img6 {
+        background-image: url(@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/investigationReport6.png")));
+    }
+</style>
+
+<div id="home-content">
+    @Html.Partial("Partials\\HeaderPartial", Model)
+    <div class="row no-margin bg-row-one">
+        <div id="pssCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="bg-row-image" id="img1">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="bg-row-image" id="img2">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="bg-row-image" id="img3">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="bg-row-image" id="img4">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="bg-row-image" id="img5">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="bg-row-image" id="img6">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 no-padding bg-row-one-content">
+            <p id="contentSupportText">YOU CAN REQUEST</p>
+            <h2 id="contentHeader">
+                Welcome to The Police Specialized Services Portal (POSSAP Portal)
+            </h2>
+            <p id="contentText">You can pay for services such as Special protection services, Guards service, Police extracts etc.</p>
+            <div class="row no-margin btn-row no-padding">
+                <div class="container col-sm-6 no-margin no-padding">
+                    <a class="right btn" href="@Url.RouteUrl("P.SelectService")">Request Service</a>
+                </div>
+                <div class="container col-sm-6 no-margin no-padding">
+                    <a href="@Url.RouteUrl("P.BIN.Search")" class="btn">Make Payment</a>
+                </div>
+            </div>
+            <div class="row carousel-nav-toggles">
+                <div class="col-2 carousel-nav-toggle active" id="img1Toggle">
+                    <p class="mb-1">01</p>
+                    <div class="toggle-bar"></div>
+                </div>
+                <div class="col-2 carousel-nav-toggle" id="img2Toggle">
+                    <p class="mb-1">02</p>
+                    <div class="toggle-bar"></div>
+                </div>
+                <div class="col-2 carousel-nav-toggle" id="img3Toggle">
+                    <p class="mb-1">03</p>
+                    <div class="toggle-bar"></div>
+                </div>
+                <div class="col-2 carousel-nav-toggle" id="img4Toggle">
+                    <p class="mb-1">04</p>
+                    <div class="toggle-bar"></div>
+                </div>
+                <div class="col-2 carousel-nav-toggle" id="img5Toggle">
+                    <p class="mb-1">05</p>
+                    <div class="toggle-bar"></div>
+                </div>
+                <div class="col-2 carousel-nav-toggle" id="img6Toggle">
+                    <p class="mb-1">06</p>
+                    <div class="toggle-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row no-margin">
+        <div class="container col-12" style="text-align:center;padding-top:60px;color:#2F281E">
+            <h3>How Does It Work</h3>
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-three" id="crumbs">
+        <div class="container col-2 active-numbered-crumb no-margin no-padding" style="width:5%" id="requestToggle">
+            <p>1</p>
+            <p class="numbered-crumb-caption">Request</p>
+        </div>
+        <div class="container col-3 dashed-block no-margin no-padding" style="width:40%">
+            <div style="width:auto;border:0.5px dashed #E3E3E3"></div>
+        </div>
+        <div class="container col-2 numbered-crumb no-margin no-padding" style="width:5%" id="approvalToggle">
+            <p>2</p>
+            <p class="numbered-crumb-caption">Approval</p>
+        </div>
+        <div class="container col-3 dashed-block no-margin no-padding" style="width:40%">
+            <div style="width:auto;border:0.5px dashed #E3E3E3"></div>
+        </div>
+        <div class="container col-2 numbered-crumb no-margin no-padding" style="width:5%" id="fulfilmentToggle">
+            <p>3</p>
+            <p class="numbered-crumb-caption">Fulfilment</p>
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-four">
+        <div class="container col-md-6" id="serviceContent">
+            <h4>Request Service</h4>
+            <p>Click on the “Request Service” or “Get Started” button to access a page to request a service. You might be required to create an account if you don’t already have one.</p>
+            <a href="@Url.RouteUrl("P.SelectService")" class="btn">Get Started</a>
+        </div>
+        <div class="container col-md-6">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/RequestService.png"))" class="img img-responsive" style="width:inherit;height:auto" id="serviceContentImg" />
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-five">
+        <div class="container col-md-6 no-margin no-padding">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/approvedRequest.svg"))" class="img img-responsive" style="width:inherit;height:auto" />
+        </div>
+        <div class="container col-md-6 no-margin no-padding">
+            <h6>Avoid the hassle</h6>
+            <h4>Get Police Specialized Services with no hassle</h4>
+            <p>The POSSAP portal provides you the ability to request services such as Police Extract, FireArm License, Police Escort, Police Protection Services, CID Clearance Certificate, Tint Permit, from the comfort of your home.</p>
+            <a href="@Url.RouteUrl("P.SelectService")">Get Started &rsaquo;</a>
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-six" style="text-align:center;color:#2F281E">
+        <div class="container col-12">
+            <h4>Take Advantage of All The <br />Benefits</h4>
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-seven">
+        <div class="container col-md-4">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/paymentCards.svg"))" />
+            <h4>Multiple Payment Channels</h4>
+            <p>Payments can be made against an invoice at any bank branch, mobile banking, POS or online with debit cards (MasterCard, Visa, Verve)</p>
+        </div>
+        <div class="container col-md-4">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/laptopMobile.svg"))" />
+            <h4>Convenience and Ease</h4>
+            <p>Request and pay for police specialized services online at your convenience. You can now access police specialized services from the comfort of your home, office or on the go.</p>
+        </div>
+        <div class="container col-md-4">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/cardTimer.svg"))" />
+            <h4>Payment Transaction Records</h4>
+            <p>View your request and<br /> payment history in one place.</p>
+        </div>
+        <div class="row no-margin no-padding">
+            <div class="container col-sm-12 add-sm-padding">
+                <a href="@Url.RouteUrl("P.SelectService")" class="btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-questions">
+        <div class="container col-md-6">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/questionTwo.svg"))" class="img img-responsive" style="width:inherit;height:auto" />
+        </div>
+        <div class="container col-md-6">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/questionOne.svg"))" class="img img-responsive" style="width:inherit;height:auto" />
+        </div>
+    </div>
+    <div class="row no-margin no-padding bg-row-eight">
+        <div class="container col-12">
+            <h4>Need Help With Getting Started?</h4>
+            <p>We understand that you might have questions about the process of making a request and possible complaints. Feel free to reach out to us</p>
+            <a href="@Url.RouteUrl("P.Contact")" class="btn">Contact Us</a>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+<div class="container-fluid login-modal no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <h3>Login</h3>
+                <p>Welcome Back!</p>
+                <form>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="username">Username</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/user.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Username" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="pwd">Password</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/lock.svg"))"></div>
+                        </div>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/visible.svg"))"></div>
+                        </div>
+                    </div>
+                    <div class="row no-margin no-padding">
+                        <div class="col no-margin no-padding">
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input"> Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col no-margin no-padding" style="text-align:right">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+            </div>
+            <div class="container-fluid login-modal-bottom-section no-margin no-padding">
+                <p>Don't have an account? <span class="signup-toggle">Signup</span></p>
+            </div>
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid signup-modal-full no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <h3>Signup</h3>
+                <p>Create an account to get started.</p>
+                <form>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="fullname">Full Name</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/user.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="fullname" placeholder="Enter Full Name" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="phoneNumber">Phone Number</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/phone.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="email">Email</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/letter.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Email" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="pwd">Password</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/lock.svg"))"></div>
+                        </div>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/visible.svg"))"></div>
+                        </div>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="cpwd">Confirm Password</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/lock.svg"))"></div>
+                        </div>
+                        <input type="password" class="form-control" id="cpwd" placeholder="Confirm Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/visible.svg"))"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+
+            </div>
+            <div class="container-fluid signup-modal-full-bottom-section no-margin no-padding">
+                <p>Already have an account? <span class="login-toggle">Login</span></p>
+            </div>
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("Partials\\PrivacyPolicyandTermsPartial")

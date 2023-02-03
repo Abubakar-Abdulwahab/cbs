@@ -1,0 +1,71 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateDetailsVM
+
+<div class="container-fluid no-padding">
+    <div class="row no-padding">
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="name">Applicant Name</label>
+            <p class="bolded-info" id="name">@Model.CbsUser.Name</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="serviceName">Service Name</label>
+            <p class="bolded-info" id="serviceName">@Model.CharacterCertificateInfo.ServiceName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="phoneNumber">Command Name</label>
+            <p class="bolded-info" id="cmdName">@Model.CharacterCertificateInfo.CommandName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="email">Command State</label>
+            <p class="bolded-info" id="cmdStateName">@Model.CharacterCertificateInfo.CommandStateName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="tin">Command LGA</label>
+            <p class="bolded-info" id="cmdLgaName">@Model.CharacterCertificateInfo.CommandLgaName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Reason for Inquiry</label>
+            <p class="bolded-info">@Model.CharacterCertificateInfo.ReasonForInquiryValue</p>
+        </div>
+        @*<div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Tribe</label>
+                <p class="bolded-info">@Model.CharacterCertificateInfo.TribeValue</p>
+            </div>*@
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">State of Origin</label>
+            <p class="bolded-info">@Model.CharacterCertificateInfo.SelectedStateOfOriginValue</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Destination Country</label>
+            <p class="bolded-info">@Model.CharacterCertificateInfo.DestinationCountryValue</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Approval Number</label>
+            <p class="bolded-info">@Model.ApprovalNumber<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Request Date</label>
+            <p class="bolded-info">@Model.RequestDate<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Approval Date</label>
+            <p class="bolded-info">@Model.ApprovalDate<p />
+        </div>
+    </div>
+    <div class="row no-padding">
+        <div class="col-9">
+            <label class="no-margin grey-label">Details of Certificate</label>
+            <p style="font-weight:500; text-align:justify">
+                According to records in the Central Criminal Records Registry of the Nigeria Police Force, there is no trace of any
+                convictions recorded in Nigeria against <b>@Model.TaxEntity.Recipient</b>
+                @if (Model.CharacterCertificateInfo.RequestTypeValue.ToLower().Contains("international"))
+                {<span>holder of <b>@Model.CharacterCertificateInfo.SelectedCountryOfPassportValue</b> Passport Number <b>@Model.CharacterCertificateInfo.PassportNumber</b> issued in <b>@Model.CharacterCertificateInfo.PlaceOfIssuance</b> on <b>@Model.CharacterCertificateInfo.DateOfIssuance.</b></span>}
+                This Certificate is issued to the holder for the purpose of <b>@Model.CharacterCertificateInfo.ReasonForInquiryValue</b>
+                @if (Model.CharacterCertificateInfo.ReasonForInquiryValue.ToLower().Contains("travelling") && Model.CharacterCertificateInfo.RequestTypeValue.ToLower().Contains("international"))
+                {<span>to <b>@Model.CharacterCertificateInfo.DestinationCountryValue</b> </span>}
+                else if ((Model.CharacterCertificateInfo.ReasonForInquiryValue.ToLower().Contains("employment") && Model.CharacterCertificateInfo.RequestTypeValue.ToLower().Contains("international")) || (Model.CharacterCertificateInfo.ReasonForInquiryValue.ToLower().Contains("education") && Model.CharacterCertificateInfo.RequestTypeValue.ToLower().Contains("international")))
+                { <span>in <b>@Model.CharacterCertificateInfo.DestinationCountryValue</b> </span>}
+                and it is valid for 3 months from the date of issuance.
+            </p>
+        </div>
+    </div>
+</div>

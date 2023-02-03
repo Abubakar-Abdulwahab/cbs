@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CentralBillingScheduler.DAO.Models.RefDataTemp, Parkway.CentralBillingScheduler.DAO" table="Parkway_CBS_Core_RefDataTemp" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Recipient" column="Recipient" />
+    <property name="Address" column="Address" />
+    <property name="TaxEntityCategoryId" column="TaxEntityCategoryId" />
+    <property name="BillingModelId" column="BillingModelId" />
+    <property name="RevenueHeadId" column="RevenueHeadId" />
+    <property name="TaxIdentificationNumber" column="TaxIdentificationNumber" />
+    <property name="Email" column="Email" />
+    <property name="BatchNumber" column="BatchNumber" />
+    <property name="Status" column="Status" />
+    <property name="AdditionalDetails" column="AdditionalDetails" />
+    <property name="ErrorLog" column="ErrorLog" />
+    <property name="StatusDetail" column="StatusDetail" />
+    <property name="Amount" column="Amount" />
+    <property name="UniqueIdentifier" column="UniqueIdentifier" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.ReferenceDataBatch, Parkway.CBS.Core" table="Parkway_CBS_Core_ReferenceDataBatch" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="ProccessStage" column="ProccessStage" />
+    <property name="NumberOfRecords" column="NumberOfRecords" />
+    <property name="AdapterClassName" column="AdapterClassName" />
+    <property name="FilePath" column="FilePath" type="String" />
+    <property name="FileName" column="FileName" type="String" />
+    <property name="PercentageProgress" column="PercentageProgress" />
+    <property name="ErrorOccurred" column="ErrorOccurred" />
+    <property name="ErrorMessage" column="ErrorMessage"/>
+    <property name="Page" column="Page" />
+    <property name="TotalPage" column="TotalPage" />
+    <property name="NumberOfRecordSentToCashFlow" column="NumberOfRecordSentToCashFlow" />
+    <property name="BatchInvoiceFileName" column="BatchInvoiceFileName" type="String" />
+    <property name="BatchInvoiceCallBackURL" column="BatchInvoiceCallBackURL" type="String" />
+
+    <many-to-one name="LGA" column="LGA_Id"/>
+    <many-to-one name="RevenueHead" column="RevenueHead_Id"/>
+    <many-to-one name="StateModel" column="StateModel_Id"/>
+    <many-to-one name="GeneralBatchReference" column="GeneralBatchReference_Id"/>
+  </class>
+</hibernate-mapping>

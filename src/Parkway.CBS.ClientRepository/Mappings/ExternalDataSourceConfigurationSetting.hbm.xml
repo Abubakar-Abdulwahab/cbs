@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.POSSAP.Scheduler.Models.ExternalDataSourceConfigurationSetting, Parkway.CBS.POSSAP.Scheduler" table="Parkway_CBS_POSSAP_Scheduler_ExternalDataSourceConfigurationSetting" lazy="false" >
+    <id name="Id" column="Id" type="Int32">
+      <generator class="identity"/>
+    </id>
+    <property name="ActionName" column="ActionName" />
+    <property name="ImplementingClass" column="ImplementingClass" />
+    <property name="CRONValue" column="CRONValue" />
+    <property name="NextScheduleDate" column="NextScheduleDate" />
+    <property name="IsActive" column="IsActive" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

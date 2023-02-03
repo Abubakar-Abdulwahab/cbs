@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.PSSEscortDetails, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSEscortDetails" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="StartDate" column="StartDate" />
+    <property name="EndDate" column="EndDate" />
+	<property name="NumberOfOfficers" column="NumberOfOfficers" />
+
+	<many-to-one name="CommandType" column="CommandType_Id"/>
+  </class>
+</hibernate-mapping>

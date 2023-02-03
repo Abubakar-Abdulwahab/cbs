@@ -1,0 +1,108 @@
+﻿@model Parkway.CBS.Police.Core.VM.AIGApprovalVM
+
+@{
+    Script.Require("PSS.Admin.LGA.Command.For.Admin.Script").AtFoot();
+    Script.Require("PSS.Assign.Formation.Script").AtFoot();
+}
+<script>
+    var states = @Html.Raw(Json.Encode(Model.States));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var formationsAllocated = @Html.Raw(Json.Encode(Model.FormationsAllocated));
+    var req = @Html.Raw(Model.RequestId);
+</script>
+<table class="items">
+    <thead>
+        <tr>
+            <th colspan="2">INSTRUCTIONS FROM DIG</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Number of officers to provide</td>
+            <td>@Model.NumberOfOfficersRequested</td>
+        </tr>
+    </tbody>
+</table>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="4">Formation to provide the service</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+            <label for="state">State</label>
+            <select id="state" class="extend-width">
+                <option value="0" selected disabled>Select a state</option>
+                @foreach(var state in Model.States) {
+                    <option value="@state.Id">@state.Name</option>
+                }
+            </select>
+            </td>
+            <td>
+                <label for="commands">Formation</label>
+                <select id="commands" class="extend-width">
+                    <option value="0" selected disabled>Select a formation</option>
+                </select>
+                <div id="searchError"></div>
+            </td>
+            <td>
+                <label for="officerQty">Number of officers to provide</label>
+                <input type="text" id="officerQty" class="extend-width" style="height:20px" />
+            </td>
+            <td style="width:50px">
+                <fieldset>
+                    <button type="button" id="addFormationdBtn" style="position: absolute; top: 31px;">+ Add</button>
+                </fieldset>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="formationsTable">
+    <tr>
+        <th>State</th>
+        <th>Formation</th>
+        <th>Number of officers<br/>requested</th>
+        <th>Number of officers<br />assigned</th>
+        <th>Actions</th>
+        <th></th>
+    </tr>
+    @if (Model.FormationsAllocated != null && Model.FormationsAllocated.Any())
+    {
+        int index = 0;
+        foreach (var allocatedFormation in Model.FormationsAllocated)
+        {
+
+            <tr>
+                <td>
+                    @allocatedFormation.StateName
+                </td>
+                <td>
+                    @allocatedFormation.FormationName
+                </td>
+                <td>
+                    @allocatedFormation.NumberOfOfficers
+                </td>
+                <td>
+                    @allocatedFormation.NumberOfOfficersAssignedByCommander
+                </td>
+                <td>
+                    @if(allocatedFormation.NumberOfOfficersAssignedByCommander > 0) { 
+                    <button type="button" class="view-officers-toggle esc-@Model.RequestId-@allocatedFormation.FormationId">View Officers</button>
+                    }
+                </td>
+                <td>
+                    <span class="delete-squad-row" Title="Remove Item" onClick="removeFormation(@index)">Remove</span>
+                </td>
+            </tr>
+            index++;
+        }
+        <input type="hidden" name="AllocationGroupId" value="@Model.FormationsAllocated.ElementAt(0).AllocationGroupId" />
+    }
+</table>
+
+@Html.Partial("\\ServicePartials\\ApprovalPartial\\AssignFormationApprovalComment", Model.CanApprove,
+    new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name) },{ new KeyValuePair<string, object>("CustomControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApprovalAIG).Name) } })
+
+@Html.Partial("\\ServicePartials\\PSSEscortViewAllocatedOfficersPartial")

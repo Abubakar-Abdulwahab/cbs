@@ -1,0 +1,31 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestDetailsVM
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="4">ADDITIONAL INFORMATION</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>
+            <label>Diary S/No</label>
+            <input type="text" class="extend-width" name="DiarySerialNumber" value="@Model.DiarySerialNumber" required />
+        </td>
+        <td>
+            <label>Incident Date</label>
+            <input type="text" class="extend-width pickyNoFutureDate" autocomplete="off" name="IncidentDate" value="@((Model.IncidentDateAndTimeParsed == null) ? Model.IncidentDate : Model.IncidentDateAndTimeParsed.Value.ToString("dd/MM/yyyy"))" required />
+        </td>
+        <td>
+            <label>Incident Time</label>
+            <input type="time" class="extend-width" name="IncidentTime" value="@((Model.IncidentDateAndTimeParsed == null) ? Model.IncidentTime : Model.IncidentDateAndTimeParsed.Value.ToString("HH:mm"))" required />
+        </td>
+        <td>
+            <label>Cross Referencing(C/R)</label>
+            <input type="text" class="extend-width" name="CrossReferencing" maxlength="10" value="@Model.CrossReferencing" @(string.IsNullOrEmpty(Model.Content) ? "" : "readonly") />
+        </td>
+    </tr>
+</table>
+
+<label >Content</label>
+<textarea class="extend-width" name="Content" placeholder="Enter content" required>@Model.Content</textarea>
+

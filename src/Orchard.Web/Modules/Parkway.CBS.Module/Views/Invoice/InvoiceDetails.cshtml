@@ -1,0 +1,63 @@
+﻿@model Parkway.CBS.Core.HelperModels.InvoiceGeneratedResponseExtn
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Script.Require("CBS.View.Invoice.Script").AtFoot();
+
+    Layout.Title = "Invoice Generated".ToString();
+}
+
+<div class="container" style="width:100%">
+    <h3 class="form-title">
+        <span>BIN:@Model.InvoiceNumber</span>
+        <span style="float:right">
+            <a href="@Url.RouteUrl("AdminViewInvoice",new { invoiceNumber = Model.InvoiceNumber })" name="viewInvoice">View invoice</a> 
+            |
+            <a href="@Url.RouteUrl("AddPaymentAdmin",new { invoiceNumber = Model.InvoiceNumber })" style="color:red" target="_blank">Add Payment</a>
+        </span>
+    </h3>
+    <div class="row">
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Recipient")</b>
+            <p>@Model.Recipient</p>
+            @Html.Hint(T("The recipient name of the tax payer you are generated an invoice for."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Phone number")</b>
+            <p>@Model.PhoneNumber</p>
+            @Html.Hint(T("Phone number of the tax payer."))
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("TIN")</b>
+            <p>@(string.IsNullOrEmpty(Model.TIN) ? "-" : Model.TIN)</p>
+            @Html.Hint(T("TIN of the tax payer on record."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Email")</b>
+            <p>@(string.IsNullOrEmpty(Model.Email) ? "-" : Model.Email)</p>
+            @Html.Hint(T("Email of the tax payer."))</p>
+        </div>
+    </div>
+    <br />
+</div>
+<hr />
+<div id="container">
+    <table class="items" id="settings">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width:50%">
+                    <label style="white-space: nowrap;text-align:center"><b>@T("(₦)Amount Due")</b></label>
+                    <br />
+                    <label style="white-space: nowrap;text-align:center;word-break:break-all;font-size:xx-large">@string.Format("{0:n2}", Model.AmountDue)</label>
+                </td>
+                <td style="width:50%">
+                    <label for="Reference" style="white-space: nowrap;text-align:center"><b>@T("Reference")</b></label>
+                    <br />
+                    <label style="white-space: nowrap;text-align:center;word-break:break-all;font-size:xx-large">@Model.ExternalRefNumber</label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

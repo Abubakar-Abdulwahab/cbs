@@ -1,0 +1,12 @@
+﻿@model Parkway.CBS.Core.HelperModels.FormControlViewModel
+
+<div class="form-group">
+    <div class="container no-margin no-padding" id="reasonDiv">
+        <h6>@Model.LabelText</h6>
+        @Html.Hidden("[" + Model.FormIndex + "].ControlIdentifier", Model.ControlIdentifier)
+        @Html.Hidden("[" + Model.FormIndex + "].FormIndex", Model.FormIndex)
+        <input id="reason" class="form-control" placeholder="@Model.PlaceHolderText" value="@(Model.FormValue)" name="@("[" + Model.FormIndex + "].FormValue")" />
+        <small class="form-text text-muted">@Model.HintText</small>
+        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("[" + Model.FormIndex + "].FormValue", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    </div>
+</div>

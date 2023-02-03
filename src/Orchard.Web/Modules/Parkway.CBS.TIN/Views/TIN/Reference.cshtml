@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Reference";
+
+    //Style.Require("font-awesome");
+    Style.Require("Registration");
+    Style.Require("DateTimePicker");
+    Style.Require("FormWizard");
+    Style.Require("CBS.Style.Main");
+    Style.Include(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/themebootstrap.min.css"));
+    Style.Include(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/theme.css"));
+
+    Script.Require("DateTimePicker");
+    Script.Require("TINRegistration");
+
+    Script.Require("Plugin");
+
+    Script.Require("EregistryFormWizard");
+
+
+
+    var reference = ViewBag.Reference as string;
+}
+
+<div class="modal" tabindex="-1" role="dialog" style="display:block;background-color:grey">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TIN Reference</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12">
+                    @*<p class="text-center">Reference</p>*@
+                    <h1 class="text-center">@reference</h1>
+                    <p class="text-center"><em>Thanks for using Central Billing System.</em> </p>
+                    <p class="text-center"><em>Kindly visit the nearest NIRS office to capture your biometrics using the reference number above.</em> </p>
+                    @*<p class="text-center"> NIRS/TIN/0001</p>*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,161 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortRequestDetailsVM
+@{
+    Script.Require("PSS.Admin.Approval.Request.List.Script").AtFoot();
+}
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">DETAILS OF SPECIAL SERVICE / ESCORT DUTY</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label for="stateB">State</label>
+                <p class="extend-width">@Model.EscortInfo.StateName</p>
+            </td>
+            <td>
+                <label for="lgaB">LGA</label>
+                <p class="extend-width">@Model.EscortInfo.LGAName </p>
+            </td>
+            <td>
+                <label for="addressB">Address</label>
+                <p class="extend-width">@Model.EscortInfo.Address</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="StartDate">Start Date</label>
+                <p class="extend-width">@Model.EscortInfo.StartDate</p>
+            </td>
+            <td>
+                <label for="EndDate">End Date</label>
+                <p class="extend-width">@Model.EscortInfo.EndDate</p>
+            </td>
+            <td>
+                <label for="EndDate">Duration</label>
+                <p class="extend-width">@Model.EscortInfo.DurationNumber days</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="EndDate">Requester Category</label>
+                <p class="extend-width">@Model.EscortInfo.TaxEntitySubSubCategoryName</p>
+            </td>
+            <td>
+                <label for="EndDate">Service Category</label>
+                <p class="extend-width">@Model.EscortInfo.ServiceCategoryName</p>
+            </td>
+            <td>
+                <label for="StartDate">Service Category Type</label>
+                <p class="extend-width">@Model.EscortInfo.ServiceCategoryTypeName</p>
+            </td>
+        </tr>
+        @if (Model.EscortInfo.ShowExtraFieldsForServiceCategoryType)
+        {
+            <tr>
+                <td>
+                    <label for="OriginState">Origin State</label>
+                    <p class="extend-width">@Model.EscortInfo.OriginStateName</p>
+                </td>
+                <td>
+                    <label for="EndDate">Origin LGA</label>
+                    <p class="extend-width">@Model.EscortInfo.OriginLGAName</p>
+                </td>
+                <td>
+                    <label for="StartDate">Origin Address</label>
+                    <p class="extend-width">@Model.EscortInfo.AddressOfOriginLocation</p>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">APPLICANT SELECTED COMMAND TO PROVIDE SERVICE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label for="stateC">State</label>
+                <p class="extend-width">@Model.EscortInfo.CommandStateName</p>
+            </td>
+            <td>
+                <label for="lgaC">LGA</label>
+                <p class="extend-width">@Model.EscortInfo.CommandLgaName</p>
+            </td>
+            <td>
+                <label for="commandTypeName">Unit</label>
+                <p class="extend-width">@Model.EscortInfo.SelectedCommandTypeName</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="srchCmd">Search Command</label>
+                <p class="extend-width">@Model.EscortInfo.CommandName </p>
+            </td>
+            <td>
+                <label for="requestedOfficerQty">Number of Officers Required by applicant</label>
+                <p class="extend-width">@Model.EscortInfo.NumberOfOfficers </p>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="display:flex; flex-flow:row nowrap; justify-content:space-between">
+    <a href="@Url.Action("RequestApprovalLog","RequestApprovalLog",new { requestId = Model.RequestId })" name="ViewApprovals">Click here to view approval log</a>
+    <a href="#" onclick="window.print()">Print Request</a>
+</div>
+
+@if (Model.Status == (int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved)
+{
+    <div class="container-fluid" style="padding:0">
+        <a href="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSEscortRequestDetails.ViewDispatchNote,new { fileRefNumber = @Model.FileRefNumber})" name="viewDispatchNote">Click here to download dispatch note</a>
+    </div>
+}
+
+@if (Model.DisplayDetailsForApproval)
+{
+    @(Html.Partial("\\ServicePartials\\" + Model.ApprovalPartialName.Trim(), Model))
+}
+else
+{
+    <table class="items" id="officerTable">
+        <thead>
+            <tr>
+                <th>
+                    POLICE OFFICER RANK
+                </th>
+                <th>
+                    NAME
+                </th>
+            </tr>
+        </thead>
+        <tbody style="background-color:#EEEEEE;">
+            @if (Model.EscortInfo.ProposedOfficers != null && Model.EscortInfo.ProposedOfficers.Count() > 0)
+            {
+                foreach (var item in Model.EscortInfo.ProposedOfficers)
+                {
+                    <tr>
+                        <td>
+                            @item.OfficerRankName
+                        </td>
+                        <td>
+                            @item.OfficerName
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2">No officer assigned yet</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

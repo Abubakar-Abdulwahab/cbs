@@ -1,0 +1,23 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+<style>
+    #upload {
+        opacity: 0;
+        position: absolute;
+        bottom: 30px;
+    }
+</style>
+@if (!Model.HeaderObj.IsLoggedIn)
+{
+    <div id="userIdentificationUploadDiv" class="form-group">
+        <div style="position:relative">
+            <label class="upload-label" for="upload">
+                <span id="fileName"></span>
+                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/upload-black.svg"))" alt="" id="uploadImg" />
+                <span class="upload-caption" id="uploadInfo">Add an identification file here. (max size 2mb)</span>
+            </label>
+            <input type="file" id="upload" name="identificationfile" accept=".pdf,.png,.jpeg,.jpg">
+            <small id="uploadHint" class="upload-caption mt-0 text-muted"></small>
+            @Html.ValidationMessage("IdentificationFile", new { @class = "tiny-caption", @style = "color:#ff0000" })
+        </div>
+    </div>
+}

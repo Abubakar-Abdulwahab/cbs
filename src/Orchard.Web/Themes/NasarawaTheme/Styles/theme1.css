@@ -1,0 +1,51 @@
+﻿.top-banner .jumbotron {
+    background-image: url(../images/nassarawa-banner-top.png);
+}
+
+#main-nav.scrolled {
+    background-color: #00B05F;
+}
+
+#main-nav-alt .loggedIn {
+    color: #00B05F;
+}
+
+.footer-top {
+    background-color: #00B05F;
+}
+
+.footer {
+    background-color: #00B05F;
+}
+
+.top-banner .banner-bottom {
+    background-color: #00B05F;
+}
+
+.breadcrumbs .breadcrumb .breadcrumb-item {
+    color: #00B05F;
+}
+
+.pay-nav-two .nav a.nav-item {
+    color: #00B05F;
+    border: 1px solid #00B05F;
+}
+
+.pay-nav-two .nav a.nav-item.active {
+    color: #ffffff;
+    background-color: #00B05F;
+}
+
+.pay-nav .nav-pills .nav-link.active,
+.pay-nav .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #00B05F;
+}
+
+.Paye-credentials .gen a {
+    color: #00b05f;
+}
+
+.table-pagination-2 a {
+    color: #00B05F;
+}

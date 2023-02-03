@@ -1,0 +1,186 @@
+﻿@model Parkway.CBS.Core.HelperModels.InvoiceGeneratedResponseExtn
+
+@{
+    Layout.Title = "Invoice Receipts";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.MakePayment.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<style>
+    .disablelink {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Invoice Receipts</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item">
+                    <a href="@Url.RouteUrl("C.MakePayment.Invoice",new { invoiceNumber = Model.InvoiceNumber})" name="makepayment">Make Payment</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Invoice Receipts</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="content-payment">
+        <div class="container form-container">
+            <div class="main-form payment-form big">
+                <h3 class="form-title">
+                    <span>BIN:@Model.InvoiceNumber</span>
+                    <span class="end">
+                        <a href="@Url.RouteUrl("C.ViewInvoice",new { BIN = Model.InvoiceNumber})" name="viewInvoice" style="text-decoration:none; color:#E12222">@Url.RouteUrl("C.ViewInvoice")View Invoice</a>
+                        @if (Model.InvoiceStatus != Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid)
+                        {
+                           <small><b>|</b></small>
+                           <a href="@Url.RouteUrl("C.MakePayment.Invoice",new { invoiceNumber = Model.InvoiceNumber})" name="makepayment" style="text-decoration:none; color:#E12222">Make Payment</a>
+                        }
+                    </span>
+                </h3>
+
+                <div class="row pl-4 pr-4" style="word-break:break-word">
+                    <div class="col-md-3">
+                        <p class="til">Name</p>
+                        <p class="ans">@Model.Recipient</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Invoice Amount Due <small style="font-size:60%">(after discount)</small></p>
+                        <p class="ans">&#x20A6;@String.Format("{0:n2}", @Model.AmountDue)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Payer ID</p>
+                        <p class="ans">@Model.PayerId</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">MDA</p>
+                        <p class="ans">@Model.MDAName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Revenue Head</p>
+                        <p class="ans">@Model.RevenueHeadName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">External Ref. Number</p>
+                        <p class="ans">@Model.ExternalRefNumber</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">TIN</p>
+                        <p class="ans">@Model.TIN</p>
+                    </div>
+                </div>
+
+                <div class="main-form payment-form big" style="margin-left:30px">
+                    <div class="table-responsive mt-4" style="overflow-x:visible">
+                        <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;margin-top:10%;display:none"></div>
+                        <table class="table" style="margin-left:10px">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Receipt Number
+                                    </th>
+                                    <th>
+                                        Payment Reference
+                                    </th>
+                                    <th style="text-align:right">
+                                        Amount Paid(&#X20A6;)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                @if (Model.Transactions != null && Model.Transactions.Any())
+                                {
+                                    foreach (var item in Model.Transactions)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.TransactionDate.ToString("dddd, dd MMMM yyyy")
+                                            </td>
+                                            <td>
+                                                <a href="@Url.RouteUrl("C.ReceiptDetails",new { receiptNumber = @item.ReceiptNumber})" name="viewReceipt">@item.ReceiptNumber</a>
+                                            </td>
+                                            <td>
+                                                @item.PaymentReference
+                                            </td>
+                                            <td style="text-align:right">
+                                                @String.Format("{0:n2}", @item.TotalAmountPaid)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4">No payments found</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-top">
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script type="text/javascript">
+    $('input[name="datefilter"]').daterangepicker({ "locale": { "format": "DD/MM/YYYY" } });
+</script>

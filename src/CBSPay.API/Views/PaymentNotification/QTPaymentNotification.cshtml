@@ -1,0 +1,46 @@
+﻿@using CBSPay.Core.APIModels
+@model PaymentStatusModel
+@{
+    ViewBag.Title = "PaymentStatus";
+    var amount = ViewBag.AmountPaid as string;
+    var baseUrl = ViewBag.HomeUrl as string;
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+    string reference = Convert.ToString(ViewBag.requestReference);
+}
+
+<style>
+    .taxpayerdiv {
+        background-color: #f1f1f1;
+        padding: 20px 20px 0px;
+        display: block;
+        position: relative
+    }
+</style>
+<script>
+    //window.setTimeout('document.forms[0].submit()', 7000);
+
+</script>
+<div>
+    <div class="housing">
+        <div class="card-amount">
+            <form action="@baseUrl" method="post" target="_parent">
+                <div class="text-center padding-horizontal-30">
+                    <h3 class="text-success">PAYMENT SYNCHRONIZED SUCCESSFULLY</h3>
+                    <img src="~/Content/payment_success.png" />
+                    @*<img src="@Url.Content("~/Content/images/payment_success.png")" alt="Payment Successful" />*@
+
+                    <div class="finished-payment">
+                        @*<h3>Tax Payer Name :  @Model.TaxPayerName</h3>*@
+                        @*<h3>Reference Number : @Model.ReferenceNumber</h3>*@
+                        <h3>@amount  Successfully paid</h3>
+                    </div>
+                    <a class="btn btn-primary" href="javascript: top.location = '@Url.Action("Receipt","PaymentNotification", new { pref = reference })';" style="">SHOW RECEIPT &#8582;</a>
+                    <a class="btn btn-success" href="javascript: top.location = '@Url.Action("Pay","Home")';" style="">FINISH &#10004;</a>
+                </div>
+            </form>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+

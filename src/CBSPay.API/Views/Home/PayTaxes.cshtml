@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Pay Your Taxes";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+<section class="alternate">
+    <div class="container">
+
+        <div class="title">
+            <h1>
+                Revenue Services Hub: Edo Revenue Administration System
+            </h1>
+            <hr>
+            <p>
+                Kindly interact with EIRS on a wide range of revenue administrator services to assist you better.
+            </p>
+        </div>
+
+        <div class="row custom-tabs">
+            <div class="col-sm-3">
+                <div class="portlet light compressed-menu">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Revenue Services Hub
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <ul class="nav">
+                            <li>
+                                <a href="@Url.Action("PayTaxes","Home")"><i class="fa fa-angle-right"></i> Pay Your Taxes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="portlet light" style="display: none">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Pay a Bill
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="link-box-data">
+                            <form action="/SearchBill.aspx" method="post">
+                                <p>
+                                    If you have received a notification of assessment or a service  bill, please enter the reference number here.
+                                </p>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" required class="form-control" id="txtReferenceNumber" name="txtReferenceNumber" placeholder="Enter Assessment or Service Bill ID" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" required class="form-control" id="txtMobileNumber" name="txtMobileNumber" placeholder="Tax Payer Mobile Number" />
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-redtheme btn-block">RETRIEVE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light" style="display: none">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Payment Matcher
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="link-box-data">
+                            <p>
+                                If you don’t have a working reference number, click to make payment against a named tax or government service by using our payment matcher.
+                            </p>
+                            <div class="form-group">
+                                <button class="btn btn-redtheme btn-block"> PROCEED </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    Pay an Assessment Bill
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="link-box-data">
+                                    <p>
+                                        If you have received a notification of assessment bill, please enter the reference number here.
+                                    </p>
+                                    <br /><br />
+                                          <div class="form-group">
+                                              @*<button class="btn btn-redtheme btn-block"> Pay </button>*@
+                                              <a href="@Url.Action("Pay","Home")" target="_blank" class="btn btn-redtheme btn-block"> Pay </a>
+                                          </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    Pay on Your Tax Account
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="link-box-data">
+                                    <p>
+                                        You can also deposit money into your ERAS Tax Account which can then be applied to any upcoming taxes you may be liable for.
+                                    </p>
+                                    <br />
+                                    <div class="form-group">
+                                        <a href="@Url.Action("PAYOnAccount","Home")" target="_blank" class="btn btn-redtheme btn-block"> Pay </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    Pay for MDA Services and Taxes
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="link-box-data">
+                                    <p>
+                                        If you have  not done your record capture yet, you can make a payment against a named tax or government service. Start by selecting the applicable options below.
+                                    </p>
+                                    <br />
+                                    <div class="form-group">
+                                        <a href="@Url.Action("RegisterForRIN","Home")" target="_blank" class="btn btn-redtheme btn-block"> Pay </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    Pay an MDA Services Bill
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="link-box-data">
+                                    <p>
+                                        If you have received a notification of service bill, please enter the reference number here.
+                                    </p>
+                                    <br /><br />
+                                    <div class="form-group">
+                                        <a href="@Url.Action("Pay","Home")" target="_blank" class="btn btn-redtheme btn-block"> Pay </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

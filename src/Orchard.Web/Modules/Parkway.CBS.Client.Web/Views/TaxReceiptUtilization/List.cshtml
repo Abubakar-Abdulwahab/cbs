@@ -1,0 +1,198 @@
+﻿@using Parkway.CBS.Core.HelperModels
+
+@{
+    Layout.Title = "Tax Receipt Utilizations";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    Script.Require("CBS.Main.Script").AtFoot();
+    //Script.Require("CBS.Payments.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+<style>
+    .disablelink {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+@Html.Partial("Partials\\HeaderPartial", new HeaderObj { })
+
+<script>
+    @*var operatorId = @Html.Raw(Json.Encode(Model.TaxEntityId));
+    var paymentPage1 = @Html.Raw(Json.Encode(Model.ReportRecords));
+    var datefilter = @Html.Raw(Json.Encode(Model.DateFilter));*@
+</script>
+@*@Html.Hidden("token", Model.Token)*@
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Tax Receipt Utilizations</h3>
+        </div>
+    </div>
+    @*<div class="container breadcrumbs">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=@Href("~/")>Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Payments</li>
+                </ol>
+            </nav>
+        </div>*@
+    <div class="content-payment mt-4">
+        <div class="container form-container employer-profile">
+            <hr class="default-hr">
+            <div class="main-form payment-form big">
+                @using (Html.BeginFormAntiForgeryPost())
+                {
+                    <div class="pay-nav-two-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="" class="title">Start Date - End Date</label>
+                                @*<input type="text" class="form-control mb-4" name="datefilter" id="datefilter" placeholder="Select Date range" value="@Model.DateFilter" />*@
+                            </div>
+                            <div class="col-md-4">
+                                <label for="" class="title">Receipt Number</label>
+                                @*<input type="text" class="form-control mb-4" name="receiptNumber" value="@Model.ReceiptNumber">*@
+                            </div>
+                            <div class="col-md-4">
+                                <label for="" class="title">&nbsp;</label>
+                                <button class="btn" style="font-size: 20px;" formaction="">Apply Filter</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-4">
+                            <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;margin-top:10%;display:none"></div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Payment Date
+                                        </th>
+                                        <th>
+                                            Receipt Number
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @*@if (Model.ReportRecords != null && Model.ReportRecords.Any())
+                                        {
+                                            foreach (var item in Model.ReportRecords)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.PaymentDateStringVal
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.AppendModulePrefixToRouteName("C.ViewReceipt",new { ReceiptNumber = @item.ReceiptNumber})" name="viewReceipt">@item.ReceiptNumber</a>
+                                                    </td>
+                                                    <td>
+                                                        @item.TaxPayerName
+                                                    </td>
+                                                    <td>
+                                                        @item.TaxPayerTIN
+                                                    </td>
+                                                    <td>
+                                                        @item.RevenueHeadName
+                                                    </td>
+                                                    <td>
+                                                        @item.PaymentRef
+                                                    </td>
+                                                    <td>
+                                                        @item.PaymentProvider
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.AppendModulePrefixToRouteName("C.ViewInvoice",new { BIN = @item.InvoiceNumber })" target="_blank" name="viewInvoice">@item.InvoiceNumber</a>
+                                                    </td>
+                                                    <td>
+                                                        @item.Bank
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        @item.Amount.ToString("F")
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="10">No payments found</td>
+                                            </tr>
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-pagination-2">
+                            <a href="#" id="moveleft" name="cursor">Previous </a><span id="page">1</span>/ <span id="pageSize">@*@(Model.DataSize == 0 ? 1 : Model.DataSize)*@</span><a href="#" id="moveright" name="cursor">Next</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script type="text/javascript">
+    $('input[name="datefilter"]').daterangepicker({ "locale": { "format": "DD/MM/YYYY" } });
+
+</script>
+
+
+
+

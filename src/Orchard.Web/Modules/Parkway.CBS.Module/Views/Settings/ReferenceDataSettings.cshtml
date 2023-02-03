@@ -1,0 +1,58 @@
+﻿@model Parkway.CBS.Core.HelperModels.ReferenceDataViewModel
+
+@{ Layout.Title = @Model.StateName + " Reference Data Settings".ToString(); }
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        width: 50%;
+        position: relative;
+        word-break: break-all;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("ReferenceDataSettings", "Settings", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div id="container">
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">@Model.StateName Settings</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <label id="mdaName">@T("Select Reference Data Source")</label>
+                        <select name="TenantCashFlowSettings.ReferenceDataSourceName" style="width:99%" required>
+                            <option value="" disabled selected>Select Ref Data</option>
+                            @foreach (var item in Model.RefData)
+                            {
+                                @*if (item == Model.RefDataReferenceDataSourceName)
+                                {
+                                    <option value="@item" selected>@item</option>
+                                }
+                                else*@
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            }
+                        </select>
+                        @Html.Hint(T("Select Reference Data Source."))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Save")</button>
+        <button type="button" value="@T(" Cancel")" onclick="location.href='@Url.Action("List", "MDA" )'" class="a-classname">@T("Cancel")</button>
+    </fieldset>
+}
+@{
+    Script.Require("CBS.MDA.Setting.Script").AtFoot();
+}

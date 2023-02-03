@@ -1,0 +1,58 @@
+﻿@using CBSPay.Core.APIModels
+@model NetPayPaymentRequestModel
+@{
+    ViewBag.Title = "PAY";
+
+}
+
+
+<script>
+
+    window.setTimeout(function () {
+
+        document.getElementById("waiting-text").innerHTML = "<i><b>Validating assessment item details...</b></i>";
+    }
+        , 5000);
+
+    window.setTimeout(function () {
+
+        document.getElementById("waiting-text").innerHTML = "<i><b>Done. Navigating to Net pay platform...</b></i>";
+    }
+        , 8000);
+
+    window.setTimeout('document.forms[0].submit()', 10000);
+
+
+
+</script>
+<div>
+     
+    <div class="housing">
+         
+        <div class="card-amount">
+            <div class="loader" style="margin: auto;">
+
+            </div>
+            <br />
+            <br/>
+            <p id="waiting-text"> <i><b>Processing the tax payment details. Please wait.....</b> </i></p>
+        </div>
+        <form action="@Model.FormUrl" method="post" accept-charset="">
+            <input type="hidden" name="Amount" value="@Model.Amount" />
+            <input type="hidden" name="Currency" value="@Model.Currency" />
+            <input type="hidden" name="CustomerName" value="@Model.CustomerName" />
+            <input type="hidden" name="Description" value="@Model.Description" />
+            <input type="hidden" name="HMAC" value="@Model.HMAC" />
+            <input type="hidden" name="MerchantUniqueId" value="@Model.MerchantUniqueId" />
+            <input type="hidden" name="TransactionReference" value="@Model.TransactionReference" />
+            <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+
+        </form>
+    </div>
+
+
+</div>
+
+
+
+

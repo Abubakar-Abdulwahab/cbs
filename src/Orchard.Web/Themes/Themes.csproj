@@ -1,0 +1,1060 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB70A642-8CEC-4DDE-8C9F-AD08900EC98D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Themes</RootNamespace>
+    <AssemblyName>Themes</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>5</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>5</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PoliceTheme\Assets.json" />
+    <Content Include="PoliceTheme\Assets\Styles.less" />
+    <Content Include="PoliceTheme\Styles\Styles.css" />
+    <Content Include="PoliceTheme\Styles\Styles.min.css" />
+    <Content Include="PoliceTheme\Scripts\Web.config" />
+    <Content Include="PoliceTheme\Styles\Web.config" />
+    <Content Include="PoliceTheme\Content\Web.config" />
+    <Content Include="PoliceTheme\Theme.txt" />
+    <Content Include="PoliceTheme\Theme.png" />
+    <Content Include="PoliceTheme\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RSTVLTheme\images\banner-top.png" />
+    <Content Include="RSTVLTheme\images\cbs-logo-white.svg" />
+    <Content Include="RSTVLTheme\images\cbs-logo.svg" />
+    <Content Include="RSTVLTheme\images\CBS_Banner.png" />
+    <Content Include="RSTVLTheme\images\CBS_logo.png" />
+    <Content Include="RSTVLTheme\images\CBS_logo_2.png" />
+    <Content Include="RSTVLTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="RSTVLTheme\images\facebook.png" />
+    <Content Include="RSTVLTheme\images\footer-bg.png" />
+    <Content Include="RSTVLTheme\images\Image.png" />
+    <Content Include="RSTVLTheme\images\instagram.png" />
+    <Content Include="RSTVLTheme\images\logo.png" />
+    <Content Include="RSTVLTheme\images\longstrip.svg" />
+    <Content Include="RSTVLTheme\images\niger_state_logo.png" />
+    <Content Include="RSTVLTheme\images\shortstrip.svg" />
+    <Content Include="RSTVLTheme\images\twitter.png" />
+    <Content Include="RSTVLTheme\images\upload-black.svg" />
+    <Content Include="RSTVLTheme\Scripts\bootstrap.js" />
+    <Content Include="RSTVLTheme\Scripts\bootstrap.min.js" />
+    <Content Include="RSTVLTheme\Scripts\jquery.js" />
+    <Content Include="RSTVLTheme\Scripts\jquery.min.js" />
+    <Content Include="RSTVLTheme\Styles\bootstrap.css" />
+    <Content Include="RSTVLTheme\Styles\bootstrap.min.css" />
+    <Content Include="RSTVLTheme\Styles\default-grid.css" />
+    <Content Include="RSTVLTheme\Styles\images\banner-top.png" />
+    <Content Include="RSTVLTheme\Styles\images\CBS Logo%404x.png" />
+    <Content Include="RSTVLTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="RSTVLTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="RSTVLTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="RSTVLTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="RSTVLTheme\Styles\images\CBS_logo.png" />
+    <Content Include="RSTVLTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="RSTVLTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="RSTVLTheme\Styles\images\facebook.png" />
+    <Content Include="RSTVLTheme\Styles\images\footer-bg.png" />
+    <Content Include="RSTVLTheme\Styles\images\Image.jpg" />
+    <Content Include="RSTVLTheme\Styles\images\Image.png" />
+    <Content Include="RSTVLTheme\Styles\images\instagram.png" />
+    <Content Include="RSTVLTheme\Styles\images\logo.png" />
+    <Content Include="RSTVLTheme\Styles\images\twitter.png" />
+    <Content Include="RSTVLTheme\Styles\images\upload-black.svg" />
+    <Content Include="RSTVLTheme\Styles\Site.css" />
+    <Content Include="RSTVLTheme\Styles\theme.css" />
+    <Content Include="RSTVLTheme\Theme.png" />
+    <Content Include="RSTVLTheme\Theme.txt" />
+    <Content Include="RSTVLTheme\ThemeZonePreview.png" />
+    <Content Include="VREGTheme\Assets.json" />
+    <Content Include="VREGTheme\Assets\Styles.less" />
+    <Content Include="VREGTheme\Styles\Styles.css" />
+    <Content Include="VREGTheme\Styles\Styles.min.css" />
+    <Content Include="VREGTheme\Web.config" />
+    <Content Include="VREGTheme\Scripts\Web.config" />
+    <Content Include="VREGTheme\Styles\Web.config" />
+    <Content Include="VREGTheme\Content\Web.config" />
+    <Content Include="VREGTheme\Theme.txt" />
+    <Content Include="VREGTheme\Theme.png" />
+    <Content Include="VREGTheme\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InlandWaterwaysTheme\Assets.json" />
+    <Content Include="InlandWaterwaysTheme\Assets\Styles.less" />
+    <Content Include="InlandWaterwaysTheme\Styles\Styles.css" />
+    <Content Include="InlandWaterwaysTheme\Styles\Styles.min.css" />
+    <Content Include="InlandWaterwaysTheme\Web.config" />
+    <Content Include="InlandWaterwaysTheme\Scripts\Web.config" />
+    <Content Include="InlandWaterwaysTheme\Styles\Web.config" />
+    <Content Include="InlandWaterwaysTheme\Content\Web.config" />
+    <Content Include="InlandWaterwaysTheme\Theme.txt" />
+    <Content Include="InlandWaterwaysTheme\Theme.png" />
+    <Content Include="InlandWaterwaysTheme\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IDECTheme\images\banner-top.png" />
+    <Content Include="IDECTheme\images\cbs-logo-white.svg" />
+    <Content Include="IDECTheme\images\cbs-logo.svg" />
+    <Content Include="IDECTheme\images\CBS_Banner.png" />
+    <Content Include="IDECTheme\images\CBS_logo.png" />
+    <Content Include="IDECTheme\images\CBS_logo_2.png" />
+    <Content Include="IDECTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="IDECTheme\images\facebook.png" />
+    <Content Include="IDECTheme\images\footer-bg.png" />
+    <Content Include="IDECTheme\images\Image.png" />
+    <Content Include="IDECTheme\images\instagram.png" />
+    <Content Include="IDECTheme\images\logo.png" />
+    <Content Include="IDECTheme\images\longstrip.svg" />
+    <Content Include="IDECTheme\images\niger_state_logo.png" />
+    <Content Include="IDECTheme\images\shortstrip.svg" />
+    <Content Include="IDECTheme\images\twitter.png" />
+    <Content Include="IDECTheme\images\upload-black.svg" />
+    <Content Include="IDECTheme\Scripts\bootstrap.js" />
+    <Content Include="IDECTheme\Scripts\bootstrap.min.js" />
+    <Content Include="IDECTheme\Scripts\jquery.js" />
+    <Content Include="IDECTheme\Scripts\jquery.min.js" />
+    <Content Include="IDECTheme\Styles\bootstrap.css" />
+    <Content Include="IDECTheme\Styles\bootstrap.min.css" />
+    <Content Include="IDECTheme\Styles\default-grid.css" />
+    <Content Include="IDECTheme\Styles\images\banner-top.png" />
+    <Content Include="IDECTheme\Styles\images\CBS Logo%404x.png" />
+    <Content Include="IDECTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="IDECTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="IDECTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="IDECTheme\Styles\images\CBS_logo.png" />
+    <Content Include="IDECTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="IDECTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="IDECTheme\Styles\images\facebook.png" />
+    <Content Include="IDECTheme\Styles\images\footer-bg.png" />
+    <Content Include="IDECTheme\Styles\images\Image.jpg" />
+    <Content Include="IDECTheme\Styles\images\Image.png" />
+    <Content Include="IDECTheme\Styles\images\instagram.png" />
+    <Content Include="IDECTheme\Styles\images\logo.png" />
+    <Content Include="IDECTheme\Styles\images\twitter.png" />
+    <Content Include="IDECTheme\Styles\images\upload-black.svg" />
+    <Content Include="IDECTheme\Styles\Site.css" />
+    <Content Include="IDECTheme\Styles\theme.css" />
+    <Content Include="IDECTheme\ThemeZonePreview.png" />
+    <Content Include="IDECTheme\Styles\Web.config" />
+    <Content Include="IDECTheme\Theme.txt" />
+    <Content Include="IDECTheme\Theme.png" />
+    <Content Include="IDECTheme\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CBSTheme\images\banner-top.png" />
+    <Content Include="CBSTheme\images\cbs-logo-white.svg" />
+    <Content Include="CBSTheme\images\cbs-logo.svg" />
+    <Content Include="CBSTheme\images\CBS_Banner.png" />
+    <Content Include="CBSTheme\images\CBS_logo.png" />
+    <Content Include="CBSTheme\images\CBS_logo_2.png" />
+    <Content Include="CBSTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="CBSTheme\images\facebook.png" />
+    <Content Include="CBSTheme\images\footer-bg.png" />
+    <Content Include="CBSTheme\images\Image.png" />
+    <Content Include="CBSTheme\images\instagram.png" />
+    <Content Include="CBSTheme\images\logo.png" />
+    <Content Include="CBSTheme\images\twitter.png" />
+    <Content Include="CBSTheme\scripts\bootstrap.min.js" />
+    <Content Include="CBSTheme\scripts\jquery.js" />
+    <Content Include="CBSTheme\scripts\jquery.min.js" />
+    <Content Include="CBSTheme\Styles\bootstrap.min.css" />
+    <Content Include="CBSTheme\Styles\default-grid.css" />
+    <Content Include="CBSTheme\Styles\images\banner-top.png" />
+    <Content Include="CBSTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="CBSTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="CBSTheme\Styles\images\CBS.png" />
+    <Content Include="CBSTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="CBSTheme\Styles\images\CBS_logo.png" />
+    <Content Include="CBSTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="CBSTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="CBSTheme\Styles\images\facebook.png" />
+    <Content Include="CBSTheme\Styles\images\footer-bg.png" />
+    <Content Include="CBSTheme\Styles\images\Image.png" />
+    <Content Include="CBSTheme\Styles\images\instagram.png" />
+    <Content Include="CBSTheme\Styles\images\logo.png" />
+    <Content Include="CBSTheme\Styles\images\twitter.png" />
+    <Content Include="CBSTheme\Styles\Site.css" />
+    <Content Include="CBSTheme\Styles\theme.css" />
+    <Content Include="CBSTheme\Styles\themebootstrap.min.css" />
+    <Content Include="CBSTheme\Theme.png" />
+    <Content Include="CBSTheme\Theme.txt" />
+    <Content Include="CBSTheme\ThemeZonePreview.png" />
+    <Content Include="CBSTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="CBSTheme\Views\Branding.cshtml" />
+    <Content Include="CBSTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="CBSTheme\Views\ChangePassword.cshtml" />
+    <Content Include="CBSTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="CBSTheme\Views\ContactUs.cshtml" />
+    <Content Include="CBSTheme\Views\Document.cshtml" />
+    <Content Include="CBSTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="CBSTheme\Views\Layout.cshtml" />
+    <Content Include="CBSTheme\Views\LogOn.cshtml" />
+    <Content Include="CBSTheme\Views\LostPassword.cshtml" />
+    <Content Include="CBSTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="CBSTheme\Views\Menu.cshtml" />
+    <Content Include="CBSTheme\Views\MenuItem.cshtml" />
+    <Content Include="CBSTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="CBSTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="CBSTheme\Views\Message.cshtml" />
+    <Content Include="CBSTheme\Views\NotFound.cshtml" />
+    <Content Include="CBSTheme\Views\Pager.cshtml" />
+    <Content Include="CBSTheme\Views\Pager.First.cshtml" />
+    <Content Include="CBSTheme\Views\Pager.Last.cshtml" />
+    <Content Include="CBSTheme\Views\Register.cshtml" />
+    <Content Include="CBSTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="CBSTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="CBSTheme\Views\User.cshtml" />
+    <Content Include="EdoTheme\images\banner-top.png" />
+    <Content Include="EdoTheme\images\banner-top1.png" />
+    <Content Include="EdoTheme\images\cbs-logo-white.svg" />
+    <Content Include="EdoTheme\images\cbs-logo.svg" />
+    <Content Include="EdoTheme\images\CBS_Banner.png" />
+    <Content Include="EdoTheme\images\CBS_logo.png" />
+    <Content Include="EdoTheme\images\CBS_logo_2.png" />
+    <Content Include="EdoTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="EdoTheme\images\facebook.png" />
+    <Content Include="EdoTheme\images\footer-bg.png" />
+    <Content Include="EdoTheme\images\footer-bg1.png" />
+    <Content Include="EdoTheme\images\footer-bg4.png" />
+    <Content Include="EdoTheme\images\Image.png" />
+    <Content Include="EdoTheme\images\Image01.png" />
+    <Content Include="EdoTheme\images\instagram.png" />
+    <Content Include="EdoTheme\images\logo.png" />
+    <Content Include="EdoTheme\images\logo1.png" />
+    <Content Include="EdoTheme\images\twitter.png" />
+    <Content Include="EdoTheme\images\upload-black.svg" />
+    <Content Include="EdoTheme\Scripts\bootstrap.js" />
+    <Content Include="EdoTheme\Scripts\bootstrap.min.js" />
+    <Content Include="EdoTheme\Scripts\jquery.js" />
+    <Content Include="EdoTheme\Scripts\jquery.min.js" />
+    <Content Include="EdoTheme\Scripts\jquery.min2.js" />
+    <Content Include="EdoTheme\Styles\bootstrap.css" />
+    <Content Include="EdoTheme\Styles\bootstrap.min.css" />
+    <Content Include="EdoTheme\Styles\default-grid.css" />
+    <Content Include="EdoTheme\Styles\images\banner-top.png" />
+    <Content Include="EdoTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="EdoTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="EdoTheme\Styles\images\CBS.png" />
+    <Content Include="EdoTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="EdoTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="EdoTheme\Styles\images\CBS_logo.png" />
+    <Content Include="EdoTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="EdoTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="EdoTheme\Styles\images\facebook.png" />
+    <Content Include="EdoTheme\Styles\images\footer-bg.png" />
+    <Content Include="EdoTheme\Styles\images\Image.jpg" />
+    <Content Include="EdoTheme\Styles\images\Image.png" />
+    <Content Include="EdoTheme\Styles\images\instagram.png" />
+    <Content Include="EdoTheme\Styles\images\logo.png" />
+    <Content Include="EdoTheme\Styles\images\twitter.png" />
+    <Content Include="EdoTheme\Styles\images\upload-black.svg" />
+    <Content Include="EdoTheme\Styles\Site.css" />
+    <Content Include="EdoTheme\Styles\theme.css" />
+    <Content Include="EdoTheme\Theme.png" />
+    <Content Include="EdoTheme\Theme.txt" />
+    <Content Include="EdoTheme\ThemeZonePreview.png" />
+    <Content Include="KogiTheme\images\banner-top.png" />
+    <Content Include="KogiTheme\images\cbs-logo-white.svg" />
+    <Content Include="KogiTheme\images\cbs-logo.svg" />
+    <Content Include="KogiTheme\images\CBS_Banner.png" />
+    <Content Include="KogiTheme\images\CBS_logo.png" />
+    <Content Include="KogiTheme\images\CBS_logo_2.png" />
+    <Content Include="KogiTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="KogiTheme\images\facebook.png" />
+    <Content Include="KogiTheme\images\footer-bg.png" />
+    <Content Include="KogiTheme\images\Image.png" />
+    <Content Include="KogiTheme\images\instagram.png" />
+    <Content Include="KogiTheme\images\logo.png" />
+    <Content Include="KogiTheme\images\twitter.png" />
+    <Content Include="KogiTheme\images\upload-black.svg" />
+    <Content Include="KogiTheme\Scripts\bootstrap.js" />
+    <Content Include="KogiTheme\Scripts\bootstrap.min.js" />
+    <Content Include="KogiTheme\Scripts\jquery.js" />
+    <Content Include="KogiTheme\Scripts\jquery.min.js" />
+    <Content Include="KogiTheme\Styles\bootstrap.css" />
+    <Content Include="KogiTheme\Styles\bootstrap.min.css" />
+    <Content Include="KogiTheme\Styles\default-grid.css" />
+    <Content Include="KogiTheme\Styles\images\banner-top.png" />
+    <Content Include="KogiTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="KogiTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="KogiTheme\Styles\images\CBS.png" />
+    <Content Include="KogiTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="KogiTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="KogiTheme\Styles\images\CBS_logo.png" />
+    <Content Include="KogiTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="KogiTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="KogiTheme\Styles\images\facebook.png" />
+    <Content Include="KogiTheme\Styles\images\footer-bg.png" />
+    <Content Include="KogiTheme\Styles\images\Image.jpg" />
+    <Content Include="KogiTheme\Styles\images\instagram.png" />
+    <Content Include="KogiTheme\Styles\images\logo.png" />
+    <Content Include="KogiTheme\Styles\images\twitter.png" />
+    <Content Include="KogiTheme\Styles\images\upload-black.svg" />
+    <Content Include="KogiTheme\Styles\Site.css" />
+    <Content Include="KogiTheme\Styles\theme.css" />
+    <Content Include="KogiTheme\Styles\themebootstrap.min.css" />
+    <Content Include="KogiTheme\Theme.png" />
+    <Content Include="KogiTheme\Theme.txt" />
+    <Content Include="KogiTheme\ThemeZonePreview.png" />
+    <Content Include="NasarawaTheme\images\banner-top.png" />
+    <Content Include="NasarawaTheme\images\cbs-logo-white.svg" />
+    <Content Include="NasarawaTheme\images\cbs-logo.svg" />
+    <Content Include="NasarawaTheme\images\CBS_Banner.png" />
+    <Content Include="NasarawaTheme\images\CBS_logo.png" />
+    <Content Include="NasarawaTheme\images\CBS_logo_2.png" />
+    <Content Include="NasarawaTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NasarawaTheme\images\facebook.png" />
+    <Content Include="NasarawaTheme\images\footer-bg.png" />
+    <Content Include="NasarawaTheme\images\Image.png" />
+    <Content Include="NasarawaTheme\images\instagram.png" />
+    <Content Include="NasarawaTheme\images\logo.png" />
+    <Content Include="NasarawaTheme\images\longstrip.svg" />
+    <Content Include="NasarawaTheme\images\nasarawa_state_logo.png" />
+    <Content Include="NasarawaTheme\images\shortstrip.svg" />
+    <Content Include="NasarawaTheme\images\twitter.png" />
+    <Content Include="NasarawaTheme\images\upload-black.svg" />
+    <Content Include="NasarawaTheme\Scripts\bootstrap.js" />
+    <Content Include="NasarawaTheme\Scripts\bootstrap.min.js" />
+    <Content Include="NasarawaTheme\Scripts\jquery.js" />
+    <Content Include="NasarawaTheme\Scripts\jquery.min.js" />
+    <Content Include="NasarawaTheme\Styles\bootstrap.css" />
+    <Content Include="NasarawaTheme\Styles\bootstrap.min.css" />
+    <Content Include="NasarawaTheme\Styles\default-grid.css" />
+    <Content Include="NasarawaTheme\Styles\images\banner-top.png" />
+    <Content Include="NasarawaTheme\Styles\images\CBS Logo%404x.png" />
+    <Content Include="NasarawaTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="NasarawaTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="NasarawaTheme\Styles\images\CBS.png" />
+    <Content Include="NasarawaTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="NasarawaTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="NasarawaTheme\Styles\images\CBS_logo.png" />
+    <Content Include="NasarawaTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="NasarawaTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NasarawaTheme\Styles\images\facebook.png" />
+    <Content Include="NasarawaTheme\Styles\images\footer-bg.png" />
+    <Content Include="NasarawaTheme\Styles\images\Image.jpg" />
+    <Content Include="NasarawaTheme\Styles\images\instagram.png" />
+    <Content Include="NasarawaTheme\Styles\images\logo.png" />
+    <Content Include="NasarawaTheme\Styles\images\twitter.png" />
+    <Content Include="NasarawaTheme\Styles\images\upload-black.svg" />
+    <Content Include="NasarawaTheme\Styles\Site.css" />
+    <Content Include="NasarawaTheme\Styles\theme.css" />
+    <Content Include="NasarawaTheme\Styles\themebootstrap.min.css" />
+    <Content Include="NasarawaTheme\Theme.png" />
+    <Content Include="NasarawaTheme\Theme.txt" />
+    <Content Include="NasarawaTheme\ThemeZonePreview.png" />
+    <Content Include="NigerTheme\images\banner-top.png" />
+    <Content Include="NigerTheme\images\cbs-logo-white.svg" />
+    <Content Include="NigerTheme\images\cbs-logo.svg" />
+    <Content Include="NigerTheme\images\CBS_Banner.png" />
+    <Content Include="NigerTheme\images\CBS_logo.png" />
+    <Content Include="NigerTheme\images\CBS_logo_2.png" />
+    <Content Include="NigerTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NigerTheme\images\facebook.png" />
+    <Content Include="NigerTheme\images\footer-bg.png" />
+    <Content Include="NigerTheme\images\Image.png" />
+    <Content Include="NigerTheme\images\instagram.png" />
+    <Content Include="NigerTheme\images\logo.png" />
+    <Content Include="NigerTheme\images\longstrip.svg" />
+    <Content Include="NigerTheme\images\niger_state_logo.png" />
+    <Content Include="NigerTheme\images\shortstrip.svg" />
+    <Content Include="NigerTheme\images\twitter.png" />
+    <Content Include="NigerTheme\images\upload-black.svg" />
+    <Content Include="NigerTheme\NigerTheme\images\banner-top.png" />
+    <Content Include="NigerTheme\NigerTheme\images\cbs-logo-white.svg" />
+    <Content Include="NigerTheme\NigerTheme\images\cbs-logo.svg" />
+    <Content Include="NigerTheme\NigerTheme\images\CBS_Banner.png" />
+    <Content Include="NigerTheme\NigerTheme\images\CBS_logo.png" />
+    <Content Include="NigerTheme\NigerTheme\images\CBS_logo_2.png" />
+    <Content Include="NigerTheme\NigerTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NigerTheme\NigerTheme\images\facebook.png" />
+    <Content Include="NigerTheme\NigerTheme\images\footer-bg.png" />
+    <Content Include="NigerTheme\NigerTheme\images\Image.png" />
+    <Content Include="NigerTheme\NigerTheme\images\instagram.png" />
+    <Content Include="NigerTheme\NigerTheme\images\logo.png" />
+    <Content Include="NigerTheme\NigerTheme\images\twitter.png" />
+    <Content Include="NigerTheme\NigerTheme\images\upload-black.svg" />
+    <Content Include="NigerTheme\NigerTheme\Scripts\bootstrap.js" />
+    <Content Include="NigerTheme\NigerTheme\Scripts\bootstrap.min.js" />
+    <Content Include="NigerTheme\NigerTheme\Scripts\jquery.js" />
+    <Content Include="NigerTheme\NigerTheme\Scripts\jquery.min.js" />
+    <Content Include="NigerTheme\NigerTheme\Styles\bootstrap.css" />
+    <Content Include="NigerTheme\NigerTheme\Styles\bootstrap.min.css" />
+    <Content Include="NigerTheme\NigerTheme\Styles\default-grid.css" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\banner-top.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\CBS_logo.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\facebook.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\footer-bg.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\Image.jpg" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\Image.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\instagram.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\logo.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\twitter.png" />
+    <Content Include="NigerTheme\NigerTheme\Styles\images\upload-black.svg" />
+    <Content Include="NigerTheme\NigerTheme\Styles\Site.css" />
+    <Content Include="NigerTheme\NigerTheme\Styles\theme.css" />
+    <Content Include="NigerTheme\NigerTheme\Theme.png" />
+    <Content Include="NigerTheme\NigerTheme\Theme.txt" />
+    <Content Include="NigerTheme\NigerTheme\ThemeZonePreview.png" />
+    <Content Include="NigerTheme\Scripts\bootstrap.js" />
+    <Content Include="NigerTheme\Scripts\bootstrap.min.js" />
+    <Content Include="NigerTheme\Scripts\jquery.js" />
+    <Content Include="NigerTheme\Scripts\jquery.min.js" />
+    <Content Include="NigerTheme\Styles\bootstrap.css" />
+    <Content Include="NigerTheme\Styles\bootstrap.min.css" />
+    <Content Include="NigerTheme\Styles\default-grid.css" />
+    <Content Include="NigerTheme\Styles\images\banner-top.png" />
+    <Content Include="NigerTheme\Styles\images\CBS Logo%404x.png" />
+    <Content Include="NigerTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="NigerTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="NigerTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="NigerTheme\Styles\images\CBS_Governor.png" />
+    <Content Include="NigerTheme\Styles\images\CBS_logo.png" />
+    <Content Include="NigerTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="NigerTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="NigerTheme\Styles\images\facebook.png" />
+    <Content Include="NigerTheme\Styles\images\footer-bg.png" />
+    <Content Include="NigerTheme\Styles\images\Image.jpg" />
+    <Content Include="NigerTheme\Styles\images\Image.png" />
+    <Content Include="NigerTheme\Styles\images\instagram.png" />
+    <Content Include="NigerTheme\Styles\images\logo.png" />
+    <Content Include="NigerTheme\Styles\images\twitter.png" />
+    <Content Include="NigerTheme\Styles\images\upload-black.svg" />
+    <Content Include="NigerTheme\Styles\Site.css" />
+    <Content Include="NigerTheme\Styles\theme.css" />
+    <Content Include="NigerTheme\Theme.png" />
+    <Content Include="NigerTheme\Theme.txt" />
+    <Content Include="NigerTheme\ThemeZonePreview.png" />
+    <Content Include="OSGOFTheme\images\banner-top.png" />
+    <Content Include="OSGOFTheme\images\banner-top1.png" />
+    <Content Include="OSGOFTheme\images\cbs-logo-white.svg" />
+    <Content Include="OSGOFTheme\images\cbs-logo.svg" />
+    <Content Include="OSGOFTheme\images\CBS_Banner.png" />
+    <Content Include="OSGOFTheme\images\CBS_logo.png" />
+    <Content Include="OSGOFTheme\images\CBS_logo_2.png" />
+    <Content Include="OSGOFTheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="OSGOFTheme\images\facebook.png" />
+    <Content Include="OSGOFTheme\images\footer-bg.png" />
+    <Content Include="OSGOFTheme\images\footer-bg1.png" />
+    <Content Include="OSGOFTheme\images\footer-bg4.png" />
+    <Content Include="OSGOFTheme\images\Image.png" />
+    <Content Include="OSGOFTheme\images\Image01.png" />
+    <Content Include="OSGOFTheme\images\instagram.png" />
+    <Content Include="OSGOFTheme\images\logo.png" />
+    <Content Include="OSGOFTheme\images\logo1.png" />
+    <Content Include="OSGOFTheme\images\twitter.png" />
+    <Content Include="OSGOFTheme\images\upload-black.svg" />
+    <Content Include="OSGOFTheme\Scripts\bootstrap.js" />
+    <Content Include="OSGOFTheme\Scripts\bootstrap.min.js" />
+    <Content Include="OSGOFTheme\Scripts\jquery.js" />
+    <Content Include="OSGOFTheme\Scripts\jquery.min.js" />
+    <Content Include="OSGOFTheme\Scripts\jquery.min2.js" />
+    <Content Include="OSGOFTheme\Styles\bootstrap.css" />
+    <Content Include="OSGOFTheme\Styles\bootstrap.min.css" />
+    <Content Include="OSGOFTheme\Styles\default-grid.css" />
+    <Content Include="OSGOFTheme\Styles\images\banner-top.png" />
+    <Content Include="OSGOFTheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="OSGOFTheme\Styles\images\cbs-logo.svg" />
+    <Content Include="OSGOFTheme\Styles\images\CBS.png" />
+    <Content Include="OSGOFTheme\Styles\images\CBS_Banner.png" />
+    <Content Include="OSGOFTheme\Styles\images\CBS_logo.png" />
+    <Content Include="OSGOFTheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="OSGOFTheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="OSGOFTheme\Styles\images\facebook.png" />
+    <Content Include="OSGOFTheme\Styles\images\footer-bg.png" />
+    <Content Include="OSGOFTheme\Styles\images\Image.jpg" />
+    <Content Include="OSGOFTheme\Styles\images\Image.png" />
+    <Content Include="OSGOFTheme\Styles\images\instagram.png" />
+    <Content Include="OSGOFTheme\Styles\images\logo.png" />
+    <Content Include="OSGOFTheme\Styles\images\logo1.png" />
+    <Content Include="OSGOFTheme\Styles\images\logo2.png" />
+    <Content Include="OSGOFTheme\Styles\images\logo3.png" />
+    <Content Include="OSGOFTheme\Styles\images\logo90.png" />
+    <Content Include="OSGOFTheme\Styles\images\twitter.png" />
+    <Content Include="OSGOFTheme\Styles\images\upload-black.svg" />
+    <Content Include="OSGOFTheme\Styles\Site.css" />
+    <Content Include="OSGOFTheme\Styles\theme.css" />
+    <Content Include="OSGOFTheme\Theme.png" />
+    <Content Include="OSGOFTheme\Theme.txt" />
+    <Content Include="OSGOFTheme\ThemeZonePreview.png" />
+    <Content Include="TheAdmin\Scripts\admin.js" />
+    <Content Include="TheAdmin\Styles\ie.css" />
+    <Content Include="TheAdmin\Styles\ie7.css" />
+    <Content Include="TheAdmin\Styles\ie8.css" />
+    <Content Include="TheAdmin\Styles\images\adminNavBackground.gif" />
+    <Content Include="TheAdmin\Styles\images\error.gif" />
+    <Content Include="TheAdmin\Styles\images\icon-advisory.png" />
+    <Content Include="TheAdmin\Styles\images\icon-contribute.png" />
+    <Content Include="TheAdmin\Styles\images\icon-docs.png" />
+    <Content Include="TheAdmin\Styles\images\icon-friends.png" />
+    <Content Include="TheAdmin\Styles\images\icon-gallery.png" />
+    <Content Include="TheAdmin\Styles\images\icon-settings.png" />
+    <Content Include="TheAdmin\Styles\images\info.gif" />
+    <Content Include="TheAdmin\Styles\images\menu-closed.png" />
+    <Content Include="TheAdmin\Styles\images\menu-default.png" />
+    <Content Include="TheAdmin\Styles\images\menu-glyph.png" />
+    <Content Include="TheAdmin\Styles\images\menu-open.png" />
+    <Content Include="TheAdmin\Styles\images\menuClosed.gif" />
+    <Content Include="TheAdmin\Styles\images\menuClosedHover.gif" />
+    <Content Include="TheAdmin\Styles\images\menuOpen.gif" />
+    <Content Include="TheAdmin\Styles\images\menuOpenHover.gif" />
+    <Content Include="TheAdmin\Styles\images\vinesBackgroundBottom.gif" />
+    <Content Include="TheAdmin\Styles\images\menu-filter.png" />
+    <Content Include="TheThemeMachine\Styles\default-grid.css" />
+    <Content Include="TheThemeMachine\Styles\Site.css" />
+    <Content Include="TheThemeMachine\Theme.png" />
+    <Content Include="TheThemeMachine\Theme.txt" />
+    <Content Include="SafeMode\Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SafeMode\Styles\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TheAdmin\Views\Pager.cshtml" />
+    <Content Include="TheAdmin\Views\OrchardVersion.cshtml" />
+    <Content Include="TheThemeMachine\ThemeZonePreview.png" />
+    <Content Include="TSATheme\images\banner-top.png" />
+    <Content Include="TSATheme\images\banner-top1.png" />
+    <Content Include="TSATheme\images\cbs-logo-white.svg" />
+    <Content Include="TSATheme\images\cbs-logo.svg" />
+    <Content Include="TSATheme\images\CBS_Banner.png" />
+    <Content Include="TSATheme\images\CBS_logo.png" />
+    <Content Include="TSATheme\images\CBS_logo_2.png" />
+    <Content Include="TSATheme\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="TSATheme\images\facebook.png" />
+    <Content Include="TSATheme\images\footer-bg.png" />
+    <Content Include="TSATheme\images\footer-bg1.png" />
+    <Content Include="TSATheme\images\footer-bg4.png" />
+    <Content Include="TSATheme\images\Image.png" />
+    <Content Include="TSATheme\images\instagram.png" />
+    <Content Include="TSATheme\images\logo.png" />
+    <Content Include="TSATheme\images\twitter.png" />
+    <Content Include="TSATheme\images\upload-black.svg" />
+    <Content Include="TSATheme\Scripts\bootstrap.js" />
+    <Content Include="TSATheme\Scripts\bootstrap.min.js" />
+    <Content Include="TSATheme\Scripts\jquery.js" />
+    <Content Include="TSATheme\Scripts\jquery.min.js" />
+    <Content Include="TSATheme\Styles\bootstrap.css" />
+    <Content Include="TSATheme\Styles\bootstrap.min.css" />
+    <Content Include="TSATheme\Styles\default-grid.css" />
+    <Content Include="TSATheme\Styles\images\banner-top.png" />
+    <Content Include="TSATheme\Styles\images\cbs-logo-white.svg" />
+    <Content Include="TSATheme\Styles\images\cbs-logo.svg" />
+    <Content Include="TSATheme\Styles\images\CBS.png" />
+    <Content Include="TSATheme\Styles\images\CBS_Banner.png" />
+    <Content Include="TSATheme\Styles\images\CBS_Governor.png" />
+    <Content Include="TSATheme\Styles\images\CBS_logo.png" />
+    <Content Include="TSATheme\Styles\images\CBS_logo_2.png" />
+    <Content Include="TSATheme\Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="TSATheme\Styles\images\facebook.png" />
+    <Content Include="TSATheme\Styles\images\footer-bg.png" />
+    <Content Include="TSATheme\Styles\images\Image.jpg" />
+    <Content Include="TSATheme\Styles\images\Image.png" />
+    <Content Include="TSATheme\Styles\images\instagram.png" />
+    <Content Include="TSATheme\Styles\images\logo.png" />
+    <Content Include="TSATheme\Styles\images\twitter.png" />
+    <Content Include="TSATheme\Styles\images\upload-black.svg" />
+    <Content Include="TSATheme\Styles\Site.css" />
+    <Content Include="TSATheme\Styles\theme.css" />
+    <Content Include="TSATheme\Styles\themebootstrap.min.css" />
+    <Content Include="TSATheme\Theme.png" />
+    <Content Include="TSATheme\Theme.txt" />
+    <Content Include="TSATheme\ThemeZonePreview.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TheAdmin\Views\Menu.cshtml" />
+    <Content Include="TheThemeMachine\Views\Branding.cshtml" />
+    <Content Include="TheThemeMachine\Views\BadgeOfHonor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Styles\images\icons.png" />
+    <Content Include="TheAdmin\Styles\images\tableHeaderBackgroundRed.gif" />
+    <Content Include="TheAdmin\Styles\site.css" />
+    <Content Include="TheAdmin\Theme.txt" />
+    <Content Include="TheAdmin\Views\Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Styles\images\icons.psd" />
+    <Content Include="SafeMode\Content\orchard.ico" />
+    <Content Include="SafeMode\Styles\ie6.css" />
+    <Content Include="SafeMode\Styles\images\backgroundHeader.gif" />
+    <Content Include="SafeMode\Styles\images\backgroundVines.gif" />
+    <Content Include="SafeMode\Styles\images\orchardLogo.gif" />
+    <Content Include="SafeMode\Styles\site.css" />
+    <Content Include="SafeMode\Theme.png" />
+    <Content Include="SafeMode\Theme.txt" />
+    <Content Include="SafeMode\Views\Layout.cshtml" />
+    <Content Include="TheAdmin\Styles\images\backgroundGradient.gif" />
+    <Content Include="TheAdmin\Styles\images\backgroundHeader.gif" />
+    <Content Include="TheAdmin\Styles\images\orchardLogo.gif" />
+    <Content Include="TheAdmin\Theme.png" />
+    <Content Include="TheAdmin\Views\User.cshtml" />
+    <Content Include="TheAdmin\Views\Header.cshtml" />
+    <Content Include="TheThemeMachine\Views\Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheThemeMachine\Styles\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Scripts\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Styles\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheThemeMachine\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\LocalMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Title.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Orchard.Layouts\Orchard.Layouts.csproj">
+      <Project>{6bd8b2fa-f2e3-4ac8-a4c3-2925a653889a}</Project>
+      <Name>Orchard.Layouts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheThemeMachine\Views\Pager.cshtml" />
+    <Content Include="TheThemeMachine\Views\Pager.First.cshtml" />
+    <Content Include="TheThemeMachine\Views\Pager.Last.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\ErrorPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\AdminCultureSelector.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CBSTheme\Placement.info" />
+    <Content Include="CBSTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="CBSTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="CBSTheme\Styles\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TSATheme\Placement.info" />
+    <Content Include="TSATheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="TSATheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="TSATheme\Styles\Web.config" />
+    <Content Include="TSATheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="TSATheme\Views\Branding.cshtml" />
+    <Content Include="TSATheme\Views\Breadcrumb.cshtml" />
+    <Content Include="TSATheme\Views\ChangePassword.cshtml" />
+    <Content Include="TSATheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="TSATheme\Views\ContactUs.cshtml" />
+    <Content Include="TSATheme\Views\Document.cshtml" />
+    <Content Include="TSATheme\Views\Layout.cshtml" />
+    <Content Include="TSATheme\Views\LogOn.cshtml" />
+    <Content Include="TSATheme\Views\LostPassword.cshtml" />
+    <Content Include="TSATheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="TSATheme\Views\Menu.cshtml" />
+    <Content Include="TSATheme\Views\MenuItem.cshtml" />
+    <Content Include="TSATheme\Views\MenuItemLink.cshtml" />
+    <Content Include="TSATheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="TSATheme\Views\Message.cshtml" />
+    <Content Include="TSATheme\Views\NotFound.cshtml" />
+    <Content Include="TSATheme\Views\Pager.cshtml" />
+    <Content Include="TSATheme\Views\Pager.First.cshtml" />
+    <Content Include="TSATheme\Views\Pager.Last.cshtml" />
+    <Content Include="TSATheme\Views\Register.cshtml" />
+    <Content Include="TSATheme\Views\RegistrationPending.cshtml" />
+    <Content Include="TSATheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="TSATheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NigerTheme\NigerTheme\Placement.info" />
+    <Content Include="NigerTheme\NigerTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="NigerTheme\NigerTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="NigerTheme\NigerTheme\Styles\Web.config" />
+    <Content Include="NigerTheme\NigerTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Branding.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\ChangePassword.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\ContactUs.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Document.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Layout.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\LogOn.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\LostPassword.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Menu.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\MenuItem.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Message.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\NotFound.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Pager.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Pager.First.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Pager.Last.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\Register.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="NigerTheme\NigerTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EdoTheme\Placement.info" />
+    <Content Include="EdoTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="EdoTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="EdoTheme\Styles\Web.config" />
+    <Content Include="EdoTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="EdoTheme\Views\Branding.cshtml" />
+    <Content Include="EdoTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="EdoTheme\Views\ChangePassword.cshtml" />
+    <Content Include="EdoTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="EdoTheme\Views\ContactUs.cshtml" />
+    <Content Include="EdoTheme\Views\Document.cshtml" />
+    <Content Include="EdoTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="EdoTheme\Views\Layout.cshtml" />
+    <Content Include="EdoTheme\Views\LogOn.cshtml" />
+    <Content Include="EdoTheme\Views\LostPassword.cshtml" />
+    <Content Include="EdoTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="EdoTheme\Views\Menu.cshtml" />
+    <Content Include="EdoTheme\Views\MenuItem.cshtml" />
+    <Content Include="EdoTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="EdoTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="EdoTheme\Views\Message.cshtml" />
+    <Content Include="EdoTheme\Views\NotFound.cshtml" />
+    <Content Include="EdoTheme\Views\Pager.cshtml" />
+    <Content Include="EdoTheme\Views\Pager.First.cshtml" />
+    <Content Include="EdoTheme\Views\Pager.Last.cshtml" />
+    <Content Include="EdoTheme\Views\Register.cshtml" />
+    <Content Include="EdoTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="EdoTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="EdoTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OSGOFTheme\Placement.info" />
+    <Content Include="OSGOFTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="OSGOFTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="OSGOFTheme\Styles\Web.config" />
+    <Content Include="OSGOFTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="OSGOFTheme\Views\Branding.cshtml" />
+    <Content Include="OSGOFTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="OSGOFTheme\Views\ChangePassword.cshtml" />
+    <Content Include="OSGOFTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="OSGOFTheme\Views\ContactUs.cshtml" />
+    <Content Include="OSGOFTheme\Views\Document.cshtml" />
+    <Content Include="OSGOFTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="OSGOFTheme\Views\Layout.cshtml" />
+    <Content Include="OSGOFTheme\Views\LogOn.cshtml" />
+    <Content Include="OSGOFTheme\Views\LostPassword.cshtml" />
+    <Content Include="OSGOFTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="OSGOFTheme\Views\Menu.cshtml" />
+    <Content Include="OSGOFTheme\Views\MenuItem.cshtml" />
+    <Content Include="OSGOFTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="OSGOFTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="OSGOFTheme\Views\Message.cshtml" />
+    <Content Include="OSGOFTheme\Views\NotFound.cshtml" />
+    <Content Include="OSGOFTheme\Views\Pager.cshtml" />
+    <Content Include="OSGOFTheme\Views\Pager.First.cshtml" />
+    <Content Include="OSGOFTheme\Views\Pager.Last.cshtml" />
+    <Content Include="OSGOFTheme\Views\Register.cshtml" />
+    <Content Include="OSGOFTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="OSGOFTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="OSGOFTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KogiTheme\Placement.info" />
+    <Content Include="KogiTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="KogiTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="KogiTheme\Styles\Web.config" />
+    <Content Include="KogiTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="KogiTheme\Views\Branding.cshtml" />
+    <Content Include="KogiTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="KogiTheme\Views\ChangePassword.cshtml" />
+    <Content Include="KogiTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="KogiTheme\Views\ContactUs.cshtml" />
+    <Content Include="KogiTheme\Views\Document.cshtml" />
+    <Content Include="KogiTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="KogiTheme\Views\Layout.cshtml" />
+    <Content Include="KogiTheme\Views\LogOn.cshtml" />
+    <Content Include="KogiTheme\Views\LostPassword.cshtml" />
+    <Content Include="KogiTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="KogiTheme\Views\Menu.cshtml" />
+    <Content Include="KogiTheme\Views\MenuItem.cshtml" />
+    <Content Include="KogiTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="KogiTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="KogiTheme\Views\Message.cshtml" />
+    <Content Include="KogiTheme\Views\NotFound.cshtml" />
+    <Content Include="KogiTheme\Views\Pager.cshtml" />
+    <Content Include="KogiTheme\Views\Pager.First.cshtml" />
+    <Content Include="KogiTheme\Views\Pager.Last.cshtml" />
+    <Content Include="KogiTheme\Views\Register.cshtml" />
+    <Content Include="KogiTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="KogiTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="KogiTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\AssessmentReport\AssessmentReport.cshtml" />
+    <Content Include="Templates\CollectionReport\CollectionReport.cshtml" />
+    <Content Include="Templates\Nasarawa\AssessmentReport\AssessmentReport.cshtml" />
+    <Content Include="Templates\Nasarawa\CollectionReport\CollectionReport.cshtml" />
+    <Content Include="Templates\Nasarawa\PaymentReceipt\Receipt.cshtml" />
+    <Content Include="Templates\Nasarawa\TaxPayerReport\TaxPayerReport.cshtml" />
+    <Content Include="Templates\Niger\AssessmentReport\AssessmentReport.cshtml" />
+    <Content Include="Templates\Niger\CollectionReport\CollectionReport.cshtml" />
+    <Content Include="Templates\Niger\PaymentReceipt\Receipt.cshtml" />
+    <Content Include="Templates\Niger\TaxPayerReport\TaxPayerReport.cshtml" />
+    <Content Include="Templates\parkwaycbs\AssessmentReport\AssessmentReport.cshtml" />
+    <Content Include="Templates\parkwaycbs\CollectionReport\CollectionReport.cshtml" />
+    <Content Include="Templates\parkwaycbs\PaymentReceipt\Receipt.cshtml" />
+    <Content Include="Templates\parkwaycbs\TaxPayerReport\TaxPayerReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InlandWaterwaysTheme\Views\" />
+    <Folder Include="Templates\parkwaycbs\Files\" />
+    <Folder Include="VREGTheme\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NasarawaTheme\Placement.info" />
+    <Content Include="NasarawaTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="NasarawaTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="NasarawaTheme\Styles\Web.config" />
+    <Content Include="NasarawaTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="NasarawaTheme\Views\Branding.cshtml" />
+    <Content Include="NasarawaTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="NasarawaTheme\Views\ChangePassword.cshtml" />
+    <Content Include="NasarawaTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="NasarawaTheme\Views\ContactUs.cshtml" />
+    <Content Include="NasarawaTheme\Views\Document.cshtml" />
+    <Content Include="NasarawaTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="NasarawaTheme\Views\Layout.cshtml" />
+    <Content Include="NasarawaTheme\Views\LogOn.cshtml" />
+    <Content Include="NasarawaTheme\Views\LostPassword.cshtml" />
+    <Content Include="NasarawaTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="NasarawaTheme\Views\Menu.cshtml" />
+    <Content Include="NasarawaTheme\Views\MenuItem.cshtml" />
+    <Content Include="NasarawaTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="NasarawaTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="NasarawaTheme\Views\Message.cshtml" />
+    <Content Include="NasarawaTheme\Views\NotFound.cshtml" />
+    <Content Include="NasarawaTheme\Views\Pager.cshtml" />
+    <Content Include="NasarawaTheme\Views\Pager.First.cshtml" />
+    <Content Include="NasarawaTheme\Views\Pager.Last.cshtml" />
+    <Content Include="NasarawaTheme\Views\Register.cshtml" />
+    <Content Include="NasarawaTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="NasarawaTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="NasarawaTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NigerTheme\Placement.info" />
+    <Content Include="NigerTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="NigerTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="NigerTheme\Styles\Web.config" />
+    <Content Include="NigerTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="NigerTheme\Views\Branding.cshtml" />
+    <Content Include="NigerTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="NigerTheme\Views\ChangePassword.cshtml" />
+    <Content Include="NigerTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="NigerTheme\Views\ContactUs.cshtml" />
+    <Content Include="NigerTheme\Views\Document.cshtml" />
+    <Content Include="NigerTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="NigerTheme\Views\Layout.cshtml" />
+    <Content Include="NigerTheme\Views\LogOn.cshtml" />
+    <Content Include="NigerTheme\Views\LostPassword.cshtml" />
+    <Content Include="NigerTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="NigerTheme\Views\Menu.cshtml" />
+    <Content Include="NigerTheme\Views\MenuItem.cshtml" />
+    <Content Include="NigerTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="NigerTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="NigerTheme\Views\Message.cshtml" />
+    <Content Include="NigerTheme\Views\NotFound.cshtml" />
+    <Content Include="NigerTheme\Views\Pager.cshtml" />
+    <Content Include="NigerTheme\Views\Pager.First.cshtml" />
+    <Content Include="NigerTheme\Views\Pager.Last.cshtml" />
+    <Content Include="NigerTheme\Views\Register.cshtml" />
+    <Content Include="NigerTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="NigerTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="NigerTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IDECTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="IDECTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IDECTheme\Views\NotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RSTVLTheme\Placement.info" />
+    <Content Include="RSTVLTheme\Styles\Fonts\avenir-bold.otf" />
+    <Content Include="RSTVLTheme\Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="RSTVLTheme\Styles\Web.config" />
+    <Content Include="RSTVLTheme\Views\BadgeOfHonor.cshtml" />
+    <Content Include="RSTVLTheme\Views\Branding.cshtml" />
+    <Content Include="RSTVLTheme\Views\Breadcrumb.cshtml" />
+    <Content Include="RSTVLTheme\Views\CallNumbers.cshtml" />
+    <Content Include="RSTVLTheme\Views\ChangePassword.cshtml" />
+    <Content Include="RSTVLTheme\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="RSTVLTheme\Views\ContactUs.cshtml" />
+    <Content Include="RSTVLTheme\Views\Document.cshtml" />
+    <Content Include="RSTVLTheme\Views\DownloadsPartial.cshtml" />
+    <Content Include="RSTVLTheme\Views\FooterText.cshtml" />
+    <Content Include="RSTVLTheme\Views\Layout.cshtml" />
+    <Content Include="RSTVLTheme\Views\LogOn.cshtml" />
+    <Content Include="RSTVLTheme\Views\LostPassword.cshtml" />
+    <Content Include="RSTVLTheme\Views\MarketingTextPartial.cshtml" />
+    <Content Include="RSTVLTheme\Views\Menu.cshtml" />
+    <Content Include="RSTVLTheme\Views\MenuItem.cshtml" />
+    <Content Include="RSTVLTheme\Views\MenuItemLink.cshtml" />
+    <Content Include="RSTVLTheme\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="RSTVLTheme\Views\Message.cshtml" />
+    <Content Include="RSTVLTheme\Views\NotFound.cshtml" />
+    <Content Include="RSTVLTheme\Views\Pager.cshtml" />
+    <Content Include="RSTVLTheme\Views\Pager.First.cshtml" />
+    <Content Include="RSTVLTheme\Views\Pager.Last.cshtml" />
+    <Content Include="RSTVLTheme\Views\Register.cshtml" />
+    <Content Include="RSTVLTheme\Views\RegistrationPending.cshtml" />
+    <Content Include="RSTVLTheme\Views\RequestLostPassword.cshtml" />
+    <Content Include="RSTVLTheme\Views\TenantAdditionalName.cshtml" />
+    <Content Include="RSTVLTheme\Views\TenantName.cshtml" />
+    <Content Include="RSTVLTheme\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PoliceTheme\Views\ContactUs.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>30320</DevelopmentServerPort>
+          <DevelopmentServerVPath>/OrchardLocal</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

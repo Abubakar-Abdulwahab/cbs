@@ -1,0 +1,73 @@
+﻿@model Parkway.CBS.Police.Core.VM.TermsOfUseVM
+
+@{
+    Layout.Title = "Terms Of Use";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    .heading {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+</style>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid about-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <h4 style="color:darkgrey" class="mt-2">Terms Of Use</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container about-content-container">
+            <div class="container about-content no-padding">
+                <div class="container no-padding">
+                    <p>
+                        By using this website www.possap.gov.ng, any of our websites and/or services, you agree to these Terms of Use.
+                        The website <a class="decorated-active-link" href="@Url.RouteUrl("P.Privacy.Policy")">Privacy Policy</a> is incorporated by reference into these Terms of Use.
+                    </p>
+                    <h5>NOTICE</h5>
+                    <p>
+                        Your email address and phone number supplied at sign-up will be used as a means of communicating information, notices and documents to you.
+                    </p>
+                    <h5>APPLICATION/PROCESSING FEES</h5>
+                    <p>Some services on this platform would attract a non-refundable application and processing fee.</p>
+                    <h5>SECURITY AND UNAUTHORISED USE</h5>
+                    <p>
+                        You are responsible for all transactions conducted using your computer (personal or otherwise), mobile phone, tablet or other electronic devices ("Device"), payment card or account. It is your responsibility to keep all of these secure.
+                    </p>
+                    <p>
+                        All passwords must be kept secret. You are liable for all activities undertaken using your username, associated password or device. You are responsible for maintaining the confidentiality of all Account information and keeping your device from unauthorized use.
+                    </p>
+                    <p>
+                        We accept no liability for any unauthorized use of your device, payment card or account or any effects of same.
+                    </p>
+                    <p>
+                    In the event your device has been stolen or there is unauthorized access to your payment card or account, it is your responsibility to immediately notify your bank to restrict transactions on your card and account.
+                    </p>
+                    <h5>SUSPENSION OF ACCESS TO PLATFORM</h5>
+                    <p>
+                        We hereby reserve the right to suspend, restrict, or terminate your access to the Platform (in whole or in part) without any notice or liability in the following circumstances:
+                    </p>
+                    <ul>
+                        <li>Upon receipt of instructions from you to suspend or terminate your access to the Platform.</li>
+                        <li>Upon receipt of notification from you that your device has been lost or stolen.</li>
+                        <li>If we suspect the Platform is being used for fraudulent or other illegal activities.</li>
+                        <li>If we believe that you have breached a provision contained in this Terms of Use.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

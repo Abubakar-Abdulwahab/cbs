@@ -1,0 +1,11 @@
+﻿@model string
+
+<div id="errorFlash" class="container alert-msg" style="@(string.IsNullOrEmpty(Model)?"display:none":"")">
+    <small class="message"><span id="closeFlash" style="float:right;">&times;</span><small id="errorMsg" style="white-space: pre-wrap;">@Model</small></small>
+</div>
+
+<script>
+    $("#closeFlash").click(function (e) {
+        $("#errorFlash").fadeOut("fast");
+    });
+</script>

@@ -1,0 +1,74 @@
+﻿@model Parkway.CBS.Police.Core.VM.InvoiceViewVM
+@{
+    Layout.Title = T("Preview Invoice").ToString();
+    Style.Include(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/themebootstrap.min.css"));
+    Style.Require("CBS.MDA.Style.RevenueStrap");
+}
+<style>
+    .pageloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header" id="printBtn" style="display:none">
+            <button onclick="printFunction()" class="btn btn-sm btn-success pull-right">Print Invoice</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-12">
+        <br />
+        <div class="pageloader" id="pageLoader" style="position:absolute;margin-left:33%;z-index:1;top:40%"></div>
+        <object id="invObj" data="@Model.URL" style="width:100%; min-height:90vh"></object>
+    </div>
+</div>
+
+<script>
+
+        document.getElementById('invObj').addEventListener('load', function () {
+            document.getElementById("printBtn").style.display = "block";
+            document.getElementById("pageLoader").style.display = "none";
+        });
+
+        function printFunction() {
+            window.print();
+        }
+</script>

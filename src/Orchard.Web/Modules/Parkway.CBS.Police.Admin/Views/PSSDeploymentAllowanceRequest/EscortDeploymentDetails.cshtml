@@ -1,0 +1,143 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortDeploymentRequestDetailsVM
+
+@{
+    Layout.Title = "Deployment Allowance - Escort Request Details";
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+
+            td{
+                width:100px;
+                word-break:break-word;
+            }
+</style>
+@using (Html.BeginFormAntiForgeryPost())
+{
+<div id="container">
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader" colspan="3">DEPLOYMENT ALLOWANCE DETAILS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="Amount">Amount</label>
+                    <p class="extend-width">@String.Format("{0:n2}", Model.Amount)</p>
+                </td>
+                <td colspan="2">
+                    <label for="Narration">Narration</label>
+                    <p class="extend-width">@Model.Narration</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="OfficerName">Officer Name</label>
+                    <p class="extend-width">@Model.PoliceOfficerName</p>
+                </td>
+                <td>
+                    <label for="ServiceNumber">AP/Force Number</label>
+                    <p class="extend-width">@Model.ServiceNumber</p>
+                </td>
+                <td>
+                    <label for="RankName">Rank Name</label>
+                    <p class="extend-width">@Model.RankName</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="IPPISNumber">IPPIS Number</label>
+                    <p class="extend-width">@Model.IPPISNumber</p>
+                </td>
+                <td>
+                    <label for="AccountNumber">Account Number</label>
+                    <p class="extend-width">@Model.AccountNumber</p>
+                </td>
+                <td>
+                    <label for="BankName">Bank Name</label>
+                    <p class="extend-width">@Model.BankName</p>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td>
+                    <label for="StartDate">Start Date</label>
+                    <p class="extend-width">@Model.EscortInfo.StartDate</p>
+                </td>
+                <td>
+                    <label for="EndDate">End Date</label>
+                    <p class="extend-width">@Model.EscortInfo.EndDate</p>
+                </td>
+                <td>
+                    <label for="InvoiceNumber">Invoice Number</label>
+                    <p class="extend-width">@Model.InvoiceNumber</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @if (Model.ShowApprovalForm)
+    {
+        <label for="comment">Comment</label>
+        <textarea class="extend-width" name="Comment" value="@Model.Comment" placeholder="Leave a comment" id="comment" required></textarea>
+
+        <input name="DeploymentAllowanceRequestId" value="@Model.DeploymentAllowanceRequestId" hidden />
+        <input name="RequestId" value="@Model.RequestId" hidden />
+        <div class="action-btns">
+            <div>
+                <button class="btn btn-success" formaction="@Url.Action("ApproveRequest", "PSSDeploymentAllowanceRequest")">@T("Approve")</button>
+            </div>
+            <div>
+                <button class="btn btn-danger" formaction="@Url.Action("RejectRequest", "PSSDeploymentAllowanceRequest")">@T("Reject")</button>
+            </div>
+        </div>
+    }
+</div>
+
+}

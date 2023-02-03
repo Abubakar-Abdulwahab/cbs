@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.PSSRegularizationUnknownOfficerRecurringInvoiceSettings, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSRegularizationUnknownOfficerRecurringInvoiceSettings" lazy="false" >
+		<id name="Id" column="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="WeekDayNumber" column="WeekDayNumber" />
+		<property name="OffSet" column="OffSet" />
+		<property name="PaymentBillingType" column="PaymentBillingType" />
+		<property name="CronExpression" column="CronExpression" />
+		<property name="NextInvoiceGenerationDate" column="NextInvoiceGenerationDate" />
+		<property name="CreatedAtUtc" column="CreatedAtUtc" />
+		<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+		<many-to-one name="GenerateRequestWithoutOfficersUploadBatchStaging" column="GenerateRequestWithoutOfficersUploadBatchStaging_Id"/>
+		<many-to-one name="EscortDetails" column="EscortDetails_Id"/>
+		<many-to-one name="Request" column="Request_Id"/>
+	</class>
+</hibernate-mapping>

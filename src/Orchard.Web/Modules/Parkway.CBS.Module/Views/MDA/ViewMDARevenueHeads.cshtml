@@ -1,0 +1,121 @@
+﻿@model Parkway.CBS.Module.ViewModels.MDARevenueHeadsListPage
+
+@{
+    Style.Require("CBS.MDA.Style");
+    var userIndex = 0;
+
+    Layout.Title = T(Model.Mda.NameAndCode()).ToString();
+}
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    <div class="manage">@Html.ActionLink(T("Add a new revenue head").ToString(), "CreateFromMDA", "RevenueHead", new { slug = Model.Mda.Slug }, new { @class = "button primaryAction" })</div>
+
+    <fieldset class="bulk-actions">
+        @Html.TextBoxFor(m => m.Options.Search, new { @class = "text", @placeholder = "Search text" })
+        <label for="filterResults">@T("Filter:")</label>
+        <select id="filterResults" name="@Html.NameOf(m => m.Options.Filter)">
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.All, T("All Revenue Heads").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.Disabled, T("Disabled Revenue Heads").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.Enabled, T("Active Revenue Heads").ToString())
+        </select>
+        <label for="sortResults">@T("Sort by:")</label>
+        <select id="sortResults" name="@Html.NameOf(m => m.Options.Order)">
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.Name, T("Order by Name").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.Code, T("Order by Code").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.CreatedAtUtc, T("Order by Creation time").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.UpdatedAtUtc, T("Order by Last Update").ToString())
+        </select>
+        @Html.CheckBoxFor(c => c.Options.Direction) Ascending
+        <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
+    </fieldset>
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Name")</th>
+                    <th scope="col">@T("Code")</th>
+                    <th scope="col">@T("Updated")</th>
+                    <th scope="col">@T("Created")</th>
+                    <th scope="col">@T("Last Updated By")</th>
+                    <th scope="col">@T("Actions")</th>
+                </tr>
+            </thead>
+            @if (Model.RevenueHeads.Any())
+            {
+                foreach (var entry in Model.RevenueHeads)
+                {
+                    <tr>
+                        <td>
+                            @if (entry.BillingModel != null)
+                            {
+                                @Html.ActionLink(entry.Name, "RevenueHeadDashBoard", "RevenueHead", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)
+                            }
+                            else
+                            {
+                                @Html.ActionLink(entry.Name, "ViewSubRevenueHeads", "RevenueHead", new { slug = entry.Slug, id = entry.Id }, null)
+                            }
+                        </td>
+                        <td>
+                            @entry.Code
+                        </td>
+                        <td>
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.UpdatedAtUtc.Value.AddHours(-1)))
+                        </td>
+                        <td>
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.CreatedAtUtc.AddHours(-1)))
+                        </td>
+                        <td>
+                            @entry.LastUpdatedBy.UserName
+                        </td>
+                        <td>
+                            @Html.ActionLink(T("Edit").ToString(), "Edit", "RevenueHead", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)
+                            @if (!entry.RevenueHeads.Any())
+                            {
+                                <b>|</b>
+                                if (entry.BillingModel == null)
+                                {
+                                    @Html.ActionLink(T("Start Collection SetUp").ToString(), "Create", "Billing", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(T("View Collection SetUp").ToString(), "RevenueHeadDashBoard", "RevenueHead", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)
+
+                                }
+                                @*@Html.ActionLink(T("Add Form").ToString(), "Create", "Form", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)*@
+                            }
+                            @*else
+        {
+            @Html.ActionLink("View Sub-Revenue Heads", "ViewSubRevenueHeads", "SubRevenueHead", new { parentrevenuedheadslug = entry.Slug, parentrevenueheadid = entry.Id }, null)
+        }*@
+                            <b>|</b>
+                            @if (!entry.IsActive)
+                            {
+                                <button type="submit" name="submit.Enable" value="@T("Enable")" formaction="@Url.Action("ChangeStatus", "RevenueHead", new { Id = entry.Id, pageNumber = Model.Pager.Page })" formmethod="post" class="a-classname">@T("Enable")</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="submit.Disable" formaction="@Url.Action("ChangeStatus", "RevenueHead", new { Id = entry.Id, pageNumber = Model.Pager.Page })" formmethod="post" value="@T("Disable")" class="a-classname">@T("Disable")</button>
+                            }
+
+                            @if (!entry.RevenueHeads.Any())
+                            {
+                                if (entry.BillingModel != null)
+                                {
+                                    <b>|</b>
+                                    @Html.ActionLink(T("Edit Billing").ToString(), "EditBilling", "Billing", new { revenueHeadSlug = entry.Slug, revenueHeadId = entry.Id }, null)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    userIndex++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">@T("No record found.")</td> </tr> }
+        </table>
+        @Display(Model.Pager)
+    </fieldset>
+
+}

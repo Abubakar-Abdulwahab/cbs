@@ -1,0 +1,58 @@
+﻿@model Parkway.CBS.Core.HelperModels.SetStateViewModel
+
+@{ Layout.Title = "Set State Settings".ToString(); }
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        width: 50%;
+        position: relative;
+        word-break: break-all;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("SetState", "Settings", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { }))
+{
+    <div id="container">
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Select State</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <label id="mdaName">@T("Tenant identifier")</label>
+                        @Html.TextBoxFor(m => m.Identifier, new { @class = "text large", @required = true, @type = "text" })
+                        @Html.Hint(T("This tenant identifier, no white spaces or special characters are allowed"))
+                        @Html.ValidationMessageFor(m => m.Identifier, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label id="mdaName">@T("Select the state this tenant belongs to")</label>
+                        <select name="stateId" style="width:99%" required>
+                            <option value="" disabled selected>Select tenant state</option>
+                            @foreach (var item in Model.States)
+                            {
+                                <option value="@item.StateId">@item.StateName</option>
+                            }
+                        </select>
+                        @Html.Hint(T("This is the state where all expert systems reside in."))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Save")</button>
+    </fieldset>
+}
+@{
+    Script.Require("CBS.MDA.Setting.Script").AtFoot();
+}

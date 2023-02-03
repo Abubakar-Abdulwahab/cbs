@@ -1,0 +1,53 @@
+﻿#main-nav.scrolled {
+}
+
+#main-nav-alt .loggedIn {
+    color: #00B05F;
+}
+
+.footer-top {
+    background-color: #F4F4F4;
+}
+
+.footer {
+    background-color: #F4F4F4;
+}
+
+.top-banner .banner-bottom {
+    background-color: #00B05F;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.breadcrumbs .breadcrumb .breadcrumb-item {
+    color: #00B05F;
+}
+
+.pay-nav-two .nav a.nav-item {
+    color: #00B05F;
+    border: 1px solid #00B05F;
+}
+
+    .pay-nav-two .nav a.nav-item.active {
+        color: #ffffff;
+        background-color: #00B05F;
+    }
+
+.pay-nav .nav-pills .nav-link.active,
+.pay-nav .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #00B05F;
+}
+
+.Paye-credentials .gen a {
+    color: #00b05f;
+}
+
+.table-pagination-2 a {
+    color: #00B05F;
+}
+
+.receipt-fill {
+    background-color: #00B05F;
+}

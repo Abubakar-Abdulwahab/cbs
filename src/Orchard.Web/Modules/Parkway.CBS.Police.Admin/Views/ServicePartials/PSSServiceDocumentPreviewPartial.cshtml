@@ -1,0 +1,69 @@
+﻿@model dynamic
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Script.Require("PSS.Draft.Service.Document.Script");
+}
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 15px;
+        height: 15px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: -22px;
+        display: none;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    .error-text { color:#ff0000; }
+    .info-text { color:#808080; }
+</style>
+<script>
+    var fileRefNumber = @Html.Raw(Json.Encode(Model.FileRefNumber.ToString()));
+</script>
+<div style="position:relative">
+    <div class="payeeloader" id="initLoader" style="position:absolute;margin-left:40%;z-index:1;margin-top:20%;display:block"></div>
+    <input type="hidden" id="serviceFileRefNumber" />
+    <embed src="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSRequestApprovalDocumentPreview.ViewDraftServiceDocument, new { fileRefNumber = Model.FileRefNumber.ToString() })" type="application/pdf" id="draftDocumentEmbedElement" style="width:100%;height:600px" />
+    <div style="position:relative">
+        <span name="profileloader" id="payerIdLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;bottom:-20px"></span>
+        <button type="button" class="btn btn-block" id="confirmPreviewDocumentBtn" style="width: 100%; margin-top: 5px; padding: 5px; display: none; background-color: #449d44; color: white; border-color: #4cae4c; border-radius:4px">I confirm that i have viewed this document</button>
+    </div>
+    <small class="info-text" id="infoMessage" style="display:none">You need to confirm that you have seen this document by clicking on the button above</small>
+    <small class="error-text" id="errorMessage"></small>
+</div>
+

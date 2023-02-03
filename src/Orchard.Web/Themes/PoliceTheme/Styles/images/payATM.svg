@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 59.1 (101010) - https://sketch.com -->
+    <title>624F204E-5E39-4575-8F2B-220C899B1A29</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Web-Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide-(Incomplete)" transform="translate(-289.000000, -224.000000)">
+            <g id="Group-8-Copy" transform="translate(290.000000, 225.000000)">
+                <rect id="Rectangle-Copy-6" stroke="#A5A5A5" fill="#FFFFFF" x="0" y="0" width="28" height="28" rx="4"></rect>
+                <g id="ATM.4" transform="translate(5.000000, 5.000000)">
+                    <path d="M13.2759657,1.91845494 L5.03304721,1.91845494 C3.89483755,1.91845494 2.9723176,2.84097489 2.9723176,3.97918455 L2.9723176,14.9697425 C2.9723176,15.3489167 3.28005322,15.6566524 3.65922747,15.6566524 L14.6497854,15.6566524 C15.0289597,15.6566524 15.3366953,15.3489167 15.3366953,14.9697425 L15.3366953,3.97918455 C15.3366953,2.84097489 14.4141753,1.91845494 13.2759657,1.91845494 Z" id="Path" stroke="#A5A5A5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g id="Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(5.033047, 3.979185)" stroke="#A5A5A5" stroke-width="1.5">
+                        <path d="M7.55600858,4.8083691 L0.686909871,4.8083691 C0.307735622,4.8083691 0,4.50063348 0,4.12145923 L0,1.14507876 C0,0.765904506 0.307735622,0.458168884 0.686909871,0.458168884 L7.55600858,0.458168884 C7.93518283,0.458168884 8.24291845,0.765904506 8.24291845,1.14507876 L8.24291845,4.12145923 C8.24291845,4.50063348 7.93518283,4.8083691 7.55600858,4.8083691 Z" id="Path"></path>
+                        <line x1="0" y1="6.86909871" x2="0.686909871" y2="6.86909871" id="Path"></line>
+                        <line x1="2.74763948" y1="6.86909871" x2="3.43454936" y2="6.86909871" id="Path"></line>
+                        <line x1="0" y1="8.92982833" x2="0.686909871" y2="8.92982833" id="Path"></line>
+                        <line x1="2.74763948" y1="8.92982833" x2="3.43454936" y2="8.92982833" id="Path"></line>
+                        <line x1="5.49527897" y1="6.86909871" x2="8.24291845" y2="6.86909871" id="Path"></line>
+                    </g>
+                    <polygon id="Path" points="0.911587983 0.544635193 17.3974249 0.544635193 17.3974249 17.0304721 0.911587983 17.0304721"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

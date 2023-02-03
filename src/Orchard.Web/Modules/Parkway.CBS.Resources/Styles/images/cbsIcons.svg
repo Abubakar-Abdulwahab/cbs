@@ -1,0 +1,98 @@
+
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="iconLock" viewBox="0 0 38 34">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Homepage_CBS" transform="translate(-110.000000, -861.000000)">
+                <g id="User,Profile,-Lock" transform="translate(108.000000, 856.000000)">
+                    <polygon id="Path" points="0 0 43 0 43 43 0 43"></polygon>
+                    <path d="M20.5489833,8.9991475 C22.9922971,11.4424612 22.9922971,15.4038542 20.5489833,17.8471679 C18.1056696,20.2904817 14.1442767,20.2904817 11.7009629,17.8471679 C9.25764917,15.4038542 9.25764917,11.4424613 11.7009629,8.9991475 C14.1442767,6.55583375 18.1056696,6.55583375 20.5489833,8.9991475" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3.58333333,34.013 C3.58333333,28.5914167 9.77891667,25.069 16.125,25.069" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M16.125,25.069 C22.4710833,25.069 28.6666667,28.5932083 28.6666667,34.013" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M28.6666667,34.0416667 L28.6666667,35.8333333 C28.6666667,36.8223333 27.864,37.625 26.875,37.625 L5.375,37.625 C4.386,37.625 3.58333333,36.8223333 3.58333333,35.8333333 L3.58333333,34.0416667" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M36.0680417,17.9166667 L32.0170833,17.9166667 C30.6607917,17.9166667 29.5625,16.818375 29.5625,15.463875 L29.5625,14.9944583 C29.5625,13.6399583 30.6607917,12.5416667 32.0152917,12.5416667 L36.06625,12.5416667 C37.4225417,12.5416667 38.5208333,13.6399583 38.5208333,14.9944583 L38.5208333,15.4620833 C38.5208333,16.818375 37.4225417,17.9166667 36.0680417,17.9166667 Z" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M31.653375,9.55495833 C31.653375,8.23629167 32.723,7.16666667 34.0416667,7.16666667 C35.3603333,7.16666667 36.4299583,8.30258333 36.4299583,9.55495833" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M31.65875,12.5416667 L31.65875,9.54958333" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M36.4245833,9.54958333 L36.4245833,12.5416667" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </symbol>
+
+    <symbol id="iconReceipt" viewBox="0 0 33 34">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage_CBS" transform="translate(-524.000000, -860.000000)">
+            <g id="Receipt" transform="translate(519.000000, 856.000000)">
+                <g id="Group">
+                    <polygon id="Path" points="43 0 0 0 0 43 43 43"></polygon>
+                    <path d="M28.6666667,12.5416667 L14.3333333,12.5416667" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M28.8995833,19.7083333 L14.3333333,19.7083333" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M7.16666667,35.8046667 L7.16666667,5.375 L35.8333333,5.375 L35.8333333,35.8046667 C35.8333333,35.8172083 35.819,35.8261667 35.80825,35.8207917 L31.05675,33.4450417 L26.278375,35.8333333 L21.5,33.4450417 L16.721625,35.8333333 L11.94325,33.4450417 L7.19175,35.8207917 C7.181,35.8261667 7.16666667,35.8172083 7.16666667,35.8046667 Z" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M23.2916667,26.875 L14.3333333,26.875" id="Path" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+    </symbol>
+
+    <symbol id="iconCreditCard" viewBox="0 0 41 37">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Homepage_CBS" transform="translate(-947.000000, -864.000000)" stroke="currentColor" stroke-width="3">
+            <g id="Credit-card,-Done,-Check" transform="translate(949.000000, 866.000000)">
+                <g id="Group">
+                    <path d="M27.75,33 C22.64215,33 18.5,28.8951667 18.5,23.8333333 C18.5,18.7715 22.64215,14.6666667 27.75,14.6666667 C32.8597,14.6666667 37,18.7715 37,23.8333333 C37,28.8951667 32.8597,33 27.75,33" id="Path"></path>
+                    <path d="M0,7.05833333 L35.15,7.05833333" id="Path"></path>
+                    <path d="M18.5,23.8333333 L3.7,23.8333333 C1.65575,23.8333333 0,22.1925 0,20.1666667 L0,3.66666667 C0,1.64083333 1.65575,0 3.7,0 L31.45,0 C33.49425,0 35.15,1.64083333 35.15,3.66666667" id="Path"></path>
+                    <path d="M35.15,3.66666667 L35.15,18.3333333" id="Path"></path>
+                    <path d="M23.643,23.8333333 L26.714,26.895" id="Path"></path>
+                    <path d="M31.857,21.7983333 L26.714,26.895" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+    </symbol>
+
+    <symbol id="iconComputer" viewBox="0 0 41 38">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage_CBS" transform="translate(-107.000000, -1202.000000)" fill="currentColor" fill-rule="nonzero">
+            <g id="computer" transform="translate(107.000000, 1203.000000)">
+                <path d="M36.5999048,0 L4.10001904,0 C2.30838387,0 0.85,1.46781297 0.85,3.27274122 L0.85,26.1817763 C0.85,27.9867046 2.30838387,29.4545176 4.10001904,29.4545176 L15.4786277,29.4545176 C15.4445027,30.7598709 15.1969446,32.8479146 14.2673449,33.8338713 C13.9261717,34.194995 13.5357916,34.363591 13.0374762,34.363591 C12.5883677,34.363591 12.2249524,34.7295471 12.2249524,35.1817955 C12.2249524,35.6340439 12.5883677,36 13.0374762,36 L27.6624476,36 C28.1115561,36 28.4749714,35.6340439 28.4749714,35.1817955 C28.4749714,34.7295471 28.1115561,34.363591 27.6624476,34.363591 C27.1641322,34.363591 26.7737521,34.1957621 26.4341785,33.8346384 C25.506864,32.8535907 25.2577062,30.7625555 25.2222864,29.4545176 L36.599981,29.4545176 C38.3916161,29.4545176 39.85,27.9867813 39.85,26.1817763 L39.85,3.27274122 C39.8499238,1.46781297 38.39154,0 36.5999048,0 Z M15.9113593,34.3635143 C16.8919941,32.8486816 17.0824995,30.6672888 17.1067983,29.4544409 L23.5932017,29.4544409 C23.6175005,30.6673655 23.8079298,32.8486816 24.7885646,34.3635143 L15.9113593,34.3635143 Z M38.2249524,26.1817763 C38.2249524,27.0838186 37.4965222,27.8181086 36.599981,27.8181086 L4.10001904,27.8181086 C3.20340165,27.8181086 2.47504761,27.0838186 2.47504761,26.1817763 L2.47504761,22.9090351 L38.2249524,22.9090351 L38.2249524,26.1817763 Z M38.2249524,21.2727029 L2.47497144,21.2727029 L2.47497144,3.27274122 C2.47497144,2.37069897 3.20340165,1.63640896 4.09994287,1.63640896 L36.5999048,1.63640896 C37.4965222,1.63640896 38.2248762,2.37069897 38.2248762,3.27274122 L38.2249524,21.2727029 L38.2249524,21.2727029 Z" id="Shape" stroke="currentColor"></path>
+                <path d="M20.35,26 C21.1776614,26 21.85,25.3268879 21.85,24.5 C21.85,23.6731121 21.1775911,23 20.35,23 C19.5224089,23 18.85,23.6731121 18.85,24.5 C18.85,25.3268879 19.5223386,26 20.35,26 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+    </symbol>
+
+    <symbol id="iconGroup" viewBox="0 0 43 40">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Homepage_CBS" transform="translate(-521.000000, -1201.000000)" stroke="currentColor" stroke-width="3">
+            <g id="Group" transform="translate(523.000000, 1203.000000)">
+                <path d="M21,28 L3.876,28 C1.736,28 8.8817842e-16,26.21 8.8817842e-16,24 L8.8817842e-16,4 C8.8817842e-16,1.79 1.736,0 3.876,0 L27.142,0 C29.276,0 31.008,1.782 31.018,3.984 L31.072,18.056" id="Path"></path>
+                <path d="M39,27 C39,31.97 34.97,36 30,36 C25.03,36 21,31.97 21,27 C21,22.028 25.03,18 30,18 C34.97,18 39,22.028 39,27" id="Path"></path>
+                <polyline id="Path" points="27 28 31 28 31 24"></polyline>
+                <path d="M6,8 L22,8" id="Path"></path>
+                <path d="M6.04,14 L22,14" id="Path"></path>
+                <path d="M6.04,19.7 L13.14,19.7" id="Path"></path>
+            </g>
+        </g>
+    </g>
+    </symbol>
+
+    <symbol id="iconInfo" viewBox="0 0 33 33">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage_CBS" transform="translate(-950.000000, -1203.000000)">
+            <g id="Infornation,-Info.2" transform="translate(947.000000, 1200.000000)">
+                <g id="Group">
+                    <polygon id="a" points="0 0 39 0 39 39 0 39"></polygon>
+                    <polygon id="a" points="0 0 39 0 39 39 0 39"></polygon>
+                    <path d="M12.1875,4.875 L8.125,4.875 C6.329375,4.875 4.875,6.329375 4.875,8.125 L4.875,12.1875" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M4.875,26.8125 L4.875,30.875 C4.875,32.670625 6.329375,34.125 8.125,34.125 L12.1875,34.125" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M26.8125,34.125 L30.875,34.125 C32.670625,34.125 34.125,32.670625 34.125,30.875 L34.125,26.8125" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M34.125,12.1875 L34.125,8.125 C34.125,6.329375 32.670625,4.875 30.875,4.875 L26.8125,4.875" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M19.5,19.5 L19.5,27.625" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M19.498375,13 C19.274125,13 19.092125,13.182 19.09375,13.40625 C19.09375,13.6305 19.27575,13.8125 19.5,13.8125 C19.72425,13.8125 19.90625,13.6305 19.90625,13.40625 C19.90625,13.182 19.72425,13 19.498375,13" id="Path" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+    </symbol>
+</svg>

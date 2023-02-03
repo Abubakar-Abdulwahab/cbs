@@ -1,0 +1,100 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+
+<div class="form-group">
+    <label for="fullname">Full Name<span class="required-sym">*</span></label>
+    <input type="text" class="form-control user-details-required" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "required") id="fullname" placeholder="Enter Full Name" name="RegisterCBSUserModel.Name" value="@Model.RegisterCBSUserModel.Name" pattern="([A-Za-z]\s[A-Za-z]|[A-Za-z]){5,}" />
+    <small class="form-text text-muted" id="nameHint">Please enter your full name. (Firstname Lastname)</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Name", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+@if(Model.HeaderObj.IsLoggedIn && !Model.HeaderObj.IsAdministrator){
+    @Html.Partial("Partials\\SubUserProfilePartial", Model)
+}
+<div class="form-group">
+    <label for="phoneNumber">Phone Number<span class="required-sym">*</span></label>
+    <input type="text" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "required") class="form-control user-details-required" id="phoneNumber" placeholder="Enter Phone Number" name="RegisterCBSUserModel.PhoneNumber" value="@Model.RegisterCBSUserModel.PhoneNumber" />
+    <small class="form-text text-muted">Specify your active phone number.</small>
+    <div class="container-fluid no-padding validation-msg">
+        @if (@Html.ValidationMessage("RegisterCBSUserModel.PhoneNumber") != null)
+        {
+            if (Html.ValidationMessage("RegisterCBSUserModel.PhoneNumber").ToHtmlString().Contains("exists"))
+            {
+                <p class="tiny-message" style="color:#ff0000">Another user with this phoneNumber exists. <a href="@Url.RouteUrl("P.Sign.In")" style="color:#2F4CB0">Click here</a> to log in.</p>
+            }
+            else
+            { @Html.ValidationMessage("RegisterCBSUserModel.PhoneNumber", new { @class = "tiny-caption", @style = "color:#ff0000" });
+        }
+    }
+    </div>
+</div>
+<div class="form-group">
+    <label for="email">Email<span class="required-sym">*</span></label>
+    <input type="text" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "required") class="form-control user-details-required" id="email" placeholder="Enter Email" name="RegisterCBSUserModel.Email" value="@Model.RegisterCBSUserModel.Email" />
+    <small class="form-text text-muted">Enter your valid email address</small>
+    <div class="container-fluid no-padding validation-msg">
+        @if (@Html.ValidationMessage("RegisterCBSUserModel.Email") != null)
+        {
+            if (Html.ValidationMessage("RegisterCBSUserModel.Email").ToHtmlString().Contains("exists"))
+            {
+                <p class="tiny-message" style="color:#ff0000">Another user with this email already exists. <a href="@Url.RouteUrl("P.Sign.In")" style="color:#2F4CB0">Click here</a> to log in.</p>
+            }
+            else
+            { @Html.ValidationMessage("RegisterCBSUserModel.Email", new { @class = "tiny-caption", @style = "color:#ff0000" });
+        }
+    }
+    </div>
+</div>
+<div class="form-group contact-person-info-required">
+    <label for="rcnumber">RC Number<span class="required-sym">*</span></label>
+    <input name="RegisterCBSUserModel.RCNumber" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") type="text" class="form-control" placeholder="Enter RC Number" id="rcnumber" value="@Model.RegisterCBSUserModel.RCNumber" />
+    <small class="form-text text-muted">Specify your RC Number.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.RCNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group" id="genderFieldContainer">
+    <label for="gender">Gender<span class="required-sym">*</span></label>
+    <select class="custom-select" name="RegisterCBSUserModel.Gender" id="gender" @(Model.HeaderObj.IsLoggedIn ? "disabled" : "required")>
+        <option selected disabled value="">Select your gender</option>
+        @foreach (var item in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.Gender)).Cast<Parkway.CBS.Police.Core.Models.Enums.Gender>())
+        {
+            <option value="@((int)item)" @(Model.RegisterCBSUserModel.Gender == (int)item ? "selected" : "")>@item</option>
+        }
+    </select>
+    <small class="form-text text-muted">Select your gender.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Gender", "Selected gender value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group">
+    <label for="state">State<span class="required-sym">*</span></label>
+    <select class="custom-select user-details-required" name="RegisterCBSUserModel.SelectedState" id="state" @(Model.HeaderObj.IsLoggedIn ? "disabled" : "required")>
+        <option selected disabled value="">Select a State</option>
+        @foreach (var item in Model.StateLGAs)
+        {
+            <option value="@item.Id" @(Model.RegisterCBSUserModel.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+        }
+    </select>
+    <small class="form-text text-muted">Select residential state.</small>
+    <div class="container-fluid no-padding validation-msg">
+        @if (@Html.ValidationMessage("RegisterCBSUserModel.SelectedState") != null)
+        {
+            <p class="tiny-message" style="color:#ff0000">Selected State value is not valid.</p>
+        }
+    </div>
+</div>
+<div class="form-group">
+    <label for="lga">Local Government Area<span class="required-sym">*</span></label>
+    <select class="custom-select user-details-required" name="RegisterCBSUserModel.SelectedStateLGA" id="lga" @(Model.HeaderObj.IsLoggedIn ? "disabled" : "required")>
+        <option selected disabled value="">Select an LGA</option>
+        @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+        {
+            foreach (var item in Model.ListLGAs)
+            {
+                <option value="@item.Id" @(Model.RegisterCBSUserModel.SelectedStateLGA == item.Id ? "selected" : "")>@item.Name</option>
+            }
+        }
+    </select>
+    <small class="form-text text-muted">Select your residential LGA.</small>
+    <div class="container-fluid no-padding validation-msg">
+        @if (@Html.ValidationMessage("RegisterCBSUserModel.SelectedStateLGA") != null)
+        {
+            <p class="tiny-message" style="color:#ff0000">Selected LGA value is not valid.</p>
+        }
+    </div>
+</div>

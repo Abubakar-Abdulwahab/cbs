@@ -1,0 +1,95 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="main-nav-alt">
+    <div class="container">
+        <a class="navbar-brand" href="@Href("~/")"><img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="CBS" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("BIN.Search")">Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.SelfAssessment")">Generate Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("Receipt.Search")">Validate Receipt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.GenerateTin")">Generate Tin</a>
+                </li>
+                @if (!Model.IsLoggedIn)
+                {
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.BvnValidation")">Generate State Tin</a>
+                </li>
+                }
+                @if (Model.ShowSignin)
+                {
+                    if (Model.IsLoggedIn)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle loggedIn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform:capitalize">@Model.DisplayText</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-height:400px;overflow:auto">
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.NoScheduleUploadOption")">Upload Schedule</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.Schedule.Validate")">Validate Schedule</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.Schedules")">PAYE Schedules</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.Batch.Search")">PAYE Schedule Items</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.BatchItem.Receipts")">PAYE Item Receipts</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.BatchItem.Receipt.Validate")">PAYE  Item Receipt Validation</a>                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.PAYE.Receipts")">PAYE Receipts</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("CBS.Payments")">Payment List</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.TccApplcation")">TCC Request</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.Validate.TCC")">TCC Validation</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.ValidateStateTin")">State TIN Validation</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080;padding: .25rem 0.5rem;" href="@Url.AppendModulePrefixToRouteName("C.Requests.History")">TCC Requests List</a>
+                                <div class="dropdown-divider"></div>
+                                @using (Html.BeginForm("SignOut", "Collection", FormMethod.Post, new { @id = "signoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a class="dropdown-item" href="#" id="signoutlnk" style="padding: .25rem 0.5rem;">Sign Out</a>
+                                }
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("CBS.User.Register")">Register</a>
+                        </li>
+                        <li class="nav-item tin-button">
+                            <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.SignIn")">Sign In</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("CBS.User.Register")">Register</a>
+                    </li>
+                    <li class="nav-item tin-button">
+                        <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.SignIn")">Sign In</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    $("#signoutlnk").click(function (e) {
+        $('#signoutForm').get(0).submit();
+    });
+</script>

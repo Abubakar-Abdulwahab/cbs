@@ -1,0 +1,63 @@
+﻿@model Parkway.CBS.Police.Core.VM.AddSettlementFeePartyVM
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Layout.Title = T("Add Fee Party").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("PSS.Admin.Add.Fee.Party.Script");
+}
+
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                    <b style="color:#e97d68;">Settlement Party Name</b>
+                    <div class="form-group" style="margin-bottom:0">
+                        <input type="text" class="form-control" name="Name" id="settlementPartyName" value="@Model.Name" required />
+                        <span class="hint">Enter setttlement fee party name.</span>
+                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <label style="color: #7c7c7c"><input type="checkbox" name="AllowAdditionalCommandSplit" id="allowAdditionalSplitsToggle" value="true">Allow additional command splits</label>
+                </div>
+            </div>
+            <div class="col-md-6" id="accountNumberFieldContainer">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Account Number</b>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="AccountNumber" id="accountNumber" value="@Model.AccountNumber" required />
+                        <span class="hint">Enter setttlement fee party account number.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" id="bankFieldContainer">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Bank</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedBankCode" id="selectedBank" required>
+                            <option selected disabled value="">Select a bank</option>
+                            @if (Model.Banks != null && Model.Banks.Any())
+                            {
+                                foreach (var item in Model.Banks)
+                                {
+                                    <option value="@item.Code" @(Model.SelectedBankCode == item.Code ? "selected" : "")>@item.Name</option>
+                                }
+                            }
+                        </select>
+                        <span class="hint">Select the bank.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-block btn-primary" type="submit">Save</button>
+    </div>
+}

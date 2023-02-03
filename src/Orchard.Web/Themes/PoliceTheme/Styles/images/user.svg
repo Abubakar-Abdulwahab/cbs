@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 59.1 (101010) - https://sketch.com -->
+    <title>7FC123F1-E8C8-4B3A-B2A3-841F115F1EEB</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Web-Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide-(Incomplete)" transform="translate(-389.000000, -194.000000)">
+            <g id="User,Profile.4-Copy" transform="translate(386.000000, 192.000000)">
+                <g id="Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.000000, 3.000000)" stroke="#A5A5A5" stroke-width="1.5">
+                    <path d="M10.4692,1.53078 C11.83291,2.89449 11.83291,5.1055 10.4692,6.46921 C9.10549,7.83292 6.89448,7.83292 5.53077,6.46921 C4.16706,5.1055 4.16706,2.89449 5.53077,1.53078 C6.89448,0.16707 9.10549,0.16707 10.4692,1.53078" id="Path"></path>
+                    <path d="M16,15.492 L16,16.492 C16,17.044 15.552,17.492 15,17.492 L1,17.492 C0.448,17.492 0,17.044 0,16.492 L0,15.492" id="Path"></path>
+                    <path d="M0,15.492 C0,12.466 3.952,10.5 8,10.5" id="Path"></path>
+                    <path d="M8,10.5 C12.048,10.5 16,12.467 16,15.492" id="Path"></path>
+                </g>
+                <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

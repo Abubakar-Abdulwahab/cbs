@@ -1,0 +1,189 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSRequestDetailsVM
+@using Parkway.CBS.Core.Models.Enums
+
+@{
+    Layout.Title = Model.ServiceName + " Details";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.NPF.Main");
+    Style.Require("Style.Datepicker");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+
+    .datepicker {
+        width: 217px;
+    }
+</style>
+
+<div id="container">
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader" colspan="2">REQUEST DETAILS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="FileNumber">File Number</label>
+                    <p class="extend-width">@Model.FileRefNumber</p>
+                </td>
+                <td>
+                    <label for="Status">Status Description</label>
+                    <p class="extend-width">@(((Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus)Model.Status).ToDescription())</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="items" id="settings">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader" colspan="3">APPLICANT INFORMATION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="name" class="heading-text">Name</label>
+                    <p class="extend-width">@Model.CbsUser.Name</p>
+                </td>
+                <td>
+                    <label for="phoneNumber">Phone Number</label>
+                    <p class="extend-width">@Model.CbsUser.PhoneNumber </p>
+                </td>
+                <td>
+                    <label for="email">Email Address</label>
+                    <p class="extend-width"> @Model.CbsUser.Email </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="tin">TIN</label>
+                    <p class="extend-width">@Model.TaxEntity.TaxPayerIdentificationNumber </p>
+                </td>
+                <td>
+                    <label for="rcNumber">RC Number <small>(for corporate)</small></label>
+                    @if (string.IsNullOrEmpty(Model.TaxEntity.RCNumber))
+                    {
+                        <p class="extend-width">&nbsp;</p>
+                    }
+                    else
+                    {
+                        <p class="extend-width">@Model.TaxEntity.RCNumber </p>
+                    }
+                </td>
+                <td>
+                    @if(Model.ServiceTypeId == (int)Parkway.CBS.Police.Core.Models.Enums.PSSServiceTypeDefinition.Escort && Model.CategorySettings.CanShowSubUsersRequestReport) {
+                        <label for="location">Branch</label>
+                        <p class="extend-width">@Model.LocationName</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="rcNumber">Contact Person Name <small>(for corporate)</small></label>
+                    @if (string.IsNullOrEmpty(Model.TaxEntity.ContactPersonName))
+                    {
+                        <p class="extend-width">&nbsp;</p>
+                    }
+                    else
+                    {
+                        <p class="extend-width">@Model.TaxEntity.ContactPersonName</p>
+                    }
+                </td>
+                <td>
+                    <label for="rcNumber">Contact Person Email <small>(for corporate)</small></label>
+                    @if (string.IsNullOrEmpty(Model.TaxEntity.ContactPersonEmail))
+                    {
+                        <p class="extend-width">&nbsp;</p>
+                    }
+                    else
+                    {
+                        <p class="extend-width">@Model.TaxEntity.ContactPersonEmail</p>
+                    }
+                </td>
+                <td>
+                    <label for="rcNumber">Contact Person PhoneNumber <small>(for corporate)</small></label>
+                    @if (string.IsNullOrEmpty(Model.TaxEntity.ContactPersonPhoneNumber))
+                    {
+                        <p class="extend-width">&nbsp;</p>
+                    }
+                    else
+                    {
+                        <p class="extend-width">@Model.TaxEntity.ContactPersonPhoneNumber</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="state">Selected State</label>
+                    <p class="extend-width">@Model.TaxEntity.SelectedStateName</p>
+                </td>
+                <td>
+                    <label for="lga">Selected LGA</label>
+                    <p class="extend-width">@Model.TaxEntity.SelectedLGAName</p>
+                </td>
+                <td colspan="2">
+                    <label for="address">Address</label>
+                    <p class="extend-width">@Model.TaxEntity.Address</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.Partial("\\ServicePartials\\" + Model.ViewName.Trim(), Model.ServiceVM as object)
+</div>

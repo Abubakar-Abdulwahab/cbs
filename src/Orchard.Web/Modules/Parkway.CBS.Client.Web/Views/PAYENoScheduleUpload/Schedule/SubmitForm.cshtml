@@ -1,0 +1,5 @@
+﻿@using (Html.AppendModulePrefixToFormRouteName(Parkway.CBS.Client.Web.RouteName.PAYENoScheduleUpload.NoScheduleUploadShowScheduleResult, FormMethod.Post, new { @class = "confirmForm" }))
+{
+    @Html.AntiForgeryToken()
+    <button class="btn generate-upload" disabled id="proceedbtn">Confirm Schedule</button>
+}

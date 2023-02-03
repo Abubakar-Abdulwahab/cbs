@@ -1,0 +1,156 @@
+﻿@model Parkway.CBS.Police.Admin.VM.PSSBranchProfileDetailVM
+
+@{
+    Layout.Title = "Branch Profile Detail";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.Upload.Branch.Officer.Script");
+}
+
+<style>
+    .upload-info {
+        color: #333333;
+        font-size: 18px;
+        letter-spacing: 0.31px;
+        line-height: 21px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    label.upload-label {
+        flex-direction: column;
+        height: 200px;
+        border: 2px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 100% !important;
+        cursor: pointer;
+    }
+
+        label.upload-label img {
+            height: 50px;
+            width: auto;
+        }
+
+    .upload-caption {
+        color: #333333;
+        font-size: 13px;
+        line-height: 19px;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+        .upload-caption a {
+            color: #00b05f;
+        }
+
+    #upload {
+        display: none;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+</style>
+<h3>MAIN BRANCH DETAILS</h3>
+<div class="row" style="padding:15px">
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Recipient")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.Name</p>
+        @Html.Hint(T("The name of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Phone number")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.TaxEntity.PhoneNumber</p>
+        @Html.Hint(T("Phone number of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Category")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.TaxEntity.CategoryName</p>
+        @Html.Hint(T("Category of recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Email")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.TaxEntity.Email</p>
+        @Html.Hint(T("Email of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Address")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.Address</p>
+        @Html.Hint(T("Address of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Profile ID")</b>
+        <p>@Model.DefaultBranchTaxEntityProfileLocation.TaxEntity.PayerId</p>
+        @Html.Hint(T("Profile ID of recipient"))
+    </div>
+</div>
+<br />
+
+@Html.Partial("\\ServicePartials\\PSSBranchDetailPartial", Model.BranchTaxEntityProfileLocation as object)
+
+<br />
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.BranchOfficer.UploadBranchOfficer, new { profileId = Model.ProfileId }), FormMethod.Post, new { @id = "uploadOfficerForm", @name = "uploadOfficerForm", @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.ProfileId)
+    <div class="col-12 px-0" style="padding-bottom:10px">
+        <label class="upload-label" for="upload">
+            <span style="font-size:14px;font-weight: lighter;" id="fileName"></span>
+            <img src="/media//cbspolice/Images/upload-black.svg" alt="" id="uploadImg" />
+            <span class="upload-caption" id="uploadInfo">Upload officers file here. (max size 2mb).</span>
+        </label>
+        <input type="file" id="upload" name="branchOfficerFile" accept=".xls,.xlsx">
+    </div>
+    <fieldset>
+        <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Proceed To Upload")</button>
+    </fieldset>
+}
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col">@T("Batch Reference")</th>
+            <th scope="col">@T("Created At")</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.BranchOfficerBatches != null && Model.BranchOfficerBatches.Count() > 0)
+        {
+            foreach (var item in Model.BranchOfficerBatches)
+            {
+                <tr>
+                    <td>
+                        @item.BatchReference
+                    </td>
+                    <td>
+                        @item.CreatedAt
+                    </td>
+                    @if (!item.HasGeneratedInvoice)
+                    {
+                    <td><a href="@Url.Action("EscortRequestDetail","BranchOfficer", new { batchId = item.Id, profileId = item.TaxProfileLocationId  })">View Detail</a> | <a href="@Url.Action("GenerateEscortRequest","BranchOfficer", new { id = item.Id })">Generate Request</a></td>
+                    }
+                    else { <td><a href="@Url.Action("EscortRequestDetail","BranchOfficer", new { batchId = item.Id, profileId = item.TaxProfileLocationId  })">View Detail</a></td> }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No Records Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Display(Model.Pager)

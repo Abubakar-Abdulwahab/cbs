@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.ClientRepository.Models.NotificationMessage, Parkway.CBS.ClientRepository" table="Parkway_CBS_Core_NotificationMessage" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="MDA_Id" column="MDA_Id" />
+    <property name="RevenueHead_Id" column="RevenueHead_Id" />
+    <property name="TaxPayer_Id" column="TaxPayer_Id" />
+    <property name="NotificationTypeId" column="NotificationTypeId" />
+    <property name="Recipient" column="Recipient" />
+    <property name="MailSubject" column="MailSubject" />
+    <property name="Body" column="Body" />
+    <property name="DeliveryStatusId" column="DeliveryStatusId" />
+    <property name="SentDate" column="SentDate" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

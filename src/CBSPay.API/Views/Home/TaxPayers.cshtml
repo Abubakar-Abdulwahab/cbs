@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Welcome To TaxPayers Section";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+
+
+<div class="title">
+    <h1>
+        Welcome to Tax Payers Section
+    </h1>
+    <hr>
+    <p>
+        This section covers information relating to tax assets, different types and importance
+    </p>
+</div>
+
+<div class="row custom-tabs">
+    <div class="col-sm-3">
+        <div class="portlet light compressed-menu">
+            <div class="portlet-title">
+                <div class="caption">
+                    Tax Payer
+                </div>
+            </div>
+            <div class="portlet-body">
+                <ul class="nav">
+                    <li>
+                        <a href="~/Home/TaxPayerCompanies"><i class="fa fa-angle-right"></i> Companies</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/TaxPayerIndividuals"><i class="fa fa-angle-right"></i> Individuals </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/TaxPayerGovernments"><i class="fa fa-angle-right"></i> Governments </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/TaxPayerSpecial"><i class="fa fa-angle-right"></i> Special </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-9">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Welcome to Tax Payer Section
+                </div>
+            </div>
+            <div class="portlet-body text-justify">
+                <p>
+                    The revenue administration process has defined tax payers as a person or legal entity that can be associated with an economic activity. The system identifies tax payers using their unique Revenue identification Numbers upon which all transactions with the revenue service will be recorded.
+                </p>
+
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="portlet grey mh-130" style="min-height: 175px;">
+                            <div class="dvicon-box clearfix">
+                                <div class="dvicon-block" style="width:75px;height:120px;text-align: center;">
+                                    @*<i class="icon-question"></i>*@
+                                    <b style="font-size: 5em;font-weight: bolder;">?</b>
+                                </div>
+                                <a href="~/Home/TaxPayerIndividuals" class="dvicon-text">
+                                    <div class="dvicon-text-header">Individuals</div>
+                                    <div class="dvicon-text-desc">
+                                        Single persons who engage in any form of economic activity within the state. They own atleast one form of asset.
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="portlet grey mh-130" style="min-height: 175px;">
+                            <div class="dvicon-box clearfix">
+                                <div class="dvicon-block" style="width:75px;height:120px;text-align: center;">
+                                    @*<i class="icon-question"></i>*@
+                                    <b style="font-size: 5em;font-weight: bolder;">?</b>
+                                </div>
+                                <a href="~/Home/TaxPayerCompanies" class="dvicon-text">
+                                    <div class="dvicon-text-header">Companies</div>
+                                    <div class="dvicon-text-desc">
+                                        Companies and legal entities who engage in business activities within the state. They can be remote or located within the state
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="portlet grey mh-130" style="min-height: 175px;">
+                            <div class="dvicon-box clearfix">
+                                <div class="dvicon-block" style="width:75px;height:120px;text-align: center;">
+                                    @*<i class="icon-question"></i>*@
+                                    <b style="font-size: 5em;font-weight: bolder;">?</b>
+                                </div>
+                                <a href="~/Home/TaxPayerGovernments" class="dvicon-text">
+                                    <div class="dvicon-text-header">Governments</div>
+                                    <div class="dvicon-text-desc">
+                                        Government bodies and parastatals who operate from within Edo State are classified as separate tax payers
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="portlet grey mh-130" style="min-height: 175px;">
+                            <div class="dvicon-box clearfix">
+                                <div class="dvicon-block"  style="width:75px;height:120px;text-align: center;">
+                                    @*<i class="icon-question"></i>*@
+                                    <b style="font-size: 5em;font-weight: bolder;">?</b>
+                                </div>
+                                <a href="~/Home/TaxPayerSpecial" class="dvicon-text">
+                                    <div class="dvicon-text-header">Special</div>
+                                    <div class="dvicon-text-desc">
+                                        Central government approved tax rebates and deals that apply to companies under special considerations are tax payers.
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

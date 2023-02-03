@@ -1,0 +1,24 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortRequestDetailsVM
+
+@{
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+}
+
+
+@using (Html.BeginRouteForm(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval.ApproveRequest, FormMethod.Post, new { @id="escortForm" }))
+{
+    if (Model.EscortInfo.OfficersHasBeenAssigned)
+    {
+        @Html.Partial("\\ServicePartials\\PSSEscortAssignedOfficersPartial", Model)
+    }
+
+    <input name="StartDate" value="@Model.EscortInfo.StartDate" hidden />
+    <input name="EndDate" value="@Model.EscortInfo.EndDate" hidden />
+    <input name="NumberOfOfficers" id="numberOfOfficers" value="@Model.EscortInfo.NumberOfOfficers" hidden />
+    <input name="RequestId" value="@Model.RequestId" hidden />
+
+    foreach (var partial in Model.Partials)
+    {
+        @Html.Partial("\\ServicePartials\\" + partial.PartialName, partial.PartialModel as object)
+    }
+}

@@ -1,0 +1,22 @@
+﻿@{
+    Layout.Title = Html.TitleForPage(T("Not Found").ToString());
+}
+
+<style type="text/css" onload="NotFoundPageRedirect()">
+    body {
+        padding: unset;
+        margin: unset;
+    }
+</style>
+
+<script>
+    function NotFoundPageRedirect() {
+        var site = document.getElementById("idecsite").value;
+        window.location.href = site;
+    }
+</script>
+
+
+<div class="wrapper-payment">
+    <input type="hidden" name="idecsite" id="idecsite" value="https://www.idec.gov.ng/" />
+</div>

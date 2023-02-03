@@ -1,0 +1,8 @@
+﻿Name: Kogi Theme
+Author: Parkway Projects imited
+Description: Central Billing System
+Version: 1.10.2
+Tags: Awesome
+Website: http://orchardproject.net
+Zones: Header, Navigation, Featured, BeforeMain, AsideFirst, Messages, BeforeContent, Content, AfterContent, AsideSecond, AfterMain, TripelFirst, TripelSecond, TripelThird, FooterQuadFirst, FooterQuadSecond, FooterQuadThird, FooterQuadFourth, Footer
+Dependencies: Orchard.Resources

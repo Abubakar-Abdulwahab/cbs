@@ -1,0 +1,70 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="main-nav-alt">
+    <div class="container">
+        <a class="navbar-brand" href="@Href("~/")"><img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="CBS" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("BIN.Search")">Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.SelfAssessment")">Generate Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("Receipt.Search")">Validate Receipt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.GenerateTin")">Generate Tin</a>
+                </li>
+                @if (Model.ShowSignin)
+                {
+                    if (Model.IsLoggedIn)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle loggedIn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform:capitalize">@Model.DisplayText</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" style="color:#808080" href="@Url.RouteUrl("CBS.Receipts")">Paye Receipts</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style="color:#808080" href="@Url.RouteUrl("CBS.Payments")">Payment List</a>
+                                <div class="dropdown-divider"></div>
+                                @using (Html.BeginForm("SignOut", "Collection", FormMethod.Post, new { @id = "signoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a class="nav-item nav-link" href="#" id="signoutlnk">Sign Out</a>
+                                }
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="@Url.RouteUrl("CBS.User.Register")">Register</a>
+                        </li>
+                        <li class="nav-item tin-button">
+                            <a class="nav-item nav-link" href="@Url.RouteUrl("C.SignIn")">Sign In</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="@Url.RouteUrl("CBS.User.Register")">Register</a>
+                    </li>
+                    <li class="nav-item tin-button">
+                        <a class="nav-item nav-link" href="@Url.RouteUrl("C.SignIn")">Sign In</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    $("#signoutlnk").click(function (e) {
+        $('#signoutForm').get(0).submit();
+    });
+</script>

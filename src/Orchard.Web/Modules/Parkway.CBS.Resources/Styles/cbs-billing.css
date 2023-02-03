@@ -1,0 +1,61 @@
+﻿/*.weekly, .monthly, .yearly {
+    display: none;
+}*/
+.months {
+    display: none;
+}
+
+.weeks, .years {
+    display: none;
+}
+
+div.form-group > label {
+    display: inline-block;
+}
+
+label.summary {
+    font-weight: bold;
+}
+
+div.checkbox input[type=checkbox] {
+    height: 20px;
+    width: 20px;
+}
+
+div.radio input[type=radio] {
+    height: 15px;
+    width: 15px;
+}
+
+div.checkbox {
+    margin: 0px;
+}
+/*.recurring-bill*/
+
+/*.textwidth{
+        display:inline;
+        width:80%;
+    }*/
+/* .form-goup {
+        display:inline-block;
+    }
+        label {
+        display:inline;
+    }
+    .form-inline {
+        display:inline-block;
+    }label {
+        display:inline;
+    }*/
+/*div.form-group > label {
+        display:inline-block;
+    }
+*/
+#penaltyDiv, #div1 {
+    margin-bottom: 5px;
+}
+
+.newControl {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

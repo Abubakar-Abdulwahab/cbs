@@ -1,0 +1,170 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    ViewBag.Title = "AssessmetView";
+}
+@{
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+    Script.Require("CBS.MDA.RevenueReport.Script");
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+    Script.Require("CBS.Report.Script").AtFoot();
+
+}
+<h2>AssessmetView</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>ASSESMENT REPORT</h2>
+        </div>
+        <form class="form-inline">
+            <div class="col-md-12 text-center">
+                <div class="form-group">
+                    From
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    To
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control selectBox">
+                        <option>Select MDA</option>
+                        <option>Ministry of Budget and Planning</option>
+                        <option>Ministry of Aviation</option>
+                        <option>Ministry of Education</option>
+                        <option>Ministry of Finance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control selectBox">
+                        <option>Select Revenue Head</option>
+                        <option>Ministry of Budget and Planning</option>
+                        <option>Ministry of Aviation</option>
+                        <option>Ministry of Education</option>
+                        <option>Ministry of Finance</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 text-center secondrow">
+
+                <div class="form-group">
+                    <input class="form-control" placeholder="Enter TIN Number" />
+                </div>
+                <div class="form-group">
+                    <select class="form-control selectBox">
+                        <option>Select invoice Status</option>
+                        <option>PAID</option>
+                        <option>UNPAID</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Enter Invoice Number" />
+                </div>
+                <button class="btn btn-default">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12 reportsummary">
+        <a href="javascript:;" class="btn btn-danger pdf"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+        <a download="MdaReport.xls" href="javascript:;" class="btn btn-success"  onclick="return ExcellentExport.excel(this,'invoices','MDA Report');"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-responsive" id="invoices">
+                    <thead>
+                        <tr>
+                            <th>
+                                INVOICE DATE
+                            </th>
+                            <th>
+                                MDA
+                            </th>
+                            <th>
+                                INVOICE NUMBER
+                            </th>
+                            <th>
+                                PAYER'S TIN
+                            </th>
+                            <th>
+                                REVENUE HEAD
+                            </th>
+                            <th>
+                                INVOICE AMOUNT
+                            </th>
+                            <th>
+                                INVOICE STATUS
+                            </th>
+                            <th>
+                                AMOUNT PAID
+                            </th>
+                            <th>
+                                PAYMENT DATE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                21 May 2017
+                            </td>
+                            <td style="word-wrap:break-word;">
+                                <a href="javascript:void(0);">MINISTRY OF LANDS AND HOUSING</a>
+                            </td>
+                            <td>
+                                012345678
+                            </td>
+                            <td>
+                                T564982
+                            </td>
+                            <td>
+                                CERTIFICATE OF OCCUPANCY
+                            </td>
+                            <td>
+                                56,000
+                            </td>
+                            <td>
+                                PAID
+                            </td>
+                            <td>
+                                56,000
+                            </td>
+                            <td>
+                                06 Jun 2017
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="summary">TOTAL NUMBER OF INVOICES: 187</p>
+            <p class="summary">TOTAL INVOICE AMOUNT: &#X20A6; 418,500</p>
+            <p class="summary">TOTAL AMOUNT PAID: &#X20A6; 308,500</p>
+        </div>
+    </div>
+</div>

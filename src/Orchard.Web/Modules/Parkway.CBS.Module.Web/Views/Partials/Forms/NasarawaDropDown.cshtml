@@ -1,0 +1,27 @@
+﻿@model Parkway.CBS.Core.HelperModels.FormControlViewModel
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="lga">@Model.LabelText<small style="color:red; font-weight:bolder">*</small></label>
+        @Html.Hidden("[" + Model.FormIndex + "].ControlIdentifier", Model.ControlIdentifier)
+        @Html.Hidden("[" + Model.FormIndex + "].FormIndex", Model.FormIndex)
+        <select class="custom-select" name="@("[" + Model.FormIndex + "].FormValue")" @(Model.IsCompulsory ? "required" : "")>
+            <option selected disabled value="">@Model.PlaceHolderText</option>
+            <option value="20">Akwanga</option>
+            <option value="21">Awe</option>
+            <option value="22">Doma</option>
+            <option value="23">Karu</option>
+            <option value="24">Keana</option>
+            <option value="25">Keffi</option>
+            <option value="26">Kokona</option>
+            <option value="27">Lafia</option>
+            <option value="28">Nasarawa</option>
+            <option value="29">Nasarawa-Eggon</option>
+            <option value="30">Obi</option>
+            <option value="31">Toto</option>
+            <option value="32">Wamba</option>
+        </select>
+        <small class="form-text text-muted">@Model.HintText</small>
+        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("[" + Model.FormIndex + "].FormValue", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    </div>
+</div>

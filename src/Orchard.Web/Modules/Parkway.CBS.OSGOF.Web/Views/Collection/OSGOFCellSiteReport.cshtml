@@ -1,0 +1,249 @@
+﻿@model Parkway.CBS.OSGOF.Admin.ViewModels.CellSiteReportVM
+@{
+    Layout.Title = "Confirm Cell Sites Assessment";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("OSGOF.CellSite.Report.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<style>
+    .disablelink {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var doWork = @Html.Raw(Json.Encode(Model.DoWork)); 
+    var doLeg2 = @Html.Raw(Json.Encode(Model.DoLeg2)); 
+    var batchToken = @Html.Raw(Json.Encode(Model.Token));
+    var adapterValue = @Html.Raw(Json.Encode(Model.AdapterValue));
+</script>
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+@Html.AntiForgeryToken()
+
+<div class="wrapper">
+    <div class="top-banner alt">
+        <div class="banner-bottom" style="background-image:@("url(" + Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/banner-top.png")) + ")")">
+            <h3>Confirm Bill</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Href("~/")>Home</a></li>
+                <li class="breadcrumb-item"><a href="@Url.AppendModulePrefixToRouteName("C.SelfAssessment")">Select Identity</a></li>
+                <li class="breadcrumb-item"><a href="@Url.AppendModulePrefixToRouteName("C.InvoiceProceed")">Paye Assessment</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Confirm Bill</li>
+            </ol>
+        </nav>
+    </div>
+    @Html.Partial("Partials\\FlashPartial", (string.IsNullOrEmpty(Model.ErrorMessage) ? "" : Model.ErrorMessage))
+    <div class="content">
+        <div class="container form-container">
+            <div class="details">
+                <h1>Employer Details</h1>
+
+                <p class="top-info">You are <b>@Model.Category</b>, you are paying for <b>@Model.RevenueHeadName (mda - @Model.MDAName)</b>. kindly fill the rest of the form to proceed.</p>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <p class="til">Name</p>
+                        <p class="ans">@Model.Recipient</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Email</p>
+                        <p class="ans">@Model.Email</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Phone</p>
+                        <p class="ans">@Model.PhoneNumber</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="til">TIN</p>
+                        <p class="ans">@Model.TIN</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="default-hr">
+            <div class="main-form payment-form big mt-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">State | LGA</th>
+                                <th scope="col">Operator Id | OSGOF Id</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Lat & Long</th>
+                                <th scope="col">Site Address</th>
+                                <th scope="col">Reference</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @if (!Model.DoWork)
+                            {
+                                if (Model.CellSites.Any())
+                                {
+                                    foreach (var item in Model.CellSites)
+                                    {
+                                        <tr>
+                                            <td scope="row">
+                                                @item.State | @item.LGA
+                                            </td>
+                                            <td>@item.CellSite | @item.OSGOFId</td>
+                                            <td>&#x20A6;@item.AmountValue</td>
+                                            <td>@item.Year</td>
+                                            <td>@item.Coords</td>
+                                            <td>@item.Address</td>
+                                            <td>@item.Ref</td>
+                                            @if (item.HasError)
+                                            {
+                                                <td><span class="status-false" title="@item.ErrorMessage" style="white-space: pre-wrap;" data-toggle="tooltip" data-placement="top" data-html="true">i</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="status-true" data-html="true">&#10003;</span></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7">No records found. Try again later.</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.DoWork)
+                    {
+                        <div style="position:absolute;margin:auto;z-index:1;" id="level">Processing... Please wait</div>
+                        <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1"></div>
+                    }
+                    else
+                    {
+                        <div style="position:absolute;margin:auto;z-index:1; display:none" id="level">Processing... Please wait</div>
+                        <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;display:none"></div>
+                    }
+                    </br>
+                    </br>
+                </div>
+                @if (!Model.DoWork)
+                {
+                    <div class="table-pagination-2">
+                        @*<span class="show">Show</span>
+                            <select class="custom-select">
+                                <option selected>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>*@
+                        <a href="#" id="moveleft" name="cursor">Previous </a><span id="page">1</span>/ <span id="pageSize">@Model.PageSize</span><a href="#" id="moveright" name="cursor">Next</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-pagination-2">
+                        @*<span class="show">Show</span>
+                            <select class="custom-select">
+                                <option selected>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>*@
+                        <a href="#" id="moveleft" name="cursor">Previous </a><span id="page">1</span>/ <span id="pageSize">@Model.PageSize</span><a href="#" id="moveright" name="cursor">Next</a>
+                    </div>
+                }
+
+                @if (Model.DoWork)
+                {
+                    <div class="summary">
+                        <div class="summary-details">
+                            <h4 class="numbers">
+                                <span class="blue" id="totalenttp" data-toggle="tooltip" data-html="true"><span class="bigger" id="totalent"></span> Total Entries</span>
+                                <span class="green" id="totalvaltp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalval"></span> Valid Entries</span>
+                                <span class="red" id="totalinvtp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalinv"></span> Invalid Entries</span>
+                            </h4>
+                            <div class="total-amount">
+                                <span class="amt">Amount to pay</span>
+                                <span class="amt-figures" id="totalamt"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="summary">
+                        <div class="summary-details">
+                            <h4 class="numbers">
+                                <span class="blue" title="@Model.CellSitesReport.AmountProcessed entries processed" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.CellSitesReport.AmountProcessedDisplayValue</span> Total Entries</span>
+                                <span class="green" title="@Model.CellSitesReport.AmountOfValidRecords valid entries" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.CellSitesReport.AmountOfValidRecords</span> Valid Entries</span>
+                                <span class="red" title="@Model.CellSitesReport.AmountOfInvalidRecords invalid entries" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.CellSitesReport.AmountOfInvalidRecords</span> Invalid Entries</span>
+                            </h4>
+                            <div class="total-amount">
+                                <span class="amt">Amount to pay</span>
+                                <span class="amt-figures">&#x20A6;@Model.Amount</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @using (Html.BeginForm("ConfirmBill", "Collection", FormMethod.Post, new { @id = "confirmForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("token", Model.Token);
+                    <button class="btn generate-upload" @(Model.DoWork ? "disabled" : "") id="proceedbtn">Proceed to invoice</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top" style="background-image:@("url(" + Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/footer-bg.png")) + ")")">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

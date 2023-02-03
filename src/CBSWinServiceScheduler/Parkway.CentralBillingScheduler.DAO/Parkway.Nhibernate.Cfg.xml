@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parkway.tools.nhibernate>
+  <SessionFactory name="Abia_SessionFactory" delay-initialization="false" schema-output-file="C:\Parkway\DB\GeneratedScripts\WAEC.sql" >
+    <property name="dialect" value="NHibernate.Dialect.MsSql2000Dialect" />
+    <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
+    <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
+	  <property name="connection.connection_string" value="Server=(local);initial catalog=Temp;User ID=sa;Password=password01;Connection Timeout=100000"/>
+    <property name="connection.isolation" value="Serializable" />
+    <property name="show_sql" value="false" />
+    <!--<property name="proxyfactory.factory_class"
+              value="NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu" />-->
+    <MappingAssemblies>
+      <mapping assembly="Parkway.CentralBillingScheduler.DAO" />
+    </MappingAssemblies>
+  </SessionFactory>
+</parkway.tools.nhibernate>

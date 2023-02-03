@@ -1,0 +1,73 @@
+﻿/*navbar logo css*/
+.cbslogo {
+    width: 65px;
+}
+/*navbar styling for bottpm margin*/
+.navbar {
+    margin-bottom: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.navbar-static-top{
+    position:fixed !important;
+}
+/*div.navbar-default{
+
+}*/
+div.container-fluid.back {
+    /*background: url('../Styles/images/Image.jpg');*/
+    background-size: cover;
+}
+/*div.row{
+	background: url('../images/Image.png');
+}*/
+/*Setting background image*/
+div.background {
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*Signin style*/
+h3.signin {
+    color: white;
+}
+
+label {
+    color: white;
+}
+    /*Password Label*/
+    label.password {
+        margin-top: 15px;
+    }
+/*Button*/
+.btn-warning {
+    background-color: #E2AD33;
+    border-color: #E2AD33;
+}
+/*Transparent input background*/
+input.form-control {
+    background: transparent;
+    color: white;
+}
+/*addon background*/
+span.input-group-addon {
+    background: transparent;
+    color: white;
+}
+/*fort awesome color*/
+i.fa {
+    color: white;
+}
+/*forgot password*/
+a.forgot {
+    color: white;
+    text-decoration: none;
+}
+/*Forgot paragraph password*/
+p.forgotp {
+    margin-top: 10px;
+}

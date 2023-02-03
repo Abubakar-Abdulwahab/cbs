@@ -1,0 +1,97 @@
+﻿@model Parkway.CBS.Police.Core.VM.RequestApprovalLogVM
+@using Parkway.CBS.Core.Models.Enums;
+
+@{
+    Layout.Title = "Approval Log";
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+        margin-bottom: 5px;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+</style>
+
+<div>
+    @if (Model.ApprovalLog.Any() && Model.ApprovalLog != null)
+    {
+        foreach (var log in Model.ApprovalLog)
+        {
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader" colspan="3">APPROVING ADMIN INFORMATION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="name">Name</label>
+                            <p class="extend-width">@log.ApprovingAdminUserName</p>
+                        </td>
+                        <td>
+                            <label for="status">Status</label>
+                            <p class="extend-width">@(((Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus)log.Status).ToDescription())</p>
+                        </td>
+                        <td>
+                            <label for="approvalTime">Time of Approval</label>
+                            <p class="extend-width">@log.ApprovalTime</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label for="comment">Comment</label>
+                            <p class="extend-width">@log.Comment</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    }
+</div>

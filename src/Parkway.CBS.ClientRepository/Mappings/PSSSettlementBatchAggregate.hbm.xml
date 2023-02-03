@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.PSSSettlementBatchAggregate, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSSettlementBatchAggregate" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    
+    <property name="RetryCount" column="RetryCount" />
+    <property name="TransactionCount" column="TransactionCount" />
+    <property name="Error" column="Error" />
+    <property name="Amount" column="Amount" />
+    <property name="TimeFired" column="TimeFired" />
+    <property name="SettlementEngineResponseJSON" column="SettlementEngineResponseJSON" length="1000000" />
+    <property name="SettlementEngineRequestJSON" column="SettlementEngineRequestJSON" length="1000000" />
+    <property name="RequestReference" column="RequestReference" />
+    <property name="ErrorType" column="ErrorType" />
+    <property name="ErrorMessage" column="ErrorMessage" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="SettlementBatch" column="SettlementBatch_Id"/>
+  </class>
+</hibernate-mapping>

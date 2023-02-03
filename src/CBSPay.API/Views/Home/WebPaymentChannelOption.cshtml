@@ -1,0 +1,77 @@
+﻿@model CBSPay.Core.APIModels.TempPaymentRequest
+@using CBSPay.Core.Helpers
+@{
+    ViewBag.Title = "WebPaymentChannelOption";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+    string TestMode = Configuration.TestMode;
+    var paymentCode = Model.PaymentCode;
+}
+<h2>Select Payment Option</h2>
+<div style="align-self: center">
+    <p><em><small><a id="@paymentCode" onclick="disableThis()" class="quickteller-checkout-anchor" style="text-align: left;">payment button will appear here shortly...</a></small></em></p>
+    <p><a id="showDisabled" class="btn btn-default disabled" style="text-align: left;background-color: gray;opacity:0;">processing...</a></p>
+    @*onClick="this.disabled=true; this.value='Sending…';"*@
+    @*<button id="submit" class="btn btn-success">some button</button>*@
+    @section scripts
+    {
+        <script>
+            var QTCheckout = QTCheckout || {};
+            //var testMode =;
+            var testMode = Boolean(@TestMode);
+            var baseUrl = "";
+            QTCheckout.paymentItems = QTCheckout.paymentItems || [];
+
+            QTCheckout.paymentItems.push({
+                paymentCode: '@paymentCode',
+                extraData: {
+                    amount:'@Model.Amount',
+                    buttonSize: 'medium',
+                    customerId:'@Model.TransactionReference',
+                    mobileNumber:'@Model.PhoneNumber',
+                    emailAddress: 'default',
+                    redirectUrl: '@Model.QuickTellerRedirectUrl',
+                    requestReference: '@Model.MerchantRequestReference'
+                }
+            });
+
+            //if (testMode == true) baseUrl = "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=";
+            //    else baseUrl = "https://paywith.quickteller.com/scripts/quickteller-checkout-min.js?v=";
+
+            if (testMode) {
+                baseUrl = '@Configuration.TestInterSwitchUrl';
+            }
+            else {
+                baseUrl = '@Configuration.LiveInterSwitchUrl';
+            }
+
+            if (!QTCheckout.qtScript) {
+                var qtScript = document.createElement('script');
+                qtScript.type = 'text/javascript';
+                qtScript.async = true;
+                qtScript.src = baseUrl + new Date().getDay();
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(qtScript, s);
+                QTCheckout.qtScript = qtScript;
+            }
+
+            else if (QTCheckout.buildPaymentItemsUI) {
+                QTCheckout.buildPaymentItemsUI();
+            }
+            function disableThis()
+            {
+                var payment = document.getElementById("@paymentCode");
+                payment.hidden = true;
+                var hide = document.getElementById("showDisabled");
+                hide.style.opacity = 1;
+                console.log("disabled!!");
+            }
+
+            //$('#submit').click(function (e) {
+            //    console.log('button', this)
+            //    e.preventDefault()
+            //    $(this).prop('disabled', true);
+            //})
+
+        </script>
+    }
+</div>

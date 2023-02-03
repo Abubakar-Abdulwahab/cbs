@@ -1,0 +1,144 @@
+﻿@{
+    Layout.Title = Html.TitleForPage(T("Not Found").ToString());
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+<style type="text/css">
+    body {
+        padding: unset;
+        margin: unset;
+    }
+
+    .error-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: unset;
+        margin: unset;
+    }
+
+    .return-btn {
+        background-color: #2a864e;
+        border: unset;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        padding: 9px 38px;
+    }
+
+    .error-container {
+        text-align: center;
+    }
+
+    .error-itself div:nth-of-type(1) {
+        width: 80vw;
+        height: 300px;
+        padding-top: 10px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .error-container .error-itself div h3 {
+        font-size: 70px;
+        margin: unset;
+    }
+</style>
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="main-nav-alt">
+    <div class="container">
+        <a class="navbar-brand" href="@Href("~/")"><img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="CBS" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("BIN.Search")">Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.SelfAssessment")">Generate Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("Receipt.Search")">Validate Receipt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.GenerateTin")">Generate Tin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("CBS.User.Register")">Register</a>
+                </li>
+                <li class="nav-item tin-button">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.SignIn")">Sign In</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>NOT FOUND</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container">
+            <div class="error-container">
+                <div class="error-itself">
+                    <div>
+                        <h3>404</h3>
+                        <p>"something went wrong somewhere"</p>
+                        <p style="margin-bottom: 25px">The page you are looking for is not available right now.</p>
+
+                        <a href="/" class="return-btn">Return to home page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-top">
+
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/CBS Logo@4x.png"))" alt="">
+                    <p class="logo-caption">
+                        Experience the easy and secure way to
+                        pay your taxes or bills owed to the
+                        @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantName.cshtml")) @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantAdditionalName.cshtml")) online or at any bank branch.
+                    </p>
+                </div>
+                <div class="col-md-2 quick-links">
+                    <h3></h3>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">State News</a>
+                </div>
+                <div class="col-md-2 quick-links">
+                    <h3>QUICK LINKS</h3>
+                    <a href="#">Downloads</a>
+                    <a href="#">FAQs</a>
+                </div>
+                <div class="col-md-4">
+                    <h3>CONNECT WITH US</h3>
+                    <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/instagram.png"))" alt=""></a>
+                    <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/facebook.png"))" alt=""></a>
+                    <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/twitter.png"))" alt=""></a>
+                    <p class="copyright">Copyright © @DateTime.Now.ToLocalTime().Year by central billing system</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

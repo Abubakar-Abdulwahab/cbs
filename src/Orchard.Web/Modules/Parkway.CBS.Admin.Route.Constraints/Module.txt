@@ -1,0 +1,10 @@
+﻿Name: Parkway.CBS.Admin.Route.Constraints
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Parkway.CBS.Admin.Route.Constraints:
+        Description: Prevents Admin from accessing client routes.

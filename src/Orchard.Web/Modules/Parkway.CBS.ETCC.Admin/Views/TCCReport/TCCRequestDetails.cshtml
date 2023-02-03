@@ -1,0 +1,236 @@
+﻿@model Parkway.CBS.Core.HelperModels.TCCRequestDetailVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Layout.Title = "TCC Request Details";
+
+    Style.Require("CBS.NPF.Main");
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+</style>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div id="container">
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">REQUEST DETAILS</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="email">Application Number</label>
+                        <p class="extend-width">@Model.ApplicationNumber</p>
+                    </td>
+                    <td>
+                        <label for="tin">Request Date</label>
+                        <p class="extend-width">@Model.RequestDate</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="email">Request Reason</label>
+                        <p class="extend-width">@Model.RequestReason</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="name">Applicant Name</label>
+                        <p class="extend-width">@Model.ApplicantName</p>
+                    </td>
+                    <td>
+                        <label for="phoneNumber">Phone Number</label>
+                        <p class="extend-width">@Model.PhoneNumber</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Residential Address</label>
+                        <p class="extend-width">@Model.ResidentialAddress</p>
+                    </td>
+                    <td>
+                        <label for="tin">Office Address</label>
+                        <p class="extend-width">@Model.OfficeAddress</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">State TIN</label>
+                        <p class="extend-width">@Model.TIN</p>
+                    </td>
+                    <td>
+                        <label for="tin">Occupation</label>
+                        <p class="extend-width">@Model.Occupation</p>
+                    </td>
+                </tr>
+                <tr>
+                    @if (@Model.IsRentedApartment)
+                    {
+                        <td>
+                            <label for="email">Landlord Name</label>
+                            <p class="extend-width">@Model.LandlordName</p>
+                        </td>
+                        <td>
+                            <label for="tin">Landlord Address</label>
+                            <p class="extend-width">@Model.LandlordAddress</p>
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tin">Development Levy Invoice Number</label>
+                        <p class="extend-width">@Model.DevelopmentLevyInvoiceNumber</p>
+                    </td>
+                    <td>
+                        <label for="tin">Exemption Type</label>
+                        <p class="extend-width">@Model.ExemptionTypeS</p>
+                    </td>
+                </tr>
+                @if (Model.ExemptionType == Parkway.CBS.Core.Models.Enums.TCCExemptionType.HouseWife)
+                {
+                    <tr>
+                        <td>
+                            <label for="email">Husband Name</label>
+                            <p class="extend-width">@Model.HusbandName</p>
+                        </td>
+                        <td>
+                            <label for="tin">Husband Address</label>
+                            <p class="extend-width">@Model.HusbandAddress</p>
+                        </td>
+                    </tr>
+                }
+                else if (Model.ExemptionType == Parkway.CBS.Core.Models.Enums.TCCExemptionType.Student)
+                {
+                    <tr>
+                        <td>
+                            <label for="email">Institution Name</label>
+                            <p class="extend-width">@Model.InstitutionName</p>
+                        </td>
+                        <td>
+                            <label for="tin">Card Identification Number</label>
+                            <p class="extend-width">@Model.IdentificationNumber</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">Uploaded File Name</label>
+                            <p class="extend-width">First Leaving Certificate</p>
+                        </td>
+                        <td>
+                            <label for="tin">Download File</label>
+                            <p class="extend-width">@Model.IdentificationNumber</p>
+                        </td>
+                    </tr>
+                }
+                else if (Model.ExemptionType == Parkway.CBS.Core.Models.Enums.TCCExemptionType.WhollyExempted)
+                {
+                    <tr>
+                        <td>
+                            <label for="email">Uploaded File Name</label>
+                            <p class="extend-width">Exemption Certificate</p>
+                        </td>
+                        <td>
+                            <label for="tin">Download File</label>
+                            <p class="extend-width">@Model.IdentificationNumber</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">REQUEST ATTACHMENTS</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <table class="items">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="titleHeader">File Name</th>
+                                    <th scope="col">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Attachments != null && Model.Attachments.Count() > 0)
+                                {
+                                    foreach (var item in Model.Attachments)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.UploadTypeName
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default" title="Download file" formaction="@Url.Action("TCCAttachmentDownload", "TCCFileExport", new { fileName = item.UploadTypeName, path = item.FilePath, contentType = item.ContentType })" formnovalidate>
+                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="11">No attachment Found</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+}

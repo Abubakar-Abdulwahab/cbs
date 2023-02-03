@@ -1,0 +1,84 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSRequestInvoiceVM
+@{
+   if (Model.Invoices != null && Model.Invoices.Any()) { 
+    Layout.Title = "" + Model.Invoices.FirstOrDefault().ServiceName + " " + Model.Invoices.FirstOrDefault().FileRefNumber;
+        }
+    Script.Require("CBS.npf.extract.details.Script").AtFoot();
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+</style>
+
+<div id="container">
+    <table class="items" id="settings">
+        <thead>
+            <tr>
+                <th>
+                    INVOICE&nbsp;NUMBER
+                </th>
+                <th>
+                    SERVICE
+                </th>
+                <th>
+                    STATUS
+                </th>
+                <th style="text-align:right">
+                    AMOUNT
+                </th>
+                <th style="text-align:right">
+                    AMOUNT&nbsp;DUE
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Invoices != null && Model.Invoices.Any())
+            {
+                foreach (var invoice in Model.Invoices)
+                {
+                    <tr>
+                        <td><a href="@invoice.InvoiceUrl" name="viewInvoice">@invoice.InvoiceNumber</a></td>
+                        <td>@invoice.ServiceName</td>
+                        <td>@((Parkway.CBS.Core.Models.Enums.InvoiceStatus)invoice.Status)</td>
+                        <td style="text-align:right"><span>&#8358;</span>@String.Format("{0:n2}", @invoice.Amount)</td>
+                        <td style="text-align:right"><span>&#8358;</span>@String.Format("{0:n2}", @invoice.AmountDue)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" style="text-align:center">No invoices found</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<script>
+    $('a[name="viewInvoice"]').click(function (e) {
+        e.preventDefault();
+        window.open(this.href, "cbsinvoice", "width=800,height=800,scrollbars=yes")
+    });
+</script>

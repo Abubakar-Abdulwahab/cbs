@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.POSSAP.Scheduler.Models.PSSExternalDataRankStaging, Parkway.CBS.POSSAP.Scheduler" table="Parkway_CBS_POSSAP_Scheduler_PSSExternalDataRankStaging" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="Name" column="Name" />
+    <property name="Code" column="Code" />
+    <property name="ExternalDataRankId" column="ExternalDataRankId" />
+    <property name="HasError" column="HasError" />
+    <property name="ErrorMessage" column="ErrorMessage" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="CallLogForExternalSystem" column="CallLogForExternalSystem_Id"/>
+  </class>
+</hibernate-mapping>

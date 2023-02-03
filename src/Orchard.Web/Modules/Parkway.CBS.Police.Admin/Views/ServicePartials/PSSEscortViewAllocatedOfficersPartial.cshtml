@@ -1,0 +1,134 @@
+﻿@{ 
+    Script.Require("PSS.Admin.View.Allocated.Officers.Script").AtFoot();
+}
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-word;
+        margin-bottom: 5px;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+
+    #allocatedOfficersModal{
+        display:none;
+    }
+
+    .overlay {
+        position: fixed;
+        background-color: rgba(0,0,0,0.5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        display: block;
+    }
+
+    .allocated-officers-div{
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-flow: nowrap row;
+        justify-content:center;
+        align-items:center;
+        position:relative;
+    }
+
+    .allocated-officers-content-div {
+        background-color: #ffffff;
+        padding: 10px;
+        height: 400px;
+        overflow: auto;
+        width: 800px;
+        position: relative;
+        display: flex;
+        flex-flow: nowrap column;
+        justify-content: space-between;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 14%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="overlay" id="allocatedOfficersModal">
+    <div class="allocated-officers-div">
+        <div class="allocated-officers-content-div">
+            <table class="items" id="allocatedOfficersTable">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">NAME</th>
+                        <th scope="col" id="titleHeader">RANK</th>
+                        <th scope="col" id="titleHeader">COMMAND</th>
+                        <th scope="col" id="titleHeader">FORCE NUMBER</th>
+                        <th scope="col" id="titleHeader">DATE ALLOCATED</th>
+                    </tr>
+                </thead>
+                <tbody id="allocatedOfficersTableBody">
+                    <tr>
+                        <td colspan="5">
+                            Officers have not yet been selected by squadron leader
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span name="profileloader" id="allocatedOfficersLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+            <div id="searchError"></div>
+            <button type="button" style="width:100%" id="closeViewOfficersModal">Close</button>
+        </div>
+    </div>
+</div>

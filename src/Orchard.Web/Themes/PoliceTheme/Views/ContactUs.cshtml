@@ -1,0 +1,132 @@
+﻿<style>
+
+    .contactloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 25%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+
+
+<div class="container-fluid police-extract-main-content no-margin no-padding">
+    <div class="container-fluid police-extract-container no-padding">
+        <div class="container police-extract-form-container no-padding">
+            <div class="container-fluid no-margin no-padding service-note-toggle-container">
+                <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#sideNoteCollapsible" id="serviceNoteToggle">Click here to view note</button>
+            </div>
+            <div class="row no-margin no-padding">
+                <div class="container col-md-6 no-padding police-extract-form">
+                    <div>
+                        <div class="container pss-flash error-alert-bar" id="errorFlash" style="display:none;margin-bottom:4px;">
+                            <div class="row no-padding no-margin">
+                                <div class="container col-2 error-icon-container no-margin no-padding">
+                                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/danger.svg"))" class="img img-responsive pss-flash-icon">
+                                </div>
+                                <div class="container col-9 no-margin no-padding error-icon-details">
+                                    <h5>Error!</h5>
+                                    <p id="errorMessage"></p>
+                                </div>
+                                <div class="col-1 delete-error-alert-icon" id="closeFlash">
+                                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container pss-flash success-alert-bar" id="successFlash" style="display:none; padding-bottom:1em;">
+                            <div class="row no-padding no-margin">
+                                <div class="container col-2 success-icon-container no-margin no-padding">
+                                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreenTwo.svg"))" class="img img-responsive pss-flash-icon">
+                                </div>
+                                <div class="container col-9 no-margin no-padding success-icon-details">
+                                    <h5>Success!</h5>
+                                    <p>Your message has been sent.</p>
+                                </div>
+                                <div class="col-1 delete-success-alert-icon" id="closeSuccessFlash">
+                                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form name="contactUsForm" id="contactUsForm" method="post">
+                        <h3 style="padding-top:1em;">Send Message</h3>
+                        <p class="text-muted">Fill out the form, we'll be in touch</p>
+                        <div class="form-group">
+                            <label for="Email">Email</label>
+                            <input type="email" class="form-control" id="email" name="Email" required />
+                            <small class="form-text text-muted">Please enter your email.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Subject">Subject</label>
+                            <input class="form-control" id="subject" name="Subject" required />
+                            <small class="form-text text-muted">Specify the subject of this message.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input class="form-control" id="name" name="Name" required />
+                            <small class="form-text text-muted">Enter your name.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="4" cols="50" style="min-height:100px" required></textarea>
+                            <small class="form-text text-muted">What would you like help with.</small>
+                        </div>
+
+                        <div class="form-group" style="position:relative">
+                            <button type="submit" id="submitBtn" class="btn btn-block contact-btn" style="height: 53px; background-color: #2F4CB0;color:white">Send</button>
+                            <span name="contactloader" class="contactloader" id="contactUsLoader" style="position:absolute;margin:auto;z-index:10;"></span>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="container col-md-6 no-padding" id="sideNoteCollapsible">
+                    <div class="police-extract-form-container-details">
+                        <div class="container police-extract-details" style="padding-left:30px; padding-right:30px;">
+                            <h3 style="padding-top:1em;">Contact Information</h3>
+
+                            <p>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/map-pin.svg"))" />
+                                <b>Address:</b><br />The Nigeria Police Force, Force headquarters, Louis Edet House. Area 11, Garki, Abuja.
+                            </p>
+                            <p>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/mail.svg"))" />
+                                <b>Email:</b><br /> <a href="mailto:info@possap.gov.ng">info@possap.gov.ng</a>
+                            <p>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/phone-blue.svg"))" />
+                                <b>Call:</b> <br /> <a href="tel:018884040">018884040</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

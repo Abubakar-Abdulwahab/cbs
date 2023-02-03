@@ -1,0 +1,116 @@
+﻿.wrapper .top-banner .jumbotron .container .img-overlay {
+    position: relative;
+    width: 100vw;
+    height: 600px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+    .wrapper .top-banner .jumbotron .container .img-overlay img {
+        position: absolute;
+        max-width: 100%;
+        max-height: 100%;
+        /* right:-160px; */
+        right: -12vw;
+        top: 80px;
+        /* opacity: 0.35; */
+    }
+
+    .wrapper .top-banner .jumbotron .container .img-overlay::after {
+        content: ' ';
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(rgb(3,159,211),rgb(3,99,131));
+        /* right:-12vw; */
+        right: -25vw;
+        top: 0;
+        opacity: 0.68;
+        /* width:100%; */
+    }
+
+.wrapper .top-banner .jumbotron {
+    overflow: hidden;
+}
+/* new banner implementation starts here */
+.top-banner .jumbotron {
+    background-image: linear-gradient(rgb(3,159,211),rgb(3,99,131));
+    padding-bottom: unset;
+}
+
+.top-banner .niger-banner .container-fluid {
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+    .top-banner .niger-banner .container-fluid::before {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: block;
+        opacity: 0.2;
+        z-index: 0;
+        background-image: url(/media/images/Cir.svg); /*Circles svg overlay*/
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+/* ends here */
+
+#main-nav.scrolled {
+      background-color:#ffffff; /*Navbar scrolled background color*/
+}
+
+#main-nav-alt .loggedIn {
+    color: #3A6925;
+}
+
+.top-banner .banner-bottom {
+    background-color: #3A6925;
+}
+
+.breadcrumbs .breadcrumb .breadcrumb-item {
+    color: #3A6925;
+}
+
+.pay-nav-two .nav a.nav-item {
+    color: #247fbd;
+    border: 1px solid #3A6925;
+}
+
+.pay-nav-two .nav a.nav-item.active {
+    color: #ffffff;
+    background-color: #3A6925;
+}
+
+.pay-nav .nav-pills .nav-link.active,
+.pay-nav .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #3A6925;
+}
+
+.Paye-credentials .gen a {
+    color: #3A6925;
+}
+
+.table-pagination-2 a {
+    color: #3A6925;
+}
+
+/* new svg icons styles starts */
+.row .info-content svg {
+    padding-bottom: 20px;
+    height: 60px;
+    width: 50px;
+    color: #3A6925; /*homepage svg icon color, modify for themeing effect*/
+}
+
+/* new svg styles ends */

@@ -1,0 +1,18 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="main-nav-alt">
+    <div class="container">
+        @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/Logo.cshtml"))
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        </div>
+    </div>
+</nav>
+<script>
+    $("#signoutlnk").click(function (e) {
+        $('#signoutForm').get(0).submit();
+    });
+</script>

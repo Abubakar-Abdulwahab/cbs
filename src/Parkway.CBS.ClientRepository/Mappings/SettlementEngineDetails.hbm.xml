@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.SettlementEngineDetails, Parkway.CBS.Core" table="Parkway_CBS_Core_SettlementEngineDetails" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="JSONModel" column="JSONModel" />
+    <property name="TimeFired" column="TimeFired" />
+    <property name="Params" column="Params" />
+    <property name="Amount" column="Amount" />
+    <property name="TransactionCount" column="TransactionCount" />
+    <property name="SettlementId" column="SettlementId" />
+    <property name="Error" column="Error" />
+    <property name="SettlementEngineResponseJSON" column="SettlementEngineResponseJSON" />
+    <property name="LongerParams" column="LongerParams" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

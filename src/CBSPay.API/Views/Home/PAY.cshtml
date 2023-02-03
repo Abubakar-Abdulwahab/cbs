@@ -1,0 +1,91 @@
+﻿@{ 
+    ViewBag.Title = "Tax Payer Payment Page ";
+} 
+  
+<style>
+     .form-control,  .form-row,  .form-group {
+        width: 100%;
+    }
+    .netpay {
+        background-color: #f1f1f1;
+        padding: 20px 20px 0px;
+    }
+    .items{
+
+    }
+
+    .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+  @@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+@using (Html.BeginForm("MakeOnlineEIRSPayment", "Home", FormMethod.Post))
+{
+    @*@Html.AntiForgeryToken()*@
+
+
+
+    <div class="col-md-12">
+        <h4 class="page-header">EIRS Tax Payment</h4>
+    </div>
+<div class="col-md-12">
+
+    @Html.Partial("_ReferenceForm")
+
+    <div class="loader" style="margin: auto; display: none">
+
+    </div>
+
+    <div class="row" id="ReferenceItems">
+        <div class="col-md-1 row">
+
+        </div>
+
+        <div class="items col-md-6"> 
+            <h4>Assessment/Service Bill Payment Items<br /></h4>
+            
+            <table id="ReferenceItemList" class="table table-responsive table-striped table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Item Name</th>
+                        <th>Item Amount</th>
+                        <th>Total Amount Paid</th>
+                        <th>Amount To Pay</th>
+
+                    </tr>
+                </thead>
+                <tbody id="ReferenceItemsBody">
+                   
+                </tbody>
+            </table>
+
+        </div>
+        <button class='pull-right btn btn-primary submit-button glyphicon-transfer' id="EIRSPayWithRef" type='submit'> Pay →</button>
+    </div>
+
+    <div  class="row" id="ErrorMessage">
+
+    </div>
+
+
+</div>
+    
+}
+
+  
+
+@section Scripts{
+    @*@Scripts.Render()*@
+    <script src="@Url.Content("~/Scripts/EIRSPayWithRefNo.js")"></script>
+}

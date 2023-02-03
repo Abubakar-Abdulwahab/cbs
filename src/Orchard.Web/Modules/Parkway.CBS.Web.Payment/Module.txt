@@ -1,0 +1,10 @@
+﻿Name: Parkway Web Payment Client
+AntiForgery: enabled
+Author: Parkway Projects Ltd
+Website: http://parkwayprojects.com
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Parkway.CBS.Web.Payment:
+        Description: Web Payment Client module for processing payment for third party system.

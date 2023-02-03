@@ -1,0 +1,160 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    ViewBag.Title = "DemandView";
+}
+@{
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Demand");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+    Script.Require("CBS.MDA.RevenueReport.Script");
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+}
+
+<div class="container">
+    <h2>DemandView</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>DEMAND VIEW REPORT</h2>
+        </div>
+        <div class="form-inline">
+            <div class="col-md-12 text-center">
+                <div class="form-group">
+                    From
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    To
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control selectBox">
+                        <option>Select MDA</option>
+                        <option>Ministry of Budget and Planning</option>
+                        <option>Ministry of Aviation</option>
+                        <option>Ministry of Education</option>
+                        <option>Ministry of Finance</option>
+                    </select>
+                </div>
+              
+            </div>
+            <div class="col-md-12 text-center secondrow">
+                <div class="form-group">
+                    <select class="form-control selectBox">
+                        <option>Select Revenue Head</option>
+                        <option>Ministry of Budget and Planning</option>
+                        <option>Ministry of Aviation</option>
+                        <option>Ministry of Education</option>
+                        <option>Ministry of Finance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Enter TIN Number" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Search Invoice Number" />
+                </div>
+                <button class="btn btn-default">Search</button>
+            </div>
+            <div class="col-md-12 reportsummary">
+                <a href="javascript:;" class="btn btn-danger pdf"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+                <a download="MdaReport.xls" href="javascript:;" class="btn btn-success" onclick="return ExcellentExport.excel(this,'invoices','MDA Report');"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-responsive" id="invoices">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!-- <label class="checkbox-inline"> -->
+                                <input type="checkbox" id="inlineCheckbox1" value="option1">
+                                <!--  </label> -->
+                            </th>
+                            <th>
+                                INVOICE DATE
+                            </th>
+                            <th>
+                                DUE DATE
+                            </th>
+                            <th>
+                                MDA
+                            </th>
+                            <th>
+                                INVOICE NUMBER
+                            </th>
+                            <th>
+                                PAYER'S TIN
+                            </th>
+                            <th>
+                                REVENUE HEAD
+                            </th>
+                            <th>
+                                INVOICE AMOUNT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="inlineCheckbox1" value="option1">
+                            </td>
+                            <td>
+                                06 Jul 2017
+                            </td>
+                            <td>
+                                06 Jul 2017
+                            </td>
+                            <td style="word-wrap:break-word;">
+                                <a href="javascript:void(0);">MINISTRY OF LANDS AND HOUSING</a>
+                            </td>
+                            <td>
+                                012345678
+                            </td>
+                            <td>
+                                T564982
+                            </td>
+                            <td>
+                                CERTIFICATE OF OCCUPANCY
+                            </td>
+                            <td>
+                                56,000
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="text-align:end;">
+            <button class="btn btn-default enforcement summary">Send to Enforcement</button>
+            <p class="summary">TOTAL NUMBER OF INVOICES: 187</p>
+            <p class="summary">TOTAL INVOICE AMOUNT: &#X20A6; 418,500</p>
+        </div>
+    </div>
+</div>
+

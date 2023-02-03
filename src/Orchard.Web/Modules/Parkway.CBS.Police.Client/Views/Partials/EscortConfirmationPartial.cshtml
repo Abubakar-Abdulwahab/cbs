@@ -1,0 +1,52 @@
+﻿@model dynamic
+
+<tr>
+    <td>Destination:</td>
+    <td>@Model.Address</td>
+</tr>
+<tr>
+    <td>Service Category:</td>
+    <td>@Model.ServiceCategoryName</td>
+</tr>
+@if (!string.IsNullOrEmpty(Model.ServiceCategoryType))
+{
+    <tr>
+        <td>Category Type:</td>
+        <td>@Model.ServiceCategoryType</td>
+    </tr>
+}
+<tr>
+    <td>Unit:</td>
+    <td>@Model.CommandTypeName</td>
+</tr>
+@if (Model.ShowExtraFields)
+{
+    <tr>
+        <td>Origin State:</td>
+        <td>@Model.OriginStateName</td>
+    </tr>
+    <tr>
+        <td>Origin LGA:</td>
+        <td>@Model.OriginLGAName</td>
+    </tr>
+    <tr>
+        <td>Address of Origin Location:</td>
+        <td>@Model.AddressOfOriginLocation</td>
+    </tr>
+}
+<tr>
+    <td>Number of Police Officers Required:</td>
+    <td>@Model.NumberOfOfficers</td>
+</tr>
+<tr>
+    <td>Duration:</td>
+    <td>@Model.Duration</td>
+</tr>
+<tr>
+    <td>Duration(days):</td>
+    <td>@Model.DurationNumber</td>
+</tr>
+@*<tr>
+    <td>Preferred Invoice Payment Method:</td>
+    <td>@Model.PrefferedPaymentSchedule</td>
+</tr>*@

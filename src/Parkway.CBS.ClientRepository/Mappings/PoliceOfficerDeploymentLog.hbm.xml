@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.PoliceOfficerDeploymentLog, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PoliceOfficerDeploymentLog" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="DeploymentRate" column="DeploymentRate" />
+    <property name="OfficerName" column="OfficerName" />
+    <property name="IsActive" column="IsActive" />
+
+    <many-to-one name="PoliceOfficerLog" column="PoliceOfficerLog_Id"/>
+    <many-to-one name="Command" column="Command_Id"/>
+    <many-to-one name="Request" column="Request_Id"/>
+  </class>
+</hibernate-mapping>

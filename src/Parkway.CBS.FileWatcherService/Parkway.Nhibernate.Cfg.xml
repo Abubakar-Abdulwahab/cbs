@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parkway.tools.nhibernate>
+  <SessionFactory name="Nassarawa_SessionFactory"  delay-initialization="false" schema-output-file="C:\Parkway\DB\GeneratedScripts\NassarawaCentralBillingSystem.sql" >
+    <property name="dialect" value="NHibernate.Dialect.MsSql2008Dialect" />
+    <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
+    <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
+    <property name="connection.connection_string" value="Server=.;initial catalog=CentralBillingSystem;User ID=sa;Password=password1" />
+    <property name="connection.isolation" value="Serializable" />
+    <property name="show_sql" value="false" />
+    <MappingAssemblies>
+      <mapping assembly="Parkway.CBS.PayeeProcessor" />
+    </MappingAssemblies>
+  </SessionFactory>
+
+  <SessionFactory name="Niger_SessionFactory"  delay-initialization="false" schema-output-file="C:\Parkway\DB\GeneratedScripts\NigerCentralBillingSystem.sql" >
+    <property name="dialect" value="NHibernate.Dialect.MsSql2008Dialect" />
+    <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
+    <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
+    <property name="connection.connection_string" value="Server=.;initial catalog=NigerCentralBillingSystem;User ID=sa;Password=password1" />
+    <property name="connection.isolation" value="Serializable" />
+    <property name="show_sql" value="false" />
+    <MappingAssemblies>
+      <mapping assembly="Parkway.CBS.PayeeProcessor" />
+    </MappingAssemblies>
+  </SessionFactory>
+  <SessionFactory name="OSGOF_SessionFactory"  delay-initialization="false" schema-output-file="C:\Parkway\DB\GeneratedScripts\NigerCentralBillingSystem.sql" >
+    <property name="dialect" value="NHibernate.Dialect.MsSql2008Dialect" />
+    <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
+    <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
+    <property name="connection.connection_string" value="Server=.;initial catalog=OSGOFCentralBillingSystem;User ID=sa;Password=password1" />
+    <property name="connection.isolation" value="Serializable" />
+    <property name="show_sql" value="false" />
+    <MappingAssemblies>
+      <mapping assembly="Parkway.CBS.PayeeProcessor" />
+    </MappingAssemblies>
+  </SessionFactory>
+</parkway.tools.nhibernate>

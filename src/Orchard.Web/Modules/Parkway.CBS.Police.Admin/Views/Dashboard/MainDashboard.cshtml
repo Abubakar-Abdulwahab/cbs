@@ -1,0 +1,130 @@
+﻿@model Parkway.CBS.Police.Admin.VM.PSSDashboardViewModel
+@using Orchard.Utility.Extensions
+
+@{ Layout.Title = T("POSSAP Dashboard").ToString(); }
+
+@{
+    Style.Require("CBS.MDA.Style.RevenueDashboard");
+
+    Style.Include("element-browser.css");
+    Script.Require("jQuery");
+    //Script.Include("/OrchardLocal/Modules/Orchard.Layouts/scripts/element-browser.js");CBS.Element.Script
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.MonthPicker");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.HighChart.Script");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.NewDashboard.Script");
+    Script.Require("CBS.MDA.MonthPicker.Script");
+
+    Script.Require("CBS.Element.Script");
+
+
+    Script.Require("CBS.Chart.JS").AtFoot();
+    Script.Require("CBS.Dashboard.Chart").AtFoot();
+
+    var categories = Model.Categories;
+    Layout.LocalNavigation.Add(New.Chart_Tab(Categories: categories));
+}
+<style>
+    /*text:last-child{
+        display:none;
+    }*/
+    label {
+        display: inline-block !important;
+    }
+
+    .panel-heading-first {
+        position: relative;
+    }
+
+        .panel-heading-first::after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: black;
+            height: 100%;
+        }
+</style>
+@using (Html.BeginFormAntiForgeryPost())
+{
+<div class="element-browser">
+    @if (categories != null && categories.Count > 0)
+    {
+        foreach (var category in categories.Reverse())
+        {
+            if (category.DisplayName.ToString() == "DashBoard")
+            {
+                <div id="cat-@category.Name.HtmlClassify()" class="elements">
+                    <div class="container-fluid">
+                        <div class="row panelrows col-lg-offset-0">
+                            <div class="col-md-6">
+                                <div class="panel panel-default" title="All pending approval service requests">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Pending Requests</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.CurrentUserTotalPendingApprovalRequests
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">All</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-default" title="Pending service requests">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Pending Service Requests</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.TotalPendingApprovalRequests
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row panelrows col-lg-offset-0">
+                            <div class="col-md-6">
+                                <div class="panel panel-default" title="Approved service requests">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Approved Service Requests</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.TotalApprovedRequests
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-default" title="Rejected service requests">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Rejected Service Requests</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.TotalRejectedRequests
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+}

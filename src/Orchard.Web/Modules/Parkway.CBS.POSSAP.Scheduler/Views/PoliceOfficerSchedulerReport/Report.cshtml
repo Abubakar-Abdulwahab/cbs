@@ -1,0 +1,272 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Police Officer Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.Admin.Reports.LGA.Commands.Script").AtFoot();
+    Script.Require("CBS.Report.Script").AtFoot();
+    Script.Require("POSSAP.Scheduler.Police.Officer.Report.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    #content{
+        position:relative;
+    }
+
+    .overlay{
+        position:absolute;
+        background-color:rgba(0,0,0,0.5);
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        z-index: 10;
+        display: none;
+    }
+
+    .loadingContentContainer{
+        display:flex;
+        height:100%;
+        width:100%;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .loadingTextField, .errorTextField {
+        text-align: center;
+        font-size: 25px;
+        color: white;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var searchParametersToken = @Html.Raw(Json.Encode(Model.searchParametersToken));
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost("",FormMethod.Post, new { @id = "officerReportForm" }))
+{
+    <input type="hidden" name="Page" id="pagerPageNumber" />
+    <input type="hidden" name="PageSize" id="pagerPageSizeNumber" />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select State</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedState" id="state">
+                            <option selected value="0">All States</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select LGA</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedLGA" id="lga">
+                            <option selected value="0">All LGAs</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Command</b>
+                    <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                    <select class="form-control" id="commands" name="SelectedCommand">
+                    </select>
+                    <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="searchError"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Rank</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedRank" id="rank">
+                            <option selected value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Gender</b>
+                    <div class="form-group">
+                        <select class="form-control" name="Gender" id="gender">
+                            <option selected value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Service Number</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="" class="form-control" name="BatchID" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">IPPIS Number</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter IPPIS No." class="form-control" name="IdNumber" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Name</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter officer's name" class="form-control" name="Name" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Deployment Status</b>
+                    <div class="form-group">
+                        <select class="form-control" name="DeploymentStatus" id="deploymentStatus">
+                            <option selected value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group" style="margin-top: 20px">
+                    <button class="btn btn-success" style="margin-left: 10px" title="Export to excel">
+                        <i class=" fa fa-file-excel-o"></i>
+                        <span>Excel</span>
+                    </button>
+                    <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF">
+                        <i class=" pdf fa fa-file-pdf-o"></i>
+                        <span>PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    SERVICE NUMBER
+                                </th>
+                                <th>
+                                    IPPIS NUMBER
+                                </th>
+                                <th>
+                                    RANK
+                                </th>
+                                <th>
+                                    GENDER
+                                </th>
+                                <th>
+                                    STATE
+                                </th>
+                                <th>
+                                    LGA
+                                </th>
+                                <th>
+                                    COMMAND
+                                </th>
+                                <th>
+                                    DEPLOYED
+                                </th>
+                                <th>
+                                    ACTION
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;" id="reportRecordsTableBody">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+}
+<div id="pagerDiv"></div>

@@ -1,0 +1,192 @@
+﻿@{ 
+    string Median = (string)ViewData["Median"];
+    string sum = (string)ViewData["sum"];
+    string average = (string)ViewData["average"];
+    string count = (string)ViewData["count"];
+    string max = (string)ViewData["max"];
+    string min = (string)ViewData["min"];
+    string timespan = (string)ViewData["timespan"];
+}
+<div class="row">
+    <div class="title">
+        <h1>
+            Statistics
+        </h1>
+        @*<hr>*@
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption"> Sum of Transaction Amount </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> ₦@sum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption"> Average Transaction Amount </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> ₦@average</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Number of Transactions
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> @count</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Maximum Amount
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> ₦@max</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Minimum Amount
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> ₦@min</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Median Amount
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> ₦@Median</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Time Span
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div>
+                    <p> @timespan </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <b style="color:#c00001;">From</b>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+                <input type="text" id="datepicker1" placeholder="click to show datepicker" class="form-control pickyDate" value="" name="fromRange" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <b style="color:#c00001;">To</b>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+                <input type="text" id="datepicker2" placeholder="click to show datepicker" class="form-control pickyDate" value="" name="endRange" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <b style="color:#c00001;">Select Payment Channel</b>
+            <select name="paymentChannel" id="paymentChannel_Selected" class="form-control" selectBox>
+                <option value="" disabled selected>Select a Payment Channel</option>
+                <option value="NETPAY">Online</option>
+                <option value="Branch">InBranch</option>
+                <option value="POS">POS</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <b style="color:#c00001;">Search by Reference Number </b>
+                @Html.TextBox("referenceNumber", "", new { @class = "form-control", @placeholder = "Enter Reference Number", @name = "referenceNumber" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <b style="color:#c00001;">Tax Payer RIN </b>
+            <div class="input-group">
+                @Html.TextBox("TaxPayerRIN", "", new { @class = "form-control", @placeholder = "Enter Tax Payer RIN", @name = "TaxPayerRIN" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <b style="color:#c00001;"></b>
+            <span class="input-group-btn" style="display:inline-block;margin-top:20px;">
+                <button class="btn btn-success" style="border-radius:10px;text-align: right;" formaction="@Url.Action(ViewData["Action"] as string, "Report")">Search</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="title">
+    <h1>
+        Table
+    </h1>
+</div>

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PostMockNotif</title>
+</head>
+<body>
+    <div>
+        Success:
+        <form action="@Url.RouteUrl("PayDirectPaymentResponse")" method="POST">
+            <input type="text" value="120000" name="apprAmt" />
+            <input type="text" value="1485998442-70" name="txnref" />
+            <input type="text" value="FBN|WEB|WDM|2-02-2017|278803" name="payRef" />
+            <input type="text" value="Approved Successful" name="retRef" />
+        </form>
+        No Card Response:
+        <form action="@Url.RouteUrl("PayDirectPaymentResponse")" method="POST">
+            <input type="text" value="1485998442-70" name="txnref" />
+            <input type="text" value="278803" name="amt" />
+        </form>
+    </div>
+</body>
+</html>

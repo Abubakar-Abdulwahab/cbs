@@ -1,0 +1,35 @@
+﻿@model Parkway.CBS.Police.Core.VM.PrivacyTermsVM
+
+@{
+    Layout.Title = "Privacy Policy";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid about-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <h4 style="color:darkgrey" class="mt-2">Privacy Policy</h4>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container about-content-container">
+            <div class="container about-content no-padding">
+                <div class="container no-padding">
+                    @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/PrivacyPolicy.cshtml"))
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

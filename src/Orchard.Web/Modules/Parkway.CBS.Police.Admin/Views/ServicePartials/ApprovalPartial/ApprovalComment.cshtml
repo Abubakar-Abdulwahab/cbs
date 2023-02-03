@@ -1,0 +1,20 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSRequestDetailsVM
+@Html.AntiForgeryToken()
+
+<div style="display:flex; flex-flow:row nowrap; justify-content:space-between;width:99%">
+    <a href="@Url.Action("RequestApprovalLog","RequestApprovalLog",new { requestId = Model.RequestId })" name="ViewApprovals">Click here to view approval log</a>
+    <a href="#" onclick="window.print()">Print Request</a>
+</div>
+<input name="RequestId" value="@Model.RequestId" hidden />
+
+<label for="comment">Comment</label>
+<textarea class="extend-width" name="Comment" value="@Model.Comment" placeholder="Leave a comment" id="comment" required></textarea>
+
+<div class="action-btns page-submit-btns">
+    <div>
+        <button class="btn btn-success" formaction="@Url.Action("ApproveRequest", (string)ViewData["ControllerName"])">@T(Model.ApprovalButtonName)</button>
+    </div>
+    <div>
+        <button class="btn btn-danger" formaction="@Url.Action("RejectRequest", (string)ViewData["ControllerName"])" formnovalidate>@T("Reject")</button>
+    </div>
+</div>

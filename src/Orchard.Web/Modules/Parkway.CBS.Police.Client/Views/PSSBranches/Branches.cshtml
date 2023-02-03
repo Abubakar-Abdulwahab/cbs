@@ -1,0 +1,260 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSBranchVM
+@{
+    Layout.Title = "Branches";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    Script.Require("PSS.Branches.List.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    .disablelink {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    thead tr th {
+        min-width:135px;
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var branchesPage1 = @Html.Raw(Json.Encode(Model.Branches));
+    var PageSize = parseInt(@Html.Raw(Json.Encode(Model.DataSize)));
+</script>
+<div id="user-profile-security-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+    <div class="container-fluid user-profile-security-main-content no-margin no-padding">
+        <div class="container-fluid user-profile-security-container no-padding">
+            <div class="container user-profile-security-form-container px-0">
+                <div class="container-fluid">
+                    <h4>User Profile</h4>
+                </div>
+                <div class="row no-margin no-padding user-profile-security-outer-row">
+                    <div class="container-fluid user-profile-security-nav-container">
+                        @Html.Partial("Partials\\SecurityNavBarPartial", Model.HeaderObj)
+                    </div>
+                    <div class="container-fluid no-margin no-padding user-profile-security-content sub-users-content">
+                        <div>
+                            <div class="container pss-flash error-alert-bar" id="errorFlash" style="display:none">
+                                <div class="row no-padding no-margin">
+                                    <div class="container col-2 error-icon-container no-margin no-padding">
+                                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/danger.svg"))" class="img img-responsive pss-flash-icon">
+                                    </div>
+                                    <div class="container col-9 no-margin no-padding error-icon-details">
+                                        <h5>Error!</h5>
+                                        <p id="errorMsg"></p>
+                                    </div>
+                                    <div class="col-1 delete-error-alert-icon" id="closeFlash">
+                                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container pss-flash info-alert-bar" id="infoFlashMsg" style="display:none">
+                                <div class="row no-padding no-margin">
+                                    <div class="container col-2 info-icon-container no-margin no-padding">
+                                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/info.svg"))" class="img img-responsive pss-flash-icon">
+                                    </div>
+                                    <div class="container col-9 no-margin no-padding info-icon-details">
+                                        <h5>Info!</h5>
+                                        <p id="infoMsg"></p>
+                                    </div>
+                                    <div class="col-1 delete-info-alert-icon" id="closeInfoFlash">
+                                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid no-margin no-padding sub-user-header-container py-2 px-3">
+                            <h4 class="my-0">Branches</h4>
+                            <button class="btn" type="button" id="addBranchBtn"><span class="fa fa-plus mx-2"></span>Create Branch</button>
+                        </div>
+                        @using (Html.BeginRouteForm(Parkway.CBS.Police.Client.RouteName.PSSBranches.Branches, FormMethod.Post, new { @id = "branches", @name = "branches", @class = "mx-0 px-0" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row sub-users-search-filter-container px-0 py-2 mx-0">
+                                @*<div class="col-3">
+                                    <input type="text" class="form-control" name="DateFilter" placeholder="Select Date range" value="@Model.DateFilter" />
+                                </div>*@
+                                <div class="col-2">
+                                    <select class="custom-select" id="state" name="FilteredState">
+                                        <option value="0" selected>All States</option>
+                                        @if (Model.StateLGAs != null && Model.StateLGAs.Any())
+                                        {
+                                            foreach (var state in Model.StateLGAs)
+                                            {
+                                                <option value="@state.Id" @(state.Id == Model.FilteredState ? "selected" : "")>@state.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="custom-select" id="lga" name="FilteredLGA">
+                                        <option value="0" selected>All LGAs</option>
+                                        @if (Model.FilterListLGAs != null && Model.FilterListLGAs.Any())
+                                        {
+                                            foreach (var lga in Model.FilterListLGAs)
+                                            {
+                                                <option value="@lga.Id" @(lga.Id == Model.FilteredLGA ? "selected" : "")>@lga.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" placeholder="search by name" name="FilteredName" value="@Model.FilteredName" />
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-2">
+                                    <button class="btn" type="submit"><span class="fa fa-search mx-2"></span>search</button>
+                                </div>
+                            </div>
+                        }
+                        <div class="container-fluid px-0">
+                            <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;margin-top:10%;display:none"></div>
+                            <table class="table sub-users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date Created</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>State</th>
+                                        <th>LGA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @if (Model.Branches != null && Model.Branches.Any())
+                                    {
+                                        foreach (var branch in Model.Branches)
+                                        {
+                                            <tr>
+                                                <td>@branch.CreatedAtParsed</td>
+                                                <td>@branch.Name</td>
+                                                <td>@branch.Address</td>
+                                                <td>@branch.StateName</td>
+                                                <td>@branch.LGAName</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5">no branches available</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-pagination-2 px-2">
+                            <a href="#" id="moveleft" name="cursor" style="color: #2F4CB0">Previous </a><span id="page">1</span>/ <span id="pageSize">@(Model.DataSize == 0 ? 1 : Model.DataSize)</span><a href="#" id="moveright" name="cursor" style="color: #2F4CB0">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+
+<div class="container-fluid branch-register-modal no-margin no-padding" id="branchRegisterModal" style="display: @(Model.ShowCreateBranchModal ? "block" : "none")">
+
+    <div class="row no-margin no-padding">
+        <div class="container white-bg-md no-padding">
+            <div class="container inner-white-container py-4">
+                <h4>Create New Branch</h4>
+                <p>Enter details of new branch</p>
+                @using (Html.BeginRouteForm(Parkway.CBS.Police.Client.RouteName.PSSBranches.CreateBranch, FormMethod.Post, new { @id = "createBranchModal", @name = "createBranchModal", @class = "row mx-0" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("token", Model.Token)
+                    <div class="form-group col-md-12">
+                        <div class="container-fluid no-padding"><label for="branchName">Name</label></div>
+                        <input class="form-control" id="branchName" placeholder="Enter the name of the branch" name="BranchInfo.Name" value="@Model.BranchInfo.Name" required />
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("BranchInfo.Name", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="container-fluid no-padding"><label for="branchState">Select State</label></div>
+                        <select class="custom-select state" id="branchState" name="BranchInfo.State" required>
+                            <option value="" disabled selected>Select a state</option>
+                            @if (Model.StateLGAs != null && Model.StateLGAs.Any())
+                            {
+                                foreach (var state in Model.StateLGAs)
+                                {
+                                    <option value="@state.Id" @(state.Id == Model.BranchInfo.State ? "selected" : "")>@state.Name</option>
+                                }
+                            }
+                        </select>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("BranchInfo.State", "Selected state value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="container-fluid no-padding"><label for="branchLGA">Select LGA</label></div>
+                        <select class="custom-select" id="branchLGA" name="BranchInfo.LGA" required>
+                            <option selected disabled>Select an LGA</option>
+                            @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                            {
+                                foreach (var lga in Model.ListLGAs)
+                                {
+                                    <option value="@lga.Id" @(lga.Id == Model.BranchInfo.LGA ? "selected" : "")>@lga.Name</option>
+                                }
+                            }
+                        </select>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("BranchInfo.LGA", "Selected LGA value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="container-fluid no-padding"><label for="branchAddress">Address</label></div>
+                        <textarea class="form-control" id="branchAddress" placeholder="Enter Address" name="BranchInfo.Address" required>@Model.BranchInfo.Address</textarea>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("BranchInfo.Address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                    <div class="col-md-6 py-1">
+                        <button type="button" class="btn blue-btn-full-outline close-register-sub-acct-modal-btn" id="closeRegisterBranchModal">Cancel</button>
+                    </div>
+                    <div class="col-md-6 py-1" style="text-align:right">
+                        <button type="submit" class="btn blue-btn-full create-sub-acct-btn">Create</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('input[name="DateFilter"]').daterangepicker({ "locale": { "format": "DD/MM/YYYY" } });
+    $("#closeFlash").click(function () { $("#errorFlash").hide(); });
+    $("#closeInfoFlash").click(function () { $("#infoFlashMsg").hide(); });
+</script>
+

@@ -1,0 +1,21 @@
+﻿@font-face {
+    font-family: Avenir;
+    src: url('Fonts/AvenirLTStd-Light.otf');
+}
+@font-face {
+    font-family:AvenirBold;
+    src: url('Fonts/avenir-bold.otf');
+}
+
+body {
+    /*font-family: Avenir !important;*/
+}
+
+h1.instant{
+    font-family:AvenirBold !important;
+}
+/*div.zone.zone-content {
+    background:url('images/Image.png');
+    background-size:cover;
+}*/
+

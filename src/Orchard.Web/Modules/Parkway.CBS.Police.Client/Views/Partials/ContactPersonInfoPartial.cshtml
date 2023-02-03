@@ -1,0 +1,19 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+<div class="form-group contact-person-info-required">
+    <label for="contactName">Contact Person Name<span class="required-sym">*</span></label>
+    <input type="text" class="form-control" id="contactName" name="RegisterCBSUserModel.ContactPersonName" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter name of correspondent" value="@Model.RegisterCBSUserModel.ContactPersonName" />
+    <small class="form-text text-muted">Please provide the full name of corporate correspondent.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.ContactPersonName", "Enter a valid name", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group contact-person-info-required">
+    <label for="contactEmail">Contact Person Email<span class="required-sym">*</span></label>
+    <input type="text" class="form-control" id="contactEmail" name="RegisterCBSUserModel.ContactPersonEmail" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter email of correspondent" value="@Model.RegisterCBSUserModel.ContactPersonEmail" />
+    <small class="form-text text-muted">Please provide a valid email address of corporate correspondent.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.ContactPersonEmail", "Enter a valid email address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group contact-person-info-required">
+    <label for="contactNumber">Contact Person Phone Number<span class="required-sym">*</span></label>
+    <input type="text" class="form-control" id="contactNumber" name="RegisterCBSUserModel.ContactPersonPhoneNumber" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter phone number of correspondent" value="@Model.RegisterCBSUserModel.ContactPersonPhoneNumber" />
+    <small class="form-text text-muted">Please provide an active phone number of corporate correspondent.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.ContactPersonPhoneNumber", "Enter a valid phone number", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

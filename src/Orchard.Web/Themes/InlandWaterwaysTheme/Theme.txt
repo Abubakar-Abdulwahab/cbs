@@ -1,0 +1,8 @@
+Name: InlandWaterwaysTheme
+Author: The Orchard Team
+Website: http://www.orchardproject.net
+Description: Description for the theme
+Version: 1.0
+BaseTheme: NasarawaTheme
+# todo: provide tags
+# Tags: Classic, Serif

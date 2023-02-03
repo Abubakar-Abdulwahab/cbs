@@ -1,0 +1,283 @@
+﻿@{
+    Layout.Title = "Police Extract";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<div id="police-extract-content-one">
+ @Html.Partial("Partials\\HeaderPartial")
+
+    <div class="container-fluid police-extract-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center police-extract-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Select Service</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    @*<span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>*@
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container-fluid police-extract-container">
+            @*<div class="container police-extract-heading-container-one no-padding"><h4>POLICE EXTRACT</h4></div>*@
+            <div class="container police-extract-form-container">
+                <div class="row no-margin no-padding">
+                    <div class="container col-md-6 no-padding police-extract-form">
+                        <h4>POLICE EXTRACT</h4>
+                        <h6>Fill in your details of your request.</h6>
+                        
+                        <div class="row no-margin no-padding escort-duties-nav-list-form">
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Customer&nbsp;Info</p>
+                            </div>
+                            <div class="container dashed-block no-margin no-padding">
+                                <div style="border:0.5px dashed #E3E3E3"></div>
+                            </div>
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Form 1</p>
+                            </div>
+                            <div class="container dashed-block no-margin no-padding">
+                                <div style="border:0.5px dashed #E3E3E3"></div>
+                            </div>
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Form 2</p>
+                            </div>
+                        </div>
+                        <div class="container no-margin no-padding">
+                            <h6>Reason for Request</h6>
+                            <p class="create-extract-text">Create Extract Template <span><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/addIcon.svg"))" /></span></p>
+                            <div class="container-fluid no-margin no-padding extract-icon-links">
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/previewExtract.svg"))" id="previewExtractIcon"/>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/trash.svg"))" id="deleteExtractIcon"/>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/editPen.svg"))" id="editExtractIcon"/>
+                                </div>
+                            </div>
+                        <h6>Select Police Command to Request Extract</h6>
+                        <form>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" class="form-control" placeholder="Select a State" id="state" list="states" autocomplete="off" spellcheck="false"/>
+                                <datalist name="states" id="states">
+                                    <option data-value="Lagos" value="Lagos">Lagos</option>
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label for="lga">Local Government Area</label>
+                                <input type="text" class="form-control" placeholder="Select an lga" id="lga" list="lgas" autocomplete="off" spellcheck="false"/>
+                                <datalist name="lgas" id="lgas">
+                                    <option data-value="Yaba" value="Yaba">Yaba</option>
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label for="searchPC">Search Police Command</label>
+                                <input type="text" class="form-control" placeholder="Enter No. of Officers" id="searchPC" />
+                            </div>
+                            <button type="button" class="btn btn-block">Proceed</button>
+                        </form>
+                    </div>
+                    <div class="container col-md-6 police-extract-form-container-details">
+                        <div class="container police-extract-details">
+                            <div class="container-fluid no-padding no-margin">
+                                @*<img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/policemen.png"))" class="img img-responsive" style="width:inherit;height:auto" />*@
+                                <h4>Please Note:</h4>
+                            </div>
+                            <ul>
+                                <li><div class="li-disc"> <div class="li-inner-disc"></div> </div> <p>will required to pay a non-refundable application fee.</p></li>
+                                <li><div class="li-disc"> <div class="li-inner-disc"></div> </div> <p>The Nigerian Police Force reserves the right to approval or deny your request based on it’s guidelines or availability of officers.</p></li>
+                                <li><div class="li-disc"> <div class="li-inner-disc"></div> </div> <p>All Police Offers on Escort duty are to be treated with the utmost respect. Any complaint of been mistreated will be liable to fines.</p> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+<div class="container-fluid login-modal no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <h3>Login</h3>
+                <p>Welcome Back!</p>
+                <form>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="username">Username</label></div> 
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/user.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Username" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="container-fluid no-padding"><label for="pwd">Password</label></div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/lock.svg"))"></div>
+                        </div>
+                        <input type="text" class="form-control" id="pwd" placeholder="Enter Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/visible.svg"))"></div>
+                        </div>
+                    </div>
+                    <div class="row no-margin no-padding">
+                        <div class="col no-margin no-padding">
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input"> Remember me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col no-margin no-padding" style="text-align:right">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+            </div>
+            <div class="container-fluid login-modal-bottom-section no-margin no-padding">
+                <p>Don't have an account? <span class="signup-toggle">Signup</span></p>
+            </div>
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid edit-extract-modal no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <div class="container-fluid">
+                    <div class="col-2 no-margin no-padding">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/npfLogo.svg"))"/>
+                    </div>
+                    <div class="col-10 no-margin no-padding">
+                        <h4>NIGERIA POLICE FORCE</h4>
+                        </div>
+                    </div>
+                <div class="container-fluid">
+                <h6>Date </h6>
+                    <input type="text" class="form-control"/>
+                    </div>
+                <div class="container-fluid">
+                    <h4>POLICE CHARACTER CERTIFICATE</h4>
+                    <p>This is to certify that according to the Criminal Records of the Nigerian Police Force, there is no trace of any conviction recorded in Nigeria against</p>
+                    <center><input type="text" class="form-control" placeholder="Enter Full Name"/></center>
+                    </div>
+                <div class="container-fluid">
+                    <div class="row no-margin no-padding">
+                        <div class="col no-margin no-padding">
+                            <h6>Holder of</h6> <input type="text" class="form-control" placeholder="Enter Country" />
+                            </div>
+                        <div class="col no-margin no-padding">
+                            <h6>Passport No. </h6> <input type="text" class="form-control" placeholder="Enter Passport No." />
+                        </div>
+                        </div>
+                    <div class="row no-margin no-padding">
+                        <div class="col no-margin no-padding">
+                            <h6>Issued in</h6> <input type="text" class="form-control" placeholder="Enter Issue Location" />
+                        </div>
+                        <div class="col no-margin no-padding">
+                            <h6>On </h6> <input type="text" class="form-control" placeholder="DD/MM/YYYY" />
+                        </div>
+                    </div>
+                    </div>
+                <div class="container-fluid">
+                <p>This  Certificate is valid for three months and issued to</p>
+                </div>
+                    <div class="container-fluid">
+                    <p>the holder to travel to </p>
+                    <input type="text" class="form-control" placeholder="Enter Country" />
+                    </div>
+                <center><h6>Signed by Registrar</h6></center>
+
+            </div>
+            <div class="container-fluid login-modal-bottom-section no-margin no-padding">
+                <div class="container">
+                    <div class="row no-margin no-padding">
+                        <div class="col no-padding">
+                            <button type="button" class="btn btn-block cancel-extract-btn">Cancel</button>
+                            </div>
+                        <div class="col no-padding">
+                            <button type="button" class="btn btn-block  save-template-btn">Save Template</button>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            @*<img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />*@
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid show-extract-modal no-margin no-padding">
+    <div class="row no-margin no-padding">
+        <div class="container white-bg no-padding">
+            <div class="container inner-white-container">
+                <div class="container-fluid">
+                    <div class="col-2 no-margin no-padding">
+                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/npfLogo.svg"))" />
+                    </div>
+                    <div class="col-10 no-margin no-padding">
+                        <h4>NIGERIA POLICE FORCE</h4>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h6>Date <span>12/04/2020</span></h6>
+                </div>
+                <div class="container-fluid">
+                    <h4>POLICE CHARACTER CERTIFICATE</h4>
+                    <p>This is to certify that according to the Criminal Records of the Nigerian Police Force, there is no trace of any conviction recorded in Nigeria against</p>
+                    <p>Parkway Projects Ltd</p>
+                </div>
+                <div class="container-fluid">
+                            <h6>Holder of <span>Nigerian</span> Passport No. <span>22289021</span></h6>
+                            <h6>Issued in <span>Immigration Abuja</span> On <span>09/03/2020</span></h6>
+                </div>
+                <div class="container-fluid">
+                    <p>This  Certificate is valid for three months and issued to</p>
+                </div>
+                <div class="container-fluid">
+                    <p>the holder to travel to <span>Cameroon</span></p>
+                </div>
+                <h6>Signed by Registrar</h6>
+            </div>
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/deleteLight.svg"))" class="modal-close-btn" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,210 @@
+﻿@model Parkway.CBS.Police.Core.VM.SelectServiceVM
+
+@{
+    Layout.Title = "Select Service";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Select.Service.Script").AtFoot();
+    Script.Require("PSS.Select.Service.Sub.Categories.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 20%;
+        display: none;
+    }
+
+    .select-service-field{
+        border:1px solid #ced4da;
+        border-radius: .25rem;
+        padding: 5px 3px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .select-service-field .form-control{
+        border:0;
+        transition:unset;
+    }
+
+    .select-service-field .form-control:focus{
+        box-shadow:none;
+    }
+
+    .clear-field-btn{
+        font-size:14px;
+        color:#6c757d;
+        border-radius:20px;
+        display: flex;
+        padding: 0 10px;
+        cursor:pointer;
+    }
+
+    .clear-field-btn img{
+        max-width:13px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var loggedIn = @Html.Raw(Json.Encode(Model.HeaderObj.IsLoggedIn));
+    var allowCategorySelect = @Html.Raw(Json.Encode(Model.AllowCategorySelect));
+    var escortServiceType = @Html.Raw(Json.Encode((int)Parkway.CBS.Police.Core.Models.Enums.PSSServiceTypeDefinition.Escort));
+</script>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid select-service-account-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Select Service</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Select Service</a></div>
+        </div>
+
+        <div class="container select-service-account-content-container">
+            @if (Model.FlashObj != null)
+            {
+                @Html.Partial("Partials\\Flash", Model.FlashObj)
+            }
+
+            <div class="container select-service-account-content no-padding">
+                <div class="container no-padding">
+                    @using (Html.BeginRouteForm("P.SelectService", FormMethod.Post, new { @id = "selectServiceForm", @name = "selectServiceForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="container no-padding">
+                            <h4>Select Service</h4>
+                            <p>Kindly select a service below</p>
+                        </div>
+                        <div class="container no-padding">
+                            <div class="row no-padding no-margin" style="justify-content:center">
+                                @if (Model.TaxCategories != null && Model.TaxCategories.Any())
+                                {
+                                    foreach (var cat in Model.TaxCategories)
+                                    {
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input autocomplete="off" type="radio" data-value="@cat.Settings.CanShowDropDown" name="TaxPayerType" id="@cat.Id" value="@cat.Id" required @(Model.TaxPayerType == cat.Id.ToString() ? "checked" : "") /> @cat.Name
+                                            </label>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <small>No Tax Category Found</small>
+                                }
+                                <input type="hidden" name="taxCategory" id="taxCategory" />
+                                <small id="categoryMsg" style="float:left;padding-bottom:10px;color:#E85854"></small>
+                            </div>
+                        </div>
+                        <div class="container no-padding">
+                            <div class="form-group" style="position:relative">
+                                <div class="input-group select-service-field">
+                                    <input required type="text" placeholder="Select Service" class="form-control mx-1" list="services" id="serviceData" name="serviceData" spellcheck="false" autocomplete="off" />
+                                    @*<button type="button" id="clearSelectFieldBtn" class="btn clear-field-btn">clear form</button>*@
+                                    <span id="clearSelectFieldBtn" class="clear-field-btn"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))"></span>
+                                </div>
+                                <span name="catloader" id="catloader" class="profileloader" style="position:absolute;margin:auto;top:12%"></span>
+                                <small class="form-text text-muted" style="text-align:left">Select service type to begin request. Example: POLICE EXTRACT</small>
+                                <datalist id="services" name="services">
+                                    @if (Model.Services != null && Model.Services.Any())
+                                    {
+                                        foreach (var item in Model.Services)
+                                        {
+                                            <option data-value="@item.Id" value="@item.Name" id="@item.ServiceType" />
+                                        }
+                                    }
+                                </datalist>
+                                <input type="hidden" name="serviceIdentifier" id="serviceIdentifier" />
+                            </div>
+
+                            <div class="form-group" id="subCategoryContainer" style="position:relative;display:none">
+                                <div class="input-group select-service-field">
+                                    <input type="text" placeholder="Select Category" class="form-control" list="subCategories" id="subCategoryData" name="subCategoryData" spellcheck="false" autocomplete="off" />
+                                    @*<button type="button" id="clearSelectFieldBtn" class="btn clear-field-btn">clear form</button>*@
+                                    <span id="clearSubCatSelectFieldBtn" class="clear-field-btn"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))"></span>
+                                </div>
+                                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                                <small id="subCategoryInfo" style="float:left;padding-bottom:10px;color:#E85854"></small>
+                                <datalist id="subCategories" name="subCategories"></datalist>
+                                <input type="hidden" name="subCategoryIdentifier" id="subCategoryIdentifier" />
+                            </div>
+
+                            <div class="form-group" id="subSubCategoryContainer" style="position:relative;display:none">
+                                <div class="input-group select-service-field">
+                                    <input type="text" placeholder="Select Sub-Category" class="form-control" list="subSubCategories" id="subSubCategoryData" name="subSubCategoryData" spellcheck="false" autocomplete="off" />
+                                    @*<button type="button" id="clearSelectFieldBtn" class="btn clear-field-btn">clear form</button>*@
+                                    <span id="clearSubSubCatSelectFieldBtn" class="clear-field-btn"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))"></span>
+                                </div>
+                                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                                <small id="subSubCategoryInfo" style="float:left;padding-bottom:10px;color:#E85854"></small>
+                                <datalist id="subSubCategories" name="subSubCategories"></datalist>
+                                <input type="hidden" name="subSubCategoryIdentifier" id="subSubCategoryIdentifier" />
+                            </div>
+                            <button name="proceedBtn" type="submit" class="btn btn-block">Proceed</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

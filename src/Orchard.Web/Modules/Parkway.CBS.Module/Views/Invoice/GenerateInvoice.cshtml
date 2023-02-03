@@ -1,0 +1,51 @@
+﻿@model Parkway.CBS.Module.ViewModels.SearchForTaxEntityVM
+
+@{ Layout.Title = "Generate Invoice: Search for Tax Payer".ToString(); }
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        width: 50%;
+        position: relative;
+        word-break: break-all;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("GenerateInvoice", "Invoice", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { }))
+{
+    <div id="container">
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Search For Tax Payer</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("Enter TIN")</label>
+                        @Html.TextBoxFor(m => m.TIN, new { @class = "text large", @type = "text", @maxlength = "15" })
+                        @Html.Hint(T("If the tax payer has a TIN, please enter it here."))
+                        @Html.ValidationMessageFor(m => m.TIN, "", new { @style = "color:#990808" })
+                    </td>
+                    <td>
+                        <label id="mdaName">@T("Enter Phone Number")</label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "text large", @type = "number", @maxlength = "15" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @style = "color:#990808" })
+                        @Html.Hint(T("If TIN is not provided please enter the tax payer's phonenumber."))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Search")</button>
+    </fieldset>
+}
+@{
+    Script.Require("CBS.MDA.Setting.Script").AtFoot();
+}

@@ -1,0 +1,192 @@
+﻿@model Parkway.CBS.Module.ViewModels.TaxProfilesReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Tax Payer Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#ff6a00"> Tax Payer Category</b>
+                    <select name="TaxCategory" id="TaxCategory" class="form-control">
+                        <option value="0" selected>All</option>
+                        @foreach (var taxCategory in Model.TaxCategories)
+                        {
+                            if (Model.TaxCategory == taxCategory.Id)
+                            {
+                                <option value="@taxCategory.Id" selected>@taxCategory.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@taxCategory.Id">@taxCategory.Name</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <b style="color:#e97d68;">Search by Payer Id</b>
+                        @Html.TextBox("PayerId", Model.PayerId, new { @class = "form-control", @placeholder = "Enter Payer Id ", @name = "PayerId" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <b style="color:#e97d68;">Search by TIN</b>
+                        @Html.TextBox("TIN", Model.TIN, new { @class = "form-control", @placeholder = "Enter TIN", @name = "TIN" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <b style="color:#e97d68;">Search by Phone number</b>
+                        @Html.TextBox("PhoneNumber", Model.PhoneNumber, new { @class = "form-control", @placeholder = "Enter Phone number", @name = "PhoneNumber" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <b style="color:#e97d68;">Search by Name</b>
+                @Html.TextBox("Name", Model.Name, new { @class = "form-control", @placeholder = "Search by Name", @name = "Name" })
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" style="margin-top: 20px;" formaction="@Url.Action("TaxProfilesReport", "Report")">Search</button>
+                        </span>
+                        <div style="float: right">
+                            <button class="btn btn-success" style="margin: 20px 10px 0 0;" title="Export to excel" formaction=" @Url.Action("ExcelTaxProfilesReport", "Report" )">
+                                <i class=" fa fa-file-excel-o"></i>
+                                <span>EXCEL</span>
+                            </button>
+                            <button class="btn btn-danger" style="margin: 20px 10px 0 0;" title="Export to PDF" formaction="@Url.Action("PdfTaxProfilesReport", "Report")">
+                                <i class=" pdf fa fa-file-pdf-o"></i>
+                                <span>PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Address
+                                </th>
+                                <th>
+                                    Category
+                                </th>
+                                <th>
+                                    RC Number
+                                </th>
+                                <th>
+                                    Phone
+                                </th>
+                                <th>
+                                    TIN
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+
+                            @if (Model.ReportRecords != null && Model.ReportRecords.Any())
+                            {
+                                foreach (var item in Model.ReportRecords)
+                                {
+                                    <tr>
+                                        <td>
+                                            @*@Html.ActionLink(@item.Name, "StatementOfAccountDetails", "Report", new { payerId = @item.PayerId }, null)*@
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td>
+                                            @item.Address
+                                        </td>
+                                        <td>
+                                            @item.Category
+                                        </td>
+                                        <td>
+                                            @(string.IsNullOrEmpty(item.RegNumber) ? "" : @item.RegNumber)
+                                        </td>
+                                        <td>
+                                            @item.PhoneNumber
+                                        </td>
+                                        <td>
+                                            @item.TaxPayerIdentificationNumber
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(T("Edit").ToString(), "EditTaxPayer", "Report", new { payerId = @item.PayerId }, new { title = "Edit" })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No Records Found</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+                <div class="col-md-12">
+                    <p class="summary">Total Number of Tax Payers :  @Model.TotalNumberOfTaxPayers</p>
+                    <p class="summary">Incomplete Tax Payers records : @Model.NumberOfIncompleteRecords</p>
+                    <p class="summary">Tax Payers without TIN: @Model.NumberOfTaxPayersWithoutTIN</p>
+                </div>
+            </div>*@
+    </div>
+
+}
+@Display(Model.Pager)
+

@@ -1,0 +1,28 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestVM
+
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command:</p>
+    <p class="details-content">@Model.CommandName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command State:</p>
+    <p class="details-content">@Model.CommandStateName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command LGA:</p>
+    <p class="details-content">@Model.CommandLgaName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Reason for Extract</p>
+    <p class="details-content">
+        @if(@Model.SelectedExtractCategories != null && @Model.SelectedExtractCategories.Any()){
+            foreach(var selectedExtractCategory in Model.SelectedExtractCategories.GroupBy(x => x.ExtractCategoryId)) {
+                <b>@selectedExtractCategory.First().RequestReason.Split(new char[]{ ':' })[0]</b>
+                <br/>
+                foreach(var category in selectedExtractCategory) {
+                    @category.RequestReason.Split(new char[] { ':' })[1]<br/>
+                }
+            }
+        }
+    </p>
+</div>

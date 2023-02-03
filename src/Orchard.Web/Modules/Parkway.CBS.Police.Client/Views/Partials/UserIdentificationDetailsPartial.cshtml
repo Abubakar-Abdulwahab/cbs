@@ -1,0 +1,27 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+
+<div class="form-group" style="position:relative">
+    <label for="idType">Identification Type<span class="required-sym">*</span></label>
+    <select class="custom-select" name="RegisterCBSUserModel.IdType" id="idType" @(Model.HeaderObj.IsLoggedIn ? "disabled" : "required")>
+        <option selected disabled value="">Select an Identification Type</option>
+        @if (Model.PSSIdentificationTypes != null && Model.PSSIdentificationTypes.Any())
+        {
+            foreach (var idType in Model.PSSIdentificationTypes)
+            {
+                <option value="@idType.Id" @(Model.RegisterCBSUserModel.IdType == idType.Id ? "selected" : "")>@idType.Name</option>
+            }
+        }
+    </select>
+    <small class="form-text text-muted">Specify an identification type.</small>
+    <small class="error-text" id="idTypeErrorText"></small>
+    <span name="idTypeProfileloader" id="idTypeLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;"></span>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.IdType", "Selected Identification type value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group" style="position:relative">
+    <label for="idNumber">Identification Number<span class="required-sym">*</span></label>
+    <input type="text" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "required") class="form-control" id="idNumber" placeholder="Enter ID number" name="RegisterCBSUserModel.IdNumber" value="@Model.RegisterCBSUserModel.IdNumber" />
+    <small class="form-text text-muted" id="hintLabel">Specify identification number of the above selected type.</small>
+    <small class="error-text" id="idNumberErrorText"></small>
+    <span name="profileloader" id="idNumberLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;"></span>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.IdNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

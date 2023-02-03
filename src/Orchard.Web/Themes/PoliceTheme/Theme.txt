@@ -1,0 +1,5 @@
+Name: Police Theme
+Author: Parkway Projects imited
+Description: Central Billing System
+Version: 1.10.2
+Dependencies: Orchard.Resources

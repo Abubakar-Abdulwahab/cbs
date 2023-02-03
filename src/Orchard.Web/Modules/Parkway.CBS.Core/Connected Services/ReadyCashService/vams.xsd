@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:ns0="http://ws.parkway.org/" targetNamespace="http://ws.parkway.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="activateCustomer">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:long" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="activateCustomerResponse">
+    <xsd:sequence>
+      <xsd:element name="return" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="clearSecretCode">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:long" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="clearSecretCodeResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="disableCutomer">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:long" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="disableCutomerResponse">
+    <xsd:sequence>
+      <xsd:element name="return" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findAgentTransactions">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg2" type="xsd:dateTime" />
+      <xsd:element name="arg3" type="xsd:int" />
+      <xsd:element name="arg4" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findAgentTransactionsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:glEntry" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomerByPhone">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomerByPhoneResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="ns0:cardHolder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomerTransactions">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg2" type="xsd:dateTime" />
+      <xsd:element name="arg3" type="xsd:int" />
+      <xsd:element name="arg4" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomerTransactionsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:glEntry" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomers">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg2" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg3" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg4" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg5" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg6" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg7" type="xsd:boolean" />
+      <xsd:element name="arg8" type="xsd:int" />
+      <xsd:element name="arg9" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findCustomersResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:cardHolder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findMerchant">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findMerchantResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="ns0:merchant" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findTerminalTransactions">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg2" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg3" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg4" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg5" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="findTerminalTransactionsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:tranLog" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getAgentBalance">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getAgentBalanceResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:decimal" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getAllCutomers">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:int" />
+      <xsd:element name="arg1" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getAllCutomersResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:cardHolder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getCustomerBalance">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getCustomerBalanceResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:decimal" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getTerminal">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getTerminalResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="ns0:terminal" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="resetPIN">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:long" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="resetPINResponse">
+    <xsd:sequence>
+      <xsd:element name="return" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="searchTranLog">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="arg0" nillable="true" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg1" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg2" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="arg3" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg4" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg5" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="arg6" type="xsd:string" />
+      <xsd:element minOccurs="0" name="arg7" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="searchTranLogResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="ns0:tranLog" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="updateCustomer">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="ns0:cardHolder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="updateCustomerResponse" />
+  <xsd:complexType name="glEntry">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="amount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="balance" type="xsd:decimal" />
+      <xsd:element name="credit" type="xsd:boolean" />
+      <xsd:element name="debit" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="detail" type="xsd:string" />
+      <xsd:element name="id" type="xsd:long" />
+      <xsd:element name="layer" type="xsd:short" />
+      <xsd:element minOccurs="0" name="tags" type="xsd:string" />
+      <xsd:element minOccurs="0" name="transaction" type="ns0:glTransaction" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="glTransaction">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="detail" type="xsd:string" />
+      <xsd:element name="id" type="xsd:long" />
+      <xsd:element minOccurs="0" name="postDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="tags" type="xsd:string" />
+      <xsd:element minOccurs="0" name="timestamp" type="xsd:dateTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="cardHolder">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="dek" type="xsd:string" />
+      <xsd:element name="active" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="address1" type="xsd:string" />
+      <xsd:element minOccurs="0" name="address2" type="xsd:string" />
+      <xsd:element minOccurs="0" name="birthDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="bvn" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="cards" nillable="true" type="xsd:anyType" />
+      <xsd:element minOccurs="0" name="city" type="xsd:string" />
+      <xsd:element minOccurs="0" name="country" type="xsd:string" />
+      <xsd:element minOccurs="0" name="email" type="xsd:string" />
+      <xsd:element minOccurs="0" name="endDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="expiryDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="firstName" type="xsd:string" />
+      <xsd:element minOccurs="0" name="gender" type="xsd:string" />
+      <xsd:element minOccurs="0" name="honorific" type="xsd:string" />
+      <xsd:element minOccurs="0" name="id" type="xsd:long" />
+      <xsd:element minOccurs="0" name="kycLevel" type="xsd:long" />
+      <xsd:element minOccurs="0" name="lastName" type="xsd:string" />
+      <xsd:element minOccurs="0" name="lastName2" type="xsd:string" />
+      <xsd:element minOccurs="0" name="middleName" type="xsd:string" />
+      <xsd:element minOccurs="0" name="notes" type="xsd:string" />
+      <xsd:element minOccurs="0" name="phone" type="xsd:string" />
+      <xsd:element minOccurs="0" name="realId" type="xsd:string" />
+      <xsd:element minOccurs="0" name="searchPath" type="xsd:string" />
+      <xsd:element minOccurs="0" name="secretCode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="startDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="state" type="xsd:string" />
+      <xsd:element name="verified" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="zip" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="card">
+    <xsd:sequence>
+      <xsd:element name="active" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="bin" type="xsd:string" />
+      <xsd:element minOccurs="0" name="endDate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="hash" type="xsd:string" />
+      <xsd:element name="id" type="xsd:long" />
+      <xsd:element minOccurs="0" name="kid" type="xsd:string" />
+      <xsd:element minOccurs="0" name="lastFour" type="xsd:string" />
+      <xsd:element name="lost" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="pan" type="xsd:string" />
+      <xsd:element minOccurs="0" name="pinOffset" type="xsd:string" />
+      <xsd:element minOccurs="0" name="startDate" type="xsd:dateTime" />
+      <xsd:element name="stolen" type="xsd:boolean" />
+      <xsd:element name="suspended" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="merchant">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="agentAmount" type="xsd:decimal" />
+      <xsd:element name="bulk" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="bvn" type="xsd:string" />
+      <xsd:element minOccurs="0" name="id" type="xsd:string" />
+      <xsd:element minOccurs="0" name="minimumAmount" type="xsd:decimal" />
+      <xsd:element minOccurs="0" name="name" type="xsd:string" />
+      <xsd:element name="revalidate" type="xsd:boolean" />
+      <xsd:element name="useValidationResult" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="ussd" type="xsd:string" />
+      <xsd:element name="validationRequired" type="xsd:boolean" />
+      <xsd:element name="visible" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tranLog">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="ns0:cloneable">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="acquirer" type="xsd:string" />
+          <xsd:element minOccurs="0" name="acquirerFee" type="xsd:decimal" />
+          <xsd:element minOccurs="0" name="additionalAmount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" name="amount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" name="approvalNumber" type="xsd:string" />
+          <xsd:element name="batchNumber" type="xsd:long" />
+          <xsd:element minOccurs="0" name="captureDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="cardHolder" type="ns0:cardHolder" />
+          <xsd:element name="completionCount" type="xsd:int" />
+          <xsd:element minOccurs="0" name="completionId" type="xsd:long" />
+          <xsd:element minOccurs="0" name="currencyCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="date" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="displayMessage" type="xsd:string" />
+          <xsd:element name="duration" type="xsd:int" />
+          <xsd:element minOccurs="0" name="echoData" type="xsd:string" />
+          <xsd:element minOccurs="0" name="extrc" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fileName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="finalAmount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" name="functionCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="glTransaction" type="ns0:glTransaction" />
+          <xsd:element minOccurs="0" name="id" type="xsd:long" />
+          <xsd:element minOccurs="0" name="irc" type="xsd:string" />
+          <xsd:element minOccurs="0" name="issuerFee" type="xsd:decimal" />
+          <xsd:element minOccurs="0" name="itc" type="xsd:string" />
+          <xsd:element name="localId" type="xsd:long" />
+          <xsd:element minOccurs="0" name="localTransactionDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="mid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="narration" type="xsd:string" />
+          <xsd:element minOccurs="0" name="node" type="xsd:string" />
+          <xsd:element name="notified" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="originalItc" type="xsd:string" />
+          <xsd:element name="outstanding" type="xsd:int" />
+          <xsd:element minOccurs="0" name="rc" type="xsd:string" />
+          <xsd:element minOccurs="0" name="reasonCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="recipient" type="xsd:string" />
+          <xsd:element minOccurs="0" name="refId" type="ns0:tranLog" />
+          <xsd:element minOccurs="0" name="responseCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="returnedBalances" type="xsd:string" />
+          <xsd:element name="reversalCount" type="xsd:int" />
+          <xsd:element minOccurs="0" name="reversalId" type="xsd:long" />
+          <xsd:element minOccurs="0" name="secureData" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sender" type="xsd:string" />
+          <xsd:element minOccurs="0" name="settlementDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="stan" type="xsd:string" />
+          <xsd:element minOccurs="0" name="tid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="transmissionDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="type" type="xsd:string" />
+          <xsd:element name="voidCount" type="xsd:int" />
+          <xsd:element minOccurs="0" name="voidId" type="xsd:long" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="cloneable" />
+  <xsd:complexType name="terminal">
+    <xsd:sequence>
+      <xsd:element name="active" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="externalInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="entry">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element minOccurs="0" name="key" type="xsd:anyType" />
+                  <xsd:element minOccurs="0" name="value" type="xsd:anyType" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="id" type="xsd:long" />
+      <xsd:element minOccurs="0" name="info" type="xsd:string" />
+      <xsd:element minOccurs="0" name="profile" type="ns0:terminalProfile" />
+      <xsd:element minOccurs="0" name="softVersion" type="xsd:string" />
+      <xsd:element minOccurs="0" name="terminalId" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="terminalProfile">
+    <xsd:sequence>
+      <xsd:element name="active" type="xsd:boolean" />
+      <xsd:element name="audit" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="id" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="activateCustomer" type="ns0:activateCustomer" />
+  <xsd:element name="activateCustomerResponse" type="ns0:activateCustomerResponse" />
+  <xsd:element name="clearSecretCode" type="ns0:clearSecretCode" />
+  <xsd:element name="clearSecretCodeResponse" type="ns0:clearSecretCodeResponse" />
+  <xsd:element name="disableCutomer" type="ns0:disableCutomer" />
+  <xsd:element name="disableCutomerResponse" type="ns0:disableCutomerResponse" />
+  <xsd:element name="findAgentTransactions" type="ns0:findAgentTransactions" />
+  <xsd:element name="findAgentTransactionsResponse" type="ns0:findAgentTransactionsResponse" />
+  <xsd:element name="findCustomerByPhone" type="ns0:findCustomerByPhone" />
+  <xsd:element name="findCustomerByPhoneResponse" type="ns0:findCustomerByPhoneResponse" />
+  <xsd:element name="findCustomerTransactions" type="ns0:findCustomerTransactions" />
+  <xsd:element name="findCustomerTransactionsResponse" type="ns0:findCustomerTransactionsResponse" />
+  <xsd:element name="findCustomers" type="ns0:findCustomers" />
+  <xsd:element name="findCustomersResponse" type="ns0:findCustomersResponse" />
+  <xsd:element name="findMerchant" type="ns0:findMerchant" />
+  <xsd:element name="findMerchantResponse" type="ns0:findMerchantResponse" />
+  <xsd:element name="findTerminalTransactions" type="ns0:findTerminalTransactions" />
+  <xsd:element name="findTerminalTransactionsResponse" type="ns0:findTerminalTransactionsResponse" />
+  <xsd:element name="getAgentBalance" type="ns0:getAgentBalance" />
+  <xsd:element name="getAgentBalanceResponse" type="ns0:getAgentBalanceResponse" />
+  <xsd:element name="getAllCutomers" type="ns0:getAllCutomers" />
+  <xsd:element name="getAllCutomersResponse" type="ns0:getAllCutomersResponse" />
+  <xsd:element name="getCustomerBalance" type="ns0:getCustomerBalance" />
+  <xsd:element name="getCustomerBalanceResponse" type="ns0:getCustomerBalanceResponse" />
+  <xsd:element name="getTerminal" type="ns0:getTerminal" />
+  <xsd:element name="getTerminalResponse" type="ns0:getTerminalResponse" />
+  <xsd:element name="resetPIN" type="ns0:resetPIN" />
+  <xsd:element name="resetPINResponse" type="ns0:resetPINResponse" />
+  <xsd:element name="searchTranLog" type="ns0:searchTranLog" />
+  <xsd:element name="searchTranLogResponse" type="ns0:searchTranLogResponse" />
+  <xsd:element name="updateCustomer" type="ns0:updateCustomer" />
+  <xsd:element name="updateCustomerResponse" type="ns0:updateCustomerResponse" />
+  <xsd:element name="glEntry" type="ns0:glEntry" />
+  <xsd:element name="glTransaction" type="ns0:glTransaction" />
+  <xsd:element name="cardHolder" type="ns0:cardHolder" />
+  <xsd:element name="card" type="ns0:card" />
+  <xsd:element name="merchant" type="ns0:merchant" />
+  <xsd:element name="tranLog" type="ns0:tranLog" />
+</xsd:schema>

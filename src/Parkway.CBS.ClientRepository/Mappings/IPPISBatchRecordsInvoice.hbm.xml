@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.IPPISBatchRecordsInvoice, Parkway.CBS.Core" table="Parkway_CBS_Core_IPPISBatchRecordsInvoice" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="InvoiceNumber" column="InvoiceNumber" />
+    <property name="InvoiceModel" column="InvoiceModel" />
+    <property name="InvoiceAmount" column="InvoiceAmount" />
+    <property name="CashflowInvoiceIdentifier" column="CashflowInvoiceIdentifier" />
+    <property name="PrimaryContactId" column="PrimaryContactId" />
+    <property name="CashflowCustomerId" column="CashflowCustomerId" />
+    <property name="ErrorOccurred" column="ErrorOccurred" />
+    <property name="ErrorCode" column="ErrorCode" />
+    <property name="ErrorMessage" column="ErrorMessage" />
+    
+    <many-to-one name="IPPISBatch" column="IPPISBatch_Id"/>
+    <many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+    <many-to-one name="IPPISTaxPayerSummary" column="IPPISTaxPayerSummary_Id"/>
+  </class>
+</hibernate-mapping>

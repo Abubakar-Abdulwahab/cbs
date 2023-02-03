@@ -1,0 +1,88 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+@{
+    Script.Require("PSS.Security.Change.Password.Script").AtFoot();
+}
+<script>
+    var changePwdURL = @Html.Raw(Json.Encode(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.ChangePassword.ShowChangePassword)));
+    var branchesURL = @Html.Raw(Json.Encode(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSBranches.Branches)));
+    var subUsersURL = @Html.Raw(Json.Encode(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSSubUser.SubUsers)));
+    var canShowSubUsersRequestReport = @Html.Raw(Json.Encode((Model.TaxEntityCategorySettings != null) ? Model.TaxEntityCategorySettings.CanShowSubUsersRequestReport : false));
+    var isMain = @Html.Raw(Json.Encode(Model.IsAdministrator));
+</script>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid nav-container">
+        <a class="navbar-brand" href="/">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/Logo.png"))" class="img img-responsive" style="width:100px;height:auto">
+        </a>
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNav">
+            <ul class="navbar-nav ml-auto no-padding no-margin">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.RouteUrl("P.SelectService")">Request Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.RouteUrl("P.Validate.Document")">Validate Document</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.RouteUrl("P.About")">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.RouteUrl("P.Contact")">Contact</a>
+                </li>
+                @if (Model.ShowSignin)
+                {
+                    if (Model.IsLoggedIn)
+                    {
+                        <li class="nav-item dropdown profile-dropdown">
+                            <a href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.NotificationMessage.List)" class="notification-link-icon"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/Notifcation.svg"))" class="img img-responsive" /></a>
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <span class="user-img"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/user.svg"))" class="img img-responsive img-circle" style="width:inherit;height:auto"></span>
+                                @Model.DisplayText
+                            </a>
+                            <div class="dropdown-menu">
+                                @using (Html.BeginRouteForm("P.Signout", FormMethod.Post, new { @id = "signoutForm", @name = "signoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    if (Model.TaxEntityCategorySettings != null && Model.TaxEntityCategorySettings.ShowCorporateRequestReport)
+                                    {
+                                        <a class="nav-item nav-link" href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.SubUsersRequestList.ShowSubUsersRequestList)">Branch Requests</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-item nav-link" href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.RequestList.ShowRequestList)">Requests</a>
+                                    }
+                                    <div id="settings">
+                                        <a class="nav-item nav-link" href="@Url.RouteUrl("P.ChangePassword")">Settings</a>
+                                    </div>
+                                    <a class="nav-item nav-link" href="#" id="signoutlnk">Sign Out</a>
+                                }
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn login-btn" href="@Url.RouteUrl("P.Sign.In")">Login | Sign Up</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="btn login-btn" href="@Url.RouteUrl("P.Sign.In")">Login | Sign Up</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    $("#signoutlnk").click(function (e) {
+        $('#signoutForm').get(0).submit();
+    });
+</script>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Parkway.CBS.Core.HelperModels.PenaltyModel>
+
+<div class="col-md-12">
+    <div class="manage">
+        <input type="button" value="Add new penalty" class="btn btn-sm btn-primary addpenalty" />
+    </div>
+    <h4><b>Penalties</b></h4>
+</div>
+<div class="col-md-12" id="penaltyDiv">
+
+    @if (Model.Any())
+    {
+        int pencounter = 0;
+
+        foreach (var penalty in Model)
+        {
+            <div class="form-inline" id="penalty_@pencounter">
+                <select name="PenaltyModel[@pencounter].PenaltyValueType" class="form-control">
+                    <option value="">Select Penalty Type</option>
+                    @Html.SelectOption("FlatRate", penalty.PenaltyValueType.ToString() == "FlatRate" ? true : false, "Flat Rate")
+                    @Html.SelectOption("Percentage", penalty.PenaltyValueType.ToString() == "Percentage" ? true : false, "% of assessment fee")
+                </select>
+                <input name="PenaltyModel[@pencounter].Value" placeholder="Value" min="1" class="form-control" type="number" value="@penalty.Value">
+                <small> Effective From: </small>
+                <input name="PenaltyModel[@pencounter].EffectiveFrom" min="1" placeholder="Days" class="form-control" type="number" value="@penalty.EffectiveFrom">
+                <select name="PenaltyModel[@pencounter].EffectiveFromType" class="form-control">
+                    <option value="">Select Range Type</option>
+                    @Html.SelectOption("Days", penalty.EffectiveFromType.ToString() == "Days" ? true : false, "Days")
+                    @Html.SelectOption("Weeks", penalty.EffectiveFromType.ToString() == "Weeks" ? true : false, "Weeks")
+                    @Html.SelectOption("Months", penalty.EffectiveFromType.ToString() == "Months" ? true : false, "Months")
+                    @Html.SelectOption("Years", penalty.EffectiveFromType.ToString() == "Years" ? true : false, "Years")
+                </select>
+                <a id="removepen_@pencounter" class="removepen" href="#" name="removepen"> &nbsp; &nbsp; Remove</a>
+            </div>
+            <input type="hidden" name="PenaltyModel.Index" value="@pencounter" />
+            pencounter++;
+        }
+    }
+    else
+    {
+    }
+</div>
+

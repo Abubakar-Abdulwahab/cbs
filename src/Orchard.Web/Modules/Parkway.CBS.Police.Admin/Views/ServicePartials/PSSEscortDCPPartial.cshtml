@@ -1,0 +1,131 @@
+﻿@model Parkway.CBS.Police.Core.VM.DCPApprovalVM
+@{ 
+    Script.Require("PSS.DCP.Assign.Formation.Script");
+    Script.Require("PSS.DCP.Get.Commands.Script");
+}
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 50%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var formationsAllocated = @Html.Raw(Json.Encode(Model.FormationsAllocated));
+    var req = @Html.Raw(Model.RequestId);
+</script>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="4">Formations to provide the service</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label for="formationLGA">LGA</label>
+                <select id="formationLGA" class="extend-width">
+                    <option value="0" selected disabled>Select an LGA</option>
+                    @foreach (var lag in Model.LGAs)
+                    {
+                        <option value="@lag.Id">@lag.Name</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <label for="commands">Formation</label>
+                <select id="commands" class="extend-width">
+                    <option value="0" selected disabled>Select a formation</option>
+                </select>
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10;top:34px"></span>
+                <div id="searchError"></div>
+            </td>
+            <td>
+                <label for="officerQty">Number of officers to provide</label>
+                <input type="text" id="officerQty" class="extend-width" style="height:20px" />
+            </td>
+            <td style="width:50px">
+                <fieldset>
+                    <button type="button" id="addFormationdBtn" style="position: absolute; top: 31px;">+ Add</button>
+                </fieldset>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="formationsTable">
+    <tr>
+        <th>LGA</th>
+        <th>Formation</th>
+        <th>Number of officers<br />requested</th>
+        <th>Number of officers<br />assigned</th>
+        <th>Actions</th>
+        <th></th>
+    </tr>
+    @if (Model.FormationsAllocated != null && Model.FormationsAllocated.Any())
+    {
+        int index = 0;
+        foreach (var allocatedFormation in Model.FormationsAllocated)
+        {
+
+            <tr>
+                <td>
+                    @allocatedFormation.LGAName
+                </td>
+                <td>
+                    @allocatedFormation.FormationName
+                </td>
+                <td>
+                    @allocatedFormation.NumberOfOfficers
+                </td>
+                <td>
+                    @allocatedFormation.NumberOfOfficersAssignedByCommander
+                </td>
+                <td>
+                    @if (allocatedFormation.NumberOfOfficersAssignedByCommander > 0)
+                    {
+                        <button type="button" class="view-officers-toggle esc-@Model.RequestId-@allocatedFormation.FormationId">View Officers</button>
+                    }
+                </td>
+                <td>
+                    <span class="delete-squad-row" Title="Remove Item" onClick="removeFormation(@index)">X</span>
+                </td>
+            </tr>
+            index++;
+        }
+        <input type="hidden" name="AllocationGroupId" value="@Model.FormationsAllocated.ElementAt(0).AllocationGroupId" />
+    }
+</table>
+
+@Html.Partial("\\ServicePartials\\ApprovalPartial\\AssignFormationApprovalComment", Model.CanApprove,
+    new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name) }, { new KeyValuePair<string, object>("CustomControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApprovalDCP).Name) } })
+
+@Html.Partial("\\ServicePartials\\PSSEscortViewAllocatedOfficersPartial")

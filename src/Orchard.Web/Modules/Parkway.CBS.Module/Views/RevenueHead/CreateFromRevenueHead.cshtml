@@ -1,0 +1,103 @@
+﻿@model Parkway.CBS.Module.ViewModels.SubRevenueHeadCreateViewModel
+
+@{ Layout.Title = @String.Format("{0}", Model.SRHName);
+    Style.Require("CBS.MDA.Style");
+}
+
+@Display(Model.AdminBreadCrumb)
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.Hidden("CodePrefix", Model.CodePrefix)
+
+    <fieldset>
+        <div class="manage">@Html.ActionLink(T("Add another Revenue Head").ToString(), null, new { }, new { @href = "#", @class = "button primaryAction", @id = "anotherOne", @name = "Revenue Head" })</div>
+        <div>
+            <button type="submit">@T("Save")</button>
+            <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("ViewSubRevenueHeads", "RevenueHead", new { slug = Model.SRHSlug, id = Model.SRHId })'">@T("Cancel")</button>
+        </div>
+    </fieldset>
+    <div id="container">
+        @if (Model.RevenueHeadsCollection.Any())
+        {
+            int counter = Model.RevenueHeadsCollection.Count - 1;
+            <input type="hidden" id="Indexer" value="@Model.RevenueHeadsCollection.Count" />
+            foreach (var item in Model.RevenueHeadsCollection)
+            {
+                <table class="items" id="tab_@counter">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="titleHeader">Revenue Head</th>
+                            <th scope="col">
+                                @if (counter != 0)
+                                {
+                                <p align="right">@Html.ActionLink(T("x").ToString(), null, new { }, new { @href = "#", @id = "remove_" + counter, @name = "remove", @class = "remove" })</p>
+
+                                }
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label id="mdaName">@T("Revenue Head Name")</label>
+                                    @*@Html.TextBox("RevenueHeadsCollection[" + counter + "].Name", null, new { @class = "text large", @required = true })*@
+                                    <input required name="RevenueHeadsCollection[@counter].Name" min="1" class="text large" type="text" value="@item.Name">
+
+                                    @Html.Hint(T("Add the name of your Revenue Head here. For example {0}.", "Land Use Charge"))
+                                    @Html.ValidationMessage("RevenueHeadsCollection[" + counter + "].Name", new { @style = "color:#990808" })
+                                </td>
+                                <td>
+                                    <label id="mdaCode">@T("Revenue Head Code")</label>
+                                    @*@Html.TextBox("Code", null, new { @class = "text large", @required = true })*@
+                                    @*@Html.TextBox("RevenueHeadsCollection[" + counter + "].Code", null, new { @class = "text large", @required = true })*@
+                                    <input required name="RevenueHeadsCollection[@counter].Code" min="1" class="text large" type="text" value="@item.Code">
+
+                                    @Html.Hint(T("Add a Revenue Head identification code. For example {0}.", "MDA/FF/RH-SL/049"))
+                                    @Html.ValidationMessage("RevenueHeadsCollection[" + counter + "].Code", new { @style = "color:#990808" })
+                                    <input type="hidden" name="RevenueHeadsCollection.Index" value="@counter" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                counter--;
+            }
+        }
+        else
+        {
+            <input type="hidden" id="Indexer" value="1" />
+            <table class="items" id="tab_0">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">Revenue Head</th>
+                        <th scope="col"></th>
+                        @*<th scope="col"><p align="right">@Html.ActionLink(T("x").ToString(), null, new { }, new { @href="#", @id = "remove_0", @name="remove" })</p></th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label id="mdaName">@T("Revenue Head Name")</label>
+                            @*@Html.TextBox("Name", null, new { @class = "text large", @required = true })*@
+                            @Html.TextBox("RevenueHeadsCollection[" + 0 + "].Name", null, new { @class = "text large", @required = true })
+                            @Html.Hint(T("Add the name of your Revenue Head here. For example {0}.", "Land Use Charge"))
+                        </td>
+                        <td>
+                            <label id="mdaCode">@T("Revenue Head Code")</label>
+                            @*@Html.TextBox("Code", null, new { @class = "text large", @required = true })*@
+                            @Html.TextBox("RevenueHeadsCollection[" + 0 + "].Code", Model.CodePrefix, new { @class = "text large", @required = true })
+                            @Html.Hint(T("Add a Revenue Head identification code. For example {0}.", "MDA/FF/RH-SL/049"))
+                            <input type="hidden" name="RevenueHeadsCollection.Index" value="0" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        }
+        <input type="hidden" name="SRHName" value="@Model.SRHName">
+    </div>
+}
+@{ Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.General.Script").AtFoot();
+}

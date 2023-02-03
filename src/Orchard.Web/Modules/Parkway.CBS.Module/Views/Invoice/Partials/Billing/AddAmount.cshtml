@@ -1,0 +1,23 @@
+﻿@model Parkway.CBS.Module.ViewModels.AdminGenerateInvoiceVM
+
+<div class="col-6">
+    <div class="form-group">
+        <div class="container">
+            <label style="white-space: nowrap;">@T("(₦)Amount")</label>
+            @Html.TextBox("Amount", null, new { @class = "text large form-control px-2", @type = "number", @step = "0.01", @required = "true", @id = "amount", @placeholder = "Enter amount the tax payer is willing to pay", @min = "0.01" })
+            @Html.ValidationMessageFor(m => m.Amount, "", new { @style = "color:#ff0000" })
+            @Html.Hint(T("Enter the amount for this invoice in Naira."))
+        </div>
+    </div>
+</div>
+
+<div class="col-6">
+    <div class="form-group">
+        <div class="container">
+            <label for="Reference" style="white-space: nowrap;">@T("Reference")</label>
+            @Html.TextBox("Reference", null, new { @class = "text large form-control px-2", @type = "text", @id = "reference", @maxlength = "200", @placeholder = "Enter external bill number here" })
+            @Html.ValidationMessageFor(m => m.Reference, "", new { @style = "color:#ff0000" })
+            @Html.Hint(T("If the tax payer is paying for a external bill, enter the bill number."))
+        </div>
+    </div>
+</div>

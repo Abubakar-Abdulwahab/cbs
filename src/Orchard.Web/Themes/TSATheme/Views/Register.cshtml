@@ -1,0 +1,74 @@
+﻿@{ 
+    Layout.Title = Html.TitleForPage(T("Register")).ToString();
+}
+
+@*<h1>@Html.TitleForPage(T("Create a New Account").ToString())</h1>
+<p>@T("Use the form below to create a new account.")</p>
+<p>@T("Passwords are required to be a minimum of {0} characters in length.", ViewData["PasswordLength"])</p>
+@Html.ValidationSummary(T("Account creation was unsuccessful. Please correct the errors and try again.").ToString())*@ 
+
+
+
+<div class="col-sm-offset-3 col-sm-6 well well-sm logreg">
+    <h3>Register with @WorkContext.CurrentSite.SiteName</h3>
+    <p class="small" style="color:#428bca">@T("Passwords are required to be a minimum of {0} characters in length.", ViewData["PasswordLength"])</p>
+    <hr />
+    @using (Html.BeginFormAntiForgeryPost(Url.Action("Register"), FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+
+        @Html.ValidationSummary(true, T("Enter account details correctly.").ToString(), new { @class = "alert alert-danger alert-dismissable fade in" })
+
+        <div class="form-group">       
+            @*<label for="userName-email" class="col-sm-2 control-label">@T("Username")</label>*@     
+            <div class="col-sm-12 login-form">
+                @Html.TextBox("username", string.Empty, new { id = "username", @class = "form-control", autofocus = "autofocus", placeholder = "Username" })
+                @Html.ValidationMessage("username", new { @class = "small red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<label for="userName-email" class="col-sm-2 control-label">@T("Username")</label>*@
+            <div class="col-sm-12 login-form">
+                @Html.TextBox("email", string.Empty, new { id = "email", @class = "form-control", autofocus = "autofocus", placeholder = "Email" })
+                @Html.ValidationMessage("email", new { @class = "small red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<label for="password" class="col-sm-2 control-label">@T("Password")</label>*@
+            <div class="col-sm-12 login-form">
+                @Html.Password("password", string.Empty, new { @class = "form-control", placeholder = "Password" })
+                @Html.ValidationMessage("password", new { @class = "small red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<label for="password" class="col-sm-2 control-label">@T("Password")</label>*@
+            <div class="col-sm-12 login-form">
+                @Html.Password("confirmPassword", string.Empty, new { @class = "form-control", placeholder = "Confirm Password" })
+                @Html.ValidationMessage("password", new { @class = "small red" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-block">@T("Register")</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="reset" class="btn btn-default btn-block">@T("Reset")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr />
+    <div class="small">
+        Already have account with us? @Html.ActionLink(T("Login").ToString(), "LogOn", new { Controller = "Account",
+                                     Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl)}, new { rel = "nofollow"})
+    </div>
+   
+</div>

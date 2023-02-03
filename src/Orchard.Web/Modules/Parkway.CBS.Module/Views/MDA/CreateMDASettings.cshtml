@@ -1,0 +1,148 @@
+﻿@model Parkway.CBS.Module.ViewModels.MDASettingsViewModel
+
+@{
+    Script.Require("CBS.MDA.Settings.Script").AtFoot();
+
+    Layout.Title = "MDA Settings".ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("CreateMDASettings", "MDA", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div id="container">
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">MDA Settings</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDA Name")</label>
+                        @Html.TextBoxFor(m => m.MDA.Name, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add the MDA name to be added on the invoice."))
+                        @Html.ValidationMessageFor(m => m.MDA.Name, "", new { @style = "color:#990808" })
+                    </td>
+                    <td>
+                        <label id="mdaName">@T("MDA Code")</label>
+                        @Html.TextBoxFor(m => m.MDA.Code, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add the MDA code for invoice reference."))
+                        @Html.ValidationMessageFor(m => m.MDA.Code, "", new { @style = "color:#990808" })
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDA Contact Email")</label>
+                        @Html.TextBoxFor(m => m.MDA.MDASettings.CompanyEmail, new { @class = "text large", @required = true, @type = "email" })
+                        @Html.Hint(T("Add the MDA contact email to be displayed on the invoice."))
+                        @Html.ValidationMessageFor(m => m.MDA.MDASettings.CompanyEmail, "", new { @style = "color:#990808" })
+                    </td>
+                    <td>
+                        <label id="mdaCode">@T("MDA Contact Phone Number")</label>
+                        @Html.TextBoxFor(m => m.MDA.MDASettings.CompanyMobile, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add the MDA contact phone number to be displayed on the invoice."))
+                        @Html.ValidationMessageFor(m => m.MDA.MDASettings.CompanyMobile, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (Model.UseTSA)
+                        {
+                            @Html.CheckBox("UseTSA", true) <small>Use TSA</small>
+                            <label id="mdaCode">@T("Bank Account Number")</label>
+                            @Html.TextBoxFor(m => m.MDA.BankDetails.BankAccountNumber, new { @class = "text large", @required = true, @disabled = true, @value = "0987" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("UseTSA", false) <small>Use TSA</small>
+                            <label id="mdaCode">@T("Bank Account Number")</label>
+                            @Html.TextBoxFor(m => m.MDA.BankDetails.BankAccountNumber, new { @class = "text large", @required = true })
+                        }
+                        @Html.Hint(T("Enter Bank Account Name."))
+                        @Html.ValidationMessageFor(m => m.MDA.BankDetails.BankAccountNumber, "", new { @style = "color:#990808" })
+                        
+                    </td>
+                    <td>
+                        @if (Model.UseTSA)
+                        {
+                            <br />
+                            <label id="mdaName">@T("Select Bank")</label>
+                            <select name="bank" aria-required="true" id="bank" style="width:99%" required disabled>
+                                <option value="">Select Bank</option>
+                                @foreach (var item in Model.Banks)
+                                {
+                                    if (item.Id.ToString() == Model.SBankId)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <br />
+                            <label id="mdaName">@T("Select Bank")</label>
+                            <select name="bank" aria-required="true" id="bank" style="width:99%" required>
+                                <option value="">Select Bank</option>
+                                @foreach (var item in Model.Banks)
+                                {
+                                    if (item.Id.ToString() == Model.SBankId)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        }
+                        
+                        @Html.Hint(T("Select Bank."))
+                        @Html.ValidationMessageFor(m => m.MDA.BankDetails.Id, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+                <tr id="accounttr">
+                    <td colspan="2">
+                        <label id="mdaName">@T("Account Name")</label>
+                        @Html.TextBox("accountName", null, new { @class = "text large", @disabled = true })
+                        @Html.Hint(T("Bank Account Name."))
+                        @*@Html.ValidationMessageFor(m => m.MDA.MDASettings.CompanyEmail, "", new { @style = "color:#990808" })*@
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDA Logo")</label>
+                        @Html.TextBox("LogoPath", null, new { @class = "text large", @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                        @Html.Hint(T("Upload logo for invoices generated."))
+                        @Html.ValidationMessage("LogoPath", null, new { @style = "color:#990808" })
+                    </td>
+                    <td>
+                        <label id="mdaName">@T("MDA Signature")</label>
+                        @Html.TextBox("SignaturePath", null, new { @class = "text large", @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                        @Html.Hint(T("Upload signature on invoices generated."))
+                        @Html.ValidationMessage("SignaturePath", null, new { @style = "color:#990808" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label id="mdaCode">@T("Company Address")</label>
+                        @Html.TextAreaFor(m => m.MDA.MDASettings.CompanyAddress, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Enter state address to be displayed on the invoice."))
+                        @Html.ValidationMessageFor(m => m.MDA.MDASettings.CompanyAddress, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Save")</button>
+        <button type="button" value="@T(" Cancel")" onclick="location.href='@Url.Action(" List", "MDA" )'" class="a-classname">@T("Cancel")</button>
+    </fieldset>
+}

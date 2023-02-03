@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.CommandWalletDetails, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_CommandWalletDetails" lazy="false" >
+    <id name="Id" column="Id" type="Int32">
+      <generator class="identity"/>
+    </id>
+
+    <property name="AccountNumber" column="AccountNumber" />
+    <property name="IsActive" column="IsActive" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="BankCode" column="BankCode" />
+
+    <many-to-one name="Command" column="Command_Id"/>
+    <many-to-one name="Bank" column="Bank_Id"/>
+  </class>
+</hibernate-mapping>

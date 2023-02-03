@@ -1,0 +1,387 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <style type="text/css">
+        body{
+            margin:unset;  
+        }
+
+        .receipt-wrapper{
+            margin:unset;
+            position: relative;
+        }
+
+        @@media screen {
+            .receipt-wrapper{
+                padding:10px;
+            }    
+        }
+
+        .container-fluid .cbs-receipt{
+            /*max-width:700px;*/
+            height: auto;
+            /*border: 1px solid #EEEEEE;*/
+            padding: 20px;
+            position: relative;
+            min-width: 600px;
+            min-height: 880px;
+            /*box-shadow: 0 0 1.2px 1.2px #EEEEEE;*/
+        }
+
+        @@media print {
+            .container-fluid .cbs-receipt{
+                max-width: 794px;
+
+            }
+        }
+
+        .table td, .table th {
+            background-color: transparent !important;
+        }
+
+        .receipt-wrapper .receipt-head__right {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .receipt-wrapper .receipt-head__right .barcode {
+            width: 150px;
+        }
+
+        .container-fluid .cbs-receipt .row{
+            width:100%;
+            padding-top:2px;
+            padding-bottom:2px;
+            margin:unset;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container-fluid .cbs-receipt .period-of-payment{
+            width:100%;
+            margin:unset;
+            padding:20px;
+            
+        }
+
+        .container-fluid .cbs-receipt .period-of-payment h5{
+            font-weight: bold;
+            font-size:16px;
+        }
+
+
+
+        .container-fluid .cbs-receipt .row table tr td{
+            border:4px solid rgba(255, 255, 255,0.5);
+            padding-bottom: 5px;
+            padding-top:5px;
+            height:30px;
+        }
+
+        .container-fluid .cbs-receipt .row table tr:nth-child(even){
+            background-color: rgba(237,239,238,0.35);
+            color: #05325b;
+        }
+
+        .container-fluid .cbs-receipt .row table tr:nth-child(odd){
+            background-color: rgba(245,247,246,0.35);
+            color: #05325b;
+        }
+
+
+        .container-fluid .cbs-receipt .content-headers{
+            background-color: #B9D5DE;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no{
+            font-size:15px;
+            font-weight:bold;
+            line-height:5px;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no .receipt-caption-1{
+            font-weight: normal;
+
+        }
+
+
+    
+        .container-fluid .container .row .receipt-receipt-no .logo-caption img {
+            height:47px;
+            width:235px;
+        }
+
+
+
+        .container-fluid .container .row .receipt-receipt-no .logo-caption p {
+            color: green;
+            line-height: 0.5px;
+            font-weight: 300;
+        }
+
+        .container-fluid .container .row .table {
+            margin: unset;
+        }
+
+
+
+        .container-fluid .cbs-receipt .row table:nth-of-type(1) tr td:nth-child(1) {
+            width:150px;
+            padding-left: 20px;
+        }
+
+        .container-fluid .cbs-receipt .row table:last-of-type tr td:nth-child(1){
+            padding-left:20px;
+        }
+
+
+
+        .container-fluid .cbs-receipt .row table:nth-of-type(2) tr td:nth-child(2) {
+            width:60px;
+            text-align: right;
+        }
+
+        /* .container-fluid .cbs-receipt .row table:last-of-type(2) tr:nth-child(1){
+            background-color: white;
+        } */
+
+        .container-fluid .container .row table tr:nth-child(1) td{
+            padding-top:1px !important;
+            padding-bottom: 1px !important;
+            color:white;
+            font-weight:bold;
+            padding-left:30px;
+            background-image: url("@Model.LongStrip");
+            background-position-x: left;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* .container-fluid .container .row table tr:nth-child(1) td::before{
+            content:url("Images/strip_2_niger_state.svg");
+            height:50px;
+        } */
+
+        .container-fluid .container .row table:last-of-type tr:nth-child(2) td{
+            background-color: white;
+            font-weight: bold;
+        }
+
+        p{
+            margin:unset;
+            padding:unset;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no .logo-caption{
+            position: relative;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no .logo-caption img{
+            position: absolute;
+            left: 0;
+            top:-10;
+			height: 70px;
+			width: auto;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no .logo-caption .first-caption{
+            position: absolute;
+            left:55px;
+            top:25px;
+        }
+
+        .container-fluid .container .row .receipt-receipt-no .logo-caption .second-caption{
+            position: absolute;
+            left:55px;
+            top:40px;
+        }
+
+        .container-fluid .cbs-receipt .total-section{
+            background-color: rgba(0,0,0,0.1);
+            width:300px;
+            padding-top:5px;
+            padding-bottom:5px;
+            float:right;
+            height:35px;
+            margin-top: 50px;
+            margin-right: 5px;
+        }
+
+        .container-fluid .cbs-receipt .total-section p:nth-child(1){
+            float:right;
+            color:white;
+            font-weight: bold;
+        }
+
+        .container-fluid .cbs-receipt .total-section p:nth-child(2){
+            float:right;
+            margin-inline-end: 140px;
+            color:black;
+            font-weight: bold;
+        }
+
+        .container-fluid .cbs-receipt::before{
+            content:' ';
+            position: absolute;
+            top:-70px;
+            bottom:0;
+            left:0;
+            right:0;
+            background-image: url('@Model.ReceiptLogoPath');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 380px 320px;
+            opacity: 0.08;
+        }
+
+        /* .container-fluid .cbs-receipt .stripe-img{
+            z-index:-1000;
+            position: absolute;
+            width:300px;
+            right:0;
+            
+        } */
+
+        .total-section{
+            background-image: url('@Model.ShortStrip');
+            /* background-position-x: left; */
+            background-position-x: left;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .footer-info{
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+</head>
+
+<body>
+    <div class="container-fluid receipt-wrapper">
+        <div class="container cbs-receipt">
+            <div class="row receipt-head">
+                <div class="container col-sm-12 receipt-receipt-no">
+                    <div class="container logo-caption">
+                        <img src="@Model.ReceiptLogoURL" />
+                        <span class="first-caption">
+                            <p>                                
+                                <!-- @Model.TenantName -->                                
+                            </p>
+                        </span>
+                        <span class="second-caption">
+                            <p>
+                            
+                            </p>
+                        </span>
+                    </div>
+                    <p>
+                        RECEIPT NO: <span class="receipt-caption-1">@Model.ReceiptNumber</span>
+                    </p>
+                    <p>
+                        Invoice Number: <span class="receipt-caption-1">@Model.InvoiceNumber</span>
+                    </p>
+					<p>
+                        Service Name: <span class="receipt-caption-1">@Model.ServiceName</span>
+                    </p>
+                    <p>
+                        File Number: <span class="receipt-caption-1">@Model.FileNumber</span>
+                    </p>
+                    <p>
+                        DATE: <span class="receipt-caption-1">@Model.PaymentDate</span>
+                    </p>
+                    <div class="receipt-head__right">
+                        <img src="@Model.BarCodeSavingPath" class="img img-fluid barcode" />
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="row receipt-body">
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td colspan="2">Payers Info</td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            @Model.Recipient
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Phone&nbsp;No:</td>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Payer ID:</td>
+                        <td>@Model.PayerId</td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td colspan="2">Billing Info</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Amount</td>
+                    </tr>
+                        <tr>
+                            @foreach (var item in Model.Transactions)
+                            {
+                                <tr>
+                                    <td>@item.InvoiceDesc</td>
+                                    <td><span>&#8358;</span>@String.Format("{0:n2}", item.AmountPaid)</td>
+                                </tr>
+                            }                        
+                        </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <div class="container total-section">
+                    <p>
+                        <span>&#8358;</span>
+                        @String.Format("{0:n2}", Model.TotalAmountPaid)
+                    </p>
+                    <p>
+                        TOTAL
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-info">
+                <p>To validate this receipt scan the QR code above or visit <a href="https://www.possap.gov.ng">www.possap.gov.ng</a></p>
+            </div>
+        </div>
+</body>
+
+</html>

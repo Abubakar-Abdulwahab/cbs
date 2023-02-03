@@ -1,0 +1,216 @@
+﻿@model ParkWay.CBS.Module.ViewModels.MDAReportViewModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Assessment Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+    Script.Require("CBS.MDA.RevenueReport.Script");
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.HiddenFor(model => model.SelectedMDA)
+    @Html.HiddenFor(model => model.SelectedRevenueHead)
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @if (!string.IsNullOrEmpty(Model.MDAName))
+                { <b>@string.Format("{0} - {1}", @Model.MDAName, @Model.RevenueHeadName)</b> } ASSESMENT REPORT
+            </div>
+            <div class="col-md-12 text-center">
+                <div class="form-inline">
+                    <div class="form-group">
+                        From
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.FromRange" name="fromRange" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        To
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.EndRange" name="endRange" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select name="mda" id="mda_selected" required class="form-control selectBox">
+                            <option value="">Select an MDA</option>
+                            @foreach (var item in Model.Mdas)
+                            {
+                                if (item.Slug == Model.SelectedMDA)
+                                {
+                                    <option value="@item.Slug" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Slug">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="revenueHeadId" id="revenuehead_selected" required class="form-control selectBox">
+                            <option value="">Select a Revenue Head</option>
+                            @foreach (var item in Model.RevenueHeads)
+                            {
+                                if (item.Id.ToString() == Model.SelectedRevenueHead)
+                                {
+                                    <option value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center secondrow">
+                <div class="form-inline">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Options.TINText, new { @class = "form-control", @placeholder = "Enter TIN Number" })
+                    </div>
+                    <div class="form-group">
+                        <select id="filterResults" name="@Html.NameOf(m => m.Options.PaymentStatus)" class="form-control selectBox">
+                            @Html.SelectOption(Model.Options.PaymentStatus, ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.All, T(ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.All.ToString()).ToString())
+                            @Html.SelectOption(Model.Options.PaymentStatus, ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Paid, T(ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Paid.ToString()).ToString())
+                            @Html.SelectOption(Model.Options.PaymentStatus, ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Unpaid, T(ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Unpaid.ToString()).ToString())
+                            @Html.SelectOption(Model.Options.PaymentStatus, ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Overdue, T(ParkWay.CBS.Module.Models.Enums.InvoiceStatusDropDownList.Overdue.ToString()).ToString())
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Options.InvoiceNumber, new { @class = "form-control", @placeholder = "Enter Invoice Number" })
+                    </div>
+                    <button class="btn btn-default">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 reportsummary">
+            <a href="javascript:;" class="btn btn-danger pdf"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+            <a download="MdaReport.xls" href="javascript:;" class="btn btn-success" onclick="return ExcellentExport.excel(this,'invoices','MDA Report');"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>
+                                    INVOICE DATE
+                                </th>
+                                <th>
+                                    INVOICE NUMBER
+                                </th>
+                                <th>
+                                    PAYER'S TIN/RIN
+                                </th>
+                                <th>
+                                    INVOICE AMOUNT
+                                </th>
+                                <th>
+                                    INVOICE STATUS
+                                </th>
+                                <th>
+                                    AMOUNT PAID
+                                </th>
+                                <th>
+                                    PAYMENT DATE
+                                </th>
+                                <th>
+                                    DUE DATE
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Report != null && Model.Report.Count() > 0)
+                            {
+                                foreach (var item in Model.Report)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.InvoiceDate.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @item.InvoiceNumber
+                                        </td>
+                                        <td>
+                                            @item.PayersTIN
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:n0}", item.Amount)
+                                        </td>
+                                        <td>
+                                            @item.PaymentStatus
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:n0}", item.AmountDue)
+                                        </td>
+                                        <td>
+                                            @if (item.PaymentDate != null)
+                                            {
+                                                @item.PaymentDate.Value.ToString("dd MMM yyyy")
+                                            }
+                                            else
+                                            {
+                                                <small> -</small>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.DueDate != null)
+                                            {
+                                                @item.DueDate.Value.ToString("dd MMM yyyy")
+                                            }
+                                            else
+                                            {
+                                                <small> -</small>
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3">No Records Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total Number of Invoices Generated: @String.Format("{0:n0}", Model.TotalNumberOfInvoicesSent) </p>
+                <p class="summary">Total Amount: &#X20A6; @String.Format("{0:n0}", Model.TotalInvoiceAmount)</p>
+            </div>
+        </div>
+    </div>
+}

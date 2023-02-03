@@ -1,0 +1,81 @@
+﻿@model Parkway.CBS.Module.Web.ViewModels.PAYESearchByReceiptNumberVM
+@{
+    Layout.Title = "PAYE Receipt Details";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+<div class="wrapper-payment">
+    @Html.AntiForgeryToken()
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>PAYE Item Receipt Details</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">PAYE Item Receipt Details</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container">
+            <div class="main-form payment-form big">
+
+                <h3 class="form-title">
+                    <span>Receipt Number: @Model.ReceiptNumber</span>
+                    <span class="end">
+                        <a download href="@Url.RouteUrl(Parkway.CBS.Client.Web.RouteName.PAYEBatchItemReceiptValidation.GeneratePAYEBatchItemReceipt,new { receiptNumber = @Model.ReceiptNumber })" name="viewReceipt" title="Download pdf copy of the receipt" style="text-decoration:none; color:#E12222">Download Receipt</a>
+                    </span>
+                </h3>
+                <div class="row pl-4 pr-4">
+                    <div class="col-md-3">
+                        <p class="til">Payer Name</p>
+                        <p class="ans">@Model.ReceiptViewModel.TaxPayerName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Phone</p>
+                        <p class="ans">@Model.ReceiptViewModel.TaxPayePhoneNumber</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Email</p>
+                        <p class="ans">@Model.ReceiptViewModel.TaxPayerEmail</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">State TIN</p>
+                        <p class="ans">@Model.ReceiptViewModel.TaxPayerId</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Gross Amount</p>
+                        <p class="ans">&#x20A6;@String.Format("{0:n2}", Model.ReceiptViewModel.GrossAnnual)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Tax Amount</p>
+                        <p class="ans">&#x20A6;@String.Format("{0:n2}", Model.ReceiptViewModel.TaxAmountPaid)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Year</p>
+                        <p class="ans">@Model.ReceiptViewModel.Year</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p class="til">Month</p>
+                        <p class="ans">@Model.ReceiptViewModel.Month.ToString()</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top"></div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

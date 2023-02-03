@@ -1,0 +1,69 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortRequestDetailsVM
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">POLICE COMMAND/FORMATION TO PROVIDE THE SERVICE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label>State</label>
+                <p class="extend-width">@Model.EscortInfo.StateName</p>
+            </td>
+            <td>
+                <label>LGA</label>
+                <p class="extend-width">@Model.EscortInfo.LGAName</p>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label>Command</label>
+                <p class="extend-width">@Model.EscortInfo.CommandName</p>
+            </td>
+            <td>
+                <label>Number of Officers Required by customer</label>
+                <p class="extend-width">@Model.EscortInfo.NumberOfOfficers </p>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="officerTable">
+    <thead>
+        <tr>
+            <th>
+                POLICE OFFICER RANK
+            </th>
+            <th>
+                NAME
+            </th>
+            <th>
+                COMMAND
+            </th>
+            <th>
+                SERVICE NUMBER
+            </th>
+        </tr>
+    </thead>
+    <tbody style="background-color:#EEEEEE;">
+        @foreach (var item in Model.EscortInfo.ProposedOfficers)
+        {
+            <tr>
+                <td>
+                    @item.OfficerRankName
+                </td>
+                <td>
+                    @item.OfficerName
+                </td>
+                <td>
+                    @item.OfficerCommandName
+                </td>
+                <td>
+                    @item.OfficerIdentificationNumber
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,199 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Module.ViewModels.TaxPayerDetailsViewModel
+
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Account Statement").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <div class="row" style="background-color:#f3f4f5;">
+            <div class="col-md-12" style="white-space: normal;">
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Recipient")</b>
+                    <p>@Model.Name</p>
+                    @Html.Hint(T("The name of the tax profile."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Phone number")</b>
+                    <p>@Model.PhoneNumber</p>
+                    @Html.Hint(T("Phone number of the tax profile."))
+                </div>
+            </div>
+            <div class="col-md-12" style="white-space: normal;">
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("TIN")</b>
+                    <p>@(string.IsNullOrEmpty(Model.TIN) ? "-" : Model.TIN)</p>
+                    @Html.Hint(T("TIN of the tax profile on record."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Email")</b>
+                    <p>@(string.IsNullOrEmpty(Model.Email) ? "-" : Model.Email)</p>
+                    @Html.Hint(T("Email of the tax profile."))</p>
+                </div>
+            </div>
+            <div class="col-md-12" style="white-space: normal;">
+
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Address")</b>
+                    <p>@(string.IsNullOrEmpty(Model.Address) ? "-" : Model.Address)</p>
+                    @Html.Hint(T("Address of the tax profile."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Category")</b>
+                    <p>@Model.Category</p>
+                    @Html.Hint(T("Category for this tax profile."))</p>
+                </div>
+            </div>
+            <div class="col-md-12" style="white-space: normal;">
+
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Payer ID")</b>
+                    <p>@Model.PayerId</p>
+                    @Html.Hint(T("ID for the tax profile."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Date Created")</b>
+                    <p>@Model.DateCreated.ToString("dd MMMM yyyy")</p>
+                    @Html.Hint(T("Creation date for the tax profile."))</p>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">From</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" autocomplete="off" class="form-control pickyDate" value="@Model.FromRange" name="fromRange" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">To</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" autocomplete="off" class="form-control pickyDate" value="@Model.EndRange" name="endRange" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Type</b>
+                    <div class="input-group">
+                        @Html.DropDownList("PaymentTypeId", PaymentType.All.ToSelectList((int)PaymentType.All), new { @class = "form-control", @Value = "SelectedTransactionTypeId" })
+                        <span class="input-group-btn">
+                            <button style="margin-left: 10px" class="btn btn-group-lg btn-primary" formaction="@Url.Action("StatementOfAccountDetails", "Report")">Search</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    INVOICE NUMBER
+                                </th>
+                                <th style="text-align:right">
+                                    (₦)BILL
+                                </th>
+                                <th style="text-align:right">
+                                    RECEIPT NUMBER
+                                </th>
+                                <th style="text-align:right">
+                                    (₦)CREDIT
+                                </th>
+                                <th style="text-align:right">
+                                    (₦)DEBIT
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+
+                            @if (Model.Report != null && Model.Report.Count() > 0)
+                            {
+                                foreach (var item in Model.Report)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.RouteUrl("AdminViewInvoice",new { invoiceNumber = @item.InvoiceNumber })" name="viewInvoice">@item.InvoiceNumber</a>
+                                        </td>
+                                        <td style="text-align:right">
+                                            @String.Format("{0:n2}", item.BillAmount)
+                                        </td>
+                                        <td style="text-align:right">
+                                            @if (item.TypeID == (int)PaymentType.Credit)
+                                            {
+                                                <a href="@Url.RouteUrl("AdminViewReceipt",new { receiptNumber = @item.ReceiptNumber})" name="viewReceipt">@item.ReceiptNumber</a>
+                                            }
+                                        </td>
+                                        <td style="text-align:right">
+                                            @if (item.TypeID == (int)PaymentType.Credit)
+                                            {
+                                                @String.Format("{0:n2}", item.Amount)
+                                            }
+                                        </td>
+                                        <td style="text-align:right">
+                                            @if (item.TypeID == (int)PaymentType.Debit)
+                                            {
+                                                @String.Format("{0:n2}", item.Amount)
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5">No Records Found</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total Bill : &#X20A6; @String.Format("{0:n2}", Model.TotalBillAmount)</p>
+                <p class="summary">Total Credit: &#X20A6; @String.Format("{0:n2}", Model.TotalCreditAmount)</p>
+            </div>
+        </div>
+
+    </div>
+}
+
+@Display(Model.Pager)
+

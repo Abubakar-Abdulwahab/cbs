@@ -1,0 +1,55 @@
+﻿@model Parkway.CBS.Module.ViewModels.AdminConfirmingInvoiceVM
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Layout.Title = "Confirm Invoice".ToString();
+}
+
+<h3 class="form-title">You are paying for @Model.RevenueHeadName bill (@Model.MDAName). Kindly confirm your invoice.</h3>
+<br />
+@using (Html.BeginFormAntiForgeryPost(Url.Action("ConfirmInvoice", "Invoice", new { area = "Parkway.CBS.Module", }), FormMethod.Post, new { }))
+{
+    @Html.Partial("Partials/DetailsView", Model.TaxPayerWithDetails)
+
+    if (Model.Forms != null && Model.Forms.Any())
+    {
+    <div class="container" style="width:100%">
+        <div class="row">
+            @foreach (var item in Model.Forms)
+            {
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T(item.Name)</b>
+                <p>@item.FormValue</p>
+                @*<p>@Html.Hint(T(item.HintText))</p>*@
+                <p> - </p>
+            </div>
+            }
+        </div>
+     </div>
+    }
+            <input type="text" name="revenueHeadId" value="@Model.RevenueHeadId" hidden />
+            <input type="text" name="token" value="@Model.Token" hidden />
+            <input type="text" name="subToken" value="@Model.SubToken" hidden />
+            <hr />
+            <div id="container">
+                <table class="items" id="settings">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:50%">
+                                <label style="white-space: nowrap;text-align:center"><b>@T("(₦)Amount")</b></label>
+                                <br />
+                                <label style="white-space: nowrap;text-align:center;word-break:break-all;font-size:xx-large">@string.Format("{0:n2}", Model.Amount)</label>
+                            </td>
+                            <td style="width:50%">
+                                <label for="Reference" style="white-space: nowrap;text-align:center"><b>@T("Reference")</b></label>
+                                <br />
+                                <label style="white-space: nowrap;text-align:center;word-break:break-all;font-size:xx-large">@Model.Reference</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit">Confirm Invoice</button>
+            </div>
+            }

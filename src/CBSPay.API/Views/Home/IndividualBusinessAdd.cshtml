@@ -1,0 +1,334 @@
+﻿
+@{
+    ViewBag.Title = "Individual Business Add";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+<div class="title">
+    <h1>
+        Individual Tax Payer: Add Business
+    </h1>
+    <hr>
+</div>
+
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Individual Tax Payer Information
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn btn-redtheme dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" data-target="#divTaxPayerModal">View Details</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/NewIndividualAdd.html">Edit Detail</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row view-form">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer Type: </label>
+                <div class="form-control-static">
+                    Individual
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer TIN: </label>
+                <div class="form-control-static">
+                    TIN
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Mobile Number: </label>
+                <div class="form-control-static">
+                    Mobile Number
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer Name: </label>
+                <div class="form-control-static">
+                    Name
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Tax Payer RIN: </label>
+                <div class="form-control-static">
+                    RIN
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label bold">Contact  Address: </label>
+                <div class="form-control-static">
+                    Contact  Address
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Add Business
+        </div>
+        <div class="actions">
+            <a href="~/Home/IndividualTaxPayerDetails" class="btn btn-redtheme"> Cancel </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Asset Type </label>
+                    <input type="text" disabled class="form-control" placeholder="Business" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Tax Payer Role  </label>
+                    <select class="form-control bs-select">
+                        <option>Select Tax Payer Role </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Name </label>
+                    <input type="text" class="form-control" placeholder="Enter Business Name" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Address</label>
+                    <textarea class="form-control" placeholder="Enter Business Address"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Type</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Type </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business LGA</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business LGA </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Buisness Category</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Category </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Sector</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Sector </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Sub Sector</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Sub Sector </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Business Structure</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Structure </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Business Operation</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Operation </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Business Size</label>
+                    <select class="form-control bs-select">
+                        <option>Select Business Size </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right col-sm-12">
+                <div class="form-group">
+                    <br />
+                    <a href="~/Home/IndividualTaxPayerDetails.html" class="btn-theme btn"> Save </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="divTaxPayerModal" tabindex="-1" role="dialog" aria-labelledby="divTaxPayerModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="divTaxPayerModalLabel">Individual Tax Payer Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Payer Type</label>
+                            <div>Individual</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Gender</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Title</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">First Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Last Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Middle Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Date of Birth</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">TIN</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 2</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Email Address 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Email Address 2</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Biometric Details</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Office</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Marital Status</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Nationality</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Economic Activity</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Preferred Notification</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Contact Address</label>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

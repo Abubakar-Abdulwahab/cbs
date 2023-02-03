@@ -1,0 +1,144 @@
+﻿@model Parkway.CBS.Core.HelperModels.CreateInvoiceModel
+
+@{
+    Layout.Title = "Confirm Your Invoice";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.MakePayment.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .tiny-loader-caption {
+        display: none;
+        margin: unset;
+        padding: unset;
+        font-size: 12px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Confirm Your Invoice</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="@Url.AppendModulePrefixToRouteName(Parkway.CBS.Module.Web.RouteName.Collection.GenerateInvoice)">Select Identity</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Confirm Your Invoice</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container">
+            <div class="main-form payment-form big">
+                <div class="row pl-4 pr-4" style="word-break:break-word">
+                    <div class="col-md-3">
+                        <p class="til">Name</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.Recipient</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Invoice Amount Due</p>
+                        <p class="ans">&#x20A6;@String.Format("{0:n2}", @Model.TaxEntityInvoice.Amount)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Surcharge</p>
+                        <p class="ans">&#x20A6;@String.Format("{0:n2}", @Model.Surcharge)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Payer ID</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.PayerId</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Phonenumber</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.PhoneNumber</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Email</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.Email</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">MDA</p>
+                        <p class="ans">@Model.MDAName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Revenue Head</p>
+                        <p class="ans">@Model.RevenueHeadName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">External Ref. Number</p>
+                        <p class="ans">@Model.ExternalRefNumber</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">TIN</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.TaxPayerIdentificationNumber</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="til">Address</p>
+                        <p class="ans">@Model.TaxEntityInvoice.TaxEntity.Address</p>
+                    </div>
+                </div>
+                <div>
+                    @if (Model.Forms != null && Model.Forms.Any())
+                    {
+                        foreach (var form in Model.Forms)
+                        {
+                            <div class="col">
+                                <p>@form.FriendlyName</p>
+                                <p>@form.FormValue</p>
+                            </div>
+                        }
+                    }
+                </div>
+                @using (Html.AppendModulePrefixToFormRouteName(Parkway.CBS.Module.Web.RouteName.InvoiceConfirmation.ConfirmInvoice, FormMethod.Post, new { @id = "confirmInvoiceForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn">Confirm Invoice</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="footer-top" />
+    @Html.Partial("Partials\\FooterPartial")
+</div>

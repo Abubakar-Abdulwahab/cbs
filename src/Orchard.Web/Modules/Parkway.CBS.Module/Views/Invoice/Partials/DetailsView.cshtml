@@ -1,0 +1,38 @@
+﻿@model Parkway.CBS.Core.HelperModels.TaxPayerWithDetails
+
+<div class="container" style="width:100%">
+    <div class="row">
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Recipient")</b>
+            <p>@Model.Name</p>
+            @Html.Hint(T("The recipient name of the tax payer you are generating an invoice for."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Phone number")</b>
+            <p>@Model.PhoneNumber</p>
+            @Html.Hint(T("Phone number of the tax payer."))
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("TIN")</b>
+            <p>@(string.IsNullOrEmpty(Model.TIN) ? "-" : Model.TIN)</p>
+            @Html.Hint(T("TIN of the tax payer on record."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Email")</b>
+            <p>@(string.IsNullOrEmpty(Model.Email) ? "-" : Model.Email)</p>
+            @Html.Hint(T("Email of the tax payer."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Address")</b>
+            <p>@(string.IsNullOrEmpty(Model.Address) ? "-" : Model.Address)</p>
+            @Html.Hint(T("Address of the tax payer."))</p>
+        </div>
+        <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+            <p><b>@T("Category")</b>
+            <p>@Model.Category</p>
+            @Html.Hint(T("Category for this tax payer."))</p>
+        </div>
+        <input type="text" name="taxPayerId" value="@Model.Id" hidden />
+    </div>
+    <br />
+</div>

@@ -1,0 +1,127 @@
+﻿@model Parkway.CBS.Core.HelperModels.ConfirmInvoiceVM
+
+@{
+    Layout.Title = "Confirm Invoice";
+
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Confirm Invoice</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="@Url.AppendModulePrefixToRouteName("C.SelfAssessment")">Select Identity</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Confirm Invoice</li>
+            </ol>
+        </nav>
+    </div>
+    @Html.Partial("Partials\\FlashPartial", (string.IsNullOrEmpty(Model.ErrorMessage) ? "" : Model.ErrorMessage))
+
+    @if (Model.HasMessage)
+    {
+        <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda;">
+            <small class="message" style="color:#155724;"><small style="white-space: pre-wrap;">@Model.Message</small></small>
+        </div>
+    }
+    <div class="content-payment">
+        <div class="container form-container">
+            @using (Html.BeginFormAntiForgeryPost(Url.AppendModulePrefixToRouteName("Confirm.Bill"), FormMethod.Post, new { @class = "main-form payment-form" }))
+            {
+                <h3 class="form-title">You are @Model.CategoryName, you are paying for @Model.RevenueHeadName bill (@Model.MDAName). Kindly confirm your invoice.</h3>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="" class="title">Payer ID</label>
+                        <input type="email" class="form-control mb-4" value="@Model.TaxEntityViewModel.PayerId" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="title">Full Name<small style="color:red; font-weight:bolder">*</small></label>
+                        <input type="text" class="form-control mb-4" value="@Model.TaxEntityViewModel.Recipient" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="" class="title">Email</label>
+                        <input type="email" class="form-control mb-4" value="@Model.TaxEntityViewModel.Email" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="title">Phone Number<small style="color:red; font-weight:bolder">*</small></label>
+                        <input type="text" class="form-control mb-4" value="@Model.TaxEntityViewModel.PhoneNumber" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="title">TIN</label>
+                        <input type="text" class="form-control mb-4" value="@Model.TaxEntityViewModel.TaxPayerIdentificationNumber" disabled>
+                    </div>
+                    <div class="col-md-12  mb-4">
+                        <label for="" class="title">External Reference (Bill number) from @Model.RevenueHeadName (@Model.MDAName)</label>
+                        <input type="text" class="form-control" value="@Model.ExternalRef" name="ExternalRef">
+                    </div>
+                    <div class="col-md-12  mb-4">
+                        <label for="" class="title">Address<small style="color:red; font-weight:bolder">*</small></label>
+                        <textarea class="form-control" disabled>@Model.TaxEntityViewModel.Address</textarea>
+                        @Html.ValidationMessageFor(m => m.TaxEntityViewModel.Address, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+
+                    @if (Model.Forms != null && Model.Forms.Any())
+                    {
+                        int counter = 0;
+                        foreach (var item in Model.Forms)
+                        {
+                            item.FormIndex = counter++;
+                            @Html.Partial("Partials\\Forms\\" + item.PartialName.Trim(), item, ViewData)
+                        }
+                    }
+
+                    @if (Model.IsVisibleSurcharge)
+                    {
+                        <div class="col-md-6  mb-4">
+                            <p class="pay">Applicable Charge</p>
+                        </div>
+                        <div class="col-md-6  mb-4">
+                            <div>
+                                <p class="amount">₦@String.Format("{0:n2}", @Model.Surcharge)</p>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-md-6  mb-4">
+                        <p class="pay">Amount to Pay</p>
+                    </div>
+                    @if (Model.CanEnterAmount)
+                    {
+                        <div class="col-md-6  mb-4">
+                            <div>
+                                <input type="text" name="SAmount" class="form-control mb-2 mr-sm-2" style="margin-left:0px" placeholder="Enter an amount" id="amountDue" value="@String.Format("{0:n2}", @Model.Amount)" required>
+                                @Html.ValidationMessageFor(m => m.SAmount, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                                <small>Enter the amount you wish to pay</small>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6  mb-4">
+                            <div>
+                                <p class="amount">₦@String.Format("{0:n2}", @Model.Amount)</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <button type="submit" class="btn">Confirm Invoice</button>
+            }
+        </div>
+    </div>
+    <div class="footer-top">
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

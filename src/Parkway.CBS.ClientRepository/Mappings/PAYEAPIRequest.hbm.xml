@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.PAYEAPIRequest, Parkway.CBS.Core" table="Parkway_CBS_Core_PAYEAPIRequest" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="BatchIdentifier" column="BatchIdentifier" />
+    <property name="BatchLimit" column="BatchLimit" />
+    <property name="ProcessingStage" column="ProcessingStage" />
+
+    <many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+    <many-to-one name="RequestedByExpertSystem" column="RequestedByExpertSystem_Id"/>
+    <many-to-one name="PAYEBatchRecordStaging" column="PAYEBatchRecordStaging_Id"/>
+
+  </class>
+</hibernate-mapping>

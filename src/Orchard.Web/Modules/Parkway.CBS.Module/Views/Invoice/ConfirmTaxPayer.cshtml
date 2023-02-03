@@ -1,0 +1,74 @@
+﻿@model Parkway.CBS.Core.HelperModels.GenerateInvoiceConfirmTaxPayer
+
+@{
+    Script.Require("CBS.GenerateInvoice.Admin.ConfirmTaxpayer.Script").AtFoot();
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Layout.Title = "Confirm Tax Payer Details".ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("ConfirmedTaxPayerAndRevenueHead", "Invoice", new { area = "Parkway.CBS.Module", }), FormMethod.Post, new { @id = "formSubmit" }))
+{
+    <div class="container" style="width:100%">
+        <div class="row">
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("Recipient")</b>
+                <p>@Model.TaxPayerWithDetails.Name</p>
+                @Html.Hint(T("The recipient name of the tax payer you are generating an invoice for."))</p>
+            </div>
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("Phone number")</b>
+                <p>@Model.TaxPayerWithDetails.PhoneNumber</p>
+                @Html.Hint(T("Phone number of the tax payer."))
+            </div>
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("TIN")</b>
+                <p>@(string.IsNullOrEmpty(Model.TaxPayerWithDetails.TIN) ? "-" : Model.TaxPayerWithDetails.TIN)</p>
+                @Html.Hint(T("TIN of the tax payer on record."))</p>
+            </div>
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("Email")</b>
+                <p>@(string.IsNullOrEmpty(Model.TaxPayerWithDetails.Email) ? "-" : Model.TaxPayerWithDetails.Email)</p>
+                @Html.Hint(T("Email of the tax payer."))</p>
+            </div>
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("Address")</b>
+                <p>@(string.IsNullOrEmpty(Model.TaxPayerWithDetails.Address) ? "-" : Model.TaxPayerWithDetails.Address)</p>
+                @Html.Hint(T("Address of the tax payer."))</p>
+            </div>
+            <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                <p><b>@T("Category")</b>
+                <p>@Model.TaxPayerWithDetails.Category</p>
+                @Html.Hint(T("Category for this tax payer."))</p>
+            </div>
+            <input type="text" name="taxPayerId" value="@Model.TaxPayerId" hidden />
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="" class="title">Revenue Heads <small style="color:red; font-weight:bolder">*</small></label>
+                @if (Model.RevenueHeads != null && Model.RevenueHeads.Any())
+                {
+                    <input required type="text" id="revenueHeadData" name="revenueHeadData" spellcheck="false" autocomplete="off" list="revenue-heads" placeholder="Search for annual fees, tender fees etc" class="form-control mb-4 border-0">
+                    <datalist id="revenue-heads" name="revenue-heads">
+                        @if (Model.RevenueHeads != null)
+                        {
+                            foreach (var item in Model.RevenueHeads)
+                            {
+                                <option data-value="@item.Id" value="@item.Name (mda- @item.MDAName - @item.MDACode)"/>
+                            }
+                        }
+                    </datalist>
+                    <input type="hidden" name="revenueHeadId" id="revenueHeadId">
+                    <fieldset>
+                        <button type="submit">@T("Confirm Tax Payer Details")</button>
+                    </fieldset>
+                }
+                else
+                {
+                    <small> No Revenue head found </small>
+                }
+            </div>
+        </div>
+    </div>
+}

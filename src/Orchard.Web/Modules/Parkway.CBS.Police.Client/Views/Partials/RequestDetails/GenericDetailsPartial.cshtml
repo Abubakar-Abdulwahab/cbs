@@ -1,0 +1,23 @@
+﻿@model Parkway.CBS.Police.Core.VM.GenericRequestDetailsVM
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command:</p>
+    <p class="details-content">@Model.CommandName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command State:</p>
+    <p class="details-content">@Model.CommandStateName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command LGA:</p>
+    <p class="details-content">@Model.CommandLgaName</p>
+</div>
+@if (Model.FormControlValues.Count > 0 && Model.FormControlValues != null)
+{
+    foreach (var formCtrl in Model.FormControlValues)
+    {
+        <div class="col-md-6">
+            <p class="mb-0 title">@formCtrl.Name:</p>
+            <p class="details-content">@formCtrl.Value</p>
+        </div>
+    }
+}

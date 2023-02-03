@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Parkway.CentralBillingScheduler.DAO" namespace="Parkway.CentralBillingScheduler.DAO.Models.BillingModel" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ParkwayCbsCoreBillingmodel" table="Parkway_CBS_Core_BillingModel" lazy="true" >
+    <id name="Id" column="Id" />
+    <property name="MdaId" column="MDA_Id" />
+    <property name="Assessment" column="Assessment" />
+    <property name="Amount" column="Amount" />
+    <property name="Billingtype" column="BillingType" />
+    <property name="Discounts" column="Discounts" />
+    <property name="Duedate" column="DueDate" />
+    <property name="Penalties" column="Penalties" />
+    <property name="Demandnotice" column="DemandNotice" />
+    <property name="Billingfrequency" column="BillingFrequency" />
+    <property name="AddedbyId" column="AddedBy_Id" />
+    <property name="LastupdatedbyId" column="LastUpdatedBy_Id" />
+    <property name="Createdatutc" column="CreatedAtUtc" />
+    <property name="Updatedatutc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

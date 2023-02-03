@@ -1,0 +1,50 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortDetailsVM
+
+<div class="container-fluid no-padding">
+    <div class="row no-padding">
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="name">Applicant Name</label>
+            <p class="bolded-info" id="name">@Model.CbsUser.Name</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="serviceName">Service Name</label>
+            <p class="bolded-info" id="serviceName">@Model.EscortInfo.ServiceName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="phoneNumber">Command Name</label>
+            <p class="bolded-info" id="cmdName">@Model.EscortInfo.CommandName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="email">Command State</label>
+            <p class="bolded-info" id="cmdStateName">@Model.EscortInfo.CommandStateName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label" for="tin">Command LGA</label>
+            <p class="bolded-info" id="cmdLgaName">@Model.EscortInfo.CommandLgaName<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Number of Officers</label>
+            <p class="bolded-info">@Model.EscortInfo.NumberOfOfficers</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Service Delivery State</label>
+            <p class="bolded-info">@Model.EscortInfo.StateName</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Service Delivery LGA</label>
+            <p class="bolded-info">@Model.EscortInfo.LGAName</p>
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Approval Number</label>
+            <p class="bolded-info">@Model.EscortInfo.ApprovalNumber<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Request Date</label>
+            <p class="bolded-info">@Model.RequestDate<p />
+        </div>
+        <div class="col-md-3 pb-1">
+            <label class="no-margin grey-label">Approval Date</label>
+            <p class="bolded-info">@Model.ApprovalDate<p />
+        </div>
+    </div>
+</div>

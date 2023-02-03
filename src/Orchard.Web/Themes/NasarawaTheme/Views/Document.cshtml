@@ -1,0 +1,39 @@
+﻿@using Orchard.Localization
+@using Orchard.Mvc.Html;
+@using Orchard.UI.Resources;
+@{
+    Script.Require("CBS.Qquery331").AtHead();
+
+    Style.Include("font-awesome.min.css");
+    Style.Include("site.css");
+    Style.Include("theme.css");    
+       
+
+    string title = Convert.ToString(Model.Title);
+    string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
+    bool isRtl = WorkContext.CurrentCultureInfo().TextInfo.IsRightToLeft;
+    string separator = Convert.ToString(WorkContext.CurrentSite.PageTitleSeparator);
+
+    var maintitle = title + " | " + siteName;
+
+    Html.AddPageClassNames("dir-" + (isRtl ? "rtl" : "ltr"));
+}
+<!DOCTYPE html> 
+<html lang="@WorkContext.CurrentCulture" class="static @Html.ClassForPage()" dir="@(isRtl?"rtl":"ltr")"> 
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@maintitle</title>
+    @*<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">*@
+
+    @*<title>@Html.Title(title, siteName)</title>*@ 
+    @Display(Model.Head)
+    <script>(function(d){d.className="dyn"+d.className.substring(6,d.className.length);})(document.documentElement);</script> 
+    <script>window.isRTL = @(isRtl.ToString().ToLowerInvariant());</script>
+</head> 
+<body>
+@* Layout (template) is in the Body zone @ the default position (nothing, zero, zilch) *@
+@Display(Model.Body)
+@Display(Model.Tail)
+</body>
+</html>

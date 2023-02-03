@@ -1,0 +1,97 @@
+﻿@model Parkway.CBS.Core.HelperModels.UtilizedReceiptsVM
+
+@{
+    Layout.Title = "PAYE Tax Schedules Utilized Receipts";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    Script.Require("CBS.Main.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Utilized Receipts</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/c/paye/schedules">PAYE Tax Schedules</a></li>
+                <li class="breadcrumb-item"><a href="#">@Model.BatchRef</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Utilized Receipts</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container employer-profile">
+            <div class="main-form payment-form big">
+                    <div class="pay-nav-two-content">
+                        <div class="table-responsive mt-4">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Receipt Number
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Total Amount
+                                            <span class="fa fa-info-circle" style="color: #E12222" data-toggle="tooltip" data-placement="right" data-html="true" title="Total amount the receipt is worth"></span>
+                                        </th>
+                                        <th>
+                                            Available Amount
+                                            <span class="fa fa-info-circle" style="color: #E12222" data-toggle="tooltip" data-placement="right" data-html="true" title="Total amount of the receipt that is available for use"></span>
+                                        </th>
+                                        <th>
+                                            Utilized Amount
+                                            <span class="fa fa-info-circle" style="color: #E12222" data-toggle="tooltip" data-placement="right" data-html="true" title="Total amount of the receipt that has been used for this schedule"></span>
+                                        </th>
+                                        <th>
+                                            Total Utilized Amount
+                                            <span class="fa fa-info-circle" style="color: #E12222" data-toggle="tooltip" data-placement="right" data-html="true" title="Total amount of the receipt that has been used"></span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @if (Model.UtilizedReceipts != null && Model.UtilizedReceipts.Any())
+                                    {
+                                        foreach (var item in Model.UtilizedReceipts)
+                                        {
+                                            <tr>
+                                                <td>@item.ReceiptNumber</td>
+                                                <td>@(Parkway.CBS.Core.Utilities.Util.InsertSpaceBeforeUpperCase(((Parkway.CBS.Core.Models.Enums.PAYEReceiptUtilizationStatus)item.Status).ToString()))</td>
+                                                <td>&#8358;@String.Format("{0:n2}", item.TotalAmount)</td>
+                                                <td>&#8358;@String.Format("{0:n2}", item.AvailableAmount)</td>
+                                                <td>&#8358;@String.Format("{0:n2}", item.UtilizedAmountForSchedule)</td>
+                                                <td>&#8358;@String.Format("{0:n2}", item.UtilizedAmount)</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6">No receipt has been utilized by this schedule</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top">
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

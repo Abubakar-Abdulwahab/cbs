@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Parkway.CBS.Core.HelperModels.TaxPayerWithDetails>
+
+@{
+    Style.Require("CBS.MDA.Style");
+    Script.Require("CBS.SelectTaxPayer.Confirm.Script").AtFoot();
+    //Style.Require("CBS.MDA.Style.BootStrap");
+
+    var userIndex = 0;
+
+    Layout.Title = T("Select Tax Payer").ToString();
+}
+
+<fieldset>
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col">@T("Name")</th>
+                <th scope="col">@T("Address")</th>
+                <th scope="col">@T("TIN")</th>
+                <th scope="col">@T("Phone Number")</th>
+                <th scope="col">@T("Category")</th>
+                <th scope="col">@T("Email")</th>
+            </tr>
+        </thead>
+        @if (Model.Any())
+            {
+                foreach (var entry in Model)
+                {
+                <tr>
+                    <td>
+                        @*<button type="submit" formaction="@Url.Action("ConfirmTaxPayer", "Invoice", new { id = entry.Id })" formmethod="post" class="a-classname">@entry.Name</button>
+                            @Html.ActionLink(entry.Name, "ConfirmTaxPayer", "Invoice", new { id = entry.Id }, null)*@
+                        <a href="#" class="taxPayer" name="@entry.Id" id="@entry.Id">@entry.Name</a>
+                    </td>
+                    <td>
+                        @entry.Address
+                    </td>
+                    <td>
+                        @entry.TIN
+                    </td>
+                    <td>
+                        @entry.PhoneNumber
+                    </td>
+                    <td>
+                        @entry.Category
+                    </td>
+                    <td>
+                        @entry.Email
+                    </td>
+                </tr>
+                userIndex++;
+            }
+            
+        }
+        else
+        {
+            <tr><td colspan="6">@T("No record found.") </td> </tr>
+        }
+    </table>
+@using (Html.BeginFormAntiForgeryPost(Url.Action("ConfirmTaxPayer", "Invoice", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { @id = "confirmForm" }))
+{
+    <input type="text" hidden id="taxPayerId" name="taxPayerId" />
+}
+</fieldset>

@@ -1,0 +1,91 @@
+﻿@model Parkway.CBS.Core.HelperModels.ExternalRedirect
+
+@{
+    if (Model.Redirecting)
+    {
+        Layout.Title = "Redirecting";
+    }
+    else
+    {
+        Layout.Title = "Redirect Link Error";
+    }
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Script.Require("CBS.ExternalInvoiceGeneration.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" id="main-nav-alt">
+    <div class="container">
+        @*<a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Bluetag Group"></a>*@
+        <a class="navbar-brand" href="@Href("~/")"><img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="CBS" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.About")">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.ContactUs")">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("BIN.Search")">Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.AppendModulePrefixToRouteName("C.SelfAssessment")">Generate Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="#">Generate Tin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            @if (Model.Redirecting)
+            {
+                <h3>Redirecting<small id="progressDots"></small></h3>
+            }
+            else
+            {
+                <h3>Redirect Link Error</h3>
+            }
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <br />
+        </nav>
+    </div>
+
+    <div class="content-payment">
+        <div class="container form-container">
+            <center>@Html.Raw(Model.Message)</center>
+            @if (!Model.Redirecting)
+            {
+                <br />
+                <div class="main-form payment-form">
+                    <center><button type="button" id="proceedbtn" class="btn" onclick="location.href='@Url.Action("GenerateInvoice")'">Generate Invoice</button></center>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script>
+    var redirecting = @Html.Raw(Json.Encode(Model.Redirecting));
+    var url = @Html.Raw(Json.Encode(Model.URL));
+</script>

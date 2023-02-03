@@ -1,0 +1,64 @@
+﻿@model Parkway.CBS.Module.Web.ViewModels.AboutVM
+
+@{
+    Layout.Title = "About";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+@Html.Partial("\\Partials\\HeaderPartial", Model.HeaderObj)
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>About</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">About CBS</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container">
+            The @Model.TenantName Instant Revenue platform is a robust central billing/tax monitoring, e-invoicing & e-payment platform for the @Model.TenantName State Board of Internal Revenue linked with all MDAs for proper alignment, codification and classification of receivables and collections into the State revenue heads and Treasury Single Account(s) -TSA. 
+            <p><b>Our policy objectives</b></p>
+            <ul>
+                <li>
+                    Provide an efficient, objective and people-friendly structures
+                    for tax and revenue administration at all levels and in all MDAs
+                    and other revenue generating agencies of the State;
+                </li>
+                <li>Achieve fairness and equity by ensuring that all chargeable
+                    persons are assessed to tax on objective principles applied in
+                    accordance with the law;
+                </li>
+                <li>
+                    Eliminate leakages in the assessment, collection and reporting
+                    process and ensure that all revenues get into designated
+                    government accounts;
+                </li>
+                <li>Ensure accuracy and completeness in assessment of tax payers</li>
+                <li>
+                    Employ technology to ensure that the federal agencies have real time visibility to invoices and payments made by their
+                    agencies
+                </li>
+                <li>
+                    Provide a 24/7 support for users of the instant revenue
+                    platform
+                </li> 
+            </ul>
+        </div>
+    </div>
+    <div class="footer-top">
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

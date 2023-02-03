@@ -1,0 +1,218 @@
+﻿@model Parkway.CBS.Core.HelperModels.AssignExternalPaymentProviderVM
+
+@{ Layout.Title = "Assign Restrictions to "+Model.SelectedPaymentProviderName;
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.Assign.Payment.Provider.Script");
+    Script.Require("CBS.MDA.Revenue.Access.Restrictions.Staging.Script");
+    Style.Require("CBS.MDA.Style");
+}
+
+<style>
+    .full-width {
+        width: 100%;
+    }
+
+    .half-width {
+        width: 49%;
+    }
+
+    .content-list, .confirmed-list {
+        border: 1px solid #bdbcbc;
+        padding: unset;
+        position: relative;
+    }
+
+        .content-list ul, .confirmed-list ul {
+            max-height: 500px;
+            overflow: auto;
+            min-height: 500px;
+        }
+
+            .content-list ul li label, .confirmed-list ul li label {
+                padding-left: 5px;
+                cursor: pointer;
+            }
+
+            .content-list ul li:hover, .confirmed-list ul li:hover {
+                background-color: aliceblue;
+            }
+
+        .content-list .header {
+            width: 100%;
+            border-bottom: 1px solid #bdbcbc;
+            color: #1e5d7d;
+            padding: 5px;
+            text-align: center;
+            background-color: #eaeaea;
+        }
+
+        .content-list .divider{
+            border-top:1px solid #bdbcbc;
+            border-bottom:1px solid #bdbcbc;
+            padding:5px 5px;
+            margin:5px;
+        }
+
+    button {
+        margin-top: 10px;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    #helpText, #ReferenceHelpText {
+        color: rgb(255, 0, 0);
+        display: none;
+    }
+
+    #myModal table.items th{ background-color:#d0d0d0; }
+</style>
+
+<script>
+    var selectedMdas = @Html.Raw(Json.Encode(@Model.SelectedMdas));
+    var selectedPaymentProviderName = @Html.Raw(Json.Encode(@Model.SelectedPaymentProviderName));
+    var SelectedRhAndMdas = @Html.Raw(@Model.SelectedRhAndMdas);
+    const originalMap = @Html.Raw(@Model.SelectedRhAndMdas);
+    const selectedProviderId = @Html.Raw(Json.Encode(@Model.SelectedPaymentProviderParsed));
+    const isEdit = @Html.Raw(Json.Encode(@Model.IsEdit));
+</script>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Assign"), FormMethod.Post, new { @id = "assignProviderForm", @name = "assignProviderForm" }))
+{
+
+    
+    <fieldset>
+        <div><button type="button" data-toggle="modal" data-target="#myModal" id="assignProviderFormSubmit" disabled>@T("Assign Restrictions")</button> <button type="button" id="assignProviderFormCancel" onclick="location.href='@Url.Action("List")'" disabled>@T("Cancel")</button></div>
+    </fieldset>
+
+    <div id="container">
+        <input type="hidden" id="Indexer" value="1" />
+        <table class="items" id="tab_0">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">External Payment Provider</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDAs")</label>
+                        <div class="container-fluid content-list mt-0">
+                            <ul id="mdaList" style="min-height:520px; max-height:520px">
+                                @if (Model.MDAs != null && Model.MDAs.Any())
+                                {
+                                    foreach (var mda in Model.MDAs)
+                                    {
+                                        if (Model.SelectedMdas != null && Model.SelectedMdas.Contains(mda.Id))
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" id="@("mdaItem"+mda.Id)" name='SelectedMdas' value="@mda.Id" checked disabled /> @mda.Name</label></li>
+                                        }
+                                        else
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" name='SelectedMdas' id="@("mdaItem"+mda.Id)" value="@mda.Id" disabled /> @mda.Name</label></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <li> No MDAs available </li>}
+                            </ul>
+                        </div>
+                        <div>
+
+                        </div>
+                        @Html.Hint(T("Select the MDA you would want to assign to the payment provider."))
+                    </td>
+                    <td>
+                        <label id="rhName">@T("Revenue Head")</label>
+                        <div class="container-fluid content-list mt-0">
+                            <p style="padding-left:5px">Select an MDA to have its revenue heads displayed here</p>
+                            <ul id="rhList">
+                            </ul>
+                            <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        </div>
+                        @Html.Hint(T("Select the revenue heads you want to assign to the payment provider."))
+                        <small id="helpText">something went wrong</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" value="@Model.SelectedPaymentProviderParsed" name="SelectedPaymentProvider" />
+    <input type="hidden" name="SelectedRhAndMdas" id="selectedRhAndMdas" />
+    <input type="hidden" name="MDARevenueHeadAccessRestrictionsReference" id="MDARevenueHeadAccessRestrictionsReference" />
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <span name="stagingloader" id="updateStagingloaderr" class="profileloader" style="position:fixed;margin:auto;z-index:10"></span>
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Selection for @Model.SelectedPaymentProviderName</h4>
+                </div>
+                <div class="modal-body" style="max-height:300px;overflow:auto" id="confirmModalBody">
+                    <span name="profileloader" id="confirmProfileloader" class="profileloader" style="position:fixed;margin:auto;z-index:10"></span>
+                    <div id="confirmModal">
+                        <div id="confirmModalContent">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @Html.Hint(T("By clicking confirm you agree with your current selection."))
+                    <button type="submit" id="submitConfirmModalBtn" disabled>Confirm</button> <button type="button" id="cancelConfirmModalBtn" data-dismiss="modal" disabled>Cancel</button>
+                </div>
+                <div id="ReferenceHelpText" style="padding-left:15px;padding-right:15px;padding-bottom:5px"><p>something went wrong</p></div>
+            </div>
+
+        </div>
+    </div>
+
+
+}
+
+
+@{ Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.General.Script").AtFoot();
+}

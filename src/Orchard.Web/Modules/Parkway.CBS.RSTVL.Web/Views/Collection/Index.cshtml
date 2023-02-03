@@ -1,0 +1,80 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+@{
+    Layout.Title = "Home";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("RSTVL.Main");
+}
+
+
+<div id="rstvl-home-content-container">
+
+    @Html.Partial("Partials/HeaderPartial",Model)
+
+    <div class="content">
+
+        <div class="row bg-row-one mx-0 my-0">
+            <div class="container">
+                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/man_rec.png"))" class="img img-responsive" />
+            </div>
+            <div class="container">
+                <div class="container-fluid">
+                    <h1 class="mb-4">Welcome to The Radio and<br />Television Rates Services (RTVRS) platform</h1>
+                    <p class="mb-4" style="font-size:20px">You can now pay and renew your licenses<br />on this platform</p>
+                    <div class="row mx-0 mt-4 py-0 px-0 btn-row">
+                        <div class="col-6 mx-0 my-o py-0 pl-0 pr-1">
+                            <a href="@Url.AppendModulePrefixToRouteName("BIN.Search")" class="btn btn-block action-btn">Pay</a>
+                        </div>
+                        <div class="col-6 mx-0 my-o py-0 pl-1 pr-0">
+                            <a href="@Url.AppendModulePrefixToRouteName("C.SelfAssessment")" class="btn btn-block action-btn-outline">Generate Invoice</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bg-row-two mx-0 my-0">
+            <div class="container-fluid">
+                <h2>Quick Renewal</h2>
+                <p>Carry out your civic responsibility</p>
+            </div>
+            <div class="col-md-6">
+                <div class="service-item">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/car_front_view.png"))" class="img img-responsive" />
+                    <h6>Vehicle</h6>
+                    <p>You can now pay for your Radio & TV License.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="service-item">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/money_round.png"))" class="img img-responsive" />
+                    <h6>Multiple payment channel</h6>
+                    <p>Payments can be made against an invoice at any bank branch, mobile banking, POS or online with debit cards(MasterCard, Visa, Verve).</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="service-item">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/folder.png"))" class="img img-responsive" />
+                    <h6>Payment Transaction records</h6>
+                    <p>View your license and payment history over a period of time.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="service-item">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/important_message.png"))" class="img img-responsive" />
+                    <h6>Learn more</h6>
+                    <p>We are here to help you understand how to pay your bills or taxes with ease. Click here for help</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @Html.Partial("Partials/FooterPartial")
+
+</div>

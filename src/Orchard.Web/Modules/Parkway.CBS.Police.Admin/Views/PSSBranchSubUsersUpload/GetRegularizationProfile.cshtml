@@ -1,0 +1,21 @@
+﻿@{
+    Layout.Title = "Upload Branches: Search for Entity";
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+@using(Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSBranchSubUsersUpload.GetRegularizationProfile))) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <b style="color:#e97d68;">Profile ID</b>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="payerId" name="PayerId" />
+                    <span class="hint">Enter Profile ID of entity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Search</button>
+}
+

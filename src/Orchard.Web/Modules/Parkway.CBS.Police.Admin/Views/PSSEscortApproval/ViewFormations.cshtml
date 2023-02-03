@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Parkway.CBS.Police.Core.VM.AIGFormationVM>
+
+@{
+    Layout.Title = "Selected Formations";
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-word;
+        margin-bottom: 5px;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+</style>
+@Html.AntiForgeryToken()
+<div>
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader">NAME</th>
+                <th scope="col" id="titleHeader">NO. OF OFFICERS<br/>REQUESTED</th>
+                <th scope="col" id="titleHeader">NO. OF OFFICERS<br/>PROVIDED</th>
+                <th scope="col" id="titleHeader">DATE ALLOCATED</th>
+                <th scope="col" id="titleHeader">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var formation in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @formation.FormationName
+                        </td>
+                        <td>
+                            @formation.NumberofOfficers
+                        </td>
+                        <td>
+                            @formation.NumberOfOfficersProvided
+                        </td>
+                        <td>
+                            @formation.DateCreated.ToString("dd/MM/yyyy hh:mm tt")
+                        </td>
+                        <td>
+                            <button type="button" class="view-officers-toggle esc-@formation.RequestId-@formation.FormationId">View Officers</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">
+                        AIG has not yet selected any formations
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Partial("\\ServicePartials\\PSSEscortViewAllocatedOfficersPartial")

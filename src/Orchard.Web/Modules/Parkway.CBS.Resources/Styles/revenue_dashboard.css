@@ -1,0 +1,33 @@
+﻿/*
+    Overriding the default Stylesheet - Site.css conflicts
+*/
+h3.panel-title{
+    margin:0 !important;
+}
+.container{
+    width:1335px;
+}
+div.first{
+    padding-left:0;
+}
+div.row.panelrows{
+    margin-top:20px;
+}
+div.panel-heading{
+    text-align:center;
+}
+
+div.panel-footer{
+    text-align:center;
+    color:#e97d68;
+}
+div.panel-footer-text{
+    font-size:5px;
+}
+
+div.panel-body{
+    text-align:center;
+    font-size:30px;
+    padding-bottom:20px;
+    padding-top:20px;
+}

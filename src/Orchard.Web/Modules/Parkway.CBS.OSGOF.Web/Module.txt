@@ -1,0 +1,11 @@
+﻿Name: Parkway.CBS.OSGOF.Web
+AntiForgery: enabled
+Author: Parkway Projects Limited
+Website: http://parkwayprojects.com
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Parkway.CBS.OSGOF.Web:
+        Description: Description for feature Parkway.CBS.OSGOF.Web.
+		Dependencies: Parkway.CBS.Module.Web

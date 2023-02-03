@@ -1,0 +1,45 @@
+﻿@model Parkway.CBS.Core.HelperModels.PAYEReceiptUtilizationReportObj
+@{
+    Layout.Title = ""+Model.ReceiptNumber+" Utilizations";
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+    <style>
+        table.items th, table.items td {
+            border-bottom: 1px solid #eaeaea;
+            border-spacing: 0px;
+            display: table-cell;
+            padding: 8px 12px;
+            max-width: 100%;
+            position: relative;
+            word-break: break-all;
+        }
+    </style>
+
+    <div id="container">
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Batch Ref</th>
+                    <th scope="col" id="titleHeader">Utilized Amount</th>
+                    <th scope="col" id="titleHeader">Utilization Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.ReceiptUtilizationItems != null && Model.ReceiptUtilizationItems.Any())
+                {
+                    foreach(var item in Model.ReceiptUtilizationItems)
+                    {
+                        <tr>
+                            <td>@item.BatchRef</td>
+                            <td>@String.Format("{0:n2}",item.UtilizedAmount)</td>
+                            <td>@item.UtilizedDate.ToString("dd MMM yyyy HH:mm")</td>
+                        </tr>
+                    }
+                }
+                else { <tr><td colspan="3">No Records Found</td></tr> }
+
+            </tbody>
+        </table>
+</div>

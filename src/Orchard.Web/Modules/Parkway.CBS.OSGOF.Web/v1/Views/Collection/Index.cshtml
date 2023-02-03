@@ -1,0 +1,246 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+@{
+    Layout.Title = "Home";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" id="main-nav">
+    <div class="container">
+        <a class="navbar-brand" href="@Href("~/")"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="Central Billing System"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.About")">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("Receipt.Search")">Validate Receipt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.GenerateTin")">Generate Tin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="@Url.RouteUrl("C.ContactUs")">Call @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/CallNumbers.cshtml"))</a>
+                </li>
+                @if (Model.IsLoggedIn)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.DisplayText</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="@Url.RouteUrl("CBS.Receipts")">Paye Receipts</a>
+                            <a class="dropdown-item" href="@Url.RouteUrl("CBS.Payments")">Payment List</a>
+                            <div class="dropdown-divider"></div>
+                            @using (Html.BeginForm("SignOut", "Collection", FormMethod.Post, new { @id = "signoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a class="nav-item nav-link" href="#" id="signoutlnk" style="color:#212529">Sign Out</a>
+                            }
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item tin-button-outline">
+                        <a class="nav-item nav-link" href="@Url.RouteUrl("CBS.User.Register")">Register</a>
+                    </li>
+                    <li class="nav-item tin-button">
+                        <a class="nav-item nav-link" href="@Url.RouteUrl("C.SignIn")">Sign In</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper">
+    <div class="top-banner">
+        <div class="jumbotron jumbotron-fluid niger-banner">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="img-overlay">
+                         <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/CBS_Governor.png"))" /> 
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div class="top-content d-flex justify-content-center text-left flex-column">
+                        <span class="top">Pay your tax! Let's build<br>@Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantName.cshtml")) together</span>
+                        <span class="bottom">
+                            Easy, convenient and secure way to pay all taxes or bills owed to the
+
+                            @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantName.cshtml")) @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantAdditionalName.cshtml")).
+                        </span>
+                        <div class="call-to-action">
+                            <a class="left" href="@Url.RouteUrl("BIN.Search")">Make Payment</a>
+                            <a class="right" href="@Url.RouteUrl("C.SelfAssessment")">Generate Invoice</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="row" style="text-align: center">
+            <div class="container taxes-caption">
+                <h3>Pay Your Taxes;</h3>
+                <p>Carryout your civic responsibility.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconLock"></use>
+                    </svg>
+                    <h6>SELF SERVICE</h6>
+                    <p>
+                        Sign in or register to pay bills or taxes as an Individual, corporate, state agency or
+                        federal agency.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconReceipt"></use>
+                    </svg>
+                    <h6>PAY TAXES AND SERVICES</h6>
+                    <p>
+                        You can pay for taxes , services or bills such as PAYE, Land use charge Vehicle registration,
+                        Withholding tax, Business premises, Capital gain tax, Waste management, etc.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconCreditCard"></use>
+                    </svg>
+                    <h6>MULTIPLE PAYMENT CHANNELS</h6>
+                    <p>
+                        Enjoy a faster and easier way to pay taxes or bills. Payments can be made against an invoice
+                        at any bank branch or online payments with debits cards (POS, Verve, Visa, or MasterCard)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconComputer"></use>
+                    </svg>
+                    <h6>CONVENIENCE AND EASE</h6>
+                    <p>
+                        Access, validate and pay your bills online, at your convenience. You now have your tax office
+                        in the comfort of your desk or your mobile device.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconGroup"></use>
+                    </svg>
+                    <h6>PAYMENT TRANSACTION RECORDS</h6>
+                    <p>View your tax information and payment history over a period of time.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-content">
+                    <svg>
+                        <use xlink:href="/media/images/cbsIcons.svg#iconInfo"></use>
+                    </svg>
+                    <h6>LEARN MORE</h6>
+                    <p>
+                        We are here to help you understand how to pay your bills or taxes with ease. Click <a href="#">here</a> for
+                        help
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-top">
+
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/CBS Logo@4x.png"))" alt="">
+                <p class="logo-caption">
+                    Experience the easy and secure way to
+                    pay your taxes or bills owed to the
+                    @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantName.cshtml")) @Html.Partial(@Html.ThemePath(WorkContext.CurrentTheme, "/Views/TenantAdditionalName.cshtml")) online or at any bank branch.
+                </p>
+            </div>
+            <div class="col-md-2 quick-links">
+                <h3></h3>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">State News</a>
+            </div>
+            <div class="col-md-2 quick-links">
+                <h3>QUICK LINKS</h3>
+                <a href="#">Downloads</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="col-md-4">
+                <h3>CONNECT WITH US</h3>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/instagram.png"))" alt=""></a>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/facebook.png"))" alt=""></a>
+                <a class="social" href="#"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/twitter.png"))" alt=""></a>
+                <p class="copyright">Copyright © @DateTime.Now.ToLocalTime().Year by central billing system</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+
+<div class="sign-up modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <span class="sign-up-info">
+                    <span>i</span>Federal agency are required to sign in with their
+                    designated user accounts
+                </span>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email ID</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp" placeholder="Enter Email ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1"
+                               placeholder="Enter Password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Keep me signed in</label>
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#signoutlnk").click(function (e) {
+        $('#signoutForm').get(0).submit();
+    });
+</script>

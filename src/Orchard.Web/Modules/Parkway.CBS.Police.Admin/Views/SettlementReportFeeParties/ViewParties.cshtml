@@ -1,0 +1,37 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSSettlementFeePartiesVM
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Layout.Title = T(Model.SettlementName + " - Allocated Fee Parties").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.Bootstrap.Script");
+}
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <table class="items" id="feePartiesTable">
+            <tr>
+                <th>SETTLEMENT PARTY</th>
+                <th>PERCENTAGE</th>
+                <th>ADAPTER</th>
+            </tr>
+            @if (Model.SelectedSettlementFeeParties != null && Model.SelectedSettlementFeeParties.Any())
+            {
+                foreach (var feeParty in Model.SelectedSettlementFeeParties)
+                {
+                    <tr>
+                        <td>@feeParty.SettlementFeePartyName</td>
+                        <td>@feeParty.DeductionValue.ToString("0.00")%</td>
+                        <td>@feeParty.AdapterName</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+}
+@Display(Model.Pager)

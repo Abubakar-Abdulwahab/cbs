@@ -1,0 +1,109 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSSettlementFeePartiesVM
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Layout.Title = T(Model.SettlementName + " - Edit Fee Parties").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("PSS.Admin.Settlements.Edit.Parties.Script");
+}
+<style>
+    .inline-check-box {
+        cursor: pointer;
+    }
+
+    .delete-fee-party-btn {
+        color: red;
+        cursor: pointer;
+    }
+</style>
+<script>
+    var settlementPartiesAllocated = @Html.Raw(Json.Encode(Model.SelectedSettlementFeeParties));
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost("EditParties", FormMethod.Post, new { @id = "settlementEditFeePartyForm", @name = "SettlementEditFeePartyForm" }))
+{
+    <input id="SettlementId" name="SettlementId" type="hidden" value="@Model.SettlementId" />
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select settlement party</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedFeeParty" id="feePartyDropdown">
+                            <option selected disabled value="">Select a fee party</option>
+                            @if (Model.FeeParties != null && Model.FeeParties.Any())
+                            {
+                                foreach (var feeParty in Model.FeeParties)
+                                {
+                                    <option value="@feeParty.Id">@feeParty.Name</option>
+                                }
+                            }
+                        </select>
+                        <span class="hint">Select a settlement fee party.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select percentage</b>
+                    <div class="form-group">
+                        <input type="number" class="form-control" min="0" value="0" step=".01" name="Percentage" id="feePartyPercentage" />
+                        <span class="hint">Enter percentage for the fee party.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select adapter</b>
+                    <div class="form-group">
+                        <select class="form-control" id="selectedAdapter" name="AdapterId">
+                            <option selected disabled value="">Select an adapter</option>
+                            @if (Model.FeePartyAdapters != null && Model.FeePartyAdapters.Any())
+                            {
+                                foreach (var feePartyAdapter in Model.FeePartyAdapters)
+                                {
+                                    <option value="@feePartyAdapter.Id">@feePartyAdapter.Name</option>
+                                }
+                            }
+                        </select>
+                        <span class="hint"><label class="inline-check-box"><input type="checkbox" value="true" id="hasAdditionalSplits" /> Allow additional splits</label></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <b>&nbsp;</b>
+                <button type="button" id="addFeePartyBtn" class="btn btn-primary btn-block">Add</button>
+            </div>
+        </div>
+        <table class="items" id="feePartiesTable">
+            <tr>
+                <th>SETTLEMENT PARTY</th>
+                <th>PERCENTAGE</th>
+                <th>ADAPTER</th>
+                <th></th>
+            </tr>
+            @if (Model.SelectedSettlementFeeParties != null && Model.SelectedSettlementFeeParties.Any())
+            {
+                int index = 0;
+                foreach (var feeParty in Model.SelectedSettlementFeeParties)
+                {
+                    <tr>
+                        <td>@feeParty.SettlementFeePartyName</td>
+                        <td>@feeParty.DeductionValue.ToString("0.00")%</td>
+                        <td>@feeParty.AdapterName</td>
+                        <td><span class="delete-fee-party-btn" Title="Remove Item" onClick="removeFeeParty(@index)">Remove</span></td>
+                    </tr>
+                    index++;
+                }
+            }
+        </table>
+
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
+    </div>
+}

@@ -1,0 +1,118 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSRequestInvoiceVM
+@{
+
+    Layout.Title = T("Request Invoices").ToString();
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+    <div class="container-fluid request-list-main-content no-margin no-padding">
+
+        <div class="container-fluid request-list-content-container">
+
+            <div class="container-fluid request-list-content no-padding">
+                <div class="container-fluid no-margin">
+                    @if (Model.Invoices != null && Model.Invoices.Any()) { 
+                        <h4 class="no-margin">@Model.Invoices.FirstOrDefault().ServiceName @Model.Invoices.FirstOrDefault().FileRefNumber</h4>
+                        }
+                </div>
+                <hr class="no-margin mb-2 mt-2" />
+                @using (Html.BeginFormAntiForgeryPost())
+                {
+                    <div class="container-fluid req-filters">
+
+                    </div>
+                    <div class="container-fluid request-list">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center">
+                                                INVOICE&nbsp;NUMBER
+                                            </th>
+                                            <th style="text-align:center">
+                                                SERVICE
+                                            </th>
+                                            <th style="text-align:center">
+                                                STATUS
+                                            </th>
+                                            <th style="text-align:right">
+                                                AMOUNT
+                                            </th>
+                                            <th style="text-align:right">
+                                                AMOUNT&nbsp;DUE
+                                            </th>
+                                            <th style="text-align:center">
+                                                ACTIONS
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="background-color:#EEEEEE" id="tbody">
+                                        @if (Model.Invoices != null && Model.Invoices.Any())
+                                        {
+                                            foreach (var invoice in Model.Invoices)
+                                            {
+                                                <tr>
+                                                    <td style="text-align:center"><a href="@Url.Action("GetInvoice","RequestInvoices", new { bin = invoice.InvoiceNumber })" name="viewInvoice">@invoice.InvoiceNumber</a></td>
+                                                    <td style="text-align:center">@invoice.ServiceName</td>
+                                                    <td style="text-align:center">
+                                                    @switch ((Parkway.CBS.Core.Models.Enums.InvoiceStatus)invoice.Status)
+                                                            {
+                                                                @*case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApplicationFeePayment:
+                                                                    <div class="status-pending">Pending</div>
+                                                                    break;*@
+                                                                case Parkway.CBS.Core.Models.Enums.InvoiceStatus.PartPaid:
+                                                                    <div class="status-pending">Part Paid</div>
+                                                                    break;
+                                                                case Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid:
+                                                                    <div class="status-approved">Paid</div>
+                                                                    break;
+                                                                case Parkway.CBS.Core.Models.Enums.InvoiceStatus.Unpaid:
+                                                                    <div class="status-declined">Unpaid</div>
+                                                                    break;
+                                                                case Parkway.CBS.Core.Models.Enums.InvoiceStatus.WriteOff:
+                                                                    <div class="status-declined">Expired</div>
+                                                                    break;
+                                                                default:
+                                                                    <div class="status-pending">Pending</div>
+                                                                    break;
+                                                            }
+                                                    </td>
+                                                    <td style="text-align:right"><span>&#8358;</span>@String.Format("{0:n2}",@invoice.Amount)</td>
+                                                    <td style="text-align:right"><span>&#8358;</span>@String.Format("{0:n2}",@invoice.AmountDue)</td>
+                                                    @if ((Parkway.CBS.Core.Models.Enums.InvoiceStatus)invoice.Status == Parkway.CBS.Core.Models.Enums.InvoiceStatus.Unpaid || (Parkway.CBS.Core.Models.Enums.InvoiceStatus)invoice.Status == Parkway.CBS.Core.Models.Enums.InvoiceStatus.PartPaid)
+                                                    {
+                                                        <td style="text-align:center"><a href="@Url.Action("MakePayment","MakePayment", new { invoiceNumber = invoice.InvoiceNumber })">Pay</a></td>
+                                                    }
+                                                    else { <td></td> }
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="6" style="text-align:center">No records found</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script>
+    $('a[name="viewInvoice"]').click(function (e) {
+        e.preventDefault();
+        window.open(this.href, "cbsinvoice", "width=800,height=800,scrollbars=yes")
+    });
+</script>

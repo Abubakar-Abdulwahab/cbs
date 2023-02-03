@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.PAYEBatchItemsStaging, Parkway.CBS.Core" table="Parkway_CBS_Core_PAYEBatchItemsStaging" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="GrossAnnual" column="GrossAnnual" />
+    <property name="PayerId" column="PayerId" />
+    <property name="Exemptions" column="Exemptions" />
+    <property name="Month" column="Month" />
+    <property name="Year" column="Year" />
+    <property name="IncomeTaxPerMonthValue" column="IncomeTaxPerMonthValue" />
+
+    <many-to-one name="PAYEBatchRecordStaging" column="PAYEBatchRecordStaging_Id"/>
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,71 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSAdminSignatureUploadVM
+@{
+    Layout.Title = "Upload Signature";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("PSS.Admin.Upload.Signature.Script");
+}
+<style>
+    .upload-info {
+        color: #333333;
+        font-size: 18px;
+        letter-spacing: 0.31px;
+        line-height: 21px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    label.upload-label {
+        flex-direction: column;
+        height: 200px;
+        border: 2px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 100% !important;
+        cursor:pointer;
+    }
+
+        label.upload-label img {
+            height: 50px;
+            width: auto;
+        }
+
+    .upload-caption {
+        color: #333333;
+        font-size: 13px;
+        line-height: 19px;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+    .upload-caption a{
+        color: #00b05f;
+    }
+
+    #upload {
+        display: none;
+    }
+
+    #saveBtn{
+        margin-top:15px;
+    }
+
+</style>
+
+<div class="row">
+    @using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSAdminSignatureUpload.UploadSignature), FormMethod.Post, new {  @id = "adminSignatureUploadForm", @enctype = "multipart/form-data" }))
+    {
+    <div class="col-12 px-0">
+        <label class="upload-label" for="upload">
+            <span style="font-size:14px;font-weight: lighter;" id="fileName"></span>
+            <img src="/media//cbspolice/Images/upload-black.svg" alt="" id="uploadImg" />
+            <span class="upload-caption" id="uploadInfo">Upload signature file here. (max size 2mb).</span>
+        </label>
+        <input type="file" id="upload" name="signatureFile" accept=".jpg,.jpeg,.png">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block" id="saveBtn">save</button>
+    }
+</div>

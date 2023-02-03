@@ -1,0 +1,29 @@
+﻿@model Parkway.CBS.Police.Core.VM.GenericRequestDetailsVM
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader">OTHER DETAILS</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.FormControlValues.Any())
+        {
+            foreach (var item in Model.FormControlValues)
+            {
+                <tr>
+                    <td colspan="2">
+                        <label for="stateB">@item.Name</label>
+                        <p class="extend-width">@item.Value</p>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.DisplayDetailsForApproval)
+{
+    @(Html.Partial("\\ServicePartials\\" + Model.ApprovalPartialName.Trim(), Model))
+}

@@ -1,0 +1,195 @@
+﻿@model Parkway.CBS.Core.HelperModels.ExpertSettingsViewModel
+
+@{ Layout.Title = @Model.ExpertSystemsSettings.CompanyName + " Settings".ToString(); }
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        width: 50%;
+        position: relative;
+        word-break: break-all;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action(Model.IsEdit ? "EditExpertSystem" : "CreateExpertSystem", "Settings", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+<div id="container">
+    @Html.HiddenFor(model => model.ExpertSystemsSettings.Id)
+    <table class="items" id="settings">
+        <thead>
+            <tr>
+                <th scope="col" id="titleHeader">@Model.ExpertSystemsSettings.CompanyName Settings</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!string.IsNullOrEmpty(@Model.ExpertSystemsSettings.ClientId))
+            {
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("Client Id")</label>
+                        <b>@Model.ExpertSystemsSettings.ClientId</b>
+                        <br />
+                        @Html.Hint(T("Client ID."))
+                    </td>
+                    <td>
+                        <label id="mdaCode">@T("Client Secret")</label>
+                        <div name="clientsecret" id="clientsecret" hidden>
+                            <b>@Model.ExpertSystemsSettings.ClientSecret</b>
+                        </div>
+                        <button sm name="showsecret" id="showsecret" type="button">Show Client Secret</button>
+                        @Html.Hint(T("Client Secret."))
+
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <label id="mdaName">@T("Contact Email")</label>
+                    @Html.TextBoxFor(m => m.ExpertSystemsSettings.CompanyEmail, new { @class = "text large", @required = true, @type = "email" })
+                    @Html.Hint(T("Add the contact email to be displayed on the invoice."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.CompanyEmail, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label id="mdaCode">@T("Contact Phone Number")</label>
+                    @Html.TextBoxFor(m => m.ExpertSystemsSettings.CompanyMobile, new { @class = "text large", @required = true })
+                    @Html.Hint(T("Add the contact phone number to be displayed on the invoice."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.CompanyMobile, "", new { @style = "color:#990808" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="mdaName">@T("Payee Name")</label>
+                    @Html.TextBoxFor(m => m.ExpertSystemsSettings.CompanyName, new { @class = "text large", @required = true })
+                    @Html.Hint(T("Add the payee name to be added on the invoice."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.CompanyName, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label id="mdaName">@T("Expert System State")</label>
+
+                    <select class="stateName" name="state" id="stateName" style="width:99%" disabled>
+                        @foreach (var item in Model.States)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    @Html.Hint(T("State of expert system invoices are generated for."))
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="mdaName">@T("TSA Bank")</label>
+                    <select name="bank" style="width:99%" required>
+                        <option value="" disabled selected>Select Bank</option>
+                        @foreach (var item in Model.Banks)
+                        {
+                            if (item.Id == Model.ExpertSystemsSettings.TSA)
+                            {
+                                <option value="@item.Id" selected>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                    @Html.Hint(T("For TSA purposes select the TSA bank."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.TSA, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label id="mdaName">@T("TSA Bank Account Number")</label>
+                    @Html.TextBoxFor(m => m.ExpertSystemsSettings.TSABankNumber, new { @class = "text large" })
+                    @Html.Hint(T("Add the TSA bank account number."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.TSABankNumber, "", new { @style = "color:#990808" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="mdaName">@T("Upload Logo")</label>
+                    @if (Model.ExpertSystemsSettings.LogoPath != null)
+                    {
+                        <div class="media-thumbnail media-thumbnail-image mime-type-image-jpeg">
+                            <img src="@Model.ExpertSystemsSettings.GetThumbnail(Model.ExpertSystemsSettings.LogoPath)" alt="file not found">
+                        </div>
+                            @Html.TextBoxFor(m => m.ExpertSystemsSettings.LogoPath, new { @class = "text large", @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.ExpertSystemsSettings.LogoPath, new { @class = "text large", @required = true, @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                    }
+                    @Html.Hint(T("Upload logo for invoices generated."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.LogoPath, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label id="mdaName">@T("Upload Signature")</label>
+                    @if (Model.ExpertSystemsSettings.SignaturePath != null)
+                    {
+                        <div class="media-thumbnail media-thumbnail-image mime-type-image-jpeg">
+                            <img src="@Model.ExpertSystemsSettings.GetThumbnail(Model.ExpertSystemsSettings.SignaturePath)" alt="file not found">
+                        </div>
+                            @Html.TextBoxFor(m => m.ExpertSystemsSettings.SignaturePath, new { @class = "text large", @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.ExpertSystemsSettings.SignaturePath, new { @class = "text large", @required = true, @type = "file", @accept = "image/x-png, image/gif, image/jpeg" })
+                    }
+                    @Html.Hint(T("Upload signature on invoices generated."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.SignaturePath, "", new { @style = "color:#990808" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="mdaName">@T("Select Reference Data Source")</label>
+                    <div name="loader" id="loader" class="loader" style="position:absolute;margin:auto;z-index:1;right:1px;left:5px;display:none"></div>
+                    <select class="refData" name="ExpertSystemsSettings.ReferenceDataSourceName" style="width:99%" required>
+                        <option value="" disabled selected>Select Ref Data</option>
+                        @foreach (var item in Model.ListOfRefData)
+                        {
+                            if (item == Model.ExpertSystemsSettings.ReferenceDataSourceName)
+                            {
+                                <option value="@item" selected>@item</option>
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                    @Html.Hint(T("Select Reference Data Source."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.ReferenceDataSourceName, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label>@T("Scheduler Name")</label>
+                    @Html.TextBoxFor(m => m.ExpertSystemsSettings.BillingSchedulerIdentifier, new { @class = "text large", @required = true })
+                    @Html.Hint(T("Enter the identifier for the Expert System's scheduler."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.BillingSchedulerIdentifier, "", new { @style = "color:#990808" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="mdaName">@T("Business Nature")</label>
+                    @Html.TextAreaFor(m => m.ExpertSystemsSettings.BusinessNature, new { @class = "text large", @required = true })
+                    @Html.Hint(T("Enter the nature of the payee business."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.BusinessNature, "", new { @style = "color:#990808" })
+                </td>
+                <td>
+                    <label id="mdaCode">@T("Company Address")</label>
+                    @Html.TextAreaFor(m => m.ExpertSystemsSettings.CompanyAddress, new { @class = "text large", @required = true })
+                    @Html.Hint(T("Enter state address to be displayed on the invoice."))
+                    @Html.ValidationMessageFor(m => m.ExpertSystemsSettings.CompanyAddress, "", new { @style = "color:#990808" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<fieldset>
+    <button type="submit">@T("Save")</button>
+    <button type="button" value="@T(" Cancel")" onclick="location.href='@Url.Action("ListOfExpertSystems", "Settings" )'" class="a-classname">@T("Cancel")</button>
+</fieldset>
+}
+@{
+    Script.Require("CBS.MDA.Setting.Script").AtFoot();
+}

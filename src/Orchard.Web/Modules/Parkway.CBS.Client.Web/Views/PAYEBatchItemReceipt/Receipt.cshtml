@@ -1,0 +1,135 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+
+@{
+    Layout.Title = "Paye Tax Receipt";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<style>
+    .paye-receipt-container{
+        width:100vw;
+        height:auto;
+        padding:10px;
+    }
+
+    .paye-receipt {
+        width:1000px;
+        height:auto;
+        margin:0 auto;
+        border: 1px solid #ccc;
+        position:relative;
+    }
+
+    .paye-receipt-header{
+        text-align:center;
+    }
+
+    .paye-receipt-row{
+        width:100%;
+    }
+
+    .paye-receipt-content{
+        padding-top:10px;
+        padding-bottom:80px;
+        padding-left:30px;
+        padding-right:30px;
+    }
+    .paye-receipt-date{
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:flex-end;
+    }
+
+    #pitReceiptPrintBtnContainer{
+        padding-top: 10px;
+        margin: 0 auto;
+        max-width: 80%;
+    }
+</style>
+<nav class="navbar navbar-default" id="pitReceiptPrintBtnContainer">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" id="printBtn" class="btn btn-sm pull-right">Print Receipt</button>
+        </div>
+    </div>
+</nav>
+<div class="paye-receipt-container container-fluid">
+    <div class="paye-receipt container-fluid">
+        <div class="paye-receipt-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1">
+            <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/paye-receipt-bg.png"))" alt="PAYE Receipt Background" style="width:100%;height:100%"/>
+        </div>
+        <div class="paye-receipt-content container-fluid" style="position:relative;z-index:2">
+            <div style="height:auto;padding:20px 0;display:flex;flex-flow:row nowrap;">
+                <div style="width:15%;font-size:12px;align-self:flex-end">
+                    <p>Date <b>MAY, 2021</b></p>
+                    <p>Receipt No <b>000114926</b></p>
+                </div>
+                <div style="text-align:center;width:70%">
+                    <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/logo.png"))" alt="CBS" style="width:30px;height:auto;margin-bottom:5px" />
+                    <p style="margin-bottom:0;font-size:12px;font-weight:bold">NASARAWA STATE GOVERNMENT</p>
+                    <p style="margin-bottom:0;font-size:12px;">NASARAWA STATE INTERNAL REVENUE SERVICE</p>
+                    <p style="margin-bottom:0;margin-top:20px;font-size:25px;font-weight:bold">MONTHLY PAYEE TAX RECEIPT</p>
+                </div>
+                <div style="width:15%;text-align:right">
+                    <img class="logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/sample-qr-code.png"))" alt="QR Code" style="width:100px;height:auto" />
+                </div>
+            </div>
+            @*<div>
+                <p style="font-size:12px">Receipt No <b>000114926</b></p>
+            </div>*@
+            <div style="display:flex;flex-flow:row nowrap;padding-top:20px;padding-bottom:10px">
+                <div style="position:relative;width:50px;flex-shrink:0">
+                    <p style="margin-bottom:0;position:absolute;bottom:-7px">From</p>
+                </div>
+                <div style="padding:0 25px; border-bottom:1px solid black;word-break:break-word;width:auto">
+                    <p style="margin-bottom:0">ERHIEYOVWE OGBUDJE</p>
+                </div>
+                <div style="position:relative;width:25px;padding:0 10px;flex-shrink:0">
+                    <p style="margin-bottom:0;position:absolute;bottom:-7px;left:3px"> of </p>
+                </div>
+                <div style="padding:0 25px; border-bottom:1px solid black;flex-grow:1">
+                    <p style="margin-bottom:0">PLOT 456, HASSAN DRIVE, NASARAWA </p>
+                </div>
+            </div>
+            <div style="display:flex;flex-flow:row nowrap;padding-top:20px;padding-bottom:10px">
+                <div style="position:relative;width:110px;flex-shrink:0">
+                    <p style="margin-bottom:0;position:absolute;bottom:-7px;">Amount Paid</p>
+                </div>
+                <div style="padding:0 25px; border-bottom:1px solid black;flex-grow:1">
+                    <p style="margin-bottom:0">FIVE HUNDRED AND FIFTY THOUSAND TWO HUNDRED </p>
+                </div>
+            </div>
+            <div style="display:flex;flex-flow:row nowrap;padding-bottom:40px;padding-top:20px">
+                <div style="padding:0 25px; border-bottom:1px solid black;flex-grow:1">
+                    <p style="margin-bottom:0">SEVENTY NAIRA ONLY </p>
+                </div>
+                <div style="width:15px;position:relative;flex-shrink:0">
+                    <span style="position:absolute;bottom:-7px;">&#8358;</span>
+                </div>
+                <div style="padding:0 25px; border-bottom:1px solid black;word-break:break-word">
+                    <p style="margin-bottom:0">550,270,000,000,000.00</p>
+                </div>
+            </div>
+            <div style="display:flex;flex-flow:row nowrap;padding:10px 0;">
+                <div style="position:relative;width:100px">
+                    <p style="margin-bottom:0;position:absolute;bottom:-7px">Issued date</p>
+                </div>
+                <div style="padding:0 25px; border-bottom:1px solid black; width:150px"></div>
+            </div>
+        </div>
+        </div>
+</div>
+
+
+<script>
+    $("#printBtn").click(function () {
+        window.print();
+    });
+</script>

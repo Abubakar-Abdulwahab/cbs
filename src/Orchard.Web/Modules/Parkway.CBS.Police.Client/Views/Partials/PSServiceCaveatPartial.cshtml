@@ -1,0 +1,51 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSServiceCaveatVM
+
+<style>
+    .service-caveat-confirmation-modal {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(9,16,39,0.71);
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        padding: 40px;
+        overflow: auto;
+    }
+
+    .btn#cancelRequest, .btn#acceptRequest {
+        width: 110px;
+    }
+
+    .caveat-content { text-align:justify; }
+</style>
+<div class="container-fluid service-caveat-confirmation-modal no-margin no-padding" id="confirmationModal">
+
+    <div class="row no-margin no-padding">
+        <div class="container white-bg-md no-padding" style="max-width:700px">
+            <div class="container inner-white-container py-4">
+                <h4 style="text-align:center">@Model.CaveatHeader</h4>
+                @Html.Raw(Model.CaveatContent)
+                <div class="row mx-0 px-0">
+                    <div class="col-6 py-1 pl-0">
+                        <button type="button" class="btn blue-btn-full-outline" id="cancelRequest">Cancel</button>
+                    </div>
+                    <div class="col-6 py-1 pr-0" style="text-align:right">
+                        <button type="button" class="btn blue-btn-full" id="acceptRequest">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector("body").style.overflow = "hidden";
+
+    document.getElementById("cancelRequest").addEventListener("click", function () {
+        location.href = @Html.Raw(Json.Encode(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.SelectService.ShowSelectService)));
+    }, false);
+
+    document.getElementById("acceptRequest").addEventListener("click", function () {
+        document.getElementById("confirmationModal").style.display = "none";
+        document.querySelector("body").style.overflow = "auto";
+    }, false);
+</script>

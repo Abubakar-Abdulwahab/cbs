@@ -1,0 +1,269 @@
+﻿@model Parkway.CBS.Police.Core.VM.RequestListVM
+
+@{
+
+    Layout.Title = T("Request List").ToString();
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Request.List.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .disablelink {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    var operatorId = @Html.Raw(Json.Encode(Model.TaxEntityId));
+    var paymentPage1 = @Html.Raw(Json.Encode(Model.Requests));
+    var startDateFilter = @Html.Raw(Json.Encode(Model.startDateString));
+    var endDateFilter = @Html.Raw(Json.Encode(Model.endDateString));
+    var reqStatus = parseInt(@Html.Raw(Json.Encode(Model.requestStatus)));
+    var hasError = @Html.Raw(Json.Encode(Model.HasError));
+    var errorMessage = @Html.Raw(Json.Encode(Model.ErrorMessage));
+
+    const pendingInvoicePayment = @((int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingInvoicePayment);
+    const pendingApproval = @((int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApproval);
+    const approved = @((int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved);
+    const confirmed = @((int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Confirmed);
+    const rejected = @((int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Rejected);
+</script>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+    <div class="container-fluid request-list-main-content no-margin no-padding">
+
+        <div class="container-fluid request-list-content-container">
+
+            <div class="container error-alert-bar" id="flash" style="display:none">
+                <div class="row no-padding no-margin">
+                    <div class="container col-2 error-icon-container no-margin no-padding">
+                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/danger.svg"))" class="img img-responsive">
+                    </div>
+                    <div class="container col-9 no-margin no-padding error-icon-details">
+                        <h5>Error!</h5>
+                        <p id="errorMsg"></p>
+                    </div>
+                    <div class="col-1 delete-error-alert-icon" id="closeFlash">
+                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid request-list-content no-padding">
+                <div class="container-fluid no-margin">
+                    <h4 class="no-margin">Service Requests</h4>
+                </div>
+                <hr class="no-margin mb-1 mt-2" />
+                @using (Html.BeginFormAntiForgeryPost())
+                {
+                    <div class="container-fluid req-filters">
+
+                        <div class="row no-margin no-padding py-1">
+                            <div class="col-2 no-margin no-padding" style="min-width: 150px;">
+                                <div class="dropdown date-filter-container">
+                                    <input class="form-control date-filter dropdown-toggle" style="background-color:#FFFFFF" data-toggle="dropdown" type="text" placeholder="Filter By: Date, Status" readonly />
+                                    <div>
+                                        <div class="dropdown-menu">
+                                            <div class="custom-dropdown-item no-padding">
+                                                <div class="container-fluid no-margin no-padding">Date</div>
+                                                <div class="row no-margin no-padding">
+                                                    <div class="col-5 no-margin no-padding">
+                                                        <input class="form-control pickyDate" placeholder="Start Date" name="from" value="@Model.startDateString" />
+                                                    </div>
+                                                    <div class="col-2 no-margin no-padding">-</div>
+                                                    <div class="col-5 no-margin no-padding">
+                                                        <input class="form-control pickyDate" placeholder="End Date" name="end" value="@Model.endDateString" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-dropdown-item no-padding">
+                                                <div class="container-fluid no-margin no-padding">Status</div>
+                                                <div class="row no-margin no-padding">
+                                                    <div class="col-8 no-padding">
+                                                        <input type="text" class="form-control" placeholder="@(Parkway.CBS.Core.Utilities.Util.InsertSpaceBeforeUpperCase(((Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus) Model.requestStatus).ToString()))" autocomplete="off" list="statuses" spellcheck="false" id="requestStatus" />
+                                                        <input type="hidden" id="requestStatusIdentifier" name="status" value="@((int)Model.requestStatus)" />
+                                                        <datalist id="statuses">
+                                                            @foreach (var status in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus)).Cast<Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus>())
+                                                            {
+                                                                <option data-value="@((int)status)" value="@(Parkway.CBS.Core.Utilities.Util.InsertSpaceBeforeUpperCase(status.ToString()))"></option>
+                                                            }
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="filter-submit-container">
+                                    <button type="submit" id="filterSubmitBtn" class="btn">Search</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="container-fluid request-list">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;margin-top:10%;display:none"></div>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                REQUEST&nbsp;DATE
+                                            </th>
+                                            <th>
+                                                APPLICANT&nbsp;NAME
+                                            </th>
+                                            <th>
+                                                FILE&nbsp;NUMBER
+                                            </th>
+                                            <th>
+                                                REQUEST&nbsp;STATUS
+                                            </th>
+                                            <th>
+                                                LAST&nbsp;ACTION&nbsp;DATE
+                                            </th>
+                                            <th>
+                                                SERVICE&nbsp;TYPE
+                                            </th>
+                                            <th>
+                                                @*VIEW&nbsp;DETAILS*@
+                                            </th>
+                                            <th>
+                                                @*VIEW&nbsp;Invoice*@
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="background-color:#EEEEEE" id="tbody">
+                                        @if (Model.Requests != null && Model.Requests.Any())
+                                        {
+                                            foreach (var request in Model.Requests)
+                                            {
+                                                <tr>
+                                                    <td>@request.RequestDateString</td>
+                                                    <td>@request.CustomerName</td>
+                                                    <td>@request.FileRefNumber</td>
+                                                    <td>
+                                                        @switch (request.Status)
+                                                        {
+                                                            case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingInvoicePayment:
+                                                                <div class="status-pending">Pending</div>
+                                                                break;
+                                                            case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApproval:
+                                                                <div class="status-pending">Pending</div>
+                                                                break;
+                                                            case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved:
+                                                                <div class="status-approved">Approved</div>
+                                                                break;
+                                                            case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Confirmed:
+                                                                <div class="status-approved">Confirmed</div>
+                                                                break;
+                                                            case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Rejected:
+                                                                <div class="status-declined">Declined</div>
+                                                                break;
+                                                            default:
+                                                                <div class="status-pending">Pending</div>
+                                                                break;
+                                                        }
+                                                    </td>
+                                                    <td>@request.LastActionDateString</td>
+                                                    <td>@request.ServiceName</td>
+                                                    <td>
+                                                        <a href="@Url.Action("RequestDetails","RequestDetails",new { fileRefNumber = request.FileRefNumber})" name="ViewDetails">View Details</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("RequestInvoices","RequestInvoices",new { fileNumber = request.FileRefNumber })" name="ViewInvoices" target="_blank">View Invoices</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="6" style="text-align:center">No requests found</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-pagination-2">
+                                @*<span class="show">Show</span>
+                            <select class="custom-select">
+                                <option selected>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>*@
+                                <a href="#" id="moveleft" name="cursor">Previous </a><span id="page">1</span>/ <span id="pageSize">@(Model.DataSize == 0 ? 1 : Model.DataSize)</span><a href="#" id="moveright" name="cursor">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script>
+    $("#closeFlash").click(function (e) {
+        $("#flash").fadeOut("slow");
+        //$("#flash").empty();
+    });
+</script>

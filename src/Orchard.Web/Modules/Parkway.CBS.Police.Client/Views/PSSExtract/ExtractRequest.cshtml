@@ -1,0 +1,410 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestVM
+
+@{
+    Layout.Title = Model.ServiceName;
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.LGA.Command.Script").AtFoot();
+    Script.Require("PSS.Extract.Category.Script").AtFoot();
+    Script.Require("PSS.Multi.Select.Extract.Category.Script").AtFoot();
+    Script.Require("PSS.Side.Note.Pop.Up.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+    Style.Require("Style.Datepicker");
+
+}
+<style>
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .multi-select-dropdown-toggle {
+        border: 1px solid #ced4da;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        display: flex;
+        flex-flow: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+        .multi-select-dropdown-toggle:hover, .multi-select-dropdown-toggle label {
+            cursor: pointer;
+        }
+
+        .multi-select-dropdown-toggle label {
+            margin: 0;
+            font-weight: unset;
+        }
+
+        .multi-select-dropdown-toggle .multi-select-dropdown-caret {
+            align-self: center;
+        }
+
+    .multi-select-dropdown-toggle-inner-label {
+        font-size: 12px;
+        align-self: center;
+        color: #DCE2F6;
+    }
+
+    .multi-select-dropdown-menu {
+        margin-top: 10px;
+        border: 1px solid #ced4da;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        min-height: 70px;
+        height: auto;
+    }
+
+    .multi-select-dropdown-search-container {
+        display: none;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        background-color: #F3F6F8;
+        border-radius: inherit;
+        height: 35px;
+        padding: .375rem .75rem;
+        margin-top: 7px;
+        font-size: 14px;
+    }
+
+    .multi-select-dropdown-menu .multi-select-dropdown-search-container .multi-select-dropdown-category-search {
+        width: 100%;
+        margin-left: 7px;
+        border: unset;
+        background-color: transparent;
+    }
+
+    .multi-select-dropdown-menu-list {
+        height: inherit;
+        max-height: 150px;
+        margin-top: 5px;
+    }
+
+        .multi-select-dropdown-menu-list ul {
+            padding: .375rem .15rem;
+            max-height: inherit;
+            overflow: auto;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+            .multi-select-dropdown-menu-list ul li {
+                padding: 2px 0;
+            }
+
+            .multi-select-dropdown-menu-list ul .form-check-input {
+                position: relative;
+                margin: unset;
+                margin-right: 0.3125rem;
+            }
+
+    input.multi-select-dropdown-category-search:focus {
+        outline: none;
+    }
+
+    .multi-select-collapsible-dropdown-container {
+        background-color: #F3F6F8;
+        border-radius: 1.25rem 1.25rem 0 0;
+        margin-bottom: 5px;
+    }
+
+        .multi-select-collapsible-dropdown-container .multi-select-dropdown-toggle {
+            background-color: #ffffff;
+        }
+
+    .multi-select-dropdown-collapsible-inner-menu {
+        background-color: transparent;
+        padding: .375rem .75rem;
+    }
+
+        .multi-select-dropdown-collapsible-inner-menu .form-check-input {
+            position: relative;
+            margin: unset;
+            margin-right: 0.3125rem;
+        }
+
+        .multi-select-dropdown-collapsible-inner-menu hr {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+            border: 0;
+            border-top: 1px solid #CED8E2;
+            max-width: 308px;
+        }
+
+    .multi-select-collapsible-dropdown-menu-default-container ul, .multi-select-collapsible-dropdown-menu-list-container ul {
+        padding: .225rem .15rem;
+        max-height: inherit;
+        overflow: auto;
+        list-style: none;
+        margin-bottom: 0;
+    }
+
+    .multi-select-collapsible-dropdown-menu-list-container {
+        max-height: 150px;
+    }
+
+        .multi-select-collapsible-dropdown-menu-list-container ul li {
+            padding: 2px 0;
+        }
+
+            .multi-select-collapsible-dropdown-menu-default-container ul li label, .multi-select-collapsible-dropdown-menu-list-container ul li label {
+                font-weight: unset;
+            }
+
+    .multi-select-dropdown-menu-list label {
+        font-weight: unset;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var extractSubCategoriesPostback = @Html.Raw(Json.Encode((Model.SelectedExtractCategoriesWithSubCategories != null && Model.SelectedExtractCategoriesWithSubCategories.Any()) ? Model.SelectedExtractCategoriesWithSubCategories.ToArray() : null));
+    var showIncidentReportForm =  @Html.Raw(Json.Encode(Model.IsIncidentReported));
+</script>
+<div id="police-extract-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid police-extract-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center police-extract-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Select Service</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Fill Request Form</a></div>
+        </div>
+        <div class="container-fluid police-extract-container no-padding">
+            <div class="container police-extract-form-container no-padding">
+                <div class="container-fluid no-margin no-padding service-note-toggle-container">
+                    <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#sideNoteCollapsible" id="serviceNoteToggle">Click here to view note</button>
+                </div>
+                <div class="row no-margin no-padding">
+                    <div class="container col-md-6 no-padding police-extract-form">
+                        <h4>@Model.ServiceName.ToUpper()</h4>
+                        <p class="grey-tip">Fill in the details of your request.</p>
+
+                        <div class="row no-margin no-padding police-extract-nav-list-form">
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Applicant&nbsp;Info</p>
+                            </div>
+                            <div class="container dashed-block no-margin no-padding">
+                                <div style="border:0.5px dashed #E3E3E3"></div>
+                            </div>
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Request&nbsp;Form</p>
+                            </div>
+                        </div>
+                        @using (Html.BeginRouteForm("P.ExtractRequest", FormMethod.Post, new { @id = "extractForm", @name = "extractForm", @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <label for="state">Select Category of Extract<span class="required-sym">*</span></label>
+                                <div class="multi-select-dropdown-toggle" id="extractCategoryMultiSelectDropdownToggle">
+                                    <label>Select a Category</label>
+                                    <span class="fa fa-caret-down multi-select-dropdown-caret"></span>
+                                </div>
+                                <div id="extractCategoryMultiSelectDropdownMenu" style="position:relative">
+                                    <div class="multi-select-dropdown-menu">
+                                        <div class="multi-select-dropdown-search-container">
+                                            <span class="fa fa-search"></span>
+                                            <input class="multi-select-dropdown-category-search" placeholder="Search Category" />
+                                        </div>
+                                        <div class="multi-select-dropdown-menu-list">
+                                            <ul>
+                                                @if (Model.ExtractCategories != null && Model.ExtractCategories.Any())
+                                                {
+                                                    foreach (var item in Model.ExtractCategories)
+                                                    {
+                                                        <li>
+                                                            <label class="form-check-label"><input type="checkbox" value="@item.Id" name="SelectedCategories" id="@("extractCategoryCheck"+@item.Id+"")" class="form-check-input extract-category" @((Model.SelectedCategories != null && Model.SelectedCategories.Contains(item.Id)) ? "checked" : "") />@item.Name</label>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <span id="extractCategoriesloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                                </div>
+                                <small class="form-text text-muted">Select an extract category.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCategory", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                <div id="extractError"></div>
+                            </div>
+                            <div class="form-group" id="subCategoryMultiSelectDropdownGroupContainer">
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedSubCategory", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <input type="hidden" name="SelectedCategoriesAndSubCategories" id="selectedCategoriesAndSubCategories" value="@Model.SelectedCategoriesAndSubCategories" />
+                            <div class="container no-margin no-padding" style="display:none" id="reasonDiv">
+                                <h6>Reason for Request</h6>
+                                <textarea id="reason" class="form-control" placeholder="Enter your Reason for Extract" name="Reason" rows="4" style="height:120px" maxlength="1000">@Model.Reason</textarea>
+                                <small class="form-text text-muted">Specify the reason for the request.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("Reason", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                <input type="checkbox" id="showFreeForm" hidden name="ShowFreeForm" @(Model.ShowFreeForm ? "checked" : "") />
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <label for="IsIncidentReported">Was incident reported at a police station?<span class="required-sym">*</span></label>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" name="IsIncidentReported" id="isIncidentReportedTrue" value="true" required @(Model.IsIncidentReported ? "checked" : "") /> YES
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" name="IsIncidentReported" id="isIncidentReportedFalse" value="false" required @(Model.IsIncidentReported ? "" : "checked") /> NO
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="container no-margin no-padding" style="display:none" id="incidentReportDiv">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <label for="incidentReportedDate">Select the date the incident was reported</label>
+                                        <input type="text" placeholder="DD/MM/YYYY" class="form-control pickyNoFutureDate" id="incidentReportedDate" value="@Model.IncidentReportedDate" name="IncidentReportedDate" autocomplete="off" />
+                                        <small class="form-text text-muted">Enter Incident Reported Date.</small>
+                                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("IncidentReportedDate", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:30px">
+                                <label for="uploadCourtAffidavit">Upload Court Affidavit<span class="required-sym">*</span></label>
+                                <input type="file" id="courtaffidavitfile" name="courtaffidavitfile" accept=".pdf,.png, .jpeg, .jpg">
+                                <small class="form-text text-muted">Add a court affidavit file here. Maximum size: 1MB</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("CourtAffidavitFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:30px">
+                                <label for="AffidavitNumber">Affidavit Number</label>
+                                <input type="text" class="form-control" id="affidavitNumber" name="AffidavitNumber" placeholder="Enter affidavit number" value="@Model.AffidavitNumber" />
+                                <small class="form-text text-muted">Enter affidavit number.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("AffidavitNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:30px">
+                                <label for="AffidavitDateOfIssuance">Affidavit Date of Issuance<span class="required-sym">*</span></label>
+                                <input type="text" placeholder="DD/MM/YYYY" class="form-control pickyNoFutureDate" id="affidavitDateOfIssuance" name="AffidavitDateOfIssuance" value="@Model.AffidavitDateOfIssuance" />
+                                <small class="form-text text-muted">Enter affidavit date of issuance.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("AffidavitDateOfIssuance", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <h6 style="font-size:18px;margin-top:40px">Police Formation/Division to Request Extract From</h6>
+                            <div class="form-group">
+                                <label for="state">State<span class="required-sym">*</span></label>
+                                <select required class="custom-select" name="SelectedState" id="state">
+                                    <option selected disabled value="">Select a State</option>
+                                    @foreach (var item in Model.StateLGAs)
+                                    {
+                                        <option value="@item.Id" @(Model.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                </select>
+                                <small class="form-text text-muted">Select State of the Police Formation/Division.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedState", "Selected State value is not valid.")</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lga">Local Government Area<span class="required-sym">*</span></label>
+                                <select class="custom-select" name="SelectedStateLGA" id="lga">
+                                    <option selected disabled value="">Select an LGA</option>
+                                    @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                                    {
+                                        foreach (var item in Model.ListLGAs)
+                                        {
+                                            <option value="@item.Id" @(Model.SelectedStateLGA == item.Id ? "selected" : "")>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <small class="form-text text-muted">Select LGA of the Police Formation/Division.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedStateLGA", "Selected LGA value is not valid.")</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="searchPC">Select the Police Formation/Division<span class="required-sym">*</span></label>
+                                <input required type="text" class="form-control" name="Command" placeholder="Select a Command" id="commandList" list="commands" autocomplete="off" spellcheck="false" />
+                                <input type="text" name="SelectedCommand" id="selectedCommand" hidden />
+                                <div id="searchError"></div>
+                                <small class="form-text text-muted">Select the Formation/Division.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCommand", "Select a valid Command.")</div>
+                                <datalist name="commands" id="commands">
+                                    @if (Model.ListOfCommands != null && Model.ListOfCommands.Any())
+                                    {
+                                        foreach (var item in Model.ListOfCommands)
+                                        {
+                                            <option data-value="@item.Id" value="@item.Name"></option>
+                                        }
+                                    }
+                                </datalist>
+                            </div>
+                            <button type="submit" class="btn btn-block">Proceed</button>
+                        }
+                    </div>
+                    @Html.Partial("Partials\\SideNotePartial", Model.ServiceNote)
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+    @if(!Model.ViewedTermsAndConditionsModal && Model.Caveat != null){ @Html.Partial("Partials\\PSServiceCaveatPartial", Model.Caveat) }
+</div>

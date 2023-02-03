@@ -1,0 +1,17 @@
+﻿@model Parkway.CBS.Core.HelperModels.HeaderObj
+<div class="container-fluid no-margin no-padding user-profile-collapse">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a href="@Url.RouteUrl("P.ChangePassword")" class="nav-link @(Url.RequestContext.HttpContext.Request.Url.AbsolutePath.Contains(Url.RouteUrl("P.ChangePassword")) ? "active" : "")">Change Password</a>
+        </li>
+        @if(Model.IsAdministrator && Model.TaxEntityCategorySettings.CanShowSubUsersRequestReport)
+        {
+        <li class="nav-item">
+            <a href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSBranches.Branches)" class="nav-link @(Url.RequestContext.HttpContext.Request.Url.AbsolutePath.Contains(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSBranches.Branches)) ? "active" : "")">Branches</a>
+        </li>
+        <li class="nav-item">
+            <a href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSSubUser.SubUsers)" class="nav-link @(Url.RequestContext.HttpContext.Request.Url.AbsolutePath.Contains(Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.PSSSubUser.SubUsers)) ? "active" : "")">Sub User</a>
+        </li>
+        }
+    </ul>
+</div>

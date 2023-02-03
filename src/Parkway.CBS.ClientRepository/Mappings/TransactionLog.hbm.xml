@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.TransactionLog, Parkway.CBS.Core" table="Parkway_CBS_Core_TransactionLog" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+
+    <property name="PaymentProvider" column="PaymentProvider" />
+    <property name="AmountPaid" column="AmountPaid" />
+    <property name="Channel" column="Channel" />
+    <property name="PaymentReference" column="PaymentReference" />
+    <property name="PaymentDate" column="PaymentDate" />
+    <property name="Status" column="Status" />
+    <property name="TypeID" column="TypeID" />
+    <property name="UpdatedByAdmin" column="UpdatedByAdmin" />
+    <property name="Settled" column="Settled" />
+    <property name="InvoiceNumber" column="InvoiceNumber" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+	<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="MDA" column="MDA_Id"/>
+    <many-to-one name="Invoice" column="Invoice_Id"/>
+    <many-to-one name="RevenueHead" column="RevenueHead_Id"/>
+    <many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+    <many-to-one name="TaxEntityCategory" column="TaxEntityCategory_Id"/>
+    <many-to-one name="InvoiceItem" column="InvoiceItem_Id"/>
+  </class>
+</hibernate-mapping>

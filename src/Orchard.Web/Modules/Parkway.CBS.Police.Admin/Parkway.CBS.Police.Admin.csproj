@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E65613D-6A5C-4401-A308-A24C96898EF6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Police.Admin</RootNamespace>
+    <AssemblyName>Parkway.CBS.Police.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ExcelDataReader.3.4.1\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ExcelDataReader.DataSet.3.4.1\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenu\PoliceAdminMenu.cs" />
+    <Compile Include="Controllers\AccountsWalletReportController.cs" />
+    <Compile Include="Controllers\AccountWalletConfigurationAJAXController.cs" />
+    <Compile Include="Controllers\AccountWalletConfigurationController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentAJAXController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentApprovalAJAXController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentApprovalController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentReportController.cs" />
+    <Compile Include="Controllers\AccountWalletPaymentReportExportController.cs" />
+    <Compile Include="Controllers\BranchOfficerAJAXController.cs" />
+    <Compile Include="Controllers\BranchOfficerController.cs" />
+    <Compile Include="Controllers\BranchOfficerFileExportController.cs" />
+    <Compile Include="Controllers\ChangePassportPhotoAJAXController.cs" />
+    <Compile Include="Controllers\ChangePCCBioDataController.cs" />
+    <Compile Include="Controllers\CommandAJAXController.cs" />
+    <Compile Include="Controllers\CommandController.cs" />
+    <Compile Include="Controllers\CommandStatementReportController.cs" />
+    <Compile Include="Controllers\CommandStatementReportExportController.cs" />
+    <Compile Include="Controllers\CommandWalletController.cs" />
+    <Compile Include="Controllers\GenerateEscortRequestWithoutOfficersController.cs" />
+    <Compile Include="Controllers\GenerateRequestWithoutOfficersAJAXController.cs" />
+    <Compile Include="Controllers\GenerateRequestWithoutOfficersController.cs" />
+    <Compile Include="Controllers\GenerateRequestWithoutOfficersFileExportController.cs" />
+    <Compile Include="Controllers\DeploymentAllowancePaymentAJAXController.cs" />
+    <Compile Include="Controllers\DeploymentAllowancePaymentController.cs" />
+    <Compile Include="Controllers\DeploymentAllowancePaymentReportController.cs" />
+    <Compile Include="Controllers\DeploymentAllowancePaymentReportExportController.cs" />
+    <Compile Include="Controllers\Handlers\AccountsWalletReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletConfigurationAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletConfigurationHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletPaymentAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletPaymentApprovalAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletPaymentApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletPaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\AccountWalletPaymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\BranchOfficerHandler.cs" />
+    <Compile Include="Controllers\Handlers\ChangePassportHandler.cs" />
+    <Compile Include="Controllers\Handlers\ChangePCCBioDataHandler.cs" />
+    <Compile Include="Controllers\Handlers\CommandStatementReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\CommandWalletHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountsWalletReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletConfigurationAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletConfigurationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletPaymentAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletPaymentApprovalAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletPaymentApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletPaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountWalletPaymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IBranchOfficerHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IChangePCCBioDataHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ICommandStatementReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ICommandWalletHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IDashboardHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IDeploymentAllowancePaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IDeploymentAllowancePaymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IDeploymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IExpenditureHeadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IExpenditureHeadReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IGenerateEscortRequestWithoutOfficersHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IGenerateRequestWithoutOfficersHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IHandlerComposition.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ICommandWalletReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IMockWalletStatementApiHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPoliceOfficerReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPoliceRequestHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPOSSAPSecretariatRoutingHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSAdminSignatureUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSAdminUserAssignEscortProcessFlowAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSAdminUserAssignEscortProcessFlowHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSAdminUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSAdminUserReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSBranchSubUsersUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCharacterCertificateRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCharacterCertificateUpdateDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSEndOfficerDeploymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSChangeDeployedOfficerHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCommandHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCollectionReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSDeploymentAllowanceHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSEscortApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSEscortRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSExtractRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSHRExternalDataCommandSeed.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSRequestApprovalDocumentPreviewHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSSettlementReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSUserReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IChangePassportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRequestApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRequestApprovalLogHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ISettlementFeePartiesHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ISettlementReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\DashboardHandler.cs" />
+    <Compile Include="Controllers\Handlers\DeploymentAllowancePaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\DeploymentAllowancePaymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\DeploymentReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\ExpenditureHeadHandler.cs" />
+    <Compile Include="Controllers\Handlers\ExpenditureHeadReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\GenerateEscortRequestWithoutOfficersHandler.cs" />
+    <Compile Include="Controllers\Handlers\GenerateRequestWithoutOfficersHandler.cs" />
+    <Compile Include="Controllers\Handlers\HandlerComposition.cs" />
+    <Compile Include="Controllers\Handlers\CommandWalletReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\MockWalletStatementApiHandler.cs" />
+    <Compile Include="Controllers\Handlers\PoliceOfficerReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\PoliceRequestHandler.cs" />
+    <Compile Include="Controllers\Handlers\POSSAPSecretariatRoutingHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSAdminSignatureUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSAdminUserAssignEscortProcessFlowAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSAdminUserAssignEscortProcessFlowHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSAdminUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSAdminUserReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSBranchSubUsersUploadHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCharacterCertificateRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCharacterCertificateUpdateDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSEndOfficerDeploymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSChangeDeployedOfficerHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCommandHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCollectionReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSDeploymentAllowanceHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSEscortApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSEscortRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSExtractRequestDetailsHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSHRExternalDataCommandSeed.cs" />
+    <Compile Include="Controllers\Handlers\PSSRequestApprovalDocumentPreviewHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSSettlementReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSUserReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\RequestApprovalHandler.cs" />
+    <Compile Include="Controllers\Handlers\RequestApprovalLogHandler.cs" />
+    <Compile Include="Controllers\Handlers\SettlementFeePartiesHandler.cs" />
+    <Compile Include="Controllers\Handlers\SettlementReportHandler.cs" />
+    <Compile Include="Controllers\MockWalletStatementApiController.cs" />
+    <Compile Include="Controllers\PSSBranchSubUsersUploadAJAXController.cs" />
+    <Compile Include="Controllers\PSSBranchSubUsersUploadController.cs" />
+    <Compile Include="Controllers\ViewAnalyticsDashboardController.cs" />
+    <Compile Include="Controllers\PoliceOfficerAJAXController.cs" />
+    <Compile Include="Controllers\CommandWalletReportController.cs" />
+    <Compile Include="Controllers\PoliceOfficerReportController.cs" />
+    <Compile Include="Controllers\PoliceOfficerReportExportController.cs" />
+    <Compile Include="Controllers\ChangePassportPhotoController.cs" />
+    <Compile Include="Controllers\PoliceRequestInvoicesController.cs" />
+    <Compile Include="Controllers\POSSAPSecretariatRoutingController.cs" />
+    <Compile Include="Controllers\PSSAdminSignatureUploadController.cs" />
+    <Compile Include="Controllers\PSSAdminUserAJAXController.cs" />
+    <Compile Include="Controllers\PSSAdminUserAssignEscortProcessFlowAJAXController.cs" />
+    <Compile Include="Controllers\PSSAdminUserAssignEscortProcessFlowController.cs" />
+    <Compile Include="Controllers\PSSAdminUserReportController.cs" />
+    <Compile Include="Controllers\PSSCharacterCertificateRequestDetailsController.cs" />
+    <Compile Include="Controllers\PSSCharacterCertificateDetailsUpdateController.cs" />
+    <Compile Include="Controllers\PSSEndOfficerDeploymentController.cs" />
+    <Compile Include="Controllers\PSSChangeDeployedOfficerController.cs" />
+    <Compile Include="Controllers\PSSDeployedOfficersReportController.cs" />
+    <Compile Include="Controllers\PSSDeploymentAllowanceRequestController.cs" />
+    <Compile Include="Controllers\PSSDeploymentAllowanceReportController.cs" />
+    <Compile Include="Controllers\PSSDeploymentReportExportController.cs" />
+    <Compile Include="Controllers\PSSCharacterCertificateApprovalController.cs" />
+    <Compile Include="Controllers\PSSEscortApprovalAIGController.cs" />
+    <Compile Include="Controllers\PSSEscortApprovalAJAXController.cs" />
+    <Compile Include="Controllers\PSSAdminUserController.cs" />
+    <Compile Include="Controllers\PSSEscortApprovalDCPController.cs" />
+    <Compile Include="Controllers\PSSEscortRequestDetailsController.cs" />
+    <Compile Include="Controllers\PSSExpenditureHeadController.cs" />
+    <Compile Include="Controllers\PSSExpenditureHeadReportController.cs" />
+    <Compile Include="Controllers\PSSExtractRequestDetailsController.cs" />
+    <Compile Include="Controllers\PSSGenericApprovalController.cs" />
+    <Compile Include="Controllers\PSSCollectionReportController.cs" />
+    <Compile Include="Controllers\PSSEscortApprovalController.cs" />
+    <Compile Include="Controllers\PSSExtractApprovalController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\PSSRequestApprovalDocumentPreviewAJAXController.cs" />
+    <Compile Include="Controllers\PSSRequestApprovalDocumentPreviewController.cs" />
+    <Compile Include="Controllers\PSSSettlementReportController.cs" />
+    <Compile Include="Controllers\PSSSettlementReportFileExportController.cs" />
+    <Compile Include="Controllers\PSSUserReportController.cs" />
+    <Compile Include="Controllers\RequestApprovalController.cs" />
+    <Compile Include="Controllers\PoliceRequestController.cs" />
+    <Compile Include="Controllers\PoliceSeedsController.cs" />
+    <Compile Include="Controllers\PSSFileExportController.cs" />
+    <Compile Include="Controllers\RequestApprovalLogController.cs" />
+    <Compile Include="Controllers\SettlementFeePartiesController.cs" />
+    <Compile Include="Controllers\SettlementReportController.cs" />
+    <Compile Include="Controllers\SettlementReportFeePartiesController.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Controllers\SeedsController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteName\AccountsWalletReport.cs" />
+    <Compile Include="RouteName\AccountWalletConfiguration.cs" />
+    <Compile Include="RouteName\AccountWalletConfigurationAJAX.cs" />
+    <Compile Include="RouteName\AccountWalletPayment.cs" />
+    <Compile Include="RouteName\AccountWalletPaymentAJAX.cs" />
+    <Compile Include="RouteName\AccountWalletPaymentApproval.cs" />
+    <Compile Include="RouteName\AccountWalletPaymentApprovalAJAX.cs" />
+    <Compile Include="RouteName\AccountWalletPaymentReport.cs" />
+    <Compile Include="RouteName\BranchOfficer.cs" />
+    <Compile Include="RouteName\BranchOfficerAjax.cs" />
+    <Compile Include="RouteName\BranchOfficerFileExport.cs" />
+    <Compile Include="RouteName\ChangePassportPhoto.cs" />
+    <Compile Include="RouteName\ChangePassportPhotoAJAX.cs" />
+    <Compile Include="RouteName\ChangePCCBioData.cs" />
+    <Compile Include="RouteName\CommandAJAX.cs" />
+    <Compile Include="RouteName\CommandWallet.cs" />
+    <Compile Include="RouteName\DeploymentAllowancePayment.cs" />
+    <Compile Include="RouteName\DeploymentAllowancePaymentAJAX.cs" />
+    <Compile Include="RouteName\DeploymentAllowancePaymentReport.cs" />
+    <Compile Include="RouteName\DeploymentAllowancePaymentReportExport.cs" />
+    <Compile Include="RouteName\EndOfficerDeployment.cs" />
+    <Compile Include="RouteName\GenerateEscortRequestWithoutOfficers.cs" />
+    <Compile Include="RouteName\GenerateRequestWithoutOfficers.cs" />
+    <Compile Include="RouteName\GenerateRequestWithoutOfficersAJAX.cs" />
+    <Compile Include="RouteName\GenerateRequestWithoutOfficersFileExport.cs" />
+    <Compile Include="RouteName\PSSAdminUserAssignEscortProcessFlow.cs" />
+    <Compile Include="RouteName\PSSAdminUserAssignEscortProcessFlowAJAX.cs" />
+    <Compile Include="RouteName\PSSBranchSubUsersUpload.cs" />
+    <Compile Include="RouteName\PSSBranchSubUsersUploadAJAX.cs" />
+    <Compile Include="RouteName\PSSCharacterCertificateDetailsUpdate.cs" />
+    <Compile Include="RouteName\PSSExpenditureHeadReport.cs" />
+    <Compile Include="RouteName\PSSExpenditureHead.cs" />
+    <Compile Include="RouteName\PoliceRequest.cs" />
+    <Compile Include="RouteName\POSSAPSecretariatRouting.cs" />
+    <Compile Include="RouteName\PSSAdminSignatureUpload.cs" />
+    <Compile Include="RouteName\PSSAdminUserAJAX.cs" />
+    <Compile Include="RouteName\PSSCharacterCertificateRequestDetails.cs" />
+    <Compile Include="RouteName\PSSDeployedOfficersReport.cs" />
+    <Compile Include="RouteName\PSSEscortApproval.cs" />
+    <Compile Include="RouteName\PSSCharacterCertificateApproval.cs" />
+    <Compile Include="RouteName\PSSEscortApprovalAIG.cs" />
+    <Compile Include="RouteName\PSSEscortApprovalDCP.cs" />
+    <Compile Include="RouteName\PSSEscortRequestDetails.cs" />
+    <Compile Include="RouteName\PSSExtractApproval.cs" />
+    <Compile Include="RouteName\PSSExtractRequestDetails.cs" />
+    <Compile Include="RouteName\PSSGenericApproval.cs" />
+    <Compile Include="RouteName\PSSRequestApprovalDocumentPreview.cs" />
+    <Compile Include="RouteName\PSSRequestApprovalDocumentPreviewAJAX.cs" />
+    <Compile Include="RouteName\PSSSettlementReport.cs" />
+    <Compile Include="RouteName\PSSSettlementReportFileExport.cs" />
+    <Compile Include="RouteName\PSSUserReport.cs" />
+    <Compile Include="RouteName\SettlementFeeParties.cs" />
+    <Compile Include="RouteName\SettlementReport.cs" />
+    <Compile Include="RouteName\SettlementReportFeeParties.cs" />
+    <Compile Include="RouteName\UserManagement.cs" />
+    <Compile Include="RouteName\RequestApproval.cs" />
+    <Compile Include="RouteName\RequestApprovalLog.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Seeds\Contracts\IEscortChartSheetSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IPoliceOfficerSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IPoliceRankingSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IPSSReasonSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ISettlementsSeed.cs" />
+    <Compile Include="Seeds\Contracts\ITaxEntitySubCategorySeeds.cs" />
+    <Compile Include="Seeds\EscortChartSheetSeeds.cs" />
+    <Compile Include="Seeds\PoliceOfficerSeeds.cs" />
+    <Compile Include="Seeds\PoliceRankingSeeds.cs" />
+    <Compile Include="Seeds\PSSReasonSeeds.cs" />
+    <Compile Include="Seeds\SettlementSeed.cs" />
+    <Compile Include="Seeds\TaxEntitySubCategorySeeds.cs" />
+    <Compile Include="VM\AccountsWalletReportVM.cs" />
+    <Compile Include="VM\AccountWalletPaymentApprovalRequestVM.cs" />
+    <Compile Include="VM\AccountWalletPaymentReportVM.cs" />
+    <Compile Include="VM\ChangeBioDataVM.cs" />
+    <Compile Include="VM\CollectionReportVM.cs" />
+    <Compile Include="VM\CommandStatementReportVM.cs" />
+    <Compile Include="VM\DeploymentAllowanceReportVM.cs" />
+    <Compile Include="VM\DeploymentReportVM.cs" />
+    <Compile Include="VM\CommandReportVM .cs" />
+    <Compile Include="VM\ExpenditureHeadReportVM.cs" />
+    <Compile Include="VM\EscortRequestDetailVM.cs" />
+    <Compile Include="VM\GenerateRequestWithoutOfficersDetailVM.cs" />
+    <Compile Include="VM\GenerateEscortRequestForWithoutOfficersVM.cs" />
+    <Compile Include="VM\GenerateRequestForBranchWithoutOfficersUploadVM.cs" />
+    <Compile Include="VM\GenerateRequestForDefaultBranchWithoutOfficersUploadVM.cs" />
+    <Compile Include="VM\GenerateRequestWithoutOfficersFileUploadValidationResultVM.cs" />
+    <Compile Include="VM\OfficerValidationResultVM.cs" />
+    <Compile Include="VM\PoliceOfficerReportVM.cs" />
+    <Compile Include="VM\PSSAdminUserReportVM.cs" />
+    <Compile Include="VM\PSSBranchDetailsVM.cs" />
+    <Compile Include="VM\PSSBranchGenerateEscortRequestVM.cs" />
+    <Compile Include="VM\PSSBranchProfileDetailVM.cs" />
+    <Compile Include="VM\PSSBranchSubUsersUploadValidationResultVM.cs" />
+    <Compile Include="VM\PSSDashboardViewModel.cs" />
+    <Compile Include="VM\PSSUserReportVM.cs" />
+    <Compile Include="VM\RequestReportVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\RequestApproval\PSSRequestList.cshtml" />
+    <Content Include="Views\PSSCollectionReport\CollectionReport.cshtml" />
+    <Content Include="Views\PSSDeployedOfficersReport\PSSDeployedOfficersReport.cshtml" />
+    <Content Include="Views\PSSDeployedOfficersReport\PSSDeployedOfficers.cshtml" />
+    <Content Include="Views\PSSReport\CollectionReport.cshtml" />
+    <Content Include="Views\PoliceOfficerReport\PoliceOfficerReport.cshtml" />
+    <Content Include="Views\PSSDeploymentAllowanceReport\PSSDeploymentAllowanceReport.cshtml" />
+    <Content Include="Views\PoliceRequestInvoices\PSSRequestsInvoices.cshtml" />
+    <Content Include="Views\PSSDeploymentAllowanceRequest\DeploymentAllowanceRequest.cshtml" />
+    <Content Include="Views\PSSDeploymentAllowanceRequest\EscortDeploymentDetails.cshtml" />
+    <Content Include="Views\PSSChangeDeployedOfficer\ChangeDeployedOfficer.cshtml" />
+    <Content Include="Views\RequestApprovalLog\RequestApprovalLog.cshtml" />
+    <Content Include="Views\PSSEndOfficerDeployment\EndOfficerDeployment.cshtml" />
+    <Content Include="Views\PoliceRequest\PSSRequestDetails.cshtml" />
+    <Content Include="Views\ServicePartials\PSSGenericDetails.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortDetails.cshtml" />
+    <Content Include="Views\ServicePartials\PSSExtractDetails.cshtml" />
+    <Content Include="Views\ServicePartials\PSSDetails.cshtml" />
+    <Content Include="Views\RequestApproval\PSSRequestApproval.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\Escort.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\ApprovalComment.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\Extract.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\Generic.cshtml" />
+    <Content Include="Views\Dashboard\MainDashboard.cshtml" />
+    <Content Include="Views\ServicePartials\PSSCharacterCertificateDetails.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\CharacterCertificate.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportSummary.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportInvoices.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportParties.cshtml" />
+    <Content Include="Views\ServicePartials\PSSExtractContentAndDiaryInfoFields.cshtml" />
+    <Content Include="Views\ServicePartials\PSSExtractContentAndDiaryInfo.cshtml" />
+    <Content Include="Views\ServicePartials\PSSServiceDocumentPreviewPartial.cshtml" />
+    <Content Include="Views\CommandWalletReport\CommandWalletReport.cshtml" />
+    <Content Include="Views\CommandStatementReport\CommandStatementReport.cshtml" />
+    <Content Include="Views\PSSAdminUser\CreateUser.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortAssignTacticalSquadPartial.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortAssignFormationsPartial.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\AssignFormationApprovalComment.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortAssignOfficersPartial.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortAssignedOfficersPartial.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortApprovalCommentPartial.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\CharacterCertificateInviteApplicantPartial.cshtml" />
+    <Content Include="Views\PSSAdminUserReport\AdminUserReport.cshtml" />
+    <Content Include="Views\PSSEscortApproval\ViewFormations.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortViewAllocatedOfficersPartial.cshtml" />
+    <Content Include="Views\PSSCharacterCertificateRequestDetails\ViewFingerPrintBiometrics.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortDCPPartial.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortDPOPartial.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\GetDPOPartial.cshtml" />
+    <Content Include="Views\ServicePartials\ApprovalPartial\GetCentralRegistraPartial.cshtml" />
+    <Content Include="Views\PSSAdminSignatureUpload\UploadSignature.cshtml" />
+    <Content Include="Views\PSSAdminSignatureUpload\SignaturesList.cshtml" />
+    <Content Include="Views\PSSAdminUser\EditUser.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportParty.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportPartyBreakdown.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportAggregate.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportBreakdown.cshtml" />
+    <Content Include="Views\ServicePartials\WorkflowPartial\PSSEscortRoutingPartial.cshtml" />
+    <Content Include="Views\ServicePartials\WorkflowPartial\PSSCharacterCertificateRoutingPartial.cshtml" />
+    <Content Include="Views\CommandWallet\AddCommandWallet.cshtml" />
+    <Content Include="Views\ServicePartials\PSSEscortSecretariatRoutingApprovalPartial.cshtml" />
+    <Content Include="Views\SettlementFeeParties\FeeParties.cshtml" />
+    <Content Include="Views\SettlementFeeParties\AddFeeParty.cshtml" />
+    <Content Include="Views\SettlementReport\Report.cshtml" />
+    <Content Include="Views\SettlementReportFeeParties\ViewParties.cshtml" />
+    <Content Include="Views\SettlementReportFeeParties\EditParties.cshtml" />
+    <Content Include="Views\PSSSettlementReport\ReportBatchBreakdown.cshtml" />
+    <Content Include="Views\PSSExpenditureHead\AddExpenditureHead.cshtml" />
+    <Content Include="Views\PSSExpenditureHeadReport\Report.cshtml" />
+    <Content Include="Views\PSSExpenditureHead\EditExpenditureHead.cshtml" />
+    <Content Include="Views\AccountsWalletReport\Report.cshtml" />
+    <Content Include="Views\AccountWalletConfiguration\AddWalletConfiguration.cshtml" />
+    <Content Include="Views\AccountWalletPayment\InitiatePaymentRequest.cshtml" />
+    <Content Include="Views\AccountWalletPaymentApproval\PaymentApproval.cshtml" />
+    <Content Include="Views\AccountWalletPaymentApproval\ViewDetail.cshtml" />
+    <Content Include="Views\AccountWalletPaymentReport\Report.cshtml" />
+    <Content Include="Views\PSSAdminUserAssignEscortProcessFlow\AssignProcessFlow.cshtml" />
+    <Content Include="Views\PSSUserReport\UserReport.cshtml" />
+    <Content Include="Views\ChangePassportPhoto\ChangePhoto.cshtml" />
+    <Content Include="Views\PSSCharacterCertificateDetailsUpdate\UpdateDetails.cshtml" />
+    <Content Include="Views\PSSCharacterCertificateDetailsUpdate\SearchFileNumber.cshtml" />
+    <Content Include="Views\BranchOfficer\GenerateEscortRequest.cshtml" />
+    <Content Include="Views\BranchOfficer\OfficerValidationResult.cshtml" />
+    <Content Include="Views\PSSBranchSubUsersUpload\FileUploadValidationResult.cshtml" />
+    <Content Include="Views\PSSBranchSubUsersUpload\GetRegularizationProfile.cshtml" />
+    <Content Include="Views\PSSBranchSubUsersUpload\ViewBranchDetails.cshtml" />
+    <Content Include="Views\BranchOfficer\BranchProfileDetail.cshtml" />
+    <Content Include="Views\BranchOfficer\EscortRequestDetail.cshtml" />
+    <Content Include="Views\ServicePartials\PSSBranchDetailPartial.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateRequestForBranchWithoutOfficersUpload.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateRequestForBranchWithoutOfficersFileUploadValidationResult.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateRequestForDefaultBranchWithoutOfficersFileUploadValidationResult.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateRequestForDefaultBranchWithoutOfficersUpload.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateBranchRequestWithoutOfficersDetail.cshtml" />
+    <Content Include="Views\GenerateRequestWithoutOfficers\GenerateDefaultRequestWithoutOfficersDetail.cshtml" />
+    <Content Include="Views\GenerateEscortRequestWithoutOfficers\GenerateEscortRequestForDefaultBranchWithoutOfficers.cshtml" />
+    <Content Include="Views\GenerateEscortRequestWithoutOfficers\GenerateEscortRequestForBranchWithoutOfficers.cshtml" />
+    <Content Include="Views\ServicePartials\GenerateEscortRequestWithoutOfficersFormPartial.cshtml" />
+    <Content Include="Views\DeploymentAllowancePayment\InitiatePaymentRequest.cshtml" />
+    <Content Include="Views\DeploymentAllowancePaymentReport\Report.cshtml" />
+    <Content Include="Views\ChangePCCBioData\ChangeBioData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.CacheProvider\Parkway.CBS.CacheProvider.csproj">
+      <Project>{1636072F-E60D-42FE-8F89-7E78F57ECFFB}</Project>
+      <Name>Parkway.CBS.CacheProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.POSSAP.EGSRegularization\Parkway.CBS.POSSAP.EGSRegularization.csproj">
+      <Project>{D7CE35D6-788E-4459-B21E-AB95DF10CD0A}</Project>
+      <Name>Parkway.CBS.POSSAP.EGSRegularization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.DataExporter\Parkway.DataExporter.csproj">
+      <Project>{3590F60E-8887-4BD8-B60B-CBF981ED917C}</Project>
+      <Name>Parkway.DataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Layouts\Orchard.Layouts.csproj">
+      <Project>{6BD8B2FA-F2E3-4AC8-A4C3-2925A653889A}</Project>
+      <Name>Orchard.Layouts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Roles\Orchard.Roles.csproj">
+      <Project>{D10AD48F-407D-4DB5-A328-173EC7CB010F}</Project>
+      <Name>Orchard.Roles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Core\Parkway.CBS.Core.csproj">
+      <Project>{7b02ed5f-5616-492f-8b66-190795d4bee9}</Project>
+      <Name>Parkway.CBS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Module\Parkway.CBS.Module.csproj">
+      <Project>{5CCE98F3-C590-43BA-80BE-87F0B92CDB29}</Project>
+      <Name>Parkway.CBS.Module</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Police.Core\Parkway.CBS.Police.Core.csproj">
+      <Project>{87365e9b-c5bf-44f7-8b5b-eb80e1563c02}</Project>
+      <Name>Parkway.CBS.Police.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Views\AcountWalletPaymentApproval\" />
+    <Folder Include="Views\NavigationToAnalyticsDashboard\" />
+    <Folder Include="Views\PSSFileExport\" />
+    <Folder Include="Views\PSSUser\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PoliceRequest\PSSRequests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

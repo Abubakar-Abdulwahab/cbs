@@ -1,0 +1,141 @@
+﻿@model Parkway.CBS.Police.Core.VM.RequestConfirmationVM
+@{
+    Layout.Title = "Request Confirmation";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Confirm.Request.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid confirmation-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Select Service</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Confirm Details and Submit Request</a></div>
+        </div>
+        <div class="container confirmation-content-container">
+            <div class="container confirmation-content no-padding">
+                <div class="container no-padding">
+                    <h5>REQUEST CONFIRMATION</h5>
+                    <p>Kindly confirm that all the details are correct.</p>
+
+                    <div class="container no-padding">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Name:</td>
+                                <td>@Model.Name</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>@Model.Address</td>
+                            </tr>
+                            <tr>
+                                <td>Service Requested:</td>
+                                <td>@Model.ServiceRequested</td>
+                            </tr>
+                            @if (!string.IsNullOrEmpty(Model.NameOfPoliceCommand))
+                            {
+                                <tr>
+                                    <td>Police Command:</td>
+                                    <td>@Model.NameOfPoliceCommand</td>
+                                </tr>
+                            }
+
+                            @if (Model.RequestSpecificModel != null)
+                            {
+                                @Html.Partial("Partials\\" + Model.PartialName, (object)Model.RequestSpecificModel);
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Reason))
+                            {
+                                <tr>
+                                    <td>Reason for Request</td>
+                                    <td>@Model.Reason</td>
+                                </tr>
+                            }
+                            @if (Model.FormValues != null && Model.FormValues.Any())
+                            {
+                                foreach (var item in Model.FormValues)
+                                {
+                                    <tr>
+                                        <td>@item.FriendlyName:</td>
+                                        <td>@item.FormValue</td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <td>Invoice Amount(s) to Pay</td>
+                                <td>
+                                    @foreach (var item in Model.AmountDetails)
+                                    {
+                                        <p>&#x20A6;@String.Format("{0:n2}", item.AmountToPay) <small>(@item.FeeDescription)</small></p>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total Invoice Amount to Pay</td>
+                                <td>
+                                    &#x20A6;@String.Format("{0:n2}", Model.AmountDetails.Sum(s => s.AmountToPay))
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group" style="display:flex; flex-direction:column; justify-content:left; text-align: left">
+                            <p style="text-decoration: underline; color: #ff0000;">DISCLAIMER</p>
+                            <p class="my-auto px-1">You are requested to review and ensure that all details provided are accurate and meet set standards. <br /> When details of the request have been confirmed and payment made, changes or updates can no longer be effected.</p>
+                        </div>
+                        <div class="form-group form-check" style="display:flex; flex-direction:row; justify-content:left">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="disclaimer" style="position:relative">
+                            </label>
+                            <p class="my-auto px-1">I have read and agreed to the disclaimer above</p>
+                        </div>
+                        <div class="form-group form-check" style="display:flex; flex-direction:row; justify-content:left">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="terms" style="position:relative">
+                            </label>
+                            <p class="my-auto px-1">I accept the <a href="@Url.RouteUrl("P.Terms.Of.Use")" target="_blank" class="decorated-active-link">Terms of use</a></p>
+                        </div>
+                    </div>
+                    @using (Html.BeginRouteForm("P.Request.Confirm", FormMethod.Post, new { @id = "confirmForm", @name = "confirmForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="btn" id="genInvBtn">Generate Invoice</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

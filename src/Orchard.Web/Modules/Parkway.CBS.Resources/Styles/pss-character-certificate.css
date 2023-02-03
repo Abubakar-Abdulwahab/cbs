@@ -1,0 +1,44 @@
+﻿    .tooltip-inner {
+        background-color: #ffffff;
+    }
+
+    .tooltip.show {
+        opacity: 1;
+    }
+
+    .upload-file-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .uploaded-passport-thumbnail img {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+    }
+
+    .uploaded-passport-thumbnail embed {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+        overflow: hidden;
+    }
+
+    .uploaded-passport-thumbnail embed html body {
+        overflow: hidden;
+    }
+
+    .preview-document-embed {
+        position: relative;
+    }
+
+    .embed-overlay {
+        position: absolute;
+        background-color: rgba(0,0,0,0);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }

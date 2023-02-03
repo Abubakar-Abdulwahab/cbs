@@ -1,0 +1,235 @@
+﻿@model Parkway.CBS.Police.Admin.VM.GenerateRequestWithoutOfficersFileUploadValidationResultVM
+@{
+    Layout.Title = "Add Officers(Count): File Upload Validation Result";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.Generate.Request.Without.Officers.Upload.Validation.Result.Script");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        position: relative;
+        word-break: break-word;
+    }
+
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+
+    span.status-false {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: red;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    span.status-true {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: forestgreen;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    .summary {
+        text-align: right;
+        margin-top: 25px;
+        padding-bottom: 10px;
+    }
+
+    .summary-details {
+        display: inline-block;
+    }
+
+    .numbers {
+        border-bottom: 2px solid #D5D5D5;
+        font-size: 15px;
+        padding-bottom: 5px;
+    }
+
+        .numbers > span {
+            margin-left: 10px;
+        }
+
+            .numbers > span.blue {
+                color: blue;
+            }
+
+            .numbers > span.green {
+                color: green;
+            }
+
+            .numbers > span.red {
+                color: red;
+            }
+
+            .numbers > span span.bigger {
+                font-size: 20px;
+            }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var batchToken = @Html.Raw(Json.Encode(Model.BatchToken));
+    var batchStatus = @Html.Raw(Json.Encode(Model.BatchDetails.Status));
+    var batchValidatedStatus = @Html.Raw(Json.Encode((int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.BatchValidated));
+    var batchCompletedStatus = @Html.Raw(Json.Encode((int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.Completed));
+</script>
+<div class="container-fluid" style="width:100%">
+    <div class="row" style="padding:15px">
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Recipient")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.Recipient</p>
+            @Html.Hint(T("The name of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Phone number")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.PhoneNumber</p>
+            @Html.Hint(T("Phone number of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Category")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.CategoryName</p>
+            @Html.Hint(T("Category of recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Email")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.Email</p>
+            @Html.Hint(T("Email of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Address")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.Address</p>
+            @Html.Hint(T("Address of the recipient."))
+        </div>
+        <div class="col-sm-6 corporate-detail-tile">
+            <p><b>@T("Profile ID")</b>
+            <p>@Model.BatchDetails.TaxEntityProfileLocation.TaxEntity.PayerId</p>
+            @Html.Hint(T("Profile ID of recipient"))
+        </div>
+    </div>
+    <br />
+    @Html.Partial("\\ServicePartials\\PSSBranchDetailPartial", Model.BatchDetails.TaxEntityProfileLocation as object)
+
+    <br />
+    <div style="position:relative">
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Branch Code")</th>
+                    <th scope="col">@T("Number Of Officers")</th>
+                    <th scope="col">@T("Command Code")</th>
+                    <th scope="col">@T("Command Name")</th>
+                    <th scope="col">@T("Command Type")</th>
+                    <th scope="col">@T("Day Type")</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.BatchDetails.Status == (int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.BatchValidated || Model.BatchDetails.Status == (int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.Completed)
+                {
+                    if (Model.Items != null && Model.Items.Any())
+                    {
+                        foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>@item.BranchCode</td>
+                                <td>@item.NumberOfOfficersValue</td>
+                                <td>@item.CommandCode</td>
+                                <td>@item.CommandName</td>
+                                <td>@item.CommandTypeValue</td>
+                                <td>@item.DayTypeValue</td>
+                                <td>
+                                    @if (item.HasError)
+                                    {<span class="status-false" data-toggle="tooltip" data-html="true" data-placement="top" title="@item.ErrorMessage">i</span> }
+                                    else
+                                    { <span class="status-true" data-toggle="tooltip" data-placement="top">&#10003;</span>}
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="7">No records found</td></tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="7"><div class="payeeloader" id="uploadStatusLoader" style="margin:0 auto"></div></td></tr>
+                }
+            </tbody>
+        </table>
+        <small id="errorMessage"></small>
+    </div>
+    @Display(Model.Pager)
+
+    <div class="summary">
+        <div class="summary-details">
+            <h4 class="numbers">
+                <span class="blue" id="totalenttp" data-toggle="tooltip" data-html="true"><span class="bigger" id="totalent"></span> @Model.BatchItemsReport.StringNumberOfRecords Total Entries</span>
+                <span class="green" id="totalvaltp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalval"></span> @Model.BatchItemsReport.StringNumberOfValidRecords Valid Entries</span>
+                <span class="red" id="totalinvtp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalinv"></span> @Model.BatchItemsReport.StringNumberOfInvalidRecords Invalid Entries</span>
+            </h4>
+        </div>
+    </div>
+
+    @using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.GenerateRequestWithoutOfficers.GenerateRequestForBranchWithoutOfficersUpload, new { branchId = Model.BatchDetails.TaxEntityProfileLocation.Id })))
+    {
+        Html.AntiForgeryToken();
+        if (Model.BatchDetails.Status == (int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.BatchValidated)
+        {
+            <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Proceed")</button>
+        }
+        else if (Model.BatchDetails.Status == (int)Parkway.CBS.Police.Core.Models.Enums.GenerateRequestWithoutOfficersUploadStatus.Completed) { }
+        else
+        { <button type="submit" class="btn btn-primary btn-block" style="width:100%" disabled>@T("Proceed")</button>}
+}
+</div>

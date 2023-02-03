@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PayDirectClientMock</title>
+</head>
+<body>
+    <div>
+        <form action="@Url.RouteUrl("P.WebPaymentTransientPage")" method="POST">
+            <input type="text" name="InvoiceNumber" />
+            <input type="text" name="CallBackURL" />
+            <button type="submit">Make Payment</button>
+        </form>
+    </div>
+</body>
+</html>

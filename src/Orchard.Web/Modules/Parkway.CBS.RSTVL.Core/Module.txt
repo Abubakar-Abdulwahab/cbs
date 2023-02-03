@@ -1,0 +1,10 @@
+﻿Name: Parkway.CBS.RSTVL.Core
+AntiForgery: enabled
+Author: Parkway Projects Limited
+Website: http://parkwayprojects.com
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Parkway.CBS.RSTVL.Core:
+        Description: Description for feature Parkway.CBS.RSTVL.Core.

@@ -1,0 +1,35 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Module.ViewModels.TaxPayerDetailsViewModel
+@{
+    Layout.Title = T("Edit Tax Payer").ToString();
+    Style.Require("CBS.Billing.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Tax Payer Code for - @String.Format("{0}", Model.Name)
+                @Html.Hidden("PayerId", Model.PayerId)
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <br />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label id="lblTaxPayerCode">@T("Tax Payer Code") </label>
+                        @Html.TextBoxFor(b => b.TaxPayerCode, new { @class = "form-control text", @required = "true" })
+                        @Html.Hint(T("Enter the Tax Payer Code."))
+                        @Html.ValidationMessage("TaxPayerCode", "Tax Payer Code is required", new { @style = "color:#ff0000 " })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">@T("Update")</button>
+                <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("TaxProfilesReport", "Report")'" class="a-classname btn btn-default">@T("Cancel")</button>
+            </div>
+        </div>
+    </div>
+}

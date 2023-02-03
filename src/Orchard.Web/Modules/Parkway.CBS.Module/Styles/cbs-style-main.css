@@ -1,0 +1,875 @@
+﻿/* maven-pro-regular - latin */
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/media/fonts/maven-pro-v11-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Maven Pro Regular'), local('MavenPro-Regular'), url('/media/fonts/maven-pro-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/media/fonts/maven-pro-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/media/fonts/maven-pro-v11-latin-regular.svg#MavenPro') format('svg'); /* Legacy iOS */
+}
+/* maven-pro-700 - latin */
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/media/fonts/maven-pro-v11-latin-700.eot'); /* IE9 Compat Modes */
+    src: local('Maven Pro Bold'), local('MavenPro-Bold'), url('/media/fonts/maven-pro-v11-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/media/fonts/maven-pro-v11-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-700.woff') format('woff'), /* Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/media/fonts/maven-pro-v11-latin-700.svg#MavenPro') format('svg'); /* Legacy iOS */
+}
+/* maven-pro-500 - latin */
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/media/fonts/maven-pro-v11-latin-500.eot'); /* IE9 Compat Modes */
+    src: local('Maven Pro Medium'), local('MavenPro-Medium'), url('/media/fonts/maven-pro-v11-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/media/fonts/maven-pro-v11-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-500.woff') format('woff'), /* Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/media/fonts/maven-pro-v11-latin-500.svg#MavenPro') format('svg'); /* Legacy iOS */
+}
+/* maven-pro-900 - latin */
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 900;
+    src: url('/media/fonts/maven-pro-v11-latin-900.eot'); /* IE9 Compat Modes */
+    src: local('Maven Pro Black'), local('MavenPro-Black'), url('/media/fonts/maven-pro-v11-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/media/fonts/maven-pro-v11-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-900.woff') format('woff'), /* Modern Browsers */
+    url('/media/fonts/maven-pro-v11-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/media/fonts/maven-pro-v11-latin-900.svg#MavenPro') format('svg'); /* Legacy iOS */
+}
+
+
+/* general css */
+
+body {
+    font-family: 'Maven Pro';
+}
+
+.navbar {
+    padding: 0px;
+}
+
+.navbar-brand img {
+    height: 63px;
+    width: 63px;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 15px;
+}
+
+    .navbar-nav .nav-item.tin-button a {
+        color: #fff;
+        font-size: 20px;
+        padding: 5px 30px;
+        border: 2px solid #fff;
+        border-radius: 3px;
+    }
+
+#main-nav-alt .navbar-nav .nav-item.tin-button a {
+    color: #000000;
+    font-size: 20px;
+    padding: 5px 30px;
+    border: 2px solid #E2AD33;
+    border-radius: 3px;
+    background-color: #E2AD33
+}
+
+.breadcrumbs .breadcrumb {
+    background-color: #f4f4f4;
+}
+
+    .breadcrumbs .breadcrumb a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    .breadcrumbs .breadcrumb .breadcrumb-item {
+        color: #00B05F;
+        font-size: 12px;
+    }
+
+.breadcrumbs .breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #6c757d;
+    content: ">";
+}
+
+.main-form {
+}
+
+.wrapper {
+    background-color: #f4f4f4;
+}
+
+.footer-top {
+    height: 100px;
+    background-image: url(../images/footer-bg.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footer {
+    background-color: #00B05F;
+    color: #ffffff;
+}
+
+    .footer h3 {
+        margin-bottom: 15px;
+        color: #ffffff;
+        font-size: 20px;
+    }
+
+    .footer .logo {
+        height: 100px;
+        width: auto;
+    }
+
+    .footer .logo-caption {
+        color: #FFFFFF;
+        font-size: 18px;
+        line-height: 19px;
+    }
+
+    .footer .quick-links h3 {
+        margin-bottom: 15px;
+        color: #ffffff;
+        font-size: 20px;
+    }
+
+    .footer .quick-links a {
+        display: block;
+        text-decoration: none;
+        margin-bottom: 15px;
+        color: #ffffff;
+        font-size: 18px;
+    }
+
+        .footer .quick-links a:hover {
+            color: aquamarine;
+        }
+
+    .footer .social {
+        display: inline-block;
+        background-color: white;
+        padding: 10px;
+        margin-right: 15px;
+        border-radius: 100%;
+    }
+
+        .footer .social:hover {
+            box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .footer .social img {
+            width: 30px;
+        }
+
+    .footer .copyright {
+        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 14px;
+        margin-top: 15px;
+    }
+
+/* general css end */
+
+/*index page css*/
+
+.top-banner.alt {
+    margin-top: 73px;
+}
+
+.top-banner .jumbotron {
+    background-image: url(../images/CBS_Governor.png);
+    background-position: bottom center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.top-content {
+    /*    height: 340px;*/
+    height: 500px;
+}
+
+    .top-content .top {
+        color: #FFFFFF;
+        font-size: 64px;
+        font-weight: bold;
+        line-height: 80px;
+        text-align: justify;
+    }
+
+    .top-content .bottom {
+        color: #FFFFFF;
+        font-size: 22px;
+        line-height: 30px;
+        text-align: justify;
+        max-width: 464px;
+    }
+
+.call-to-action a {
+    display: inline-block;
+    height: 48px;
+    width: 238px;
+    border-radius: 2px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-right: 15px;
+    line-height: 42px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+    .call-to-action a.left {
+        color: #333333;
+        background-color: #F5A623;
+        border: 1.5px solid #F5A623;
+    }
+
+    .call-to-action a.right {
+        border: 1.5px solid #FFFFFF;
+    }
+
+.top-banner .banner-bottom {
+    height: 120px;
+    background-image: url(../images/banner-top.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .top-banner .banner-bottom h3 {
+        text-align: center;
+        padding: 40px 0px 0px;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: 400;
+    }
+
+.content {
+    margin-bottom: 50px;
+}
+
+/*index page css end*/
+
+/*payment page css*/
+
+.form-container {
+    background-color: #ffffff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.payment-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    .payment-form.big {
+        max-width: 1000px;
+    }
+
+label.title {
+    font-weight: 600;
+}
+
+    label.title span {
+        font-weight: normal;
+        color: #E12222;
+    }
+
+.input-group {
+    height: 52px;
+    border: 1px solid #C6C6C6;
+    border-radius: 5px;
+    background: #F4F4F4
+}
+
+    .input-group input {
+        background: #F4F4F4;
+        border: none;
+        font-size: 13px;
+    }
+
+    .input-group button.btn-orange {
+        color: #333333;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #E2AD33;
+        border-color: #E2AD33;
+        width: 120px;
+        margin: 1px 1px 1px 0px;
+    }
+
+form span.caption {
+    font-weight: 500;
+}
+
+    form span.caption a {
+        font-weight: normal;
+        color: #E12222;
+    }
+
+
+
+/*payment page css end*/
+
+.form-container .default-hr {
+    border-top: 2px solid #D5D5D5;
+}
+
+.form-container .details {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+    .form-container .details h1 {
+        color: #333333;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21px;
+    }
+
+    .form-container .details p.top-info {
+        color: #333333;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.27px;
+        line-height: 17px;
+        max-width: 700px;
+    }
+
+    .form-container .details p.ans {
+        margin-bottom: 7px;
+    }
+
+.form-container .main-form label {
+    display: block;
+    color: #333333;
+}
+
+.form-container .main-form select {
+    height: 48px;
+    background-color: #F4F4F4;
+    border: 2px solid #ddd;
+    font-size: 13px;
+}
+
+.form-container .main-form input {
+    height: 48px;
+    border: 1.5px solid #C6C6C6;
+    background-color: #f4f4f4;
+}
+
+.form-container .main-form .tiny-caption {
+    color: #9B937A;
+    font-size: 13px;
+    font-weight: 100;
+    line-height: 15px;
+    text-align: right;
+}
+
+.form-container .main-form button {
+    display: block;
+    background-color: #E2AD33;
+    width: 100%;
+    height: 48px;
+    color: #333333;
+    font-weight: 600;
+}
+
+.form-container .main-form .form-title {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #D5D5D5;
+    position: relative;
+}
+
+    .form-container .main-form .form-title .end {
+        position: absolute;
+        right: 0px;
+        color: #E12222;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+    }
+
+        .form-container .main-form .form-title .end img {
+            height: 20px;
+            width: auto;
+            margin-right: 5px;
+        }
+
+.form-container p.til {
+    color: #797979;
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 5px;
+}
+
+.form-container p.ans {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+.form-container .main-form .pay {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.form-container .main-form .amount {
+    color: #333333;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: right;
+}
+
+.form-container .main-form .anount-to-pay span.amount {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+}
+
+.form-container .main-form .anount-to-pay input {
+    display: inline-block;
+    min-width: 300px;
+    width: auto;
+    height: 50px;
+    margin-left: 10px;
+    border: 1.5px solid #C6C6C6;
+    background-color: #f4f4f4;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.form-container .main-form .anount-to-pay p {
+    color: #333333;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+    .form-container .main-form .anount-to-pay p span {
+        color: #ffffff;
+        font-size: 10px;
+        background-color: orange;
+        display: inline-block;
+        height: 14px;
+        width: 14px;
+        text-align: center;
+        border-radius: 100%;
+        margin-right: 5px;
+    }
+
+.form-container .table thead th {
+    vertical-align: bottom;
+    padding: .50rem;
+    border-bottom: 1px solid #dee2e6;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.27px;
+    line-height: 20px;
+    background-color: #E3E3E3;
+}
+
+.form-container .table td {
+    padding: .50rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    color: #333333;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.27px;
+    line-height: 20px;
+}
+
+.form-container tbody tr:nth-of-type(even) {
+    background-color: #E3E3E3;
+}
+
+.alert-msg {
+    background-color: #FF8A8A;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin: 0px;
+    color: #B90000;
+    font-size: 20px;
+}
+
+    .message span {
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 20px;
+        margin-left: 10px;
+    }
+
+.pay-nav .nav a {
+    height: 150px;
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #979797;
+    margin: 3px;
+    color: #979797;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .pay-nav .nav a img {
+        width: auto;
+        height: 50px;
+    }
+
+.pay-nav .nav-pills .nav-link.active,
+.pay-nav .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #00B05F;
+}
+
+.pay-nav-content.tab-content {
+    margin: 3px;
+}
+
+    .pay-nav-content.tab-content > .tab-pane {
+        padding: 50px;
+        border: 1px solid #979797;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+.pay-nav-two {
+    text-align: center;
+}
+
+    .pay-nav-two .nav a.nav-item {
+        color: #00B05F;
+        border: 1px solid #00B05F;
+    }
+
+        .pay-nav-two .nav a.nav-item.active {
+            color: #ffffff;
+            background-color: #00B05F;
+        }
+
+        .pay-nav-two .nav a.nav-item.a {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .pay-nav-two .nav a.nav-item.b {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+    .pay-nav-two .pay-up-info {
+        display: inline-block;
+        color: #219CF1;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 14px;
+        margin-bottom: 10px;
+    }
+
+        .pay-nav-two .pay-up-info span {
+            color: #ffffff;
+            font-size: 10px;
+            background-color: #219CF1;
+            display: inline-block;
+            height: 14px;
+            width: 14px;
+            text-align: center;
+            border-radius: 100%;
+            margin-right: 5px;
+        }
+
+.pay-nav-two-content h3 {
+    color: #333333;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21px;
+}
+
+.sign-up.modal .modal-body {
+    padding: 30px 40px;
+}
+
+    .sign-up.modal .modal-body .sign-up-info {
+        display: inline-block;
+        color: #219CF1;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 14px;
+        margin-bottom: 10px;
+    }
+
+        .sign-up.modal .modal-body .sign-up-info span {
+            color: #ffffff;
+            font-size: 10px;
+            background-color: #219CF1;
+            display: inline-block;
+            height: 14px;
+            width: 14px;
+            text-align: center;
+            border-radius: 100%;
+            margin-right: 5px;
+        }
+
+    .sign-up.modal .modal-body label {
+        color: #424242;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        margin-bottom: 0px;
+    }
+
+    .sign-up.modal .modal-body button {
+        display: block;
+        background-color: #E2AD33;
+        width: 100%;
+        height: 48px;
+        color: #333333;
+        font-weight: 600;
+    }
+
+.form-container .main-form .upload-info {
+    color: #333333;
+    font-size: 18px;
+    letter-spacing: 0.31px;
+    line-height: 21px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-container .main-form label.upload-label {
+    flex-direction: column;
+    height: 200px;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+    .form-container .main-form label.upload-label img {
+        height: 50px;
+        width: auto;
+    }
+
+.form-container form .upload-caption {
+    color: #333333;
+    font-size: 13px;
+    line-height: 19px;
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+}
+
+.form-container .main-form .upload-caption a {
+    color: #00b05f;
+}
+
+.generate-upload {
+    display: block;
+    background-color: #E2AD33;
+    width: 100%;
+    height: 48px;
+    color: #333333;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 30px auto 0;
+}
+
+#upload {
+    display: none;
+}
+
+.form-container .main-form .success {
+    text-align: center;
+    margin-bottom: 90px;
+}
+
+.form-container .main-form .go-back {
+    text-align: center;
+    margin-top: 40px;
+}
+
+    .form-container .main-form .go-back a {
+        color: #E12222;
+    }
+
+span.status-false {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: red;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-align: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+span.status-true {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: forestgreen;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-align: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.table-pagination {
+    display: flex;
+    margin-top: 20px;
+}
+
+    .table-pagination button.before {
+        height: 36px;
+        width: 36px;
+        border: 0.5px solid #BBBBBB;
+        border-radius: 4px 0 0 4px;
+        background-color: #F9F9F9;
+        box-shadow: 0 1px 1px 0 rgba(221, 221, 221, 0.5);
+        line-height: 20px;
+        border-right: 0px;
+    }
+
+    .table-pagination span {
+        line-height: 36px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .table-pagination input {
+        height: 36px;
+        width: 56px;
+        text-align: center;
+    }
+
+    .table-pagination label.of {
+        height: 36px;
+        width: 27px;
+        margin-bottom: 0px;
+        text-align: center;
+        line-height: 36px;
+    }
+
+    .table-pagination label.figure {
+        height: 36px;
+        width: 20px;
+        margin-bottom: 0px;
+        text-align: left;
+        line-height: 36px;
+    }
+
+    .table-pagination button.next {
+        height: 36px;
+        width: 36px;
+        border: 0.5px solid #BBBBBB;
+        border-radius: 0 4px 4px 0;
+        background-color: #F9F9F9;
+        box-shadow: 0 1px 1px 0 rgba(221, 221, 221, 0.5);
+        line-height: 20px;
+    }
+
+.summary {
+    text-align: right;
+    margin-top: 25px;
+}
+
+.summary-details {
+    display: inline-block;
+}
+
+.numbers {
+    border-bottom: 2px solid #D5D5D5;
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+
+    .numbers > span {
+        margin-left: 10px;
+    }
+
+        .numbers > span.blue {
+            color: blue;
+        }
+
+        .numbers > span.green {
+            color: green;
+        }
+
+        .numbers > span.red {
+            color: red;
+        }
+
+        .numbers > span span.bigger {
+            font-size: 20px;
+        }
+
+.total-amount {
+}
+
+    .total-amount .amt {
+        font-size: 20px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .total-amount .amt-figures {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+.tooltip-inner {
+    max-width: 300px;
+    text-align: left;
+    font-size: 12px;
+}
+
+    .tooltip-inner img {
+        max-width: 180px;
+        height: auto;
+        margin: 0 auto 5px;
+        display: block;
+    }

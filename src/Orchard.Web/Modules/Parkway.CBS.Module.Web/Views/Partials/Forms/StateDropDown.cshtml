@@ -1,0 +1,24 @@
+﻿@model Parkway.CBS.Core.HelperModels.FormControlViewModel
+<div class="container-fluid">
+    <div class="form-group">
+        <div class="container no-margin px-0" id="reasonDiv">
+            <label>
+                @Model.LabelText
+                @if (Model.IsCompulsory)
+                {<small style="color:red; font-weight:bolder">*</small>}
+            </label>
+            @Html.Hidden("[" + Model.FormIndex + "].Name", Model.Name)
+            @Html.Hidden("[" + Model.FormIndex + "].ControlIdentifier", Model.ControlIdentifier)
+            @Html.Hidden("[" + Model.FormIndex + "].FormIndex", Model.FormIndex)
+            <select id="state" class="form-control custom-select" name="@("[" + Model.FormIndex + "].FormValue")" @(Model.IsCompulsory ? "required" : "")>
+                <option selected disabled value="">@Model.PlaceHolderText</option>
+                @foreach (var item in Model.PartialModel)
+                {
+                    <option value="@item" @(Model.FormValue == item ? "selected" : "")>@item</option>
+                }
+            </select>
+            <small class="form-text text-muted">@Model.HintText</small>
+            <div class="container-fluid no-padding validation-msg px-0">@Html.ValidationMessage("[" + Model.FormIndex + "].FormValue", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+        </div>
+    </div>
+</div>

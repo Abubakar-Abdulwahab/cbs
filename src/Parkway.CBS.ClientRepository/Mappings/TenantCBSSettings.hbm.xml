@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.TenantCBSSettings, Parkway.CBS.Core" table="Parkway_CBS_Core_TenantCBSSettings" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="StateName" column="StateName" />
+    <property name="Identifier" column="Identifier" />
+    <property name="StateId" column="StateId" />
+    <!--<property name="StateID" column="StateID" />
+    <property name="CountryID" column="CountryID" />
+    <property name="CompanyName" column="CompanyName" />
+    <property name="CompanyMobile" column="CompanyMobile" />
+    <property name="BusinessNature" column="BusinessNature" />
+    <property name="ReferenceDataSourceType" column="ReferenceDataSourceType" />
+    <property name="ReferenceDataSourceName" column="ReferenceDataSourceName" />
+    <property name="AdapterClassName" column="AdapterClassName" />
+    <property name="LogoPath" column="LogoPath" />
+    <property name="SignaturePath" column="SignaturePath" />
+    <property name="TSA" column="TSA" />
+    <property name="TSABankNumber" column="TSABankNumber" />
+    <property name="StateName" column="StateName" />
+    <property name="ClientId" column="ClientId" />
+    <property name="ClientSecret" column="ClientSecret" />
+    <property name="BillingSchedulerIdentifier" column="BillingSchedulerIdentifier" />
+    <property name="BankCode" column="BankCode" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />-->
+  </class>
+</hibernate-mapping>

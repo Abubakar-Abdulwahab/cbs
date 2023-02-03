@@ -1,0 +1,149 @@
+﻿@model Parkway.CBS.Police.Core.VM.EndOfficerDeploymentVM
+@{
+    Layout.Title = "End Police Officer Deployment";
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-word;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        /*width: 100%;*/
+    }
+
+        /*.action-btns div {
+            width: 50%;
+        }*/
+
+        .action-btns div:nth-child(1) {
+            padding-right: 5px;
+        }
+
+        .action-btns div:nth-child(2) {
+            padding-left: 5px;
+        }
+
+        .action-btns div button {
+            width: 100%;
+        }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div id="container">
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader" colspan="4">CUSTOMER INFORMATION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="name" class="heading-text">Name</label>
+                        <p class="extend-width">@Model.DeploymentInfo.CustomerName</p>
+                    </td>
+                    <td>
+                        <label for="phoneNumber">Service Type</label>
+                        <p class="extend-width">@Model.DeploymentInfo.ServiceTypeName</p>
+                    </td>
+                    <td>
+                        <label for="email">Start Date</label>
+                        <p class="extend-width">@Model.DeploymentInfo.StartDate.ToString("dd/MM/yyyy")</p>
+                    </td>
+                    <td>
+                        <label for="email">End Date</label>
+                        <p class="extend-width">@Model.DeploymentInfo.EndDate.ToString("dd/MM/yyyy")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="tin">Location</label>
+                        <p class="extend-width">@Model.DeploymentInfo.Address</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader" colspan="4">DETAILS OF CURRENT OFFICER</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label>Name of Officer</label>
+                        <p class="extend-width">@Model.DeploymentInfo.PoliceOfficerName</p>
+                    </td>
+                    <td>
+                        <label>Batch ID</label>
+                        <p class="extend-width">@Model.DeploymentInfo.BatchId</p>
+                    </td>
+                    <td>
+                        <label>Rank</label>
+                        <p class="extend-width">@Model.DeploymentInfo.OfficerRankName</p>
+                    </td>
+                    <td>
+                        <label>Command</label>
+                        <p class="extend-width">@Model.DeploymentInfo.CommandName</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        @if (!Model.CanNotEndDeployment)
+        {
+            <div>
+                <label for="EndReason">End Reason</label>
+                <textarea class="extend-width" name="EndReason" value="@Model.EndReason" placeholder="Leave a reason" id="EndReason" required></textarea>
+            </div>
+
+            <input type="text" name="deploymentLogId" id="deploymentLogId" value="@Model.DeploymentLogId" hidden />
+        }
+
+
+    </div>
+
+    if (!Model.CanNotEndDeployment)
+    {
+        <div class="action-btns">
+            <div>
+                <button type="submit" formaction="@Url.Action("EndOfficerDeployment", "PSSEndOfficerDeployment" )">@T("End Deployment")</button>
+            </div>
+            <div>
+                <a class="button" href="@Url.Action("PSSDeployedOfficers", "PSSDeployedOfficersReport")">@T("Cancel")</a>
+            </div>
+        </div>
+    }
+
+}

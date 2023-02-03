@@ -1,0 +1,291 @@
+﻿@model Parkway.CBS.Police.Core.VM.InitiateAccountWalletPaymentVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Initiate Wallet Payment Request").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("PSS.Verify.Account.Code.Script").AtFoot();
+    Script.Require("PSS.Admin.Wallet.Initiate.Request.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .delete-user-row {
+        color: red;
+        cursor: pointer;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .inline-check-box input[type='checkbox'] {
+        float: right;
+    }
+
+    .code-box-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin-bottom: 25px;
+    }
+
+    .code-box {
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        margin-left: 2px;
+        margin-right: 2px;
+        font-weight: 500;
+    }
+
+    .vertification-code-container {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        background-color: rgba(128, 128, 128, 0.5);
+        display: none;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center
+    }
+
+    .vertification-code-content {
+        background-color: #ffffff;
+        width: 400px;
+        height: auto;
+        padding: 20px;
+        margin: 0 auto;
+        position:relative;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var selectedRequest = @Html.Raw(Json.Encode(Model.WalletPaymentRequests));
+
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select Source Account</b>
+                <div class="form-group">
+                    <select class="form-control" name="SelectedAccountWallet" id="accountWallet">
+                        <option selected disabled value="">Select Source Wallet</option>
+                        @if (Model.AccountWalletConfigurations != null && Model.AccountWalletConfigurations.Any())
+                        {
+                            foreach (var item in Model.AccountWalletConfigurations)
+                            {
+                                <option value="@item.Id">@item.WalletName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Balance</b>
+                <input type="text" class="form-control" id="walletBalance" readonly />
+                <span id="accountBalanceLoader" class="profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                <div id="accountBalanceError" style="color:red"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.AccountWalletPayment.InitiatePaymentRequest), FormMethod.Post, new { @name = "initiatePaymentRequestForm", @id = "initiatePaymentRequestForm" }))
+{
+    <div class="container-fluid">
+        <div id="inputContainer">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Beneficiary Name</b>
+                        <input type="text" class="form-control" id="beneficiaryName" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Account Number</b>
+                        <input type="number" class="form-control" id="acctNo" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Bank</b>
+                        <div class="form-group">
+                            <select class="form-control" name="SelectedBankId" id="bank">
+                                <option selected disabled value="0">Select Bank</option>
+                                @if (Model.Banks != null && Model.Banks.Any())
+                                {
+                                    foreach (var item in Model.Banks)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Account Name</b>
+                        <div id="retryBtnDiv">
+                            <input type="text" class="form-control" id="acctName" disabled />
+                            <div class="input-group-btn" style="display:none">
+                                <button class="btn btn-default" id="retryValidateBtn">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span id="accountNameLoader" class="profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                        <div id="accountNameError" style="color:red"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Cost Expenditure Head</b>
+                        <div class="form-group">
+                            <select class="form-control" name="SelectedExpenditureHeadId" id="expenditureHead">
+                                <option selected disabled value="0">Select Expenditure head</option>
+                                @if (Model.ExpenditureHeads != null && Model.ExpenditureHeads.Any())
+                                {
+                                    foreach (var item in Model.ExpenditureHeads)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Amount</b>
+                        <input type="number" class="form-control" id="amount" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">&nbsp;</b>
+                        <button type="button" id="addRequest" class="btn btn-primary" style="width:100%">+ Add</button>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="items" id="requestsTable">
+                    <tr>
+                        <th>BENEFICIARY NAME</th>
+                        <th>ACCOUNT NUMBER</th>
+                        <th>BANK</th>
+                        <th>ACCOUNT NAME</th>
+                        <th>EXPENDITURE HEAD</th>
+                        <th>AMOUNT(<span>&#8358;</span>)</th>
+                        <th>ACTION</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%" type="submit">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="vertification-code-container" id="verificationCodeContainer">
+    <div class="vertification-code-content">
+        <h4>Initiate Payment Request Verification</h4>
+        <p class="tip-text" style="color: #A5A5A5;margin-bottom:20px">Kindly enter the secret code sent to your email and phone number.</p>
+        <div class="form-group">
+            <div class="container-fluid code-box-container no-padding no-margin">
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+                <div class="col-2 no-padding">
+                    <input type="text" required class="form-control code-box" maxlength="1" />
+                </div>
+            </div>
+            <input type="hidden" id="codeTextBox" name="Code" />
+            <p>Didn’t receive a code? <a href="#" id="resendCode" name="resendCode" style="float:right" disabled>Resend code</a></p>
+        </div>
+        <button type="button" class="btn btn-primary btn-block" style="border-radius:4px" id="paymentApprovalVerificationSubmitBtn">Initiate Payment</button>
+        <span id="paymentApprovalVerificationLoader" class="profileloader" style="position: absolute; margin: auto; z-index: 10; bottom: -94px; left: 192px"></span>
+        <div id="paymentApprovalVerificationError" style="color:red"></div>
+    </div>
+</div>

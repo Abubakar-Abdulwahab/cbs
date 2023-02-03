@@ -1,0 +1,10 @@
+﻿@model dynamic
+
+@{ 
+    Layout.Title = Html.TitleForPage(T("Registration Pending").ToString());
+}
+<h1>@Html.TitleForPage(T("User Registration Pending").ToString()) </h1>
+<p class="alert alert-info">@T("Your user account has been created but has to be approved before it can be used.")</p>
+@if (Url.IsLocalUrl(Request.QueryString["ReturnUrl"])) {
+    <p>@Html.Link(T("Go back to where you were"), Url.Content(Request.QueryString["ReturnUrl"]))</p>    
+}

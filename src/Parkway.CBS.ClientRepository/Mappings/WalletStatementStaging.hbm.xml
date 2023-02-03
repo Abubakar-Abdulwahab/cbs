@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.WalletStatementStaging, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_WalletStatementStaging" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="TransactionDate" column="TransactionDate" />
+    <property name="ValueDate" column="ValueDate" />
+    <property name="Narration" column="Narration" />
+    <property name="TransactionTypeId" column="TransactionTypeId" />
+    <property name="Amount" column="Amount" />
+    <property name="TransactionReference" column="TransactionReference" />
+    <property name="WalletId" column="WalletId" />
+    <property name="WalletIdentifierType" column="WalletIdentifierType" />
+    <property name="Reference" column="Reference" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,205 @@
+﻿@using System.Web.Mvc.Html
+@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Module.ViewModels.AddPaymentVM
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("CBS.MDA.Settings.Script").AtFoot();
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.Admin.AddPayment.Script");
+    Layout.Title = "Add Payment".ToString();
+}
+
+
+
+@if (Model.InvoiceNumber != null && Model.Status != (int)InvoiceStatus.Paid)
+{
+
+    using (Html.BeginFormAntiForgeryPost(Url.Action("AddInvoicePaymentRecord", "Payment", new { area = "Parkway.CBS.Module", }), FormMethod.Post, new { @id = "addPaymentForm" , invoiceNumber = Model.InvoiceNumber }))
+    {
+        <div style="float:right">
+
+            <a href="@Url.RouteUrl("AdminViewInvoice", new { invoiceNumber = Model.InvoiceNumber })" name="viewInvoice">View invoice</a>
+        </div>
+        <div class="container">
+            <h1>Add Payment for invoice number : @Model.InvoiceNumber</h1>
+            <div class="row">
+                <div>
+                    
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Recipient")</b>
+                    <p>@Model.Recipient</p>
+                    <p>@Html.Hint(T("The recipient name of the tax payer you are adding payment for."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Phone number")</b>
+                    <p>@Model.PhoneNumber</p>
+                    <p>@Html.Hint(T("Phone number of the tax payer."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("TIN")</b>
+                    <p>@(string.IsNullOrEmpty(Model.TIN) ? "" : Model.TIN)</p>
+                    <p>@Html.Hint(T("TIN of the tax payer on record."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Email")</b>
+                    <p>@(string.IsNullOrEmpty(Model.Email) ? "" : Model.Email)</p>
+                    <p>@Html.Hint(T("Email of the tax payer."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Amount Due")</b>
+                    <p>@string.Format("₦{0:n2}", Model.AmountDue)</p>
+                    <p>@Html.Hint(T("Amount due on this invoice."))</p>
+                </div>
+                <div class="col-sm-6" style="background-color:#f3f4f5;text-align:center;">
+                    <p><b>@T("Due Date")</b>
+                    <p>@(Model.DueDate == null ? "" : Model.DueDate.ToString("dd'/'MM'/'yyyy"))</p>
+                    <p>@Html.Hint(T("Due date for this invoice."))</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="container">
+            <table class="items" id="settings">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:50%">
+
+                            <input type="hidden" name="InvoiceNumber" id="InvoiceNumber" value="@Model.InvoiceNumber" />
+
+                            <label for="PaymentChannel" style="white-space: nowrap;">@T("Payment Method")</label>
+                            <select id="PaymentChannel" name="@Html.NameOf(m => m.PaymentChannel)" aria-required="true" style="width:99%">
+                                <option value="" selected disabled>Select a payment method</option>
+                                @Html.SelectOption(Parkway.CBS.Core.Models.Enums.PaymentChannel.BankDeposit, Model.PaymentChannel == Parkway.CBS.Core.Models.Enums.PaymentChannel.BankDeposit ? true : false, T("Bank Deposit").ToString())
+                                @Html.SelectOption(Parkway.CBS.Core.Models.Enums.PaymentChannel.BankDraft, Model.PaymentChannel == Parkway.CBS.Core.Models.Enums.PaymentChannel.BankDraft ? true : false, T("Bank Draft").ToString())
+                                @Html.SelectOption(Parkway.CBS.Core.Models.Enums.PaymentChannel.POS, Model.PaymentChannel == Parkway.CBS.Core.Models.Enums.PaymentChannel.POS ? true : false, T("POS").ToString())
+                                @Html.SelectOption(Parkway.CBS.Core.Models.Enums.PaymentChannel.Transfer, Model.PaymentChannel == Parkway.CBS.Core.Models.Enums.PaymentChannel.Transfer ? true : false, T("Bank Transfer").ToString())
+                            </select>
+                            @Html.ValidationMessageFor(m => m.PaymentChannel, "", new { @style = "color:#990808" })
+                            @Html.Hint(T("Select the channel payment was made on."))
+                        </td>
+                        <td>
+                            <label style="white-space: nowrap;">@T("(₦)Amount Paid")</label>
+                            @Html.TextBox("AmountPaid", null, new { @class = "text large", @type = "number", @step = "0.01", @required = "true", @id = "AmountPaid", @placeholder = "Enter amount paid here" })
+                            @Html.ValidationMessageFor(m => m.AmountPaid, "", new { @style = "color:#990808" })
+                            @Html.Hint(T("Enter the amount paid for this invoice in Naira."))
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%">
+                            <label for="pickyDate2" style="white-space: nowrap;">@T("Payment Date (Format dd/MM/YYYY)")</label>
+                            <input type="text" name="PaymentDate" id="pickyDate2" value="@Model.PaymentDate" class="text large pickyDate" required placeholder="Pick the date payment was made here (dd/MM/YYYY)" />
+                            @Html.ValidationMessageFor(m => m.PaymentDate, "", new { @style = "color:#990808" })
+                            @Html.Hint(T("Date this payment was made."))
+                        </td>
+                        <td>
+                            <label for="PaymentReference" style="white-space: nowrap;">@T("Reference")</label>
+                            @Html.TextBox("Reference", null, new { @class = "text large", @type = "text", @required = "true", @id = "PaymentReference", @maxlength = "200", @placeholder = "Enter payment reference here" })
+                            @Html.ValidationMessageFor(m => m.Reference, "", new { @style = "color:#990808" })
+                            @Html.Hint(T("Enter the reference for this payment. e.g Teller number for Bank Deposit, bank draft number for Bank Draft, reference number for POS and bank transfer."))
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <fieldset>
+            <button type="submit" id="proceed">@T("Proceed")</button>
+            <button type="button" value="@T(" Cancel")" onclick="location.href='@Url.RouteUrl("SearchInvoicePayment")'" class="a-classname">@T("Cancel")</button>
+        </fieldset>
+    }
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirmPayment">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirm Payment for invoice number @Model.InvoiceNumber</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p>
+                                    <b>@T("Recipient")</b>
+                                <p><b style="color:#e97d68;">@Model.Recipient</b></p>
+                            </div>
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Phone number")</b>
+                                <p><b style="color:#e97d68;">@Model.PhoneNumber</b></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("TIN")</b>
+                                <p><b style="color:#e97d68;">@(string.IsNullOrEmpty(Model.TIN) ? "" : Model.TIN)</b></p>
+                            </div>
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Email")</b>
+                                <p><b style="color:#e97d68;">@(string.IsNullOrEmpty(Model.Email) ? "" : Model.Email)</b></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("(₦)Amount Due")</b>
+                                <p><b style="color:#e97d68;">@string.Format("{0:n2}", Model.AmountDue)</b></p>
+                            </div>
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Due Date")</b>
+                                <p><b style="color:#e97d68;">@(Model.DueDate == null ? "" : Model.DueDate.ToString("dd'/'MM'/'yyyy"))</b></p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Payment Method")</b>
+                                <p><b id="mpaymentMethod" style="color:#e97d68;"></b></p>
+                            </div>
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("(₦)Amount Paid")</b>
+                                <p><b id="mamount" style="color:#e97d68;"></b></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Payment Date")</b>
+                                <p><b id="mpaymentdate" style="color:#e97d68;"></b></p>
+                            </div>
+                            <div class="col-sm-6" style="text-align:center;">
+                                <p><b>@T("Reference")</b>
+                                <p><b id="mref" style="color:#e97d68;"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmed">@T("Confirm")</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+else if (Model.InvoiceNumber != null && Model.Status == (int)InvoiceStatus.Paid)
+{
+    <div class="container">
+        <h1>Invoice has already been paid for  : @Model.InvoiceNumber</h1>
+    </div>
+    
+}
+else
+{
+    <div class="container">
+        <h1>No invoice record found</h1>
+    </div>
+   
+}

@@ -1,0 +1,187 @@
+﻿@model Parkway.CBS.Police.Admin.VM.OfficerValidationResultVM
+@{
+    Layout.Title = "Added Officers : File Upload Validation Result";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.Branch.Officer.Upload.Validation.Result.Script");
+
+}
+
+<style>
+    .branch-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+
+    span.status-false {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: red;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    span.status-true {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: forestgreen;
+        display: inline-block;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        text-align: center;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+
+    .summary {
+        text-align: right;
+        margin-top: 25px;
+        padding-bottom: 10px;
+    }
+
+    .summary-details {
+        display: inline-block;
+    }
+
+    .numbers {
+        border-bottom: 2px solid #D5D5D5;
+        font-size: 15px;
+        padding-bottom: 5px;
+    }
+
+        .numbers > span {
+            margin-left: 10px;
+        }
+
+            .numbers > span.blue {
+                color: blue;
+            }
+
+            .numbers > span.green {
+                color: green;
+            }
+
+            .numbers > span.red {
+                color: red;
+            }
+
+            .numbers > span span.bigger {
+                font-size: 20px;
+            }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    var batchToken = @Html.Raw(Json.Encode(Model.BatchToken));
+    var batchStatus = @Html.Raw(Json.Encode(Model.Status));
+    var batchValidatedStatus = @Html.Raw(Json.Encode((int)Parkway.CBS.Police.Core.Models.Enums.PSSBranchOfficersUploadStatus.BatchValidated));
+</script>
+
+@Html.Partial("\\ServicePartials\\PSSBranchDetailPartial", Model.BranchTaxEntityProfileLocation)
+
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col">@T("AP Number")</th>
+            <th scope="col">@T("Name")</th>
+            <th scope="col">@T("Command")</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Status == (int)Parkway.CBS.Police.Core.Models.Enums.PSSBranchOfficersUploadStatus.BatchValidated)
+        {
+            if (Model.BranchOfficers != null && Model.BranchOfficers.Any())
+            {
+                foreach (var item in Model.BranchOfficers)
+                {
+                    <tr>
+                        <td>@item.ServiceNumber</td>
+                        <td>@item.Name</td>
+                        <td>@item.Command</td>
+                        <td>
+                            @if (item.HasError)
+                            {<span class="status-false" data-toggle="tooltip" data-html="true" data-placement="top" title="@item.ErrorMessage">i</span> }
+                            else
+                            { <span class="status-true" data-toggle="tooltip" data-placement="top">&#10003;</span>}
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="4">No records found</td></tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="8"><div class="payeeloader" id="uploadStatusLoader" style="margin:0 auto"></div></td></tr>
+        }
+    </tbody>
+</table>
+<small id="errorMessage"></small>
+
+@Display(Model.Pager)
+<div class="summary">
+    <div class="summary-details">
+        <h4 class="numbers">
+            <span class="blue" id="totalenttp" data-toggle="tooltip" data-html="true"><span class="bigger" id="totalent"></span> @Model.PSSBranchOfficerUploadBatchItemsReport.StringNumberOfRecords Total Entries</span>
+            <span class="green" id="totalvaltp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalval"></span>@Model.PSSBranchOfficerUploadBatchItemsReport.StringNumberOfValidRecords Valid Entries</span>
+            <span class="red" id="totalinvtp" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger" id="totalinv"></span> @Model.PSSBranchOfficerUploadBatchItemsReport.StringNumberOfInvalidRecords Invalid Entries</span>
+        </h4>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+<input type="hidden" value="@Model.BatchToken" name="BatchToken" />
+
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.BranchOfficer.BranchProfileDetail, new { id = Model.ProfileId }), FormMethod.Get))
+{
+    if (Model.Status == (int)Parkway.CBS.Police.Core.Models.Enums.PSSBranchOfficersUploadStatus.BatchValidated)
+    {
+        <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Proceed")</button>
+    }
+    else
+    { <button type="submit" class="btn btn-primary btn-block" style="width:100%" disabled>@T("Proceed")</button>}
+}

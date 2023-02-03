@@ -1,0 +1,123 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<CBSPay.Core.ViewModels.TaxPayerTransaction>
+@{
+    ViewBag.Title = "FailedReport";
+    Layout = "~/Views/Shared/_EIRSReportPageLayout.cshtml";
+    var Median = "0.00";
+    var sum = "0.00";
+    var average = "0.00";
+    var count = "0";
+    var max = "0.00";
+    var min = "0.00";
+    var timespan = "---";
+    new CBSPay.Core.Services.PaymentService().TransactionReport(Model, ref Median, ref sum, ref average, ref count, ref max, ref min, ref timespan);
+}
+<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="~/Scripts/datepickerinitialization.js"></script>
+<style>
+    input[type=text] {
+        width: 100%;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="title">
+        <h1 title="This are failed transaction, ones where the customers couldn't make payments (and so were not charged)">Failed Reports</h1>
+        <hr>
+    </div>
+    @Html.Partial("_ReportFilterStat", new ViewDataDictionary { { "Action", "FailedReport" }, { "Median", Median }, { "sum", sum }, { "average", average }, { "count", count }, { "max", max }, { "min", min }, { "timespan", timespan } });
+   
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered" id="table">
+                    <thead>
+                        <tr>
+                            @*<th style="color:#c00001;">
+                                    Payment Log ID
+                                </th>*@
+                            <th style="color:#c00001;">
+                                Tax Payer RIN
+                            </th>
+                            <th style="color:#c00001;">
+                                TaxPayer Name
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer Phone Number
+                            </th>
+                            <th style="color:#c00001;">
+                                Reference Number
+                            </th>
+                            <th style="color:#c00001;">
+                                Amount (<span>&#8358;</span>)
+                            </th>
+
+                            <th style="color:#c00001;">
+                                Payment Date
+                            </th>
+                            @*<th style="color:#c00001;">
+                                    Synced With RDM
+                                </th>*@
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    @*<td>
+                                            @Model[i].PaymentIdentifer
+                                        </td>*@
+                                    <td>
+                                        @Model[i].TaxPayerRIN
+                                    </td>
+                                    <td>
+                                        @Model[i].TaxPayerName
+                                    </td>
+
+                                    <td>
+                                        @Model[i].PhoneNumber
+                                    </td>
+                                    <td>
+                                        @Model[i].ReferenceNumber
+                                    </td>
+                                    <td>
+                                        @Model[i].TotalAmount.ToString("N2")
+                                    </td>
+
+                                    <td>
+                                        @Model[i].PaymentDate.ToString("dd MMM yyyy")
+                                    </td>
+                                    @*<td></td>*@
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("FailedReport", new { page }))
+        </div>
+    </div>
+}
+

@@ -1,0 +1,46 @@
+﻿@model Parkway.CBS.Module.ViewModels.AdminGenerateInvoiceVM
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Bootstrap");
+    Layout.Title = "Confirm Tax Payer Details".ToString();
+}
+
+<style>
+    .form-control {
+        height: 38px;
+    }
+</style>
+<h3 class="form-title">You are paying for @Model.RevenueHeadName bill (@Model.MDAName). Kindly confirm your invoice.</h3>
+<br />
+@using (Html.BeginFormAntiForgeryPost(Url.Action("CreateBill", "Invoice", new { area = "Parkway.CBS.Module", }), FormMethod.Post, new { }))
+{
+    @Html.Partial("Partials/DetailsView", Model.TaxPayerWithDetails)
+    <input type="text" name="revenueHeadId" value="@Model.RevenueHeadId" hidden />
+    <hr />
+
+    <div class="row">
+        @if (!string.IsNullOrEmpty(Model.PartialToShow))
+        {
+            @Html.Partial("Partials/Billing/" + Model.PartialToShow, Model)
+        }
+    </div>
+
+    <div class="row">
+
+        @if (Model.Forms.Any())
+        {
+            for (int i = 0; i < Model.Forms.Count(); i++)
+            {
+                <div class="col-6">
+                    @{Model.Forms[i].FormIndex = i;}
+                    @Html.Partial("Partials\\Forms\\" + Model.Forms[i].PartialName.Trim(), Model.Forms[i], ViewData)
+                </div>
+            }
+        }
+    </div>
+
+    <div class="container">
+        <button type="submit">Proceed</button>
+    </div>
+}

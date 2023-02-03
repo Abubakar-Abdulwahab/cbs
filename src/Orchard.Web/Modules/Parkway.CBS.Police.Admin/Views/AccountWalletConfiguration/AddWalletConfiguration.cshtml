@@ -1,0 +1,226 @@
+﻿@model Parkway.CBS.Police.Core.VM.AddOrRemoveAccountWalletConfigurationVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Wallet Configuration for Users").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("PSS.Admin.Wallet.Configuration.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .delete-user-row {
+        color: red;
+        cursor: pointer;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .inline-check-box input[type='checkbox'] {
+        float: right;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var selectedUsers = @Html.Raw(Json.Encode(Model.WalletUsers));
+
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+
+<div class="container-fluid" style="padding:15px;">
+    <div class="row" style="background-color: #f3f4f5;">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4" style="background-color: #f3f4f5; text-align: center; padding: 5px">
+            <h3><b>@T("Wallet Configuration")</b></h3>
+            <h4>@Model.WalletName</h4>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Enter Admin Username</b>
+                <input type="text" class="form-control" id="adminUserUsername" placeholder="Enter Admin Username" />
+                <span id="adminUserUsernameLoader" class="profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                <div id="adminUserUsernameError" style="color:red"></div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3" style="padding-top: 18px;">
+            <div class="form-group">
+                <button type="button" id="searchBtn" class="btn btn-primary" style="width:100%">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.HiddenFor(x => x.AccountWalletId)
+    <div class="container-fluid">
+        <div id="inputContainer">
+            <div class="row">
+                <h3 class="field-set-heading">User Details</h3>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Fullname</b>
+                        <input type="text" class="form-control" id="fullName" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Username</b>
+                        <input type="text" class="form-control" id="userName" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Phone Number</b>
+                        <input type="text" class="form-control" id="phoneNumber" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Email</b>
+                        <input type="text" class="form-control" id="email" disabled />
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="row">
+            <h3 class="field-set-heading">Command Details</h3>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Officer Formation</b>
+                    <input type="text" class="form-control" id="officerFormation" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Officer Department</b>
+                    <input type="text" class="form-control" id="officerDepartment" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Officer Section</b>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="officerSection" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Officer Sub Section</b>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="officerSubSection" disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Workflow Approval Level</b>
+                    <div class="form-group">
+                        <select class="form-control" name="FlowDefinitionLevels" id="workflowLevel">
+                            <option selected disabled value="">Select Role</option>
+                            @if (Model.FlowDefinitionLevels != null && Model.FlowDefinitionLevels.Any())
+                            {
+                                foreach (var item in Model.FlowDefinitionLevels)
+                                {
+                                    <option value="@item.Id">@item.DefinitionName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button type="button" id="addUser" class="btn btn-primary" style="width:100%">+ Add</button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <table class="items" id="walletsTable">
+                    <tr>
+                        <th>USERNAME</th>
+                        <th>COMMAND NAME</th>
+                        <th>APPROVAL LEVEL</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" id="submitBtn" style="width:100%" formaction="@Url.Action("AddWalletConfiguration", "AccountWalletConfiguration" )">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

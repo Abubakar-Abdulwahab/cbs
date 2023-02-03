@@ -1,0 +1,41 @@
+﻿@model Parkway.CBS.Module.ViewModels.CollectionRevenueFormViewModel
+@{
+    Layout.Title = T("Preview Invoice").ToString();
+
+    Style.Require("CBS.MDA.Style.RevenueStrap");
+}
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">CBS</a>
+        </div>
+        <div class="collapsed navbar-collapse" id="collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0);">Help</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-12">
+        <form action="@Model.PaymentUrl" method="post">
+            @Html.HiddenFor(m => m.Payment.ClientID)
+            @Html.HiddenFor(m=> m.Payment.Amount)
+            @Html.HiddenFor(m=> m.Payment.MAC)
+            @Html.HiddenFor(m=> m.Payment.PaymentReference)
+            @Html.HiddenFor(m => m.Payment.CurrencyCode)
+            @Html.HiddenFor(m => m.Payment.ReturnUrl)
+            <button type="submit" class="btn btn-sm btn-primary">PAY @Model.Amount.ToString("N2")</button>
+        </form>
+        @*<button type="button" class="btn btn-lg btn-success" formaction="@Model.PaymentUrl" formmethod="post">PAY @Model.Amount.ToString("N2")</button>*@
+        <br />
+        <object data="@Model.PreviewUrl" style="width:100%; min-height:90vh"></object>
+    </div>
+</div>

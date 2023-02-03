@@ -1,0 +1,52 @@
+﻿@model dynamic
+
+<tr>
+    <td>Was Incident Reported:</td>
+    @if (Model.IsIncidentReported)
+    {
+        <td> YES </td>
+    }
+    else
+    {
+        <td> NO </td>
+    }
+</tr>
+@if (Model.IsIncidentReported)
+{
+    <tr>
+        <td>Incident Reported Date:</td>
+        <td>@Model.IncidentReportedDate</td>
+    </tr>
+}
+<tr>
+    <td>Court Affidavit Number:</td>
+    <td>@Model.AffidavitNumber</td>
+</tr>
+<tr>
+    <td>Court Affidavit Date of Issuance:</td>
+    <td>@Model.AffidavitDateOfIssuance</td>
+</tr>
+<tr>
+    <td>Reason for Request</td>
+    <td>
+        @foreach (var category in Model.extractCategories)
+        {
+            <h6 style="margin-bottom: .2rem;">@category.Name</h6>
+            if (category.FreeForm) {
+                <p>@Model.otherReason</p>
+                continue;
+            }
+            IEnumerable<int> selectedSubCategories = new List<int>();
+            if (!Model.selectedCategoriesAndSubCategories.TryGetValue(category.Id, out selectedSubCategories)) { continue; }
+            <ul style="list-style:none; font-size:14px" class="px-0">
+                @foreach (var subCategory in category.SubCategories)
+                {
+                    if (selectedSubCategories.Contains((int)subCategory.Id))
+                    {
+                        <li>@subCategory.Name</li>
+                    }
+                }
+            </ul>
+        }
+    </td>
+</tr>

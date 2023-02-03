@@ -1,0 +1,39 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+<style>
+    #AltContactInfoContainer {
+        display:none;
+    }
+</style>
+<div class="form-group">
+    <label for="hasAlternativeContactInfo">Do you have an alternative contact info for this request?</label>
+    <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" name="HasAlternativeContactInfo" id="hasAlternativeContactInfoTrue" value="true" required @(Model.HasAlternativeContactInfo ? "checked" : "") /> YES
+        </label>
+    </div>
+    <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" name="HasAlternativeContactInfo" id="hasAlternativeContactInfoFalse" value="false" required @(Model.HasAlternativeContactInfo ? "" : "checked") /> NO
+        </label>
+    </div>
+</div>
+<div id="AltContactInfoContainer" style="display:@((Model.HasAlternativeContactInfo) ? "block" : "none" )">
+    <div class="form-group">
+        <label for="altContactName">Contact Person Name</label>
+        <input type="text" class="form-control" id="altContactName" name="AlternativeContactPersonName" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter name of the contact person" value="@Model.AlternativeContactPersonName" />
+        <small class="form-text text-muted">Please provide the full name of the contact person.</small>
+        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("AlternativeContactPersonName", "Enter a valid name", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    </div>
+    <div class="form-group">
+        <label for="altContactNumber">Contact Person Phone Number</label>
+        <input type="text" class="form-control" id="altContactNumber" name="AlternativeContactPersonPhoneNumber" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter phone number of the contact person" value="@Model.AlternativeContactPersonPhoneNumber" />
+        <small class="form-text text-muted">Please provide an active phone number of the contact person.</small>
+        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("AlternativeContactPersonPhoneNumber", "Enter a valid phone number", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    </div>
+    <div class="form-group">
+        <label for="altContactEmail">Contact Person Email</label>
+        <input type="text" class="form-control" id="altContactEmail" name="AlternativeContactPersonEmail" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "") placeholder="Enter email of the contact person" value="@Model.AlternativeContactPersonEmail" />
+        <small class="form-text text-muted">Please provide a valid email address of the contact person.</small>
+        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("AlternativeContactPersonEmail", "Enter a valid email address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    </div>
+</div>

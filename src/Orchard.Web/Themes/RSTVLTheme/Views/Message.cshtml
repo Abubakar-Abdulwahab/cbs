@@ -1,0 +1,18 @@
+﻿@* 
+    Model.Message can either be:
+    - an IHtmlString and won't be re-encoded
+    - a string and will be encoded
+*@
+@*<div class="message message-@Model.Type">@Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))</div>*@
+
+<div class="alert @((Model.Type).ToString() == "Error" ? "alert-danger" : (Model.Type).ToString() == "Information" ? "alert-info" : "alert-warning") fadeIn in">
+    <a class="close" data-dissmiss="alert" href="#" aria-hidden="true">&times;</a>
+    <strong>@Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br/>"))</strong>
+</div>
+
+@using (Script.Foot())
+{
+    <script>
+        $(".alert").alert();
+    </script>
+}

@@ -1,0 +1,174 @@
+﻿@model Parkway.CBS.Police.Admin.VM.AccountsWalletReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+
+    Layout.Title = T("Account Wallet Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.AccountsWalletReport.Report)))
+{
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Account Name</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter account name" class="form-control" name="AccountName" value="@Model.AccountName" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Account Number</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter Account number" class="form-control" value="@Model.AccountNumber" name="AccountNumber" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Bank</b>
+                    <div class="form-group">
+                        <select class="form-control" name="BankId" id="BankId">
+                            <option selected disabled value="">Select a Bank</option>
+                            @if (Model.Banks != null && Model.Banks.Any())
+                            {
+                                foreach (var item in Model.Banks)
+                                {
+                                    <option value="@item.Id" @(Model.BankId == item.Id ? "selected" : "")>@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%">Search</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                   ACCOUNT NAME
+                                </th>
+                                <th>
+                                    ACCOUNT NUMBER
+                                </th>
+                                <th>
+                                    BANK
+                                </th>
+
+                                  <th></th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+                            @if (Model.AccountsWalletReports != null && Model.AccountsWalletReports.Count() > 0)
+                            {
+                                foreach (var item in Model.AccountsWalletReports)
+                                {
+                                    <tr>
+                                        <td>
+                                            
+                                            @(string.IsNullOrEmpty(item.AccountName) ? item.FeePartyAccountName : item.AccountName)
+                                        </td>
+                                        <td>
+                                            @(string.IsNullOrEmpty(item.AccountNumber) ? item.FeePartyAccountNumber : item.AccountNumber)
+                                        </td>
+                                        <td>
+                                            @(string.IsNullOrEmpty(item.Bank) ? item.FeePartyBank : item.Bank)
+                                        </td>
+                                        <td>
+                                                <a href="@Url.Action("AddWalletConfiguration","AccountWalletConfiguration",new { walletAcctId = @item.AccountWalletId })" target="_blank">Configure Approval Workflow</a>
+                                            </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4">No Records Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total account wallet: @Model.TotalAccountWalletRecord </p>
+            </div>
+        </div>
+
+
+    </div>
+}
+@Display(Model.Pager)

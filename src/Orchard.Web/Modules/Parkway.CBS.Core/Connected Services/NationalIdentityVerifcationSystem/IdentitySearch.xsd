@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://IdentitySearch.nimc/" targetNamespace="http://IdentitySearch.nimc/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="changePassword" type="tns:changePassword" />
+  <xs:element name="changePasswordResponse" type="tns:changePasswordResponse" />
+  <xs:element name="createToken" type="tns:createToken" />
+  <xs:element name="createTokenResponse" type="tns:createTokenResponse" />
+  <xs:element name="createTokenString" type="tns:createTokenString" />
+  <xs:element name="createTokenStringResponse" type="tns:createTokenStringResponse" />
+  <xs:element name="getPermissionByLevel" type="tns:getPermissionByLevel" />
+  <xs:element name="getPermissionByLevelResponse" type="tns:getPermissionByLevelResponse" />
+  <xs:element name="searchByDemo" type="tns:searchByDemo" />
+  <xs:element name="searchByDemoPhone" type="tns:searchByDemoPhone" />
+  <xs:element name="searchByDemoPhoneResponse" type="tns:searchByDemoPhoneResponse" />
+  <xs:element name="searchByDemoResponse" type="tns:searchByDemoResponse" />
+  <xs:element name="searchByDocumentNumber" type="tns:searchByDocumentNumber" />
+  <xs:element name="searchByDocumentNumberResponse" type="tns:searchByDocumentNumberResponse" />
+  <xs:element name="searchByFinger" type="tns:searchByFinger" />
+  <xs:element name="searchByFingerResponse" type="tns:searchByFingerResponse" />
+  <xs:element name="searchByNIN" type="tns:searchByNIN" />
+  <xs:element name="searchByNINResponse" type="tns:searchByNINResponse" />
+  <xs:element name="searchByPhoto" type="tns:searchByPhoto" />
+  <xs:element name="searchByPhotoResponse" type="tns:searchByPhotoResponse" />
+  <xs:element name="updateUserSELF" type="tns:updateUserSELF" />
+  <xs:element name="updateUserSELFResponse" type="tns:updateUserSELFResponse" />
+  <xs:element name="verifyFingerWithData" type="tns:verifyFingerWithData" />
+  <xs:element name="verifyFingerWithDataResponse" type="tns:verifyFingerWithDataResponse" />
+  <xs:element name="verifyPhotoWithData" type="tns:verifyPhotoWithData" />
+  <xs:element name="verifyPhotoWithDataResponse" type="tns:verifyPhotoWithDataResponse" />
+  <xs:complexType name="createTokenString">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="orgid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createTokenStringResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="verifyFingerWithData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="fingerStringInBase64" type="xs:string" />
+      <xs:element name="pos" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="verifyFingerWithDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchResponseDemo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="data" nillable="true" type="tns:demoData" />
+      <xs:element minOccurs="0" name="returnMessage" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="demoData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="batchid" type="xs:string" />
+      <xs:element minOccurs="0" name="birthcountry" type="xs:string" />
+      <xs:element minOccurs="0" name="birthdate" type="xs:string" />
+      <xs:element minOccurs="0" name="birthlga" type="xs:string" />
+      <xs:element minOccurs="0" name="birthstate" type="xs:string" />
+      <xs:element minOccurs="0" name="cardstatus" type="xs:string" />
+      <xs:element minOccurs="0" name="centralID" type="xs:string" />
+      <xs:element minOccurs="0" name="documentno" type="xs:string" />
+      <xs:element minOccurs="0" name="educationallevel" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="emplymentstatus" type="xs:string" />
+      <xs:element minOccurs="0" name="firstname" type="xs:string" />
+      <xs:element minOccurs="0" name="gender" type="xs:string" />
+      <xs:element minOccurs="0" name="heigth" type="xs:string" />
+      <xs:element minOccurs="0" name="maidenname" type="xs:string" />
+      <xs:element minOccurs="0" name="maritalstatus" type="xs:string" />
+      <xs:element minOccurs="0" name="middlename" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_address1" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_address2" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_firstname" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_lga" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_middlename" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_postalcode" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_state" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_surname" type="xs:string" />
+      <xs:element minOccurs="0" name="nok_town" type="xs:string" />
+      <xs:element minOccurs="0" name="nspokenlang" type="xs:string" />
+      <xs:element minOccurs="0" name="ospokenlang" type="xs:string" />
+      <xs:element minOccurs="0" name="othername" type="xs:string" />
+      <xs:element minOccurs="0" name="pfirstname" type="xs:string" />
+      <xs:element minOccurs="0" name="photo" type="xs:string" />
+      <xs:element minOccurs="0" name="pmiddlename" type="xs:string" />
+      <xs:element minOccurs="0" name="profession" type="xs:string" />
+      <xs:element minOccurs="0" name="psurname" type="xs:string" />
+      <xs:element minOccurs="0" name="religion" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_AdressLine1" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_AdressLine2" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_Town" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_lga" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_postalcode" type="xs:string" />
+      <xs:element minOccurs="0" name="residence_state" type="xs:string" />
+      <xs:element minOccurs="0" name="residencestatus" type="xs:string" />
+      <xs:element minOccurs="0" name="self_origin_lga" type="xs:string" />
+      <xs:element minOccurs="0" name="self_origin_place" type="xs:string" />
+      <xs:element minOccurs="0" name="self_origin_state" type="xs:string" />
+      <xs:element minOccurs="0" name="signature" type="xs:string" />
+      <xs:element minOccurs="0" name="surname" type="xs:string" />
+      <xs:element minOccurs="0" name="telephoneno" type="xs:string" />
+      <xs:element minOccurs="0" name="title" type="xs:string" />
+      <xs:element minOccurs="0" name="trackingId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDocumentNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="doc" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDocumentNumberResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createToken">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element minOccurs="0" name="orgid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createTokenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:tokenObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tokenObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="loginObject" type="tns:loginObject" />
+      <xs:element minOccurs="0" name="loginString" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tokenStringx" type="xs:string" />
+      <xs:element name="timestamp" type="xs:long" />
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="lMessage" type="tns:loginMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="approved" type="xs:string" />
+      <xs:element minOccurs="0" name="asaid" type="xs:string" />
+      <xs:element name="authenticated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="defaultpassword" type="xs:string" />
+      <xs:element minOccurs="0" name="demoPermission" type="tns:demoMapPermission" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element name="expireTime" type="xs:long" />
+      <xs:element minOccurs="0" name="firstname" type="xs:string" />
+      <xs:element name="loginExpiryTimeInMinutes" type="xs:int" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="orgaddress" type="xs:string" />
+      <xs:element minOccurs="0" name="orgid" type="xs:string" />
+      <xs:element minOccurs="0" name="orgname" type="xs:string" />
+      <xs:element minOccurs="0" name="phone" type="xs:string" />
+      <xs:element minOccurs="0" name="requestTypePermission" type="tns:requestType" />
+      <xs:element minOccurs="0" name="status" type="xs:string" />
+      <xs:element minOccurs="0" name="surname" type="xs:string" />
+      <xs:element minOccurs="0" name="type" type="xs:string" />
+      <xs:element minOccurs="0" name="userid" type="xs:string" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="demoMapPermission">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="atype" type="tns:accessType" />
+      <xs:element minOccurs="0" name="batchid" type="xs:boolean" />
+      <xs:element minOccurs="0" name="birthcountry" type="xs:boolean" />
+      <xs:element minOccurs="0" name="birthdate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="birthlga" type="xs:boolean" />
+      <xs:element minOccurs="0" name="birthstate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cardstatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="documentno" type="xs:boolean" />
+      <xs:element minOccurs="0" name="educationallevel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="email" type="xs:boolean" />
+      <xs:element minOccurs="0" name="emplymentstatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="gender" type="xs:boolean" />
+      <xs:element minOccurs="0" name="heigth" type="xs:boolean" />
+      <xs:element minOccurs="0" name="maritalstatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="names" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nok_address" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nok_names" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nspokenlang" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ospokenlang" type="xs:boolean" />
+      <xs:element minOccurs="0" name="photo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="pnames" type="xs:boolean" />
+      <xs:element minOccurs="0" name="profession" type="xs:boolean" />
+      <xs:element minOccurs="0" name="religion" type="xs:boolean" />
+      <xs:element minOccurs="0" name="residence_address" type="xs:boolean" />
+      <xs:element minOccurs="0" name="residencestatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="self_origin_lga" type="xs:boolean" />
+      <xs:element minOccurs="0" name="self_origin_place" type="xs:boolean" />
+      <xs:element minOccurs="0" name="self_origin_state" type="xs:boolean" />
+      <xs:element minOccurs="0" name="signature" type="xs:boolean" />
+      <xs:element minOccurs="0" name="telephoneno" type="xs:boolean" />
+      <xs:element minOccurs="0" name="title" type="xs:boolean" />
+      <xs:element minOccurs="0" name="userID" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="accessType">
+    <xs:sequence>
+      <xs:element name="level" type="xs:int" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="userid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="requestType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bio" type="xs:string" />
+      <xs:element minOccurs="0" name="demo" type="xs:string" />
+      <xs:element minOccurs="0" name="doc" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="ninbio" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="data" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByPhotoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDemoPhone">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="DemoDataMandatory" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDemoPhoneResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="verifyPhotoWithData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="photoStringInBase64" type="xs:string" />
+      <xs:element name="pos" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="verifyPhotoWithDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPermissionByLevel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element name="level" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPermissionByLevelResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:demoMapPermission" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changePassword">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="newpassword" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="changePasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:tokenObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByFinger">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="data" type="xs:string" />
+      <xs:element name="FingerPositionCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByFingerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateUserSELF">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="surname" type="xs:string" />
+      <xs:element minOccurs="0" name="firstname" type="xs:string" />
+      <xs:element minOccurs="0" name="phone" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateUserSELFResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:loginMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByNIN">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByNINResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDemo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="token" type="xs:string" />
+      <xs:element minOccurs="0" name="DemoDataMandatory" type="tns:demoDataMandatory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="demoDataMandatory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dateOfBirth" type="xs:string" />
+      <xs:element minOccurs="0" name="firstname" type="xs:string" />
+      <xs:element minOccurs="0" name="gender" type="xs:string" />
+      <xs:element minOccurs="0" name="lastname" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchByDemoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:searchResponseDemo" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

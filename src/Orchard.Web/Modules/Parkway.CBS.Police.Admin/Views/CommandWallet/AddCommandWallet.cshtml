@@ -1,0 +1,138 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Police.Core.VM.AddCommandWalletVM
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Create Command Wallet").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+
+    <div class="container-fluid">
+        <div id="inputContainer">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Wallet Number</b>
+                        @Html.TextBox("WalletNumber", Model.WalletNumber, new { @class = "form-control", @placeholder = "Enter wallet number here", @required = "required", @type = "number" })
+                        @Html.Hint(T("Enter wallet number."))
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Commands</b>
+                        <div class="form-group">
+                            <select class="form-control" name="SelectedCommandId" id="SelectedCommandId" required>
+                                <option selected disabled value="">Select a Command</option>
+                                @if (Model.Commands != null && Model.Commands.Any())
+                                {
+                                    foreach (var item in Model.Commands)
+                                    {
+                                        <option value="@item.Id" @(Model.SelectedCommandId == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <span class="hint">Select command.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Banks</b>
+                        <div class="form-group">
+                            <select class="form-control" name="SelectedBankId" id="SelectedBankId" required>
+                                <option selected disabled value="">Select a bank</option>
+                                @if (Model.Banks != null && Model.Banks.Any())
+                                {
+                                    foreach (var item in Model.Banks)
+                                    {
+                                        <option value="@item.Id" @(Model.SelectedBankId == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <span class="hint">Select bank.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Account Type</b>
+                        <div class="form-group">
+                            <select class="form-control" name="SelectedAccountType">
+                                <option selected disabled value="">Select Account Type</option>
+                                @Html.SelectOption(Model.SelectedAccountType, Parkway.CBS.Police.Core.Models.Enums.SettlementAccountType.CommandSettlement, T(Parkway.CBS.Police.Core.Models.Enums.SettlementAccountType.CommandSettlement.ToDescription()).ToString())
+                                @Html.SelectOption(Model.SelectedAccountType, Parkway.CBS.Police.Core.Models.Enums.SettlementAccountType.DeploymentAllowanceSettlement, T(Parkway.CBS.Police.Core.Models.Enums.SettlementAccountType.DeploymentAllowanceSettlement.ToDescription()).ToString())
+                            </select>
+                            <span class="hint">Specify the wallet account type</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("AddCommandWallet", "CommandWallet" )">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,287 @@
+﻿@model Parkway.CBS.Police.Admin.VM.AccountWalletPaymentReportVM
+@using Parkway.CBS.Core.Models.Enums
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+
+    Layout.Title = T("Account Wallet Payment Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+
+    Script.Require("CBS.Report.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.AccountWalletPaymentReport.Report)))
+{
+<div class="container-fluid">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">From</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.From" name="From" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">To</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.End" name="End" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Payment ID</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter payment Id" class="form-control" name="PaymentId" value="@Model.PaymentId" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Source Account Name</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter source account name" class="form-control" value="@Model.SourceAccount" name="SourceAccount" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Beneficiary Account Number</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Beneficiary Account number" class="form-control" value="@Model.BeneficiaryAccountNumber" name="BeneficiaryAccountNumber" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Expenditure Head</b>
+                <div class="form-group">
+                    <select class="form-control" name="ExpenditureHeadId" id="ExpenditureHeadId">
+                        <option selected disabled value="">Select a Expenditure Head</option>
+                        @if (Model.ExpenditureHeads != null && Model.ExpenditureHeads.Any())
+                        {
+                            foreach (var item in Model.ExpenditureHeads)
+                            {
+                        <option value="@item.Id" @(Model.ExpenditureHeadId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Status</b>
+                    <div class="form-group">
+                        <select class="form-control" name="Status" id="Status">
+                            <option selected disabled value="">Select Status</option>
+                            @foreach (var statusType in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.PaymentRequestStatus)).Cast<Parkway.CBS.Police.Core.Models.Enums.PaymentRequestStatus>())
+                            {
+                                <option value="@((int) statusType)" @(((int)statusType == Model.Status) ? "selected" : "")>@statusType.GetDescription()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">&nbsp;</b>
+                <button class="btn btn-primary" style="width:100%">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="form-group" style="margin-top: 20px">
+                <button class="btn btn-success" style="margin-left: 10px" title="Export to excel" formaction="@Url.Action("Download", "AccountWalletPaymentReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+                    <i class=" fa fa-file-excel-o"></i>
+                    <span>Excel</span>
+                </button>
+                <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF" formaction="@Url.Action("Download", "AccountWalletPaymentReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+                    <i class=" pdf fa fa-file-pdf-o"></i>
+                    <span>PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                PAYMENT ID
+                            </th>
+                            <th>
+                                DATE INITIATED
+                            </th>
+                            <th>
+                                SOURCE ACCOUNT
+                            </th>
+                            <th>
+                                SOURCE ACCT NO.
+                            </th>
+                            <th>
+                                BENEFICIARY NAME
+                            </th>
+                            <th>
+                                ACCOUNT NUMBER
+                            </th>
+                            <th>
+                                BANK
+                            </th>
+                            <th>
+                                ACCOUNT NAME
+                            </th>
+                            <th>
+                                EXPENDITURE HEAD
+                            </th>
+                            <th>
+                                AMOUNT(<span>&#8358;</span>)
+                            </th>
+                            <th>
+                                STATUS
+                            </th>
+                            @* <th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model.AccountWalletPaymentReports != null && Model.AccountWalletPaymentReports.Count() > 0)
+                            {
+                                foreach (var item in Model.AccountWalletPaymentReports)
+                                {
+                            <tr>
+                                <td>
+                                    @item.PaymentId
+                                </td>
+                                <td>
+                                    @item.DateInitiated.ToString("dd MMM yyyy hh:mm:ss")
+                                </td>
+                                <td>
+                                    @item.SourceAccount
+                                </td>
+                                <td>
+                                    @item.SourceAccountNumber
+                                </td>
+                                <td>
+                                    @item.BeneficiaryName
+                                </td>
+                                <td>
+                                    @item.AccountNumber
+                                </td>
+                                <td>
+                                    @item.Bank
+                                </td>
+                                <td>
+                                    @item.AccountName
+                                </td>
+                                <td>
+                                    @item.ExpenditureHead
+                                </td>
+                                <td>
+                                    @String.Format("{0:n2}", item.Amount)
+                                </td>
+                                <td>
+                                    @(((Parkway.CBS.Police.Core.Models.Enums.PaymentRequestStatus)item.Status).GetDescription())
+                                </td>
+                               @* <td><a href="#">View approval log</a></td>*@
+                            </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="11">No Records Found</td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total account wallet amount : <span>&#8358;</span> @Model.TotalAccountWalletPaymentReportAmount.ToString("n2") </p>
+                <p class="summary">Total account wallet request : @Model.TotalAccountWalletPaymentReportRecord </p>
+
+            </div>
+        </div>
+
+
+</div>
+}
+@Display(Model.Pager)

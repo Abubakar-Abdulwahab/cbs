@@ -1,0 +1,236 @@
+﻿@model Parkway.CBS.Core.HelperModels.AssignRevenueHeadPermissionConstraintsVM
+
+@{ Layout.Title = "Assign Restrictions to " + Model.ExpertSystem.CompanyName;
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.Revenue.Head.Permissions.Constraints.Script");
+    Style.Require("CBS.MDA.Style");
+}
+
+<style>
+    .full-width {
+        width: 100%;
+    }
+
+    .half-width {
+        width: 49%;
+    }
+
+    .content-list, .confirmed-list {
+        border: 1px solid #bdbcbc;
+        padding: unset;
+        position: relative;
+    }
+
+        .content-list ul, .confirmed-list ul {
+            max-height: 200px;
+            overflow: auto;
+        }
+
+            .content-list ul li label, .confirmed-list ul li label {
+                padding-left: 5px;
+                cursor: pointer;
+            }
+
+            .content-list ul li:hover, .confirmed-list ul li:hover {
+                background-color: aliceblue;
+            }
+
+        .content-list .header {
+            width: 100%;
+            border-bottom: 1px solid #bdbcbc;
+            color: #1e5d7d;
+            padding: 5px;
+            text-align: center;
+            background-color: #eaeaea;
+        }
+
+        .content-list .divider {
+            border-top: 1px solid #bdbcbc;
+            border-bottom: 1px solid #bdbcbc;
+            padding: 5px 5px;
+            margin: 5px;
+        }
+
+    button {
+        margin-top: 10px;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    #helpText, #mdaHelpText {
+        color: rgb(255, 0, 0);
+        display: none;
+    }
+
+    #myModal table.items th {
+        background-color: #d0d0d0;
+    }
+</style>
+
+<script>
+        var selectedMdas = @Html.Raw(Json.Encode(@Model.SelectedMdas));
+        var SelectedRhAndMdas = @Html.Raw(@Model.SelectedRhAndMdas);
+    </script>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Assign"), FormMethod.Post, new { @id = "assignPermissionsForm", @name = "assignPermissionsForm" }))
+{
+
+    <fieldset>
+        <div><button type="button" data-toggle="modal" data-target="#myModal" id="assignPermissionsFormSubmit" disabled>@T("Assign Restrictions")</button> <button type="button" id="assignPermissionsFormCancel" onclick="location.href='@Url.Action("ListOfExpertSystems", "Settings", new { } )'" disabled>@T("Cancel")</button></div>
+    </fieldset>
+
+    <div id="container">
+        <input type="hidden" id="Indexer" value="1" />
+        <table class="items" id="tab_0">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Revenue Head Permissions</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <label id="permissionName">@T("Permissions")</label>
+                        <select name="SelectedPermissionId" id="permissionList" class="full-width">
+                            @if (Model.Permissions != null && Model.Permissions.Any())
+                            {
+                                <option value="0" selected disabled>Select a permission</option>
+                                foreach (var permission in Model.Permissions)
+                                {
+                                    if (Model.SelectedPermissionIdParsed == permission.Id)
+                                    {
+                                        <option id="@("permissionItem"+permission.Id)" value="@permission.Id" selected> @permission.Description</option>
+                                    }
+                                    else
+                                    {
+                                        <option id="@("permissionItem"+permission.Id)" value="@permission.Id"> @permission.Description</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <option>No permission available</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDAs")</label>
+                        <div class="container-fluid content-list mt-0">
+                            <ul id="mdaList">
+                                @if (Model.MDAs != null && Model.MDAs.Any())
+                                {
+                                    foreach (var mda in Model.MDAs)
+                                    {
+                                        if (Model.SelectedMdas != null && Model.SelectedMdas.Contains(mda.Id))
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" id="@("mdaItem"+mda.Id)" name='SelectedMdas' value="@mda.Id" checked disabled /> @mda.Name</label></li>
+                                        }
+                                        else
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" name='SelectedMdas' id="@("mdaItem"+mda.Id)" value="@mda.Id" disabled /> @mda.Name</label></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    < li > < p style = "padding-left:5px" > No MDAs available</ p ></ li >}
+                            </ul>
+                            <span name="mdaprofileloader" id="mdaprofileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        </div>
+                        <div>
+
+                        </div>
+                        @Html.Hint(T("Select MDAs you would like to restrict the permission to"))
+                        <small id="mdaHelpText">something went wrong</small>
+                    </td>
+                    <td>
+                        <label id="rhName">@T("Revenue Head")</label>
+                        <div class="container-fluid content-list mt-0">
+                            <p style="padding-left:5px">Select an MDA to have its revenue heads displayed here</p>
+                            <ul id="rhList"></ul>
+                            <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        </div>
+                        @Html.Hint(T("Select the revenue heads you would like to restrict the permission to"))
+                        <small id="helpText">something went wrong</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" value="@Model.ExpertSystem.Id" name="ExpertSystem.Id" />
+    <input type="hidden" name="SelectedRhAndMdas" id="selectedRhAndMdas" />
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Selection for @Model.ExpertSystem.CompanyName</h4>
+                </div>
+                <div class="modal-body" style="max-height:300px;overflow:auto">
+                    <span name="profileloader" id="confirmProfileloader" class="profileloader" style="position:fixed;margin:auto;z-index:10"></span>
+                    <div id="confirmModal">
+                        <div id="confirmModalContent">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @Html.Hint(T("By clicking confirm you agree with your current selection."))
+                    <button type="submit" id="submitConfirmModalBtn" disabled>Confirm</button> <button type="button" id="cancelConfirmModalBtn" data-dismiss="modal" disabled>Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+}
+
+
+@{ Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.General.Script").AtFoot();
+}

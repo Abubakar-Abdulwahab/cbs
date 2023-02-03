@@ -1,0 +1,64 @@
+﻿.container{
+    width:1039px !important;
+}
+label {
+    width: 5% !important;
+}
+
+select#month {
+    width: 20%;
+    display: inline-block;
+}
+
+div.secondrow {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+div.searchform {
+    text-align: end;
+}
+
+div.searchbutton {
+    text-align: end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table > tbody > tr > td {
+    border-bottom: 0 !important;
+}
+
+.table > thead > tr > th {
+    border-bottom: 0 !important;
+}
+
+thead tr {
+    /* border:1px solid #e3e3e3; */
+    background: #d8d8d8;
+}
+
+tbody {
+    border: 1px solid #e3e3e3;
+}
+
+p.summary, div.lastcol {
+    text-align: end;
+}
+
+button.enforcement {
+    margin-bottom: 10px;
+}
+.btn-danger, .btn-success {
+    border-radius: 26px;
+}
+a.btn-success, a.btn-danger {
+    color: white !important;
+}
+div.reportsummary {
+    direction: rtl;
+    margin-bottom:10px;
+}
+div.addpayment{
+    margin-bottom:10px;
+}

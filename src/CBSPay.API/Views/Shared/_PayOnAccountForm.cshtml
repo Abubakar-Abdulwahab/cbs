@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Tax Payer Pay On Account Page ";
+}
+
+<style>
+    .form-control, .form-row, .form-group {
+        width: 100%;
+    }
+
+    .netpay {
+        background-color: #f1f1f1;
+        padding: 20px 20px 0px;
+    }
+
+    .items {
+    }
+</style>
+
+<div class="col-md-5 row">
+
+    <div class="row">
+        <h4> Pay On Account/ Customer Deposit</h4>
+        <div class="netpay" id="payOnAccountBody">
+
+
+            <div class='form-row'>
+                <div class='form-group card required'>
+                    <label>Tax Payer RIN</label>
+                    <input class='form-control card-number' size='20' type='text' id="RIN" name="TaxPayerRIN" value="" required>
+                </div>
+            </div>
+
+            <div class='form-row'>
+                <div class='form-group' >
+                    <label class='control-label'>Phone Number</label> 
+                    <input class='form-control card-number' size='20' type='text' id="taxPayerPhone" name="PhoneNumber" value="" required>
+                </div>
+            </div>
+
+            <div class='form-row'>
+                <div class='form-group' id="POATaxPayer">
+                </div>
+            </div>
+
+            <div class='form-row'>
+                <div class='form-group' id="payAmount">
+                   
+                </div>
+            </div>
+
+            <input type="hidden" name="PaymentChannel" id="PaymentChannel" value="3" />
+            <input type="hidden" name="ClientId" id="ClientId" value="6817ab2b-4351-6017-5099-358F01bb9558" />
+            <input type="hidden" name="ClientSecret" id="ClientSecret" value="t+i61Vo71Y4T8nIcjxZMMMYy4YlAxrE/vSEWPlDdVMYHgFdVAsLbRDypDpzjki7LE" />
+
+
+
+            <div class="row">
+                @Html.ActionLink("No RIN? Click here", "RegisterForRIN", "Home")
+
+                <button id="FetchTaxPayerData" class='pull-right btn btn-primary submit-button glyphicon-transfer' type='submit'> Validate RIN</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts
+    {
+
+    <script src="@Url.Content("~/Scripts/EIRSPayOnAccount.js")"></script>
+
+}
+
+

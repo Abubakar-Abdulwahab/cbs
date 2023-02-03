@@ -1,0 +1,495 @@
+﻿@model Parkway.CBS.Police.Core.VM.AdminUserCreationVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Create User").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("PSS.Admin.UserCreation.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .delete-commad-row {
+        color: red;
+        cursor: pointer;
+    }
+
+    .multi-select-dropdown {
+        border: 1px solid #ccc;
+        height: 130px;
+        width: 100%;
+        overflow: auto;
+        padding: 7px;
+        border-radius: 4px;
+    }
+
+        .multi-select-dropdown ul {
+            list-style-type: none;
+        }
+
+        .multi-select-dropdown label {
+            display: inline;
+            cursor: pointer;
+        }
+
+    .multi-select-dropdown-default-option {
+        color: #808080;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .inline-check-box{
+        display:inline;
+        position:relative;
+        cursor:pointer;
+    }
+
+    .inline-check-box input[type='checkbox']{
+        float:right;
+    }
+
+    .multi-select-dropdown-divider-option {
+        background-color: #eaeaea;
+        padding: 5px;
+        font-weight: bold;
+        border-radius:4px;
+    }
+
+    #commandsTable tr td:nth-child(1) {
+        max-width: 150px;
+    }
+
+    #commandsTable tr td:nth-child(3) {
+        max-width: 90px;
+        padding-right: 40px;
+    }
+
+    #flowDefinitionLevelCheckboxList .multi-select-checkbox-options {
+        padding-bottom: 3px;
+        padding-top: 3px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var approver = @Html.Raw((int)Parkway.CBS.Police.Core.Models.Enums.AdminUserType.Approver);
+    var viewer = @Html.Raw((int)Parkway.CBS.Police.Core.Models.Enums.AdminUserType.Viewer);
+    var selectedUserType = @Html.Raw(Model.AdminUserType);
+    var selectedCommands = @Html.Raw(Json.Encode(Model.SelectedCommands));
+    var selectedServiceTypes = @Html.Raw(Json.Encode((Model.SelectedServiceTypes!=null) ? Model.SelectedServiceTypes.ToList() : null));
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">AP Number</b>
+                <input type="text" class="form-control" id="apNumber" placeholder="Enter AP Number" />
+                <span id="apNumberLoader" class="profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                <div id="apNumberSearchError" style="color:red"></div>
+                <label style="width:unset !important"><input type="checkbox" id="displayInput" checked /> Use service number as username.</label>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3" style="padding-top: 18px;">
+                <div class="form-group">
+                    <button type="button" id="searchBtn" class="btn btn-primary" style="width:100%">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+
+<div class="container-fluid">
+    <div id="inputContainer">
+        <div class="row">
+            <h3 class="field-set-heading">User Details <small> (This is where the personal information of the user is specified)</small></h3>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Fullname</b>
+                    @Html.TextBox("Fullname", Model.Fullname, new { @class = "form-control", @placeholder = "Enter Fullname here", @required = "required", @readonly = "readonly" })
+                    @Html.Hint(T("Add the name of the user."))
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Username</b>
+                    @Html.TextBox("Username", Model.Username, new { @class = "form-control", @placeholder = "Enter Username here", @required = "required", @readonly = "readonly" })
+                    @Html.Hint(T("Specify a username."))
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Phone Number</b>
+                    @Html.TextBox("PhoneNumber", Model.PhoneNumber, new { @class = "form-control", @placeholder = "Enter PhoneNumber here", @type = "number", @required = "required" })
+                    @Html.Hint(T("Enter the phone number of the user."))
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Email</b>
+                    @Html.TextBox("Email", Model.Email, new { @class = "form-control", @placeholder = "Enter Email here", @type = "email", @required = "required" })
+                    @Html.Hint(T("Enter the email of the user."))
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <div class="row">
+        <h3 class="field-set-heading">Command Details <small> (This is the command of the user)</small></h3>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Officer Formation</b>
+                <div class="form-group">
+                    <select class="form-control" name="CommandCategoryId" id="officerCommandCategory" required>
+                        <option selected disabled value="">Select a Formation</option>
+                        @if (Model.CommandCategories != null && Model.CommandCategories.Any())
+                        {
+                            foreach (var item in Model.CommandCategories)
+                            {
+                                <option value="@item.Id" @(Model.CommandCategoryId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">Select a formation.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Officer Department</b>
+                <div class="form-group">
+                    <select class="form-control" name="CommandId" id="officerDepartmentLevel" required>
+                        <option selected disabled value="">Select a Department</option>
+                        @if (Model.Commands != null && Model.Commands.Any())
+                        {
+                            foreach (var item in Model.Commands)
+                            {
+                                <option value="@item.Id" @(Model.CommandId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">Select a department in the formation.</span>
+                    <span id="officerDepartmentLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="officerDepartmentSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Officer Section</b>
+                <div class="form-group">
+                    <select class="form-control" name="OfficerSectionId" id="officerSectionLevel">
+                        <option selected disabled value="">Select a Section</option>
+                        @if (Model.OfficerSectionCommands != null && Model.OfficerSectionCommands.Any())
+                        {
+                            foreach (var item in Model.OfficerSectionCommands)
+                            {
+                                <option value="@item.Id" data-code="@item.Code" @(Model.OfficerSectionId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">Select a section in the department.</span>
+                    <span id="officerSectionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="officerSectionSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Officer Sub Section</b>
+                <div class="form-group">
+                    <select class="form-control" name="OfficerSubSectionId" id="officerSubSectionLevel">
+                        <option selected disabled value="">Select a Sub Section</option>
+                        @if (Model.OfficerSubSectionCommands != null && Model.OfficerSubSectionCommands.Any())
+                        {
+                            foreach (var item in Model.OfficerSubSectionCommands)
+                            {
+                                <option value="@item.Id" @(Model.OfficerSubSectionId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">Select a sub section of the section.</span>
+                    <span id="officerSubSectionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="officerSubSectionSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <h3 class="field-set-heading">User Access <small> (This defines the user's access level)</small></h3>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Role</b>
+                <div class="form-group">
+                    <select class="form-control" name="RoleTypeId" id="roleTypeId" required>
+                        <option selected disabled value="">Select Role</option>
+                        @if (Model.RoleTypes != null && Model.RoleTypes.Any())
+                        {
+                            foreach (var item in Model.RoleTypes)
+                            {
+                                <option value="@item.Id" @(Model.RoleTypeId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">This is the role of the user</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Access Type</b>
+                <div class="form-group">
+                    <select class="form-control" name="AdminUserType" id="adminUserTypeId" required>
+                        <option selected disabled value="">Select Access Type</option>
+                        @foreach (var userType in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.AdminUserType)).Cast<Parkway.CBS.Police.Core.Models.Enums.AdminUserType>())
+                        {
+                            <option value="@((int) userType)" @(((int)userType == Model.AdminUserType) ? "selected" : "")>@userType</option>
+                        }
+                    </select>
+                    <span class="hint">Specify the user's access level</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" id="serviceTypeContainer">
+            <div class="form-group">
+                <b style="color:#e97d68;">Service</b>
+                <div class="form-group">
+                    <div class="multi-select-dropdown">
+                        <ul id="serviceCheckboxList">
+                            @foreach (var serviceType in Model.ServiceTypes)
+                            {
+                                <li class="multi-select-checkbox-options"><label><input type="checkbox" value="@serviceType.ServiceId" name="SelectedServiceTypes[]" @((Model.SelectedServiceTypes != null && Model.SelectedServiceTypes.Contains(serviceType.ServiceId)) ? "checked" : "") /> <span>@serviceType.ServiceName</span></label></li>
+                            }
+                        </ul>
+                        <span id="serviceTypeLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    </div>
+                    <span class="hint">Select the services the user will have access to</span>
+                    <div id="serviceTypeSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" id="flowDefinitionContainer" style="display:none">
+            <div class="form-group">
+                <b style="color:#e97d68;">Work Flow </b>
+                <div class="form-group">
+                    <div class="multi-select-dropdown">
+                        <ul id="flowDefinitionCheckboxList">
+                            @if (Model.FlowDefinitions != null && Model.FlowDefinitions.Any())
+                            {
+                                foreach (var definitionGroup in Model.FlowDefinitions.GroupBy(x => x.ServiceId))
+                                {
+                                    <li class="multi-select-dropdown-divider-option definition-@definitionGroup.First().ServiceId">@Model.ServiceTypes.Where(x => x.ServiceId == definitionGroup.First().ServiceId).SingleOrDefault().ServiceName</li>
+                                    foreach (var definition in definitionGroup)
+                                    {
+                                        <li class="multi-select-checkbox-options definition-@definition.ServiceId"><label><input type="checkbox" value="@definition.Id" name="SelectedFlowDefinitions[]" @((Model.SelectedFlowDefinitions != null && Model.SelectedFlowDefinitions.Contains(definition.Id)) ? "checked" : "") /> <span>@definition.Name</span></label></li>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <li class="multi-select-dropdown-default-option">Select a service to have it's flow definitions listed here</li>
+                            }
+                        </ul>
+                        <span id="flowDefinitionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    </div>
+                    <span class="hint">Select the request flow.</span>
+                    <span id="flowDefinitionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="flowDefinitionSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="flowDefinitionLevelContainer" style="display:none">
+            <div class="form-group">
+                <b style="color:#e97d68;">Work Flow Approval Level</b>
+                <div class="form-group">
+                    <div class="multi-select-dropdown">
+                        <ul id="flowDefinitionLevelCheckboxList">
+                            @if (Model.FlowDefinitionLevels != null && Model.FlowDefinitionLevels.Any())
+                            {
+                                foreach (var levels in Model.FlowDefinitionLevels)
+                                {
+                                    <li class="multi-select-dropdown-divider-option parent-@levels.First().ServiceId-definition-level-@levels.First().DefinitionId">@levels.First().DefinitionName</li>
+                                    foreach (var level in levels)
+                                    {
+                                        <li class="multi-select-checkbox-options parent-@levels.First().ServiceId-definition-level-@levels.First().DefinitionId"><label><input type="checkbox" value="@level.Id" name="SelectedFlowDefinitionLevels[]" @((Model.SelectedFlowDefinitionLevels != null && Model.SelectedFlowDefinitionLevels.Contains(level.Id)) ? "checked" : "") /> <span>@level.PositionName</span></label></li>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <li class="multi-select-dropdown-default-option">Select a flow definition to have it's approval levels listed here</li>
+                            }
+                        </ul>
+                        <span id="flowDefinitionLevelLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    </div>
+                    <span class="hint">Select the levels of the request flow the user should be assigned to.</span>
+                    <div id="flowDefinitionLevelSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <h3 class="field-set-heading">Command Access Details<small> (These are the commands that the user has access to)</small></h3>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Formation</b>
+                <div class="form-group">
+                    <select class="form-control" name="CommandCategoryId" id="commandCategory">
+                        <option selected disabled value="">Select a Formation</option>
+                        @if (Model.CommandCategories != null && Model.CommandCategories.Any())
+                        {
+                            foreach (var item in Model.CommandCategories)
+                            {
+                                <option value="@item.Id" @(Model.CommandCategoryId == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <span class="hint">Select a formation.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Department</b>
+                <div class="form-group">
+                    <select class="form-control" name="department" id="departmentLevel">
+                        <option selected disabled value="">Select a Department</option>
+                    </select>
+                    <span class="hint">Select a department in the formation.</span>
+                    <span id="departmentLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="departmentSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Section</b>
+                <div class="form-group">
+                    <select class="form-control" name="section" id="sectionLevel">
+                        <option selected disabled value="">Select a Section</option>
+                    </select>
+                    <span class="hint">Select a section in the department.</span>
+                    <span id="sectionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="sectionSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <b style="color:#e97d68;">Sub Section</b>
+                <div class="form-group">
+                    <select class="form-control" name="subSection" id="subSectionLevel">
+                        <option selected disabled value="">Select a Sub Section</option>
+                    </select>
+                    <span class="hint">Select a sub section of the section.</span>
+                    <span id="subSectionLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="subSectionSearchError" style="color:red"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" id="commandAccessTypeContainer" style="display:none">
+            <div class="form-group">
+                <b style="color:#e97d68;">Access Type</b>
+                <div class="form-group">
+                    <select class="form-control" name="commandAccessType" id="commandAccessType">
+                        <option selected disabled value="">Select Access Type</option>
+                        @foreach (var userType in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.AdminUserType)).Cast<Parkway.CBS.Police.Core.Models.Enums.AdminUserType>())
+                        {
+                            <option value="@((int) userType)">@userType</option>
+                        }
+                    </select>
+                    <span class="hint">Specify the user's access level for the command</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="button" id="addCommand" class="btn btn-primary" style="width:100%">+ Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="items" id="commandsTable">
+                <tr>
+                    <th>Command Name</th>
+                    <th></th>
+                    <th>Access Type</th>
+                    <th>Actions</th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <b style="color:#e97d68;">&nbsp;</b>
+                <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("CreateUser", "PSSAdminUser" )">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+}

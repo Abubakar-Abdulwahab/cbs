@@ -1,0 +1,206 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.DeploymentAllowancePaymentReportVM
+@using Parkway.CBS.Core.Models.Enums
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+
+    Layout.Title = T("Deployment Allowance Payment Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+
+    Script.Require("CBS.Report.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+}
+
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.DeploymentAllowancePaymentReport.Report), FormMethod.Post))
+{
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">From</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.From" name="From" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">To</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.End" name="End" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Payment ID</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter payment Id" class="form-control" name="PaymentRef" value="@Model.PaymentRef" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Source Account Name</b>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter source account name" class="form-control" value="@Model.SourceAccount" name="SourceAccount" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Status</b>
+                    <div class="form-group">
+                        <select class="form-control" name="Status" id="Status">
+                            <option selected disabled value="">Select Status</option>
+                            @foreach (var statusType in Enum.GetValues(typeof(Parkway.CBS.Police.Core.Models.Enums.PaymentRequestStatus)).Cast<Parkway.CBS.Police.Core.Models.Enums.PaymentRequestStatus>())
+                            {
+                                <option value="@((int)statusType)" @(((int)statusType == Model.Status) ? "selected" : "")>@statusType.GetDescription()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Unit</b>
+                    <select class="form-control" name="CommandTypeId" id="CommandTypeId">
+                        <option selected disabled value="">select a unit</option>
+                        <option value="0" @((Model.CommandTypeId == 0) ? "selected" : "")>All</option>
+                        @foreach (var commandType in Model.CommandTypes)
+                        {
+                            <option value="@commandType.Id" @((Model.CommandTypeId == commandType.Id) ? "selected" : "")>@commandType.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group" style="margin-top: 20px">
+                    <button class="btn btn-success" style="margin-left: 10px" title="Export to excel" formaction="@Url.Action("Download", "DeploymentAllowancePaymentReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+                        <i class=" fa fa-file-excel-o"></i>
+                        <span>Excel</span>
+                    </button>
+                    <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF" formaction="@Url.Action("Download", "DeploymentAllowancePaymentReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+                        <i class=" pdf fa fa-file-pdf-o"></i>
+                        <span>PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    PAYMENT ID
+                                </th>
+                                <th>
+                                    DATE INITIATED
+                                </th>
+                                <th>
+                                    UNIT
+                                </th>
+                                <th>
+                                    DAY TYPE
+                                </th>
+                                <th>
+                                    START DATE
+                                </th>
+                                <th>
+                                    END DATE
+                                </th>
+                                <th>
+                                    APPLICANT NAME
+                                </th>
+                                <th>
+                                    SOURCE ACCOUNT
+                                </th>
+                                <th>
+                                    ACCOUNT NUMBER
+                                </th>
+                                <th>
+                                    ACCOUNT NAME
+                                </th>
+                                <th>
+                                    AMOUNT(<span>&#8358;</span>)
+                                </th>
+                                <th>
+                                    STATUS
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+                            @if (Model.DeploymentAllowancePaymentReportItems != null && Model.DeploymentAllowancePaymentReportItems.Any())
+                            {
+                                foreach (var item in Model.DeploymentAllowancePaymentReportItems)
+                                {
+                                    <tr>
+                                        <td>@item.PaymentReference</td>
+                                        <td>@item.DateInitiated</td>
+                                        <td>@item.CommandTypeName</td>
+                                        <td>@item.DayTypeName</td>
+                                        <td>@item.StartDateString</td>
+                                        <td>@item.EndDateString</td>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.SourceAccount</td>
+                                        <td>@item.AccountNumber</td>
+                                        <td>@item.AccountName</td>
+                                        <td>@item.Amount.ToString("N2")</td>
+                                        <td>@item.StatusString</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="12">No Records Found</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total deployment allowance payment amount : <span>&#8358;</span> @Model.TotalDeploymentAllowancePaymentReportAmount.ToString("N2")</p>
+                <p class="summary">Total deployment allowance payment request :  @Model.TotalDeploymentAllowancePaymentReportRecord</p>
+
+            </div>
+        </div>
+    </div>
+}
+@Display(Model.Pager)

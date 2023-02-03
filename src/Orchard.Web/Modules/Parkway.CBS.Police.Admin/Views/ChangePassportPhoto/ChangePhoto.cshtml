@@ -1,0 +1,179 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Module.ViewModels.SearchInvoicePaymentVM
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("PSS.PCC.ChangePhoto.Script.Script").AtFoot();
+
+    Layout.Title = "Change PCC passport photo".ToString();
+}
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+        width:unset !important;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 50%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<form id = "searchForFileNumber">
+    <div id="container">
+        @Html.AntiForgeryToken()
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Enter the File Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label style="width:auto !important">@T("Enter File Number")</label>
+                        @Html.TextBoxFor(m => m.InvoiceNumber, new { @class = "text large", @type = "text", @maxlength = "50" })
+                        @Html.Hint(T("Enter the PCC file number."))
+                        @Html.ValidationMessageFor(m => m.InvoiceNumber, "", new { @style = "color:#990808" })
+                        <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10;top:32px"></span>
+                        <small id="fileNumberErrorMessage" style="color:#990808"></small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit" id="searchForFileNumber">@T("Search")</button>
+    </fieldset>
+</form>
+
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.ChangePassportPhoto.ChangePhoto), FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div id="resultContainer" style="display:none">
+        <div id="container">
+            <table class="items" id="settings">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader" colspan="3">Search Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="name" class="heading-text">Name</label>
+                            <p class="extend-width" id="name"></p>
+                        </td>
+                        <td>
+                            <label for="extReason">Request Reason</label>
+                            <p class="extend-width" id="extReason"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="dateOfBirth">Date Of Birth</label>
+                            <p class="extend-width" id="dateOfBirth"></p>
+                        </td>
+                        <td>
+                            <label for="placeOfBirth">Place Of Birth</label>
+                            <p class="extend-width" id="placeOfBirth"></p>
+                        </td>
+                        <td>
+                            <label for="prevConvicted">Previously Convicted</label>
+                            <p class="extend-width" id="prevConvicted"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="destCountry">Destination Country</label>
+                            <p class="extend-width" id="destCountry"></p>
+                        </td>
+                        <td>
+                            <label for="countryOfPassport">Country Of Passport</label>
+                            <p class="extend-width" id="countryOfPassport"></p>
+                        </td>
+                        <td>
+                            <label for="passportNumber">Passport Number</label>
+                            <p class="extend-width" id="passportNumber"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="placeOfIssuance">Place of Issuance</label>
+                            <p class="extend-width" id="placeOfIssuance"></p>
+                        </td>
+                        <td>
+                            <label for="dateOfIssuance">Date of Issuance</label>
+                            <p class="extend-width" id="dateOfIssuance"></p>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="displayForPhoto">
+                        <td colspan="3">
+                            <input type="file" id="passportPhotoFile" name="passportPhotoFile" accept=".png, .jpeg, .jpg" required>
+                            <input type="text" id="passPortFileNumber" name="passPortFileNumber" hidden>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <fieldset>
+            <button type="submit" id="replacePhoto">@T("Replace Image")</button>
+        </fieldset>
+    </div>
+}

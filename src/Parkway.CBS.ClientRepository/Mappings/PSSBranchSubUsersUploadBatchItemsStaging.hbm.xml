@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.PSSBranchSubUsersUploadBatchItemsStaging, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSBranchSubUsersUploadBatchItemsStaging" lazy="false" >
+		<id name="Id" column="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="BranchStateCode" column="BranchStateCode" />
+		<property name="BranchLGACode" column="BranchLGACode" />
+		<property name="BranchStateValue" column="BranchStateValue" />
+		<property name="BranchLGAValue" column="BranchLGAValue" />
+		<property name="BranchAddress" column="BranchAddress" />
+		<property name="BranchName" column="BranchName" />
+		<property name="SubUserName" column="SubUserName" />
+		<property name="SubUserEmail" column="SubUserEmail" />
+		<property name="SubUserPhoneNumber" column="SubUserPhoneNumber" />
+		<property name="HasError" column="HasError" />
+		<property name="ErrorMessage" column="ErrorMessage" />
+		<property name="CreatedAtUtc" column="CreatedAtUtc" />
+		<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+		<many-to-one name="PSSBranchSubUsersUploadBatchStaging" column="PSSBranchSubUsersUploadBatchStaging_Id"/>
+		<many-to-one name="BranchState" column="BranchState_Id"/>
+		<many-to-one name="BranchLGA" column="BranchLGA_Id"/>
+	</class>
+</hibernate-mapping>

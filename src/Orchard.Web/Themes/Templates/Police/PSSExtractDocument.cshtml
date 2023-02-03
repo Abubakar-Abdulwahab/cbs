@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/apercu-font@1.0.0/stylesheet.min.css" />
+    <style type="text/css">
+        body {
+            margin: unset;
+            font-family:Apercu;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .ext-document-body {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+
+        .ext-document-bg {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ext-document-bg img {
+            width: 100%;
+            height: auto;
+        }
+
+        .ext-document-content {
+            position: relative;
+            max-width: 100%;
+            padding-top: 40px;
+            padding-left: 70px;
+            padding-right: 70px;
+            padding-bottom: 10px;
+            z-index: 2;
+        }
+
+        .ext-document-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-image: url("@Model.PSSExtractDocumentBGPath");
+            background-repeat: no-repeat;
+            background-size: 102% 102%;
+            background-position: center;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table thead tr th {
+            padding: 15px 5px;
+            text-align: left;
+        }
+
+        table tbody tr td {
+            padding: 25px 5px;
+        }
+
+        table tbody tr td:not(:nth-child(1)) {
+            text-align: left;
+        }
+
+        .pt-4,
+        .py-4 {
+            padding-top: 1.5rem !important;
+        }
+
+        .pt-2,
+        .py-2 {
+            padding-top: .5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .mt-4,
+        .my-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        .blue-font {
+            color: #000D31;
+        }
+
+        .extract-category-val { font-weight: bold; }
+
+        table tbody tr td{ padding: 0; width: 33.33%; }
+
+        .padding-left-15 { padding-left: 15%; }
+
+        .issued-by-blue-strip-1{
+            width: 61px;
+    background-color: #2145A9;
+    height: 0.5px;
+    position: absolute;
+    top: -6px;
+    left: 322px;
+        }
+
+        .issued-by-blue-strip-2{
+            width: 61px;
+    background-color: #2145A9;
+    height: 0.5px;
+    position: absolute;
+    top: -6px;
+    left: 464px;
+        }
+
+        .issued-by-blue-strip-container{
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper-payment">
+
+        <div class="content-payment">
+            <div class="ext-document">
+                <div class="ext-document-body">
+                    <div class="ext-document-content" style="position:relative">
+                        <div style="text-align:center;height: 260px;">
+                            <div style="text-align:center">
+                                <img class="logo mt-4" src="@Model.LogoURL" alt="Logo"
+                                    style="height:auto; width:80px" />
+                                <h6 style="font-weight:bold;font-size:14px;margin-top: 0;">THE NIGERIA POLICE</h6>
+                            </div>
+
+                            <p class="mb-0" style="margin-top:45px;font-size: 28px;font-weight:bold">EXTRACT FROM POLICE DIARY</p>
+                        </div>
+                        <div style="width:100%; height: 90px;padding-top:10px;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td><small>Issued by</small></td>
+                                    <td class="padding-left-15"><small>Issued Date</small></td>
+                                    <td class="padding-left-15"><small>Document No</small></td>
+                                </tr>
+                                <tr>
+                                    <td><p class="my-0 blue-font" style="font-size:14px;font-weight:bold">@Model.CommandName.ToUpper(),<br />@Model.CommandStateName.ToUpper() STATE COMMAND</p></td>
+                                    <td class="padding-left-15"><p class="my-0 blue-font" style="font-size:14px;font-weight:bold">@Model.ApprovalDateString</p></td>
+                                    <td class="padding-left-15"><p class="my-0 blue-font" style="font-size:14px;font-weight:bold">@Model.ApprovalNumber</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:100%; height:20px">
+                            <img src="@Model.PSSExtractDocumentStripURL" style="width:100%" />
+                        </div>
+                        <div style="width:100%; height: 50px;padding-top:10px;">
+                            <div class="blue-font" style="float:left;width:25%">
+                                <p class="my-0" style="font-size:14px">Diary S/No. <span
+                                        style="font-weight:bold">@Model.DiarySerialNumber</span></p>
+                            </div>
+                            <div style="float: left;width:25%;text-align: center;">
+                                <p class="my-0" style="font-size:14px">Date <span
+                                        style="font-weight:bold">@Model.IncidentDate</span></p>
+                            </div>
+                            <div style="float: left;width:25%;text-align: center;">
+                                <p class="my-0" style="font-size:14px">Time <span style="font-weight:bold">@Model.IncidentTime</span>
+                                </p>
+                            </div>
+                            <div style="float:right;width:25%;text-align: center;">
+                                <p class="my-0" style="font-size:14px">C/R <span style="font-weight:bold">@Model.CrossRef</span></p>
+                            </div>
+                        </div>
+                        <div
+                            style="text-align:center; padding-bottom: 15px; padding-left: 0; padding-right: 0; padding-top: 30px; font-size:24px; font-weight: bold;">
+                            <hr style="float:left;width:35%;border-top:1.5px solid #2145A9" />
+                            <p class="my-0" style="float:left;width:30%">Details of Entries</p>
+                            <hr style="float:left;width:35%;border-top:1.5px solid #2145A9" />
+                            <br />
+                        </div>
+                        <div style="min-height:200px">
+                            <p>
+                                <span class="extract-category-val">@Model.ExtractCategoriesConcat</span>
+                            </p>
+                            <p style="line-height: 1.95;margin-top: 0;">@Model.Content</p>
+                        </div>
+                        <div style="width:100%; height:50px;text-align: center; margin-top: 70px; margin-bottom: 30px;">
+                            <img src="@Model.DPOSignatureImageSrc" style="height:50px;width:auto;margin-bottom: 10px" />
+                            <p class="my-0 blue-font" style="font-weight: bold"><span>@Model.DPORankCode</span>. @Model.DPOName</p>
+                            <div class="issued-by-blue-strip-container"><hr class="issued-by-blue-strip-1" /><p style="display: inline-block; margin-bottom:5px">ISSUED BY</p><hr class="issued-by-blue-strip-2"/></div>
+                            <p class="blue-font" style="font-size: 14px;margin-bottom: 5px; margin-top: 1px;">@Model.CommandName.ToUpper(),</p>
+                            <p class="my-0 blue-font" style="font-size: 14px;">@Model.CommandStateName.ToUpper() STATE COMMAND</p>
+                        </div>
+                        <div style="text-align: center;margin-top: 150px;"><small class="blue-font" style="font-size: 10px;font-weight: 500;">This Extract
+                                is issued for the attention/information of the general public/concerned/relevant
+                                body(ies)/organization(s)</small></div>
+                        <div style="width:100%;text-align: center;position:relative;height: 70px;padding-top:50px">
+                            <p class="blue-font" style="display: inline-block; margin-top: 0; margin-bottom: 0; margin-left: 15px;font-size: 14px;">
+                                To validate this document, please visit: <i class="blue-font">@Model.ValidateDocumentUrl</i></p>
+                        </div>
+                        <div style="width: 100%; height: 40px;">
+                        </div>
+                        <div>
+                            <img src="@Model.PossapLogoUrl"
+                                style="height:50px;width:auto; display: inline-block;position: absolute;bottom: -5px;left: 240px;" />
+                            <p class="blue-font" style="position:absolute;bottom:-5px;left:300px;font-size: 14px">
+                                Powered by Police Specialized Services Automation Project (POSSAP)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top">
+        </div>
+    </div>
+</body>
+</html>

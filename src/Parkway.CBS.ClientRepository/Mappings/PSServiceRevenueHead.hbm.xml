@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.PSServiceRevenueHead, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSServiceRevenueHead" lazy="false" >
+		<id name="Id" column="Id" type="Int32">
+			<generator class="identity"/>
+		</id>
+
+		<property name="Description" column="Description" />
+		<property name="IsActive" column="IsActive" />
+
+		<many-to-one name="FlowDefinitionLevel" column="FlowDefinitionLevel_Id"/>
+		<many-to-one name="Service" column="Service_Id"/>
+		<many-to-one name="RevenueHead" column="RevenueHead_Id"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,11 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group" style="margin-top:30px">
+    <label for="proofOfResidence">Upload Proof of Residence<span class="required-sym">*</span></label>
+    <div class="upload-file-container">
+        <input type="file" id="proofOfResidence" name="proofOfResidenceFile" accept=".pdf,.png, .jpeg, .jpg">
+        <div class="proof-of-residence-thumbnail proof-of-residence-preview-document-embed"><span class="embed-overlay"></span><embed src='/media/images/cloud_upload.svg' id="proofOfResidenceThumbnail" /></div>
+    </div>
+    <small class="form-text text-muted">Add a copy of your proof of residence here. Accepted documents includes Tax Receipt, Bank Statement, Phone/Utility Bill, School Admission, School/Employment ID and Resident Visa/Card. Maximum size: 2MB</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("ProofOfResidenceFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

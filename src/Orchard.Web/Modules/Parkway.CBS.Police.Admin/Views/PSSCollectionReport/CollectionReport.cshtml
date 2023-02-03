@@ -1,0 +1,347 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Police.Admin.VM.CollectionReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Collection Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.Admin.Reports.LGA.Commands.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var isAdmin = true;
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">From</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.From" name="from" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">To</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.End" name="end" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select Revenue Head</b>
+                <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                <select name="SelectedRevenueHead" class="form-control selectBox">
+                    <option value="" disabled>Select a Revenue Head</option>
+                    <option value="0" @(Model.SelectedRevenueHead == "0" ? "selected" : "")>All Revenue Heads</option>
+                    @foreach (var item in Model.RevenueHeads)
+                    {
+                        <option value="@item.Id" @(Model.SelectedRevenueHead == item.Id.ToString() ? "selected" : "")>@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by Invoice Number</b>
+                @Html.TextBox("InvoiceNumber", Model.InvoiceNumber, new { @class = "form-control", @placeholder = "Search by Invoice Number" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">State</b>
+                <div class="form-group">
+                    <select class="form-control" name="State" id="state">
+                        <option selected value="0">All States</option>
+                        @foreach (var item in Model.StateLGAs)
+                        {
+                            <option value="@item.Id" @(Model.State == item.Id ? "selected" : "")>@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">LGA</b>
+                <div class="form-group">
+                    <select class="form-control" name="LGA" id="lga">
+                        <option selected value="0">All LGAs</option>
+                        @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                        {
+                            foreach (var item in Model.ListLGAs)
+                            {
+                                <option value="@item.Id" @(Model.LGA == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select Command</b>
+                <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                <select class="form-control" id="commands" name="SelectedCommand">
+                    @if (Model.Commands != null && Model.Commands.Any())
+                    {
+                        <option value="0">All Commands</option>
+                        foreach (var item in Model.Commands)
+                        {
+                            <option value="@item.Id" @(Model.SelectedCommand == item.Id.ToString() ? "selected" : "")>@item.Name (@item.Code)</option>
+
+                        }
+                    }
+                    else if (Model.SelectedCommand == "0")
+                    {
+                        <option value="0">All Commands</option>
+                    }
+                    else
+                    {
+                        <option value="">Select a Command</option>
+                    }
+                </select>
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                <div id="searchError"></div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <b style="color:#e97d68;">Search by Receipt Number  </b>
+                    @Html.TextBox("ReceiptNumber", Model.ReceiptNumber, new { @class = "form-control", @placeholder = "Enter Receipt Number ", @name = "receiptNumber" })
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by Date</b>
+                <select id="filterResults" name="PaymentDirection" class="form-control selectBox">
+                    @Html.SelectOption(Model.PaymentDirection, Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.PaymentDate, T(Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.PaymentDate.ToDescription()).ToString())
+                    @Html.SelectOption(Model.PaymentDirection, Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.TransactionDate, T(Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.TransactionDate.ToDescription()).ToString())
+                    @Html.SelectOption(Model.PaymentDirection, Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.CreatedAtUtc, T(Parkway.CBS.Core.Models.Enums.CollectionPaymentDirection.CreatedAtUtc.ToDescription()).ToString())
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by File Number</b>
+                @Html.TextBox("FileNumber", Model.FileNumber, new { @class = "form-control", @placeholder = "Search by File Number" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <b style="color:#e97d68;">Search by Payment Reference</b>
+                    @Html.TextBox("PaymentRef", Model.PaymentRef, new { @class = "form-control", @placeholder = "Enter Payment Reference", @name = "paymentRef" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">&nbsp;</b>
+                <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("CollectionReport", "PSSCollectionReport" )">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <button class="btn btn-success" style="margin-left: 10px" title="Export to excel" formaction="@Url.Action("PSSCollectionReportDownload", "PSSFileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+                    <i class=" fa fa-file-excel-o"></i>
+                    <span>Excel</span>
+                </button>
+                <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF" formaction="@Url.Action("PSSCollectionReportDownload", "PSSFileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+                    <i class=" pdf fa fa-file-pdf-o"></i>
+                    <span>PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                PAYMENT DATE
+                            </th>
+                            <th>
+                                RECEIPT NUMBER
+                            </th>
+                            <th>
+                                PAYER NAME
+                            </th>
+                            <th>
+                                COMMAND
+                            </th>
+                            <th>
+                                REVENUE HEAD
+                            </th>
+                            <th>
+                                PAYMENT REFERENCE
+                            </th>
+                            <th>
+                                PAYMENT METHOD
+                            </th>
+                            <th>
+                                INVOICE NUMBER
+                            </th>
+                            <th>
+                                BANK NAME
+                            </th>
+                            <th>
+                                FILE NUMBER
+                            </th>
+                            <th>
+                                AMOUNT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model.Reports != null && Model.Reports.Count() > 0)
+                        {
+                            foreach (var item in Model.Reports)
+                            {
+                        <tr>
+                            <td>
+                                @item.PaymentDate.ToString("dd MMM yyyy HH:mm")
+                            </td>
+                            <td>
+                                @item.ReceiptNumber
+                            </td>
+                            <td>
+                                @item.PayerName
+                            </td>
+                            <td>
+                                @item.CommandName
+                            </td>
+                            <td>
+                                @item.RevenueHeadName
+                            </td>
+                            <td>
+                                @item.PaymentReference
+                            </td>
+                            <td>
+                                @item.PaymentProviderName
+                            </td>
+                            <td>
+                                @item.InvoiceNumber
+                            </td>
+                            <td>
+                                @item.Bank
+                            </td>
+                            <td>
+                                @item.FileRefNumber
+                            </td>
+                            <td style="text-align:right">
+                                @String.Format("{0:n2}", item.AmountPaid)
+                            </td>
+                        </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="11">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="summary">Total Number of Payments: @String.Format("{0:n2}", Model.TotalRequestRecord) </p>
+            <p class="summary">Total Amount Paid: ₦ @String.Format("{0:n2}", Model.TotalRequestAmount) </p>
+        </div>
+    </div>
+
+</div>
+}
+@Display(Model.Pager)

@@ -1,0 +1,46 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+@*<div class="col-md-6">
+    <p class="mb-0 title">Tribe:</p>
+    <p class="details-content">@Model.TribeValue</p>
+</div>*@
+<div class="col-md-6">
+    <p class="mb-0 title">Country of Origin:</p>
+    <p class="details-content">@Model.SelectedCountryOfOriginValue</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">State of Origin:</p>
+    <p class="details-content">@Model.SelectedStateOfOriginValue</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Destination Country:</p>
+    <p class="details-content">@Model.DestinationCountryValue</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Reason:</p>
+    <p class="details-content">@Model.ReasonForInquiryValue</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Place of Birth:</p>
+    <p class="details-content">@Model.PlaceOfBirth</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Date of Birth:</p>
+    <p class="details-content">@Model.DateOfBirth</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Country of Passport:</p>
+    <p class="details-content">@Model.SelectedCountryOfPassportValue</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Passport Number:</p>
+    <p class="details-content">@Model.PassportNumber</p>
+</div>
+@if (Model.PreviouslyConvicted)
+{
+    <div class="col-md-6">
+        <p class="mb-0 title">Previous Conviction History</p>
+        <p class="details-content">@Model.PreviousConvictionHistory</p>
+    </div>
+}
+

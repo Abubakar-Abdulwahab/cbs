@@ -1,0 +1,44 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Module.ViewModels.SearchInvoicePaymentVM
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    //Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    //Script.Require("CBS.MDA.Settings.Script").AtFoot();
+
+    //Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    //Script.Require("CBS.MDA.BillingDatepicker.Script");
+    //Script.Require("CBS.Admin.AddPayment.Script");
+    //Script.Require("CBS.Admin.Client.SearchInvoicePayment.Script");
+    Layout.Title = "Make Payment: search for invoice".ToString();
+
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("SearchInvoicePayment", "Payment", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { }))
+{
+    <div id="container">
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Search for the invoice number (BIN) you want to add payments for</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label style="width:auto !important">@T("Enter Invoice Number")</label>
+                        @Html.TextBoxFor(m => m.InvoiceNumber, new { @class = "text large", @type = "text", @maxlength = "50" })
+                        @Html.Hint(T("Enter the invoice number (BIN) the user has previously generated."))
+                        @Html.ValidationMessageFor(m => m.InvoiceNumber, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Search")</button>
+    </fieldset>
+}
+

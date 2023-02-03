@@ -1,0 +1,152 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@Model Parkway.CBS.Police.Admin.VM.RequestReportVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body, td, th, div, p {
+            font-family: 'Open Sans', Arial;
+            font-size: 8px;
+            direction: ltr;
+            line-height: 1.65;
+        }
+
+        body {
+            color: #000;
+            padding: 0px !important;
+            margin: 0px !important;
+            background-color: #fff;
+            display: block;
+        }
+
+        .container {
+            position: relative;
+            margin-right: 0;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        p {
+            padding-top: 10px;
+            line-height: 1.85;
+        }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        .bolder {
+            font-weight: 800;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
+
+        .no-margin {
+            margin: 0;
+        }
+
+        .no-border {
+            border: none;
+        }
+
+        .border-left {
+            border: 0;
+            border-color: #999999;
+            border-left-color: #999999;
+            border-left-width: 1px;
+            border-left-style: solid;
+        }
+
+        .border-right {
+            border: 0;
+            border-color: #999999;
+            border-right-color: #999999;
+            border-right-width: 1px;
+            border-right-style: solid;
+        }
+
+        .border-bottom {
+            border: 0;
+            border-color: #999999;
+            border-bottom-color: #999999;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+
+        .border-top {
+            border: 0;
+            border-color: #999999;
+            border-top-color: #999999;
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+
+        td {            
+            vertical-align: top;
+            text-transform:capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <!-- The logo path has to be absolute path -->
+                    <td align="center" style="padding: 10px;"><img src="@Model.LogoURL" width="83px" alt="" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td align="center" style="padding: 10px;font-size:12px;"><strong>@Model.TenantName Central Billing System Requests</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            <table style="width:100%;" cellpadding="3" cellspacing="0">
+                <tbody>
+                    <tr style="font-weight: bold">
+                        <td class="border-top border-bottom" nowrap style="white-space: nowrap; width:12%;">REQUEST DATE</td>
+                        <td class="border-top border-bottom" style="width:14%;">APPLICANT NAME</td>
+                        <td class="border-top border-bottom" style="width:14%;">FILE NUMBER</td>
+                        <td class="border-top border-bottom" style="width:14%;">APPROVAL NUMBER</td>
+                        <td class="border-top border-bottom" style="width:16%;">REQUEST STATUS</td>
+                        <td class="border-top border-bottom" style="width:16%;">COMMENT</td>
+                        <td class="border-top border-bottom" style="width:15%;">SERVICE NAME</td>
+                        
+                    </tr>
+                    @foreach (var item in Model.Requests)
+                    {
+                        <tr>
+                            <td class="border-top"> @item.RequestDate.ToString("dd MMM yyyy HH:mm")</td>
+                            <td class="border-top">@item.CustomerName</td>
+                            <td class="border-top">@item.FileRefNumber</td>
+                            <td class="border-top">@item.ApprovalNumber</td>
+                            <td class="border-top">@((Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus)item.Status)</td>
+                            <td class="border-top">@item.Comment</td>
+                            <td class="border-top">@item.ServiceName</td>
+                        </tr>
+                    }
+                    <tr><td colspan="10" class="border-top">&nbsp;</td></tr>
+                </tbody>
+            </table>
+        </p>
+        
+                <p class="summary" style="text-align:center; padding-top:5px;"><i>Total Number of Requests Generated: @String.Format("{0:n2}", Model.TotalRequestRecord) </i></p>
+                <p class="summary" style="text-align:center; padding-top:5px;"><i>Total Request Amount of Requests Generated: ₦ @String.Format("{0:n2}", Model.TotalRequestAmount) </i></p>
+        <p style="text-align:center; padding-top:5px;">
+            <i>This report was generated @DateTime.Now.ToString("MMM d, yyyy @ HH:mm:ss") on @Model.TenantName Central Billing System</i><br />
+        </p>
+    </div>
+</body>
+</html>

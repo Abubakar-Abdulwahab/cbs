@@ -1,0 +1,12 @@
+﻿Name: Parkway Central Billing System Core
+AntiForgery: enabled
+Author: Parkway Projects Limited
+Website: http://parkwayprojects.com/
+Version: 1.0
+OrchardVersion: 1.0
+Description: Parkway Projects CBS Core Module
+Features:
+    Parkway.CBS.Core:
+		Name: Parkway CBS Core
+        Description: Core module that performs data centric actions.
+		Category: Parkway

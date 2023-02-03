@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.NagisOldInvoiceSummary, Parkway.CBS.Core" table="Parkway_CBS_Core_NagisOldInvoiceSummary" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="NagisInvoiceNumber" column="NagisInvoiceNumber" />
+    <property name="TotalAmount" column="TotalAmount" />
+    <property name="AmountDue" column="AmountDue" />
+    <property name="GroupId" column="GroupId" />
+    <property name="RevenueHead_Id" column="RevenueHead_Id" />
+    <property name="MDAId" column="MDAId" />
+    <property name="ExpertSystemId" column="ExpertSystemId" />
+    <property name="StatusId" column="StatusId" />
+    <property name="TaxEntityCategory_Id" column="TaxEntityCategory_Id" />
+    <property name="InvoiceDescription" column="InvoiceDescription" />
+    <property name="NumberOfItems" column="NumberOfItems" />
+    <property name="InvoiceUniqueKey" column="InvoiceUniqueKey" />
+    <property name="InvoiceNumber" column="InvoiceNumber"/>
+    <property name="CashflowInvoiceIdentifier" column="CashflowInvoiceIdentifier" />
+    <property name="PrimaryContactId" column="PrimaryContactId" />
+    <property name="CashflowCustomerId" column="CashflowCustomerId" />
+    <property name="DueDate" column="DueDate" />
+    <property name="InvoiceURL" column="InvoiceURL" />
+
+    <many-to-one name="NagisDataBatch" column="NagisDataBatch_Id"/>
+    <many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+
+    <set name="InvoiceItems" lazy="false">
+      <key column="NagisOldInvoiceSummary_Id"/>
+      <one-to-many class="Parkway.CBS.Core.Models.NagisOldInvoices"/>
+    </set>
+  </class>
+</hibernate-mapping>

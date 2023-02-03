@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.EscortAmountChartSheet, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_EscortAmountChartSheet" lazy="false" >
+    <id name="Id" column="Id" type="Int32">
+      <generator class="identity"/>
+    </id>
+
+    <property name="Rate" column="Rate" />
+
+    <many-to-one name="CommandType" column="CommandType_Id"/>
+    <many-to-one name="PSSEscortDayType" column="PSSEscortDayType_Id"/>
+  </class>
+</hibernate-mapping>

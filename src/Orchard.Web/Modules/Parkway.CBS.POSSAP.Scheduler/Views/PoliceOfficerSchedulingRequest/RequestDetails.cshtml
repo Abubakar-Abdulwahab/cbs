@@ -1,0 +1,162 @@
+﻿@{
+    Layout.Title = "Request Details";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+
+</style>
+
+<div id="container">
+    <div class="row">
+        <table id="serviceDetailsSection" class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader" colspan="5">DETAILS OF SPECIAL DUTY/ESCORT SERVICE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="customerName">Customer Name</label>
+                        <p class="extend-width">FirstName LastName</p>
+                    </td>
+                    <td>
+                        <label for="serviceType">Service Type</label>
+                        <p class="extend-width">Escort</p>
+                    </td>
+                    <td>
+                        <label for="start">Start Date</label>
+                        <p class="extend-width">20/08/2021</p>
+                    </td>
+                    <td>
+                        <label for="end">End Date</label>
+                        <p class="extend-width">20/09/2021</p>
+                    </td>
+                    <td>
+                        <label for="location">Location</label>
+                        <p class="extend-width">No 11 somewhere in nigera</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader" colspan="6">SELECT OFFICERS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="state">State</label>
+                        <select id="state" name="state" class="custom-select extend-width">
+                            <option value="0">Select State</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="lga">LGA</label>
+                        <select id="lga" name="lga" class="custom-select extend-width">
+                            <option value="0">Select LGA</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="srchCmd">Command</label>
+                        <select class="extend-width" id="commands" name="SelectedCommand">
+                            <option value="">Select a Command</option>
+                        </select>
+                        <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        <div class="container-fluid no-padding validation-msg"></div>
+                        <div id="searchError"></div>
+                    </td>
+                    <td>
+                        <label for="officerRank">Rank</label>
+                        <select id="officerRank" name="officerRank" class="extend-width">
+                            <option value="0">Select Rank</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="policeOfficer">Select Police officer</label>
+                        <select id="policeOfficer" name="policeOfficer" class="extend-width">
+                            <option value="0">Select officer</option>
+                        </select>
+                        <span name="profileloader" id="secondProfileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        <div id="policeSearchError"></div>
+                    </td>
+                    <td>
+                        <fieldset>
+                            <button type="button" id="addOfficerBtn" style="position:absolute;bottom:9px">+ Add</button>
+                        </fieldset>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="items" id="officerTable">
+            <tr>
+                <th>NAME OF OFFICERS</th>
+                <th>SERVICE NUMBER</th>
+                <th>RANK</th>
+                <th>GENDER</th>
+                <th>COMMAND</th>
+                <th>ACTION</th>
+            </tr>
+        </table>
+    </div>
+    <div class="action-btns">
+        <fieldset style="padding:5px">
+            <button type="button" id="saveBtn">Save</button>
+        </fieldset>
+        <fieldset style="padding:5px">
+            <button type="button" id="cancelBtn">Cancel</button>
+        </fieldset>
+    </div>
+</div>

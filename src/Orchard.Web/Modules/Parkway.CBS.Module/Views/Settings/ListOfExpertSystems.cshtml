@@ -1,0 +1,126 @@
+﻿@using System.Web.Mvc.Html
+@using System.Web.UI.WebControls
+@model Parkway.CBS.Core.HelperModels.ExpertSystemListViewModel
+
+@{
+    Style.Require("CBS.MDA.Style");
+    var userIndex = 0;
+
+    Layout.Title = T("Expert Systems").ToString();
+}
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 400px;
+        position: relative;
+        word-break: break-all;
+    }
+    button{
+        border:none;
+    }
+    /*https://www.w3schools.com/howto/howto_css_loader.asp*/
+    .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(155, 179, 108);
+        width: 10px;
+        height: 10px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    @*@Html.HiddenFor(model => model.PINViewModel.PageNumber)*@
+
+if (Model.ShowSetStateButton)
+{
+    <div class="manage">@Html.ActionLink(T("Set Tenant state settings").ToString(), "SetState", new { }, new { @class = "button primaryAction" })</div>
+}
+else
+{
+    <div class="manage">@Html.ActionLink(T("Add a new expert system").ToString(), "CreateExpertSystem", new { }, new { @class = "button primaryAction" })</div>
+}
+
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Name")</th>
+                    <th scope="col">@T("Client Id")</th>
+                    <th scope="col">@T("Client Secret")</th>
+                    <th scope="col">@T("Added By")</th>
+                    <th scope="col">@T("Actions")</th>
+                </tr>
+            </thead>
+            @if (Model.ExpertSystemSettings.Any())
+            {
+                foreach (var item in Model.ExpertSystemSettings)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.CompanyName, "EditExpertSystem", "Settings", new { identifier = item.BillingSchedulerIdentifier }, null)
+                        </td>
+                        <td>
+                            <div class="client_@userIndex">
+                                @item.ClientId
+                            </div>
+                        </td>
+                        <td>
+                            <div name="clientsecret_@userIndex" id="clientsecret_@userIndex" hidden>
+                            </div>
+                            <div>
+                                <div name="loader_@userIndex" id="loader_@userIndex" class="loader" style="position:absolute;margin-left:50px;z-index:1;right:auto;left:auto;display:none"></div>
+                                <button sm name="showsecretbtn_@userIndex" class="showsecretbtn" id="showsecretbtn_@userIndex" type="button">Show Client Secret</button>
+                            </div>
+                        </td>
+                        <td>
+                            @item.AddedBy.UserName
+                        </td>
+                        @*<td>
+                            @Html.ActionLink(T("Make Payment").ToString(), "MakePayment", "RevenueHead", new { revenueHeadSlug = 1 }, null)
+                        </td>*@
+                    <td>
+                        @Html.ActionLink(T("Assign Permissions").ToString(), "Assign", "RevenueHeadPermissions", new { expertSystemId = @item.Id }, null)
+                    </td>
+                    </tr>
+                    userIndex++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="4">@T("No record found.") </td> </tr>
+            }
+        </table>
+        @Display(Model.Pager)
+    </fieldset>
+}
+@{
+    Script.Require("CBS.MDA.Setting.Script").AtFoot();
+}

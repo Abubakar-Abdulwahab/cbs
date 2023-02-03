@@ -1,0 +1,1176 @@
+﻿@model Parkway.CBS.TIN.ViewModels.TINFormViewModel
+
+@{
+    Layout.Title = "TIN Registration Form";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+
+    Script.Require("DateTimePicker");
+    Script.Require("TINRegistration");
+    Script.Require("Plugin");
+    Script.Require("EregistryFormWizard");
+
+    Style.Require("Registration");
+    Style.Require("FormWizard");
+    Style.Require("font-awesome");
+    Style.Require("DateTimePicker");
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+
+
+    ViewData["TAxType"] = new List<SelectListItem>()
+{
+new SelectListItem { Text = "Vat", Value = "Vat"},
+};
+
+    ViewData["Empty List"] = new List<SelectListItem>()
+    {
+    };
+    ViewBag.Gender = new List<SelectListItem>()
+{
+new SelectListItem { Text = "Male", Value = "Male"},
+new SelectListItem { Text = "Female", Value = "Female"}
+
+};
+    ViewBag.MaritalStatus = new List<SelectListItem>()
+{
+new SelectListItem { Text = "Single", Value = "Single"},
+new SelectListItem { Text = "Married", Value = "Married"},
+new SelectListItem { Text = "Widowed", Value = "Widowed"},
+new SelectListItem { Text = "Divorced", Value = "Divorced"},
+
+};
+
+
+    var thisYear = DateTime.Now.Year;
+    var lastYear = thisYear - 1;
+    var upLastYear = thisYear - 2;
+
+}
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom" @*style="background-image:@("url(" + Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/banner-top.png")) + ")")"*@>
+            <h3>Register For TIN</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Register TIN</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="content-payment">
+        <div class="container form-container">
+            @using (Html.BeginForm("TIN", "TIN", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="page-body">
+                    <div id="newErrorDiv">
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div id="page-title-header">
+                                <h3 class="row-title">TAX IDENTIFICATION NUMBER REGISTRATION</h3>
+                                <h5 class="row-title row-title-right">All fields with&nbsp;<i class="red fa  fa-circle"></i>&nbsp;are required</h5>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
+                                    <ul class="steps">
+                                        @*<li data-target="#wiredstep1" class="active"><span class="title">REGISTRATION GUIDE</span><span class="chevron"></span></li>*@
+                                        <li data-target="#wiredstep1" class="active"><span class="title">PRIMARY INFORMATION</span> <span class="chevron"></span></li>
+                                        <li data-target="#wiredstep2"><span class="title">SECONDARY INFORMATION</span> <span class="chevron"></span></li>
+                                        <li data-target="#wiredstep3"><span class="title">REFERENCE</span> <span class="chevron"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-9">
+                                <div class="step-content" id="WiredWizardsteps">
+
+                                        <div class="step-pane active" id="wiredstep1" >
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-12 form-section">
+                                                    <h5 class="row-title"><span class=""></span>Direct Financial Cost (License Fee)</h5>
+                                                    Title:
+                                                    @Html.RadioButtonFor(m => m.Applicant.Title, "Mr") Mr
+                                                    @Html.RadioButtonFor(m => m.Applicant.Title, "Mrs") Mrs
+                                                    @Html.RadioButtonFor(m => m.Applicant.Title, "Miss") Miss
+                                                    @Html.RadioButtonFor(m => m.Applicant.Title, "Others") Others
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastName">Surname &nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.LastName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="FirstName">First Name &nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.FirstName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="MiddleName">Middle Name &nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.MiddleName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CompanyName">Nationality &nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.Nationality, new { htmlAttributes = new { @class = "form-control validation", Name = "Nationality" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CompanyName">Phone No (1) &nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.Phone, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Phone2">Phone No (2) </label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.Phone2, new { htmlAttributes = new { @class = "form-control", } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="StateOfOrigin">State of Origin&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.StateOfOrigin, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="MaritalStatus">Marital Status&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @*@Html.EditorFor(model => model.Applicant.MaritalStatus, new { htmlAttributes = new { @class = "form-control validation" } })*@
+                                                                    @Html.DropDownListFor(model => model.Applicant.MaritalStatus, (List<SelectListItem>)ViewBag.MaritalStatus, "Select Marital Status", new { @class = "form-control validation" })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="DateOfBirth">D.O.B&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.DateOfBirth, new { htmlAttributes = new { @class = "form-control validation Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Occupation">Ocupation&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.Occupation, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Sex">Gender&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.DropDownListFor(model => model.Applicant.Sex, (List<SelectListItem>)ViewBag.Gender, "Select Gender", new { @class = "form-control validation" })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Email">Email&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.Email, new { htmlAttributes = new { @class = "form-control validation email " } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="MotherMaidenName">Mothers Maiden Name&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.MotherMaidenName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="MotherName">Mother's Name&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.MotherName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        @*@Html.HiddenFor(model => model.LicenceIdentifier)
+                            @Html.HiddenFor(model => model.MinistryIdentifier)*@
+                                                        <div class="col-sm-12 form-section-line"></div>
+                                                        <div class="col-sm-12">
+                                                            <h5 class="row-title"><span class=""></span>Residential Address</h5>
+                                                        </div>
+
+                                                        <div class="stateCascade row col-sm-12">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="State"><i class="field-compulsory red fa fa-circle"></i>State&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.DropDownListFor(model => model.ResidentialAddress.State, (List<SelectListItem>)ViewData["Empty List"], "Select State", new { @class = "form-control validation" })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="LGA"><i class="field-compulsory red fa fa-circle"></i>LGA&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.DropDownListFor(model => model.ResidentialAddress.LGA, (List<SelectListItem>)ViewData["Empty List"], "Select LGA", new { @class = "form-control validation" })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Ward">Ward&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ResidentialAddress.Ward, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="City">City/Town/Area&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ResidentialAddress.City, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="StreetName">Street Name&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ResidentialAddress.StreetName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="HouseNumber">House No.&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ResidentialAddress.HouseNumber, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="PreviousTaxPayerNumber">Previous Tax Payer Number&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.PreviousTaxPayerNumber, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CompanyName">Issuing Authority&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.IssuingAuthority, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 form-section-line"></div>
+                                                        <div class="col-sm-12">
+                                                            <h5 class="row-title"><span class=""></span>Identification Card</h5>
+
+                                                            @*<h5 class="row-title"> </h5>*@
+                                                            <span class=""></span>
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "National ID") National ID
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "Drivers License") Drivers License
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "International Passport") International Passport
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "Government Parastatal") Government Parastatal
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "Resident Permit") Resident Permit
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "Registered Organisation") Registered Organisation
+                                                            @Html.RadioButtonFor(m => m.Applicant.IdentificationType, "Letter From Recognised Individual") Letter From Recognised Individual
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="IdentificationNumber">ID Number&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.Applicant.IdentificationNumber, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="IssuanceDate">Issuance Date&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.IssuanceDate, new { htmlAttributes = new { @class = "form-control validation Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="ExpiryDate">ExpiryDate&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control validation Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="PlaceOfIssuance">Place of Issuance&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.PlaceOfIssuance, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="IssuingAuthorityIdentification">ID Issuing Authority&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.IssuingAuthorityIdentification, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 form-section-line"></div>
+                                                        <div class="col-sm-12">
+                                                            <h5 class="row-title"><span class=""></span>Tax Assessment/Payment Details</h5>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastAssessmentDate">Last Assessment Date</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.LastAssessmentDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastAssessmentAmount">Last Assessment Amount</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.LastAssessmentAmount, new { htmlAttributes = new { @class = "form-control " } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastPaymentDate">Last Payment Date</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.LastPaymentDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastPaymentAmount">Last Payment Amount</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.LastPaymentAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="TaxType">Tax Type</label>
+                                                                <span class="input-icon icon-right">
+
+                                                                    @Html.EnumDropDownListFor(model => model.TaxType, "Select Tax Type", new { @class = "form-control" })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        @*<div class="row col-sm-12">*@
+                                                        <div class=" col-sm-12">
+                                                            @*<div class="col-sm-6">*@
+
+                                                            <div class="col-sm-12">
+                                                                <h5 class="row-title toggle-icon"><span class=""> <i class="fa  fa-minus-square " id="RCTOGGLE"></i> </span>Total Income for the Past Three Years</h5>
+                                                            </div>
+
+                                                            <div class="col-sm-12">
+
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Year</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @Html.TextBox("testModel", thisYear, new { @class = "form-control", @value = thisYear, @readonly = true })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Income</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @*@Html.TextBoxFor(model => model.testModel, new { @class = "form-control validation", @value = DateTime.Now.Year - 1 })*@
+                                                                                @Html.TextBox("testModel", "", new { @class = "form-control validation" })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Year</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @*@Html.TextBoxFor(model => model.testModel, new { @class = "form-control validation", @value = DateTime.Now.Year - 2 })*@
+                                                                                @Html.TextBox("testModel", lastYear, new { @class = "form-control", @value = lastYear, @readonly = true })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Income</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @*@Html.DropDownListFor(model => model.testModel, (List<SelectListItem>)ViewData["TAxType"], "", new { @class = "form-control validation" })*@
+                                                                                @Html.TextBox("testModel", "", new { @class = "form-control validation" })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Year</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @Html.TextBox("testModel", upLastYear, new { @class = "form-control", @value = upLastYear, @readonly = true })
+                                                                                @*@Html.TextBoxFor(model => model.testModel, new { @class = "form-control validation" })*@
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="Sector">Income</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @Html.TextBox("testModel", "", new { @class = "form-control validation" })
+                                                                                @* @Html.TextBoxFor(model => model.testModel, new { @class = "form-control validation" })*@
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            @*</div>  *@
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="step-pane" id="wiredstep2">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-12 form-section">
+                                                    <h5 class="row-title"><span class=""></span>Tax Representative Details</h5>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="TaxRepresentativeName">Name&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.TaxRepresentativeName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="TaxRepresentativeTin">TIN&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.TaxRepresentativeTin, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="RepType">Rep.Type&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepType, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="ReasonForRepresentation">Reason&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.ReasonForRepresentation, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12 form-section-line"></div>
+                                                    <div class="col-sm-12">
+                                                        <h5 class="row-title"><span class=""></span>Representative Details </h5>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="stateCascade2 row col-sm-12">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="State"><i class="field-compulsory red fa fa-circle"></i>State&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.DropDownListFor(model => model.RepresentativeAddress.State, (List<SelectListItem>)ViewData["Empty List"], "Select State", new { @class = "form-control validation" })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="LGA"><i class="field-compulsory red fa fa-circle"></i>LGA&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.DropDownListFor(model => model.RepresentativeAddress.LGA, (List<SelectListItem>)ViewData["Empty List"], "Select LGA", new { @class = "form-control validation" })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Ward">Ward&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativeAddress.Ward, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="City">City/Town/Area&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativeAddress.City, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="StreetName">Street Name&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativeAddress.StreetName, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="HouseNumber">House No.&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativeAddress.HouseNumber, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="RepresentativePhoneNumber1">Phone Number (1)&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativePhoneNumber1, new { htmlAttributes = new { @class = "form-control validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="RepresentativePhoneNumber2">Phone Number (2)</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativePhoneNumber2, new { htmlAttributes = new { @class = "form-control" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="RepresentativeEmail">Email Address&nbsp; <i class="field-compulsory red fa  fa-circle"></i></label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.RepresentativeEmail, new { htmlAttributes = new { @class = "form-control email validation" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="col-sm-12 form-section-line"></div>
+                                                    <div class="col-sm-12">
+                                                        <h5 class="row-title"><span class=""></span>Source Of Income</h5>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            Are you an employee?
+                                                            @Html.RadioButtonFor(m => m.SourceOfIncome, "Employed", new { @id = "Employed"}) Yes
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            Are you self employed?
+                                                            @Html.RadioButtonFor(m => m.SourceOfIncome, "SelfEmployed", new { @id = "SelfEmployed" }) Yes
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            Are you an organisation owner/partner?
+                                                            @Html.RadioButtonFor(m => m.SourceOfIncome, "Owner_Partner", new { @id = "Owner_Partner" }) Yes
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            No Income?
+                                                            @Html.RadioButtonFor(m => m.SourceOfIncome, "None", new { @id = "NoIncome", @checked = "checked" }) Yes
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="paidEmployment">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="EmployerName">Employer Name</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.EmployerName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="EmployerTIN">Employer TIN</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.EmployerTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="EmploymentDate">Start Date Of Employment</label>
+                                                                <span class="input-icon icon-right">
+                                                                    @Html.EditorFor(model => model.EmploymentDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                    <i class="red fa  fa-calendar-minus-o"></i>
+
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="selfEmployment">
+                                                        <div class="col-sm-12 form-section-line"></div>
+                                                        <div class="col-sm-6">
+                                                            <h5 class="row-title toggle-icon"><span class=""> <i class="fa  fa-minus-square " id="RCTOGGLE"></i> </span>Self Employment Details</h5>
+                                                        </div>
+                                                        <div class="col-sm-6" style="text-align:right;">
+                                                            @*<h5 class="row-title toggle-icon"><span class=""></span>fill this section only if you are self employed</h5>*@
+                                                            <p>fill this section only if you are self employed</p>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-xs-12">
+                                                            <div class="row">
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="BusinessName">Name</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="BusinessCommencementDate">Commencement Date</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessCommencementDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                            <i class="red fa  fa-calendar-minus-o"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="CompanyName">State</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @Html.EditorFor(model => model.BusinessAddress.State, new { htmlAttributes = new { @class = "form-control" } })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="LGA">LGA</label>
+                                                                            <span class="input-icon icon-right">
+                                                                                @Html.EditorFor(model => model.BusinessAddress.LGA, new { htmlAttributes = new { @class = "form-control" } })
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="Ward">Ward</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessAddress.Ward, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="City">City/Town/Area</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessAddress.City, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="StreetName">Street Name</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessAddress.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="HouseNumber">House Number</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessAddress.HouseNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="BusinessSector">Sector</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.BusinessSector, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="LineOfBusiness">Line of Business</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.LineOfBusiness, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="NumberOfEmployees">Number of employees</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.NumberOfEmployees, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="ownership">
+                                                        <div class="col-sm-12 form-section-line"></div>
+                                                        <div class="col-sm-3">
+                                                            <h5 class="row-title toggle-icon"><span class=""> <i class="fa  fa-minus-square " id="RCTOGGLE"></i> </span>Ownership Details</h5>
+                                                        </div>
+                                                        <div class="col-sm-9" style="text-align:right;">
+                                                            @*<h5 class="row-title toggle-icon"><span class=""></span>fill this section only if you are a full or part owner of a registered business</h5>*@
+                                                            <p>fill this section only if you are a full or part owner of a registered business</p>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-xs-12">
+
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="OwnershipName">Ownership Name</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.OwnershipName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="CompanyTIN">TIN</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.CompanyTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="SharePercentage">Shareholding (%)</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.SharePercentage, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="OwnershipStartDate">Date</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.OwnershipStartDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                            <i class="red fa  fa-calendar-minus-o"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12 form-section-line"></div>
+
+                                                                <div class="col-sm-12">
+                                                                    <h5 class="row-title"><span class=""></span>Assets Details</h5>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="TypeOfAsset">Type Of Asset</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.AssetOwned.TypeOfAsset, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-5">
+                                                                    <div class="form-group">
+                                                                        <label for="LocationOfAsset">Location Of Assets</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.AssetOwned.LocationOfAsset, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-1">
+                                                                    <div class="form-group">
+                                                                        <i id="add_assets" class="align-box red fa  fa-plus-circle"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="MarketValue">Market value (₦)</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.AssetOwned.MarketValue, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-5">
+                                                                    <div class="form-group">
+                                                                        <label for="OwnershipDate">Start Date of Ownership</label>
+                                                                        <span class="input-icon icon-right">
+                                                                            @Html.EditorFor(model => model.AssetOwned.OwnershipDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                            <i class="red fa  fa-calendar-minus-o"></i>
+
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-11">
+                                                                    <div class="row ts">
+                                                                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                                                                            <div class="table-scrollable dynamic-table" rel="GetAssets" data-holderKey="AssetTableDataHolder">
+                                                                                <table id="Assets_Table" class="table table-striped table-bordered table-hover">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col"></th>
+                                                                                            <th scope="col"><strong>@T("Type of Asset")</strong></th>
+                                                                                            <th scope="col"><strong>@T("Location of Asset")</strong></th>
+                                                                                            <th scope="col"><strong>@T("Market Value")</strong></th>
+                                                                                            <th scope="col"><strong>@T("Start Date Of Ownership")</strong></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.HiddenFor(m => m.AssetsTable, new { @id = "AssetsTable", @class = "AssetTableDataHolder" })
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-sm-12 form-section-line"></div>
+                                                    <div class="col-sm-3">
+                                                        <h5 class="row-title toggle-icon"><span class=""> <i class="fa  fa-minus-square " id="RCTOGGLE"></i> </span>Dependent/Children/Spouse</h5>
+                                                    </div>
+                                                    <div class="col-sm-9" style="text-align:right;">
+                                                        @*<h5 class="row-title toggle-icon"><span class=""></span>fill this section only if you have a dependant or spouse</h5>*@
+                                                        <p>fill this section only if you have a dependant or spouse</p>
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildLastName">Dep/Child SurName</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-5">
+                                                                <div class="form-group">
+                                                                    <label for="DepChild1FirstName">First Name</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChild1FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-1">
+                                                                <div class="form-group">
+                                                                    <i id="add_Dependants" class="align-box red fa  fa-plus-circle"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildMiddleName">Middle Name</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-5">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildState">State of Origin</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildState, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildDateofBirth">DOB</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildDateofBirth, new { htmlAttributes = new { id = "DepChildDateofBirth", @class = "form-control Date-Field", Name = "DepChildDateofBirth" } })
+
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-5">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildTIN">TIN</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="DepChildRelationship">Relationship Type</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.DepChildRelationship, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-11">
+                                                                <div class="row ts">
+                                                                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                                                                        <div class="table-scrollable dynamic-table" rel="GetDependants">
+                                                                            <table id="Dependants_Table" class="table table-striped table-bordered table-hover">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th scope="col"></th>
+                                                                                        <th scope="col"><strong>@T("Dep/Child SurName")</strong></th>
+                                                                                        <th scope="col"><strong>@T("First Name")</strong></th>
+                                                                                        <th scope="col"><strong>@T("Middle Name")</strong></th>
+                                                                                        <th scope="col"><strong>@T("State of Origin")</strong></th>
+                                                                                        <th scope="col"><strong>@T("DOB")</strong></th>
+                                                                                        <th scope="col"><strong>@T("TIN")</strong></th>
+                                                                                        <th scope="col"><strong>@T("Relationship Type")</strong></th>
+
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody></tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @Html.HiddenFor(m => m.DependantsTable, new { @id = "DependantsTable", @class = "S" })
+                                                            </div>
+
+                                                            <div class="form-section-line"></div>
+
+                                                            <div class="col-sm-12">
+                                                                <h5 class="row-title"><span class=""></span>Spouse</h5>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="SpouseSurname">Surname</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.SpouseSurname, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="CompanyName">First Name</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.SpouseFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="SpouseMiddleName">Middle Name</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.SpouseMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="CompanyName">Start Date</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control Date-Field" } })
+                                                                        <i class="red fa  fa-calendar-minus-o"></i>
+
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="CompanyName">TIN</label>
+                                                                    <span class="input-icon icon-right">
+                                                                        @Html.EditorFor(model => model.SpouseTIN, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        @*<i class="red fa  fa-calendar-minus-o"></i>*@
+
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-1">
+                                                                <div class="col-sm-1">
+                                                                    @Html.CheckBoxFor(m => m.Attestation, new { @id = "RegAttestation" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-11 val">
+                                                                <div class="form-group">
+                                                                    I accept that the above information is true and correct
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="step-pane" id="wiredstep3">
+                <div class="row">
+
+                </div>
+            </div>*@
+                                    </div>
+                                    <div class="actions actions-footer" id="WiredWizard-actions">
+                                        <div class="col-sm-12 col-xs-12 center_element">
+                                            <button id="SubmitForm" type="submit" class="btn-success btn btn-sm" name="command" value="submit">Submit</button>
+                                            <button id="tinNext" class="btn btn-default k_home-btn btn-navigate_form btn-next" data-last="Submit" type="button">NEXT</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="footer-top" @*style="background-image:@("url(" + Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/footer-bg.png")) + ")")"*@>
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+
+

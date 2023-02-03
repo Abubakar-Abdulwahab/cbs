@@ -1,0 +1,26 @@
+﻿@using CBSPay.Core.APIModels
+@model PaymentStatusModel
+@{
+    ViewBag.Title = "QTPaymentNotification";
+    //Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+    Layout = null;
+    var amount = ViewBag.AmountPaid as string;
+    var homeUrl = ViewBag.HomeUrl as string;
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<div class="row" style="width: 100%;margin:auto;background-color:#f0f0f0;height:100%;margin-top:0;">
+    <div class="card-amount" style="background-color: #2c8968;">
+        <h3 class="" style="color:#ff6a00;font-weight:900;">SUCCESS NOTE</h3>
+    </div>
+    <div class="text-center">
+        <h4 class="text-success">PAYMENT SYNCHRONIZED SUCCESSFULLY</h4>
+        <img src="~/Content/payment_success.png" />
+        <div class="" style="color:#808080;">
+            <h3>@amount successfully paid</h3>
+        </div>
+        <hr />
+        <a class="btn btn-primary" href="javascript: top.location = '@Url.Action("Index","Home")';" style="">DOWNLOAD RECEIPT &#8582;</a>
+        <a class="btn btn-success" href="javascript: top.location = '@Url.Action("Pay","Home")';" style="">FINISH &#10004;</a>
+    </div>
+</div>

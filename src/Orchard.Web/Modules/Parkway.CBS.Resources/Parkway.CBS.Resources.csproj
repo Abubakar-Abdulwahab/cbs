@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7FE00A27-F8EF-45BD-930B-602461A598C5}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Resources</RootNamespace>
+    <AssemblyName>Parkway.CBS.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Scripts\cbs-pcc-country-of-residence.script.js" />
+    <Content Include="Scripts\pss-character-certificate-diaspora.js" />
+    <Content Include="Scripts\pss.admin.account.wallet.payment.approval.view.details.js" />
+    <Content Include="Scripts\pss.admin.branch.officer.upload.generate.request.js" />
+    <Content Include="Scripts\pss.admin.branch.officer.upload.validation.result.js" />
+    <Content Include="Scripts\pss.admin.branch.sub.users.upload.validation.result.js" />
+    <Content Include="Scripts\pss.admin.change.deployed.officer.js" />
+    <Content Include="Scripts\Assessment.js" />
+    <Content Include="Scripts\billing-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap4.min.js" />
+    <Content Include="Scripts\cbs-add-payment-update-1.js" />
+    <Content Include="Scripts\cbs-assign-payment-provider.js" />
+    <Content Include="Scripts\cbs-cellsite-report-update-2.js" />
+    <Content Include="Scripts\cbs-client-direct-script.js" />
+    <Content Include="Scripts\cbs-client-searchinvoicepayment.js" />
+    <Content Include="Scripts\cbs-discount-script.js" />
+    <Content Include="Scripts\cbs-fetch-lgas-script.js" />
+    <Content Include="Scripts\cbs-lga-partial-script.js" />
+    <Content Include="Scripts\cbs-mda-revenue-access-restrictions-staging.js" />
+    <Content Include="Scripts\cbs-npf-servicerequest.js" />
+    <Content Include="Scripts\cbs-generate-invoice-admin.js" />
+    <Content Include="Scripts\cbs-invoice-generation-redirect.js" />
+    <Content Include="Scripts\cbs-main.js" />
+    <Content Include="Scripts\cbs-make-payment.js" />
+    <Content Include="Scripts\cbs-mda-client-script.js" />
+    <Content Include="Scripts\cbs-mda-edit-billing-script.js" />
+    <Content Include="Scripts\cbs-mda-eirs-settlementreport.js" />
+    <Content Include="Scripts\cbs-mda-g-script.js" />
+    <Content Include="Scripts\cbs-mda-revenue-head-script.js" />
+    <Content Include="Scripts\cbs-mda-script.js" />
+    <Content Include="Scripts\cbs-npf-extract-details.js" />
+    <Content Include="Scripts\cbs-npf-main.js" />
+    <Content Include="Scripts\cbs-paye-schedule-list-script.js" />
+    <Content Include="Scripts\cbs-paye-batch-items-list.js" />
+    <Content Include="Scripts\cbs-payee-old-assessment.js" />
+    <Content Include="Scripts\cbs-payment-provider-list.js" />
+    <Content Include="Scripts\cbs-paye-receipt-update.js" />
+    <Content Include="Scripts\cbs-tcc-receipt-utilization.js" />
+    <Content Include="Scripts\cbs-reg-business-script.js" />
+    <Content Include="Scripts\cbs-revenue-head-permissions-constraints.js" />
+    <Content Include="Scripts\cbs-tcc-req-history-script.js" />
+    <Content Include="Scripts\cbs-validate-bvn.js" />
+    <Content Include="Scripts\cbs.state.lga.by.name.js" />
+    <Content Include="Scripts\newfile.js" />
+    <Content Include="Scripts\payee-old-script.js" />
+    <Content Include="Scripts\payee-script - Copy.js" />
+    <Content Include="Scripts\possap-scheduler-police-officer-report-script.js" />
+    <Content Include="Scripts\pss-verify-account-code.js" />
+    <Content Include="Scripts\cbs-operator-add-cellsites.js" />
+    <Content Include="Scripts\cbs-paye-assessment.js" />
+    <Content Include="Scripts\cbs-payment.js" />
+    <Content Include="Scripts\cbs-receipt-update-3.js" />
+    <Content Include="Scripts\cbs-select-taxpayer.js" />
+    <Content Include="Scripts\cbs-self-assessment.js" />
+    <Content Include="Scripts\cbs-settings-script.js" />
+    <Content Include="Scripts\cbs-view-invoice.js" />
+    <Content Include="Scripts\cbs-web-update-1.js" />
+    <Content Include="Scripts\cbs.billing.script.js" />
+    <Content Include="Scripts\cbs.maindashboard.chart.js" />
+    <Content Include="Scripts\cbs.mda.settings.js" />
+    <Content Include="Scripts\cbs.reportscripts.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\custom_chart.js" />
+    <Content Include="Scripts\datepickerinitialization.js" />
+    <Content Include="Scripts\daterangepicker.min.js" />
+    <Content Include="Scripts\DateTimePicker.js" />
+    <Content Include="Scripts\element-browser.js" />
+    <Content Include="Scripts\EregistryFormWizard.js" />
+    <Content Include="Scripts\excellentexport.min.js" />
+    <Content Include="Scripts\GeneralFormWizard.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\HighChartsExport.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\cbs.settlement.script.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf.min.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.js" />
+    <Content Include="Scripts\MdaReport.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\monthpicker.js" />
+    <Content Include="Scripts\NewDashboard.js" />
+    <Content Include="Scripts\osgof-add-cellsite-client.js" />
+    <Content Include="Scripts\osgof-cell-site-script-update-3.js" />
+    <Content Include="Scripts\osgof-cell-sites-upload-script.js" />
+    <Content Include="Scripts\osgof-list-cellsite-client.js" />
+    <Content Include="Scripts\payee-script.js" />
+    <Content Include="Scripts\payer-script.js" />
+    <Content Include="Scripts\plugin.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\cbs.state.lga.js" />
+    <Content Include="Scripts\pss.admin.add.fee.party.js" />
+    <Content Include="Scripts\pss.admin.assign.officers.submit.prompt.js" />
+    <Content Include="Scripts\pss.admin.disable.submit.btn.on.click.js" />
+    <Content Include="Scripts\pss.admin.formation.approval.comment.js" />
+    <Content Include="Scripts\pss.admin.generate.escort.request.without.officers.js" />
+    <Content Include="Scripts\pss.admin.generate.request.without.officers.upload.js" />
+    <Content Include="Scripts\pss.admin.generate.request.without.officers.upload.validation.result.js" />
+    <Content Include="Scripts\pss.admin.get.command.js" />
+    <Content Include="Scripts\pss.admin.get.officers.js" />
+    <Content Include="Scripts\pss.admin.initiate.deployment.allowance.payment.js" />
+    <Content Include="Scripts\pss.admin.print.view.js" />
+    <Content Include="Scripts\pss.admin.settlements.edit.parties.js" />
+    <Content Include="Scripts\pss.admin.upload.branch.officer.js" />
+    <Content Include="Scripts\pss.admin.upload.branch.sub.users.js" />
+    <Content Include="Scripts\pss.admin.upload.signature.js" />
+    <Content Include="Scripts\pss.admin.usercreation.js" />
+    <Content Include="Scripts\pss.admin.reports.get.commands.js" />
+    <Content Include="Scripts\pss.admin.usercreation.edit.js" />
+    <Content Include="Scripts\pss.assign.escort.process.flow.js" />
+    <Content Include="Scripts\pss.assign.formation.js" />
+    <Content Include="Scripts\pss.assign.tactical.squad.js" />
+    <Content Include="Scripts\pss.branches.list.js" />
+    <Content Include="Scripts\pss.character.certificate.js" />
+    <Content Include="Scripts\pss.confirm.request.js" />
+    <Content Include="Scripts\pss.contact.us.js" />
+    <Content Include="Scripts\pss.dcp.assign.formation.js" />
+    <Content Include="Scripts\pss.dcp.get.commands.js" />
+    <Content Include="Scripts\pss.draft.service.document.js" />
+    <Content Include="Scripts\pss.escort.forms.js" />
+    <Content Include="Scripts\pss.estimate.calc.js" />
+    <Content Include="Scripts\pss.extract.category.js" />
+    <Content Include="Scripts\pss.get.central.registrar.partial.js" />
+    <Content Include="Scripts\pss.get.state.command.js" />
+    <Content Include="Scripts\pss.get.command.js" />
+    <Content Include="Scripts\pss-date-picker.js" />
+    <Content Include="Scripts\pss.get.dpo.partial.js" />
+    <Content Include="Scripts\pss.home.carousel.js" />
+    <Content Include="Scripts\pss.multi.select.extract.category.js" />
+    <Content Include="Scripts\pss.notification.message.list.js" />
+    <Content Include="Scripts\pss.pcc.change.bio.data.page.js" />
+    <Content Include="Scripts\pss.pcc.document.upload.confirmation.modal.js" />
+    <Content Include="Scripts\pss.pcc.document.upload.preview.partial.js" />
+    <Content Include="Scripts\pss.pcc.passport.upload.guidelines.modal.js" />
+    <Content Include="Scripts\pss.request.details.js" />
+    <Content Include="Scripts\pss.request.branch.list.js" />
+    <Content Include="Scripts\pss.request.list.js" />
+    <Content Include="Scripts\pss.resend.code.js" />
+    <Content Include="Scripts\pss.resend.retrieve.email.code.js" />
+    <Content Include="Scripts\pss.security.change.password.js" />
+    <Content Include="Scripts\pss.resend.password.reset.code.js" />
+    <Content Include="Scripts\pss.select.service.sub.categories.js" />
+    <Content Include="Scripts\pss.sub.users.list.js" />
+    <Content Include="Scripts\pss.terms.of.use.modal.js" />
+    <Content Include="Scripts\pss.user.profile.js" />
+    <Content Include="Scripts\pss.user.profile.pwd.js" />
+    <Content Include="Scripts\pss.user.reg.js" />
+    <Content Include="Scripts\pss.admin.view.allocated.officers.js" />
+    <Content Include="Scripts\pss.view.blob.js" />
+    <Content Include="Scripts\reference-data-upload-script.js" />
+    <Content Include="Scripts\Reports.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tax-payer-enumeration-schedule-result-script.js" />
+    <Content Include="Scripts\tax-payer-enumeration-upload-script.js" />
+    <Content Include="Scripts\tcc-application-form.js" />
+    <Content Include="Scripts\TINRegistration.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\tooltip-toggling-script.js" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\assesment.css" />
+    <Content Include="Styles\backend-update-1.css" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\cbs-billing.css" />
+    <Content Include="Styles\cbs-main-style.css" />
+    <Content Include="Styles\cbs-npf-main.css" />
+    <Content Include="Styles\cbs-pages-style.css" />
+    <Content Include="Styles\cbs-tsa.css" />
+    <Content Include="Styles\client-bootstrap.min.css" />
+    <Content Include="Styles\cbs-demand.css" />
+    <Content Include="Styles\cbs-mda-style-parkstrap.css" />
+    <Content Include="Styles\cbs-mda-style-revenuehead.css" />
+    <Content Include="Styles\cbs-mda-style-revenuestrap.css" />
+    <Content Include="Styles\cbs-mda-style.css" />
+    <Content Include="Styles\cbs-mda-tree-style.css" />
+    <Content Include="Styles\custom_chart.css" />
+    <Content Include="Styles\datepicker.css" />
+    <Content Include="Styles\DateTimePicker.css" />
+    <Content Include="Styles\FormWizard.css" />
+    <Content Include="Styles\images\atm-machine.svg" />
+    <Content Include="Styles\images\bank.svg" />
+    <Content Include="Styles\images\card-machine.svg" />
+    <Content Include="Styles\images\CBS_Banner.png" />
+    <Content Include="Styles\images\CBS_logo.png" />
+    <Content Include="Styles\images\CBS_logo_2.png" />
+    <Content Include="Styles\images\cloud-upload-svgrepo-com.svg" />
+    <Content Include="Styles\images\Image.png" />
+    <Content Include="Styles\images\online-payment.svg" />
+    <Content Include="Styles\jsdelivrdaterangepicker.css" />
+    <Content Include="Styles\monthpicker.css" />
+    <Content Include="Styles\pss-character-certificate.css" />
+    <Content Include="Styles\Registration.css" />
+    <Content Include="Styles\reset-pagination.css" />
+    <Content Include="Styles\revenue_dashboard.css" />
+    <Content Include="Styles\rstvl-main.css" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Web.config" />
+    <Content Include="Module.txt" />
+    <Content Include="Scripts\pss.select.service.js" />
+    <Content Include="Scripts\pss.admin.approval.request.list.js" />
+    <Content Include="Scripts\pss.side.note.pop.up.js" />
+    <Content Include="Scripts\pss.admin.get.command.for.admin.js" />
+    <Content Include="Scripts\pss.add.wallet.configuration.js" />
+    <Content Include="Scripts\pss.admin.initiate.wallet.payment.js" />
+    <Content Include="Scripts\pss.admin.user.report.js" />
+    <Content Include="Scripts\pss.pcc.change.passport.photo.js" />
+    <Content Include="Scripts\pss.pcc.update.details.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\Fonts\AvenirLTStd-Book.otf" />
+    <Content Include="Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="Styles\Fonts\AvenirLTStd-Roman.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Police.Core.Models.GenerateRequestWithoutOfficersUploadBatchItemsStaging, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_GenerateRequestWithoutOfficersUploadBatchItemsStaging" lazy="false" >
+		<id name="Id" column="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="BranchCode" column="BranchCode" />
+		<property name="NumberOfOfficers" column="NumberOfOfficers" />
+		<property name="NumberOfOfficersValue" column="NumberOfOfficersValue" />
+		<property name="CommandCode" column="CommandCode" />
+		<property name="CommandType" column="CommandType" />
+		<property name="DayType" column="DayType" />
+		<property name="CommandTypeValue" column="CommandTypeValue" />
+		<property name="DayTypeValue" column="DayTypeValue" />
+		<property name="HasError" column="HasError" />
+		<property name="ErrorMessage" column="ErrorMessage" />
+		<property name="CreatedAtUtc" column="CreatedAtUtc" />
+		<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+		<many-to-one name="GenerateRequestWithoutOfficersUploadBatchStaging" column="GenerateRequestWithoutOfficersUploadBatchStaging_Id"/>
+		<many-to-one name="Command" column="Command_Id"/>
+	</class>
+</hibernate-mapping>

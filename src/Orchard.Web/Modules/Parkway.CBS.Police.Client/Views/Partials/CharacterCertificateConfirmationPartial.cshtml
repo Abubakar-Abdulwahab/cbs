@@ -1,0 +1,84 @@
+﻿@model dynamic
+
+<tr>
+    <td>Request Type:</td>
+    <td>@Model.RequestType</td>
+</tr>
+<tr>
+    <td>Reason for inquiry:</td>
+    <td>@Model.ReasonForInquiryValue</td>
+</tr>
+@*<tr>
+        <td>Tribe:</td>
+        <td>@Model.Tribe</td>
+    </tr>*@
+@if (!string.IsNullOrEmpty(Model.CountryOfOrigin))
+{
+    <tr>
+        <td>Country of Origin:</td>
+        <td>@Model.CountryOfOrigin</td>
+    </tr>
+}
+@if (!string.IsNullOrEmpty(Model.StateOfOrigin))
+{
+    <tr>
+        <td>State of Origin:</td>
+        <td>@Model.StateOfOrigin</td>
+    </tr>
+}
+<tr>
+    <td>Place of Birth:</td>
+    <td>@Model.PlaceOfBirth</td>
+</tr>
+<tr>
+    <td>Date of Birth:</td>
+    <td>@Model.DateOfBirth</td>
+</tr>
+@if (!string.IsNullOrEmpty(Model.DestinationCountry))
+{
+    <tr>
+        <td>Destination Country:</td>
+        <td>@Model.DestinationCountry</td>
+    </tr>
+}
+
+@if (!string.IsNullOrEmpty(Model.CountryOfPassport))
+{
+    <tr>
+        <td>Country of Passport:</td>
+        <td>@Model.CountryOfPassport</td>
+    </tr>
+}
+
+@if (!string.IsNullOrEmpty(Model.PassportNumber))
+{
+    <tr>
+        <td>Passport Number:</td>
+        <td>@Model.PassportNumber</td>
+    </tr>
+}
+
+@if (!string.IsNullOrEmpty(Model.PlaceOfIssuance))
+{
+    <tr>
+        <td>Place of Issuance:</td>
+        <td>@Model.PlaceOfIssuance</td>
+    </tr>
+}
+
+@if (!string.IsNullOrEmpty(Model.DateOfIssuance))
+{
+    <tr>
+        <td>Date of Issuance:</td>
+        <td>@Model.DateOfIssuance</td>
+    </tr>
+}
+
+
+@if (Model.PreviouslyConvicted)
+{
+    <tr>
+        <td>Previous Conviction History:</td>
+        <td>@Model.PreviousConvictionHistory</td>
+    </tr>
+}

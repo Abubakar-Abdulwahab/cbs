@@ -1,0 +1,205 @@
+﻿@model Parkway.CBS.Module.Web.ViewModels.GenerateInvoiceVM
+
+@{
+    Layout.Title = "Generate Invoice";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.Self.Assessment.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+
+
+}
+<style>
+    .loader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #317896;
+        border-right: 6px solid #f0ad4e;
+        border-bottom: 6px solid #317896;
+        border-left: 6px solid #f0ad4e;
+        width: 50px;
+        height: 50px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        top:49px;
+        position:relative;
+        z-index:30;
+    }
+
+    .babyloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 20%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var loggedIn = @Html.Raw(Json.Encode(Model.HeaderObj.IsLoggedIn));
+    var allowCategorySelect = @Html.Raw(Json.Encode(Model.AllowCategorySelect));
+</script>
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Generate Invoice</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Select Identity</li>
+            </ol>
+        </nav>
+    </div>
+
+    @Html.Partial("Partials\\FlashPartial", Model.ErrorMessage)
+    <div class="content-payment">
+
+        <div class="container form-container">
+            @using (Html.AppendModulePrefixToFormRouteName("C.SelfAssessment", FormMethod.Post, new { @id = "indexForm", @name = "indexForm", @class = "main-form payment-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="form-title">Kindly fill the following details to proceed</h3>
+                <label for="" class="title">Who are you?</label>
+                if (Model.TaxCategories != null && Model.TaxCategories.Any())
+                {
+                    foreach (var cat in Model.TaxCategories)
+                    {
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" data-value="@cat.Settings.CanShowDropDown" name="TaxPayerType" id="@cat.Id" value="@cat.Id" required @(Model.TaxPayerType == cat.Id.ToString() ? "checked" : "") />
+                            <label class="form-check-label" for="inlineRadio1">@cat.Name</label>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <small>No Tax Category Found</small>
+                }
+                <input type="hidden" name="taxCategory" id="taxCategory">
+
+                <div id="parentProfileDiv" style="display:none">
+                    <label for="" class="title">Search for the profile you want to pay for?</label>
+                    <div name="profilediv" id="profilediv">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <input type="text" id="profileData" name="profileData" spellcheck="false" autocomplete="off" list="profiles" placeholder="Search for your profile here. e.g Nigerian Ports Authority" class="form-control border-0" />
+                                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                                <datalist id="profiles" name="profiles"></datalist>
+                                <input type="hidden" name="profileIdentifier" id="profileIdentifier" />
+                                <div class="container-fluid mb-4 px-0" id="bzRegLink" style="display:none;flex-flow:nowrap row;justify-content:flex-end">
+                                    <a href="@Url.AppendModulePrefixToRouteName("C.RegisterBusiness")">Don't have a profile? Click to register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+                <label for="" class="title">What do you want to pay for?</label>
+                <div name="maindiv" id="maindiv">
+                    <div class="form-group has-feedback">
+                        <div class="input-group">
+                            <input required type="text" id="revenueHeadData" name="revenueHeadData" spellcheck="false" autocomplete="off" list="revenue-heads" placeholder="Search for annual fees, tender fees etc" class="form-control mb-4 border-0"/>
+                            <datalist id="revenue-heads" name="revenue-heads">
+                                @if (Model.RevenueHeads != null)
+                                {
+                                    foreach (var item in Model.RevenueHeads)
+                                    {
+                                        <option data-value="@item.Id" value="@item.Name (@item.Mda.Name)" />
+                                    }
+                                }
+                            </datalist>
+                            <input type="hidden" name="revenueHeadIdentifier" id="revenueHeadIdentifier"/>
+                            <input type="hidden" name="claimToken" id="claimToken"/>
+                        </div>
+                    </div>
+                </div>
+                <div name="loader" id="loader" class="loader" style="margin:0 auto; margin-top:-32px;display:none"></div>
+                <button type="submit" id="proceedbtn" class="btn">Proceed</button>
+
+            }
+        </div>        
+    </div>
+
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<div class="sign-up modal" id="signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="loginErrorFlash" class="container alert-msg" style="display:none">
+                    <small class="message"><span id="closeModalFlash" style="float:right;">&times;</span><small id="loginErrorMsg" style="white-space: pre-wrap;"></small></small>
+                </div>
+                <span class="sign-up-info"><span>i</span>Federal agencies are required to login with credentials that was sent via email and memo</span>
+                <form id="indexUserLoginForm" method="post">
+                    <div class="form-group">
+                        <label for="signinemail">Username</label>
+                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter Username" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter Password" required/>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Keep me signed in</label>
+                            <div class="gen" style="float:right"><a href="@Url.AppendModulePrefixToRouteName("CBS.User.Register")">Register Here</a></div>
+                    </div>                    
+                    <button type="submit" class="btn" id="userLoginSubmitBtn"><span name="babyloader" id="babyloader" class="babyloader" style="position:absolute;margin:auto;"></span>Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

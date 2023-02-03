@@ -1,0 +1,31 @@
+﻿@{
+    var date = DateTime.Now;
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+
+ 
+
+<div class="row custom-tabs">
+    <div class="col-sm-3">
+         
+    </div>
+    
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="portlet light" style="background-color: #f9f9f9;">
+                    <div class="portlet-title">
+                        <div class="caption"> Login </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+        <div class="portlet-body text-justify">
+            @Html.Partial((string) ViewBag.Login)
+        </div>
+    </div>
+</div>
+
+
+

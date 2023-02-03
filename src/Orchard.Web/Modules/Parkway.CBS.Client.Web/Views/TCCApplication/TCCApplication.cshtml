@@ -1,0 +1,408 @@
+﻿@model Parkway.CBS.Core.HelperModels.TCCApplicationRequestVM
+
+@{
+    Layout.Title = "TCC Application Form";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("CBS.Tcc.Application.Form.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display:none;
+    }
+
+    .tiny-loader-caption {
+        display: none;
+        margin: unset;
+        padding: unset;
+        font-size: 12px;
+    }
+
+    .not-validated{
+        border-color:#dc3545;
+    }
+
+    .validated{
+        border-color:#28a745;
+    }
+
+    .til-mid{
+        height:22px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl("C.TccApplcation"), FormMethod.Post, new { @id = "tccform", @name = "tccform", @enctype = "multipart/form-data" }))
+{
+    <div class="tcc-application-form wrapper-payment">
+        <div class="top-banner alt">
+            <div class="banner-bottom">
+                <h3>TCC Application Form</h3>
+            </div>
+        </div>
+        <div class="container breadcrumbs">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container-fluid pb-4">
+            @if (Model.HasErrors)
+            {
+            <div class="container-fluid px-0">
+                <div id="errorFlash" class="container alert-msg" style="@(string.IsNullOrEmpty(Model.ErrorMessage)?"display:none":"")">
+                    <div class="message"> <span id="closeFlash" style="float:right;cursor:pointer">&times;</span> <p id="errorMsg" class="pl-2 mb-0" style="white-space: pre-wrap;font-size:14px;display:inline-block">@Model.ErrorMessage</p> </div>
+                </div>
+            </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <div class="container-fluid px-0">
+                    <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda;padding-left:10px">
+                        <small class="message" style="color:#155724;"><span id="closeInfoFlash" style="float:right;cursor:pointer">&times;</span><small style="white-space: pre-wrap;">@Model.Message</small></small>
+                    </div>
+                </div>
+            }
+            <div class="container tcc-application-form-container">
+                <div class="container-fluid">
+                    <div class="row mx-auto" id="applicantInfo">
+                        <div class="container-fluid px-auto mb-1" style="font-weight:600">
+                            <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Fields marked with asterisk (<span class="required-symbol">*</span>) are mandatory fields</p>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="applicantTIN">Applicant Tax Identification Number/Payer Id<span class="required-symbol">*</span></label>
+                            <input type="text" id="applicantTIN" name="Model.StateTIN" value="@Model.StateTIN" class="form-control" placeholder="Enter applicant state tax identification number" required />
+                            <small class="error-text" id="payerIdErrorText"></small>
+                            <span name="profileloader" id="payerIdLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;bottom:-20px"></span>
+                            <span class="fa fa-check" id="payerIdValid" style="position:absolute;top:51px;right:25px;color:#28a745;display:none"></span>
+                            <span class="fa fa-times" id="payerIdInvalid" style="position:absolute;top:51px;right:25px;color:#dc3545;display:none"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="applicantJob">Applicant Job/Kind of Work</label>
+                            <input type="text" id="applicantJob" name="Model.Occupation" value="@Model.Occupation" class="form-control" placeholder="Specify occupation" />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="applicationYear">Application Year</label>
+                            <select class="form-control" name="Model.ApplicationYear" id="applicationYear">
+                                @for (int i = 1; i < 20; ++i)
+                                {
+                                    <option value="@(DateTime.Now.Year - i)">@(DateTime.Now.Year - i)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="name">Name of Applicant<span class="required-symbol">*</span></label>
+                            <input type="text" id="name" name="Model.ApplicantName" class="form-control" value="@Model.ApplicantName" placeholder="Enter name of applicant" required />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="applicantPhoneNumber">Applicant Phone Number<span class="required-symbol">*</span></label>
+                            <input type="text" id="applicantPhoneNumber" name="Model.PhoneNumber" value="@Model.PhoneNumber" class="form-control" placeholder="Enter applicant's phone number" required />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="address">House or Residential Address<span class="required-symbol">*</span></label>
+                            <textarea id="address" class="form-control" name="Model.ResidentialAddress" placeholder="Enter residential address" required>@Model.ResidentialAddress</textarea>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="applicantBusinessAddress">Applicant's Business/Office Address<span class="required-symbol">*</span></label>
+                            <textarea id="applicantBusinessAddress" class="form-control" name="Model.OfficeAddress" placeholder="Enter business address of applicant" required>@Model.OfficeAddress</textarea>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <p class="mb-2" style="font-weight:600">Please specify if this a rented apartment?<span class="required-symbol">*</span></p>
+                            <div class="form-check-inline">
+                                <label class="form-check-label"><input type="radio" name="Model.IsRentedApartment" value="True" class="form-check-input" id="rented" @(Model.IsRentedApartment ? "checked" : "") />Yes, rented</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label"><input type="radio" name="Model.IsRentedApartment" value="False" class="form-check-input" id="notRented" @(Model.IsRentedApartment ? "" : "checked") />No, Not rented</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row mx-auto" id="llInfo">
+                        <div class="container-fluid px-auto mb-1" style="font-weight:600">
+                            <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Residential info & Certificate reason</p>
+                        </div>
+                        <div class="col-md-12 form-group" id="llName">
+                            <label for="landlordName">Name of Landlord</label>
+                            <input type="text" id="landlordName" name="Model.LandlordName" value="@Model.LandlordName" class="form-control landLord" placeholder="Enter name of landlord" />
+                        </div>
+                        <div class="col-md-12 form-group" id="llHouse">
+                            <label for="landlordAddress">Landlord's Business or Residential Address</label>
+                            <textarea id="landlordAddress" name="Model.LandlordAddress" class="form-control landLord" placeholder="Enter landlord address">@Model.LandlordAddress</textarea>
+                        </div>
+                        <div class="col-md-12 form-group" id="reasonLabel">
+                            <label for="reason">Reason for obtaining tax clearance certificate<span class="required-symbol">*</span></label>
+                            <textarea id="reason" name="Model.RequestReason" class="form-control" placeholder="Enter reason for obtaining tax clearance certificate" required>@Model.RequestReason</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid px-0 py-0" id="exemptionInfo">
+                    <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                        <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Exemption info & Invoice number</p>
+                    </div>
+                    <div class="col-md-12 px-0">
+                        <div class="form-group">
+                            <label for="exemptionOptions">Persons exempted from tax(Please select your category if applicable)</label>
+                            <select class="form-control" name="Model.ExemptionTypeId" id="exemptionOptions">
+                                @if (Model.HeaderObj.CategoryId == (int)Parkway.CBS.Core.Models.Enums.TaxEntityCategoryEnum.Corporate)
+                                {
+                                    <option value="1">Not Exempted</option>
+                                }
+                                else
+                                {
+                                    <option value="1">Not Exempted</option>
+                                    <option value="2">Wholly Exempted</option>
+                                    <option value="3">Unemployed House Wife</option>
+                                    <option value="4">Student</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container-fluid px-0 mb-2" id="whollyExemptedForms">
+                        <div class="col-md-12 px-0">
+                            <label class="upload-label" for="uploadExemptionCert">
+                                <span style="font-size:14px;font-weight: lighter;" id="whollyExemptedFileName"></span>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/upload-black.svg"))" alt="" id="uploadImg" />
+                                <span class="upload-caption" id="uploadInfo">Upload exemption certificate here.</span>
+                            </label>
+                            <input type="file" id="uploadExemptionCert" name="exemptioncertificate" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+                    <div class="container-fluid px-0" id="unemployedHouseWifeForms">
+                        <div class="col-md-12 px-0">
+                            <div class="form-group">
+                                <label for="husbandName">Husband Name</label>
+                                <input type="text" class="form-control" name="Model.HusbandName" value="@Model.HusbandName" id="husbandName" placeholder="Enter husband name" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-0">
+                            <div class="form-group">
+                                <label for="husbandAddress">Husband Address</label>
+                                <textarea id="husbandAddress" class="form-control" name="Model.HusbandAddress" placeholder="Enter husband address">@Model.HusbandAddress</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid px-0" id="studentForms">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nameOfInstitute">Name of Institution</label>
+                                <input type="text" class="form-control" id="nameOfInstitute" name="Model.InstitutionName" value="@Model.InstitutionName" placeholder="Enter name of institution" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="idCardNumber">ID Card No.</label>
+                                <input type="text" class="form-control" id="idCardNumber" name="Model.IdCardNumber" value="@Model.IdCardNumber" placeholder="Enter identification card number" />
+                            </div>
+                        </div>
+                        <div class="container-fluid px-0">
+                            <label class="upload-label" for="uploadSchoolCert">
+                                <span style="font-size:14px;font-weight: lighter;" id="uploadSchoolCertFileName"></span>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/upload-black.svg"))" alt="" id="uploadImg" />
+                                <span class="upload-caption" id="uploadInfo">Upload first school leaving certificate here.</span>
+                            </label>
+                            <input type="file" id="uploadSchoolCert" name="schoolcertificate" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group px-0">
+                        <label for="invoiceNumber">Invoice Number<span class="required-symbol">*</span></label>
+                        <input type="text" class="form-control" id="invoiceNumber" name="Model.DevelopmentLevyInvoice" value="@Model.DevelopmentLevyInvoice" placeholder="Paid invoice number for Development levy" required />
+                        <small class="error-text" id="invoiceNumberErrorText" style="display:block"></small>
+                        <span name="invoiceNumberLoader" id="invoiceNumberLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;bottom:28px"></span>
+                        <span class="fa fa-check" id="invoiceNumberValid" style="position:absolute;top:52px;right:25px;color:#28a745;display:none"></span>
+                        <span class="fa fa-times" id="invoiceNumberInvalid" style="position:absolute;top:52px;right:25px;color:#dc3545;display:none"></span>
+                        <span class="tiny-caption">Development levy invoice number can be used for just one ETCC application</span>
+                    </div>
+                </div>
+                @*<div class="container-fluid" id="acctStatementSection">
+                    <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                        <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Statement of account file upload</p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="upload-label" for="uploadAcctStatement">
+                                <span style="font-size: 14px;font-weight: lighter;" id="uploadAcctStatementFileName"></span>
+                                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/upload-black.svg"))" alt="" id="uploadImg" />
+                                <span class="upload-caption" id="uploadInfo">Upload statement of account here.</span>
+                            </label>
+                            <input type="file" id="uploadAcctStatement" name="accountstatement" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+                </div>*@
+                <div class="container-fluid" id="confirmationSection" style="max-width:800px">
+                    <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                        <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Application Summary Confirmation</p>
+                    </div>
+                    <div class="row px-0">
+                        <div class="col-md-4 form-group">
+                            <p class="til">Name of Applicant</p>
+                            <p class="ans" id="applicantNameAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til"> Applicant Phone Number</p>
+                            <p class="ans" id="applicantNumberAns"> </p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Applicant TIN/Payer Id</p>
+                            <p class="ans" id="applicantTinAns"> </p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" style="height:22px">Applicant Occupation/Kind of Work</p>
+                            <p class="ans" id="applicantJobAns"> </p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til til-mid">House or Residential Address</p>
+                            <p class="ans" id="applicantHomeAddressAns"> @Model.OfficeAddress </p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til til-mid">Applicant's Business/Office Address</p>
+                            <p class="ans" id="applicantOfficeAddressAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Apartment Type</p>
+                            <p class="ans" id="appartmentTypeAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Application Year</p>
+                            <p class="ans" id="applicationYearAns"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="resdentialSummary">
+                        <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                            <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Residential info & certificate reason</p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" style="height:22px">Name of Landlord</p>
+                            <p class="ans" id="landlordNameAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" style="height:22px">Landlord's Business or Residential Address</p>
+                            <p class="ans" id="landlordBusinessAddressAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" style="height:22px">Reason for obtaining tax clearance certificate</p>
+                            <p class="ans" id="reasonAns"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="exemptionInfoSummary">
+                        <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                            <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Exemption info & invoice number</p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" id="exemptionTypeTil">Exemption Type</p>
+                            <p class="ans" id="exemptionTypeAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Husband Name</p>
+                            <p class="ans" id="husbandNameAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Husband Address</p>
+                            <p class="ans" id="husbandAddressAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">Name of Institution</p>
+                            <p class="ans" id="institutionNameAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til">ID Card No.</p>
+                            <p class="ans" id="idCardNumberAns"></p>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <p class="til" id="invoiceNumberTil">Development Levy Invoice Number</p>
+                            <p class="ans" id="invoiceNumberAns"></p>
+                        </div>
+                    </div>
+                    <div class="row" id="fileUploads">
+                        <div class="container-fluid px-0 mb-1" style="font-weight:600">
+                            <p class="pb-2" style="border-bottom:2px solid #d5d5d5;">Attachments</p>
+                        </div>
+                        <div class="col-md-4 px-1" id="uploadAcctStatementSummary">
+                            <label class="upload-label">
+                                <span style="font-size: 14px;font-weight: lighter;word-break:break-word" id="uploadAcctStatementSummaryFileName"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 px-1" id="uploadExemptionCertSummary">
+                            <label class="upload-label">
+                                <span style="font-size:14px;font-weight: lighter;word-break:break-word" id="whollyExemptedSummaryFileName"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 px-1" id="uploadSchoolCertSummary">
+                            <label class="upload-label">
+                                <span style="font-size:14px;font-weight: lighter;word-break:break-word" id="uploadSchoolCertSummaryFileName"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="Model.IsCertify" id="certify" value="true" class="form-check-input" required /> <b>I certify that the statements made above are correct and true<span class="required-symbol">*</span></b>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="max-width:600px">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block mt-4" id="backBtn">Back</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-block mt-4" id="submitBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Html.Partial("Partials\\FooterPartial")
+<script>
+    $("#closeInfoFlash").click(function (e) {
+        $('#infoFlashMsg').hide();
+    });
+
+    $("#closeFlash").click(function (e) {
+        $("#errorFlash").fadeOut("fast");
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+
+    Style.Require("CBS.Style.Main");
+    Style.Include(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/themebootstrap.min.css"));
+    Style.Include(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/theme.css"));
+}
+
+<div class="modal" tabindex="-1" role="dialog" style="display:block;background-color:grey">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registration Error</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12">
+                    @*<p class="text-center">Reference</p>*@
+                    <p class="text-center"><em>An error occurred</em> </p>
+                    <p class="text-center"><em>Kindly click the link below to try again.</em> </p>
+                    <p class="text-center"><a class="" href="@Url.RouteUrl("C.GenerateTin")">Retry</a></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+

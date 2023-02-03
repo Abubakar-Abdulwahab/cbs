@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "Capture Government";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+<div class="title">
+    <h1>
+        Search Tax Payer - Government
+    </h1>
+    <hr>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Search Tax Payer - Government
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-7 form-horizontal">
+                <div class="form-group">
+                    <label for="TIN" class="control-label col-sm-3">TIN</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="TIN" class="form-control" placeholder="Enter TIN">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="MobileNumber" class="control-label col-sm-3">Mobile</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="MobileNumber" class="form-control" placeholder="Enter Mobile Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="RIN" class="control-label col-sm-3">RIN</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="RIN" class="form-control" placeholder="Enter RIN">
+                    </div>
+                </div>
+                <div class="form-group text-right row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-theme btn-block"> Search </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>
+                    Enter name of Government and click on search below. The five most matches results will be returned where available. Select the one that best matches your company name and click on proceed.
+                </p>
+
+                <p>
+                    You will be able to claim one business at a time and to view details of each company, click on the view link.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">Government List</div>
+        <div class="actions">
+            <div class="btn-group">
+                <button type="button" class="btn btn-redtheme dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add New <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="~/Home/NewIndividualAdd">Individual</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/NewCorporateAdd">Corporates</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/NewGovernmentAdd">Government</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/NewSpecialAdd">Special</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="table table-bordered v-middle" id="tblSearchGovernmentList">
+            <thead class="red-th">
+                <tr>
+                    <th>Government RIN</th>
+                    <th>Government Name</th>
+                    <th>Government Type</th>
+                    <th>Mobile Number</th>
+                    <th class="action-th">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>Adamu</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divTaxPayerModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a href="GovernmentDetail.html"> Tax Payer Details </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>Adamu</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divTaxPayerModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a href="MobileTaxPayerAsset.html">	Tax Payer Details </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="divTaxPayerModal" tabindex="-1" role="dialog" aria-labelledby="divTaxPayerModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="divTaxPayerModalLabel">Government Tax Payer Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Payer Type</label>
+                            <div>Government</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Government Name</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">TIN</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Phone 2</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Email Address 1</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Tax Office</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Preferred Notification</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Contact Address</label>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/jsCaptureIndividual.js"></script>
+

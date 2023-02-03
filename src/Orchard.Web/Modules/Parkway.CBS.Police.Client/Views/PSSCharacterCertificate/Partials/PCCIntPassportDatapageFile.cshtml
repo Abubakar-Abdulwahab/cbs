@@ -1,0 +1,11 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group" style="margin-top:30px">
+    <label for="uploadInternationalPassport">Upload International Passport Bio Datapage<span class="required-sym">*</span></label>
+    <div class="upload-file-container">
+        <input type="file" id="uploadInternationalPassport" name="intPassportDatapageFile" accept=".pdf,.png, .jpeg, .jpg">
+        <div class="uploaded-passport-thumbnail preview-document-embed"><span class="embed-overlay"></span><embed src='/media/images/cloud_upload.svg' id="passportDatapageThumbnail" /></div>
+    </div>
+    <small class="form-text text-muted">Add an image of your international passport bio datapage here. Maximum size: 2MB</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("IntPassportDatapageFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

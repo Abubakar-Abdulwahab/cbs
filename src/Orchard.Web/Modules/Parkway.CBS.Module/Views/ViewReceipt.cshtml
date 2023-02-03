@@ -1,0 +1,256 @@
+﻿@using System.Web.Mvc.Html
+ 
+@model Parkway.CBS.Module.ViewModels.ReceiptViewModel
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Script.Require("CBS.MDA.Settings.Script").AtFoot();
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.Admin.AddPayment.Script");
+    Script.Require("CBS.Admin.Client.SearchInvoicePayment.Script");
+    Layout.Title = "Receipt".ToString();
+}
+
+<style>
+    .receipt-fill {
+        height: 25px;
+    }
+
+    .receipt-head {
+        margin-top: 70px;
+    }
+
+        .receipt-head .receipt-logo {
+            height: 100px;
+            width: 100px;
+        }
+
+        .receipt-head h3 {
+            color: #222222;
+            display: inline-block;
+            font-size: 50px;
+            font-weight: bold;
+            margin-left: 10px;
+            text-align: right;
+            margin-bottom: 0px;
+        }
+
+        .receipt-head .receipt-num {
+            padding-top: 15px;
+        }
+
+            .receipt-head .receipt-num p {
+                color: #4F4F4F;
+                font-size: 24px;
+                font-weight: bold;
+                text-align: right;
+                margin: 0px;
+            }
+
+    .receipt {
+        margin: 50px 0px 70px;
+        padding: 0px 84px 130px;
+        background-color: #E5E5E5;
+        border-top: 2px solid #555555;
+    }
+
+        .receipt h4 {
+            color: #333333;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 50px
+        }
+
+        .receipt p {
+            color: #6B6B6B;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+            .receipt p.total {
+                font-weight: bold;
+                color: #333333;
+            }
+
+
+    .receipt-fill {
+        background-color: #00B05F;
+    }
+
+    .receipt-type {
+        position: absolute;
+        top: 65px;
+        width: 268px;
+        right: 30px;
+    }
+
+        .receipt-type p {
+            margin: 0;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .receipt-type table {
+            font-size: 12px;
+        }
+
+    .receipt-info {
+        position: absolute;
+        bottom: 85px;
+        left: 30px;
+        width: 140px;
+        text-align: center;
+    }
+
+        .receipt-info span {
+            line-height: 1;
+            font-size: 14px;
+        }
+
+        .receipt-info p {
+            margin: 0px;
+            line-height: 1;
+            font-size: 15px;
+        }
+
+    .receipt-tax {
+        position: absolute;
+        bottom: 30px;
+        left: 170px;
+        width: 280px;
+    }
+
+        .receipt-tax p {
+            margin: 0px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+    .receipt-sum {
+        position: absolute;
+        bottom: 10px;
+        right: 30px;
+        width: 260px;
+    }
+
+        .receipt-sum p {
+            margin: 0px;
+            font-size: 12px;
+        }
+
+    .receipt-rev {
+        position: absolute;
+        bottom: 2px;
+        left: 30px;
+    }
+
+        .receipt-rev p {
+            margin: 0px;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .receipt-rev span {
+            font-size: 10px;
+        }
+
+    .receipt-add {
+        position: absolute;
+        bottom: 2px;
+        left: 175px;
+    }
+
+        .receipt-add p {
+            font-size: 10px;
+            margin: 0px;
+            line-height: 1.3;
+        }
+
+
+</style>
+
+<script>
+
+    window.onload = function() {
+            window.resizeTo(651, 597);
+            window.focus();
+    };
+
+function printReceipt() {
+    window.print();
+}
+</script>
+ 
+<div>
+
+    <div class="receipt-fill"></div>
+    <div class="container">
+        <div class="row receipt-head">
+            <div class="col-md-8">
+
+                <img class="receipt-logo" src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, Model.ReceiptLogoUrl))" alt="CBS" /></a>
+
+                @*<img class="receipt-logo" src="images/logo.png" alt="">*@
+                <h3>RECEIPT</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="receipt-num">
+                    <p>RECEIPT NO: @Model.ReceiptNumber</p>
+                    <p>@Model.PaymentDate.ToString("dd MMM yyyy")</p>
+                    @*<p>@Model.PaymentDate</p>*@
+                </div>
+
+                 
+                <button onclick="printReceipt()">Print this Receipt</button>
+
+            </div>
+        </div>
+    <div class="receipt">
+        <div class="card">
+            <div class="card-header">
+                <h4>Paye Info</h4>
+            </div>
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><p> Name: </p><b class="pull-right">@Model.TaxPayerName</b></li>
+                    <li class="list-group-item"><p>Email: </p> <b class="pull-right">@Model.TaxPayerEmail</b></li>
+                    <li class="list-group-item"><p> Phone Number: </p> <b class="pull-right">@Model.TaxPayePhoneNumber</b></li>
+
+                    <li class="list-group-item"><p>MDA: </p> <b class="pull-right">@Model.MDAName</b></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4>Billing Info</h4>
+            </div>
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span>Item:  </span> <b class="pull-right">@Model.RevenueHeadName</b></li>
+                    <li class="list-group-item"><span>Total Amount Paid: </span> <b class="pull-right">@string.Format("₦{0:n2}", Model.AmountPaid)</b></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+       
+    <div class="receipt-fill"></div>
+
+</div>
+    </div>
+ 
+    
+    
+ 
+ 

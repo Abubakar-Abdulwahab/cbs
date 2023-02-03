@@ -1,0 +1,4 @@
+﻿@model Parkway.CBS.Core.HelperModels.InvoiceProceedVMForPayeAssessment
+
+@Html.Partial("PAYE\\AddSchedule\\ScheduleOption", Model, new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ActionViewPath", typeof(Parkway.CBS.Client.Web.RouteName.PAYEWithSchedule).Name + "\\") },
+    { new KeyValuePair<string, object>("OnScreenActionURLName", Parkway.CBS.Client.Web.RouteName.PAYEWithScheduleOnscreen.PAYEOnscreen) }, { new KeyValuePair<string, object>("FileUploadActionURLName", Parkway.CBS.Client.Web.RouteName.PAYEWithScheduleFileUpload.PAYEFileUpload) } })

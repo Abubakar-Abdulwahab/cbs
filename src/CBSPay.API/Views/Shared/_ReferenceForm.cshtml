@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Tax Payer Payment Page ";
+}
+
+<style>
+    .form-control, .form-row, .form-group {
+        width: 100%;
+    }
+
+    .netpay {
+        background-color: #f1f1f1;
+        padding: 20px 20px 0px;
+    }
+
+    .items {
+    }
+</style>
+
+<div class="col-md-5 row">
+
+    <div class="row">
+        <h4> Pay With Reference Number</h4>
+        <div class="netpay" id="referenceBody">
+
+            @*<div class='form-row'>
+                    <div class='form-group card'>
+                        <label>Tax Payer Name</label>
+                        <input autocomplete='off' class='form-control card-number' size='20' type='text' id="TaxPayerName" name="TaxPayerName" value="" required>
+                    </div>
+                </div>*@
+
+            <div class='form-row'>
+                <div class='form-group card required'>
+                    <label class='control-label'>Reference Number</label>
+                    <input autocomplete='off' class='form-control card-number' size='20' type='text' id="ReferenceNumber" placeholder="AB00023" name="ReferenceNumber" value="" required>
+                </div>
+            </div>
+
+            <div class='form-row'>
+                <div class='form-group' id="refAmount">
+
+                </div>
+            </div>
+
+            <div class='form-row'>
+                <div class='form-group' id="refTaxPayer">
+
+                </div>
+            </div>
+
+
+            <input type="hidden" name="PaymentChannel" id="PaymentChannel" value="3" />
+            <input type="hidden" name="ClientId" id="ClientId" value="6817ab2b-4351-6017-5099-358F01bb9558" />
+            <input type="hidden" name="ClientSecret" id="ClientSecret" value="t+i61Vo71Y4T8nIcjxZMMMYy4YlAxrE/vSEWPlDdVMYHgFdVAsLbRDypDpzjki7LE" />
+
+
+
+            <div class="row">
+                <button id="FetchRefItems" class='pull-right btn btn-primary submit-button glyphicon-transfer' type='submit'> Fetch Reference Items</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts
+    {
+
+    <script src="@Url.Content("~/Scripts/EIRSPayWithRefNo.js")"></script>
+
+}
+
+

@@ -1,0 +1,245 @@
+﻿@model Parkway.CBS.Police.Core.VM.InitiateDeploymentAllowancePaymentVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Initiate Deployment Allowance Payment Request").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("Style.Datepicker");
+
+    Script.Require("PSS.Admin.Initiate.Deployment.Allowance.Payment.Script");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .delete-user-row {
+        color: red;
+        cursor: pointer;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .inline-check-box input[type='checkbox'] {
+        float: right;
+    }
+
+    .pickyNoFutureDate{
+        cursor:pointer;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var selectedRequestsPostback = @Html.Raw(Json.Encode(Model.DeploymentAllowancePaymentRequests));
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.DeploymentAllowancePayment.InitiatePaymentRequest), FormMethod.Post, new { @id = "initiateDeploymentAllowanceReqForm" }))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Source Account</b>
+                    <div class="form-group">
+                        <select class="form-control" name="SelectedAccountWallet" id="accountWallet">
+                            <option selected disabled value="">Select Source Wallet</option>
+                            @if (Model.AccountWalletConfigurations != null && Model.AccountWalletConfigurations.Any())
+                            {
+                                foreach (var item in Model.AccountWalletConfigurations)
+                                {
+                                    <option value="@item.Id" @((Model.SelectedSourceAccountId == item.Id) ? "selected" : "")>@item.WalletName</option>
+                                }
+                            }
+                        </select>
+                        <input type="hidden" name="SelectedSourceAccountId" id="accountWalletId" value="@Model.SelectedSourceAccountId" />
+                        <input type="hidden" name="SelectedSourceAccountName" id="accountWalletName" value="@Model.SelectedSourceAccountName" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Account Number</b>
+                    <input type="text" class="form-control" id="officerAccountNumber" maxlength="10" />
+                    <span class="service-number-loader profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Bank</b>
+                    <select id="officerBank" class="form-control">
+                        <option selected disabled value="">select a bank</option>
+                        @foreach (var bank in Model.Banks)
+                        {
+                            <option value="@bank.Code">@bank.Name</option>
+                        }
+                    </select>
+                    <span class="service-number-loader profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button type="button" class="btn btn-primary" id="accountNumberSearchBtn" style="width:100%">Search</button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="inputContainer">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Account Name</b>
+                        <input type="text" class="form-control" id="officerAccountName" disabled />
+                        <span class="profileloader" id="accountNameLoader" style="position: absolute; margin: auto; z-index: 10; top: 22px;"></span>
+                        <div id="accountNameError" style="color:red"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Start Date</b>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" placeholder="click to show datepicker" class="form-control pickyNoFutureDate" id="startDate" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">End Date</b>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" placeholder="click to show datepicker" class="form-control pickyNoFutureDate" id="endDate" readonly />
+                            <input type="hidden" id="noOfDayLbl" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Unit</b>
+                        <select class="form-control" id="commandType">
+                            <option selected disabled value="">select a unit</option>
+                            @foreach (var commandType in Model.CommandTypes)
+                            {
+                                <option value="@commandType.Id">@commandType.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Day Type</b>
+                        <select class="form-control" id="dayType">
+                            <option selected disabled value="">select type of day</option>
+                            @foreach (var dayType in Model.EscortDayTypes)
+                            {
+                                <option value="@dayType.Id">@dayType.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Invoice Number</b>
+                        <input type="text" class="form-control" id="invoiceNumber" placeholder="Enter Invoice Number" value="@Model.InvoiceNumber" />
+                        <input type="hidden" class="form-control" name="InvoiceNumber" id="invoiceNumb" value="@Model.InvoiceNumber" />
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">&nbsp;</b>
+                        <button type="button" id="addRequest" class="btn btn-primary" style="width:100%">+ Add</button>
+                        <span class="profileloader" style="position: absolute; margin: auto; z-index: 10; top: 22px;" id="addRequestLoader"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="container-fluid" style="overflow:auto">
+                <table class="items" id="requestsTable">
+                    <tr>
+                        <th>ACCOUNT NAME</th>
+                        <th>UNIT</th>
+                        <th>BANK</th>
+                        <th>ACCOUNT NUMBER</th>
+                        <th>START DATE</th>
+                        <th>END DATE</th>
+                        <th>DAY TYPE</th>
+                        <th>DURATION(DAYS)</th>
+                        <th>AMOUNT(<span>&#8358;</span>)</th>
+                        <th>ACTION</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="paymentRequestItemAmountError" style="color:red"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button type="submit" class="btn btn-primary" id="initiatePaymentBtn" style="width:100%">Initiate Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

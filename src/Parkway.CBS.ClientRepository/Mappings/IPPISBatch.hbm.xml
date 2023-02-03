@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.IPPISBatch, Parkway.CBS.Core" table="Parkway_CBS_Core_IPPISBatch" lazy="false" >
+    <id name="Id" column="Id" type="Int64">
+      <generator class="identity"/>
+    </id>
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="Month" column="Month"/>
+    <property name="Year" column="Year"/>
+    <property name="ProccessStage" column="ProccessStage" />
+    <property name="NumberOfRecords" column="NumberOfRecords" />
+    <property name="FilePath" column="FilePath" type="String" />
+    <property name="ErrorOccurred" column="ErrorOccurred" />
+    <property name="ErrorMessage" column="ErrorMessage"/>
+    <property name="HasSummaryFileMoved" column="HasSummaryFileMoved"/>
+    <property name="IsSummaryFileReady" column="IsSummaryFileReady"/>
+    <property name="ErrorProcessingSummaryFile" column="ErrorProcessingSummaryFile"/>
+    <property name="ErrorMessageProcessingSummaryFile" column="ErrorMessageProcessingSummaryFile"/>
+  </class>
+</hibernate-mapping>

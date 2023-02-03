@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5CCE98F3-C590-43BA-80BE-87F0B92CDB29}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParkWay.CBS.Module</RootNamespace>
+    <AssemblyName>ParkWay.CBS.Module</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Faker.NET4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4" />
+    <Reference Include="ParkWay.CashFlow.Ng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Cashflow.SDK\ParkWay.CashFlow.Ng\ParkWay.CashFlow.Ng\bin\Release\ParkWay.CashFlow.Ng.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Simple.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Simple.ImageResizer.2.1.0\lib\net40\Simple.ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\Contracts\ITINSystem.cs" />
+    <Compile Include="Adapters\TINSystem.cs" />
+    <Compile Include="AdminMenu\CBSAdminMenu.cs" />
+    <Compile Include="ApiRoutes.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\CollectionController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
+    <Compile Include="Controllers\Handlers\BaseHandler.cs" />
+    <Compile Include="Controllers\Handlers\BillingHandler.cs" />
+    <Compile Include="Controllers\Handlers\CollectionHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IBillingHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ICollectionHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IFakerHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IFormHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IInvoiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IMDAHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPrepaidPinHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRevenueHeadHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ISettingsHandler.cs" />
+    <Compile Include="Controllers\Handlers\FakerHandler.cs" />
+    <Compile Include="Controllers\Handlers\FormHandler.cs" />
+    <Compile Include="Controllers\Handlers\InvoiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ITransactionHandler.cs" />
+    <Compile Include="Controllers\Handlers\MDAHandler.cs" />
+    <Compile Include="Controllers\Handlers\MDARevenueHeadHandler.cs" />
+    <Compile Include="Controllers\Handlers\PrepaidPinHandler.cs" />
+    <Compile Include="Controllers\Handlers\ReportHandler.cs" />
+    <Compile Include="Controllers\Handlers\RevenueHeadHandler.cs" />
+    <Compile Include="Controllers\Handlers\SettingsHandler.cs" />
+    <Compile Include="Controllers\Handlers\TransactionHandler.cs" />
+    <Compile Include="Controllers\IntegrationController.cs" />
+    <Compile Include="Controllers\MDAController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RevenueHeadController.cs" />
+    <Compile Include="Controllers\SeedsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="DataFilters\MDAReport\Order\IMDAReportOrder.cs" />
+    <Compile Include="DataFilters\MDAReport\SortCriteria\IMDAReportSortCriteria.cs" />
+    <Compile Include="DataFilters\MDA\Filter\AllFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\DisabledFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\EnabledFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\IMDAFilter.cs" />
+    <Compile Include="DataFilters\MDA\Filter\VisibleFilter.cs" />
+    <Compile Include="DataFilters\MDA\Order\CodeOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\CreatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\IMDAOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\NameOrder.cs" />
+    <Compile Include="DataFilters\MDA\Order\UpdatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\Reports\Filters\All.cs" />
+    <Compile Include="DataFilters\Reports\Filters\BaseReportsFilter.cs" />
+    <Compile Include="DataFilters\Reports\Filters\IReportFilter.cs" />
+    <Compile Include="DataFilters\Reports\Filters\Overdue.cs" />
+    <Compile Include="DataFilters\Reports\Filters\Paid.cs" />
+    <Compile Include="DataFilters\Reports\Filters\Unpaid.cs" />
+    <Compile Include="DataFilters\Reports\Filters\WriteOff.cs" />
+    <Compile Include="DataFilters\Reports\SearchFilters\ISearchFilter.cs" />
+    <Compile Include="DataFilters\Reports\SearchFilters\NoTINAndInvoiceNumber.cs" />
+    <Compile Include="DataFilters\Reports\SearchFilters\OnlyInvoiceNumber.cs" />
+    <Compile Include="DataFilters\Reports\SearchFilters\OnlyTIN.cs" />
+    <Compile Include="DataFilters\Reports\SearchFilters\TINAndInvoiceNumber.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\AllFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\DisabledFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\EnabledFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Filter\IRevenueHeadFilter.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\CodeOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\CreatedAtUtcOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\IRevenueHeadOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\NameOrder.cs" />
+    <Compile Include="DataFilters\RevenueHead\Order\UpdatedAtUtcOrder.cs" />
+    <Compile Include="Events\Contracts\IInvoiceCreatedEventHandler.cs" />
+    <Compile Include="Events\Contracts\IRevenueHeadStatisticsHandler.cs" />
+    <Compile Include="Events\InvoiceCreatedEventHandler.cs" />
+    <Compile Include="Events\RevenueHeadStatisticsHandler.cs" />
+    <Compile Include="Exceptions\AlreadyHasBillingException.cs" />
+    <Compile Include="Exceptions\CannotConnectToCashFlowException.cs" />
+    <Compile Include="Exceptions\CannotCreateStartSetupProcessBecauseRevenueHeadHasSubRevenueHeadsException.cs" />
+    <Compile Include="Exceptions\CannotEditFormBecauseRevenueHeadFormHasNotBeenCreatedException.cs" />
+    <Compile Include="Exceptions\CannotFindRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CannotSaveBillingException.cs" />
+    <Compile Include="Exceptions\CannotSaveMDARecordException.cs" />
+    <Compile Include="Exceptions\CannotSaveRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CannotUpdateRevenueHeadException.cs" />
+    <Compile Include="Exceptions\CashFlowAdminSettingsNotFoundException.cs" />
+    <Compile Include="Exceptions\Class1.cs" />
+    <Compile Include="Exceptions\ControlNotFoundException.cs" />
+    <Compile Include="Exceptions\CouldNotGenerateCashFlowInvoice.cs" />
+    <Compile Include="Exceptions\CouldNotGeneratePINs.cs" />
+    <Compile Include="Exceptions\CouldNotSaveCustomerDetails.cs" />
+    <Compile Include="Exceptions\CouldNotSaveCustomerRecord.cs" />
+    <Compile Include="Exceptions\CouldNotSaveFormRevenueHeadControls.cs" />
+    <Compile Include="Exceptions\CustomerTypeNotFoundException.cs" />
+    <Compile Include="Exceptions\DirtyFormDataException.cs" />
+    <Compile Include="Exceptions\FormFieldDoesNotExistsException.cs" />
+    <Compile Include="Exceptions\HasNoBillingException.cs" />
+    <Compile Include="Exceptions\MDARecordCouldNotBeUpdatedException.cs" />
+    <Compile Include="Exceptions\MDARecordNotFoundException.cs" />
+    <Compile Include="Exceptions\NoBillingDetailAddedYetException.cs" />
+    <Compile Include="Exceptions\NoBillingInformationFound.cs" />
+    <Compile Include="Exceptions\NoInvoicesMatchingTheParametersFoundException.cs" />
+    <Compile Include="Exceptions\NoSearchFilterExceptionFound.cs" />
+    <Compile Include="Exceptions\RevenueHeadCannotAddSubRevenueHeadBecauseSetupHasAlreadyStartedException.cs" />
+    <Compile Include="Exceptions\TINNumberNotFound.cs" />
+    <Compile Include="Exceptions\TriedAccessingANoneDatabaseModelException.cs" />
+    <Compile Include="Exceptions\TriedCheckingForTheUniquenessOfANoneDatabaseModelException.cs" />
+    <Compile Include="Exceptions\UserNotAuthorizedForThisActionException.cs" />
+    <Compile Include="Lang\Lang.cs" />
+    <Compile Include="Lang\ValidationErrorLang.cs" />
+    <Compile Include="Migrations\BankDetailsMigrations.cs" />
+    <Compile Include="Migrations\BillingDiscountMigrations.cs" />
+    <Compile Include="Migrations\BillingMigrations.cs" />
+    <Compile Include="Migrations\BillingScheduleMigrations.cs" />
+    <Compile Include="Migrations\CustomerDetailsMigrations.cs" />
+    <Compile Include="Migrations\CustomerMigrations.cs" />
+    <Compile Include="Migrations\FormControlsMigrations.cs" />
+    <Compile Include="Migrations\FormControlsRevenueHeadMigrations.cs" />
+    <Compile Include="Migrations\InvoiceMigrations.cs" />
+    <Compile Include="Migrations\MDASettingsMigrations.cs" />
+    <Compile Include="Migrations\PrepaidPinMigration.cs" />
+    <Compile Include="Migrations\StatsMigrations.cs" />
+    <Compile Include="Migrations\TenantCashFlowSettingsMigrations.cs" />
+    <Compile Include="Migrations\TINMigrations.cs" />
+    <Compile Include="Migrations\TransactionLogMigration.cs" />
+    <Compile Include="Models\BankDetails.cs" />
+    <Compile Include="Models\Billing.cs" />
+    <Compile Include="Models\BillingDiscount.cs" />
+    <Compile Include="Models\BillingSchedule.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerDetails.cs" />
+    <Compile Include="Models\Enums\Enums.cs" />
+    <Compile Include="Models\FormControls.cs" />
+    <Compile Include="Models\FormControlsRevenueHead.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\MDASettings.cs" />
+    <Compile Include="API\Models\PaymentNotification.cs" />
+    <Compile Include="Models\PrepaidPin.cs" />
+    <Compile Include="Models\Stats.cs" />
+    <Compile Include="Models\TenantCashFlowSettings.cs" />
+    <Compile Include="Models\TIN.cs" />
+    <Compile Include="Models\TransactionLog.cs" />
+    <Compile Include="Seeds\Contracts\IFormControlsSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ITINSeeds.cs" />
+    <Compile Include="Seeds\FormControlsSeeds.cs" />
+    <Compile Include="Seeds\TINSeeds.cs" />
+    <Compile Include="Services\AdminSettingManager.cs" />
+    <Compile Include="Services\BillingManager.cs" />
+    <Compile Include="Services\Contracts\IAdminSettingManager.cs" />
+    <Compile Include="Services\Contracts\IBillingManager.cs" />
+    <Compile Include="Services\Contracts\ICustomerDetailsManager.cs" />
+    <Compile Include="Services\Contracts\ICustomerManager.cs" />
+    <Compile Include="Services\Contracts\IFormControlsManager.cs" />
+    <Compile Include="Services\Contracts\IFormControlsRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\IInvoiceManager.cs" />
+    <Compile Include="Services\Contracts\IInvoicingService.cs" />
+    <Compile Include="Services\Contracts\IMDASettingsManager.cs" />
+    <Compile Include="Services\Contracts\IPrepaidPinManager.cs" />
+    <Compile Include="Services\Contracts\IRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\IStatsManager.cs" />
+    <Compile Include="Services\Contracts\ITINManager.cs" />
+    <Compile Include="Services\Contracts\ITransactionLogManager.cs" />
+    <Compile Include="Services\TransactionLogManager.cs" />
+    <Compile Include="Services\CustomerDetailsManager.cs" />
+    <Compile Include="Services\CustomerManager.cs" />
+    <Compile Include="Services\FormControlsManager.cs" />
+    <Compile Include="Services\FormControlsRevenueHeadManager.cs" />
+    <Compile Include="Services\InvoiceManager.cs" />
+    <Compile Include="Services\InvoicingService.cs" />
+    <Compile Include="Services\MDASettingsManager.cs" />
+    <Compile Include="Services\PrepaidPinManager.cs" />
+    <Compile Include="Services\RevenueHeadManager.cs" />
+    <Compile Include="Services\StatsManager.cs" />
+    <Compile Include="Services\TINManager.cs" />
+    <Compile Include="Utilities\Configuration.cs" />
+    <Compile Include="Utilities\Util.cs" />
+    <Compile Include="Validations\CollectionValidationModel.cs" />
+    <Compile Include="Validations\ResultCount.cs" />
+    <Compile Include="Validations\Rules\BaseCollectionValidate.cs" />
+    <Compile Include="Validations\Rules\Contracts\ICollectionValidator.cs" />
+    <Compile Include="Validations\Rules\ValidateEmail.cs" />
+    <Compile Include="Validations\Rules\ValidateText.cs" />
+    <Compile Include="ViewModels\AdminBreadCrumb.cs" />
+    <Compile Include="ViewModels\BillablesPageViewModel.cs" />
+    <Compile Include="ViewModels\BillingViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Charts\BarChartViewModel.cs" />
+    <Compile Include="ViewModels\Charts\DoughNutChartViewModel.cs" />
+    <Compile Include="ViewModels\Charts\ExpectationLineChart.cs" />
+    <Compile Include="ViewModels\Charts\MainDashboardChartViewModel.cs" />
+    <Compile Include="ViewModels\Charts\PieChartsViewModel.cs" />
+    <Compile Include="ViewModels\CollectionFormControlsViewModel.cs" />
+    <Compile Include="ViewModels\CollectionRevenueFormViewModel.cs" />
+    <Compile Include="ViewModels\CollectionRevenueViewModel.cs" />
+    <Compile Include="ViewModels\CollectionViewModel.cs" />
+    <Compile Include="ViewModels\CreateCompanyResponse.cs" />
+    <Compile Include="ViewModels\CreateCustomerRequest.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DemandNoticeViewModel.cs" />
+    <Compile Include="ViewModels\DetailReport.cs" />
+    <Compile Include="ViewModels\FormControlsView.cs" />
+    <Compile Include="ViewModels\FormSetupEditModel.cs" />
+    <Compile Include="ViewModels\FormSetupViewModel.cs" />
+    <Compile Include="ViewModels\JsonBillableViewModel.cs" />
+    <Compile Include="ViewModels\JsonRevenueViewModel.cs" />
+    <Compile Include="ViewModels\MDAandInvoices.cs" />
+    <Compile Include="ViewModels\MDADropDownListViewModel.cs" />
+    <Compile Include="ViewModels\MDAExpectationViewModel.cs" />
+    <Compile Include="ViewModels\MdaHierarchyView.cs" />
+    <Compile Include="ViewModels\MDAListViewModel.cs" />
+    <Compile Include="Migrations\MDAMigrations.cs" />
+    <Compile Include="Migrations\RevenueHeadMigrations.cs" />
+    <Compile Include="Models\CBSModel.cs" />
+    <Compile Include="Models\MDA.cs" />
+    <Compile Include="Models\MDARevenueHead.cs" />
+    <Compile Include="Models\RevenueHead.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Services\BaseManager.cs" />
+    <Compile Include="Services\Contracts\IBaseManager.cs" />
+    <Compile Include="Services\Contracts\IMDAManager.cs" />
+    <Compile Include="Services\MdaManager.cs" />
+    <Compile Include="Validations\Contracts\IValidator.cs" />
+    <Compile Include="Validations\Rules\Contracts\IUniqueness.cs" />
+    <Compile Include="Validations\Rules\Uniqueness.cs" />
+    <Compile Include="Validations\UniqueValidationModel.cs" />
+    <Compile Include="Validations\Validator.cs" />
+    <Compile Include="ViewModels\MDAMonthlyPaymentPerRevenueViewModel.cs" />
+    <Compile Include="ViewModels\MDAMonthlyPaymentViewModel.cs" />
+    <Compile Include="ViewModels\MdaPaymentReportViewModel.cs" />
+    <Compile Include="ViewModels\MDAReportViewModel.cs" />
+    <Compile Include="ViewModels\MDARevenueHeadsListPage.cs" />
+    <Compile Include="ViewModels\MDASettingsViewModel.cs" />
+    <Compile Include="ViewModels\PaymentModel.cs" />
+    <Compile Include="ViewModels\PerRevenueReportViewModel.cs" />
+    <Compile Include="ViewModels\PINViewModel.cs" />
+    <Compile Include="ViewModels\RevenueHeadAndBillingInformation.cs" />
+    <Compile Include="ViewModels\RevenueHeadAndInvoices.cs" />
+    <Compile Include="ViewModels\RevenueHeadCreateFromMDAView.cs" />
+    <Compile Include="ViewModels\RevenueHeadCreateView.cs" />
+    <Compile Include="ViewModels\RevenueHeadDashboardViewModel.cs" />
+    <Compile Include="ViewModels\RevenueHeadDropDownListViewModel.cs" />
+    <Compile Include="ViewModels\RevenueHeadHierarchyView.cs" />
+    <Compile Include="ViewModels\RevenueHeadInvoicesViewModel.cs" />
+    <Compile Include="ViewModels\RevenueHeadPaymentBreakdownViewModel.cs" />
+    <Compile Include="ViewModels\SubRevenueHeadCreateViewModel.cs" />
+    <Compile Include="ViewModels\SubRevenueHeadEditViewModel.cs" />
+    <Compile Include="ViewModels\SubRevenueHeadsListViewModel.cs" />
+    <Compile Include="ViewModels\TenantSettingsViewModel.cs" />
+    <Compile Include="ViewModels\UserCollectionFormView.cs" />
+    <Compile Include="WebApiConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\Assessment.js" />
+    <Content Include="Scripts\billing-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cbs-mda-client-script.js" />
+    <Content Include="Scripts\cbs-mda-g-script.js" />
+    <Content Include="Scripts\cbs-mda-revenue-head-script.js" />
+    <Content Include="Scripts\cbs-mda-script.js" />
+    <Content Include="Scripts\cbs.billing.script.js" />
+    <Content Include="Scripts\cbs.maindashboard.chart.js" />
+    <Content Include="Scripts\cbs.mda.settings.js" />
+    <Content Include="Scripts\cbs.reportscripts.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\custom_chart.js" />
+    <Content Include="Scripts\datepickerinitialization.js" />
+    <Content Include="Scripts\excellentexport.min.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\ParkWayCBS.pubxml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\HighChartsExport.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jspdf.min.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.js" />
+    <Content Include="Scripts\MdaReport.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\monthpicker.js" />
+    <Content Include="Scripts\NewDashboard.js" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\cbs-billing.css" />
+    <Content Include="Styles\cbs-mda-style-parkstrap.css" />
+    <Content Include="Styles\cbs-mda-style-revenuehead.css" />
+    <Content Include="Styles\cbs-mda-style-revenuestrap.css" />
+    <Content Include="Styles\cbs-mda-style-revenuestrap.css" />
+    <Content Include="Styles\cbs-mda-style.css" />
+    <Content Include="Styles\cbs-mda-tree-style.css" />
+    <Content Include="Styles\custom_chart.css" />
+    <Content Include="Styles\datepicker.css" />
+    <Content Include="Styles\images\CBS_Banner.png" />
+    <Content Include="Styles\images\CBS_logo.png" />
+    <Content Include="Styles\revenue_dashboard.css" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\MDA\Create.cshtml" />
+    <Content Include="Views\MDA\List.cshtml" />
+    <Content Include="Views\MDA\Edit.cshtml" />
+    <Content Include="Views\MDA\ViewHierarchy.cshtml" />
+    <Content Include="Views\Billing\Create.cshtml" />
+    <Content Include="Views\Form\Create.cshtml" />
+    <Content Include="Views\Form\Edit.cshtml" />
+    <Content Include="Views\Billing\Edit.cshtml" />
+    <Content Include="Views\Collection\Index.cshtml" />
+    <Content Include="Views\Collection\ComingSoonPage.cshtml" />
+    <Content Include="Views\Collection\GetBilling.cshtml" />
+    <Content Include="Views\Collection\GetRevenueHeadsView.cshtml" />
+    <Content Include="Views\Collection\FormView.cshtml" />
+    <Content Include="Views\Collection\GetInvoice.cshtml" />
+    <Content Include="Styles\Fonts\AvenirLTStd-Book.otf" />
+    <Content Include="Styles\Fonts\AvenirLTStd-Light.otf" />
+    <Content Include="Styles\Fonts\AvenirLTStd-Roman.otf" />
+    <Content Include="Views\Report\ExpectationPerMDA.cshtml" />
+    <Content Include="Views\Report\MDAMonthlyPayment.cshtml" />
+    <Content Include="Views\Report\MDAMonthlyPaymentPerRevenue.cshtml" />
+    <Content Include="Views\Report\MDAPaymentPerRevenue.cshtml" />
+    <Content Include="Views\Report\MdaReport.cshtml" />
+    <Content Include="Views\Report\MonthlyExpectationReport.cshtml" />
+    <Content Include="Views\Report\PaymentReportRevenueHead.cshtml" />
+    <Content Include="Views\Report\RevenueBreakDown.cshtml" />
+    <Content Include="Views\Report\RevenueBreakdownReport.cshtml" />
+    <Content Include="Views\Report\ViewChart.cshtml" />
+    <Content Include="Views\Collection\One.cshtml" />
+    <Content Include="Views\Report\R1.cshtml" />
+    <Content Include="Views\Report\RevenueBreakDown.cshtml" />
+    <Content Include="Views\Billing\Billing.cshtml" />
+    <Content Include="Views\MDA\MainDashboard.cshtml" />
+    <Content Include="Views\MDA\ViewMDARevenueHeads.cshtml" />
+    <Content Include="Views\RevenueHead\RevenueHeadDashBoard.cshtml" />
+    <Content Include="Views\RevenueHead\Edit.cshtml" />
+    <Content Include="Views\RevenueHead\ViewSubRevenueHeads.cshtml" />
+    <Content Include="Views\RevenueHead\List.cshtml" />
+    <Content Include="Views\RevenueHead\CreateFromMDA.cshtml" />
+    <Content Include="Views\RevenueHead\CreateFromRevenueHead.cshtml" />
+    <Content Include="Views\AdminUser\Create.cshtml" />
+    <Content Include="Views\Settings\ChangePassword.cshtml" />
+    <Content Include="Views\UserManagement\CreateAdmin.cshtml" />
+    <Content Include="Views\UserManagement\Index.cshtml" />
+    <Content Include="Views\UserManagement\CreateRole.cshtml" />
+    <Content Include="Views\UserManagement\Users.cshtml" />
+    <Content Include="Views\Collection\CollectionFormView.cshtml" />
+    <Content Include="Views\Settings\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\AdminBreadCrumb.cshtml" />
+    <Content Include="Views\Chart.Tab.cshtml" />
+    <Content Include="Views\MDA\CreateMDASettings.cshtml" />
+    <Content Include="Views\Settings\AdminSettings.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\RevenueHead\BillablesList.cshtml" />
+    <Content Include="Views\GetInvoice.cshtml" />
+    <Content Include="Views\Report\DemandNotice.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Orchard.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Orchard.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Orchard.Framework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Orchard\obj\Debug\Orchard.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\" />
+    <Folder Include="DataFilters\Reports\Assessments\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orchard.Alias\Orchard.Alias.csproj">
+      <Project>{475B6C45-B27C-438B-8966-908B9D6D1077}</Project>
+      <Name>Orchard.Alias</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Autoroute\Orchard.Autoroute.csproj">
+      <Project>{66FCCD76-2761-47E3-8D11-B45D0001DDAA}</Project>
+      <Name>Orchard.Autoroute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Email\Orchard.Email.csproj">
+      <Project>{05660F47-D649-48BD-9DED-DF4E01E7CFF9}</Project>
+      <Name>Orchard.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Layouts\Orchard.Layouts.csproj">
+      <Project>{6BD8B2FA-F2E3-4AC8-A4C3-2925A653889A}</Project>
+      <Name>Orchard.Layouts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.MediaLibrary\Orchard.MediaLibrary.csproj">
+      <Project>{73a7688a-5bd3-4f7e-adfa-ce36c5a10e3b}</Project>
+      <Name>Orchard.MediaLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Media\Orchard.Media.csproj">
+      <Project>{d9a7b330-cd22-4da1-a95a-8de1982ad8eb}</Project>
+      <Name>Orchard.Media</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Roles\Orchard.Roles.csproj">
+      <Project>{D10AD48F-407D-4DB5-A328-173EC7CB010F}</Project>
+      <Name>Orchard.Roles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Widgets\Orchard.Widgets.csproj">
+      <Project>{194D3CCC-1153-474D-8176-FDE8D7D0D0BD}</Project>
+      <Name>Orchard.Widgets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Workflows\Orchard.Workflows.csproj">
+      <Project>{7059493C-8251-4764-9C1E-2368B8B485BC}</Project>
+      <Name>Orchard.Workflows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

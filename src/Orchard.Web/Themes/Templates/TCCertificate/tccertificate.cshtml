@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+    body{
+        margin: unset;
+        padding: 20px 0;
+    }
+
+    p{
+        margin-top: 0;
+    }
+        .tcc-certificate-body {
+            position: relative;
+            height: auto;
+            width: 900px;
+            border: 1px solid #808080;
+            box-shadow: 0 0 1px 1px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding-bottom: 90px;
+        }
+
+        .tcc-certificate-bg {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tcc-certificate-bg img {
+            width: 100%;
+            height: auto;
+        }
+
+        .tcc-certificate-content {
+            position: relative;
+            max-width: 100%;
+            padding-top: 40px;
+            padding-left: 65px;
+            padding-right: 65px;
+            padding-bottom: 92px;
+            z-index: 2;
+        }
+
+        .tcc-certificate-body::before{
+            content:'';
+            position: absolute;
+            top:0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-image: url("@Model.TCCCertificateBGPath");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+        }
+
+        .tcc-certificate-content::before{
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("@Model.LogoURLPath");
+            opacity: 0.08;
+        }
+
+        table {
+            border-bottom: 2px solid #e9edeb;
+            border-collapse: collapse;
+        }
+
+        table thead tr {
+            background-color: #e9edeb;
+        }
+
+        table thead tr th {
+            padding: 15px 5px;
+            text-align: left;
+        }
+
+        table tbody tr td {
+            padding: 25px 5px;
+        }
+
+        table tbody tr:nth-of-type(1) {
+            border-bottom: 1px solid #e9edeb;
+        }
+
+        table tbody tr td:not(:nth-child(1)) {
+            text-align: left;
+        }
+
+        table tbody tr td:nth-child(1) {
+            font-weight: bold;
+        }
+
+        .pt-4, .py-4 {
+    padding-top: 1.5rem !important;
+}
+
+.pt-2, .py-2 {
+    padding-top: .5rem !important;
+}
+
+.mb-0, .my-0 {
+    margin-bottom: 0 !important;
+}
+
+.mt-4, .my-4 {
+    margin-top: 1.5rem !important;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+    </style>
+</head>
+
+<body>
+    <div class="wrapper-payment">
+
+        <div class="content-payment mt-4 py-2">
+            <div class="tcc-certificate">
+                <div class="tcc-certificate-body">
+                    <div class="tcc-certificate-content" style="position:relative">
+                    <div style="position:absolute;top:100px;left:70px">
+                        <img class="logo" src="@Model.BarCodeSavingPath" alt="QR Code"
+                            style="width:100px;height:auto;border:none" />
+                        </div>
+                        <div style="text-align:center">
+                            <img class="logo mt-4" src="@Model.LogoURL" alt="CBS" style="height:auto; width:100px" />
+                            <h6 class="mt-4 mb-1" style="font-weight:bold;font-size:14px">NASARAWA STATE OF NIGERIA</h6>
+                            <p class="mb-1" style="font-size:15px">MINISTRY OF FINANCE, BOARD OF INTERNAL REVENUE</p>
+                            <p style="font-size:14px">Private Mail Bag No. 47, Lafia</p>
+                        </div>
+                        <div class="pb-2 pt-4" style="font-size:14px">
+                            <p>Tax File No: @Model.TCCNumber</p>
+                        </div>
+                        <div style="text-align:center">
+                            <p class="mb-0">INCOME TAX CLEARANCE<br /><span
+                                    style="font-size:32px;line-height:17px">CERTIFICATE</span></p>
+                        </div>
+                        <div style="text-align:center; padding: 30px 10px; font-size:12px;">
+                            <p>THIS IS TO CERTIFY THAT</p>
+                        </div>
+                        <div>
+                            <p><b>@Model.ApplicantName</b> of <b>@Model.Address</b> has
+                                settled his/her income tax assessment for the past three years [@Model.YearOne @Model.YearTwo @Model.YearAppliedFor]</p>
+                        </div>
+                        <div style="width:100%">
+                            <p><b>Details of his/her assessments are as follows:</b></p>
+                            <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>@Model.YearOne</th>
+                                        <th>@Model.YearTwo</th>
+                                        <th>@Model.YearAppliedFor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total Income</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearOneTotalIncome)</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearTwoTotalIncome)</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearAppliedForTotalIncome)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax Paid</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearOneTaxPaid)</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearTwoTaxPaid)</td>
+                                        <td>&#8358;@String.Format("{0:n2}", Model.YearAppliedForTaxPaid)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-4" style="font-size:14px">This certificate expires on <b>@Model.ExpireDate</b></p>
+                        </div>
+                        <div style="width: 100%; height: 100px;">
+                            <div style="text-align:center; min-width:25%;margin-top:115px;font-size:14px;float: left;">
+                                <img src="@Model.RevenueOfficerSignature" alt="Revenue-Officer-Signature" style="height:70px;width:auto"/>
+                                <hr style="border-color:#000000" />
+                                <p class="mb-0">Prepared by</p>
+                                <p>Revenue Officer</p>
+                            </div>
+                            <div style="text-align:center; min-width:25%;margin-top:115px;font-size:14px;float: right;">
+								<img src="@Model.DirectorOfRevenueSignature" alt="Director-of-Officer-Signature" style="height:70px;width:auto"/>
+                                <hr style="border-color:#000000" />
+                                <p class="mb-0">Director of Revenue</p>
+                                <p class="mb-0">Nasarawa State</p>
+                                <p>@Model.LastDateModified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-top">
+
+        </div>
+    </div>
+</body>
+
+</html>

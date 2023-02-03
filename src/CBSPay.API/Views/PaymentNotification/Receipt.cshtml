@@ -1,0 +1,171 @@
+﻿@model CBSPay.Core.APIModels.EIRSSettlementInfo
+@{
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Receipt page</title>
+    </head>
+    <body>*@
+<h4 style="color:red;">@ViewBag.Error</h4>
+<div id="receiptPage">
+    <div class="text-center">
+        <h4 class="text-success">PAYMENT SYNCHRONIZED SUCCESSFULLY</h4>
+        <img src="~/Content/payment_success.png" />
+        <div class="" style="color:#808080;">
+            <h3>successfully paid</h3>
+        </div>
+        <hr />
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><span>Tax Payer Name:  </span> <b class="pull-right">@Model.TaxPayerName</b></li>
+                        <li class="list-group-item"><span>Reference Number: </span> <b class="pull-right">@Model.ReferenceNumber</b></li>
+                        <li class="list-group-item"><span>Phone Number: </span> <b class="pull-right">@Model.PhoneNumber</b></li>
+                        <li class="list-group-item"><span>Tax Payer RIN Number: </span> <b class="pull-right">@Model.TaxPayerRIN</b></li>
+
+
+                        <li class="list-group-item">
+                            <span>Service Bill ID: </span> <b class="pull-right">
+                                @if (Model.ServiceBillID != 0)
+                                {
+                                    @Model.ServiceBillID
+                                }
+                                else
+                                {
+                                    <small> -</small>
+                                }
+                            </b>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Assessment ID: </span> <b class="pull-right">
+                                @if (Model.AssessmentID != 0)
+                                {
+                                    @Model.AssessmentID
+                                }
+                                else
+                                {
+                                    <small> -</small>
+                                }
+                            </b>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Payment Date: </span> <b class="pull-right">
+                                @if (Model.PaymentDate != null)
+                                {
+                                    @Model.PaymentDate.ToString("dd MMM yyyy")
+                                }
+                                else
+                                {
+                                    <small> -</small>
+                                }
+                            </b>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Settlement Date: </span> <b class="pull-right">
+                                @if (Model.SettlementDate != null)
+                                {
+                                    @Model.SettlementDate.ToString("dd MMM yyyy")
+                                }
+                                else
+                                {
+                                    <small> -</small>
+                                }
+                            </b>
+                        </li>
+
+                        <li class="list-group-item"><span> Settlement Method: </span> <b class="pull-right">@Model.SettlementMethodName</b></li>
+
+                        <li class="list-group-item"><span>Total Amount Paid : </span><b class="pull-right">@Model.TotalAmountPaid.ToString("N2")</b></li>
+
+                        <li class="list-group-item"><span>Payment Reference: </span><b class="pull-right">@Model.TransactionRefNo</b></li>
+
+                        <li class="list-group-item"><span>Settlement Note: </span> <b class="pull-right">@Model.Notes</b></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Settlement List Item
+                </div>
+                <div class="card-body">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Settlement TBPKID
+                                        </th>
+                                        <th>
+                                            Tax Amount
+                                        </th>
+
+                                        <th>
+                                            Settlement Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color:#EEEEEE;">
+
+                                    @if (Model.lstSettlementItems != null && Model.lstSettlementItems.Count() > 0)
+                                    {
+                                        foreach (var item in Model.lstSettlementItems)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.TBPKID
+                                                </td>
+                                                <td>
+                                                    @item.TaxAmount.ToString("N2")
+                                                </td>
+
+                                                <td>
+                                                    @item.ToSettleAmount.ToString("N2")
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="8">No Records Found</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@*<a class="btn btn-primary" href="@Model.ReceiptPath" style="" download>DOWNLOAD RECEIPT &#8582;</a>*@
+<a class="btn btn-primary" href="@Url.Action("ShowPdfInBrowser","PaymentNotification")" style="" download="receipt.pdf">DOWNLOAD RECEIPT <i class="fa fa-download"></i></a>
+
+@*<span class="btn btn-primary" onclick="receiptPdf('#receiptPage')">DOWNLOAD RECEIPT DOCUMENT <i class="fa fa-download"></i></span>
+<span class="btn btn-info" onclick="receiptImage('#receiptPage')">DOWNLOAD RECEIPT IMAGE <i class="fa fa-download"></i></span>*@
+<a class="btn btn-success" href="javascript: top.location = '@Url.Action("Pay","Home")';" style="">FINISH &#10004;</a>
+@*</body>
+    </html>*@

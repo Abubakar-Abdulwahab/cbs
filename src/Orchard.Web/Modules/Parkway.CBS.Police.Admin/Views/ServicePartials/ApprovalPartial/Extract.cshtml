@@ -1,0 +1,10 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestDetailsVM
+@using (Html.BeginRouteForm(Parkway.CBS.Police.Admin.RouteName.PSSExtractApproval.ApproveRequest))
+{
+    if (Model.IsLastApprover){ @Html.Partial("\\ServicePartials\\ApprovalPartial\\GetDPOPartial") }
+    if(Model.IncidentDateAndTimeParsed == null || string.IsNullOrEmpty(Model.Content) || string.IsNullOrEmpty(Model.DiarySerialNumber)) { 
+    @(Html.Partial("\\ServicePartials\\PSSExtractContentAndDiaryInfoFields", Model))
+    }
+    @Html.Partial("\\ServicePartials\\ApprovalPartial\\ApprovalComment", Model,
+    new ViewDataDictionary(ViewData) { { new KeyValuePair<string, object>("ControllerName", typeof(Parkway.CBS.Police.Admin.RouteName.PSSExtractApproval).Name) } })
+}

@@ -1,0 +1,369 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Module.ViewModels.BillingViewModel
+<style>
+    a.a-classname {
+        align-content;
+    }
+    /*
+        Overide Site.css select styling
+    */
+    select {
+        padding: 3px;
+    }
+
+    label {
+        color: #e97d68;
+        font-weight: 200;
+    }
+
+    b {
+        font-weight: 500;
+    }
+</style>
+<script>
+    var billingType = @Html.Raw(Json.Encode(Model.BillingType));
+
+    var hasFrequencyValue = @Html.Raw(Json.Encode(Model.CallBackObject.HasFrequencyValue));
+    var isFixed = @Html.Raw(Json.Encode(Model.BillingType));
+
+    var frequencyModel = @Html.Raw(Json.Encode(Model.FrequencyModel));
+    var fixedType = @Html.Raw(Json.Encode(Model.FrequencyModel.FrequencyType));
+    var demandNoticeChecked = @Html.Raw(Json.Encode(Model.BillingDemandNotice.IsChecked));
+    var templatesModel = @Html.Raw(Json.Encode(Model.FileUploadBillingModel));
+</script>
+@{
+    Layout.Title = (Model.IsEdit ? T("Edit Billing Details").ToString() : T("Create Billing Details").ToString());
+    Style.Require("CBS.Billing.Style");
+}
+
+@using (Html.BeginFormAntiForgeryPost((Model.IsEdit ? "Edit" : "Create"), FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Billing Details for - @String.Format("{0}", Model.RHName) - Revenue Head
+                @Html.Hidden("RHName", Model.RHName)
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4><b>Assessment Details</b></h4>
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label id="blAmount">@T("Amount") (&#8358;)</label>
+                        @Html.TextBoxFor(b => b.SAmount, new { @class = "form-control text large amount", @required = "true" })
+                        @Html.Hint(T("Add the amount payable. For example {0}.", "10000"))
+                        @Html.ValidationMessage("SAmount", "Specified amount is too small", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label id="blSurcharge">@T("Surcharge") (&#8358;)</label>
+                        @Html.TextBoxFor(b => b.Surcharge, new { @class = "form-control text large amount" })
+                        @Html.Hint(T("Additional fee charged by merchant intended to cover costs for accepting payment"))
+                        @Html.ValidationMessage("Surcharge", "", new { @style = "color:#ff0000 " })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>@T("Is this Assessment Recurring?")</label>
+                        <br />
+                        <input name="IsRecurring" class="billing_type_selector" value="True" id="isRecurring" type="radio" @(Model.IsRecurring ? "checked" : "")>
+                        @Html.Hint(T("Check this if the payments are to recur on a schedule. Also set a schedule below"))
+                        <br />
+                        @Html.ValidationMessage("IsRecurring", "Choose a one of the Billing Types below", new { @style = "color:#ff0000 " })
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label>@T("Is this Assessment a oneoff payment?")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_selector_nosch" value="OneOff" id="nosch" type="radio" @(Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.OneOff ? "checked" : "")>
+                        @Html.Hint(T("Check this if tax payers are to pay for this assessment only once."))
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label>@T("Is this a Direct Assessment?")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_selector_nosch" value="DirectAssessment" id="nosch1" type="radio" @((Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.DirectAssessment) || (Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.SelfAssessment) ? "checked" : "")>
+                        @Html.Hint(T("Check this for PAYEE/self-assessment"))
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label>@T("Is this a File Upload?")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_selector_nosch" value="FileUpload" id="nosch1" type="radio" @(Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.FileUpload ? "checked" : "")>
+                        @Html.Hint(T("Check this for file upload and select the relevant file template and adapter"))
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label>@T("Does this Assessment have a fixed amount?")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_selector_nosch" value="FixedAmountAssessment" id="nosch" type="radio" @(Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.FixedAmountAssessment ? "checked" : "")>
+                        @Html.Hint(T("Check this if tax payers are to pay for this assessment multiple times but for a fixed amount."))
+                    </div>
+                </div>
+
+                <!-- #region File upload section -->
+
+                <div id="billing_type_file" class="billing_type_file_control row" style="display:none">
+                    <hr />
+                    <div class="col-sm-12">
+                        <h4><b>File Upload</b></h4>
+                        <br />
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>@T("Select template")</label>
+                        <br />
+                        <select class="file_upload_template form-control" id="TemplateValue" name="FileUploadBillingModel.SelectedTemplate">
+                            <option value="" selected disabled> Select assessment adapter </option>
+                            @if (Model.FileUploadBillingModel != null && Model.FileUploadBillingModel.ListOfTemplates.Any())
+                            {
+                                foreach (var item in Model.FileUploadBillingModel.ListOfTemplates)
+                                {
+                                    if (Model.FileUploadBillingModel.SelectedTemplate == @item.Name)
+                                    {
+                                        <option value="@item.Name" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Name">@item.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        @Html.Hint(T("Select a template for the file upload"))
+                        @Html.ValidationMessageFor(m => m.FileUploadBillingModel.SelectedTemplate, "", new { @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>@T("Select adapter")</label>
+                        <br />
+                        <select class="file_upload_adapter form-control" id="FileUploadAdapterValue" name="FileUploadBillingModel.SelectedImplementation">
+                            @if (string.IsNullOrEmpty(Model.FileUploadBillingModel.SelectedImplementation))
+                            {
+                                <option value="" selected disabled>Select an adapter implementation</option>
+                            }
+                        </select>
+                        @Html.Hint(T("Select an adapter that defines how this file upload template is treated"))
+                        @Html.ValidationMessageFor(m => m.FileUploadBillingModel.SelectedImplementation, "", new { @style = "color:#ff0000" })
+                    </div>
+                </div>
+                <!-- #region End file upload section -->
+
+                <div id="billing_type_payee" class="billing_type_payee_control row" style="display:none">
+                    <hr />
+                    <div class="col-sm-12">
+                        <h4><b>Direct Assessment</b></h4>
+                        <br />
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label>@T("Allow File Uploads")</label>
+                        <br />
+                        @Html.CheckBoxFor(b => b.DirectAssessment.AllowFileUpload) &nbsp;
+                        @Html.Hint(T("Allow employers to upload assessment file."))
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>@T("Select State direct assessment adapter")</label>
+                        <br />
+                        <select class="direct_adapter form-control" id="AdapterValue" name="DirectAssessment.AdapterValue">
+                            <option value="" selected disabled> Select assessment adapter </option>
+                            @if (Model.DirectAssessment != null && Model.DirectAssessment.ListOfAssessmentInterface.Any())
+                            {
+                                foreach (var item in Model.DirectAssessment.ListOfAssessmentInterface)
+                                {
+                                    <option value="@item.Value" @(Model.DirectAssessment.AdapterValue == item.Name ? "selected": "")>@item.Name</option>}
+                            }
+                        </select>
+                        @Html.Hint(T("Select how assessments are calculated"))
+                        @Html.ValidationMessageFor(m => m.DirectAssessment.AdapterValue, "", new { @style = "color:#ff0000" })
+                    </div>
+                </div>
+
+                <!-- #region Billing Type -->
+
+                <div id="billing_type_panel" class="billing_type_control row" style="display:none">
+                    <hr />
+                    <div class="col-sm-12">
+                        <h4><b>Billing Type</b></h4>
+                        <br />
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label>@T("Fixed Billing Type")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_control" value="fixed" id="billingtype" disabled="" type="radio" @(Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.Fixed ? "checked" : "")>
+                        @Html.Hint(T("Pick a billing type. Fixed billing type description"))
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>@T("Variable Billing Type")</label>
+                        <br />
+                        <input name="BillingType" class="billing_type_control" value="variable" id="billingtype" disabled="" type="radio" @(Model.BillingType == Parkway.CBS.Core.Models.Enums.BillingType.Variable ? "checked" : "")>
+                        @Html.Hint(T("Pick a billing type. Variable billing type description"))
+                    </div>
+                </div>
+
+                <!-- #endregion -->
+                <!-- #region Billing -->
+
+                <div class="frequency_control row" style="display:none">
+                    <hr />
+                    <div class="col-sm-12">
+                        <h4><b>Billing Frequency</b></h4>
+                        <br />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="" class="control-label">Billing Frequency:</label>
+                        <select class="recurring_control form-control" id="FrequencyType" name="FrequencyType">
+                            <option value="" selected disabled>Select Frequency</option>
+                            <option value="1" @(Model.FrequencyModel.FrequencyType.ToString() == "Daily" ? "selected" : "")>Daily</option>
+                            <option value="2" @(Model.FrequencyModel.FrequencyType.ToString() == "Weekly" ? "selected" : "")>Weekly</option>
+                            <option value="3" @(Model.FrequencyModel.FrequencyType.ToString() == "Monthly" ? "selected" : "")>Monthly</option>
+                            <option value="4" @(Model.FrequencyModel.FrequencyType.ToString() == "Yearly" ? "selected" : "")>Yearly</option>
+                        </select>
+                        @Html.ValidationMessage("FrequencyType", "For recurring billing, this field is required", new { @style = "color:#ff0000" })
+                    </div>
+                    @Html.Partial("FixedBilling", Model.FrequencyModel)
+                    @Html.Partial("VariableBilling", Model.FrequencyModel)
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Ends: </label>
+                        <ul class="list-group list-unstyled list-inline">
+                            <li>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="duration" name="Duration.DurationType" class="recurring_control" value="@Parkway.CBS.Core.Models.Enums.DurationType.NeverEnds" @(Model.FrequencyModel.Duration.DurationType == Parkway.CBS.Core.Models.Enums.DurationType.NeverEnds ? "checked" : "") />Never
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="duration" name="Duration.DurationType" class="recurring_control" value="@Parkway.CBS.Core.Models.Enums.DurationType.EndsAfter" @(Model.FrequencyModel.Duration.DurationType == Parkway.CBS.Core.Models.Enums.DurationType.EndsAfter ? "checked" : "") />After
+                                        <input type="number" min="0" name="Duration.EndsAfterRounds" class="textwidth ends" value="@Model.FrequencyModel.Duration.EndsAfterRounds" id="after" @(Model.FrequencyModel.Duration.DurationType != Parkway.CBS.Core.Models.Enums.DurationType.EndsAfter ? "disabled" : "") style="width:20%" />   Rounds
+                                    </label>
+                                    @Html.ValidationMessage("Duration.EndsAfterRounds", "", new { @style = "color:#ff0000" })
+                                </div>
+                            </li>
+                            <li>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="duration" name="Duration.DurationType" class="recurring_control " value="@Parkway.CBS.Core.Models.Enums.DurationType.EndsOn" @(Model.FrequencyModel.Duration.DurationType == Parkway.CBS.Core.Models.Enums.DurationType.EndsOn ? "checked" : "") />On
+                                        <input type="text" name="Duration.EndsAtDate" id="datepicker4" class="ends-on" @(Model.FrequencyModel.Duration.DurationType != Parkway.CBS.Core.Models.Enums.DurationType.EndsOn ? "disabled" : "") value="@Model.FrequencyModel.Duration.EndsAtDate" />
+                                    </label>
+                                    @Html.ValidationMessage("Duration.EndsAtDate", "", new { @style = "color:#ff0000" })
+                                </div>
+                            </li>
+                        </ul>
+                        @Html.ValidationMessage("Duration", "", new { @style = "color:#ff0000" })
+                    </div>
+                </div>
+
+                <!-- #endregion -->
+                <div class="row">
+                    <hr />
+                    <div class="col-sm-12">
+                        <div class="form-inline">
+                            <h4><b>Assessment Due Date</b></h4>
+                            <br />
+                            <div class="col-md-3 form-group">
+                                <label>@T("Due on next bill Date")</label>
+                                <br />
+                                @Html.CheckBoxFor(b => b.DueDateModel.DueOnNextBillingDate, new { @disabled = true })
+                                @Html.Hint(T("Check this if the payments are to recur on a schedule"))
+                                @Html.ValidationMessage("DueDateModel.DueOnNextBillingDate", "Only recurring bills can have their next bill date as the due date.", new { @style = "color:#ff0000" })
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>@T("Due on")</label>
+                                <br />
+                                @Html.TextBoxFor(b => b.DueDateModel.DueDateInterval, new { @class = "form-control", @type = "number", @value = "0", @min = "0", @style = "color:black" })
+                                @Html.Hint(T("Select a number for the time range in which demand notices are to be sent."))
+                                @Html.ValidationMessage("DueDateModel.DueDateInterval", "", new { @style = "color:#ff0000" })
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>@T("Select due date period")</label>
+                                <br />
+                                <div>
+                                    <select id="filterResults" class="form-control" name="@Html.NameOf(m => m.DueDateModel.DueDateAfter)">
+                                        <option disabled selected>Select Due Date Interval</option>
+                                        <option @(Model.DueDateModel.DueDateAfter == Parkway.CBS.Core.Models.Enums.DueDateAfter.Days ? "selected" : "")>@Parkway.CBS.Core.Models.Enums.DueDateAfter.Days</option>
+                                        <option @(Model.DueDateModel.DueDateAfter == Parkway.CBS.Core.Models.Enums.DueDateAfter.Weeks ? "selected" : "")>@Parkway.CBS.Core.Models.Enums.DueDateAfter.Weeks</option>
+                                        <option @(Model.DueDateModel.DueDateAfter == Parkway.CBS.Core.Models.Enums.DueDateAfter.Months ? "selected" : "")>@Parkway.CBS.Core.Models.Enums.DueDateAfter.Months</option>
+                                        <option @(Model.DueDateModel.DueDateAfter == Parkway.CBS.Core.Models.Enums.DueDateAfter.Years ? "selected" : "")>@Parkway.CBS.Core.Models.Enums.DueDateAfter.Years</option>
+                                    </select>&nbsp;after invoice /assesment generation
+                                </div>
+                                @Html.Hint(T("Select due data. Example 2 weeks after invoice generation"))
+                                @Html.ValidationMessage("DueDateModel.DueDateAfter", "", new { @style = "color:#ff0000" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <input type="hidden" id="Indexer" value="@Model.Indexer" />
+                    @Html.Partial("DiscountPartial", Model.DiscountModelPostBackData)
+                </div>
+                <hr />
+                <div class="row">
+                    <input type="hidden" id="IndexerPenalty" value="@Model.IndexerPenalty" />
+                    @Html.Partial("PenaltyPartial", Model.PenaltyModelPostBackData)
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-inline">
+                            <h4><b>Demand Notice</b></h4>
+                            <br />
+                            <div class="col-md-3 form-group">
+                                <label>@T("Issue Demand Notice")</label>
+                                <br />
+                                @Html.CheckBox("BillingDemandNotice.IsChecked", Model.BillingDemandNotice.IsChecked)
+                                @Html.Hint(T("Check this if you want demand notices to be sent"))
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>@T("Send Demand Notice after")</label>
+                                <br />
+                                @Html.TextBoxFor(m => m.BillingDemandNotice.EffectiveFrom, new { @class = "form-control", @type = "number", @disabled = "true", @min = "1" })
+                                @Html.Hint(T("Select a number for the time range for which demand notices are to be sent."))
+                                @Html.ValidationMessageFor(m => m.BillingDemandNotice.EffectiveFrom, "", new { @style = "color:#ff0000" })
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>@T("Select Demand Notice period")</label>
+                                <br />
+                                <div>
+                                    <select id="demandnoticedropdown" class="form-control" disabled name="BillingDemandNotice.EffectiveFromType">
+                                        <option value="" disabled selected>Select Demand Notice Range</option>
+                                        <option value="Days" @(Model.BillingDemandNotice.EffectiveFromType == Parkway.CBS.Core.Models.Enums.EffectiveFromType.Days ? "selected" : "")>Days</option>
+                                        <option value="Weeks" @(Model.BillingDemandNotice.EffectiveFromType == Parkway.CBS.Core.Models.Enums.EffectiveFromType.Weeks ? "selected" : "")>Weeks</option>
+                                        <option value="Months" @(Model.BillingDemandNotice.EffectiveFromType == Parkway.CBS.Core.Models.Enums.EffectiveFromType.Months ? "selected" : "")>Months</option>
+                                        <option value="Years" @(Model.BillingDemandNotice.EffectiveFromType == Parkway.CBS.Core.Models.Enums.EffectiveFromType.Years ? "selected" : "")>Years</option>
+                                    </select>&nbsp;after the Due Date
+                                </div>
+                                @Html.Hint(T("Select Demand Notice period. Example 2 weeks after the due date"))
+                                @Html.ValidationMessageFor(m => m.BillingDemandNotice.EffectiveFromType, "", new { @style = "color:#ff0000" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <br />
+                        <b>Demand Notice Header</b>
+                        @Html.TextAreaFor(dm => dm.BillingDemandNotice.DemandNoticeHeaderText, new { })
+                    </div>
+                    <br />
+                    <br />
+                </div>
+
+                <button type="submit" class="btn btn-success">@T("Save")</button>
+                <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("List", "MDA")'" class="a-classname btn btn-default">@T("Cancel")</button>
+            </div>
+        </div>
+    </div>
+}
+@{
+    // Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.Script").AtFoot();
+    Script.Require("CBS.MDA.Discount.Script").AtFoot();
+}

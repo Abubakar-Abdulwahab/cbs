@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/datatables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/components.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/layout.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/custom.css">
+
+
+</head>
+<body>
+    <div id="domMessage" style="display:none;">
+        <h4>We are processing your request. Please be patient.</h4>
+    </div>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="~/Home/Index" class="navbar-brand">
+                        <img src="~/Styles/Images/EIRS-logo.png">
+                        <img src="~/Styles/Images/Logo.png">
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="">User Name</a></li>
+                    <li><a href="IndividualLogin.html">Logout</a></li>
+                </ul>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navMainMenu" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-collapse collapse" id="navMainMenu" aria-expanded="false">
+                    <ul class="nav navbar-nav">
+                        <li class=" switch-li no-hover">
+                            <a href="index.html">
+                                <label class="switch">
+                                    <input type="checkbox" checked="checked" id="chkMenuSwitch">
+                                    <span class="slider round"></span>
+                                </label>
+                            </a>
+                        </li>
+                        <li class="search-li no-hover">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-magnifier"></i> <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        All
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Individuals
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Corporates
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Buildings
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Businesses
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Vehicles
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-menu-item checkbox">
+                                        <input type="checkbox" />
+                                        <span class="fa fa-square-o"></span>
+                                        Lands
+                                    </label>
+                                </li>
+                            </ul>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Capture<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Home/IndividualCapture">Individuals</a></li>
+                                <li><a href="~/Home/CorporateCapture">Corporates</a></li>
+                                <li><a href="~/Home/GovernmentCapture">Government</a></li>
+                                <li><a href="~/Home/SpecialCapture">Special</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Buildings</a></li>@*BuildingProfile.html*@
+                                <li><a href="">Businesses</a></li>@*BusinessProfile.html*@
+                                <li><a href="">Vehicles</a></li>@*VehicleProfile.html*@
+                                <li><a href="">Lands</a></li>@*LandProfile.html*@
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assess<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">List All</a></li>@*AllBills.html*@
+                                <li><a href="">Unsettled</a></li>@*UnsettledBills.html*@
+                                <li><a href="">Settled</a></li>@*SettledBills.html*@
+                                <li><a href="">Partial</a></li>@*PartiallySettledBills.html*@
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notify<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Individuals</a></li>
+                                <li><a href="">Corporates</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settle<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">List All</a></li>@*SettleList.html*@
+                                <li><a href="">Individuals</a></li>
+                                <li><a href="">Corporates</a></li>
+                                <li><a href="">Central Billing</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">List All</a></li>@*Report.html*@
+                                <li><a href="">Single View</a></li>
+                                <li><a href="">Exceptions</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Modules<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Business Premises Permit</a></li>@*/BPP/BusinessPremisesDashboard.html*@
+                                <li><a href="">Consumption Tax</a></li>@*/CNT/ConsumptionTaxDashboard.html*@
+                                <li><a href="">Direct Assessment</a></li>@*/DAS/DirectAssessmentDashboard.html*@
+                                <li><a href="">Land Use Charge</a></li>@*/LUC/LandUseDashboard.html*@
+                                <li><a href="">Pools Betting</a></li>@*/PBG/PoolsBettingDashboard.html*@
+                                <li><a href="">Mobile Payment Collection</a></li>@*/MPCS/MobilePaymentCollectionDashboard.html*@
+                                <li><a href="">PAYE</a></li>@*/PAYE/PAYEDashboard.html*@
+                                <li><a href="">Stamp Duty</a></li>@*/SDT/StampDutyDashboard.html*@
+                                <li><a href="">Vehicle Insurance</a></li>@*/VIV/VehicleInsuranceDashboard.html*@
+                                <li><a href="">Vehicle Licenses</a></li>@*/VLR/VehicleLicenseDashboard.html*@
+                                <li><a href="">Waste Management</a></li>@*/WMS/WasteManagementDashboard.html*@
+                                <li><a href="">Withholding Tax</a></li>@*/WHT/WithholdingTaxDashboard.html*@
+                                <li><a href="">MDA Services</a></li>@*/MDAS/MDAServicesDashboard.html*@
+                                <li><a href="">Central Billing</a></li>@*/CBS/CentralBillingDashboard.html*@
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">User Management</a></li>
+                                <li><a href="">Reference Data Management</a></li>
+                                <li><a href="">Revenue Data Management</a></li>
+                                <li><a href="">Scratch Card Management</a></li>
+                                <li><a href="">Managed File Transfers</a></li>
+                                <li><a href="">API Management</a></li>
+                                <li><a href="">Systems Settings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="no-hover hidden p0"><a>Welcome</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">My Profile</a></li>
+                                <li><a href="">My Modules</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="alternate" style="min-height:79vh;">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-sm-3">
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    NAVIGATION MENU
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li class=""><a href="About.html"><i class="fa fa-angle-right"></i>About</a></li>
+                                    <li class=""><a href="Awareness.html"><i class="fa fa-angle-right"></i>Awareness</a></li>
+                                    <li class=""><a href="~/Home/TaxPayers"><i class="fa fa-angle-right"></i>Tax Payers</a></li>
+                                    <li class=""><a href="TaxAsset.html"><i class="fa fa-angle-right"></i>Tax Assets</a></li>
+                                    <li class=""><a href="TaxTypePAYE.html"><i class="fa fa-angle-right"></i>Tax Types</a></li>
+                                    <li class=""><a href="~/Home/Pay"><i class="fa fa-angle-right"></i>Services</a></li>
+                                    <li class=""><a href="Partnership.html"><i class="fa fa-angle-right"></i>Partnership</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    ERAS
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="~/Home/Index"><i class="fa fa-angle-right"></i> Home</a>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="fa fa-angle-right"></i> Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Report/Index"><i class="fa fa-angle-right"></i> Reports</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    TAX PAYERS
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="~/Home/IndividualCapture"><i class="fa fa-angle-right"></i> Individuals</a>
+                                        @*  IndividualList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/CorporateCapture"><i class="fa fa-angle-right"></i> Corporates</a>
+                                        @*  CorporateList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/GovernmentCapture"><i class="fa fa-angle-right"></i> Government</a>
+                                        @*  GovernmentList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/SpecialCapture"><i class="fa fa-angle-right"></i> Special</a>
+                                        @*  SpecialList.html *@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    ASSETS
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="~/home/CaptureBuildingSearch"><i class="fa fa-angle-right"></i> Buildings</a>
+                                        @*  BuildingList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/CaptureBusinessSearch"><i class="fa fa-angle-right"></i> Businesses</a>
+                                        @*  BusinesseList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/CaptureVehicleSearch"><i class="fa fa-angle-right"></i> Vehicles</a>
+                                        @*  VehicleList.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/CaptureLandSearch"><i class="fa fa-angle-right"></i> Lands</a>
+                                        @*  LandList.html *@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    REVENUE DATA
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="~/Home/AssessmentBill"><i class="fa fa-angle-right"></i> Assessment Bill</a>
+                                        @*  SideAssessmentBill.html *@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/ServiceBill"><i class="fa fa-angle-right"></i> Service Bill</a>
+                                        @*SideServiceBill.html*@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/AssessmentRule"><i class="fa fa-angle-right"></i> Assessment Rules</a>
+                                        @*SideAssessmentRule.html*@
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/MDAServiceBill"><i class="fa fa-angle-right"></i> MDA Service</a>
+                                        @*SideMDAService.html*@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9">
+                        @RenderBody()
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="navbar-brand">
+                        <img src="~/Styles/Images/Logo.png">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    © Copyright ERAS - Edo State Internal Revenue Service @DateTime.Now.Year. All rights reserved
+                </div>
+                <div class="col-sm-4">
+                    <ul>
+                        <li>
+                            <a>Data Protection</a>
+                        </li>
+                        <li>
+                            <a>Terms of Use</a>
+                        </li>
+                        <li>
+                            <a>Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.all.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/jsCommon.js"></script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+    <script>
+        var captureSection = function (id) { //e.g. "#captureThis"
+            html2canvas(document.querySelector(id)).then(canvas => {
+                var doc = new jsPDF();
+                doc.addImage(canvas.toDataURL(), 'PNG', 15, 40, 180, 180);
+                doc.save();
+            });
+        }
+    </script>
+</body>
+</html>

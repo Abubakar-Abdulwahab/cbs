@@ -1,0 +1,142 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestDetailsVM
+@{ Script.Require("PSS.View.Blob.Script").AtFoot(); }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">DETAILS OF @Model.ServiceName.ToUpper()</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label for="extReason">Request Reason</label>
+                <p class="extend-width">
+                    @if (@Model.SelectedExtractCategories != null && @Model.SelectedExtractCategories.Any())
+                    {
+                        foreach (var selectedExtractCategory in Model.SelectedExtractCategories.GroupBy(x => x.ExtractCategoryId))
+                        {
+                            <b>@selectedExtractCategory.First().RequestReason.Split(new char[] { ':' })[0]</b>
+                            <br />
+                            foreach (var category in selectedExtractCategory)
+                            {
+                                @category.RequestReason.Split(new char[] { ':' })[1]<br />
+                            }
+                        }
+                    }
+                </p>
+            </td>
+            <td>
+                <label for="extReason">Was Incident Reported?</label>
+                <p class="extend-width">@Model.IsIncidentReported</p>
+            </td>
+            <td>
+                <label for="extReason">Incident Reported Date</label>
+                <p class="extend-width">@Model.IncidentReportedDate</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="extReason">Affidavit Number</label>
+                <p class="extend-width">@Model.AffidavitNumber</p>
+            </td>
+            <td>
+                <label for="extReason">Affidavit Date of Issuance</label>
+                <p class="extend-width">@((Model.AffidavitDateOfIsssuance != null) ? Model.AffidavitDateOfIsssuance.Value.ToString("dd/MM/yyy") : "")</p>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">POLICE COMMAND TO PROVIDE THE SERVICE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label for="stateT">State</label>
+                <p class="extend-width">@Model.StateName</p>
+            </td>
+            <td>
+                <label for="lgaT">LGA</label>
+                <p class="extend-width">@Model.LGAName</p>
+            </td>
+            <td>
+                <label for="srchCmd">Search Command</label>
+                <p class="extend-width">@Model.CommandName</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@if (Model.IncidentDateAndTimeParsed != null && !string.IsNullOrEmpty(Model.DiarySerialNumber) && !string.IsNullOrEmpty(Model.Content))
+{
+    @(Html.Partial("\\ServicePartials\\PSSExtractContentAndDiaryInfo", Model))
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <table class="items">
+        <thead>
+            <tr>
+                <th scope="col" colspan="2" id="titleHeader">AFFIDAVIT ATTACHMENTS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Attachments != null && Model.Attachments.Count() > 0)
+            {
+                foreach (var item in Model.Attachments)
+                {
+                    <tr>
+                        <td>
+                            Affidavit
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" title="Download file" formaction="@Url.Action("AttachmentDownload", "PSSFileExport", new { fileName = item.FileName, path = item.FilePath, contentType = item.ContentType })" formnovalidate>
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary view-blob" title="View file">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <input type="text" class="blobstring" value="@item.Blob" hidden />
+                            <input type="text" class="blob-content-type" value="@item.ContentType" hidden />
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2">No attachment Found</td>
+                </tr>
+            }
+            @if (Model.DisplayDetailsForApproval)
+            {
+                <tr>
+                    <td colspan="2">
+                        <div style="width:100%;height:655px;">
+                            @(Html.Partial("\\ServicePartials\\PSSServiceDocumentPreviewPartial", new { FileRefNumber = Model.FileRefNumber }))
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+@if (Model.Status == (int)Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved)
+{
+    <div class="container-fluid" style="padding:0">
+        <a href="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSExtractRequestDetails.ViewExtract,new { fileRefNumber = @Model.FileRefNumber})" name="viewExtract">click here to download extract</a>
+    </div>
+}
+
+
+@if (Model.DisplayDetailsForApproval)
+{
+    @(Html.Partial("\\ServicePartials\\" + Model.ApprovalPartialName.Trim(), Model))
+}

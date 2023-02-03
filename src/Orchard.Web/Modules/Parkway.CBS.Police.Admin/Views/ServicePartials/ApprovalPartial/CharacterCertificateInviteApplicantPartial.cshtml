@@ -1,0 +1,12 @@
+﻿@model Parkway.CBS.Police.Core.VM.PSSRequestDetailsVM
+@Html.AntiForgeryToken()
+
+<a href="@Url.Action("RequestApprovalLog","RequestApprovalLog",new { requestId = Model.RequestId })" name="ViewApprovals">Click here to view approval log</a>
+<input name="RequestId" value="@Model.RequestId" hidden />
+
+
+<div>
+    <div>
+        <button class="btn btn-success" style="width:100%" formaction="@Url.Action("InviteApplicant", (string)ViewData["ControllerName"])">@T(Model.ApprovalButtonName)</button>
+    </div>
+</div>

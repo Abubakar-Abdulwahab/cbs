@@ -1,0 +1,285 @@
+﻿@using System.Globalization;
+@model Parkway.CBS.Core.HelperModels.SettlementRuleVM
+@{
+    var months = DateTimeFormatInfo.CurrentInfo.MonthNames;
+    var days = DateTimeFormatInfo.CurrentInfo.DayNames;
+    var _days = Enumerable.Range(1, 30);
+    var _weeks = Enumerable.Range(1, 28);
+    //Style.Require("CBS.Billing.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.SettlementRule.Script").AtFoot();
+}
+
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        width: 55%;
+        position: relative;
+        word-break: break-all;
+    }
+
+    #confirmModal table.items th {
+        background: #d3d3d3;
+    }
+
+    #profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .content-list .divider {
+            border-top: 1px solid #bdbcbc;
+            border-bottom: 1px solid #bdbcbc;
+            padding: 5px 5px;
+            margin: 5px;
+        }
+
+    .validation-message {
+        color: #990808;
+        display:none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var selectedFrq = @Html.Raw(Json.Encode(Model.FrequencyValue));
+    var selectedMdas = @Html.Raw(Json.Encode(@Model.SelectedMdas));
+    var SelectedRhAndMdas = @Html.Raw(@Model.SelectedRhAndMdas);
+</script>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action(Model.IsEdit ? "CreateSettlementRule" : "CreateSettlementRule", "Settlement", new { area = "Parkway.CBS.Module" }), FormMethod.Post, new { @enctype = "multipart/form-data", @id = "formSubmit" }))
+{
+    <div id="container">
+        <input type="hidden" name="SelectedRhAndMdas" id="selectedRhAndMdas" />
+        <table class="items" id="settings">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">Settlement Rule Settings</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("Settlement Rule Name")</label>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add the name of the settlement rule."))
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @style = "color:#990808" })
+                    </td>
+                    <td>
+                        <label id="mdaCode">@T("Settlement Engine Identifier")</label>
+                        @Html.TextBoxFor(m => m.SettlementEngineRuleIdentifier, new { @class = "text large", @required = true, @min = "4" })
+                        @Html.Hint(T("Add the rule identifier for the settlement engine."))
+                        @Html.ValidationMessageFor(m => m.SettlementEngineRuleIdentifier, "", new { @style = "color:#990808" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="paymentProviders">@T("Payment Providers")</label>
+                        <div class="container-fluid content-list mt-0" style="border: 1px solid black;padding-right:0; padding-top:10px">
+                            <ul id="paymentProvidersList" style="max-height: 320px;overflow: auto;height:320px;">
+                                @if (Model.PaymentProviders != null && Model.PaymentProviders.Any())
+                                {
+                                    foreach (var paymentProvider in Model.PaymentProviders)
+                                    {
+                                        if (Model.SelectedPaymentProviders != null && Model.SelectedPaymentProviders.Contains(paymentProvider.Id))
+                                        {
+                                            <li><label><input type='checkbox' class="payment-providers" id="@("paymentProviderItem"+paymentProvider.Id)" name='SelectedPaymentProviders[]' value="@paymentProvider.Id" checked /> @paymentProvider.Name</label></li>
+                                        }
+                                        else
+                                        {
+                                            <li><label><input type='checkbox' class="payment-providers" name='SelectedPaymentProviders[]' id="@("paymentProviderItem"+paymentProvider.Id)" value="@paymentProvider.Id" /> @paymentProvider.Name</label></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <li> <p style="padding-left:5px"> No payment providers available</p></li>
+                                }
+                            </ul>
+                        </div>
+                        @Html.Hint(T("Select the payment provider you want to be attached to the settlement rule."))
+                        @Html.ValidationMessageFor(m => m.SPaymentProviderId, "", new { @style = "color:#990808" })
+                        <small class="validation-message" id="paymentProviderContentListValidationMessage">Select at least one payment provider</small>
+                    </td>
+                    <td>
+                        <label id="paymentChannels">@T("Payment Channels")</label>
+                        <div class="container-fluid content-list mt-0" style="border: 1px solid black;padding-right:0; padding-top:10px">
+                            <ul id="paymentChannelsList" style="max-height: 320px;overflow: auto;height:320px;">
+                                @if (Model.PaymentChannels != null && Model.PaymentChannels.Any())
+                                {
+                                    foreach (var paymentChannel in Model.PaymentChannels)
+                                    {
+                                        if (Model.SelectedPaymentChannels != null && Model.SelectedPaymentChannels.Contains(paymentChannel.Id))
+                                        {
+                                            <li><label><input type='checkbox' class="@((paymentChannel.Id == 0) ? "default-payment-channels" : "payment-channels")" id="@("paymentChannelItem"+paymentChannel.Id)" name='SelectedPaymentChannels[]' value="@paymentChannel.Id" checked /> @paymentChannel.Name</label></li>
+                                        }
+                                        else
+                                        {
+                                            <li><label><input type='checkbox' class="@((paymentChannel.Id == 0) ? "default-payment-channels" : "payment-channels")" name='SelectedPaymentChannels[]' id="@("paymentChannelItem"+paymentChannel.Id)" value="@paymentChannel.Id" /> @paymentChannel.Name</label></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <li> <p style="padding-left:5px"> No payment channels available</p></li>
+                                }
+                            </ul>
+                        </div>
+                        @Html.Hint(T("Select the payment channel you want to be attached to the settlement rule."))
+                        @Html.ValidationMessageFor(m => m.SPaymentChannelId, "", new { @style = "color:#990808" })
+                        <small class="validation-message" id="paymentChannelContentListValidationMessage">Select at least one payment channel</small>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        @Html.CheckBox("SettlementFrequencyModel.EODSettlement", true, new { @id = "EODSettlement" }) <small>Settle at end of day</small>
+                        <br />
+                        <br />
+                        <label id="mdaName">@T("Select Start Date")</label>
+                        <div id="f_start">
+                            <div class="col-md-6" style="padding:0">
+                                <input required type="text" name="SettlementFrequencyModel.FixedBill.StartFrom" id="datepickernextday" value="@Model.SettlementFrequencyModel.FixedBill.StartFrom" style="width:99%;" />
+                                @Html.Hint(T("Start date for this settlement."))
+                                @Html.ValidationMessageFor(m => m.SettlementFrequencyModel.FixedBill.StartFrom, "", new { @style = "color:#990808" })
+                            </div>
+                            <div class="col-md-6" style="padding:0">
+                                <input required type="time" id="dateStartTime" name="SettlementFrequencyModel.FixedBill.StartTime" value="@Model.SettlementFrequencyModel.FixedBill.StartTime" style="width:99%;" />
+                                @Html.Hint(T("Start time for this settlement."))
+                                @Html.ValidationMessageFor(m => m.SettlementFrequencyModel.FixedBill.StartTime, "", new { @style = "color:#990808" })
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <br />
+                        <br />
+                        <label id="mdaName">@T("Settlement Frequency")</label>
+                        <select class="recurring_control" id="FrequencyType" name="SettlementFrequencyModel.FrequencyType" style="width:99%" required>
+                            <option value="" selected disabled>Select Frequency</option>
+                            <option value="1" @(Model.SettlementFrequencyModel.FrequencyType.ToString() == "Daily" ? "selected" : "")>Daily</option>
+                            <option value="2" @(Model.SettlementFrequencyModel.FrequencyType.ToString() == "Weekly" ? "selected" : "")>Weekly</option>
+                            <option value="3" @(Model.SettlementFrequencyModel.FrequencyType.ToString() == "Monthly" ? "selected" : "")>Monthly</option>
+                            <option value="4" @(Model.SettlementFrequencyModel.FrequencyType.ToString() == "Yearly" ? "selected" : "")>Yearly</option>
+                        </select>
+                        @Html.Hint(T("Select the frequency for this settlement."))
+                        @Html.ValidationMessage("SettlementFrequencyModel.FrequencyType", "This field is required", new { @style = "color:#990808" })
+                        <div class="frequency_control row">
+                            @Html.Partial("SettlementFrequency", Model.SettlementFrequencyModel)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="mdaName">@T("MDA")</label>
+                        <div class="container-fluid content-list mt-0" style="border: 1px solid black;padding-right:0; padding-top:10px">
+                            <ul id="mdaList" style="max-height: 320px;overflow: auto;height:320px;">
+                                @if (Model.MDAs != null && Model.MDAs.Any())
+                                {
+                                    @*<li><label><input type='checkbox' class="default-mda" name='SMDAIds[]' value="0" disabled /> Apply to all MDAs</label></li>*@
+                                    foreach (var mda in Model.MDAs)
+                                    {
+                                        if (Model.SelectedMdas != null && Model.SelectedMdas.Contains(mda.Id))
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" id="@("mdaItem"+mda.Id)" name='SMDAIds[]' value="@mda.Id" checked disabled /> @mda.Name | @mda.Code</label></li>
+                                        }
+                                        else
+                                        {
+                                            <li><label><input type='checkbox' class="mdas" name='SMDAIds[]' id="@("mdaItem"+mda.Id)" value="@mda.Id" disabled /> @mda.Name | @mda.Code</label></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <li> <p style = "padding-left:5px"> No MDAs available</p></li>}
+                            </ul>
+                        </div>
+
+                        @Html.Hint(T("Select the MDA you want this rule to apply or leave to apply all for rule to apply to all MDAs."))
+                        @Html.ValidationMessageFor(m => m.SMDAId, "", new { @style = "color:#990808" })
+                        <small class="validation-message" id="mdaContentListValidationMessage">Select at least one MDA</small>
+                    </td>
+                    <td id="revenueHeadTd">
+                        <label id="mdaName">@T("RevenueHeads")</label>
+                        <div class="container-fluid content-list mt-0" style="border: 1px solid black;padding-right:0; padding-top:10px">
+                            <p style="padding-left:5px">Select an MDA to have its revenue heads displayed here</p>
+                            <ul id="rhList" style="max-height: 310px;overflow: auto;height:300px;"></ul>
+                            <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                        </div>
+                        @Html.Hint(T("Select the Revenuehead you want this rule to apply or leave to apply all for rule to apply to all RevenueHeads."))
+                        @*@Html.ValidationMessageFor(m => m.SRevenueHeadId, "", new { @style = "color:#990808" })*@
+                        @Html.ValidationMessage("SRevenueHeadId", new { @style = "color:#990808" }, "div")
+                        <small class="validation-message" id="rhContentListValidationMessage">Select at least one Revenue head</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" >submit</button>
+    </div>
+
+    <!--Confirm Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Selection</h4>
+                </div>
+                <div class="modal-body" style="max-height:300px;overflow:auto">
+                    <span name="profileloader" id="confirmProfileloader" class="profileloader" style="position:fixed;margin:auto;z-index:10"></span>
+                    <div id="confirmModal">
+                        <div id="confirmModalContent">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @Html.Hint(T("By clicking confirm you agree with your current selection."))
+                    <button type="button" id="submitConfirmModalBtn" disabled>Confirm</button> <button type="button" id="cancelConfirmModalBtn" data-dismiss="modal" disabled>Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+

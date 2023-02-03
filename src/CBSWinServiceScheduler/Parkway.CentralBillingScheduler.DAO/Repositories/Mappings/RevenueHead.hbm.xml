@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CentralBillingScheduler.DAO.Models.RevenueHead, Parkway.CentralBillingScheduler.DAO" table="Parkway_CBS_Core_RevenueHead" lazy="false" >
+    <id name="Id" column="Id" />
+    <property name="Code" column="Code" />
+    <property name="Name" column="Name" />
+    <property name="Slug" column="Slug" />
+    <!--<property name="MDA_Id" column="MDA_Id" />-->
+    <!--<property name="RevenueHead_Id" column="RevenueHead_Id" />-->
+    <property name="CashFlowProductCode" column="CashFlowProductCode" />
+    <property name="RefDataURL" column="RefDataURL" />
+    <property name="CashFlowProductId" column="CashFlowProductId" />
+    <!--<property name="Billing_Id" column="Billing_Id" />
+    <property name="BillingModel_Id" column="BillingModel_Id" />
+    <property name="AddedBy_Id" column="AddedBy_Id" />
+    <property name="LastUpdatedBy_Id" column="LastUpdatedBy_Id" />-->
+    <property name="IsActive" column="IsActive" />
+    <property name="IsVisible" column="IsVisible" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="Mda" column="MDA_Id"/>
+    <many-to-one name="BillingModel" column="BillingModel_Id"/>
+  </class>
+</hibernate-mapping>

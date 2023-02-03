@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.BillingModel, Parkway.CBS.Core" table="Parkway_CBS_Core_BillingModel" lazy="false" >
+    <id name="Id" column="Id" />
+    <property name="Assessment" column="Assessment" />
+    <property name="Amount" column="Amount" />
+    <property name="BillingType" column="BillingType" />
+    <property name="Discounts" column="Discounts" />
+    <property name="DueDate" column="DueDate" />
+    <property name="Penalties" column="Penalties" />
+    <property name="Duration" column="Duration" />
+    <property name="DemandNotice" column="DemandNotice" />
+    <property name="BillingFrequency" column="BillingFrequency" />
+    <property name="NextBillingDate" column="NextBillingDate" />
+    <property name="Surcharge" column="Surcharge" />
+    <property name="StillRunning" column="StillRunning" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+  </class>
+</hibernate-mapping>

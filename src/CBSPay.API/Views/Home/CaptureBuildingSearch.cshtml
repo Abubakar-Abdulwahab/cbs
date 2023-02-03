@@ -1,0 +1,290 @@
+﻿
+@{
+    ViewBag.Title = "Profile Building";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+<div class="title">
+    <h1>
+        Search Assets - Building
+    </h1>
+    <hr>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Search Assets - Building
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-7 form-horizontal">
+                <div class="form-group">
+                    <label for="Name" class="control-label col-sm-4">Building Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="Name" class="form-control" placeholder="Building Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Number" class="control-label col-sm-4">Street Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="Number" class="form-control" placeholder="Street Name">
+                    </div>
+                </div>
+                <div class="form-group text-right row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-theme btn-block"> Search </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>
+                    Enter name of Corporate and click on search below. The five most matches results will be returned where available. Select the one that best matches your company name and click on proceed.
+                </p>
+
+                <p>
+                    You will be able to claim one business at a time and to view details of each company, click on the view link.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">Building List</div>
+        <div class="actions">
+            <a href="~/Home/IndividualBuildingAdd" class="btn btn-redtheme"> Add New Building </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="table table-bordered v-middle" id="tblSearchBuildingList">
+            <thead class="red-th">
+                <tr>
+                    <th>Building RIN</th>
+                    <th>Building Name</th>
+                    <th>Building Number</th>
+                    <th class="action-th">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetSelectModal">Select</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetSelectModal">Select</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--Modal section-->
+
+<div class="modal fade" id="divAssetSelectModal" tabindex="-1" role="dialog" aria-labelledby="divAssetSelectModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="divAssetSelectModalLabel">Select Asset</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label required-star">Select Tax Payer Role</label>
+                    <select class="form-control">
+                        <option> Select Tax Payer Role </option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="~/Home/IndividualTaxPayerDetails" class="btn btn-theme"> Save </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="divAssetModal" tabindex="-1" role="dialog" aria-labelledby="divAssetModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="divAssetModalLabel">Building Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Asset Type</label>
+                            <div>Building</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Name </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Number </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Street Name </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Off Street Name </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Town </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building LGA </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Ward </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Type </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Completion</label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Purpose  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Ownership  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">No of Units </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Length </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Width </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Latitude </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Longitude </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Building Tag  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-red bold">Units in Building</h4>
+                <table class="table table-bordered" id="tblBuildingUnit">
+                    <thead class="red-th">
+                        <tr>
+                            <th>Unit Number</th>
+                            <th>Unit Purpose</th>
+                            <th>Unit Function</th>
+                            <th>Unit Occupancy</th>
+                            <th>Unit Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

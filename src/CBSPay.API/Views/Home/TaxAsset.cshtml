@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Tax Assets";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+<section class="alternate">
+    <div class="container">
+
+        <div class="title">
+            <h1>
+                Welcome to Tax Assets Section
+            </h1>
+            <hr>
+            <p>
+                This section covers information relating to tax assets, different types and importance
+            </p>
+        </div>
+
+        <div class="row custom-tabs">
+            <div class="col-sm-3">
+                <div class="portlet light compressed-menu">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Tax Assets
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <ul class="nav">
+                            <li>
+                                <a href="@Url.Action("Business","Home")"><i class="fa fa-angle-right"></i> Businesses</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Building","Home")"><i class="fa fa-angle-right"></i> Buildings </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Land","Home")"><i class="fa fa-angle-right"></i> Lands </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Vehicle","Home")"><i class="fa fa-angle-right"></i> Vehicles </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Welcome to Tax Assets Section
+                        </div>
+                    </div>
+                    <div class="portlet-body text-justify">
+                        <p>
+                            The revenue administration process has defined tax assets as items that assist in the development of economic activities. All assets are associated with tax payers using their unique Revenue identification Numbers upon which all transactions with the revenue service will be recorded.
+                        </p>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="portlet grey mh-130">
+                                    <div class="dvicon-box clearfix">
+                                        <div class="dvicon-block with-img">
+                                            <img src="/Content/images/Icons/Business.png" />
+                                        </div>
+                                        <a href="@Url.Action("Business","Home")" class="dvicon-text">
+                                            <div class="dvicon-text-header">Businesses</div>
+                                            <div class="dvicon-text-desc">
+                                                Formal and informal businesses across fixed, remote and online locations. Businesses are owned by individual and corporate tax payers
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="portlet grey mh-130">
+                                    <div class="dvicon-box clearfix">
+                                        <div class="dvicon-block with-img">
+                                            <img src="/Content/images/Icons/Vehicle.png" />
+                                        </div>
+                                        <a href="@Url.Action("Vehicle","Home")" class="dvicon-text">
+                                            <div class="dvicon-text-header">Vehicles</div>
+                                            <div class="dvicon-text-desc">
+                                                Private and commercial vehicles owned by individual and corporate tax payers are considered assets
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="portlet grey mh-130">
+                                    <div class="dvicon-box clearfix">
+                                        <div class="dvicon-block with-img">
+                                            <img src="/Content/images/Icons/Land.png" />
+                                        </div>
+                                        <a href="@Url.Action("Land","Home")" class="dvicon-text">
+                                            <div class="dvicon-text-header">Land</div>
+                                            <div class="dvicon-text-desc">
+                                                Land within the state, whether developed or undeveloped or just used for an economic activity like farming.
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="portlet grey mh-130">
+                                    <div class="dvicon-box clearfix">
+                                        <div class="dvicon-block with-img">
+                                            <img src="/Content/images/Icons/Buildings.png" />
+                                        </div>
+                                        <a href="@Url.Action("Building","Home")" class="dvicon-text">
+                                            <div class="dvicon-text-header">Buildings</div>
+                                            <div class="dvicon-text-desc">
+                                                Buildings used for businesses or residential, multiple tenancy or single tenancy are known to be assets under the eRAS process.
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

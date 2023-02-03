@@ -1,0 +1,320 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Police.Admin.VM.RequestReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Request Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.Admin.Reports.LGA.Commands.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var isAdmin = true;
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">From</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.From" name="from" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">To</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.End" name="end" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Service Request Type</b>
+                    <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                    <select name="serviceType" id="service_selected" class="form-control selectBox">
+                        <option value="" disabled>Select a Service Request Type</option>
+                        <option value="0" @(Model.ServiceType == "0" ? "selected" : "")>All Service Requests</option>
+                        @foreach (var item in Model.ServiceRequestTypes)
+                        {
+                            <option value="@item.Id" @(Model.ServiceType == item.Id.ToString() ? "selected" : "")>@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Search by request status</b>
+                    <select id="filterResults" name="status" class="form-control selectBox">
+                        @Html.SelectOption(Model.Status, Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.None, T(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.None.ToDescription()).ToString())
+                        @Html.SelectOption(Model.Status, Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingInvoicePayment, T(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingInvoicePayment.ToDescription()).ToString())
+                        @Html.SelectOption(Model.Status, Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApproval, T(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApproval.ToDescription()).ToString())
+                        @Html.SelectOption(Model.Status, Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved, T(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved.ToDescription()).ToString())
+                        @Html.SelectOption(Model.Status, Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Rejected, T(Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Rejected.ToDescription()).ToString())
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">State</b>
+                    <div class="form-group">
+                        <select class="form-control" name="State" id="state">
+                            <option selected value="0">All States</option>
+                            @foreach (var item in Model.StateLGAs)
+                        {
+                            <option value="@item.Id" @(Model.State == item.Id ? "selected" : "")>@item.Name</option>
+                        }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">LGA</b>
+                    <div class="form-group">
+                        <select class="form-control" name="LGA" id="lga">
+                            <option selected value="0">All LGAs</option>
+                            @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                        {
+                            foreach (var item in Model.ListLGAs)
+                            {
+                                <option value="@item.Id" @(Model.LGA == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Select Command</b>
+                    <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                    <select class="form-control" id="commands" name="SelectedCommand">
+                        @if (Model.Commands != null && Model.Commands.Any())
+                        {
+                            <option value="0">All Commands</option>
+                            foreach (var item in Model.Commands)
+                            {
+                                <option value="@item.Id" @(Model.SelectedCommand == item.Id.ToString() ? "selected" : "")>@item.Name (@item.Code)</option>
+
+                            }
+                        }
+                        else if (Model.SelectedCommand == "0")
+                        {
+                            <option value="0">All Commands</option>
+                        }
+                        else
+                        {
+                            <option value="">Select a Command</option>
+                        }
+                    </select>
+                    <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                    <div id="searchError"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Search by Invoice Number</b>
+                    @Html.TextBox("invoiceNumber", Model.InvoiceNumber, new { @class = "form-control", @placeholder = "Search by Invoice Number" })
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Search by File Number</b>
+                    @Html.TextBox("fileNumber", Model.FileNumber, new { @class = "form-control", @placeholder = "Search by File Number" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Search by Approval Number</b>
+                    @Html.TextBox("approvalNumber", Model.ApprovalNumber, new { @class = "form-control", @placeholder = "Search by Approval Number" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("PSSRequests", "PoliceRequest")">Search</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" style="margin-top: 20px">
+                    <button class="btn btn-success" style="margin-left: 10px" title="Export to excel" formaction="@Url.Action("PSSRequestReportDownload", "PSSFileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+                        <i class=" fa fa-file-excel-o"></i>
+                        <span>Excel</span>
+                    </button>
+                    <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF" formaction="@Url.Action("PSSRequestReportDownload", "PSSFileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+                        <i class=" pdf fa fa-file-pdf-o"></i>
+                        <span>PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    REQUEST DATE
+                                </th>
+                                <th>
+                                    APPLICANT NAME
+                                </th>
+                                <th>
+                                    FILE NUMBER
+                                </th>
+                                <th>
+                                    APPROVAL NUMBER
+                                </th>
+                                <th>
+                                    REQUEST STATUS
+                                </th>
+                                <th>
+                                    COMMENT
+                                </th>
+                                <td>
+                                    SERVICE NAME
+                                </td>
+                                <th>
+                                    VIEW DETAILS
+                                </th>
+                                <th>
+                                    VIEW INVOICES
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+                            @if (Model.Requests != null && Model.Requests.Count() > 0)
+                            {
+                                foreach (var item in Model.Requests)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.RequestDate.ToString("dd MMM yyyy HH:mm")
+                                        </td>
+                                        <td>
+                                            @item.CustomerName
+                                        </td>
+                                        <td>
+                                            @item.FileRefNumber
+                                        </td>
+                                        <td>
+                                            @item.ApprovalNumber
+                                        </td>
+                                        <td>
+                                            @item.Status.ToDescription()
+                                        </td>
+                                        <td>
+                                            @item.Comment
+                                        </td>
+                                        <td>
+                                            @item.ServiceName
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("PSSRequestDetails","PoliceRequest",new { requestId = @item.Id })" name="ViewDetails">View Details</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("PSSRequestsInvoices","PoliceRequestInvoices",new { requestId = @item.Id})" name="ViewInvoices" target="_blank">View Invoices</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="9">No Records Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total Number of Invoice Generated: @Model.TotalNumberOfInvoices </p>
+                <p class="summary">Total Number of Requests Generated: @Model.TotalRequestRecord </p>
+                <p class="summary">Total Request Amount of Requests Generated: ₦ @String.Format("{0:n2}", Model.TotalRequestAmount) </p>
+            </div>
+        </div>
+
+    </div>
+}
+@Display(Model.Pager)

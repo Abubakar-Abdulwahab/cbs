@@ -1,0 +1,48 @@
+﻿@model Parkway.CBS.OSGOF.Admin.ViewModels.OperatorProfileVM
+
+@{
+    Script.Require("CBS.Operator.CellSites.Script").AtFoot();
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Layout.Title = "Search for an Operator".ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("SearchOperator", "Operator", new { area = "Parkway.CBS.OSGOF.Admin", }), FormMethod.Post, new { @id = "searchOperator" }))
+{
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Search for an Operator
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="" class="title">Operators <small style="color:red; font-weight:bolder">*</small></label>
+                        @if (Model.Operators.Any())
+                        {
+                            <input required type="text" id="operatorData" name="operatorData" spellcheck="false" autocomplete="off" list="operators" placeholder="Search for an Operator" class="form-control mb-4 border-0">
+                            <datalist id="operators" name="operators">
+                                @if (Model.Operators != null)
+                                {
+                                    foreach (var item in Model.Operators)
+                                    {
+                                        <option data-value="@item.PayerId" value="@item.Name" />
+                                    }
+                                }
+                            </datalist>
+                            <input type="hidden" name="payerId" id="payerId">
+                            <fieldset>
+                                <button type="submit">@T("Proceed")</button>
+                            </fieldset>
+                        }
+                        else
+                        {
+                            <small> No Operator found </small>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}

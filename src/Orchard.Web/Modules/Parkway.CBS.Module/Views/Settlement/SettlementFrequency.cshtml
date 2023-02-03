@@ -1,0 +1,96 @@
+﻿@using System.Globalization;
+@model Parkway.CBS.Core.HelperModels.SettlementFrequencyModel
+
+<div class="fixed_billing">
+    <div class="form-group col-md-4">
+        <div id="f_day_number" style="display:none">
+            <label class="control-label" style="margin-top:10px;">Every: </label>
+            <input type="number" name="SettlementFrequencyModel.FixedBill.DailyBill.Interval" id="dailyfq" value="@Model.FixedBill.DailyBill.Interval" min="0" />
+            <br />
+            <span>Day(s)</span>
+        </div>
+        @*weekly*@
+        <div id="f_day" style="display:none">
+            <label class="control-label" style="margin-top:10px;">Repeat on: </label>
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.SUN" name="SettlementFrequencyModel.FixedBill.WeeklyBill.Days" @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.SUN) ? "checked" : "") />&nbsp;S
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.MON" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.MON) ? "checked" : "") />&nbsp;M
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.TUE" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.TUE) ? "checked" : "") />&nbsp;T
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.WED" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.WED) ? "checked" : "") />&nbsp;W
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.THU" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.THU) ? "checked" : "") />&nbsp;T
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.FRI" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.FRI) ? "checked" : "") /> &nbsp;F
+            <input class="weeklyCheckBoxes" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Days.SAT" name='SettlementFrequencyModel.FixedBill.WeeklyBill.Days' @(Model.FixedBill != null && Model.FixedBill.WeeklyBill != null && Model.FixedBill.WeeklyBill.Days != null && Model.FixedBill.WeeklyBill.Days.Contains(@Parkway.CBS.Core.Models.Enums.Days.SAT) ? "checked" : "") /> &nbsp;S
+            <br />
+            <span>Day(s)</span><br />
+        </div>
+        @*Monthly*@
+        <div id="f_month" style="display:none">
+            <label class="control-label" style="margin-top:10px;">Repeat on: </label>
+            <div class="divTable">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.January" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.January) ? "checked" : "" ) />January</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.February" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.February) ? "checked" : "" ) />February</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.March" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.March) ? "checked" : "" ) />March</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.April" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.April) ? "checked" : "" ) />April</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.May" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.May) ? "checked" : "" ) />May</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.June" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.June) ? "checked" : "" ) />June</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.July" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.July) ? "checked" : "" ) />July</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.August" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.August) ? "checked" : "" ) />August</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.September" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.September) ? "checked" : "" ) />September</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.October" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.October) ? "checked" : "" ) />October</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.November" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.November) ? "checked" : "" ) />November</div>
+                        <div class="divTableCell">&nbsp;<input class="monthlyCheckBoxes" id="monthlyfq" name="SettlementFrequencyModel.FixedBill.MonthlyBill.Months" type="checkbox" value="@Parkway.CBS.Core.Models.Enums.Months.December" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.Months.Contains(@Parkway.CBS.Core.Models.Enums.Months.December) ? "checked" : "" ) />December</div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
+        <div id="f_week" style="display:none">
+            <label class="control-label">Repeat every: </label>
+            <select class="recurring_control yearweek" id="monthlyfq_week_select" name="SettlementFrequencyModel.FixedBill.MonthlyBill.WeekDay">
+                <option value="" selected disabled>Select What Day</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.FirstDayOfTheMonth" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.FirstDayOfTheMonth ? "selected" : "")>First day of the month</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.FirstWeekDayOfTheMonth" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.FirstWeekDayOfTheMonth ? "selected" : "")>First week day of the month</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.FirstDay" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.FirstDay ? "selected" : "")>First day of selected (day))</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.SecondDay" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.SecondDay ? "selected" : "")>Second day of the selected (day)</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.ThirdDay" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.ThirdDay ? "selected" : "")>Third day of selected (day)</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.LastDay" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.LastDay ? "selected" : "")>Last day of selected (day)</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.LastDayOfWeekDayOfTheMonth" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.LastDayOfWeekDayOfTheMonth ? "selected" : "")>Last week day of the week</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.WeekDays.LastDayOfTheMonth" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.WeekDay == Parkway.CBS.Core.Models.Enums.WeekDays.LastDayOfTheMonth ? "selected" : "")>Last day of the month</option>
+            </select>
+            @Html.Hint(T("Select day of the  the amount payable. For example {0}.", "10000"))
+            <span>Week(s)</span>
+        </div>
+
+        <div id="f_day_dropdown" style="display:none">
+            <label class="control-label" style="margin-top:10px;">Repeat on: </label>
+            <select class="recurring_control yearweek" id="monthlyfq_day_select" name="SettlementFrequencyModel.FixedBill.MonthlyBill.SelectedDay">
+                <option value="" selected disabled>Select What Day</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.MON" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.MON ? "selected" : "" )>Monday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.TUE" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.TUE ? "selected" : "" )>Tuesday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.WED" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.WED ? "selected" : "" )>Wednesday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.THU" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.THU ? "selected" : "" )>Thursday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.FRI" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.FRI ? "selected" : "" )>Friday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.SAT" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.SAT ? "selected" : "" )>Saturday</option>
+                <option value="@Parkway.CBS.Core.Models.Enums.Days.SUN" @(Model.FixedBill != null && Model.FixedBill.MonthlyBill != null && Model.FixedBill.MonthlyBill.Months != null && Model.FixedBill.MonthlyBill.SelectedDay == Parkway.CBS.Core.Models.Enums.Days.SUN ? "selected" : "" )>Sunday</option>
+            </select>
+            <br />
+            <span>Day</span>
+        </div>
+
+        @*Yearly*@
+        <div id="f_year" style="display:none">
+            <label class="control-label">Repeat every: </label>
+            <input type="number" id="yearlyfq" name="SettlementFrequencyModel.FixedBill.YearlyBill.NumberOfYears" value="@(Model.FixedBill != null && Model.FixedBill.YearlyBill != null?Model.FixedBill.YearlyBill.NumberOfYears:0)" min="0" />
+            <span>Years(s)</span>
+        </div>
+
+    </div>
+</div>

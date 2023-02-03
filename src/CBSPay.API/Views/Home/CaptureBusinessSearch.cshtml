@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "Profile Business";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+<div class="title">
+    <h1>
+        Search Assets - Business
+    </h1>
+    <hr>
+</div>
+
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Search Assets - Business
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-7 form-horizontal" id="formBusinessSearch">
+                <div class="form-group">
+                    <label for="Name" class="control-label col-sm-4"> Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="Name" class="form-control" placeholder="Name" id="txtSearchName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Number" class="control-label col-sm-4">Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="Number" class="form-control" placeholder="Number" id="txtSearchNumber">
+                    </div>
+                </div>
+                <div class="form-group text-right row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-theme btn-block" id="btnSearchBusiness"> Search </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>
+                    Enter name of Corporate and click on search below. The five most matches results will be returned where available. Select the one that best matches your company name and click on proceed.
+                </p>
+
+                <p>
+                    You will be able to claim one business at a time and to view details of each company, click on the view link.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">Business List</div>
+        <div class="actions">
+            <a href="~/Home/IndividualBusinessAdd" class="btn btn-redtheme"> Add New Business </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="table table-bordered v-middle" id="tblSearchBusinessList">
+            <thead class="red-th">
+                <tr>
+                    <th>Business RIN</th>
+                    <th>Business Name</th>
+                    <th>Business Type</th>
+                    <th>Business Address</th>
+                    <th class="action-th">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>ABC</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetSelectModal">Select</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IND0001</td>
+                    <td>Michael</td>
+                    <td>ABC</td>
+                    <td>08039909909</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-theme btn-xs md-skip dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetModal">Quick View</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#divAssetSelectModal">Select</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--Modal Section-->
+
+<div class="modal fade" id="divAssetSelectModal" tabindex="-1" role="dialog" aria-labelledby="divAssetSelectModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="divAssetSelectModalLabel">Select Asset</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label required-star">Select Tax Payer Role</label>
+                    <select class="form-control">
+                        <option> Select Tax Payer Role </option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="~/Home/IndividualTaxPayerDetails" class="btn btn-theme"> Save </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="divAssetModal" tabindex="-1" role="dialog" aria-labelledby="divAssetModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="divAssetModalLabel">Business Profile</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Asset Type</label>
+                            <div>Business</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Name </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Address  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Type  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business LGA  </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Category </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Sector </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Sub Sector </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Structure </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Operation </label>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label control-label-static bold">Business Size </label>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

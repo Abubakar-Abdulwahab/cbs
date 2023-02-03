@@ -1,0 +1,36 @@
+﻿<style>
+    .search-by-invoice-number-info-container {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 11;
+        top: 0;
+        background-color: rgba(9,16,39,0.71);
+        overflow: auto;
+        padding: 20px;
+        display: none;
+    }
+
+    .search-by-invoice-number-info-content {
+        height: auto;
+        max-width: 700px;
+        background-color: #ffffff;
+        border-radius: 10px 10px 10px 10px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .search-by-invoice-number-info-content img{ width: 100%; }
+</style>
+
+<div class="search-by-invoice-number-info-container">
+    <div class="search-by-invoice-number-info-content">
+        <p>The Invoice Number is a unique number that is systematically assigned to each invoice generated on the Police Specialized Services Portal.</p><p>This number identifies each invoice and allow payers make payment for their invoices via any of the available payment channels on the portal.</p>
+        <img src='/media/images/invoice.png' class="pb-2" alt=''>
+        <button class="btn btn-block blue-btn-full-outline" id="closeSearchByInvoiceInfoModal">Close</button>
+    </div>
+    <script>
+        document.getElementById("closeSearchByInvoiceInfoModal").addEventListener("click", function () { document.querySelector(".search-by-invoice-number-info-container").style.display = "none"; });
+        document.getElementById("binInfoModalToggle").addEventListener("click", function () { document.querySelector(".search-by-invoice-number-info-container").style.display = "block"; });
+    </script>
+</div>

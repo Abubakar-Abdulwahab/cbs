@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExportTemplates>
+
+  <Groups>
+
+    <TemplateGroup Type="Razor">
+      <Collections>
+
+        <TemplateCollection Tenants="PARKWAYCBS">
+          <Templates>
+            <Template Name="PaymentList" File="Receipt.cshtml" BasePath="~/Themes/Templates/" SavingPath="Files" />
+          </Templates>
+        </TemplateCollection>
+
+        <TemplateCollection Tenants="NIRS_NASARAWA">
+          <Templates>
+            <Template Name="PaymentList" File="Receipt.cshtml" BasePath="~/Themes/Templates/" SavingPath="Files" />
+          </Templates>
+        </TemplateCollection>
+
+      </Collections>
+    </TemplateGroup>
+
+    <TemplateGroup Type="KeyValue">
+      <Collections>
+
+        <TemplateCollection Tenants="PARKWAYCBS">
+          <Templates>
+
+            <Template Name="CellSiteList" BasePath="~/Themes/Templates/" SavingPath="Files">
+              <Fields>
+                <Field Key="OperatorSiteId" Value="Operator Site Id" />
+                <Field Key="YearOfDeployment" Value="Year Of Deployment" />
+                <Field Key="HeightOfTower" Value="Height Of Tower" />
+                <Field Key="Long" Value="Longitude" />
+                <Field Key="Lat" Value="Latitude" />
+                <Field Key="SiteAddress" Value="Site Address" />
+                <Field Key="OSGOFID" Value="OSGOFID" />
+                <Field Key="State" Value="State" />
+                <Field Key="LGA" Value="LGA" />
+              </Fields>
+            </Template>
+
+          </Templates>
+        </TemplateCollection>
+
+      </Collections>
+    </TemplateGroup>
+
+  </Groups>
+
+</ExportTemplates>
+

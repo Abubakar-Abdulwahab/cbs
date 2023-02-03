@@ -1,0 +1,55 @@
+﻿/*replace all color codes with state color except #FFFFFF*/
+
+.top-banner .jumbotron {
+    background-image: url(../images/niger-banner-top.png);
+}
+
+#main-nav.scrolled {
+    background-color: #0DAF5A;
+}
+
+#main-nav-alt .loggedIn {
+    color: #0DAF5A;
+}
+
+.footer-top {
+    background-color: #0DAF5A;
+}
+
+.footer {
+    background-color: #0DAF5A;
+}
+
+.top-banner .banner-bottom {
+    background-color: #0DAF5A;
+}
+
+.breadcrumbs .breadcrumb .breadcrumb-item {
+    color: #0DAF5A;
+}
+
+.pay-nav-two .nav a.nav-item {
+    color: #0DAF5A;
+    border: 1px solid #0DAF5A;
+}
+
+.pay-nav-two .nav a.nav-item.active {
+    color: #ffffff;
+    /*dont change #ffffff*/
+    background-color: #0DAF5A;
+}
+
+.pay-nav .nav-pills .nav-link.active,
+.pay-nav .nav-pills .show > .nav-link {
+    color: #fff;
+    /*dont change #fff*/
+    background-color: #0DAF5A;
+}
+
+.Paye-credentials .gen a {
+    color: #0DAF5A;
+}
+
+.table-pagination-2 a {
+    color: #0DAF5A;
+}

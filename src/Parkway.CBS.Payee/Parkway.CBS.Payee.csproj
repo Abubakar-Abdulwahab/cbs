@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{09D19D8E-FD27-43ED-931B-ED1549E658C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Payee</RootNamespace>
+    <AssemblyName>Parkway.CBS.Payee</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.4.1\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.1\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DirectAssessmentPayeeLine.cs" />
+    <Compile Include="DirectAssessmentPayee.cs" />
+    <Compile Include="Models\BatchGroup.cs" />
+    <Compile Include="Models\IPPISMarshalled.cs" />
+    <Compile Include="Models\IPPISBatchGroup.cs" />
+    <Compile Include="Models\SettlementDetails.cs" />
+    <Compile Include="Models\SettlementParty.cs" />
+    <Compile Include="PayeeAdapters\BasePayeeAdapter.cs" />
+    <Compile Include="PayeeAdapters\Contracts\IIPPISPayeeAdapter.cs" />
+    <Compile Include="PayeeAdapters\Contracts\IPayeeAdapter.cs" />
+    <Compile Include="PayeeAdapters\Contracts\IReferenceDataAdapter.cs" />
+    <Compile Include="PayeeAdapters\ETCC\ETCCAdapter.cs" />
+    <Compile Include="PayeeAdapters\ETCC\PAYEAssessmentLine.cs" />
+    <Compile Include="PayeeAdapters\ETCC\PAYEExemptionTypeAssessmentLine.cs" />
+    <Compile Include="PayeeAdapters\FileReader.cs" />
+    <Compile Include="PayeeAdapters\IPPIS\IPPISAssessmentLineRecordModel.cs" />
+    <Compile Include="PayeeAdapters\IPPIS\IPPISPayeeAdapter.cs" />
+    <Compile Include="PayeeAdapters\IPPIS\IPPISPayeeAmountMinistrySummary.cs" />
+    <Compile Include="PayeeAdapters\IPPIS\IPPISPayeeResponse.cs" />
+    <Compile Include="PayeeAdapters\LineRecordModel.cs" />
+    <Compile Include="PayeeAdapters\ParkwayPayeeAdapter.cs" />
+    <Compile Include="PayeeAdapters\PayeeAmountAndBreakDown.cs" />
+    <Compile Include="PayeeAdapters\PayeeResponseModel.cs" />
+    <Compile Include="PayeeAdapters\PAYEExemptionTypeVM.cs" />
+    <Compile Include="PayeeAdapters\ReferenceData\ReferenceDataAdapter.cs" />
+    <Compile Include="PayeeAdapters\ReferenceData\ReferenceDataLineRecordModel.cs" />
+    <Compile Include="PayeeAdapters\ReferenceData\ReferenceDataResponse.cs" />
+    <Compile Include="PayeeAdapters\ReferenceData\TypeOfTaxPaidMappingLineRecordModel.cs" />
+    <Compile Include="PayeeAdapters\TaxRuleSet.cs" />
+    <Compile Include="PayeeExcelFileModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

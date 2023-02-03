@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="16px" viewBox="0 0 13 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>map-pin copy</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Possap-contact-us" transform="translate(-748.000000, -478.000000)" stroke="#2145A9" stroke-width="1.5">
+            <g id="map-pin-copy" transform="translate(749.000000, 479.000000)">
+                <path d="M11,5.72727268 C11,10.1818182 5.5,14 5.5,14 C5.5,14 0,10.1818182 0,5.72727268 C0,2.56418731 2.46243391,0 5.5,0 C8.53756609,0 11,2.56418731 11,5.72727268 L11,5.72727268 Z" id="Path"></path>
+                <circle id="Oval" cx="6" cy="6" r="2"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

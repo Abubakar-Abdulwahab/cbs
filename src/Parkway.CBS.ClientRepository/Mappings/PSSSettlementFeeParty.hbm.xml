@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.PSSSettlementFeeParty, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSSettlementFeeParty" lazy="false" >
+    <id name="Id" column="Id" type="Int32">
+      <generator class="identity"/>
+    </id>
+    <property name="IsActive" column="IsActive" />
+    <property name="HasAdditionalSplits" column="HasAdditionalSplits" />
+    <property name="AdditionalSplitValue" column="AdditionalSplitValue" />
+
+    <many-to-one name="Settlement" column="Settlement_Id"/>
+  </class>
+</hibernate-mapping>

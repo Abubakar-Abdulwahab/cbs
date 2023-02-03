@@ -1,0 +1,151 @@
+﻿@{
+    Layout.Title = "Deployment History";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    table.items th, table.items td {
+        border-bottom: 1px solid #eaeaea;
+        border-spacing: 0px;
+        display: table-cell;
+        padding: 8px 12px;
+        max-width: 100%;
+        position: relative;
+        word-break: break-word;
+    }
+
+    .extend-width {
+        width: 99%;
+    }
+
+    .heading-text, label {
+        color: #808080;
+    }
+
+    p {
+        font-weight: 500;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+    }
+
+        .action-btns div {
+            width: 50%;
+        }
+
+            .action-btns div:nth-child(1) {
+                padding-right: 5px;
+            }
+
+            .action-btns div:nth-child(2) {
+                padding-left: 5px;
+            }
+
+            .action-btns div button {
+                width: 100%;
+            }
+
+    td {
+        width: 100px;
+        word-break: break-word;
+    }
+</style>
+
+<div id="container">
+    <div class="row">
+        <div class="container-fluid">
+            <h4 style="padding: 10px 0px;">DETAILS OF OFFICER</h4>
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">NAME OF OFFICER</th>
+                        <th scope="col" id="titleHeader">SERVICE NUMBER</th>
+                        <th scope="col" id="titleHeader">RANK</th>
+                        <th scope="col" id="titleHeader">GENDER</th>
+                        <th scope="col" id="titleHeader">COMMAND</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="extend-width">James Jameson</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">050452</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">Inspector of Police</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">Male</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">Sabo Divisional Headquarters</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container-fluid">
+            <h4 style="padding: 10px 0px;">RECENT DEPLOYMENTS</h4>
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">CUSTOMER NAME</th>
+                        <th scope="col" id="titleHeader">FILE NUMBER</th>
+                        <th scope="col" id="titleHeader">SERVICE TYPE</th>
+                        <th scope="col" id="titleHeader">ADDRESS</th>
+                        <th scope="col" id="titleHeader">START DATE</th>
+                        <th scope="col" id="titleHeader">END DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="extend-width">Peter John</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">PSS050452</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">Guards Service</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">123 new estate</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">25/02/2021</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">30/02/2021</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="extend-width">Greg Matt</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">PSS050453</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">Guards Service</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">123 old estate</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">29/03/2021</p>
+                        </td>
+                        <td>
+                            <p class="extend-width">30/04/2021</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

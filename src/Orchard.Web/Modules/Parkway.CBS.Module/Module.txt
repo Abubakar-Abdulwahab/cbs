@@ -1,0 +1,13 @@
+﻿Name: Parkway Central Billing System
+AntiForgery: enabled
+Author: Parkway Projects Limited (contact <Ifetayo>: iagunbiade at parkwayprojects.com)
+Website: http://parkwayprojects.com
+Version: 1.0
+OrchardVersion: 1.0
+Description: Central Billing System module.
+Features:
+    Parkway.CBS.Module:
+		Name: Parkway CBS Module
+        Description: Central Billing System module. Contains MDA, revenue head, billing and form setup.
+		Category: Parkway
+		Dependencies: Parkway.CBS.Resources

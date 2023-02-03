@@ -1,0 +1,80 @@
+﻿@model Parkway.CBS.Module.Web.ViewModels.SignInObj
+
+@{
+    Layout.Title = "Login";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Sign In</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <br />
+            <br />
+        </nav>
+    </div>
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    @if (Model.Error)
+    {
+        <div id="loginErrorFlash" class="container alert-msg">
+            <small class="message"><span id="closeModalFlash" style="float:right;">&times;</span><small id="loginErrorMsg" style="white-space: pre-wrap;">@Model.ErrorMessage</small></small>
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda;">
+            <small class="message" style="color:#155724;"><span id="closeFlash" style="float:right;">&times;</span><small style="white-space: pre-wrap;">@Model.Message</small></small>
+        </div>
+    }
+    <div class="content-payment">
+        <div class="container form-container">
+            @using (Html.BeginForm("SignIn", "Collection", new { r = Model.ReturnURL }, FormMethod.Post, new { @class = "main-form payment-form Paye-credentials", @style = "max-width:500px" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("r", Model.ReturnURL)
+                <h3 class="form-title">Kindly fill the following details to sign in</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="" class="title">Username<small style="color:red; font-size:larger">*</small></label>
+                        @Html.TextBoxFor(m => m.CBSUserName, new { @class = "form-control mb-4", @type = "text", @placeholder = "Enter username here", @maxlength = "20", @required = true })
+                        @Html.ValidationMessageFor(m => m.CBSUserName, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-12">
+                        <label for="" class="title">Password<small style="color:red; font-size:larger">*</small></label>
+                        <input type="password" class="form-control mb-4" id="password" name="Password" placeholder="Enter password here" maxlength="255" required>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "tiny-caption", @style = "color:#ff0000" })
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn">Sign In</button>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+<script>
+    $("#closeFlash").click(function (e) {
+        $('#infoFlashMsg').hide();
+    });
+    $("#closeModalFlash").click(function (e) {
+        $('#loginErrorFlash').hide();
+    });
+</script>

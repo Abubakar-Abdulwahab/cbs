@@ -1,0 +1,45 @@
+﻿@model Parkway.CBS.Module.ViewModels.HierarchyViewModel
+
+@{
+    Layout.Title = Model.Name;
+    Style.Require("CBS.MDA..Tree.Style");
+}
+
+<div class="tree">
+    <ul>
+        <li>
+            <a href="#">@Model.Name</a>
+            @if (Model.RevenueHeads.Any())
+            {
+                @ShowTree(Model.RevenueHeads)
+            }
+
+            @helper ShowTree(IEnumerable<Parkway.CBS.Core.Models.RevenueHead> revenueHeads)
+            {
+            <ul>
+                @foreach (var revenueHead in revenueHeads)
+                {
+                    if (revenueHead.RevenueHeads.Any())
+                    {
+                        <li>
+                            @Html.ActionLink(revenueHead.Name, "ViewHierarchy", "RevenueHead", new { area = "Parkway.CBS.Module", revenueHeadId = revenueHead.Id, revenueHeadSlug = revenueHead.Slug }, null)
+                            @ShowTree(revenueHead.RevenueHeads)
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink(revenueHead.Name, "ViewHierarchy", "RevenueHead", new { area = "Parkway.CBS.Module", revenueHeadId = revenueHead.Id, revenueHeadSlug = revenueHead.Slug }, null)
+                        </li>
+                    }
+                }
+            </ul>
+
+}
+        </li>
+    </ul>
+    <br />
+</div>
+<p>
+    @Html.ActionLink("Back to List", "List")
+</p>

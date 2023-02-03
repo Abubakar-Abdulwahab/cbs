@@ -1,0 +1,52 @@
+﻿body {
+    background-color: #0DAF5A;
+    background-image: url(/media/images/half-circle.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    /*    background-size: contain;*/
+    background-size: auto 605px;
+}
+
+#home-nav .navbar-brand img {
+    width: auto;
+    height: 50px;
+}
+
+.content {
+    background-color: #0DAF5A;
+    max-width: 1141px;
+    box-shadow: 13px 33px 67px 36px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    margin-top: 14px;
+}
+
+    .content form {
+        max-width: 684px;
+        margin: 0 auto;
+        padding: 150px 20px;
+        text-align: center;
+    }
+
+        .content form h3 {
+            color: #fff;
+            max-width: 629px;
+            margin-bottom: 60px;
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 30px;
+        }
+
+        .content form select {
+            margin-bottom: 40px
+        }
+
+        .content form button {
+            color: #fff;
+            background-color: orange;
+            margin: auto;
+            width: 100%;
+            max-width: 445px;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 30px;
+        }

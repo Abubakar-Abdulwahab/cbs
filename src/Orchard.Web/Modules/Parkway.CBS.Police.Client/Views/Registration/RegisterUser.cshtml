@@ -1,0 +1,198 @@
+﻿@model Parkway.CBS.Police.Core.HelperModels.RegisterPSSUserObj
+
+@{
+    Layout.Title = "Signup";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("PSS.User.Reg.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    #userDetailsSection, #userIdentificationUploadSection {
+        display: none;
+    }
+
+        #userIdentificationUploadSection .upload-info {
+            color: #333333;
+            font-size: 18px;
+            letter-spacing: 0.31px;
+            line-height: 21px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #userIdentificationUploadSection label.upload-label {
+            flex-direction: column;
+            height: 200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+            #userIdentificationUploadSection label.upload-label img {
+                height: 50px;
+                width: auto;
+            }
+
+        #userIdentificationUploadSection .upload-caption {
+            color: #333333;
+            font-size: 13px;
+            line-height: 19px;
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+        }
+
+    .form-container .main-form .upload-caption a {
+        color: #00b05f;
+    }
+
+    #fileName {
+        font-size: xx-large;
+        font-weight: lighter;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .error-text {
+        color: #E12222;
+        font-size: 12px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var formErrorNumber = @Html.Raw(Json.Encode(Model.FormErrorNumber));
+    var categoryId = @Html.Raw(Json.Encode(Model.TaxPayerType));
+    var hasIntegration = @Html.Raw(Json.Encode((Model.PSSIdentificationTypes != null) ? Model.PSSIdentificationTypes.Where(x => x.Id == Model.RegisterCBSUserModel.IdType).SingleOrDefault().HasIntegration : null));
+    var identificationTypesList = @Html.Raw(Json.Encode((Model.PSSIdentificationTypes != null) ? Model.PSSIdentificationTypes : null));
+    var categoryPermissionsList = @Html.Raw(Json.Encode((Model.TaxCategoryPermissions != null) ? Model.TaxCategoryPermissions : null));
+    var categoryJsonSettings = @Html.Raw(Json.Encode((Model.TaxCategoriesVM != null) ? Model.TaxCategoriesVM : null));
+</script>
+<div id="login-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid signup-main-content no-margin no-padding">
+        <div class="container-fluid signup-container">
+            @if (Model.FlashObj != null)
+            {
+                @Html.Partial("Partials\\Flash", Model.FlashObj)
+            }
+            <div class="row no-margin no-padding">
+                <div class="container white-bg-md no-padding">
+                    <div class="container inner-white-container">
+                        <h3>Signup</h3>
+                        <p>Create an account to get started.</p>
+                        @using (Html.BeginFormAntiForgeryPost(Url.RouteUrl("P.Register.User"), FormMethod.Post, new { @class = "main-form payment-form", @id = "mainForm", @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="userCategorySection" style="display:@((Model.FormErrorNumber < 2) ? "block" : "none")">
+                                <div class="container no-padding mb-3">
+                                    <div class="row no-padding no-margin" style="justify-content:center">
+                                        <div class="container-fluid no-padding"><h6>Who are you ?</h6></div>
+                                        @if (Model.TaxCategoriesVM != null && Model.TaxCategoriesVM.Any())
+                                        {
+                                            foreach (var cat in Model.TaxCategoriesVM)
+                                            {
+                                                <div class="form-check form-check-inline">
+                                                    <input required class="form-check-input" type="radio" name="TaxPayerType" id="@cat.Id" value="@cat.Id" @(Model.TaxPayerType == cat.Id.ToString() ? "checked" : "")>
+                                                    <label class="form-check-label" for="@cat.Id">@cat.Name</label>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <small>No Tax Category Found</small>
+                                        }
+                                        <input type="hidden" name="taxCategory" id="taxCategory" />
+                                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.TaxPayerType", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                    </div>
+                                </div>
+                                @Html.Partial("Partials\\UserIdentificationDetailsPartial", Model)
+                                <div id="userIdentificationUploadSection" style="display:@((Model.FormErrorNumber > 0 && !Model.PSSIdentificationTypes.Where(x => x.Id == Model.RegisterCBSUserModel.IdType).SingleOrDefault().HasIntegration) ? "block" : "none")">
+                                    @Html.Partial("Partials\\UserIdentificationFileUploadPartial", Model)
+                                </div>
+                            </div>
+
+                            <div id="userDetailsSection" style="display:@((Model.FormErrorNumber == 3) ? "block" : "none")">
+                                @Html.Partial("Partials\\UserProfilePartial", Model)
+                                <div class="form-group">
+                                    <label for="address">Address<span class="required-sym">*</span></label>
+                                    <textarea required class="form-control user-details-required" placeholder="Enter your address" name="RegisterCBSUserModel.Address" rows="4" style="height:120px" minlength="10" maxlength="100" @(Model.HeaderObj.IsLoggedIn ? "readonly" : "required")>@Model.RegisterCBSUserModel.Address</textarea>
+                                    <small class="form-text text-muted">Specify your current address.</small>
+                                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                </div>
+                                @Html.Partial("Partials\\ContactPersonInfoPartial", Model)
+                                <div class="form-group">
+                                    <label for="pwd">Password<span class="required-sym">*</span></label>
+                                    <input type="password" class="form-control user-details-required" id="pwd" placeholder="Enter Password" name="RegisterCBSUserModel.Password" required />
+                                    <small class="form-text text-muted">Please provide a strong password which you can remember.</small>
+                                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.Password", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpwd">Confirm Password<span class="required-sym">*</span></label>
+                                    <input type="password" class="form-control user-details-required" id="cpwd" placeholder="Confirm Password" name="RegisterCBSUserModel.ConfirmPassword" required />
+                                    <small class="form-text text-muted">Specify the password entered above.</small>
+                                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RegisterCBSUserModel.ConfirmPassword", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button id="backBtn" type="button" class="btn btn-block">Back</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="createAccountBtn" type="submit" class="btn btn-block">Proceed</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="container-fluid no-margin no-padding">
+                        <p>Already have an account? <span class="login-link"><a href="@Url.RouteUrl("P.Sign.In")">Login</a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

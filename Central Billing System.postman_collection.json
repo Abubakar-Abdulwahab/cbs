@@ -1,0 +1,1792 @@
+{
+	"info": {
+		"_postman_id": "8d9370c4-f5c2-4e36-9dda-b1e04dba4bc3",
+		"name": "Central Billing System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PaymentApi",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Validate",
+					"item": [
+						{
+							"name": "Dev",
+							"item": [
+								{
+									"name": "Successful Validation",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "IHqZnOyRRI3adCTQ8qwWgDpEk9b5olS1VOEPbepNzNA=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\"\n}\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation successful with respone code OK"
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid ClientID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "37HnMJc2vwAp+OHm3D0TXIJxa2MVHK5X9H00LpBDBXM=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"Signature\" : \"37HnMJc2vwAp+OHm3D0TXIJxa2MVHK5X9H00LpBDBXM=\"\n}\n\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation Request made with invalid ClientID"
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid Signature",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "37HnMJc2vwAp+OHm3D0TXIJxa2MVHK5X9H00LpBDBXM=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"Signature\" : \"37HnMJc2vwAp+OHm3D0TXIJxa2MVHK5X9H00LpBDBXM=\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation request made with inaccurate signature"
+									},
+									"response": []
+								},
+								{
+									"name": "Unknown Invoice Number",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "ivoSVQvjXnOWNBun2hyt9Y9Nbzl1uSafg14BNeEL4pA=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447001\",\n\t\"Signature\" : \"ivoSVQvjXnOWNBun2hyt9Y9Nbzl1uSafg14BNeEL4pA=\"\n}\n\n"
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation request made with an unknown invoice number"
+									},
+									"response": []
+								},
+								{
+									"name": "Empty CLIENTID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "IHqZnOyRRI3adCTQ8qwWgDpEk9b5olS1VOEPbepNzNA=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"Signature\" : \"IHqZnOyRRI3adCTQ8qwWgDpEk9b5olS1VOEPbepNzNA=\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation request made with an empty ClientID header parameter"
+									},
+									"response": []
+								},
+								{
+									"name": "Empty SIGNATURE",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\"\n}"
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/invoice/validate",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"invoice",
+												"validate"
+											]
+										},
+										"description": "Validation request made with an empty Signature header parameter"
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "UAT",
+							"item": [],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Live",
+							"item": [],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Bridge",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Validations",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Notification",
+					"item": [
+						{
+							"name": "Dev",
+							"item": [
+								{
+									"name": "Duplicate Request",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "+Z0Sc01zIgbRd11RbTTgMeD0InOf0LCPxkMzRA8+9Ic=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"PaymentRef\" : \"MV-102331000447041\",\n\t\"PaymentDate\" : \"31/03/2020 15:48:33\",\n\t\"BankCode\" : \"100\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"34000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"31/03/2020 15:48:33\"\n}\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Duplicate payment notification request"
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid ClientID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvj24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "+Z0Sc01zIgbRd11RbTTgMeD0InOf0LCPxkMzRA8+9Ic=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"PaymentRef\" : \"MV-102331000447041\",\n\t\"PaymentDate\" : \"31/03/2020 15:48:33\",\n\t\"BankCode\" : \"100\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"34000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"31/03/2020 15:48:33\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with an invalid Client ID"
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid Signature",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "+Z0Sc01zIgbRd11RbTTgMeD0InOf0LCPxkMA8+9Ic=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447041\",\n\t\"PaymentRef\" : \"MV-102331000447041\",\n\t\"PaymentDate\" : \"31/03/2020 15:48:33\",\n\t\"BankCode\" : \"100\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"34000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"31/03/2020 15:48:33\"\n}"
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with an invalid signature"
+									},
+									"response": []
+								},
+								{
+									"name": "Wrongly Formatted Date",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "NU3JghkkLApFoACkWTSbrRR++deTzeyHMJDyQzlJILc=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"InvoiceNumber\": \"1000447041\",\n    \"PaymentRef\": \"MV-102331000447041\",\n    \"PaymentDate\": \"2020/03/31 15:48:33\",\n    \"BankCode\": \"100\",\n    \"BankName\": \"\",\n    \"BankBranch\": \"\",\n    \"AmountPaid\": \"34000.00000\",\n    \"Channel\": \"0\",\n    \"PaymentMethod\": \"0\",\n    \"TransactionDate\": \"2020/03/31 15:48:33\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with a wrongly formatted date used in creating signature"
+									},
+									"response": []
+								},
+								{
+									"name": "Unknown Invoice Number",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "rDi39qnHGQYrPoM45Xhq+LRwdp2qqoAPWIRNS+6VJK8=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447001\",\n\t\"PaymentRef\" : \"MV-102331000447041\",\n\t\"PaymentDate\" : \"31/03/2020 15:48:33\",\n\t\"BankCode\" : \"100\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"34000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"31/03/2020 15:48:33\"\n}"
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with an unknown invoice number"
+									},
+									"response": []
+								},
+								{
+									"name": "Successful Notification",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "uaNwz0gy/C+sekLprme6kbgWKPWOXdKzAy+2cIRDfI0=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447021\",\n\t\"PaymentRef\" : \"IH-102251000447021\",\n\t\"PaymentDate\" : \"26/03/2020 18:47:02\",\n\t\"BankCode\" : \"\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"70000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"26/03/2020 18:47:02\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment successful with response code OK"
+									},
+									"response": []
+								},
+								{
+									"name": "Wrongly Formatted Amount",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "10stoJGThfQAZky2V7EEpMTRfV747ihpcamFTTjeJtA=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447021\",\n\t\"PaymentRef\" : \"IH-102251000447021\",\n\t\"PaymentDate\" : \"26/03/2020 18:47:02\",\n\t\"BankCode\" : \"\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"70000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"26/03/2020 18:47:02\"\n}"
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with a wrongly formatted amount used in creating signature"
+									},
+									"response": []
+								},
+								{
+									"name": "Empty Payment Channel",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "CLIENTID",
+												"value": "Wph6Aaax0ud6KbQGZGwpKboWykOpVhTvjlh24Py6Uso=",
+												"type": "text"
+											},
+											{
+												"key": "SIGNATURE",
+												"value": "1Jkw74cD13wKzyx5Kshhf1lavOj3W2OMfIgsLkOWBgI=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"InvoiceNumber\" : \"1000447021\",\n\t\"PaymentRef\" : \"IH-102251000447021\",\n\t\"PaymentDate\" : \"26/03/2020 18:47:02\",\n\t\"BankCode\" : \"\",\n\t\"BankName\" : \"\",\n\t\"BankBranch\" : \"\",\n\t\"AmountPaid\" : \"70000.00000\",\n\t\"Channel\" : \"0\",\n\t\"PaymentMethod\" : \"0\",\n\t\"TransactionDate\" : \"26/03/2020 18:47:02\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://dev.cbs/api/v1/Payment/notification",
+											"protocol": "http",
+											"host": [
+												"dev",
+												"cbs"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Payment",
+												"notification"
+											]
+										},
+										"description": "Payment notification request made with an empty payment channel parameter used in creating signature"
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "UAT",
+							"item": [],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Live",
+							"item": [],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "POSSAP USSD Dev",
+			"item": [
+				{
+					"name": "Extract",
+					"item": [
+						{
+							"name": "Select service type 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enter File Number 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type-approve 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*1\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type-decline 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*2\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 1: Provide comment-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*1*Approved. Good to go\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 1: Provide comment-decline 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*2*We can't approve this request\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 2: Provide comment-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*1*Approved. Good to go\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 2: Provide comment-decline 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"1*EXT0000020272*2*We can't approve this request\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Character Certificate",
+					"item": [
+						{
+							"name": "Select service type 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enter File Number 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020278\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020278*1\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020273*2\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 1: Provide Reference number-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020278*1*6473773REF\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 1: Provide comment approve 6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020278*1*6473773REF*Approved. Good to go\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 1: Provide comment-decline 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020293*2*We can't approve this request\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 2: Provide comment-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020273*1*Approved. Good to go\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approver 2: Provide comment-decline 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*PCC0000020273*2*We can't approve this request\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Escort & Guard Service",
+					"item": [
+						{
+							"name": "Select service type 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enter File Number 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type-approve 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*1\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type-decline 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*2\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 1: Comment-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*1*Testing, you can proceed.\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 1: Comment-decline 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*1*Testing, you can proceed.\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 2: operation type-approve 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*1\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 2: operation type-decline 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*2\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 2: comment-decline 6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020262*2*I won't approve this\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 2: Enter officer info-approve 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020247*1*ID76333, ID76334\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approval 2: comment-approve 6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"2*ESC0000020247*1*ID76333*It's fine. Approved\",\r\n    \"phoneNumber\": \"+2347064955742\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Generic",
+					"item": [
+						{
+							"name": "Select service type (generic) 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test.possap.ng/api/v1/pss/ussdrequest/approval",
+									"protocol": "https",
+									"host": [
+										"test",
+										"possap",
+										"ng"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enter file number (generic) 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*NPFPSS_TTP0000020174\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test.possap.ng/api/v1/pss/ussdrequest/approval",
+									"protocol": "https",
+									"host": [
+										"test",
+										"possap",
+										"ng"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Select operation type (generic - approve) 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*NPFPSS_TTP0000020174*1\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test.possap.ng/api/v1/pss/ussdrequest/approval",
+									"protocol": "https",
+									"host": [
+										"test",
+										"possap",
+										"ng"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Provide comment (generic - approve) 5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"3*NPFPSS_TTP0000020174*1*Good to go. Approved\",\r\n    \"phoneNumber\": \"+2348064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test.possap.ng/api/v1/pss/ussdrequest/approval",
+									"protocol": "https",
+									"host": [
+										"test",
+										"possap",
+										"ng"
+									],
+									"path": [
+										"api",
+										"v1",
+										"pss",
+										"ussdrequest",
+										"approval"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Start Approval Request 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"\",\r\n    \"phoneNumber\": \"+2347064955741\",\r\n    \"sessionId\": \"sess44444401\",\r\n    \"serviceCode\": \"1800\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/pss/ussdrequest/approval",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pss",
+								"ussdrequest",
+								"approval"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+					"protocolProfileBehavior": {}		
+		}
+
+
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://pss.cbs"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

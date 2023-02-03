@@ -1,0 +1,1318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{87365E9B-C5BF-44F7-8B5B-EB80E1563C02}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Police.Core</RootNamespace>
+    <AssemblyName>Parkway.CBS.Police.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\Parkway.CBS.Core\bin\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="InfoGRID.Pulse.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\InfoGRID.Pulse.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="zxing, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ZXing.Net.0.16.5\lib\net45\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ZXing.Net.0.16.5\lib\net45\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CoreServices\Contracts\ICoreCharacterCertificateInputValidation.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreCharacterCertificateOptions.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreCharacterCertificateReasonForInquiry.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreCharacterCertificateService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreCommand.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreCommandCategory.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreDeploymentAllowancePaymentService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreDiasporaCharacterCertificateInputValidation.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreEGSRegularizationPSSRequestGenerationService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreEscortService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreExtractCategory.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreExtractDetails.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreExtractService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreExtractSubCategory.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreBiometricAppActivityLogService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreGenerateEscortRequestWithoutOfficersService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreIdentificationType.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreOfficersDataFromExternalSource.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSAdminUserService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePoliceOfficerService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSAdminVerificationService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSBranchSubUsersUploadBatchItemsStagingService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSServiceRequest.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSEscortServiceCategory.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSReceiptService.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSRequest.cs" />
+    <Compile Include="CoreServices\Contracts\ICorePSSRequestInvoiceService.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreRequestStatusLog.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreServiceOptions.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreServiceState.cs" />
+    <Compile Include="CoreServices\Contracts\ICoreServiceStateCommand.cs" />
+    <Compile Include="CoreServices\CoreCharacterCertificateInputValidation.cs" />
+    <Compile Include="CoreServices\CoreCharacterCertificateOptions.cs" />
+    <Compile Include="CoreServices\CoreCharacterCertificateReasonForInquiry.cs" />
+    <Compile Include="CoreServices\CoreCharacterCertificateService.cs" />
+    <Compile Include="CoreServices\CoreCommand.cs" />
+    <Compile Include="CoreServices\CoreCommandCategory.cs" />
+    <Compile Include="CoreServices\CoreDeploymentAllowancePaymentService.cs" />
+    <Compile Include="CoreServices\CoreDiasporaCharacterCertificateInputValidation.cs" />
+    <Compile Include="CoreServices\CoreEGSRegularizationPSSRequestGenerationService.cs" />
+    <Compile Include="CoreServices\CoreEscortService.cs" />
+    <Compile Include="CoreServices\CoreExtractCategory.cs" />
+    <Compile Include="CoreServices\CoreExtractDetails.cs" />
+    <Compile Include="CoreServices\CoreExtractService.cs" />
+    <Compile Include="CoreServices\CoreExtractSubCategory.cs" />
+    <Compile Include="CoreServices\CoreBiometricAppActivityLogService.cs" />
+    <Compile Include="CoreServices\CoreGenerateEscortRequestWithoutOfficersService.cs" />
+    <Compile Include="CoreServices\CoreIdentificationType.cs" />
+    <Compile Include="CoreServices\CoreOfficersDataFromExternalSource.cs" />
+    <Compile Include="CoreServices\CorePSSAdminUserService.cs" />
+    <Compile Include="CoreServices\CorePoliceOfficerService.cs" />
+    <Compile Include="CoreServices\CorePSSAdminVerificationService.cs" />
+    <Compile Include="CoreServices\CorePSSBranchSubUsersUploadBatchItemsStagingService.cs" />
+    <Compile Include="CoreServices\CorePSService.cs" />
+    <Compile Include="CoreServices\CorePSServiceRequest.cs" />
+    <Compile Include="CoreServices\CorePSSEscortServiceCategory.cs" />
+    <Compile Include="CoreServices\CorePSSReceiptService.cs" />
+    <Compile Include="CoreServices\CorePSSRequest.cs" />
+    <Compile Include="CoreServices\CorePSSRequestInvoiceService.cs" />
+    <Compile Include="CoreServices\CoreRequestStatusLog.cs" />
+    <Compile Include="CoreServices\CoreServiceOptions.cs" />
+    <Compile Include="CoreServices\CoreServiceState.cs" />
+    <Compile Include="CoreServices\CoreServiceStateCommand.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentApprovalReport\AccountWalletPaymentApprovalFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentApprovalReport\Contracts\IAccountWalletPaymentApprovalFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentApprovalReport\SearchFilters\AccountWalletPaymentApprovalFilters.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentApprovalReport\SearchFilters\Contracts\IAccountWalletPaymentApprovalFilters.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentReport\AccountWalletPaymentReportFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentReport\Contracts\IAccountWalletPaymentReportFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentReport\SearchFilters\AccountWalletPaymentReportFilters.cs" />
+    <Compile Include="DataFilters\AccountWalletPaymentReport\SearchFilters\Contracts\IAccountWalletPaymentReportFilters.cs" />
+    <Compile Include="DataFilters\AccountWalletReport\AccountWalletReportFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletReport\Contracts\IAccountWalletReportFilter.cs" />
+    <Compile Include="DataFilters\AccountWalletReport\SearchFilters\AccountWalletReportFilters.cs" />
+    <Compile Include="DataFilters\AccountWalletReport\SearchFilters\Contracts\IAccountWalletReportFilters.cs" />
+    <Compile Include="DataFilters\AdminUserReport\AdminUserReportFilter.cs" />
+    <Compile Include="DataFilters\AdminUserReport\Contracts\IAdminUserReportFilter.cs" />
+    <Compile Include="DataFilters\AdminUserReport\SearchFilters\AdminUserReportFilters.cs" />
+    <Compile Include="DataFilters\AdminUserReport\SearchFilters\Contracts\IAdminUserReportFilters.cs" />
+    <Compile Include="DataFilters\CollectionReport\Contracts\IPoliceCollectionFilter.cs" />
+    <Compile Include="DataFilters\CollectionReport\SearchFilters\IPSSCollectionReportFilters.cs" />
+    <Compile Include="DataFilters\CollectionReport\SearchFilters\PSSCollectionReportFilters.cs" />
+    <Compile Include="DataFilters\CommandReport\CommandWalletReportFilter.cs" />
+    <Compile Include="DataFilters\CommandReport\Contracts\ICommandWalletReportFilter.cs" />
+    <Compile Include="DataFilters\CommandReport\SearchFilters\CommandWalletReportFilters.cs" />
+    <Compile Include="DataFilters\CommandReport\SearchFilters\Contracts\ICommandWalletReportFilters.cs" />
+    <Compile Include="DataFilters\CommandStatementReport\CommandStatementReportFilter.cs" />
+    <Compile Include="DataFilters\CommandStatementReport\Contracts\ICommandStatementReportFilter.cs" />
+    <Compile Include="DataFilters\CommandStatementReport\SearchFilters\CommandStatementReportFilters.cs" />
+    <Compile Include="DataFilters\CommandStatementReport\SearchFilters\Contracts\ICommandStatementReportFilters.cs" />
+    <Compile Include="DataFilters\DeploymentAllowancePaymentReport\Contracts\IDeploymentAllowancePaymentReportFilter.cs" />
+    <Compile Include="DataFilters\DeploymentAllowancePaymentReport\DeploymentAllowancePaymentReportFilter.cs" />
+    <Compile Include="DataFilters\DeploymentAllowancePaymentReport\SearchFilters\Contracts\IDeploymentAllowancePaymentReportFilters.cs" />
+    <Compile Include="DataFilters\DeploymentAllowancePaymentReport\SearchFilters\DeploymentAllowancePaymentReportFilters.cs" />
+    <Compile Include="DataFilters\ExpenditureHeadReport\Contracts\IExpenditureHeadReportFilter.cs" />
+    <Compile Include="DataFilters\ExpenditureHeadReport\ExpenditureHeadReportFilter.cs" />
+    <Compile Include="DataFilters\ExpenditureHeadReport\SearchFilters\Contracts\IExpenditureHeadReportFilters.cs" />
+    <Compile Include="DataFilters\ExpenditureHeadReport\SearchFilters\ExpenditureHeadReportFilters.cs" />
+    <Compile Include="DataFilters\GenerateRequestWithoutOfficersUploadBatchStagingReport\Contracts\IGenerateRequestWithoutOfficersUploadBatchItemsStagingFilter.cs" />
+    <Compile Include="DataFilters\GenerateRequestWithoutOfficersUploadBatchStagingReport\Contracts\IGenerateRequestWithoutOfficersUploadBatchStagingFilter.cs" />
+    <Compile Include="DataFilters\GenerateRequestWithoutOfficersUploadBatchStagingReport\GenerateRequestWithoutOfficersUploadBatchItemsStagingFilter.cs" />
+    <Compile Include="DataFilters\GenerateRequestWithoutOfficersUploadBatchStagingReport\GenerateRequestWithoutOfficersUploadBatchStagingFilter.cs" />
+    <Compile Include="DataFilters\OfficerDeploymentAllowance\Contracts\IOfficerDeploymentAllowanceFilter.cs" />
+    <Compile Include="DataFilters\OfficerDeploymentAllowance\OfficerDeploymentAllowanceFilter.cs" />
+    <Compile Include="DataFilters\OfficerDeploymentAllowance\SearchFilters\IOfficerDeploymentAllowanceFilters.cs" />
+    <Compile Include="DataFilters\OfficerDeploymentAllowance\SearchFilters\OfficerDeploymentAllowanceFilters.cs" />
+    <Compile Include="DataFilters\OfficerDeployment\Contracts\IOfficerDeploymentFilter.cs" />
+    <Compile Include="DataFilters\OfficerDeployment\OfficerDeploymentFilter.cs" />
+    <Compile Include="DataFilters\OfficerDeployment\SearchFilters\IOfficerDeploymentReportFilters.cs" />
+    <Compile Include="DataFilters\OfficerDeployment\SearchFilters\OfficerDeploymentReportFilters.cs" />
+    <Compile Include="DataFilters\PoliceOfficer\Contracts\IPoliceOfficerFilter.cs" />
+    <Compile Include="DataFilters\PoliceOfficer\PoliceOfficerFilter.cs" />
+    <Compile Include="DataFilters\PoliceOfficer\SearchFilters\IPoliceOfficerReportFilters.cs" />
+    <Compile Include="DataFilters\PoliceOfficer\SearchFilters\PoliceOfficerReportFilters.cs" />
+    <Compile Include="DataFilters\PSSBranchOfficersUploadBatchStagingReport\Contracts\IPSSBranchOfficersUploadBatchItemsStagingFilter.cs" />
+    <Compile Include="DataFilters\PSSBranchOfficersUploadBatchStagingReport\Contracts\IPSSBranchOfficersUploadBatchStagingFilter.cs" />
+    <Compile Include="DataFilters\PSSBranchOfficersUploadBatchStagingReport\PSSBranchOfficersUploadBatchStagingItemsFilter.cs" />
+    <Compile Include="DataFilters\PSSBranchOfficersUploadBatchStagingReport\PSSBranchOfficersUploadBatchStagingFilter.cs" />
+    <Compile Include="DataFilters\PSSBranchSubUsersUpload\Contracts\IPSSBranchSubUsersUploadBatchItemsStagingFilter.cs" />
+    <Compile Include="DataFilters\PSSBranchSubUsersUpload\PSSBranchSubUsersUploadBatchItemsStagingFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportAggregate\Contracts\IPSSSettlementReportAggregateFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportAggregate\PSSSettlementReportAggregateFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportAggregate\SearchFilters\IPSSSettlementReportAggregateFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportAggregate\SearchFilters\PSSSettlementReportAggregateFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBatchBreakdown\Contracts\IPSSSettlementReportBatchBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBatchBreakdown\PSSSettlementReportBatchBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBreakdown\Contracts\IPSSSettlementReportBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBreakdown\PSSSettlementReportBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBreakdown\SearchFilters\IPSSSettlementReportBreakdownFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportBreakdown\SearchFilters\PSSSettlementReportBreakdownFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportPartyBreakdown\Contracts\IPSSSettlementReportPartyBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportPartyBreakdown\PSSSettlementReportPartyBreakdownFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportPartyBreakdown\SearchFilters\IPSSSettlementReportPartyBreakdownFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportPartyBreakdown\SearchFilters\PSSSettlementReportPartyBreakdownFilters.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportParty\Contracts\IPSSSettlementReportPartyFilter.cs" />
+    <Compile Include="DataFilters\PSSSettlementReportParty\PSSSettlementReportPartyFilter.cs" />
+    <Compile Include="DataFilters\PSSUserReport\Contracts\IPSSUserReportFilter.cs" />
+    <Compile Include="DataFilters\PSSUserReport\PSSUserReportFilter.cs" />
+    <Compile Include="DataFilters\PSSUserReport\SearchFilters\Contracts\IPSSUserReportFilters.cs" />
+    <Compile Include="DataFilters\PSSUserReport\SearchFilters\PSSUserReportFilters.cs" />
+    <Compile Include="DataFilters\Requests\AdminRequestFilter.cs" />
+    <Compile Include="DataFilters\Requests\Contracts\IAdminRequestFilter.cs" />
+    <Compile Include="DataFilters\Requests\Contracts\IPoliceRequestFilter.cs" />
+    <Compile Include="DataFilters\CollectionReport\PoliceCollectionFilter.cs" />
+    <Compile Include="DataFilters\Requests\PoliceRequestFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\ApprovalRequestFilters.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\Filters.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\IInvoiceFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\InvoiceFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\IAdminApprovalRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\IPoliceRequestSerachFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\IPoliceCoporateBranchRequestSearchFilter.cs" />
+    <Compile Include="DataFilters\Requests\SearchFilters\BranchFilter.cs" />
+    <Compile Include="DataFilters\FeePartyReport\Contracts\IFeePartyReportFilter.cs" />
+    <Compile Include="DataFilters\FeePartyReport\FeePartyReportFilter.cs" />
+    <Compile Include="DataFilters\SettlementFeePartiesReport\Contracts\ISettlementFeePartiesReportFilter.cs" />
+    <Compile Include="DataFilters\SettlementFeePartiesReport\SearchFilters\Contracts\ISettlementFeePartiesReportFilters.cs" />
+    <Compile Include="DataFilters\SettlementFeePartiesReport\SettlementFeePartiesReportFilter.cs" />
+    <Compile Include="DataFilters\SettlementReport\Contracts\ISettlementReportFilter.cs" />
+    <Compile Include="DataFilters\SettlementReport\SettlementReportFilter.cs" />
+    <Compile Include="DTO\AccountWalletConfigurationDTO.cs" />
+    <Compile Include="DTO\AccountWalletPaymentRequestItemDTO.cs" />
+    <Compile Include="DTO\ApprovalAccessRoleUserDTO.cs" />
+    <Compile Include="DTO\EscortRegularizationSettingsDTO.cs" />
+    <Compile Include="DTO\DeploymentAllowancePaymentRequestDTO.cs" />
+    <Compile Include="DTO\DeploymentAllowancePaymentRequestItemDTO.cs" />
+    <Compile Include="DTO\EscortDetailsDTO.cs" />
+    <Compile Include="DTO\EscortFormationAllocationDTO.cs" />
+    <Compile Include="DTO\EscortProcessFlowDTO.cs" />
+    <Compile Include="DTO\EscortProcessStageDefinitionDTO.cs" />
+    <Compile Include="DTO\EscortSquadAllocationDTO.cs" />
+    <Compile Include="DTO\EscortViewRubricDTO.cs" />
+    <Compile Include="DTO\GenerateRequestWithoutOfficersUploadBatchItemsStagingDTO.cs" />
+    <Compile Include="DTO\GenerateRequestWithoutOfficersUploadBatchStagingDTO.cs" />
+    <Compile Include="DTO\IdentificationTypeAndValue.cs" />
+    <Compile Include="DTO\PoliceOfficerDeploymentAllowanceVM.cs" />
+    <Compile Include="DTO\PoliceOfficerDeploymentVM.cs" />
+    <Compile Include="DTO\PSSBranchOfficersUploadBatchItemsStagingDTO.cs" />
+    <Compile Include="DTO\PSSBranchSubUsersUploadBatchItemsStagingDTO.cs" />
+    <Compile Include="DTO\PSSBranchSubUsersUploadBatchStagingDTO.cs" />
+    <Compile Include="DTO\PSSDeploymentAllowanceDTO.cs" />
+    <Compile Include="DTO\PSServiceRequestFlowApproverDTO.cs" />
+    <Compile Include="DTO\PSServiceRequestFlowDefinitionDTO.cs" />
+    <Compile Include="DTO\PSServiceRequestFlowDefinitionLevelDTO.cs" />
+    <Compile Include="DTO\PSServiceRevenueHeadVM.cs" />
+    <Compile Include="DTO\PSServiceVM.cs" />
+    <Compile Include="DTO\PSSEscortDayTypeDTO.cs" />
+    <Compile Include="DTO\PSSFeePartyAdapterConfigurationDTO.cs" />
+    <Compile Include="DTO\PSSRegularizationUnknownOfficerRecurringInvoiceSettingsDTO.cs" />
+    <Compile Include="DTO\PSSRegularizationUnknownPoliceOfficerDeploymentContributionLogDTO.cs" />
+    <Compile Include="DTO\PSSRegularizationUnknownPoliceOfficerDeploymentLogDTO.cs" />
+    <Compile Include="DTO\PSSRequestInvoiceDTO.cs" />
+    <Compile Include="DTO\PSSSettlementBatchVM.cs" />
+    <Compile Include="DTO\PSSTransactionLogVM.cs" />
+    <Compile Include="DTO\PSServiceRequestInvoiceValidationDTO.cs" />
+    <Compile Include="DTO\PSSServiceRequestDTO.cs" />
+    <Compile Include="Events\AccountPaymentRequestNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\AccountPaymentRequestSettlementDetailNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\GenerateRequestWithoutOfficersUploadBatchStagingNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\DeploymentAllowancePaymentRequestNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSBranchSubUsersUploadBatchStagingNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSBranchOfficersUploadBatchStagingNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSCharacterCertificateDetailsBlobLogNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSRequestEditNHibernatePersistenceConfig.cs" />
+    <Compile Include="Exceptions\PSSRequestAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\PSSRequestNotApprovedException.cs" />
+    <Compile Include="HelperModels\AccountsWalletReportVM.cs" />
+    <Compile Include="HelperModels\AccountWalletPaymentApprovalReportVM.cs" />
+    <Compile Include="HelperModels\AccountWalletPaymentReportVM.cs" />
+    <Compile Include="HelperModels\AccountWalletPaymentRequestItemDetailVM.cs" />
+    <Compile Include="HelperModels\CharacterCertificateDetailsUpdateVM.cs" />
+    <Compile Include="HelperModels\DeploymentAllowancePaymentReportItemVM.cs" />
+    <Compile Include="HelperModels\DeploymentAllowancePaymentReportVM.cs" />
+    <Compile Include="HelperModels\ExpenditureHeadReportVM.cs" />
+    <Compile Include="HelperModels\GenerateRequestWithoutOfficersUploadBatchItemsStagingReportSearchParams.cs" />
+    <Compile Include="HelperModels\GenerateRequestWithoutOfficersUploadBatchStagingReportSearchParams.cs" />
+    <Compile Include="HelperModels\PSSAdminValidateVerReturnValue.cs" />
+    <Compile Include="HelperModels\PSSAdminVerificationCodeVM.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersUploadBatchItemsStagingVM.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersUploadBatchStagingVM.cs" />
+    <Compile Include="HelperModels\SettlementEngineAccountVerifyRequestVM.cs" />
+    <Compile Include="HelperModels\SettlementEngineAccountVerifyResponse.cs" />
+    <Compile Include="HelperModels\SettlementEngineAccountVerifyResponseVM.cs" />
+    <Compile Include="HelperModels\SettlementEnginePaymentStatusItem.cs" />
+    <Compile Include="HelperModels\SettlementEnginePaymentStatusResponseObject.cs" />
+    <Compile Include="HelperModels\SettlementEnginePaymentStatusVM.cs" />
+    <Compile Include="HelperModels\SettlementEnginePaymentItem.cs" />
+    <Compile Include="HelperModels\SettlementEnginePayRequestParty.cs" />
+    <Compile Include="HelperModels\SettlementEnginePayRequestResponseObject.cs" />
+    <Compile Include="HelperModels\DeploymentAllowancePaymentNotificationModel.cs" />
+    <Compile Include="HelperModels\PSSProxyAuthenticationModel.cs" />
+    <Compile Include="HelperModels\WalletPaymentRequestApprovalDetailVM.cs" />
+    <Compile Include="Migrations\AccountPaymentRequestApprovalLogMigrations.cs" />
+    <Compile Include="Migrations\AccountPaymentRequestSettlementLogMigrations.cs" />
+    <Compile Include="Migrations\AccountPaymentRequestItemsMigrations.cs" />
+    <Compile Include="Migrations\AccountPaymentRequestMigrations.cs" />
+    <Compile Include="Migrations\AccountPaymentRequestSettlementDetailMigrations.cs" />
+    <Compile Include="Migrations\AccountWalletConfigurationPSServiceRequestFlowApproverMigrations.cs" />
+    <Compile Include="Migrations\AccountWalletConfigurationMigrations.cs" />
+    <Compile Include="Migrations\BiometricAppActivityLogMigrations.cs" />
+    <Compile Include="Migrations\PSSAdminVerificationCodeItemsMigrations.cs" />
+    <Compile Include="Migrations\PSSAdminVerificationCodeMigrations.cs" />
+    <Compile Include="Migrations\PSSEscortDayTypeMigrations.cs" />
+    <Compile Include="Migrations\DeploymentAllowancePaymentRequestItemMigrations.cs" />
+    <Compile Include="Migrations\DeploymentAllowancePaymentRequestMigrations.cs" />
+    <Compile Include="Migrations\FailedWalletStatementRequestCallLogMigrations.cs" />
+    <Compile Include="Migrations\GenerateRequestWithoutOfficersUploadBatchItemsStagingMigrations.cs" />
+    <Compile Include="Migrations\GenerateRequestWithoutOfficersUploadBatchStagingMigrations.cs" />
+    <Compile Include="Migrations\PoliceofficerDeploymentAllowanceSettlementLogMigrations.cs" />
+    <Compile Include="Migrations\PSSRegularizationUnknownOfficerRecurringInvoiceSettingsMigrations.cs" />
+    <Compile Include="Migrations\PSSRegularizationUnknownPoliceOfficerDeploymentContributionLogMigrations.cs" />
+    <Compile Include="Migrations\PSSProposedRegularizationUnknownPoliceOfficerDeploymentLogMigrations.cs" />
+    <Compile Include="Migrations\PSSRegularizationUnknownPoliceOfficerDeploymentLogMigrations.cs" />
+    <Compile Include="Migrations\PSSBiometricAppUserDetailMigrations.cs" />
+    <Compile Include="Migrations\PSSBranchSubUsersUploadBatchItemsStagingMigrations.cs" />
+    <Compile Include="Migrations\PSSBranchSubUsersUploadBatchStagingMigrations.cs" />
+    <Compile Include="Migrations\PSSBranchOfficersUploadBatchItemsStagingMigrations.cs" />
+    <Compile Include="Migrations\PSSBranchOfficersUploadBatchStagingMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateDetailsBlobLogMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateDetailsLogMigrations.cs" />
+    <Compile Include="Migrations\PSServiceOptionsMigrations.cs" />
+    <Compile Include="Migrations\PSServiceFormFieldsMigrations.cs" />
+    <Compile Include="Migrations\PSServiceStateCommandMigrations.cs" />
+    <Compile Include="Migrations\PSServiceStateMigrations.cs" />
+    <Compile Include="Migrations\PSSExpenditureHeadMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementAdapterCommandMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestEditMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestEditPSServiceFormFieldsMigrations.cs" />
+    <Compile Include="Migrations\RegularizationDeploymentAllowanceSettlementEngineDetailMigrations.cs" />
+    <Compile Include="Migrations\RegularizationUnknownOfficersDeploymentAllowancePaymentSettlementLogMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementCallLogMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementScheduleLogMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementScheduleMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementScheduleUpdateMigrations.cs" />
+    <Compile Include="Migrations\WalletStatementStagingMigrations.cs" />
+    <Compile Include="Models\AccountPaymentRequest.cs" />
+    <Compile Include="Models\AccountPaymentRequestApprovalLog.cs" />
+    <Compile Include="Models\AccountPaymentRequestItem.cs" />
+    <Compile Include="Models\AccountPaymentRequestSettlementDetail.cs" />
+    <Compile Include="Models\AccountPaymentRequestSettlementLog.cs" />
+    <Compile Include="Models\AccountWalletConfigurationPSServiceRequestFlowApprover.cs" />
+    <Compile Include="Migrations\PSSDeploymentAllowanceSettlementEngineDetailsMigrations.cs" />
+    <Compile Include="Models\AccountWalletConfiguration.cs" />
+    <Compile Include="Models\BiometricAppActivityLog.cs" />
+    <Compile Include="Models\PSSAdminVerificationCode.cs" />
+    <Compile Include="Models\PSSAdminVerificationCodeItems.cs" />
+    <Compile Include="Models\PSSEscortDayType.cs" />
+    <Compile Include="Models\DeploymentAllowancePaymentRequest.cs" />
+    <Compile Include="Models\DeploymentAllowancePaymentRequestItem.cs" />
+    <Compile Include="Models\Enums\CharacterCertificate.cs" />
+    <Compile Include="Models\FailedWalletStatementRequestCallLog.cs" />
+    <Compile Include="Models\GenerateRequestWithoutOfficersUploadBatchItemsStaging.cs" />
+    <Compile Include="Models\GenerateRequestWithoutOfficersUploadBatchStaging.cs" />
+    <Compile Include="Models\PoliceofficerDeploymentAllowanceSettlementLog.cs" />
+    <Compile Include="Models\PSSBiometricAppUserDetail.cs" />
+    <Compile Include="Models\PSSBranchSubUsersUploadBatchItemsStaging.cs" />
+    <Compile Include="Models\PSSBranchSubUsersUploadBatchStaging.cs" />
+    <Compile Include="Models\PSSBranchOfficersUploadBatchItemsStaging.cs" />
+    <Compile Include="Models\PSSBranchOfficersUploadBatchStaging.cs" />
+    <Compile Include="Models\PSServiceOptions.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetailsBase.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetailsBlobBase.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetailsLog.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetailsBlobLog.cs" />
+    <Compile Include="Models\PSServiceFormFields.cs" />
+    <Compile Include="Models\PSServiceState.cs" />
+    <Compile Include="Models\PSServiceStateCommand.cs" />
+    <Compile Include="Models\PSSExpenditureHead.cs" />
+    <Compile Include="Migrations\PSSSettlementScheduleUpdateMigrations.cs" />
+    <Compile Include="Models\PSSDeploymentAllowanceSettlementEngineDetails.cs" />
+    <Compile Include="Models\PSSRegularizationUnknownOfficerRecurringInvoiceSettings.cs" />
+    <Compile Include="Models\PSSRegularizationUnknownPoliceOfficerDeploymentContributionLog.cs" />
+    <Compile Include="Models\PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog.cs" />
+    <Compile Include="Models\PSSRegularizationUnknownPoliceOfficerDeploymentLog.cs" />
+    <Compile Include="Models\PSSRequestEdit.cs" />
+    <Compile Include="Models\PSSRequestEditPSServiceFormFields.cs" />
+    <Compile Include="Models\PSSSettlementAdapterCommand.cs" />
+    <Compile Include="Models\PSSSettlementScheduleUpdate.cs" />
+    <Compile Include="HelperModels\SettlementEnginePaymentRequestVM.cs" />
+    <Compile Include="HelperModels\SettlementEnginePayRequestResponseVM.cs" />
+    <Compile Include="Models\RegularizationDeploymentAllowanceSettlementEngineDetail.cs" />
+    <Compile Include="Models\RegularizationUnknownOfficersDeploymentAllowancePaymentSettlementLog.cs" />
+    <Compile Include="Models\WalletStatementCallLog.cs" />
+    <Compile Include="Models\WalletStatementSchedule.cs" />
+    <Compile Include="Models\WalletStatementScheduleLog.cs" />
+    <Compile Include="Models\WalletStatementScheduleUpdate.cs" />
+    <Compile Include="PaymentRequestSettlement\Contracts\IPaymentRequestService.cs" />
+    <Compile Include="PaymentRequestSettlement\PaymentRequestService.cs" />
+    <Compile Include="Models\WalletStatement.cs" />
+    <Compile Include="Models\WalletStatementStaging.cs" />
+    <Compile Include="PSSErrorCode.cs" />
+    <Compile Include="Events\ExtractRequestFilesNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\IdentificationTypeFileAttachmentNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PoliceRankingNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\CharacterCertificateBiometricsNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSAdminSignatureUploadNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSCharacterCertificateDetailsBlobNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSRejectionCharacterCertificateNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSCharacterCertificateNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSEscortOfficerDetailsNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSExtractDocumentNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSRequestApprovalDocumentPreviewLogNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSRequestNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSServiceSettlementConfigurationNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\PSSSettlementBatchNHibernatePersistenceConfig.cs" />
+    <Compile Include="Events\ReceiptNHibernatePersistenceConfig.cs" />
+    <Compile Include="Exceptions\PSSRequestNotPendingApprovalException.cs" />
+    <Compile Include="Exceptions\CannotFindPoliceServiceTypeException.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\Contracts\IExternalDataCommands.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\Contracts\IExternalDataOfficers.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ExternalDataCommands.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ExternalDataOfficers.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\CommandRecordLineItemModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\CommandReportRecordModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\CommandResponseModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\OfficersRequestModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\OfficersRequestResponseModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\HRErrorResponseModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\PersonnelErrorResponseModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\PersonnelReportRecord.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\PersonnelRequestModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\PersonnelResponseModel.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\RootHRSystemResponse.cs" />
+    <Compile Include="ExternalSourceData\HRSystem\ViewModels\RootPersonnelResponse.cs" />
+    <Compile Include="HelperModels\AuthenticationModel.cs" />
+    <Compile Include="HelperModels\CertificateTemplateVM.cs" />
+    <Compile Include="HelperModels\CharacterCertificateDocumentVM.cs" />
+    <Compile Include="HelperModels\CharacterCertificateRequestVM.cs" />
+    <Compile Include="HelperModels\CommandCategoryVM.cs" />
+    <Compile Include="HelperModels\CommandWalletReportVM.cs" />
+    <Compile Include="HelperModels\CommandStatVM.cs" />
+    <Compile Include="HelperModels\CommandWalletDetailsVM.cs" />
+    <Compile Include="HelperModels\CommandWalletStatementVM.cs" />
+    <Compile Include="HelperModels\CommandVM.cs" />
+    <Compile Include="HelperModels\ContactEntityValidationModel.cs" />
+    <Compile Include="HelperModels\CreateCertificateDocumentVM.cs" />
+    <Compile Include="HelperModels\DispatchNoteVM.cs" />
+    <Compile Include="HelperModels\EscortChartSheetStatVM.cs" />
+    <Compile Include="HelperModels\ExtractCategoryVM.cs" />
+    <Compile Include="HelperModels\ExtractDocumentVM.cs" />
+    <Compile Include="HelperModels\ExtractSubCategoryVM.cs" />
+    <Compile Include="HelperModels\PoliceOfficerSeedingVM.cs" />
+    <Compile Include="HelperModels\PSSRequestExtractDetailsCategoryVM.cs" />
+    <Compile Include="HelperModels\RegisterPSSUserObj.cs" />
+    <Compile Include="HelperModels\RequestCallbackModel.cs" />
+    <Compile Include="HelperModels\DeploymentAllowancePaymentItemModel.cs" />
+    <Compile Include="HelperModels\DeploymentAllowancePaymentDetailsModel.cs" />
+    <Compile Include="HelperModels\ShortCodeSMSRequestModel.cs" />
+    <Compile Include="HelperModels\USSDAPIResponse.cs" />
+    <Compile Include="HelperModels\USSDRequestModel.cs" />
+    <Compile Include="HelperModels\USSDValidateDocumentVM.cs" />
+    <Compile Include="HelperModels\USSDValidateReceiptVM.cs" />
+    <Compile Include="HelperModels\ValidateIdentificationNumberResponseModel.cs" />
+    <Compile Include="Lang\PoliceErrorLang.cs" />
+    <Compile Include="Lang\PoliceLang.cs" />
+    <Compile Include="Migrations\AdminRequestActivityLogMigrations.cs" />
+    <Compile Include="Migrations\ApprovalAccessListStagingMigrations.cs" />
+    <Compile Include="Migrations\CharacterCertificateBiometricsMigrations.cs" />
+    <Compile Include="Migrations\CharacterCertificateReasonForInquiryMigrations.cs" />
+    <Compile Include="Migrations\CommandExternalDataStagingMigrations.cs" />
+    <Compile Include="Migrations\CommandHierarchyMigrations.cs" />
+    <Compile Include="Migrations\CommandCategoryMigrations.cs" />
+    <Compile Include="Migrations\CommandMigrations.cs" />
+    <Compile Include="Migrations\PSSAdminSignatureUploadMigrations.cs" />
+    <Compile Include="Migrations\PoliceofficerDeploymentAllowanceTrackerMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateDetailsBlobMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateRejectionMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateRequestTypeMigrations.cs" />
+    <Compile Include="Migrations\CommandTypeMigrations.cs" />
+    <Compile Include="Migrations\CommandWalletDetailsMigrations.cs" />
+    <Compile Include="Migrations\EscortFormationAllocationMigrations.cs" />
+    <Compile Include="Migrations\EscortFormationAllocationSelectionTrackingMigrations.cs" />
+    <Compile Include="Migrations\EscortFormationOfficerSelectionTrackingMigrations.cs" />
+    <Compile Include="Migrations\EscortProcessFlowMigrations.cs" />
+    <Compile Include="Migrations\EscortProcessStageDefinitionMigrations.cs" />
+    <Compile Include="Migrations\EscortRolePartialMigrations.cs" />
+    <Compile Include="Migrations\EscortSquadAllocationGroupMigrations.cs" />
+    <Compile Include="Migrations\EscortSquadAllocationMigrations.cs" />
+    <Compile Include="Migrations\EscortSquadAllocationSelectionTrackingMigrations.cs" />
+    <Compile Include="Migrations\EscortViewRubricMigrations.cs" />
+    <Compile Include="Migrations\IdentificationTypeFileAttachmentMigrations.cs" />
+    <Compile Include="Migrations\IdentificationTypeMigrations.cs" />
+    <Compile Include="Migrations\IdentificationTypeTaxCategoryMigrations.cs" />
+    <Compile Include="Migrations\ExtractRequestFilesMigrations.cs" />
+    <Compile Include="Migrations\OfficersDataFromExternalSourceStagingMigrations.cs" />
+    <Compile Include="Migrations\PoliceofficerDeploymentAllowanceMigrations.cs" />
+    <Compile Include="Migrations\EscortAmountChartSheetMigrations.cs" />
+    <Compile Include="Migrations\ExtractCategoryMigrations.cs" />
+    <Compile Include="Migrations\InvestigationReportDetailsMigrations.cs" />
+    <Compile Include="Migrations\ExtractDetailsMigrations.cs" />
+    <Compile Include="Migrations\ApprovalAccessListMigrations.cs" />
+    <Compile Include="Migrations\ApprovalAccessRoleMigrations.cs" />
+    <Compile Include="Migrations\ApprovalAccessRoleUserMigrations.cs" />
+    <Compile Include="Migrations\ExtractSubCategoryMigrations.cs" />
+    <Compile Include="Migrations\PoliceCollectionLogMigrations.cs" />
+    <Compile Include="Migrations\PoliceOfficerCommandRankLogMigrations.cs" />
+    <Compile Include="Migrations\PoliceOfficerDeploymentLogMigrations.cs" />
+    <Compile Include="Migrations\OfficersDataFromExternalSourceMigrations.cs" />
+    <Compile Include="Migrations\PoliceOfficerMigrations.cs" />
+    <Compile Include="Migrations\PolicerOfficerLogMigrations.cs" />
+    <Compile Include="Migrations\ProposedEscortOfficerMigrations.cs" />
+    <Compile Include="Migrations\ProposedEscortOfficerSelectionTrackingMigrations.cs" />
+    <Compile Include="Migrations\PSSAdminUsersMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateDetailsMigrations.cs" />
+    <Compile Include="Migrations\PSSCharacterCertificateMigrations.cs" />
+    <Compile Include="Migrations\PSSDispatchNoteMigrations.cs" />
+    <Compile Include="Migrations\PSServiceRequestFlowApproverStagingMigrations.cs" />
+    <Compile Include="Migrations\PSServiceCaveatMigrations.cs" />
+    <Compile Include="Migrations\PSServiceRequestFlowApproverMigrations.cs" />
+    <Compile Include="Migrations\PSServiceRequestFlowDefinitionLevelMigrations.cs" />
+    <Compile Include="Migrations\PSServiceRequestFlowDefinitionMigrations.cs" />
+    <Compile Include="Migrations\PSServiceRevenueHeadMigrations.cs" />
+    <Compile Include="Migrations\PSSEscortServiceCategoryMigrations.cs" />
+    <Compile Include="Migrations\PSSEscortSettingsMigrations.cs" />
+    <Compile Include="Migrations\PSSEscortDetailsMigrations.cs" />
+    <Compile Include="Migrations\PSSEscortOfficerDetailsmigrations.cs" />
+    <Compile Include="Migrations\PSSExtractDocumentMigrations.cs" />
+    <Compile Include="Migrations\PSSFailedProcessingFeeConfirmationsMigrations.cs" />
+    <Compile Include="Migrations\PSSHangfireSettlementReferenceMigrations.cs" />
+    <Compile Include="Migrations\PSSPresettlementDeductionConfigurationMigrations.cs" />
+    <Compile Include="Migrations\PSSPresettlementDeductionsMigrations.cs" />
+    <Compile Include="Migrations\PSSReasonMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestApprovalDocumentPreviewLogMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestApprovalLogMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestExtractDetailsCategoryMigrations.cs" />
+    <Compile Include="Migrations\PSSServiceSettlementConfigurationMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementFeePartyBatchAggregateMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementFeePartyStagingMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementFeePartyRequestTransactionCommandSplitComputeMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementPercentageRecalculationFeePartyBatchAggregateMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigCommandMigrations.cs" />
+    <Compile Include="Migrations\PSSServiceSettlementConfigurationTransactionMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementBatchAggregateMigrations.cs" />
+    <Compile Include="Migrations\PSSFeePartyAdapterConfigurationMigrations.cs" />
+    <Compile Include="Migrations\PSSFeePartyMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementBatchItemsMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementBatchMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementFeePartyRequestTransactionMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementPreFlightBatchMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementPreFlightItemsMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigCommandRatioComputeMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigCommandRatioMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigCommandStateCommandMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigCommandZonalCommandMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigStateCommandRatioComputeMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigStateCommandRatioMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigZonalCommandRatioComputeMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementRequestTransactionConfigZonalCommandRatioMigrations.cs" />
+    <Compile Include="Migrations\RequestCommandMigrations.cs" />
+    <Compile Include="Migrations\RequestCommandWorkFlowLogMigrations.cs" />
+    <Compile Include="Migrations\RequestStatusLogMigrations.cs" />
+    <Compile Include="Migrations\PSSSettlementFeePartyMigrations.cs" />
+    <Compile Include="Migrations\SecretariatRoutingLevelMigrations.cs" />
+    <Compile Include="Migrations\ServiceTaxCategoryMigrations.cs" />
+    <Compile Include="Migrations\ServiceWorkflowDifferentialMigrations.cs" />
+    <Compile Include="Migrations\EscortFormationOfficerMigrations.cs" />
+    <Compile Include="Migrations\TaxEntitySubCategoryMigrations.cs" />
+    <Compile Include="Migrations\TaxEntitySubSubCategoryMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestInvoiceMigrations.cs" />
+    <Compile Include="Models\ApprovalAccessListStaging.cs" />
+    <Compile Include="Models\CharacterCertificateBiometrics.cs" />
+    <Compile Include="Models\CharacterCertificateReasonForInquiry.cs" />
+    <Compile Include="Models\CommandExternalDataStaging.cs" />
+    <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\CommandCategory.cs" />
+    <Compile Include="DTO\PSSRequestTypeVM.cs" />
+    <Compile Include="DTO\PSSRequestVM.cs" />
+    <Compile Include="Migrations\PoliceServiceRequestMigrations.cs" />
+    <Compile Include="Migrations\PSServiceMigrations.cs" />
+    <Compile Include="Migrations\PSSRequestMigrations.cs" />
+    <Compile Include="Models\CommandHierarchy.cs" />
+    <Compile Include="Models\PSSAdminSignatureUpload.cs" />
+    <Compile Include="Models\PoliceofficerDeploymentAllowanceTracker.cs" />
+    <Compile Include="Models\Enums\HangfireReferenceType.cs" />
+    <Compile Include="Models\Enums\PSSSettlementBatchStatus.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetailsBlob.cs" />
+    <Compile Include="Models\PSSCharacterCertificateRejection.cs" />
+    <Compile Include="Models\PSSCharacterCertificateRequestType.cs" />
+    <Compile Include="Models\CommandType.cs" />
+    <Compile Include="Models\CommandWalletDetails.cs" />
+    <Compile Include="Models\Enums\EscortApprovalViewPermissions.cs" />
+    <Compile Include="Models\EscortFormationAllocation.cs" />
+    <Compile Include="Models\EscortFormationAllocationSelectionTracking.cs" />
+    <Compile Include="Models\EscortFormationOfficerSelectionTracking.cs" />
+    <Compile Include="Models\EscortProcessFlow.cs" />
+    <Compile Include="Models\EscortProcessStageDefinition.cs" />
+    <Compile Include="Models\EscortRolePartial.cs" />
+    <Compile Include="Models\EscortSquadAllocation.cs" />
+    <Compile Include="Models\EscortSquadAllocationGroup.cs" />
+    <Compile Include="Models\EscortSquadAllocationSelectionTracking.cs" />
+    <Compile Include="Models\EscortViewRubric.cs" />
+    <Compile Include="Models\IdentificationType.cs" />
+    <Compile Include="Models\IdentificationTypeFileAttachment.cs" />
+    <Compile Include="Models\IdentificationTypeTaxCategory.cs" />
+    <Compile Include="Models\ExtractRequestFiles.cs" />
+    <Compile Include="Models\OfficersDataFromExternalSource.cs" />
+    <Compile Include="Models\OfficersDataFromExternalSourceStaging.cs" />
+    <Compile Include="Models\PoliceofficerDeploymentAllowance.cs" />
+    <Compile Include="Models\Enums\Enums.cs" />
+    <Compile Include="Models\EscortAmountChartSheet.cs" />
+    <Compile Include="Models\ExtractCategory.cs" />
+    <Compile Include="Models\InvestigationReportDetails.cs" />
+    <Compile Include="Models\ExtractDetails.cs" />
+    <Compile Include="Models\ApprovalAccessList.cs" />
+    <Compile Include="Models\ApprovalAccessRole.cs" />
+    <Compile Include="Models\ApprovalAccessRoleUser.cs" />
+    <Compile Include="Models\ExtractSubCategory.cs" />
+    <Compile Include="Models\PoliceCollectionLog.cs" />
+    <Compile Include="Models\PoliceOfficer.cs" />
+    <Compile Include="Models\PoliceOfficerCommandRankLog.cs" />
+    <Compile Include="Models\PoliceOfficerDeploymentLog.cs" />
+    <Compile Include="Models\PoliceRanking.cs" />
+    <Compile Include="Migrations\PoliceRankingMigrations.cs" />
+    <Compile Include="Models\PolicerOfficerLog.cs" />
+    <Compile Include="Models\PoliceServiceRequest.cs" />
+    <Compile Include="Models\ProposedEscortOfficer.cs" />
+    <Compile Include="Models\ProposedEscortOfficerSelectionTracking.cs" />
+    <Compile Include="Models\PSSAdminUsers.cs" />
+    <Compile Include="Models\PSSCharacterCertificate.cs" />
+    <Compile Include="Models\PSSCharacterCertificateDetails.cs" />
+    <Compile Include="Models\PSSDispatchNote.cs" />
+    <Compile Include="Models\PSServiceRequestFlowApproverStaging.cs" />
+    <Compile Include="Models\PSServiceCaveat.cs" />
+    <Compile Include="Models\PSServiceRequestFlowApprover.cs" />
+    <Compile Include="Models\PSServiceRequestFlowDefinition.cs" />
+    <Compile Include="Models\PSServiceRequestFlowDefinitionLevel.cs" />
+    <Compile Include="Models\PSServiceRevenueHead.cs" />
+    <Compile Include="Models\PSServices.cs" />
+    <Compile Include="Models\PSSEscortServiceCategory.cs" />
+    <Compile Include="Models\PSSEscortSettings.cs" />
+    <Compile Include="Models\PSSEscortDetails.cs" />
+    <Compile Include="Models\PSSEscortOfficerDetails.cs" />
+    <Compile Include="Models\PSSExtractDocument.cs" />
+    <Compile Include="Models\PSSFailedProcessingFeeConfirmations.cs" />
+    <Compile Include="Models\PSSHangfireSettlementReference.cs" />
+    <Compile Include="Models\PSSPresettlementDeductionConfiguration.cs" />
+    <Compile Include="Models\PSSPresettlementDeductions.cs" />
+    <Compile Include="Models\PSSReason.cs" />
+    <Compile Include="Models\AdminRequestActivityLog.cs" />
+    <Compile Include="Models\PSSSettlementFeePartyStaging.cs" />
+    <Compile Include="Models\PSSSettlementFeePartyBatchAggregate.cs" />
+    <Compile Include="Models\PSSSettlementFeePartyRequestTransactionCommandSplitCompute.cs" />
+    <Compile Include="Models\PSSSettlementPercentageRecalculationFeePartyBatchAggregate.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigCommand.cs" />
+    <Compile Include="Models\PSSServiceSettlementConfigurationTransaction.cs" />
+    <Compile Include="Models\PSSSettlement.cs" />
+    <Compile Include="Models\PSSSettlementDeduction.cs" />
+    <Compile Include="Models\PSSSettlementFeePartyRequestTransaction.cs" />
+    <Compile Include="Models\PSSSettlementPreFlightBatch.cs" />
+    <Compile Include="Models\PSSSettlementPreFlightItems.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigCommandRatio.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigCommandRatioCompute.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigCommandStateCommand.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigCommandZonalCommand.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigStateCommandRatio.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigStateCommandRatioCompute.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigZonalCommandRatio.cs" />
+    <Compile Include="Models\PSSSettlementRequestTransactionConfigZonalCommandRatioCompute.cs" />
+    <Compile Include="Models\RequestCommand.cs" />
+    <Compile Include="Models\PSSRequest.cs" />
+    <Compile Include="Models\PSSRequestApprovalDocumentPreviewLog.cs" />
+    <Compile Include="Models\PSSRequestApprovalLog.cs" />
+    <Compile Include="Models\PSSRequestExtractDetailsCategory.cs" />
+    <Compile Include="Models\PSSServiceSettlementConfiguration.cs" />
+    <Compile Include="Models\PSSSettlementBatch.cs" />
+    <Compile Include="Models\PSSSettlementBatchAggregate.cs" />
+    <Compile Include="Models\PSSSettlementBatchItems.cs" />
+    <Compile Include="Models\RequestCommandWorkFlowLog.cs" />
+    <Compile Include="Models\RequestStatusLog.cs" />
+    <Compile Include="Models\PSSSettlementFeeParty.cs" />
+    <Compile Include="Models\SecretariatRoutingLevel.cs" />
+    <Compile Include="Models\ServiceTaxCategory.cs" />
+    <Compile Include="Models\ServiceWorkflowDifferential.cs" />
+    <Compile Include="Models\EscortFormationOfficer.cs" />
+    <Compile Include="Models\SettlementAdapterConfiguration.cs" />
+    <Compile Include="Models\PSSFeeParty.cs" />
+    <Compile Include="Models\TaxEntitySubCategory.cs" />
+    <Compile Include="Models\TaxEntitySubSubCategory.cs" />
+    <Compile Include="Models\PSSRequestInvoice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSSIdentification\AccountNumberValidation.cs" />
+    <Compile Include="PSSIdentification\BVNValidation.cs" />
+    <Compile Include="PSSIdentification\Contracts\IAccountNumberValidation.cs" />
+    <Compile Include="PSSIdentification\Contracts\IIdentificationNumberValidationImpl.cs" />
+    <Compile Include="PSSIdentification\Contracts\IIdentityBiometric.cs" />
+    <Compile Include="PSSIdentification\FourCoreBVNValidation.cs" />
+    <Compile Include="PSSIdentification\NINValidation.cs" />
+    <Compile Include="PSSIdentification\TINValidation.cs" />
+    <Compile Include="PSSMail\Provider\Contracts\IPSSEmailProvider.cs" />
+    <Compile Include="PSSMail\Provider\PSSGmailProvider.cs" />
+    <Compile Include="PSSMail\Provider\PSSPulseProvider.cs" />
+    <Compile Include="PSSServiceType\Approval\ApprovalComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\Contracts\IApprovalComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\Contracts\IEscortApprovalComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\Contracts\IPSSServiceTypeApprovalImpl.cs" />
+    <Compile Include="PSSServiceType\Approval\Contracts\IPSSServiceTypeCustomApprovalImpl.cs" />
+    <Compile Include="PSSServiceType\Approval\Contracts\IPSSServiceTypeDocumentPreviewImpl.cs" />
+    <Compile Include="PSSServiceType\Approval\Escort.cs" />
+    <Compile Include="PSSServiceType\Approval\CharacterCertificate.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\AIGEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\Contracts\IEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\CPEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\DCPEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\DeskOfficerEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\DIGEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\DPOEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\SecretariatRoutingEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalViewComposition\SquadronLeaderEscortViewComposition.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalWorkFlow\Contracts\IEscortApprovalWorkFlow.cs" />
+    <Compile Include="PSSServiceType\Approval\EscortApprovalWorkFlow\EscortApprovalWorkFlow.cs" />
+    <Compile Include="PSSServiceType\Approval\Extract.cs" />
+    <Compile Include="PSSServiceType\Approval\Generic.cs" />
+    <Compile Include="PSSServiceType\CharacterCertificate.cs" />
+    <Compile Include="PSSServiceType\CharacterCertificateOptions\InCountryOption.cs" />
+    <Compile Include="PSSServiceType\CharacterCertificateOptions\Contracts\ICharacterCertificateOptions.cs" />
+    <Compile Include="PSSServiceType\Rejection\RejectionComposition.cs" />
+    <Compile Include="PSSServiceType\Contracts\IPSSDeploymentAllowanceImpl.cs" />
+    <Compile Include="PSSServiceType\Contracts\IPSSServiceTypeImpl.cs" />
+    <Compile Include="PSSServiceType\Contracts\ITypeImplComposer.cs" />
+    <Compile Include="PSSServiceType\Escort.cs" />
+    <Compile Include="PSSServiceType\EscortApproval.cs" />
+    <Compile Include="PSSServiceType\EscortDeploymentAllowanceApproval.cs" />
+    <Compile Include="PSSServiceType\Extract.cs" />
+    <Compile Include="PSSServiceType\ExtractApproval.cs" />
+    <Compile Include="PSSServiceType\GenericPoliceServiceApproval.cs" />
+    <Compile Include="PSSServiceType\GenericPoliceServices.cs" />
+    <Compile Include="PSSServiceType\Rejection\Contracts\IRejectionComposition.cs" />
+    <Compile Include="PSSServiceType\TypeImplComposer.cs" />
+    <Compile Include="PSSSMS\Provider\Contracts\IPSSSMSProvider.cs" />
+    <Compile Include="PSSSMS\Provider\PSSPulseProvider.cs" />
+    <Compile Include="RequestWorkFlow\Actions\Approval.cs" />
+    <Compile Include="RequestWorkFlow\Actions\ApprovalImpl\ApprovalExtract.cs" />
+    <Compile Include="RequestWorkFlow\Actions\ApprovalImpl\ApprovalEscort.cs" />
+    <Compile Include="RequestWorkFlow\Actions\ApprovalImpl\ApprovalCharacterCertificate.cs" />
+    <Compile Include="RequestWorkFlow\Actions\ApprovalImpl\Contracts\IServiceApprovalImpl.cs" />
+    <Compile Include="RequestWorkFlow\Actions\GenerateInvoiceImpl\Contracts\IServiceGenerateInvoiceImpl.cs" />
+    <Compile Include="RequestWorkFlow\Actions\GenerateInvoiceImpl\GenerateInvoiceAction.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoActionImpl\Contracts\IServiceNoActionImpl.cs" />
+    <Compile Include="RequestWorkFlow\Actions\Contracts\IActionImpl.cs" />
+    <Compile Include="RequestWorkFlow\Actions\GenerateInvoice.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoAction.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoActionImpl\NoActionCharacterCertificate.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoActionImpl\NoActionEscortRegularization.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoActionImpl\NoActionEscort.cs" />
+    <Compile Include="RequestWorkFlow\Actions\NoActionImpl\NoActionExtract.cs" />
+    <Compile Include="RequestWorkFlow\Contracts\IRequestFlowHandler.cs" />
+    <Compile Include="RequestWorkFlow\RequestFlowHandler.cs" />
+    <Compile Include="Seeds\BankSeeds.cs" />
+    <Compile Include="Seeds\CommandSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IBankSeeds.cs" />
+    <Compile Include="Seeds\Contracts\ICommandSeeds.cs" />
+    <Compile Include="Seeds\Contracts\IIdentificationTypeSeeds.cs" />
+    <Compile Include="Seeds\IdentificationTypeSeeds.cs" />
+    <Compile Include="Services\Contracts\IGenerateRequestWithoutOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSAdminVerificationCodeItemsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSAdminVerificationCodeManager.cs" />
+    <Compile Include="Services\Contracts\IRegularizationDeploymentAllowanceSettlementEngineDetailManager.cs" />
+    <Compile Include="Services\Contracts\IRegularizationUnknownOfficersDeploymentAllowancePaymentSettlementLogManager.cs" />
+    <Compile Include="Services\GenerateRequestWithoutOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\PSSAdminVerificationCodeItemsManager.cs" />
+    <Compile Include="Services\PSSAdminVerificationCodeManager.cs" />
+    <Compile Include="Services\PSSRegularizationUnknownPoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\PSSRegularizationUnknownPoliceOfficerDeploymentContributionLogManager.cs" />
+    <Compile Include="Services\PSSRegularizationUnknownOfficerRecurringInvoiceSettingsManager.cs" />
+    <Compile Include="Services\AccountPaymentRequestItemManager.cs" />
+    <Compile Include="Services\AccountPaymentRequestManager.cs" />
+    <Compile Include="Services\AccountPaymentRequestSettlementDetailManager.cs" />
+    <Compile Include="Services\AccountPaymentRequestSettlementLogManager.cs" />
+    <Compile Include="Services\AccountWalletConfigurationManager.cs" />
+    <Compile Include="Services\AccountWalletConfigurationPSServiceRequestFlowApproverManager.cs" />
+    <Compile Include="Services\ApprovalAccessListStagingManager.cs" />
+    <Compile Include="Services\ApprovalAccessListManager.cs" />
+    <Compile Include="Services\ApprovalAccessRoleManager.cs" />
+    <Compile Include="Services\ApprovalAccessRoleUserManager.cs" />
+    <Compile Include="Services\BiometricAppActivityLogManager.cs" />
+    <Compile Include="Services\CharacterCertificateBiometricsManager.cs" />
+    <Compile Include="Services\CharacterCertificateReasonForInquiryManager.cs" />
+    <Compile Include="Services\CommandExternalDataStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRegularizationUnknownPoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRegularizationUnknownPoliceOfficerDeploymentContributionLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRegularizationUnknownOfficerRecurringInvoiceSettingsManager.cs" />
+    <Compile Include="Services\Contracts\IAccountPaymentRequestItemManager.cs" />
+    <Compile Include="Services\Contracts\IAccountPaymentRequestManager.cs" />
+    <Compile Include="Services\Contracts\IAccountPaymentRequestSettlementDetailManager.cs" />
+    <Compile Include="Services\Contracts\IAccountPaymentRequestSettlementLogManager.cs" />
+    <Compile Include="Services\Contracts\IAccountWalletConfigurationManager.cs" />
+    <Compile Include="Services\Contracts\IAccountWalletUserConfigurationPSServiceRequestFlowApproverManager.cs" />
+    <Compile Include="Services\Contracts\IApprovalAccessListStagingManager.cs" />
+    <Compile Include="Services\Contracts\IBiometricAppActivityLogManager.cs" />
+    <Compile Include="Services\Contracts\ICommandExternalDataStagingManager.cs" />
+    <Compile Include="Services\Contracts\IDeploymentAllowancePaymentRequestItemManager.cs" />
+    <Compile Include="Services\Contracts\IDeploymentAllowancePaymentRequestManager.cs" />
+    <Compile Include="Services\Contracts\IEscortSquadAllocationManager.cs" />
+    <Compile Include="Services\Contracts\IGenerateRequestWithoutOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IGenerateRequestWithoutOfficersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceofficerDeploymentAllowanceSettlementLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSAdminSignatureUploadManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceofficerDeploymentAllowanceTrackerManager.cs" />
+    <Compile Include="Services\Contracts\IPSSBranchOfficersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSBranchOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSBranchSubUsersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSBranchSubUsersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateDetailsBlobLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateDetailsBlobManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateDetailsLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateOptionsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateRejectionManager.cs" />
+    <Compile Include="Services\Contracts\IPSSDispatchNoteManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceRequestFlowApproverStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceStateManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceStateCommandManager.cs" />
+    <Compile Include="Services\Contracts\IPSSEscortDayTypeManager.cs" />
+    <Compile Include="Services\Contracts\IPSSExpenditureHeadManager.cs" />
+    <Compile Include="Services\Contracts\IPSSFeePartyManager.cs" />
+    <Compile Include="Services\Contracts\IPSSProposedRegularizationUnknownPoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRegularizationUnknownOfficerRecurringInvoiceSettingsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRegularizationUnknownPoliceOfficerDeploymentContributionLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementFeePartyBatchAggregateManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementFeePartyStagingManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementFeePartyManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementManager.cs" />
+    <Compile Include="Services\Contracts\IPSSDeploymentAllowanceSettlementEngineDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementPercentageRecalculationFeePartyBatchAggregateManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementScheduleUpdateManager.cs" />
+    <Compile Include="Services\Contracts\ISecretariatRoutingLevelManager.cs" />
+    <Compile Include="Services\Contracts\ISettlementFeePartyConfigurationManager.cs" />
+    <Compile Include="Services\Contracts\IPSSFeePartyAdapterConfigurationManager.cs" />
+    <Compile Include="Services\DeploymentAllowancePaymentRequestItemManager.cs" />
+    <Compile Include="Services\DeploymentAllowancePaymentRequestManager.cs" />
+    <Compile Include="Services\EscortSquadAllocationManager.cs" />
+    <Compile Include="Services\GenerateRequestWithoutOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\GenerateRequestWithoutOfficersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\PoliceofficerDeploymentAllowanceSettlementLogManager.cs" />
+    <Compile Include="Services\PSSAdminSignatureUploadManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceCaveatManager.cs" />
+    <Compile Include="Services\PoliceofficerDeploymentAllowanceTrackerManager.cs" />
+    <Compile Include="Services\Contracts\IPSSServiceSettlementConfigurationManager.cs" />
+    <Compile Include="Services\PSSBranchOfficersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\PSSBranchOfficersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\PSSBranchSubUsersUploadBatchItemsStagingManager.cs" />
+    <Compile Include="Services\PSSBranchSubUsersUploadBatchStagingManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateDetailsBlobLogManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateDetailsBlobManager.cs" />
+    <Compile Include="Services\Contracts\IRequestCommandWorkFlowLogManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateDetailsLogManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateOptionsManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateRejectionManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateRequestTypeManager.cs" />
+    <Compile Include="Services\CommandTypeManager.cs" />
+    <Compile Include="Services\CommandWalletDetailsManager.cs" />
+    <Compile Include="Services\Contracts\ICharacterCertificateBiometricsManager.cs" />
+    <Compile Include="Services\Contracts\ICharacterCertificateReasonForInquiryManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateRequestTypeManager.cs" />
+    <Compile Include="Services\Contracts\ICommandTypeManager.cs" />
+    <Compile Include="Services\Contracts\ICommandWalletDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IEscortFormationAllocationManager.cs" />
+    <Compile Include="Services\Contracts\IEscortFormationOfficerManager.cs" />
+    <Compile Include="Services\Contracts\IEscortProcessFlowManager.cs" />
+    <Compile Include="Services\Contracts\IEscortProcessStageDefinitionManager.cs" />
+    <Compile Include="Services\Contracts\IEscortRolePartialManager.cs" />
+    <Compile Include="Services\Contracts\IEscortSquadAllocationGroupManager.cs" />
+    <Compile Include="Services\Contracts\IEscortViewRubricManager.cs" />
+    <Compile Include="Services\Contracts\IIdentificationTypeFileAttachmentManager.cs" />
+    <Compile Include="Services\Contracts\IIdentificationTypeManager.cs" />
+    <Compile Include="Services\Contracts\IIdentificationTypeTaxCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IOfficersDataFromExternalSourceStagingManager.cs" />
+    <Compile Include="Services\Contracts\IOfficersDataFromExternalSourceManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceofficerDeploymentAllowanceManager.cs" />
+    <Compile Include="Services\Contracts\IEscortAmountChartSheetManager.cs" />
+    <Compile Include="Services\Contracts\IInvestigationReportDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IProposedEscortOfficerManager.cs" />
+    <Compile Include="Services\Contracts\IPSSAdminUsersManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSCharacterCertificateManager.cs" />
+    <Compile Include="Services\Contracts\IPSSEscortServiceCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IPSSExtractDocumentManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRequestApprovalDocumentPreviewLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRequestExtractDetailsCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementBatchAggregateManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementBatchItemsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSSettlementBatchManager.cs" />
+    <Compile Include="Services\Contracts\IRequestCommandManager.cs" />
+    <Compile Include="Services\Contracts\IServiceTaxCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceRequestFlowApproverManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceRequestFlowDefinitionLevelManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceCollectionLogManager.cs" />
+    <Compile Include="Services\Contracts\IPSSEscortSettingsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSFailedApplicationFeeRequestsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSReasonManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRequestApprovalLogManager.cs" />
+    <Compile Include="Services\Contracts\IExtractRequestFilesManager.cs" />
+    <Compile Include="Services\Contracts\IRequestStatusLogManager.cs" />
+    <Compile Include="Services\Contracts\IServiceWorkflowDifferentialManager.cs" />
+    <Compile Include="Services\Contracts\ITaxEntitySubCategoryManager.cs" />
+    <Compile Include="Services\Contracts\ITaxEntitySubSubCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRequestInvoiceManager.cs" />
+    <Compile Include="Services\EscortFormationAllocationManager.cs" />
+    <Compile Include="Services\EscortFormationOfficerManager.cs" />
+    <Compile Include="Services\EscortProcessFlowManager.cs" />
+    <Compile Include="Services\EscortProcessStageDefinitionManager.cs" />
+    <Compile Include="Services\EscortRolePartialManager.cs" />
+    <Compile Include="Services\EscortSquadAllocationGroupManager.cs" />
+    <Compile Include="Services\EscortViewRubricManager.cs" />
+    <Compile Include="Services\IdentificationTypeFileAttachmentManager.cs" />
+    <Compile Include="Services\IdentificationTypeManager.cs" />
+    <Compile Include="Services\IdentificationTypeTaxCategoryManager.cs" />
+    <Compile Include="Services\ExtractRequestFilesManager.cs" />
+    <Compile Include="Services\OfficersDataFromExternalSourceStagingManager.cs" />
+    <Compile Include="Services\OfficersDataFromExternalSourceManager.cs" />
+    <Compile Include="Services\PoliceofficerDeploymentAllowanceManager.cs" />
+    <Compile Include="Services\EscortAmountChartSheetManager.cs" />
+    <Compile Include="Services\InvestigationReportDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceOfficerManager.cs" />
+    <Compile Include="Services\Contracts\IPolicerOfficerLogManager.cs" />
+    <Compile Include="Services\PoliceCollectionLogManager.cs" />
+    <Compile Include="Services\PoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\CommandCategoryManager.cs" />
+    <Compile Include="Services\CommandManager.cs" />
+    <Compile Include="Services\Contracts\IApprovalAccessListManager.cs" />
+    <Compile Include="Services\Contracts\IApprovalAccessRoleManager.cs" />
+    <Compile Include="Services\Contracts\IApprovalAccessRoleUserManager.cs" />
+    <Compile Include="Services\Contracts\ICommandCategoryManager.cs" />
+    <Compile Include="Services\Contracts\ICommandManager.cs" />
+    <Compile Include="Services\Contracts\IExtractCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IExtractDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IExtractSubCategoryManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceRankingManager.cs" />
+    <Compile Include="Services\Contracts\IPoliceServiceRequestManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceManager.cs" />
+    <Compile Include="Services\Contracts\IPSServiceRevenueHeadManager.cs" />
+    <Compile Include="Services\Contracts\IPSSEscortDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSEscortOfficerDetailsManager.cs" />
+    <Compile Include="Services\Contracts\IPSSRequestManager.cs" />
+    <Compile Include="Services\ExtractCategoryManager.cs" />
+    <Compile Include="Services\ExtractDetailsManager.cs" />
+    <Compile Include="Services\ExtractSubCategoryManager.cs" />
+    <Compile Include="Services\PoliceRankingManager.cs" />
+    <Compile Include="Services\PoliceOfficerManager.cs" />
+    <Compile Include="Services\PolicerOfficerLogManager.cs" />
+    <Compile Include="Services\PoliceServiceRequestManager.cs" />
+    <Compile Include="Services\ProposedEscortOfficerManager.cs" />
+    <Compile Include="Services\PSSAdminUsersManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateDetailsManager.cs" />
+    <Compile Include="Services\PSSCharacterCertificateManager.cs" />
+    <Compile Include="Services\PSSDispatchNoteManager.cs" />
+    <Compile Include="Services\PSServiceCaveatManager.cs" />
+    <Compile Include="Services\PSServiceRequestFlowApproverStagingManager.cs" />
+    <Compile Include="Services\PSServiceStateCommandManager.cs" />
+    <Compile Include="Services\PSServiceStateManager.cs" />
+    <Compile Include="Services\PSSEscortDayTypeManager.cs" />
+    <Compile Include="Services\PSSEscortServiceCategoryManager.cs" />
+    <Compile Include="Services\PSSExpenditureHeadManager.cs" />
+    <Compile Include="Services\PSSExtractDocumentManager.cs" />
+    <Compile Include="Services\PSSProposedRegularizationUnknownPoliceOfficerDeploymentLogManager.cs" />
+    <Compile Include="Services\PSSRegularizationUnknownOfficerRecurringInvoiceSettingsManager.cs" />
+    <Compile Include="Services\PSSRegularizationUnknownPoliceOfficerDeploymentContributionLogManager.cs" />
+    <Compile Include="Services\PSSRequestApprovalDocumentPreviewLogManager.cs" />
+    <Compile Include="Services\PSSRequestExtractDetailsCategoryManager.cs" />
+    <Compile Include="Services\PSSServiceSettlementConfigurationManager.cs" />
+    <Compile Include="Services\PSSSettlementBatchAggregateManager.cs" />
+    <Compile Include="Services\PSSSettlementBatchItemsManager.cs" />
+    <Compile Include="Services\PSSSettlementBatchManager.cs" />
+    <Compile Include="Services\PSSSettlementFeePartyBatchAggregateManager.cs" />
+    <Compile Include="Services\PSSSettlementFeePartyStagingManager.cs" />
+    <Compile Include="Services\PSSSettlementFeePartyManager.cs" />
+    <Compile Include="Services\PSSSettlementManager.cs" />
+    <Compile Include="Services\PSSDeploymentAllowanceSettlementEngineDetailsManager.cs" />
+    <Compile Include="Services\PSSSettlementPercentageRecalculationFeePartyBatchAggregateManager.cs" />
+    <Compile Include="Services\PSSSettlementScheduleUpdateManager.cs" />
+    <Compile Include="Services\RegularizationDeploymentAllowanceSettlementEngineDetailManager.cs" />
+    <Compile Include="Services\RegularizationUnknownOfficersDeploymentAllowancePaymentSettlementLogManager.cs" />
+    <Compile Include="Services\RequestCommandManager.cs" />
+    <Compile Include="Services\RequestCommandWorkFlowLogManager.cs" />
+    <Compile Include="Services\SecretariatRoutingLevelManager.cs" />
+    <Compile Include="Services\ServiceTaxCategoryManager.cs" />
+    <Compile Include="Services\PSServiceManager.cs" />
+    <Compile Include="Services\PSServiceRequestFlowApproverManager.cs" />
+    <Compile Include="Services\PSServiceRequestFlowDefinitionLevelManager.cs" />
+    <Compile Include="Services\PSServiceRevenueHeadManager.cs" />
+    <Compile Include="Services\PSSEscortSettingsManager.cs" />
+    <Compile Include="Services\PSSEscortDetailsManager.cs" />
+    <Compile Include="Services\PSSEscortOfficerDetailsManager.cs" />
+    <Compile Include="Services\PSSFailedApplicationFeeRequestsManager.cs" />
+    <Compile Include="Services\PSSReasonManager.cs" />
+    <Compile Include="Services\PSSRequestApprovalLogManager.cs" />
+    <Compile Include="Services\PSSRequestInvoiceManager.cs" />
+    <Compile Include="Services\PSSRequestManager.cs" />
+    <Compile Include="Services\RequestStatusLogManager.cs" />
+    <Compile Include="Services\ServiceWorkflowDifferentialManager.cs" />
+    <Compile Include="Services\PSSFeePartyManager.cs" />
+    <Compile Include="Services\PSSFeePartyAdapterConfigurationManager.cs" />
+    <Compile Include="Services\TaxEntitySubCategoryManager.cs" />
+    <Compile Include="Services\TaxEntitySubSubCategoryManager.cs" />
+    <Compile Include="Utilities\HelperImageConverter.cs" />
+    <Compile Include="Utilities\PSSUtil.cs" />
+    <Compile Include="VM\AboutVM.cs" />
+    <Compile Include="VM\AccountPaymentRequestVM.cs" />
+    <Compile Include="VM\AccountWalletConfigurationVM.cs" />
+    <Compile Include="VM\AccountWalletPaymentApprovalSearchParams.cs" />
+    <Compile Include="VM\AccountWalletPaymentSearchParams.cs" />
+    <Compile Include="VM\AccountWalletReportSearchParams.cs" />
+    <Compile Include="VM\AddOrRemoveAccountWalletConfigurationVM.cs" />
+    <Compile Include="VM\AddCommandWalletVM.cs" />
+    <Compile Include="VM\AddExpenditureHeadVM.cs" />
+    <Compile Include="VM\AddSettlementFeePartyVM.cs" />
+    <Compile Include="VM\AdminUserDetailVM.cs" />
+    <Compile Include="VM\AdminUserReportSearchParams.cs" />
+    <Compile Include="VM\AdminUserVM.cs" />
+    <Compile Include="VM\AIGApprovalVM.cs" />
+    <Compile Include="VM\AIGFormationVM.cs" />
+    <Compile Include="VM\ApprovalAccessListVM.cs" />
+    <Compile Include="VM\AssignEscortProcessFlowVM.cs" />
+    <Compile Include="VM\CharacterCertificateBiometricsVM.cs" />
+    <Compile Include="VM\CharacterCertificateOptionFormDetailsVM.cs" />
+    <Compile Include="VM\CharacterCertificateRequestTypeVM.cs" />
+    <Compile Include="VM\CanApproveEscortVM.cs" />
+    <Compile Include="VM\CommandTypeVM.cs" />
+    <Compile Include="VM\DCPApprovalVM.cs" />
+    <Compile Include="VM\DeploymentAllowancePaymentRequestItemVM.cs" />
+    <Compile Include="VM\DeploymentAllowancePaymentSearchParams.cs" />
+    <Compile Include="VM\DeskOfficerApprovalVM.cs" />
+    <Compile Include="VM\DIGApprovalVM.cs" />
+    <Compile Include="VM\DIGTacticalSquadVM.cs" />
+    <Compile Include="VM\DPOApprovalVM.cs" />
+    <Compile Include="VM\EscortPartialVM.cs" />
+    <Compile Include="VM\EscortProcessFlowVM.cs" />
+    <Compile Include="VM\EscortSquadAllocationVM.cs" />
+    <Compile Include="VM\ExpenditureHeadReportSearchParams.cs" />
+    <Compile Include="VM\ExpenditureHeadVM.cs" />
+    <Compile Include="VM\InitiateAccountWalletPaymentVM.cs" />
+    <Compile Include="VM\InitiateDeploymentAllowancePaymentVM.cs" />
+    <Compile Include="VM\NotificationInfoVM.cs" />
+    <Compile Include="VM\NotificationMessageListVM.cs" />
+    <Compile Include="VM\PCCDiasporaUserInputVM.cs" />
+    <Compile Include="VM\PSSAdminSignaturesListVM.cs" />
+    <Compile Include="VM\PSSAdminSignatureUploadVM.cs" />
+    <Compile Include="VM\PSSAdminUsersVM.cs" />
+    <Compile Include="VM\PSSBranchSubUsersUploadBatchItemsSearchParams.cs" />
+    <Compile Include="VM\PSSCharacterCertificateDetailsBlobVM.cs" />
+    <Compile Include="VM\PSServiceOptionsPageVM.cs" />
+    <Compile Include="VM\PSSCharacterCertificateOptionsVM.cs" />
+    <Compile Include="VM\PSServiceCaveatVM.cs" />
+    <Compile Include="VM\PSSFeePartyVM.cs" />
+    <Compile Include="VM\PSSSettlementFeePartiesVM.cs" />
+    <Compile Include="VM\PSSSettlementFeePartyVM.cs" />
+    <Compile Include="VM\PSSSettlementFeePartyBatchAggregateVM.cs" />
+    <Compile Include="VM\PSSSettlementReportAggregateSearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportAggregateVM.cs" />
+    <Compile Include="VM\PSSSettlementReportBatchBreakdownSearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportBatchBreakdownVM.cs" />
+    <Compile Include="VM\PSSSettlementReportBreakdownSearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportBreakdownVM.cs" />
+    <Compile Include="VM\PSSSettlementReportPartiesBreakdownVM.cs" />
+    <Compile Include="VM\PSSSettlementReportPartyBreakdownSearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportVM.cs" />
+    <Compile Include="VM\PSSSettlementVM.cs" />
+    <Compile Include="VM\PSSSettlementReportPartySearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportPartyVM.cs" />
+    <Compile Include="VM\PSSUserReportCBSUserVM.cs" />
+    <Compile Include="VM\PSSUserReportSearchParams.cs" />
+    <Compile Include="VM\RegularizationRequestWithoutOfficersUploadBatchItemsStagingDTO.cs" />
+    <Compile Include="VM\RetrieveEmailVM.cs" />
+    <Compile Include="VM\SearchByFileNumberVM.cs" />
+    <Compile Include="VM\SecretariatEscortRoutingVM.cs" />
+    <Compile Include="VM\SecretariatRoutingApprovalResponse.cs" />
+    <Compile Include="VM\FeePartyAdapterConfigurationVM.cs" />
+    <Compile Include="VM\SettlementFeePartiesSearchParams.cs" />
+    <Compile Include="VM\SettlementFeePartiesVM.cs" />
+    <Compile Include="VM\FeePartyReportSearchParams.cs" />
+    <Compile Include="VM\SettlementFeePartyVM.cs" />
+    <Compile Include="VM\SettlementReportSearchParams.cs" />
+    <Compile Include="VM\SquadronLeaderApprovalVM.cs" />
+    <Compile Include="VM\PSSEscortServiceCategoryChartSheetVM.cs" />
+    <Compile Include="VM\UserRoleVM.cs" />
+    <Compile Include="VM\AdminUserCreationVM.cs" />
+    <Compile Include="VM\AmountDetails.cs" />
+    <Compile Include="VM\ApprovalLogVM.cs" />
+    <Compile Include="VM\ChangeDeployedOfficerVM.cs" />
+    <Compile Include="VM\CharacterCertificateDetailsVM.cs" />
+    <Compile Include="VM\CharacterCertificateReasonForInquiryVM.cs" />
+    <Compile Include="VM\CharacterCertificateRequestVM.cs" />
+    <Compile Include="VM\CommandStatementReportSearchParams.cs" />
+    <Compile Include="VM\ContactVM.cs" />
+    <Compile Include="VM\EndOfficerDeploymentVM.cs" />
+    <Compile Include="VM\ErrorVM.cs" />
+    <Compile Include="VM\EscortDeploymentRequestDetailsVM.cs" />
+    <Compile Include="VM\EscortDetailsVM.cs" />
+    <Compile Include="VM\EscortRequestDetailsVM.cs" />
+    <Compile Include="VM\EscortRequestVM.cs" />
+    <Compile Include="VM\ExtractConfirmVM.cs" />
+    <Compile Include="VM\ExtractDetailsVM.cs" />
+    <Compile Include="VM\ExtractRequestAttachmentVM.cs" />
+    <Compile Include="VM\CharacterCertificateRequestDetailsVM.cs" />
+    <Compile Include="VM\GenericDetailsVM.cs" />
+    <Compile Include="VM\GenericRequestVM.cs" />
+    <Compile Include="VM\IdentificationTypeVM.cs" />
+    <Compile Include="VM\InvestigationReportRequestDetailsVM.cs" />
+    <Compile Include="VM\ExtractRequestDetailsVM.cs" />
+    <Compile Include="VM\ExtractRequestVM.cs" />
+    <Compile Include="VM\GenericPoliceRequest.cs" />
+    <Compile Include="VM\ForgotPasswordVM.cs" />
+    <Compile Include="VM\GenericRequestDetailsVM.cs" />
+    <Compile Include="VM\GenericRequestDetails.cs" />
+    <Compile Include="VM\InvoiceViewVM.cs" />
+    <Compile Include="VM\InvoicePaymentsVM.cs" />
+    <Compile Include="VM\OfficerDeploymentAllowanceSearchParams.cs" />
+    <Compile Include="VM\OfficerDeploymentSearchParams.cs" />
+    <Compile Include="VM\PoliceOfficerDeploymentLogVM.cs" />
+    <Compile Include="VM\PoliceOfficerDetailsVM.cs" />
+    <Compile Include="VM\PoliceOfficerLogVM.cs" />
+    <Compile Include="VM\PoliceOfficerReportSearchFilter.cs" />
+    <Compile Include="VM\CommandWalletReportSearchParams.cs" />
+    <Compile Include="VM\PoliceOfficersReportVM.cs" />
+    <Compile Include="VM\PoliceOfficerSearchParams.cs" />
+    <Compile Include="VM\PoliceOfficerVM.cs" />
+    <Compile Include="VM\PoliceRankingVM.cs" />
+    <Compile Include="VM\PrivacyTermsVM.cs" />
+    <Compile Include="VM\ProposedEscortOffficerVM.cs" />
+    <Compile Include="VM\PSSBranchVM.cs" />
+    <Compile Include="VM\PSSCollectionSearchParams.cs" />
+    <Compile Include="VM\PSSEscortServiceCategoryVM.cs" />
+    <Compile Include="VM\PSSReasonVM.cs" />
+    <Compile Include="VM\PSSRequestDetailsVM.cs" />
+    <Compile Include="VM\PSSRequestInvoiceVM.cs" />
+    <Compile Include="VM\PSSRequestStageModel.cs" />
+    <Compile Include="VM\PSSRequestStatusLogVM.cs" />
+    <Compile Include="VM\PSSSettlementBatchAggregateVM.cs" />
+    <Compile Include="VM\PSSSettlementBatchItemsVM.cs" />
+    <Compile Include="VM\PSSSettlementReportInvoicesVM.cs" />
+    <Compile Include="VM\PSSSettlementReportPartiesVM.cs" />
+    <Compile Include="VM\PSSSettlementReportSearchParams.cs" />
+    <Compile Include="VM\PSSSettlementReportSummaryVM.cs" />
+    <Compile Include="VM\PSSSubUserVM.cs" />
+    <Compile Include="VM\ReceiptDisplayVM.cs" />
+    <Compile Include="VM\ReceiptDetailsVM.cs" />
+    <Compile Include="VM\RequestApprovalLogVM.cs" />
+    <Compile Include="VM\RequestApprovalResponse.cs" />
+    <Compile Include="VM\RequestConfirmationVM.cs" />
+    <Compile Include="VM\RequestDetailsVM.cs" />
+    <Compile Include="VM\RequestDumpVM.cs" />
+    <Compile Include="VM\RequestFlowVM.cs" />
+    <Compile Include="VM\RequestInvoiceVM.cs" />
+    <Compile Include="VM\RequestListVM.cs" />
+    <Compile Include="VM\RequestOptions.cs" />
+    <Compile Include="VM\RequestsReportSearchParams.cs" />
+    <Compile Include="VM\RequestTypeVM.cs" />
+    <Compile Include="VM\RequestUserProfileVM.cs" />
+    <Compile Include="VM\ResetPasswordVM.cs" />
+    <Compile Include="VM\RouteNameAndStage.cs" />
+    <Compile Include="VM\SearchByBINVM.cs" />
+    <Compile Include="VM\SelectServiceVM.cs" />
+    <Compile Include="VM\ServiceWorkFlowDifferentialDataParam.cs" />
+    <Compile Include="VM\TaxEntitySubCategoryVM.cs" />
+    <Compile Include="VM\TaxEntitySubSubCategoryVM.cs" />
+    <Compile Include="VM\TermsOfUseVM.cs" />
+    <Compile Include="VM\ValidatedDocumentVM.cs" />
+    <Compile Include="VM\ValidatedExtractInfoVM.cs" />
+    <Compile Include="VM\ValidateDocumentVM.cs" />
+    <Compile Include="VM\WalletPaymentRequestVM.cs" />
+    <Compile Include="VM\WalletUsersVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.CacheProvider\Parkway.CBS.CacheProvider.csproj">
+      <Project>{1636072F-E60D-42FE-8F89-7E78F57ECFFB}</Project>
+      <Name>Parkway.CBS.CacheProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.HangFireInterface\Parkway.CBS.HangFireInterface.csproj">
+      <Project>{1eca1ed8-4bb3-4dba-8d5f-22af1d93e4fd}</Project>
+      <Name>Parkway.CBS.HangFireInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.RemoteClient\Parkway.CBS.RemoteClient.csproj">
+      <Project>{484E95E0-1C49-4EBD-BE0F-202838F72376}</Project>
+      <Name>Parkway.CBS.RemoteClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.Services\Parkway.CBS.Services.csproj">
+      <Project>{79B06181-9877-4CF5-8687-167BBFC509FF}</Project>
+      <Name>Parkway.CBS.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.DataExporter\Parkway.DataExporter.csproj">
+      <Project>{3590F60E-8887-4BD8-B60B-CBF981ED917C}</Project>
+      <Name>Parkway.DataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Tools\Orchard\Orchard.csproj">
+      <Project>{33b1bc8d-e292-4972-a363-22056b207156}</Project>
+      <Name>Orchard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Roles\Orchard.Roles.csproj">
+      <Project>{D10AD48F-407D-4DB5-A328-173EC7CB010F}</Project>
+      <Name>Orchard.Roles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Core\Parkway.CBS.Core.csproj">
+      <Project>{7B02ED5F-5616-492F-8B66-190795D4BEE9}</Project>
+      <Name>Parkway.CBS.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataFilters\FeePartyReport\SearchFilters\Contracts\" />
+    <Folder Include="DataFilters\GenerateRequestWithoutOfficersUploadBatchStagingReport\SearchFilters\" />
+    <Folder Include="DataFilters\PSSSettlement\" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

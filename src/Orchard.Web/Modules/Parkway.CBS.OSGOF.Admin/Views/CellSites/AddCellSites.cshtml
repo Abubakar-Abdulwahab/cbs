@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@model Parkway.CBS.Core.HelperModels.TaxPayerWithDetails
+
+@{
+    Layout.Title = T("Add Cell Sites").ToString();
+    Style.Require("CBS.Billing.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("AddCellSites", "CellSites", new { area = "Parkway.CBS.OSGOF.Admin" }), FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Add Cell Sites to Operator @Model.Name (@Model.PayerId)
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                            <label id="lblCellSites">@T("Cell Sites")</label>
+                            @Html.TextBox("CellSitesFile", null, new { @class = "text large", @type = "file", @accept = "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" })
+                            @Html.Hint(T("Upload Cell Sites."))
+                            @Html.ValidationMessage("CellSitesFile", null, new { @style = "color:#990808" })
+                        </div>
+                </div>
+                <button type="submit" class="btn btn-success">@T("Save")</button>
+            </div>
+        </div>
+    </div>
+
+
+
+}

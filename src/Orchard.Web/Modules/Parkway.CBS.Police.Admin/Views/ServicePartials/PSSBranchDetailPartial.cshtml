@@ -1,0 +1,45 @@
+﻿@model Parkway.CBS.Core.HelperModels.TaxEntityProfileLocationVM
+
+<style>
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+</style>
+
+<h3>BRANCH DETAILS</h3>
+
+<div class="row" style="padding:15px">
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Recipient")</b>
+        <p>@Model.Name</p>
+        @Html.Hint(T("The name of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Phone number")</b>
+        <p>@Model.TaxEntity.PhoneNumber</p>
+        @Html.Hint(T("Phone number of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Category")</b>
+        <p>@Model.TaxEntity.CategoryName</p>
+        @Html.Hint(T("Category of recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Email")</b>
+        <p>@Model.TaxEntity.Email</p>
+        @Html.Hint(T("Email of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Address")</b>
+        <p>@Model.Address</p>
+        @Html.Hint(T("Address of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Code")</b>
+        <p>@Model.Code</p>
+        @Html.Hint(T("Branch Code of recipient"))
+    </div>
+</div>

@@ -1,0 +1,283 @@
+﻿/*Work Sans font begins*/
+
+@font-face {
+    font-family: 'Work_Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/media/fonts/WorkSans-Regular.ttf');
+    /* IE9 Compat Modes */
+    src: local('Work Sans Regular'), local('WorkSans-Regular'), url('/media/fonts/WorkSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+/* Work Sans-700 */
+
+@font-face {
+    font-family: 'Work_Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/media/fonts/WorkSans-Bold.ttf');
+    /* IE9 Compat Modes */
+    src: local('Work Sans Bold'), local('WorkSans-Bold'), url('/media/fonts/WorkSans-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+/* Work Sans-500 */
+
+@font-face {
+    font-family: 'Work_Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/media/fonts/WorkSans-Medium.ttf');
+    /* IE9 Compat Modes */
+    src: local('Work Sans Medium'), local('WorkSans-Medium'), url('/media/fonts/WorkSans-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+
+/* Work Sans font ends */
+
+
+/*Rubik font begins*/
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/media/fonts/Rubik-Regular.ttf');
+    /* IE9 Compat Modes */
+    src: local('Rubik Regular'), local('Rubik-Regular'), url('/media/fonts/Rubik-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+/* Work Sans-700 */
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/media/fonts/Rubik-Bold.ttf');
+    /* IE9 Compat Modes */
+    src: local('Rubik Bold'), local('Rubik-Bold'), url('/media/fonts/Rubik-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+/* Work Sans-500 */
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/media/fonts/Rubik-Medium.ttf');
+    /* IE9 Compat Modes */
+    src: local('Rubik Medium'), local('Rubik-Medium'), url('/media/fonts/Rubik-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+    /* Legacy iOS */
+}
+
+
+/* Rubik font ends */
+
+
+/*Index Styles Start*/
+a:link, a:active, a:visited, a:hover {
+    color: unset;
+    text-decoration: unset;
+}
+
+body #rstvl-home-content-container {
+    font-family: 'Work_Sans';
+}
+
+#rstvl-home-content-container h1, h2 {
+    font-family: 'Work_Sans';
+    font-weight: bold;
+}
+
+#rstvl-home-content-container .content {
+    min-height: 100vh;
+}
+
+.rstvl-nav-container {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.rstvl-nav-container .navbar-brand > img {
+    width: auto;
+    max-height: 63px;
+}
+
+.rstvl-nav-container .nav-link.link-bordered {
+    border: 1px solid #3A6925;
+    border-radius: 3px;
+}
+
+
+#rstvl-home-content-container .bg-row-one > .container:nth-child(1) {
+    position: relative;
+    width: 30%;
+}
+
+#rstvl-home-content-container .bg-row-one > .container:nth-child(1) img {
+        position: absolute;
+        right: -175px;
+        top: 150px;
+    }
+
+#rstvl-home-content-container .bg-row-one > .container:nth-child(2) {
+    background-color: #FFF9ED;
+    height: 600px;
+    width: 70%;
+    max-width: unset;
+    padding-top: 190px;
+    padding-left: 200px;
+}
+
+#rstvl-home-content-container .bg-row-one {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#rstvl-home-content-container a.action-btn {
+    background-color: #3A6925;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFF9ED;
+    height: 50px;
+    padding-top: 12px;
+}
+
+#rstvl-home-content-container a.action-btn-outline {
+    border: 1px solid #3A6925;
+    border-radius: 5px 5px 5px 5px;
+    color: #3A6925;
+    height: 50px;
+    padding-top: 12px;
+}
+
+#rstvl-home-content-container .bg-row-one .btn-row {
+    max-width: 400px;
+}
+
+#rstvl-home-content-container .bg-row-two {
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#rstvl-home-content-container .bg-row-two .col-md-4 {
+        padding: 5px;
+    }
+
+#rstvl-home-content-container .service-item {
+    padding: 35px;
+    border: 1.2px solid #CBCBCB;
+    border-radius: 5px 5px 5px 5px;
+    min-height: 260px;
+    max-height: 260px;
+    overflow: auto;
+    width: 100%;
+    color: #3C3C3C;
+}
+
+#rstvl-home-content-container .service-item .img {
+        margin-bottom: 10px;
+    }
+
+#rstvl-home-content-container .bg-row-two > .container-fluid:nth-child(1) {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#rstvl-home-content-container .bg-row-two > .container-fluid:nth-child(1) p {
+        font-size: 20px;
+    }
+
+#rstvl-home-content-container .bg-row-two > .col-md-4:nth-child(5) > .service-item > .img {
+    margin-bottom: 25px;
+}
+
+.rstvl-footer {
+    height: 300px;
+    padding-left: 120px;
+    padding-right: 50px;
+    padding-bottom: 40px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    color: #3C3C3C;
+    font-weight: 500;
+}
+
+.footer-row > .col-md-8 {
+    max-width: 500px;
+}
+
+
+
+@media only screen and (max-width:991px){
+#rstvl-home-content-container .bg-row-one > .container:nth-child(1){
+        display:none;
+    }
+
+#rstvl-home-content-container .bg-row-one > .container:nth-child(2){
+        width:100%;
+        padding-left:20px;
+        padding-top:80px;
+        height:400px;
+    }
+
+.rstvl-nav-container {
+        padding-left:unset;
+        padding-right:unset;
+    }
+#rstvl-home-content-container .bg-row-two{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+.rstvl-footer{
+        padding-left:unset;
+        padding-right:unset;
+    }
+
+.rstvl-footer .col-md-1 {
+        max-width: unset;
+    }
+}
+
+@media only screen and (max-width:768px) {
+
+#rstvl-home-content-container .navbar-light .navbar-toggler {
+        border: unset;
+        outline: unset;
+    }
+
+.rstvl-nav-container .nav-link.link-bordered {
+        border:unset;
+        border-radius:unset;
+    }
+
+#rstvl-home-content-container .bg-row-one h1{
+        font-size:25px;
+    }
+
+.rstvl-footer {
+        text-align: center;
+    }
+}
+
+/*Module Web Overrides Start*/
+.top-banner.alt{
+    margin-top:unset !important;
+}
+
+.navbar-nav .nav-item{
+    margin-left:unset !important;
+}
+/*Module Web Overrides Ends*/
+
+/*Index Styles Ends*/

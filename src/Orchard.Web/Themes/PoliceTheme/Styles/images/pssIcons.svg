@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg style="display:none" width="30px" height="30px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 59.1 (101010) - https://sketch.com -->
+    <title>03ED42C1-8FAA-4D69-8140-1AD64129CACA</title>
+    <desc>Created with sketchtool.</desc>
+    <symbol id="payPosIcon" viewBox="0 0 30 30">
+    <g id="Web-Design-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7-Copy" transform="translate(1.000000, 1.000000)">
+            <rect id="Rectangle-Copy-5" stroke="var(--custom-stroke-color)" fill="currentColor" x="0" y="0" width="28" height="28" rx="4"></rect>
+            <g id="Atm.3" transform="translate(4.000000, 6.000000)">
+                <path d="M4.44624464,8.55067954 C3.64504059,8.55067954 2.99610157,7.80893137 2.99610157,6.89316602 L2.99610157,4.40762082 C2.99610157,3.49185547 3.64504059,2.7501073 4.44624464,2.7501073 L14.5972461,2.7501073 C15.3984501,2.7501073 16.0473891,3.49185547 16.0473891,4.40762082 L16.0473891,6.89389109 C16.0473891,7.80893137 15.3984501,8.55067954 14.5972461,8.55067954" id="Path" stroke="var(--custom-stroke-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <g id="Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.446245, 7.825608)" stroke="var(--custom-stroke-color)" stroke-width="1.5">
+                    <line x1="0" y1="0.725071531" x2="1.45014306" y2="0.725071531" id="Path"></line>
+                    <line x1="10.1510014" y1="0.725071531" x2="8.70085837" y2="0.725071531" id="Path"></line>
+                </g>
+                <polygon id="Path" points="0.820886981 0.574892704 18.2226037 0.574892704 18.2226037 17.9766094 0.820886981 17.9766094"></polygon>
+                <g id="Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(5.896388, 5.650393)" stroke="var(--custom-stroke-color)" stroke-width="1.5">
+                    <path d="M7.25071531,0 L0,0 L0,8.59717314 C0,8.99741263 0.324832046,9.32224467 0.725071531,9.32224467 L6.52564378,9.32224467 C6.92588326,9.32224467 7.25071531,8.99741263 7.25071531,8.59717314 L7.25071531,0 Z" id="Path"></path>
+                    <path d="M4.54105049,3.22736589 C5.04677048,3.73308588 5.04677048,4.55302142 4.54105049,5.05874431 C4.0353305,5.5644643 3.21539496,5.5644643 2.70967207,5.05874431 C2.20395208,4.55302432 2.20395208,3.73308878 2.70967207,3.22736589 C3.21539206,2.7216459 4.0353276,2.7216459 4.54105049,3.22736589" id="Path"></path>
+                    <line x1="2.32747961" y1="7.25071531" x2="4.92323569" y2="7.25071531" id="Path"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</symbol>
+
+
+<symbol id="mobileIcon" viewBox="0 0 30 30">
+<g id="Web-Design-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-11-Copy-3" transform="translate(1.000000, 1.000000)">
+            <rect id="Rectangle" stroke="var(--custom-stroke-color)" fill="currentColor" x="0" y="0" width="28" height="28" rx="4"></rect>
+            <g id="Iphone,-Mobile,-Phone" transform="translate(4.000000, 4.000000)">
+                <g id="Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.844907, 3.016204)" stroke="var(--custom-stroke-color)" stroke-width="1.5">
+                    <path d="M8.69560185,14.2291667 L0.790509259,14.2291667 C0.354148148,14.2291667 0,13.8750185 0,13.4386574 L0,0.790509259 C0,0.354148148 0.354148148,0 0.790509259,0 L8.69560185,0 C9.13196296,0 9.48611111,0.354148148 9.48611111,0.790509259 L9.48611111,13.4386574 C9.48611111,13.8750185 9.13196296,14.2291667 8.69560185,14.2291667 Z" id="Path"></path>
+                    <path d="M4.74226505,10.5730613 C4.57862963,10.5738519 4.44661458,10.7066574 4.44661458,10.8702928 C4.44661458,11.0339282 4.57942014,11.1667338 4.74305556,11.1659433 C4.90669097,11.1659433 5.03949653,11.0331377 5.03949653,10.8695023 C5.03949653,10.7058669 4.90669097,10.5730613 4.74226505,10.5730613" id="Path"></path>
+                    <line x1="3.9525463" y1="2.37152778" x2="5.53356481" y2="2.37152778" id="Path"></line>
+                </g>
+                <polygon id="Path" points="0.101851852 0.644675926 19.0740741 0.644675926 19.0740741 19.6168981 0.101851852 19.6168981"></polygon>
+            </g>
+        </g>
+    </g>
+</symbol>
+</svg>

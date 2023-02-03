@@ -1,0 +1,219 @@
+﻿@model Parkway.CBS.OSGOF.Admin.ViewModels.CellSitesStagingReportVM
+@{
+    Layout.Title = "Confirm Cell Sites";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Script.Require("OSGOF.AddCellSite.Report.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+
+
+}
+<style>
+    .disablelink {
+        pointer-events: none; /* Disables the button completely. Better than just cursor: default; */
+        opacity: 0.7;
+    }
+
+    .payeeloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid rgb(204, 204, 204);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(204, 204, 204);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var doWork = @Html.Raw(Json.Encode(Model.DoWork));
+    var scheduleRef = @Html.Raw(Json.Encode(Model.ScheduleRef));
+    var cellSitesFirstData = @Html.Raw(Json.Encode(Model.CellSites));
+</script>
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+@Html.AntiForgeryToken()
+
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Confirm Cell Sites</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Href("~/")>Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Confirm Cell Sites</li>
+            </ol>
+        </nav>
+    </div>
+    @Html.Partial("Partials\\FlashPartial", (string.IsNullOrEmpty(Model.ErrorMessage) ? "" : Model.ErrorMessage))
+    <div class="content-payment">
+        <div class="container form-container">
+            <div class="main-form payment-form big mt-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Operator Site Id</th>
+                                <th>
+                                    Year of Deployment
+                                </th>
+                                <th scope="col">
+                                    Height of Tower
+                                </th>
+                                <th scope="col">
+                                    Mast Type
+                                </th>
+                                <th scope="col">
+                                    Lat and Long
+                                </th>
+                                <th scope="col">
+                                    Address
+                                </th>
+                                <th scope="col">
+                                    Region
+                                </th>
+                                <th scope="col">
+                                    State
+                                </th>
+                                <th scope="col">
+                                    LGA
+                                </th>
+                                <th scope="col">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @if (Model.CellSites != null && Model.CellSites.Any())
+                            {
+                                foreach (var item in Model.CellSites)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.OperatorSiteId
+                                        </td>
+                                        <td>
+                                            @item.YearOfDeployment
+                                        </td>
+                                        <td>
+                                            @item.HeightOfTower
+                                        </td>
+                                        <td>
+                                            @item.MastType
+                                        </td>
+                                        <td>
+                                            (@item.Lat, @item.Long)
+                                        </td>
+                                        <td>
+                                            @item.SiteAddress
+                                        </td>
+                                        <td>
+                                            @item.Region
+                                        </td>
+                                        <td>
+                                            @item.State
+                                        </td>
+                                        <td>
+                                            @item.LGA
+                                        </td>
+
+                                        @if (item.HasErrors)
+                                        {
+                                            <td><span class="status-false" title="@item.ErrorMessages" style="white-space: pre-wrap;" data-toggle="tooltip" data-placement="top" data-html="true">i</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="status-true" data-html="true">&#10003;</span></td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7">No records found. Try again later.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.DoWork)
+                    {
+                        <div style="position:absolute;margin:auto;z-index:1;" id="level">Processing... Please wait</div>
+                        <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1"></div>
+                    }
+                    else
+                    {
+                        <div style="position:absolute;margin:auto;z-index:1; display:none" id="level">Processing... Please wait</div>
+                        <div class="payeeloader" style="position:absolute;margin-left:33%;z-index:1;display:none"></div>
+                    }
+                    </br>
+                    </br>
+
+                    <div class="table-pagination-2">
+                        <a href="#" id="moveleft" name="cursor">Previous </a><span id="page">1</span>/ <span id="pageSize">@Model.PageSize</span><a href="#" id="moveright" name="cursor">Next</a>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="summary">
+                        <div class="summary-details">
+                            <h4 class="numbers">
+                                <span class="blue" title="@Model.TotalNumberOfRecords entries processed" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.TotalNumberOfRecords</span> Total Entries</span>
+                                <span class="green" title="@Model.TotalNumberOfValidRecords valid entries" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.TotalNumberOfValidRecords</span> Valid Entries</span>
+                                <span class="red" title="@Model.TotalNumberOfInvalid invalid entries" data-toggle="tooltip" data-placement="top" data-html="true"><span class="bigger">@Model.TotalNumberOfInvalid</span> Invalid Entries</span>
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+                @if (!Model.Error)
+                {
+                    using (Html.BeginRouteForm("C.AddCellSite.Report", FormMethod.Post, new { scheduleRef = Model.ScheduleRef, @id = "confirmForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn generate-upload" id="proceedbtn">Save Valid Records</button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-top">
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>

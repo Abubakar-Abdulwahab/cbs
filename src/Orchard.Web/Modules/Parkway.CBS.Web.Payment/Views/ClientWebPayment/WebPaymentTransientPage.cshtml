@@ -1,0 +1,80 @@
+﻿@model Parkway.CBS.Core.HelperModels.RedirectToWebPayModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Redirecting to web payment page</title>
+    <style>
+        h1 {
+            color: gray;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>@Model.Message<small id="progressDots"></small></h1>
+        @Html.AntiForgeryToken()
+        <form action="" id="requestPaymentForm" method="post" hidden></form>
+    </div>
+</body>
+</html>
+<script>
+    var token = @Html.Raw(Json.Encode(Model.Token));
+    var requestToken = document.getElementsByName("__RequestVerificationToken")[0].defaultValue;
+    var formElement = document.getElementById("requestPaymentForm");
+    var progressDots = document.getElementById("progressDots");
+    var httpRequest;
+    if (token.length > 0) {
+        showProgress();
+        requestPayment();
+    }
+
+
+    function showProgress() {
+        var counter = -5;
+        setInterval(showProgressDots, 500);
+
+        function showProgressDots() {
+            if (counter >= 0) {
+                progressDots.innerHTML = ""; counter = -5;
+            } else {
+                progressDots.innerHTML += "."; counter++;
+            }
+        }
+    }
+
+
+    //https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started
+    function requestPayment() {
+
+        if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+            httpRequest = new XMLHttpRequest();
+        } else if (window.ActiveXObject) { // IE 6 and older
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('POST', "request-pay-direct-web", true);
+        httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        httpRequest.send('token=' + encodeURIComponent(token) + '&__RequestVerificationToken=' + encodeURIComponent(requestToken));
+    };
+
+    function alertContents() {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                var model = JSON.parse(httpRequest.responseText);
+                if (!model.Error) {
+                    formElement.innerHTML = model.ResponseObject.InnerForm;
+                    formElement.action = model.ResponseObject.PostURL;
+                    formElement.submit();
+                } else {
+                    alert(model.ResponseObject);
+                }
+            } else {
+                alert('There was a problem with the request.');
+            }
+        }
+    }
+</script>

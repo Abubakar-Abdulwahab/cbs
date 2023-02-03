@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.TaxEntity, Parkway.CBS.Core" table="Parkway_CBS_Core_TaxEntity" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity"/>
+    </id>
+    <property name="Address" column="Address" />
+    <property name="Recipient" column="Recipient" />
+    <property name="Email" column="Email" />
+    <property name="CashflowCustomerId" column="CashflowCustomerId" />
+    <property name="PhoneNumber" column="PhoneNumber" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+    <many-to-one name="TaxEntityCategory" column="TaxEntityCategory_Id"/>
+    <many-to-one name="StateLGA" column="StateLGA_Id"/>
+  </class>
+</hibernate-mapping>

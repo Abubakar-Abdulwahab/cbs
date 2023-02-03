@@ -1,0 +1,111 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_EIRSReportPageLayout.cshtml";
+    ViewBag.Title = "Report";
+}
+
+<style>
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {
+        display: inline;
+    }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+            ul.pagination li a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            ul.pagination li a:hover:not(.active) {
+                background-color: #ddd;
+            }
+</style>
+<div class="col-md-12" style="font-size:12px;font-weight:700;text-align:right;color:#337ab7;">
+    <span onclick="ReportStatisticsImage('#BillRefItems');" title="download report statistic as image">image</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <span onclick="ReportStatisticsPdf('#BillRefItems');" title="download report statistic as a pdf document">pdf</span>
+</div>
+<div id="ReportStatistics">
+    <div class="row">
+        <div class="title">
+            <h1>Today's Stats</h1>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="row panelrows col-lg-offset-0">
+                <div class="col-md-4 first">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            11.00
+                            <p class="panel-footer-text"><b>Total POA</b></p>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            12.00
+
+                            <p class="panel-footer-text"><b> Total Bill Settlement</b></p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            12.00
+                            <p class="panel-footer-text"><b>Total Transaction</b> </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="title">
+            <h1>This Week's Stats</h1>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        12.00
+
+                        <p class="panel-footer-text"><b> Total Bill Settlement</b></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Header</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Dark card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+builder
+
+                // Image set
+                .AddImageSet("webshop")
+
+                // "Webshop"
+                .Add(item => item
+
+                    .Caption(T("Webshop"))
+                    .Position("2")
+                    .LinkToFirstChild(true)
+
+                    // "Customers"
+                    .Add(subItem => subItem
+                        .Caption(T("Customers"))
+                        .Position("2.1")
+                        .Action("Index", "CustomerAdmin", new { area = "Orchard.Webshop" })
+
+                        .Add(T("Details"), i => i.Action("Edit", "CustomerAdmin", new { id }).LocalNav())
+                        .Add(T("Addresses"), i => i.Action("ListAddresses", "CustomerAdmin", new { id }).LocalNav())
+                        .Add(T("Orders"), i => i.Action("ListOrders", "CustomerAdmin", new { id }).LocalNav())
+                    )
+
+                    // "Orders"
+                    .Add(subItem => subItem
+                        .Caption(T("Orders"))
+                        .Position("2.2")
+                        .Action("Index", "OrderAdmin", new { area = "Orchard.Webshop" })
+                    )
+                );
+        }
+    }
+}

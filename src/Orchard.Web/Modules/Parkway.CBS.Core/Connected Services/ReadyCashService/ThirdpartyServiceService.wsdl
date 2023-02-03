@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.parkway.org/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ThirdpartyServiceService" targetNamespace="http://ws.parkway.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://62.173.32.28:8080/ws/vams?xsd=1" namespace="http://ws.parkway.org/" />
+    </xsd:schema>
+  </types>
+  <message name="getTerminal">
+    <part name="parameters" element="tns:getTerminal" />
+  </message>
+  <message name="getTerminalResponse">
+    <part name="parameters" element="tns:getTerminalResponse" />
+  </message>
+  <message name="findCustomerTransactions">
+    <part name="parameters" element="tns:findCustomerTransactions" />
+  </message>
+  <message name="findCustomerTransactionsResponse">
+    <part name="parameters" element="tns:findCustomerTransactionsResponse" />
+  </message>
+  <message name="findCustomerByPhone">
+    <part name="parameters" element="tns:findCustomerByPhone" />
+  </message>
+  <message name="findCustomerByPhoneResponse">
+    <part name="parameters" element="tns:findCustomerByPhoneResponse" />
+  </message>
+  <message name="findAgentTransactions">
+    <part name="parameters" element="tns:findAgentTransactions" />
+  </message>
+  <message name="findAgentTransactionsResponse">
+    <part name="parameters" element="tns:findAgentTransactionsResponse" />
+  </message>
+  <message name="findTerminalTransactions">
+    <part name="parameters" element="tns:findTerminalTransactions" />
+  </message>
+  <message name="findTerminalTransactionsResponse">
+    <part name="parameters" element="tns:findTerminalTransactionsResponse" />
+  </message>
+  <message name="getCustomerBalance">
+    <part name="parameters" element="tns:getCustomerBalance" />
+  </message>
+  <message name="getCustomerBalanceResponse">
+    <part name="parameters" element="tns:getCustomerBalanceResponse" />
+  </message>
+  <message name="findCustomers">
+    <part name="parameters" element="tns:findCustomers" />
+  </message>
+  <message name="findCustomersResponse">
+    <part name="parameters" element="tns:findCustomersResponse" />
+  </message>
+  <message name="resetPIN">
+    <part name="parameters" element="tns:resetPIN" />
+  </message>
+  <message name="resetPINResponse">
+    <part name="parameters" element="tns:resetPINResponse" />
+  </message>
+  <message name="updateCustomer">
+    <part name="parameters" element="tns:updateCustomer" />
+  </message>
+  <message name="updateCustomerResponse">
+    <part name="parameters" element="tns:updateCustomerResponse" />
+  </message>
+  <message name="findMerchant">
+    <part name="parameters" element="tns:findMerchant" />
+  </message>
+  <message name="findMerchantResponse">
+    <part name="parameters" element="tns:findMerchantResponse" />
+  </message>
+  <message name="searchTranLog">
+    <part name="parameters" element="tns:searchTranLog" />
+  </message>
+  <message name="searchTranLogResponse">
+    <part name="parameters" element="tns:searchTranLogResponse" />
+  </message>
+  <message name="disableCutomer">
+    <part name="parameters" element="tns:disableCutomer" />
+  </message>
+  <message name="disableCutomerResponse">
+    <part name="parameters" element="tns:disableCutomerResponse" />
+  </message>
+  <message name="clearSecretCode">
+    <part name="parameters" element="tns:clearSecretCode" />
+  </message>
+  <message name="clearSecretCodeResponse">
+    <part name="parameters" element="tns:clearSecretCodeResponse" />
+  </message>
+  <message name="activateCustomer">
+    <part name="parameters" element="tns:activateCustomer" />
+  </message>
+  <message name="activateCustomerResponse">
+    <part name="parameters" element="tns:activateCustomerResponse" />
+  </message>
+  <message name="getAllCutomers">
+    <part name="parameters" element="tns:getAllCutomers" />
+  </message>
+  <message name="getAllCutomersResponse">
+    <part name="parameters" element="tns:getAllCutomersResponse" />
+  </message>
+  <message name="getAgentBalance">
+    <part name="parameters" element="tns:getAgentBalance" />
+  </message>
+  <message name="getAgentBalanceResponse">
+    <part name="parameters" element="tns:getAgentBalanceResponse" />
+  </message>
+  <portType name="ThirdpartyService">
+    <operation name="getTerminal">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/getTerminalRequest" message="tns:getTerminal" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/getTerminalResponse" message="tns:getTerminalResponse" />
+    </operation>
+    <operation name="findCustomerTransactions">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomerTransactionsRequest" message="tns:findCustomerTransactions" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomerTransactionsResponse" message="tns:findCustomerTransactionsResponse" />
+    </operation>
+    <operation name="findCustomerByPhone">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomerByPhoneRequest" message="tns:findCustomerByPhone" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomerByPhoneResponse" message="tns:findCustomerByPhoneResponse" />
+    </operation>
+    <operation name="findAgentTransactions">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findAgentTransactionsRequest" message="tns:findAgentTransactions" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findAgentTransactionsResponse" message="tns:findAgentTransactionsResponse" />
+    </operation>
+    <operation name="findTerminalTransactions">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findTerminalTransactionsRequest" message="tns:findTerminalTransactions" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findTerminalTransactionsResponse" message="tns:findTerminalTransactionsResponse" />
+    </operation>
+    <operation name="getCustomerBalance">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/getCustomerBalanceRequest" message="tns:getCustomerBalance" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/getCustomerBalanceResponse" message="tns:getCustomerBalanceResponse" />
+    </operation>
+    <operation name="findCustomers">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomersRequest" message="tns:findCustomers" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findCustomersResponse" message="tns:findCustomersResponse" />
+    </operation>
+    <operation name="resetPIN">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/resetPINRequest" message="tns:resetPIN" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/resetPINResponse" message="tns:resetPINResponse" />
+    </operation>
+    <operation name="updateCustomer">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/updateCustomerRequest" message="tns:updateCustomer" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/updateCustomerResponse" message="tns:updateCustomerResponse" />
+    </operation>
+    <operation name="findMerchant">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/findMerchantRequest" message="tns:findMerchant" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/findMerchantResponse" message="tns:findMerchantResponse" />
+    </operation>
+    <operation name="searchTranLog">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/searchTranLogRequest" message="tns:searchTranLog" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/searchTranLogResponse" message="tns:searchTranLogResponse" />
+    </operation>
+    <operation name="disableCutomer">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/disableCutomerRequest" message="tns:disableCutomer" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/disableCutomerResponse" message="tns:disableCutomerResponse" />
+    </operation>
+    <operation name="clearSecretCode">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/clearSecretCodeRequest" message="tns:clearSecretCode" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/clearSecretCodeResponse" message="tns:clearSecretCodeResponse" />
+    </operation>
+    <operation name="activateCustomer">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/activateCustomerRequest" message="tns:activateCustomer" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/activateCustomerResponse" message="tns:activateCustomerResponse" />
+    </operation>
+    <operation name="getAllCutomers">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/getAllCutomersRequest" message="tns:getAllCutomers" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/getAllCutomersResponse" message="tns:getAllCutomersResponse" />
+    </operation>
+    <operation name="getAgentBalance">
+      <input wsam:Action="http://ws.parkway.org/ThirdpartyService/getAgentBalanceRequest" message="tns:getAgentBalance" />
+      <output wsam:Action="http://ws.parkway.org/ThirdpartyService/getAgentBalanceResponse" message="tns:getAgentBalanceResponse" />
+    </operation>
+  </portType>
+  <binding name="ThirdpartyServicePortBinding" type="tns:ThirdpartyService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getTerminal">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findCustomerTransactions">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findCustomerByPhone">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findAgentTransactions">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findTerminalTransactions">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getCustomerBalance">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findCustomers">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="resetPIN">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="updateCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findMerchant">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="searchTranLog">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="disableCutomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="clearSecretCode">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="activateCustomer">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getAllCutomers">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getAgentBalance">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ThirdpartyServiceService">
+    <port name="ThirdpartyServicePort" binding="tns:ThirdpartyServicePortBinding">
+      <soap:address location="http://62.173.32.28:8080/ws/vams" />
+    </port>
+  </service>
+</definitions>

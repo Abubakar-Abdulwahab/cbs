@@ -1,0 +1,170 @@
+﻿@model CBSPay.Core.ViewModels.AdminDashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_EIRSReportPageLayout.cshtml";
+}
+@section head{
+    <script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: ""
+	},
+	axisY: {
+		includeZero: false
+	},
+	toolTip: {
+		shared: true
+	},
+	data: [{
+		type: "line",
+		name: "POA Transaction",
+		showInLegend: true,
+		dataPoints: @Html.Raw(ViewBag.POADataPoint)
+	}, {
+		type: "line",
+		name: "Bill Settlement Transaction",
+		showInLegend: true,
+		dataPoints: @Html.Raw(ViewBag.BillSettlementDataPoint)
+	}, {
+		type: "line",
+		name: "Total Transactions",
+		showInLegend: true,
+		dataPoints: @Html.Raw(ViewBag.TotalTransactionDataPoint)
+	}]
+});
+chart.render();
+
+}
+    </script>
+}
+    <div class="col-md-12" id="imagepdf" data-html2canvas-ignore="true" style="font-size:12px;font-weight:700;text-align:right;color:#337ab7;">
+        <span onclick="ReportStatisticsImage('#ReportStatistics');" title="download report statistic as image">image</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span onclick="ReportStatisticsPdf('#ReportStatistics');" title="download report statistic as a pdf document">pdf</span>
+    </div>
+    <div>
+        <div class="title">
+            <h1>
+                Today's Stats
+            </h1>
+            <hr>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption"> Total POA Transactions </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div>
+                        <p> ₦@Model.todaysPOAAmount.ToString("N2")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Total Bill Settlement
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div>
+                        <p> ₦@Model.todaysBillSettlementAmount.ToString("N2")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Total Transactions
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div>
+                        <p> ₦@Model.todaysTotalAmount.ToString("N2")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="title">
+            <h1>
+                This Week's Stats
+            </h1>
+            <hr>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">Transactions</div>
+                </div>
+
+                <div class="portlet-body">
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">This Week Transactions Total </div>
+                </div>
+
+                <div class="portlet-body">
+                    <table class="table table-bordered v-middle" id="">
+                        <thead class="red-th">
+                            <tr>
+                                <th>Days</th>
+                                <th>Pay On Account(₦)</th>
+                                <th>Settlement(₦)</th>
+                                <th>Total(₦)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="TransactionItemsBody">
+                            @if (Model.weeklyPaymentTransactions != null)
+                            {
+                                foreach (var paymentTransaction in Model.weeklyPaymentTransactions)
+                                {
+                                    <tr>
+                                        <td>@paymentTransaction.DayOfWeek.ToString()</td>
+                                        <td>@paymentTransaction.POAAmount.ToString("N2")</td>
+                                        <td>@paymentTransaction.BillSettlementAmount.ToString("N2")</td>
+                                        <td>@paymentTransaction.TotalAmount.ToString("N2")</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    There is nothing to display
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+@section scripts{
+    @*<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
+    <script src="~/Scripts/canvasjs.min.js"></script>
+}

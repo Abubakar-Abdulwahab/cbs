@@ -1,0 +1,46 @@
+﻿@using CBSPay.Core.APIModels
+@model PaymentStatusModel
+@{ 
+    ViewBag.Title = "PaymentStatus";
+}
+ 
+<style>
+    .taxpayerdiv {
+        background-color: #f1f1f1;
+        padding: 20px 20px 0px;
+        display: block;
+        position: relative
+    }
+</style>
+<script>
+    window.setTimeout('document.forms[0].submit()', 7000);
+
+</script>
+
+<div>
+
+    <div class="housing"> 
+
+        <div class="card-amount">
+            <form action="https://stage.eirsautomation.xyz" method="post" target="_parent">
+                <div class="text-center padding-horizontal-30">
+                    <h3 class="text-success">PAYMENT SYNCHRONIZED SUCCESSFUL</h3>
+                    <img src="~/Content/payment_success.png" />
+                    <img src="@Url.Content("~/Content/images/payment_success.png")" alt="" />
+
+
+                    <div class="finished-payment">
+                        <h3>Tax Payer Name :  @Model.TaxPayerName</h3>
+                        @*<h3>Reference Number : @Model.ReferenceNumber</h3>*@
+                        <h3>Amount Paid: @Model.TotalAmountPaid</h3> 
+                    </div> 
+                </div>
+            </form>
+            <br />
+            <br />
+            
+        </div>
+    </div>
+
+</div>
+

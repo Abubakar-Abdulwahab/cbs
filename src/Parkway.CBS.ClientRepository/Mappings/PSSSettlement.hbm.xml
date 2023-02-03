@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Police.Core.Models.PSSSettlement, Parkway.CBS.Police.Core" table="Parkway_CBS_Police_Core_PSSSettlement" lazy="false" >
+    <id name="Id" column="Id" type="Int32">
+      <generator class="identity"/>
+    </id>
+
+    <property name="Name" column="Name" />
+    <property name="IsActive" column="IsActive" />
+    <property name="CreatedAtUtc" column="CreatedAtUtc" />
+    <property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+    <property name="HasCommandSplits" column="HasCommandSplits" />
+
+    <many-to-one name="SettlementRule" column="SettlementRule_Id"/>
+    <many-to-one name="Service" column="Service_Id"/>
+  </class>
+</hibernate-mapping>

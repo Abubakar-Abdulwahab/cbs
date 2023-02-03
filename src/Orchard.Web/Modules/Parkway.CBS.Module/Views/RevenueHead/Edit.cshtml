@@ -1,0 +1,94 @@
+﻿<style>
+    .breadcrumb-arrow li a {
+        height:34px !important;
+    }
+    .container{
+        width:1020px !important;
+        padding-left:0 !important;
+    }
+    ol.breadcrumb.breadcrumb-arrow{
+        margin-bottom:15px !important;
+    }
+</style>
+@model Parkway.CBS.Module.ViewModels.RevenueHeadCreateView
+
+@{ Layout.Title = T("Edit - {0}", Model.RevenueHead.Name).ToString(); }
+
+
+@Display(Model.AdminBreadCrumb)
+
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    <div id="container">
+        <table class="items" id="rhItems">
+            <thead>
+                <tr>
+                    <th scope="col" id="titleHeader">@String.Format("{0}", Model.RevenueHead.NameAndCode())</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label id="rHName">@T("Revenue Head Name")</label>
+                        @Html.TextBoxFor(m => m.RevenueHead.Name, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add the name of your Revenue Head here. For example {0}.", "Land Use Charge"))
+                    </td>
+                    <td>
+                        <label id="rHCode">@T("Revenue Head Code")</label>
+                        @Html.TextBoxFor(m => m.RevenueHead.Code, new { @class = "text large", @required = true })
+                        @Html.Hint(T("Add a Revenue Head identification code. For example {0}.", "MDAL/FF/TAB/REVH/LAG-SL/0049"))
+                    </td>
+                    <td>
+                        <label id="rHCallBackURL">@T("Revenue Head CallBackURL")</label>
+                        @Html.TextBoxFor(m => m.RevenueHead.CallBackURL, new { @class = "text large" })
+                        @Html.Hint(T("Add optional CallBackURL. For example {0}.", "https://notifyme.com/payment"))
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="settlementCode">Settlement Code</label>
+                        <input type="text" class="text large" name="RevenueHead.SettlementCode" id="settlementCode" value="@Model.RevenueHead.SettlementCode"/>
+                        @Html.Hint(T("Add or Edit settlement code"))
+                    </td>
+                    <td>
+                        <label for="settlementType">Settlement Type</label>
+                        <select id="settlementType" style="width:99%" name="RevenueHead.SettlementType">
+                            @foreach(var settlementType in Enum.GetValues(typeof(Parkway.CBS.Core.Models.Enums.SettlementType)).Cast<Parkway.CBS.Core.Models.Enums.SettlementType>().ToList())
+                            {
+                                <option value="@((int)settlementType)" @((int)settlementType == Model.RevenueHead.SettlementType ? "selected" : "")>@settlementType</option>
+                            }
+                        </select>
+                        @Html.Hint(T("Specify settlement type. For example {0}.","Flat"))
+                    </td>
+                    <td>
+                        <label for="serviceId">Service Id</label>
+                        <input type="text" class="text large" name="RevenueHead.ServiceId" id="serviceId" value="@Model.RevenueHead.ServiceId"/>
+                        @Html.Hint(T("Add or Edit service id"))
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <fieldset>
+        <button type="submit">@T("Save Edit")</button>
+       
+        @if (string.IsNullOrEmpty(Model.ParentSlug))
+        {
+            <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("ViewMDARevenueHeads", "MDA", new { Slug = Model.MDASlug })'" class="a-
+            classname">
+                @T("Cancel")
+            </button>
+        }
+        else
+        {
+            <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("ViewSubRevenueHeads", "RevenueHead", new { slug = Model.ParentSlug, id = Model.ParentId })'" class="a-
+            classname">
+                @T("Cancel")
+            </button>
+        }
+    </fieldset>
+}

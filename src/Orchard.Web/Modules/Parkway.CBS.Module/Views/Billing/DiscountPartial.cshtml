@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Parkway.CBS.Core.HelperModels.DiscountModel>
+
+@{
+    Script.Require("CBS.MDA.Discount.Script").AtFoot();
+}
+<div class="col-md-12">
+    <div class="manage">
+        <input type="button" class="btn btn-sm btn-primary adddiscount" value="Add Discount" />
+    </div>
+    <h4><b>Discounts (after issuance of invoice)</b></h4>
+</div>
+<div class="col-md-12" id="discountDiv">
+        @if (Model.Any())
+        {
+            int counter = 0;
+
+            foreach (var discount in Model)
+            {
+                <div class="form-inline" id="discount_@counter">
+                    <select name="DiscountModel[@counter].BillingDiscountType" class="form-control">
+                        <option value="">Select Discount Type</option>
+                        @Html.SelectOption("Flat", @discount.BillingDiscountType.ToString() == "Flat" ? true : false, "Flat Rate")
+                        @Html.SelectOption("Percent", @discount.BillingDiscountType.ToString() == "Percent" ? true : false, "% of assessment fee")
+                    </select>
+                    <input name="DiscountModel[@counter].Discount" placeholder="Discount Value" min="1" class="form-control" type="number" value="@discount.Discount">
+                    <small> Effective Till: </small>
+                    <input name="DiscountModel[@counter].EffectiveFrom" min="1" placeholder="Days" class="form-control" type="number" value="@discount.EffectiveFrom">
+                    
+                    <select name="DiscountModel[@counter].EffectiveFromType" class="form-control">
+                        <option value="">Select Range Type</option>
+                        @Html.SelectOption("Days", @discount.EffectiveFromType.ToString() == "Days" ? true : false, "Days")
+                        @Html.SelectOption("Weeks", @discount.EffectiveFromType.ToString() == "Weeks" ? true : false, "Weeks")
+                        @Html.SelectOption("Months", @discount.EffectiveFromType.ToString() == "Months" ? true : false, "Months")
+                        @Html.SelectOption("Years", @discount.EffectiveFromType.ToString() == "Years" ? true : false, "Years")
+                    </select>
+ <a id="remove_@counter" class="remove" href="#" name="remove">  Remove</a>
+                </div>
+                <input type="hidden" name="DiscountModel.Index" value="@counter" />
+                counter++;
+            }
+        }
+        else
+        {
+        }
+    </div>

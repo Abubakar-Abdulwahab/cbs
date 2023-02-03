@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1549" height="104" viewBox="0 0 1549 104">
+  <defs>
+    <style>
+      .cls-1 {
+        <!-- light shade theme color -->
+        fill: #b9d5de;
+      }
+
+      .cls-2 {
+        <!-- dark shade theme color -->
+        fill: #4394b6;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        <!-- darker shade theme color -->
+        fill: #0f5b75;
+      }
+
+      .cls-4 {
+        <!-- dark shade theme color same as the one used in .cls-2 -->
+        fill: #1687ac;
+      }
+    </style>
+  </defs>
+  <rect id="Rectangle_1_copy_21" data-name="Rectangle 1 copy 21" class="cls-1" width="1303" height="104"/>
+  <path id="Rectangle_1_copy_21-2" data-name="Rectangle 1 copy 21" class="cls-2" d="M1408,0H447.407L353,104H1408V0Z"/>
+  <path id="Rectangle_1_copy_21-3" data-name="Rectangle 1 copy 21" class="cls-3" d="M1453,0H542.485L453,104H1453V0Z"/>
+  <path id="Rectangle_1_copy_21-4" data-name="Rectangle 1 copy 21" class="cls-4" d="M1549,0H633.933L544,104H1549V0Z"/>
+</svg>

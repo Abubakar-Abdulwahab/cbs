@@ -1,0 +1,36 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestDetailsVM
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="4">ADDITIONAL INFORMATION</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>
+            <label>Diary S/No</label>
+            <p class="extend-width">@Model.DiarySerialNumber</p>
+        </td>
+        <td>
+            <label>Incident Date</label>
+            <p class="extend-width"> @Model.IncidentDateAndTimeParsed.Value.ToString("dd/MM/yyyy")</p>
+        </td>
+        <td>
+            <label>Incident Time</label>
+            <p class="extend-width">@Model.IncidentDateAndTimeParsed.Value.ToString("HH:mm")</p>
+        </td>
+        <td>
+            <label>Cross Referencing(C/R)</label>
+            <p class="extend-width">@Model.CrossReferencing</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <label>Content</label>
+            <p class="extend-width">@Model.Content</p>
+        </td>
+    </tr>
+</table>
+
+
+

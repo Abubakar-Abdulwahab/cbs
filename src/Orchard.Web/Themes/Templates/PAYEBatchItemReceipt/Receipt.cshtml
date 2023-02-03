@@ -1,0 +1,151 @@
+﻿@{
+Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style type="text/css">
+        p {
+            margin-top: 0;
+        }
+
+        .paye-receipt-container {
+            height: auto;
+            padding: 10px;
+        }
+
+        .paye-receipt {
+            width: 1000px;
+            height: auto;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .paye-receipt-header {
+            text-align: center;
+        }
+
+        .paye-receipt-row {
+            width: 100%;
+        }
+
+        .paye-receipt-content {
+            padding-top: 25px;
+            padding-bottom: 90px;
+            padding-left: 45px;
+            padding-right: 45px;
+        }
+
+        .paye-receipt-date {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        #pitReceiptPrintBtnContainer {
+            padding-top: 10px;
+            margin: 0 auto;
+            max-width: 80%;
+        }
+
+        .paye-receipt::before{
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: 100% 100%;
+            background-image: url('@Model.ReceiptBackgroundWatermarkPath');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .paye-receipt-content::before{
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('@Model.ReceiptLogoPath');
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="paye-receipt-container">
+        <div class="paye-receipt">
+            <div class="paye-receipt-content" style="position:relative;z-index:2">
+                <div style="height:140px;padding:20px 0">
+                    <div style="width:20%;font-size:12px; float: left; margin-top: 60px;">
+                        <p>Date: <b>@Model.Month, @Model.Year</b></p>
+                        <p>Receipt No: <b>@Model.ReceiptNumber</b></p>
+                    </div>
+                    <div style="text-align:center;width:65%; float: left;">
+                        <img class="logo" src="@Model.ReceiptLogoURL" alt="CBS"
+                            style="width:60px;height:auto;margin-bottom:5px" />
+                        <p style="margin-bottom:0;font-size:12px;font-weight:bold">NASARAWA STATE GOVERNMENT</p>
+                        <p style="margin-bottom:0;font-size:12px;">NASARAWA STATE INTERNAL REVENUE SERVICE</p>
+                        <p style="margin-bottom:0;margin-top:20px;font-size:25px;font-weight:bold">MONTHLY PAYEE TAX
+                            RECEIPT</p>
+                    </div>
+                    <div style="width:15%;text-align:right; float: left;">
+                        <img class="logo" src="@Model.BarCodeSavingPath" alt="QR Code"
+                            style="width:100px;height:auto;border:none" />
+                    </div>
+                </div>
+                <div style="height:25px;padding-top:20px;padding-bottom:10px;width: 100%;">
+                    <div style="position:relative;min-width:42px;float: left;width: 5%;">
+                        <p style="margin-bottom:0;;margin-top: 6px;">From</p>
+                    </div>
+                    <div style="padding:0 25px;float: left; border-bottom:1px solid black;word-break:break-word;width:30%">
+                        <p style="margin-bottom:0">@Model.TaxPayerName.ToUpper()</p>
+                    </div>
+                    <div style="position:relative;padding:0 10px;float: left;width: 1%;">
+                        <p style="margin-bottom:0;margin-top: 6px;"> of </p>
+                    </div>
+                    <div style="padding:0 25px; border-bottom:1px solid black;float: left;width: 50%;">
+                        <p style="margin-bottom:0">@Model.TaxPayerAddress.ToUpper() </p>
+                    </div>
+                </div>
+                <div style="width:100%;height:25px;padding-top:20px;padding-bottom:10px">
+                    <div style="position:relative;min-width:94px;width: 11%;float: left;">
+                        <p style="margin-bottom:0;margin-top: 6px;">Amount Paid</p>
+                    </div>
+                    <div style="padding:0 25px; border-bottom:1px solid black; width: 83%;float: left;">
+                        <p style="margin-bottom:0">@Model.TaxAmountPaidInWordsFirstLine.ToUpper()</p>
+                    </div>
+                </div>
+                <div style="width:100%;height:25px;padding-bottom:40px;padding-top:20px">
+                    <div style="padding:0 25px; border-bottom:1px solid black;float: left;width: 65%;height:20px">
+                        <p style="margin-bottom:0">@((Model.TaxAmountPaidInWordsSecondLine != null) ? Model.TaxAmountPaidInWordsSecondLine.ToUpper() : Model.TaxAmountPaidInWordsSecondLine)</p>
+                    </div>
+                    <div style="min-width:15px;position:relative;float: left;padding-top:6px">
+                        <span>&#8358;</span>
+                    </div>
+                    <div style="padding:0 25px; border-bottom:1px solid black;word-break:break-word;float: left;width: 22%;">
+                        <p style="margin-bottom:0">@String.Format("{0:n2}", Model.TaxAmountPaid)</p>
+                    </div>
+                </div>
+                <div style="width:100%;height:20px;padding:10px 0;">
+                    <div style="position:relative;min-width:86px;float: left;">
+                        <p style="margin-top:0;margin-bottom:0;margin-top: 6px;">Issued date</p>
+                    </div>
+                    <div style="padding:0 25px; border-bottom:1px solid black; min-width:150px;float: left">@Model.PaymentDate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

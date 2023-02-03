@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Search Tax Payer";
+    Layout = "~/Views/Shared/_EIRSInnerDetailsLayout.cshtml";
+}
+
+
+<div class="title">
+    <h1>
+        Corporate Tax Payer
+    </h1>
+    <hr>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Add New Corporate
+        </div>
+        <div class="actions">
+            <a href="~/Home/CorporateCapture" class="btn btn-redtheme"> Cancel </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Tax Payer Type </label>
+                    <input type="text" disabled class="form-control" placeholder="Company" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Company Name </label>
+                    <input type="text" class="form-control" placeholder="Enter Company Name" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">TIN</label>
+                    <input type="text" class="form-control" placeholder="Enter TIN" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Phone 1</label>
+                    <input type="text" class="form-control" placeholder="Enter Phone 1" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Phone 2</label>
+                    <input type="text" class="form-control" placeholder="Enter Phone2" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Email Address 1</label>
+                    <input type="text" class="form-control" placeholder="Enter Email Address 1" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Email Address 2</label>
+                    <input type="text" class="form-control" placeholder="Enter Email Address 2" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Tax Office</label>
+                    <select class="form-control bs-select">
+                        <option> Select Tax Office </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Economic Activity </label>
+                    <select class="form-control bs-select">
+                        <option> Select Economic Activity </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Preferred Notification</label>
+                    <select class="form-control bs-select">
+                        <option> Select Preferred Notification </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label required-star">Contact Address </label>
+                    <textarea class="form-control" placeholder="Enter Contact Address"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right col-sm-12">
+                <div class="form-group">
+                    <br />
+                    <a href="CorporateDetail.html" class="btn-theme btn"> Save </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6206A92-CD85-4BEC-A07B-D9DDB869578C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Parkway.CBS.ClientFileServices</RootNamespace>
+    <AssemblyName>Parkway.CBS.ClientFileServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncEnumerable, Version=2.2.2.0, Culture=neutral, PublicKeyToken=0426b068161bd1d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncEnumerator.2.2.2\lib\net45\AsyncEnumerable.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ExcelDataReader.3.4.1\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.1.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.1\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.0\lib\net45\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.7.0\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.Cashflow.Ng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\Parkway.Cashflow.Ng.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.CBS.Core, Version=1.10.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Orchard.Web\Modules\Parkway.CBS.Core\bin\Parkway.CBS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementations\Contracts\IFileProcessor.cs" />
+    <Compile Include="Implementations\Contracts\IFileWatcherProcessor.cs" />
+    <Compile Include="Implementations\Contracts\IReferenceDataFileProcessor.cs" />
+    <Compile Include="Implementations\Contracts\ITaxPayerEnumerationFileUpload.cs" />
+    <Compile Include="Implementations\FileProcessor.cs" />
+    <Compile Include="Implementations\IPPIS\IPPISFileProcessor.cs" />
+    <Compile Include="Implementations\IPPIS\Log4netLogger.cs" />
+    <Compile Include="Implementations\Models\TaxPayerEnumerationExcelFileModel.cs" />
+    <Compile Include="Implementations\Models\ValidateFileResponse.cs" />
+    <Compile Include="Implementations\NAGIS\NAGISAdapter.cs" />
+    <Compile Include="Implementations\ReferenceData\WithHoldingTaxonRentAdapter.cs" />
+    <Compile Include="Implementations\TaxPayerEnumeration\TaxPayerEnumerationFileUpload.cs" />
+    <Compile Include="Logger\Contracts\ILogger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parkway.CBS.ClientRepository\Parkway.CBS.ClientRepository.csproj">
+      <Project>{E43FEFA6-FBF8-4FBB-8796-53222160B8BB}</Project>
+      <Name>Parkway.CBS.ClientRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.ClientServices\Parkway.CBS.ClientServices.csproj">
+      <Project>{1863CD88-D655-4F0D-82FA-7F2A157C4EB7}</Project>
+      <Name>Parkway.CBS.ClientServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Entities\Parkway.CBS.Entities.csproj">
+      <Project>{9872DCF4-A38E-43F6-BBF6-3E855119FC88}</Project>
+      <Name>Parkway.CBS.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.FileUpload\Parkway.CBS.FileUpload.csproj">
+      <Project>{F50948AA-154F-4F1D-922A-06F6A0CE49FD}</Project>
+      <Name>Parkway.CBS.FileUpload</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.HangFireInterface\Parkway.CBS.HangFireInterface.csproj">
+      <Project>{1eca1ed8-4bb3-4dba-8d5f-22af1d93e4fd}</Project>
+      <Name>Parkway.CBS.HangFireInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Payee\Parkway.CBS.Payee.csproj">
+      <Project>{09D19D8E-FD27-43ED-931B-ED1549E658C1}</Project>
+      <Name>Parkway.CBS.Payee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.TaxPayerEnumerationService\Parkway.CBS.TaxPayerEnumerationService.csproj">
+      <Project>{A6BC07AD-1608-445C-907A-1C46EF4415FC}</Project>
+      <Name>Parkway.CBS.TaxPayerEnumerationService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

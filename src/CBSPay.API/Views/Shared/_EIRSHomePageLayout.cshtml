@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/datatables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/components.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/layout.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/typeahead.css">
+    @RenderSection("head", false)
+</head>
+<body>
+    <div id="domMessage" style="display:none;">
+        <h4>We are processing your request. Please be patient.</h4>
+    </div>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="~/Home/Index" class="navbar-brand" id="logo">
+                        <img src="~/Styles/Images/EIRS-logo.png">
+                        <img src="~/Styles/Images/Logo.png">
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="@Url.Action("SignUp","Login")">Sign Up</a></li>
+                    <li><a href="~/Login/Home">Login</a></li>
+                </ul>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navMainMenu" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-collapse collapse" id="navMainMenu" aria-expanded="false">
+                    <ul class="nav navbar-nav">
+                        <li class=" switch-li no-hover">
+                            <a href="">
+                                <label class="switch">
+                                    <input type="checkbox" id="chkMenuSwitch">
+                                    <span class="slider round"></span>
+                                </label>
+                            </a>
+                        </li>
+                        @*<li class=""><a >About</a></li>
+                        <li class=""><a >Awareness</a></li>
+                        <li class=""><a >Tax Payers</a></li>
+                        <li class=""><a >Tax Assets</a></li>
+                        <li class=""><a >Tax Types</a></li>*@
+                        <li class=""><a href="~/Home/Pay">Services</a></li>
+                        @*<li class=""><a href="@Url.Action("Partnership","Home")">Partnership</a></li>
+                        <li class=""><a href="@Url.Action("Support","Home")">Support</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<div class="top-bar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="index.html" class="navbar-brand">
+                            <img src="~/Styles/Images/Logo.png">
+                        </a>
+                    </div>
+                    <ul>
+                        <li><a href="">Sign Up |</a></li>
+                        <li><a href="IndividualLogin.html">Log in</a></li>
+                    </ul>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navMainMenu" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-collapse collapse" id="navMainMenu" aria-expanded="false">
+                        <ul class="nav navbar-nav">
+                            <li class=" switch-li no-hover">
+                                <a href="index.html">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="checked" id="chkMenuSwitch">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ABOUT<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="IndividualCapture.html">Individuals</a></li>
+                                    <li><a href="CorporateCapture.html">Corporates</a></li>
+                                    <li><a href="GovernmentCapture.html">Government</a></li>
+                                    <li><a href="SpecialCapture.html">Special</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AWARENESS<span class="caret"></span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TAX PAYERS<span class="caret"></span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TAX ASSETS<span class="caret"></span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICES<span class="caret"></span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PARTNERSHIPS<span class="caret"></span></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="no-hover hidden p0"><a>Welcome to ERAS</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+    </header>
+
+    <section class="alternate" style="min-height:79vh;">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-sm-3">
+                        <div class="portlet light compressed-menu">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    NAVIGATION MENU
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <ul class="nav">
+                                    <li class=""><a href="About.html"><i class="fa fa-angle-right"></i>About</a></li>
+                                    <li class=""><a href="Awareness.html"><i class="fa fa-angle-right"></i>Awareness</a></li>
+                                    <li class=""><a href="~/Home/TaxPayers"><i class="fa fa-angle-right"></i>Tax Payers</a></li>
+                                    <li class=""><a href="TaxAsset.html"><i class="fa fa-angle-right"></i>Tax Assets</a></li>
+                                    <li class=""><a href="TaxTypePAYE.html"><i class="fa fa-angle-right"></i>Tax Types</a></li>
+                                    <li class=""><a href="~/Home/Pay"><i class="fa fa-angle-right"></i>Services</a></li>
+                                    <li class=""><a href="Partnership.html"><i class="fa fa-angle-right"></i>Partnership</a></li>
+                                    <li class=""><a href="Support.html"><i class="fa fa-angle-right"></i>Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="col-sm-12">
+                    <div>
+                        @RenderSection("HomePageWelcome", false)
+                    </div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @RenderSection("HomePageFooter", false)
+    <div>
+        @RenderSection("InnerBillingModal", false)
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="navbar-brand">
+                        <img src="~/Styles/Images/Logo.png">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    © Copyright ERAS - Edo State Internal Revenue Service @DateTime.Now.Year. All rights reserved
+                </div>
+                <div class="col-sm-4">
+                    <ul>
+                        <li>
+                            <a>Data Protection</a>
+                        </li>
+                        <li>
+                            <a>Terms of Use</a>
+                        </li>
+                        <li>
+                            <a>Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.all.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/select2.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/jsCommon.js"></script>
+    <script type="text/javascript" src="~/Scripts/jsCustomValidator.js"></script>
+
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script>
+        var captureSection = function (id) { //e.g. "#captureThis"
+            html2canvas(document.querySelector(id)).then(canvas => {
+                var doc = new jsPDF();
+                doc.addImage(canvas.toDataURL(), 'PNG', 15, 40, 180, 180);
+                doc.save();
+            });
+        }
+        var captureInnerBillRefDetailsImage = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    window.saveAs(blob, "InnerBillRefDetails.png");
+                });
+                //var doc = new jsPDF();
+                //doc.addImage(canvas.toDataURL(), 'PNG', 15, 40, 180, 180);
+                //doc.save();
+            });
+        }; //e.g. "#captureThis" (used by InnerBillRefDetails.cshtml)
+        var captureInnerBillRefDetailsPdf = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                var doc = new jsPDF({
+                    orientation: 'p',
+                    unit: 'in',
+                });
+                doc.addImage(canvas.toDataURL(), 'PNG', 0, 0, 8.27, 11.69);
+                doc.save();
+            });
+        }; //e.g. "#captureThis" (used by InnerBillRefDetails.cshtml)
+
+        var receiptImage = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    window.saveAs(blob, 'Receipt.png');
+                });
+                //var blob = canvas.msToBlob();
+                //window.navigator.msSaveBlob(blob, 'Receipt.png');
+            });
+        }//used by the receipt page
+        var receiptPdf = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                html2canvas(document.querySelector('#logo')).then(logo => {
+                    var doc = new jsPDF(
+                        {
+                            orientation: 'p',
+                            unit: 'in'
+                        });
+                    doc.addImage(canvas.toDataURL(), 'PNG', 0, 0, 8.27, 6.23);
+                    doc.addImage(logo.toDataURL(), 'PNG', 0, 0, 1.5, 0.3);
+                    doc.save();
+                });
+
+            });
+        }//used by the receipt page
+
+    </script>
+</body>
+</html>
+

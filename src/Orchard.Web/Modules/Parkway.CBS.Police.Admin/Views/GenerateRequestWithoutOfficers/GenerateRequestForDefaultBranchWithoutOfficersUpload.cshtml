@@ -1,0 +1,151 @@
+﻿@model Parkway.CBS.Police.Admin.VM.GenerateRequestForDefaultBranchWithoutOfficersUploadVM
+@{
+    Layout.Title = "Corporate Super-Invoice: Upload Request Info";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.Report.Reset.Pagination");
+    Script.Require("PSS.Admin.Generate.Request.Without.Officers.Upload.Script");
+}
+
+<style>
+    .upload-info {
+        color: #333333;
+        font-size: 18px;
+        letter-spacing: 0.31px;
+        line-height: 21px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    label.upload-label {
+        flex-direction: column;
+        height: 200px;
+        border: 2px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 100% !important;
+        cursor: pointer;
+    }
+
+        label.upload-label img {
+            height: 50px;
+            width: auto;
+        }
+
+    .upload-caption {
+        color: #333333;
+        font-size: 13px;
+        line-height: 19px;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+        .upload-caption a {
+            color: #00b05f;
+        }
+
+    #upload {
+        display: none;
+    }
+
+    .field-set-heading {
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    .corporate-detail-tile {
+        background-color: #f3f4f5;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+</style>
+<div class="row" style="padding:15px">
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Recipient")</b>
+        <p>@Model.BranchDetails.Name</p>
+        @Html.Hint(T("The name of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Phone number")</b>
+        <p>@Model.BranchDetails.TaxEntity.PhoneNumber</p>
+        @Html.Hint(T("Phone number of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Category")</b>
+        <p>@Model.BranchDetails.TaxEntity.CategoryName</p>
+        @Html.Hint(T("Category of recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Email")</b>
+        <p>@Model.BranchDetails.TaxEntity.Email</p>
+        @Html.Hint(T("Email of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Address")</b>
+        <p>@Model.BranchDetails.Address</p>
+        @Html.Hint(T("Address of the recipient."))
+    </div>
+    <div class="col-sm-6 corporate-detail-tile">
+        <p><b>@T("Code")</b>
+        <p>@Model.BranchDetails.Code</p>
+        @Html.Hint(T("Branch Code of recipient"))
+    </div>
+</div>
+<br />
+
+@using (Html.BeginFormAntiForgeryPost(Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.GenerateRequestWithoutOfficers.GenerateRequestForDefaultBranchWithoutOfficersFileUploadValidation), FormMethod.Post, new { @id = "uploadGenerateRequestWithoutOfficersForm", @name = "uploadGenerateRequestWithoutOfficersForm", @enctype = "multipart/form-data" }))
+{
+    <div class="col-12 px-0" style="padding-bottom:10px">
+        <label class="upload-label" for="upload">
+            <span style="font-size:14px;font-weight: lighter;" id="fileName"></span>
+            <img src="/media//cbspolice/Images/upload-black.svg" alt="" id="uploadImg" />
+            <span class="upload-caption" id="uploadInfo">Upload request info file here. (max size 2mb).</span>
+        </label>
+        <input type="file" id="upload" name="generateRequestWithoutOfficersFile" accept=".xls,.xlsx">
+    </div>
+    <fieldset>
+        <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Proceed To Upload")</button>
+    </fieldset>
+}
+
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col">@T("Batch Reference")</th>
+            <th scope="col">@T("Created At")</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.GenerateRequestWithoutOfficersUploadBatches != null && Model.GenerateRequestWithoutOfficersUploadBatches.Any())
+        {
+            foreach (var batch in Model.GenerateRequestWithoutOfficersUploadBatches)
+            {
+                <tr>
+                    <td>
+                        @batch.BatchRef
+                    </td>
+                    <td>
+                        @batch.CreatedAt.ToString("dd/MM/yyyy HH:mm tt")
+                    </td>
+                    @if (!batch.HasGeneratedInvoice)
+                    {
+                    <td><a href="@Url.Action("GenerateDefaultRequestWithoutOfficersDetail","GenerateRequestWithoutOfficers", new { batchId = batch.Id, taxEntityId = Model.BranchDetails.Id  })">View Detail</a> | <a href="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.GenerateEscortRequestWithoutOfficers.GenerateEscortRequestForDefaultBranchWithoutOfficers, new { batchId = batch.Id })">Generate Request</a></td>
+                    }
+                    else
+                    {
+                        <td><a href="@Url.Action("GenerateDefaultRequestWithoutOfficersDetail","GenerateRequestWithoutOfficers", new { batchId = batch.Id, taxEntityId = Model.BranchDetails.Id  })">View Detail</a></td> 
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
+        }
+    </tbody>
+</table>
+@Display(Model.Pager)

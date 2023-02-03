@@ -1,0 +1,100 @@
+﻿@model ParkWay.CBS.Module.Models.RevenueHead
+@using ParkWay.CBS.Module.ViewModels;
+@using Orchard.Utility.Extensions;
+
+@{
+    ViewBag.Title = "RevenueHeadDashBoard";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.RevenueDashboard");
+
+}
+@{ Layout.Title = T("Revenue Head").ToString(); }
+
+<h2>DashBoard</h2>
+@{ if (Model.Billing != null)
+    {
+        @Html.ActionLink(T("Edit Billing").ToString(), "Edit", "Billing", new { revenueHeadSlug = Model.Slug, revenueHeadId = Model.Id }, null)
+    }
+    else
+    {
+        @Html.ActionLink(T("Add Billing").ToString(), "Create", "Billing", new { revenueHeadSlug = Model.Slug, revenueHeadId = Model.Id }, null)
+    }
+    <b>|</b>
+    if (Model.FormControls.Count() > 0)
+    {
+        @Html.ActionLink(T("Edit Form Setup").ToString(), "Edit", "Form", new { revenueHeadSlug = Model.Slug, revenueHeadId = Model.Id }, null)
+    }
+    else
+    {
+        @Html.ActionLink(T("Add Form Setup").ToString(), "Create", "Form", new { revenueHeadSlug = Model.Slug, revenueHeadId = Model.Id }, null)
+    }
+    <b>|</b>
+    @Html.ActionLink(T("Start Demo").ToString(), "Index", "Collection", new { }, null)
+}
+<div class="container">
+    <div class="row panelrows">
+        <div class="col-md-3 first">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Number of Invoices Sent</h3>
+                </div>
+                <div class="panel-body">
+                    450
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Amount Collected</h3>
+                </div>
+                <div class="panel-body">
+                    <span>&#x20a6</span> 400,000.00
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Amount Expected (Jul)</h3>
+                </div>
+                <div class="panel-body">
+                    <span>&#x20a6</span> 30,000.00
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Amount Pending (Jul)</h3>
+                </div>
+                <div class="panel-body">
+                    <span>&#x20a6</span> 20,000.00
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<section class="dashboard group">
+    <div class="help-item">
+        <h2 class="start">@T("Number of Invoices sent")</h2>
+        <p>
+            @T("30")
+        </p>
+    </div>
+    <div class="help-item">
+        <h2 class="gallery">@T("Amount Collected")</h2>
+        <p>
+            @T("3000")
+        </p>
+    </div>
+    <div class="help-item">
+        <h2 class="docs">@T("Amount Expected")</h2>
+        <p>@T("3029")</p>
+    </div>
+    <div class="help-item">
+        <h2 class="friends">@T("Amount Pending")</h2>
+        <p>@T("2323")</p>
+    </div>
+
+</section>-->

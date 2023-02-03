@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Bill Settlement";
+    Layout = "~/Views/Shared/_EIRSHomePayLayout.cshtml";
+}
+    <div class="col-sm-12">
+        <div class="title">
+            <h1 class="step1">
+                Pay On Account - Search
+            </h1>
+            <h1 class="step2"> Pay On Account - Tax Services</h1>
+            <hr>
+        </div>
+
+        <div class="portlet light">
+            <div class="step1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Step 1: Perform a search and check to see if we already have your record
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-7 form-horizontal">
+
+                            <div class="form-group">
+                                <label for="POASearchOptions" class="control-label col-sm-3">How will you like to search</label>
+                                <div class="col-sm-9">
+                                    <select name="POASearchOptions" id="POASearchOptions" class="form-control">
+                                        <option value="">Select Option</option>
+                                        <option value="RIN">RIN</option>
+                                        <option value="BusinessName">Business Name</option>
+                                        <option value="MobileNumber">Mobile Number</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="POASearchValue" class="control-label col-sm-3">Enter Value</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="POASearchValue" id="POASearchValue" class="form-control" placeholder="Enter the Search Value">
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="PaymentChannel" id="PaymentChannel" value="3" />
+                            <input type="hidden" name="ClientId" id="ClientId" value="6817ab2b-4351-6017-5099-358F01bb9558" />
+                            <input type="hidden" name="ClientSecret" id="ClientSecret" value="t+i61Vo71Y4T8nIcjxZMMMYy4YlAxrE/vSEWPlDdVMYHgFdVAsLbRDypDpzjki7LE" />
+
+
+
+                            <div class="form-group text-right row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-theme btn-block" id="FetchTaxPayerData"> Search </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="loader" style="margin: auto; display: none"></div>
+                            <div>
+                                <p>
+                                    <ul>
+                                        <li>RIN: Select RIN if you already have an EIRS Revenue Identification Number</li>
+                                        <li>Business Name: better to use if paying business related tasks</li>
+                                        <li>Mobile Number: preferraable to select this if you are an individual <br /></li>
+
+                                        <li>@Html.ActionLink("No RIN? Click here", "RegisterForRIN", "Home")</li>
+                                    </ul>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="step2">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Step 2: Complete the fields below and click to make payment
+                    </div>
+                </div>
+                @using (Html.BeginForm("MakeOnlineEIRSPaymentOnAccount", "Home", FormMethod.Post))
+                {
+                    <div class="portlet-body" id="step2_form">
+                        <div class="row">
+                            <div class="col-sm-7 form-horizontal">
+
+                                <div class="form-group">
+                                    <label for="TaxPayerRIN" class="control-label col-sm-3">RIN</label>
+                                    <div class="col-sm-9" id="RINValue">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="TaxPayerName" class="control-label col-sm-3">Tax Payer Name</label>
+                                    <div class="col-sm-9" id="TaxPayerName">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="RevenueStream" class="control-label col-sm-3">Select Revenue Stream</label>
+                                    <div class="col-sm-9" id="">
+                                        @Html.DropDownList("RevenueStream", (IEnumerable<SelectListItem>)ViewBag.RevenueStreamItems, "Select Revenue stream", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="RevenueSubStream" class="control-label col-sm-3">Select Revenue Sub Stream</label>
+                                    <div class="col-sm-9" id="">
+                                        @Html.DropDownList("RevenueSubStream", (IEnumerable<SelectListItem>)ViewBag.RevenueSubStreamItems, "Select Revenue Sub Stream", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="AmountPaid" class="control-label col-sm-3">Enter Amount You Want To Pay</label>
+                                    <div class="col-sm-9" id="">
+                                        <input type="text" name="AmountPaid" class="form-control" placeholder="<<Enter Amount>>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="OtherInformation" class="control-label col-sm-3">Tell us anything else</label>
+                                    <div class="col-sm-9" id="">
+                                        <input type="text" height="3" name="OtherInformation" class="form-control" placeholder="<<Notes>>">
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="PaymentChannel" id="PaymentChannel" value="3" />
+                                <input type="hidden" name="ClientId" id="ClientId" value="6817ab2b-4351-6017-5099-358F01bb9558" />
+                                <input type="hidden" name="ClientSecret" id="ClientSecret" value="t+i61Vo71Y4T8nIcjxZMMMYy4YlAxrE/vSEWPlDdVMYHgFdVAsLbRDypDpzjki7LE" />
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3"></label>
+                                    <div class="col-sm-9" id="">
+                                        <button type="submit" class="text-right btn btn-success" id="" aria-expanded="false">
+                                            Pay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+        <div class="portlet light" id="PayOnAccountItems">
+            <div class="portlet-title">
+                <div class="caption">The following records have been found. Select your record and proceed </div>
+            </div>
+
+            <div class="portlet-body">
+                <table class="table table-bordered v-middle" id="POAItemList">
+                    <thead class="red-th">
+                        <tr>
+                            <th>RIN</th>
+                            <th>Tax Payer Name</th>
+                            <th>Tax Payer Type</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="POAItemsBody"></tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-12 row">
+                <div class="caption col-sm-8">
+                    If you feel the details we hold about you are wrong, kindly send an email to <a>eras@eirs.gov.ng</a> or call 080xxxxxxxx
+                </div>
+                <div class="form-group text-right col-sm-4">
+
+                    <button class="btn btn-theme btn-block pull-right" id="ProceedToStep2"> Proceed </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section scripts
+    {
+        <script src="@Url.Content("~/Scripts/EIRSPayOnAccount.js")"></script>
+
+    }

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Business";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+<section class="alternate">
+    <div class="container">
+
+        <div class="title">
+            <h1>
+                Welcome to Tax Assets Section
+            </h1>
+            <hr>
+            <p>
+                This section covers information relating to tax assets, different types and importance
+            </p>
+        </div>
+
+        <div class="row custom-tabs">
+            <div class="col-sm-3">
+                <div class="portlet light compressed-menu">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Tax Assets
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="@Url.Action("Business","Home")"><i class="fa fa-angle-right"></i> Businesses</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Building","Home")"><i class="fa fa-angle-right"></i> Buildings </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Land","Home")"><i class="fa fa-angle-right"></i> Lands </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Vehicle","Home")"><i class="fa fa-angle-right"></i> Vehicles </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Tax Assets - Businesses
+                        </div>
+                    </div>
+                    <div class="portlet-body text-justify">
+                        <p>
+                            Formal and informal businesses across fixed, remote and online locations. Businesses are owned by individual and corporate tax payers
+                        </p>
+
+                        <div class="btn-custom-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/Paye.aspx"> PAYE <i class="icon-arrow-right"></i> </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/PoolsBetting.aspx"> POOLS &amp; BETTING <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/ConsumptionTax.aspx"> CONSUMPTION TAX <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/LandUseCharge.aspx"> LAND USE CHARGE <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/CapitalGains.aspx"> CAPITAL GAINS TAX <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/WitholdingTax.aspx"> WITHHOLDING TAX <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/BusinessPremises.aspx"> BUSINESS PREMISES <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block btn-outline" href="/DirectAssessment.aspx"> DIRECT ASSESSMENT <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-custom-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block"> BUSINESS CAPTURE <i class="icon-arrow-right"></i> </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block"> BUSINESS PROFILES <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-theme btn-block"> TAX CLEARANCE CERTIFICATE <i class="icon-arrow-right"></i>  </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

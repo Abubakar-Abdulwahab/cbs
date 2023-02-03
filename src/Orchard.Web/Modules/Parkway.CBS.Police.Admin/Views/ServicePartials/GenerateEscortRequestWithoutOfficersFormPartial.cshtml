@@ -1,0 +1,423 @@
+﻿@model Parkway.CBS.Police.Admin.VM.GenerateEscortRequestForWithoutOfficersVM
+@{ 
+    Style.Require("Style.Datepicker");
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("PSS.Admin.Generate.Escort.Request.Without.Officers.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+}
+<style>
+    #numberOfDaysFieldContainer {
+        display: none;
+    }
+
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    .no-padding-x {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .search-error-text {
+        color: #ff0000;
+        display: block;
+    }
+
+    .margin-b-16 {
+        margin-bottom: 16px;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .pickyNoPastAndTodaysDate{
+        cursor:pointer;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.EscortDetails.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var serviceCategories = @Html.Raw(Json.Encode(Model.EscortDetails.EscortServiceCategories));
+    var serviceCategoriesMap = new Map(serviceCategories.map(obj => [obj.Id, obj]));
+    var escortCategoryTypes = @Html.Raw(Json.Encode(Model.EscortDetails.EscortCategoryTypes));
+    var tacticalSquadsObj = @Html.Raw(Json.Encode(Model.EscortDetails.TacticalSquads));
+    var formationsObj = @Html.Raw(Json.Encode(Model.EscortDetails.Formations));
+    var selectedTacticalSquad = @Html.Raw(Model.EscortDetails.SelectedTacticalSquad);
+    var selectedDeliveryState = @Html.Raw(Model.EscortDetails.SelectedState);
+    var selectedOriginState= @Html.Raw(Model.EscortDetails.SelectedOriginState);
+</script>
+<div class="container-fluid" style="padding-left:15px;padding-right:15px;">
+    <div id="inputContainer">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Sector</b>
+                    <div class="form-group">
+                        <select class="form-control" name="EscortDetails.SubCategoryId" id="sector" required>
+                            <option value="" selected disabled>Select a sector</option>
+                            @if (Model.Sectors != null && Model.Sectors.Any())
+                            {
+                                foreach (var sector in Model.Sectors)
+                                {
+                                    <option value="@sector.Id" @(Model.EscortDetails.SubCategoryId == sector.Id ? "selected" : "")>@sector.Name</option>
+                                }
+                            }
+                        </select>
+                        <small class="form-text text-muted">Select the sector.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SubCategoryId", "Selected sector value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid no-padding-x">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Service Category</b>
+                        <div class="form-group">
+                            <select class="form-control" name="EscortDetails.SelectedEscortServiceCategories[0]" id="serviceCategory" required>
+                                <option selected disabled value="">Select a Category</option>
+                                @if (Model.EscortDetails.EscortServiceCategories != null && Model.EscortDetails.EscortServiceCategories.Any())
+                                {
+                                    foreach (var serviceCategory in Model.EscortDetails.EscortServiceCategories)
+                                    {
+                                        <option value="@serviceCategory.Id" @(Model.EscortDetails.SelectedEscortServiceCategories.ElementAtOrDefault(0) == serviceCategory.Id ? "selected" : "")>@serviceCategory.Name</option>
+                                    }
+                                }
+                            </select>
+                            <span name="profileloader" id="escortServiceCategoryLoader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                            <small class="form-text text-muted">Select the service category.</small>
+                            <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedEscortServiceCategory", "Selected service category value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" id="escortServiceCategoryType" style="display:@((Model.EscortDetails.EscortCategoryTypes != null && Model.EscortDetails.EscortCategoryTypes.Any()) ? "block" : "none")">
+                        <b style="color:#e97d68;">Category Type</b>
+                        <div class="form-group">
+                            <select class="form-control" name="EscortDetails.SelectedEscortServiceCategories[1]" id="categoryType" @((Model.EscortDetails.SelectedEscortServiceCategories.ElementAtOrDefault(1) > 0) ? "required" : "")>
+                                <option selected disabled value="">Select a Category Type</option>
+                                @if (Model.EscortDetails.EscortCategoryTypes != null && Model.EscortDetails.EscortCategoryTypes.Any())
+                                {
+                                    foreach (var serviceCategoryType in Model.EscortDetails.EscortCategoryTypes)
+                                    {
+                                        <option value="@serviceCategoryType.Id" @(Model.EscortDetails.SelectedEscortServiceCategories.ElementAtOrDefault(1) == serviceCategoryType.Id ? "selected" : "")>@serviceCategoryType.Name</option>
+                                    }
+                                }
+                            </select>
+                            <small class="form-text text-muted">Select the category type.</small>
+                            <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedEscortServiceCategoryType", "Selected service category type value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Unit</b>
+                    <div class="form-group">
+                        <select class="form-control" name="EscortDetails.SelectedCommandType" id="commandType" required>
+                            <option selected disabled value="">Select unit</option>
+                            @if (Model.EscortDetails.CommandTypes != null && Model.EscortDetails.CommandTypes.Any())
+                            {
+                                foreach (var commandType in Model.EscortDetails.CommandTypes)
+                                {
+                                    <option value="@commandType.Id" @(Model.EscortDetails.SelectedCommandType == commandType.Id ? "selected" : "")>@commandType.Name</option>
+                                }
+                            }
+                        </select>
+                        <small id="commandTypeSearchError" class="search-error-text"></small>
+                        <span name="commandTypeloader" id="commandTypeLoader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                        <small class="form-text text-muted">Select a unit.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedCommandType", "Selected unit value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="tacticalSquadDiv" style="position:relative;display:@((Model.EscortDetails.TacticalSquads != null && Model.EscortDetails.TacticalSquads.Any()) ? "block" : "none")">
+                    <b style="color:#e97d68;">Tactical Squad</b>
+                    <div class="form-group">
+                        <select class="form-control" name="EscortDetails.SelectedTacticalSquad" id="tacticalSquad">
+                            <option selected disabled value="">Select a Tactical Squad</option>
+                            @if (Model.EscortDetails.TacticalSquads != null && Model.EscortDetails.TacticalSquads.Any())
+                            {
+                                foreach (var tacticalSquad in Model.EscortDetails.TacticalSquads)
+                                {
+                                    <option value="@tacticalSquad.Id" @(Model.EscortDetails.SelectedTacticalSquad == tacticalSquad.Id ? "selected" : "")>@tacticalSquad.Name</option>
+                                }
+                            }
+                        </select>
+                        <small id="tacticalSquadSearchError" class="search-error-text"></small>
+                        <span name="tacticalSquadloader" id="tacticalSquadloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                        <small class="form-text text-muted">Select a tactical squad.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedTacticalSquad", "Selected tactical squad value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" id="tacticalSquadFormations">
+                <div class="form-group" id="commandDiv" style="position:relative;display:@((Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any() && Model.EscortDetails.SelectedTacticalSquad > 0) ? "block" : "none")">
+                    <b style="color:#e97d68;">Command/Formation</b>
+                    <div class="form-group">
+                        <select class="form-control" name="EscortDetails.SelectedCommand" id="commandList">
+                            <option value="" disabled selected>Select a Command/Formation</option>
+                            <option value="0">Any</option>
+                            @if (Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any())
+                            {
+                                foreach (var item in Model.EscortDetails.Formations)
+                                {
+                                    <option value="@item.Id" @(Model.EscortDetails.SelectedCommand == item.Id ? "selected" : "")>@item.Name</option>
+                                }
+                            }
+                        </select>
+                        <small id="commandSearchError" class="search-error-text"></small>
+                        <span name="commandloader" id="commandloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                        <small class="form-text text-muted">Select a command/formation.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedCommand", "Selected command value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid no-padding-x" id="escortServiceCategoryExtraFields" style="display:@((Model.EscortDetails.ShowExtraFieldsForServiceCategoryType) ? "block" : "none")">
+                <div class="col-md-6 margin-b-16">
+                    <b style="color:#e97d68;">Origin State</b>
+                    <select class="form-control state" name="EscortDetails.SelectedOriginState" id="originState" @((Model.EscortDetails.SelectedOriginState > 0) ? "required" : "")>
+                        <option selected disabled value="">Select a State</option>
+                        @foreach (var item in Model.EscortDetails.StateLGAs)
+                        {
+                            <option value="@item.Id" @(Model.EscortDetails.SelectedOriginState == item.Id ? "selected" : "")>@item.Name</option>
+                        }
+                    </select>
+                    <span name="originStateloader" id="originStateloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                    <small class="form-text text-muted">Select the origin state.</small>
+                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedOriginState", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                </div>
+
+                <div class="col-md-6 margin-b-16">
+                    <b style="color:#e97d68;">Origin LGA</b>
+                    <select class="form-control" name="EscortDetails.SelectedOriginLGA" id="originLga" @((Model.EscortDetails.SelectedOriginLGA > 0) ? "required" : "")>
+                        <option selected disabled value="">Select an LGA</option>
+                        @if (Model.EscortDetails.OriginLGAs != null && Model.EscortDetails.OriginLGAs.Any())
+                        {
+                            foreach (var item in Model.EscortDetails.OriginLGAs)
+                            {
+                                <option value="@item.Id" @(Model.EscortDetails.SelectedOriginLGA == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                    <small class="form-text text-muted">Select the origin LGA.</small>
+                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedOriginLGA", "Selected origin LGA value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                </div>
+
+                <div class="col-md-12" id="escortServiceOriginFormations">
+                    @if (Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any() && Model.EscortDetails.SelectedTacticalSquad == 0 && Model.EscortDetails.SelectedOriginState > 0)
+                    {
+                        <div class="form-group" id="commandDiv" style="position:relative;display:@((Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any()) ? "block" : "none")">
+                            <b style="color:#e97d68;">Command/Formation</b>
+                            <div class="form-group">
+                                <select class="form-control" name="EscortDetails.SelectedCommand" id="commandList">
+                                    <option value="" disabled selected>Select a Command/Formation</option>
+                                    <option value="0">Any</option>
+                                    @if (Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any())
+                                    {
+                                        foreach (var item in Model.EscortDetails.Formations)
+                                        {
+                                            <option value="@item.Id" @(Model.EscortDetails.SelectedCommand == item.Id ? "selected" : "")>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <small id="commandSearchError" class="search-error-text"></small>
+                                <span name="commandloader" id="commandloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                                <small class="form-text text-muted">Select a command/formation.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedCommand", "Selected command value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Address</b>
+                        <textarea id="originLocation" class="form-control" placeholder="Enter your address" name="EscortDetails.AddressOfOriginLocation" rows="4" style="height:120px;width:100%" maxlength="100" minlength="5" @((!string.IsNullOrEmpty(Model.EscortDetails.AddressOfOriginLocation)) ? "required" : "")>@Model.EscortDetails.AddressOfOriginLocation</textarea>
+                        <small class="form-text text-muted">Please specify the address of the origin location.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.AddressOfOriginLocation", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container-fluid no-padding-x">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Service Delivery State</b>
+                        <div class="form-group">
+                            <select class="form-control" name="EscortDetails.SelectedState" id="state" required>
+                                <option selected disabled value="">Select a State</option>
+                                @foreach (var item in Model.EscortDetails.StateLGAs)
+                                {
+                                    <option value="@item.Id" @(Model.EscortDetails.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+                                }
+                            </select>
+                            <span name="deliveryStateloader" id="deliveryStateloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                            <small class="form-text text-muted">Select the police command state for the service delivery.</small>
+                            <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedState", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Service Delivery LGA</b>
+                        <div class="form-group">
+                            <select required class="form-control" name="EscortDetails.SelectedStateLGA" id="lga">
+                                <option selected disabled value="">Select an LGA</option>
+                                @if (Model.EscortDetails.ListLGAs != null && Model.EscortDetails.ListLGAs.Any())
+                                {
+                                    foreach (var item in Model.EscortDetails.ListLGAs)
+                                    {
+                                        <option value="@item.Id" @(Model.EscortDetails.SelectedStateLGA == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <small class="form-text text-muted">Select the police command LGA for the service delivery.</small>
+                            <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedStateLGA", "Selected LGA value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" id="escortServiceDeliveryFormations">
+                    @if (Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any() && Model.EscortDetails.SelectedTacticalSquad == 0 && Model.EscortDetails.SelectedOriginState == 0)
+                    {
+                        <div class="form-group" id="commandDiv" style="position:relative;display:@((Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any()) ? "block" : "none")">
+                            <b style="color:#e97d68;">Command/Formation</b>
+                            <div class="form-group">
+                                <select class="form-control" name="EscortDetails.SelectedCommand" id="commandList">
+                                    <option value="" disabled selected>Select a Command/Formation</option>
+                                    <option value="0">Any</option>
+                                    @if (Model.EscortDetails.Formations != null && Model.EscortDetails.Formations.Any())
+                                    {
+                                        foreach (var item in Model.EscortDetails.Formations)
+                                        {
+                                            <option value="@item.Id" @(Model.EscortDetails.SelectedCommand == item.Id ? "selected" : "")>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <small id="commandSearchError" class="search-error-text"></small>
+                                <span name="commandloader" id="commandloader" class="profileloader" style="position:absolute;margin:auto;"></span>
+                                <small class="form-text text-muted">Select a command/formation.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.SelectedCommand", "Selected command value is not valid.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Address</b>
+                    <textarea id="address" class="form-control" placeholder="Enter you address" name="EscortDetails.Address" rows="4" style="height:120px;width:100%" maxlength="100" minlength="5" required>@Model.EscortDetails.Address</textarea>
+                    <small class="form-text text-muted">Please specify your desired address.</small>
+                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.Address", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding:0">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">Start Date</b>
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control pickyNoPastAndTodaysDate" id="startDate" name="EscortDetails.StartDate" autocomplete="off" value="@Model.EscortDetails.StartDate" readonly="readonly" required />
+                        <small class="form-text text-muted">Select start date.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.StartDate", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <b style="color:#e97d68;">End Date</b>
+                        <input type="text" placeholder="DD/MM/YYYY" class="form-control pickyNoPastAndTodaysDate" id="endDate" name="EscortDetails.EndDate" autocomplete="off" value="@Model.EscortDetails.EndDate" readonly="readonly" required />
+                        <small class="form-text text-muted">Select end date.</small>
+                        <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.EndDate", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="container-fluid" style="margin-bottom:12px">
+                        <b style="color:#e97d68;">Select Preferred Invoice Payment Method</b>
+                    </div>
+                    <div class="col-md-6" style="padding-left:0">
+                        <div class="form-check">
+                            <label class="form-check-label" style="width:auto !important">
+                                <input required type="radio" @(Model.EscortDetails.PSBillingType == Parkway.CBS.Police.Core.Models.Enums.PSBillingType.Weekly ? "checked" : "") name="EscortDetails.PSBillingType" class="form-check-input billing-type-radio" value="@(Parkway.CBS.Police.Core.Models.Enums.PSBillingType.Weekly)" id="weeklyRadioBtn" /> Weekly Payment
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding-left:0">
+                        <div class="form-check">
+                            <label class="form-check-label" style="width:auto !important">
+                                <input required type="radio" @(Model.EscortDetails.PSBillingType == Parkway.CBS.Police.Core.Models.Enums.PSBillingType.Monthly ? "checked" : "") name="EscortDetails.PSBillingType" class="form-check-input billing-type-radio" value="@(Parkway.CBS.Police.Core.Models.Enums.PSBillingType.Monthly)" /> Monthly Payment
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.PSBillingType", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                </div>
+            </div>
+            <div class="col-md-6" id="numberOfDaysFieldContainer" style="display:@(Model.EscortDetails.PSBillingType == Parkway.CBS.Police.Core.Models.Enums.PSBillingType.Weekly ? "block" : "none")">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Number of Days</b>
+                    <input type="number" class="form-control" name="EscortDetails.PSBillingTypeDurationNumber" value="@Model.EscortDetails.PSBillingTypeDurationNumber" />
+                    <small class="form-text text-muted">Enter the number of days.</small>
+                    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("EscortDetails.PSBillingTypeDurationNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" value="@Model.BatchId" name="BatchId" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button type="submit" class="btn btn-primary btn-block" style="width:100%">@T("Generate Request")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

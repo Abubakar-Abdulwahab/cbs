@@ -1,0 +1,267 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Police.Admin.VM.PoliceOfficerReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Police Officer Report").ToString();
+
+     Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.Admin.Reports.LGA.Commands.Script").AtFoot();
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 41%;
+        top: 33%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var isAdmin = true;
+</script>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+<div class="container-fluid">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Rank</b>
+                <div class="form-group">
+                    <select class="form-control" name="SelectedRank" id="rank">
+                        <option selected value="0">All</option>
+                        @if (Model.Ranks.Any())
+                        {
+                            foreach (var item in Model.Ranks)
+                            {
+                                <option value="@item.Id" @(Model.SelectedRank == item.Id ? "selected" : "")>@item.RankName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Officer Name</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter officer's name" class="form-control" name="OfficerName" value="@Model.OfficerName" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">ID Number</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter ID number" class="form-control" value="@Model.IdNumber" name="IdNumber" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">IPPIS No.</b>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter officer's IPPIS number" class="form-control" value="@Model.IppisNumber" name="IppisNumber" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">State</b>
+                <div class="form-group">
+                    <select class="form-control" name="SelectedState" id="state">
+                        <option selected value="0">All States</option>
+                        @foreach (var item in Model.StateLGAs)
+                        {
+                            <option value="@item.Id" @(Model.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">LGA</b>
+                <div class="form-group">
+                    <select class="form-control" name="SelectedLGA" id="lga">
+                        <option selected value="0">All LGAs</option>
+                        @if (Model.ListLGAs != null && Model.ListLGAs.Any())
+                        {
+                            foreach (var item in Model.ListLGAs)
+                            {
+                                <option value="@item.Id" @(Model.SelectedLGA == item.Id ? "selected" : "")>@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select Command</b>
+                <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                <select class="form-control" id="commands" name="SelectedCommand">
+                    @if (Model.Commands != null && Model.Commands.Any())
+                    {
+                        <option value="0">All Commands</option>
+                        foreach (var item in Model.Commands)
+                        {
+                            <option value="@item.Id" @(Model.SelectedCommand == item.Id.ToString() ? "selected" : "")>@item.Name (@item.Code)</option>
+
+                        }
+                    }
+                    else if (Model.SelectedCommand == "0")
+                    {
+                            <option value="0">All Commands</option> 
+                    }
+                    else
+                    {
+                        <option value="">Select a Command</option>
+                    }
+                </select>
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                <div id="searchError"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <b style="color:#e97d68;">&nbsp;</b>
+                <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("PoliceOfficerReport", "PoliceOfficerReport" )">Search</button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="form-group" style="margin-top: 20px">
+                <button class="btn btn-success" style="margin-left: 10px" title="Export to excel" formaction="@Url.Action("PoliceOfficersReportDownload", "PoliceOfficerReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+                    <i class=" fa fa-file-excel-o"></i>
+                    <span>Excel</span>
+                </button>
+                <button class="btn btn-danger" style="margin-left: 10px" title="Export to PDF" formaction="@Url.Action("PoliceOfficersReportDownload", "PoliceOfficerReportExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+                    <i class=" pdf fa fa-file-pdf-o"></i>
+                    <span>PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                NAME
+                            </th>
+                            <th>
+                                RANK
+                            </th>
+                            <th>
+                                ID NUMBER
+                            </th>
+                            <th>
+                                IPPIS NUMBER
+                            </th>
+                            <th>
+                                COMMAND
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model.Reports != null && Model.Reports.Count() > 0)
+                        {
+                            foreach (var item in Model.Reports)
+                            {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.RankName
+                            </td>
+                            <td>
+                                @item.IdNumber
+                            </td>
+                            <td>
+                                @item.IppisNumber
+                            </td>
+                            <td>
+                                @item.CommandName (@item.CommandCode)
+                            </td>
+                        </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+}
+@Display(Model.Pager)

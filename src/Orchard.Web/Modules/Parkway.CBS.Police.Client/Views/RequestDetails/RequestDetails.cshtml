@@ -1,0 +1,258 @@
+﻿@model Parkway.CBS.Police.Core.VM.RequestDetailsVM
+@{
+    Layout.Title = "" + Model.ServiceName + " Details";
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Request.Details.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<style>
+    .transparent {
+        opacity: 0;
+    }
+
+    .flex-style-container-header {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+        .flex-style-container-header a {
+            color: #2F4CB0;
+        }
+</style>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid request-details-new-main-content no-margin no-padding">
+        <div class="container-fluid request-details-header">
+            <a href="#" id="backCaret" style="position:relative;padding-top:1px"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/dropdown-caret-blue.svg"))" class="img img-responsive" style="width:inherit;height:auto;transform:rotate(90deg);position:absolute;left:0;top:8.5px"> <b class="pl-3">Back</b></a>
+            <span class="px-2">|</span>
+            <h6> Request for @Model.ServiceName</h6>
+        </div>
+
+        <div class="container-fluid request-details-container">
+            <div class="container-fluid request-details-content-1 no-margin no-padding">
+                @switch ((Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus)Model.Status)
+                {
+                    case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingInvoicePayment:
+                        <h6>Request Status: <span class="status-pending">Pending</span></h6>
+                        break;
+                    case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.PendingApproval:
+                        <h6>Request Status: <span class="status-pending">Pending</span></h6>
+                        break;
+                    case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Approved:
+                        <h6>Request Status: <span class="status-approved">Approved</span></h6>
+                        break;
+                    case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Confirmed:
+                        <h6>Request Status: <span class="status-approved">Confirmed</span></h6>
+                        break;
+                    case Parkway.CBS.Police.Core.Models.Enums.PSSRequestStatus.Rejected:
+                        <h6>Request Status: <span class="status-declined">Declined</span></h6>
+                        break;
+                    default:
+                        <h6>Request Status: <span class="status-pending">Pending</span></h6>
+                        break;
+                }
+            </div>
+            <div class="row px-0 py-0 mx-0 my-0">
+
+
+
+                <div class="col-md-6 request-details-content-3 pt-4 px-0">
+                    @foreach (var statusLog in Model.RequestStatusLog)
+                    {
+                        if (statusLog.Position == Model.RequestStatusLog.ElementAt(0).Position && statusLog.Fulfilled == false && Model.RequestStatusLog.Count() == 1)
+                        {
+                            <div class="row no-margin no-padding">
+                                <div class="col-2 info-circle-container px-0">
+                                    <div class="info-circle"></div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="stage-info-container pb-2">
+                                        <div class="container-fluid content-1">
+                                        </div>
+                                        <div class="container-fluid content-2">
+                                            <h6>@statusLog.PositionName</h6>
+                                            <p class="stage-end-info">Completed: @((statusLog.UserActionRequired == true && statusLog.Fulfilled == true) ? statusLog.UpdatedAtParsed : null)</p>
+                                        </div>
+                                        @if (statusLog.UserActionRequired && statusLog.Invoice != null && statusLog.Fulfilled == false)
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">Hi there, to continue your application process kindly pay your processing fee, you can click on the link below to view your invoice</p>
+                                            </div>
+                                            <div class="container-fluid content-4">
+                                                <a href="@Url.Action("GetInvoice","RequestInvoices", new { bin = statusLog.Invoice.InvoiceNumber })" name="viewInvoice">View Invoice</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">@statusLog.StatusDescription</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (statusLog.Position == Model.RequestStatusLog.ElementAt(0).Position && statusLog.Fulfilled == false)
+                        {
+                            <div class="row no-margin no-padding">
+                                <div class="col-2 info-circle-container px-0">
+                                    <div class="info-circle"></div>
+                                    <div class="info-circle-chain"></div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="stage-info-container pb-2">
+                                        <div class="container-fluid content-1">
+                                        </div>
+                                        <div class="container-fluid content-2">
+                                            <h6>@statusLog.PositionName</h6>
+                                            <p class="stage-end-info">Completed: @((statusLog.UserActionRequired == true && statusLog.Fulfilled == true) ? statusLog.UpdatedAtParsed : null)</p>
+                                        </div>
+                                        @if (statusLog.UserActionRequired && statusLog.Invoice != null && statusLog.Fulfilled == false)
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">Hi there, to continue your application process kindly pay your processing fee, you can click on the link below to view your invoice</p>
+                                            </div>
+                                            <div class="container-fluid content-4">
+                                                <a href="@Url.Action("GetInvoice","RequestInvoices", new { bin = statusLog.Invoice.InvoiceNumber })" name="viewInvoice">View Invoice</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">@statusLog.StatusDescription</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (statusLog.Position == Model.RequestStatusLog.ElementAt(Model.RequestStatusLog.Count() - 1).Position)
+                        {
+                            <div class="row no-margin no-padding">
+                                <div class="col-2 info-circle-container px-0">
+                                    <div class="info-circle-checked"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/check.svg"))" class="img img-responsive"></div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="stage-info-container pb-2">
+                                        <div class="container-fluid content-1">
+                                        </div>
+                                        <div class="container-fluid content-2">
+                                            <h6>@statusLog.PositionName</h6>
+                                            <p class="stage-end-info">Completed: @(((statusLog.UserActionRequired == true && statusLog.Fulfilled == true) || statusLog.UserActionRequired == false) ? statusLog.UpdatedAtParsed : null)</p>
+                                        </div>
+                                        @if (statusLog.UserActionRequired && statusLog.Invoice != null && statusLog.Fulfilled == false)
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">Hi there, to continue your application process kindly pay your processing fee, you can click on the link below to view your invoice</p>
+                                            </div>
+                                            <div class="container-fluid content-4">
+                                                <a href="@Url.Action("GetInvoice","RequestInvoices", new { bin = statusLog.Invoice.InvoiceNumber })" name="viewInvoice">View Invoice</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">@statusLog.StatusDescription</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row no-margin no-padding">
+                                <div class="col-2 info-circle-container px-0">
+                                    <div class="info-circle-checked"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/check.svg"))" class="img img-responsive"></div>
+                                    <div class="info-circle-chain"></div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="stage-info-container pb-2">
+                                        <div class="container-fluid content-1">
+                                        </div>
+                                        <div class="container-fluid content-2">
+                                            <h6>@statusLog.PositionName</h6>
+                                            <p class="stage-end-info">Completed: @(((statusLog.UserActionRequired == true && statusLog.Fulfilled == true) || statusLog.UserActionRequired == false) ? statusLog.UpdatedAtParsed : null)</p>
+                                        </div>
+                                        @if (statusLog.UserActionRequired && statusLog.Invoice != null && statusLog.Fulfilled == false)
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">Hi there, to continue your application process kindly pay your processing fee, you can click on the link below to view your invoice</p>
+                                            </div>
+                                            <div class="container-fluid content-4">
+                                                <a href="@Url.Action("GetInvoice","RequestInvoices", new { bin = statusLog.Invoice.InvoiceNumber })" name="viewInvoice">View Invoice</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="container-fluid content-3">
+                                                <p class="mb-0">@statusLog.StatusDescription</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="col-md-6 request-details-content-2 no-margin no-padding pt-4">
+                    <div class="container-fluid header flex-style-container-header">
+                        <h6>
+                            <span><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/info-grey.svg"))" class="img img-responsive mr-1" style="width:inherit;height:auto"></span> Request Details
+                        </h6>
+
+                        @if (Model.HasCertificate)
+                        {
+                            <a href="@Url.RouteUrl(Parkway.CBS.Police.Client.RouteName.RequestDetails.ViewServiceDocument, new { fileRefNumber = Model.FileRefNumber })">Download @Model.CertificateLabel</a>
+                        }
+                    </div>
+                    <div id="detailsInfo">
+                        <div class="container-fluid content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-0 title">Service Requested:</p>
+                                    <p class="details-content">@Model.ServiceName</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0 title">Address:</p>
+                                    <p class="details-content">@Model.TaxEntity.Address</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0 title">File Ref Number:</p>
+                                    <p class="details-content">@Model.FileRefNumber</p>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.ApprovalNumber))
+                                {
+                                    <div class="col-md-6">
+                                        <p class="mb-0 title">Approval Number:</p>
+                                        <p class="details-content">@Model.ApprovalNumber</p>
+                                    </div>
+                                }
+                                @Html.Partial("Partials\\RequestDetails\\" + Model.ViewName + "", Model.ServiceVM as object)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+<script>
+    $('a[name="viewInvoice"]').click(function (e) {
+        e.preventDefault();
+        window.open(this.href, "cbsinvoice", "width=800,height=800,scrollbars=yes")
+    });
+</script>
+
+

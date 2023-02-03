@@ -1,0 +1,219 @@
+﻿@model Parkway.CBS.Module.ViewModels.DashboardViewModel
+@using Orchard.Utility.Extensions
+
+@{ Layout.Title = T("Central Billing System Dashboard").ToString();  }
+
+@{
+    Style.Require("CBS.MDA.Style.RevenueDashboard");
+
+    Style.Include("element-browser.css");
+    Script.Require("jQuery");
+    //Script.Include("/OrchardLocal/Modules/Orchard.Layouts/scripts/element-browser.js");CBS.Element.Script
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.MonthPicker");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.HighChart.Script");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.NewDashboard.Script");
+    Script.Require("CBS.MDA.MonthPicker.Script");
+
+    Script.Require("CBS.Element.Script");
+
+
+    Script.Require("CBS.Chart.JS").AtFoot();
+    Script.Require("CBS.Dashboard.Chart").AtFoot();
+
+    var categories = Model.Categories;
+    Layout.LocalNavigation.Add(New.Chart_Tab(Categories: categories));
+}
+<style>
+    /*text:last-child{
+        display:none;
+    }*/
+    label {
+        display: inline-block !important;
+    }
+
+    .panel-heading-first{
+        position:relative;
+    }
+
+    .panel-heading-first::after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: black;
+        height: 100%;
+    }
+</style>
+<script>
+    var pies = @Html.Raw(Json.Encode(Model.ChartViewModel.PieChart));
+
+    var barChart = @Html.Raw(Json.Encode(Model.ChartViewModel.BarChart));
+    var dougCharts = @Html.Raw(Json.Encode(Model.ChartViewModel.DoughNutCharts));
+    var lineChart = @Html.Raw(Json.Encode(Model.ChartViewModel.LineChart));
+</script>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="element-browser">
+        @foreach (var category in categories.Reverse())
+        {
+            if (category.DisplayName.ToString() == "DashBoard")
+            {
+                <div id="cat-@category.Name.HtmlClassify()" class="elements">
+                    <div class="container">
+                        <div class="row panelrows col-lg-offset-0">
+                            <div class="col-md-3 first">
+                                <div class="panel panel-default" title="Number of Invoices that have been sent to the customers for a month">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Invoices Sent</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.TotalNumberOfInvoices
+                                        @*@String.Format("{0:n0}", Model.TotalNumberOfInvoices)*@
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="panel panel-default" title="Total Income expected">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Expected Income</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span>&#x20a6</span> @String.Format("{0:n2}", Model.TotalExpectedIncome)
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">January - @Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="panel panel-default" title="Total Income expected for a month">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Income Due</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span>&#x20a6</span> @String.Format("{0:n2}", Model.TotalIncomeDue)
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row panelrows col-lg-offset-0">
+                            <div class="col-md-3 first">
+                                <div class="panel panel-default" title="Number of Invoices that have been paid for in a month">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Invoices Paid</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.TotalInvoicePaid
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="panel panel-default" title="Total Income received for a month">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Received Income</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span>&#x20a6</span>@String.Format("{0:n2}", Model.ActualIncomeOnInvoicesPaid)
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">@Model.Month</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="panel panel-default" title="Number of Invoices that have been created">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-6 panel-heading-first"><h3 class="panel-title">MDAs</h3></div>
+                                            <div class="col-xs-6"><h3 class="panel-title" style="white-space: nowrap">Revenue Heads</h3></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-6 panel-heading-first">@Model.NumberOfMDAs</div>
+                                            <div class="col-xs-6">@Model.NumberOfRevenueHeads</div>
+                                        </div>
+                                        @*@String.Format("{0:n0}", Model.NumberOfMDAs) | @String.Format("{0:n0}", Model.NumberOfRevenueHeads)*@
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h1 class="panel-footer-text">&nbsp;</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="cat-@category.Name.HtmlClassify()" class="elements">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="text" placeholder="click to show datepicker" class="form-control from" value="@Model.FromRange" name="fromRange" />
+                        </div>
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" placeholder="click to show datepicker" class="form-control to" value="@Model.EndRange" name="endRange" />
+                        </div>
+                        <div class="form-group">
+                            <select id="mdaSelected" name="mdaSelected" class="form-control">
+                                <option value="All" selected>All</option>
+                                @foreach (var item in Model.ListOfMdas)
+                        {
+                            if (item.Slug == Model.MDASelected)
+                            {
+                                        <option value="@item.Slug" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Slug">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default">Search</button>
+                        </div>
+                        <br />
+                        <hr />
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="chart-container">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="container"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div id="linechart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}

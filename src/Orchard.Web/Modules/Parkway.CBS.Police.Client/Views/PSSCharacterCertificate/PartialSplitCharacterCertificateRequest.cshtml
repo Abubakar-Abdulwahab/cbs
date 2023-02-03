@@ -1,0 +1,185 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+@{
+    Layout.Title = Model.ServiceName;
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+    Script.Require("PSS.Side.Note.Pop.Up.Script").AtFoot();
+    Script.Require("PSS.Character.Certificate.Script");
+    Script.Require("Tooltip.Toggling.Script");
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+    Style.Require("Style.Datepicker");
+
+}
+<style>
+    .tooltip-inner {
+        background-color: #ffffff;
+    }
+
+    .tooltip.show {
+        opacity: 1;
+    }
+
+    .upload-file-container{
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .uploaded-passport-thumbnail img {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+    }
+
+    .uploaded-passport-thumbnail embed {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+        overflow:hidden;
+    }
+
+    .uploaded-passport-thumbnail embed html body{
+        overflow:hidden;
+    }
+
+    .preview-document-embed{ position:relative; }
+
+    .embed-overlay{
+        position:absolute;
+        background-color:rgba(0,0,0,0);
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+</style>
+<script>
+    var internationalRequestType = @Html.Raw(Json.Encode(Parkway.CBS.Police.Core.Models.Enums.PCCRequestType.International));
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var reasonsForInquiry = @Html.Raw(Json.Encode(Model.CharacterCertificateReasonsForInquiry));
+    var reasonsForInquiryMap = new Map(reasonsForInquiry.map(obj => [obj.Id, obj]));
+</script>
+<div id="police-extract-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid police-extract-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center police-extract-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Select Service</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Fill Request Form</a></div>
+        </div>
+        <div class="container-fluid police-extract-container no-padding">
+            <div class="container police-extract-form-container no-padding">
+                <div class="container-fluid no-margin no-padding service-note-toggle-container">
+                    <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#sideNoteCollapsible" id="serviceNoteToggle">Click here to view note</button>
+                </div>
+                <div class="row no-margin no-padding">
+                    <div class="container col-md-6 no-padding police-extract-form">
+                        <h4>@Model.ServiceName.ToUpper()</h4>
+                        <p class="grey-tip">Fill in the details of your request.</p>
+
+                        <div class="row no-margin no-padding police-extract-nav-list-form">
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Applicant&nbsp;Info</p>
+                            </div>
+                            <div class="container dashed-block no-margin no-padding">
+                                <div style="border:0.5px dashed #E3E3E3"></div>
+                            </div>
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Request&nbsp;Form</p>
+                            </div>
+                        </div>
+                        @using (Html.BeginRouteForm("P.CharacterCertificateRequest", FormMethod.Post, new { @id = "characterCertificateForm", @name = "characterCertificateForm", @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.Partial("\\Partials\\PCCRequestType", Model)
+
+                            @Html.Partial("\\Partials\\PCCCharacterCertificateReasonForInquiry", Model)
+
+                            @Html.Partial("\\Partials\\PCCSelectedCountryOfOrigin", Model)
+
+                            @Html.Partial("\\Partials\\PCCPlaceOfBirth", Model)
+
+                            @Html.Partial("\\Partials\\PCCDateOfBirth", Model)
+
+                            @Html.Partial("\\Partials\\PCCDestinationCountry", Model)
+
+                            @Html.Partial("\\Partials\\PCCSelectedCountryOfPassport", Model)
+
+                            @Html.Partial("\\Partials\\PCCPassportNumber", Model)
+
+                            @Html.Partial("\\Partials\\PCCPlaceOfIssuance", Model)
+
+                            @Html.Partial("\\Partials\\PCCDateOfIssuance", Model)
+
+                            @Html.Partial("\\Partials\\PCCPreviouslyConvicted", Model)
+
+                            @Html.Partial("\\Partials\\PCCPassportPhotographFile", Model)
+
+                            @Html.Partial("\\Partials\\PCCIntPassportDatapageFile", Model)
+
+                            <h6 style="font-size:18px;margin-top:40px">Select Police Command to Request Character Certificate</h6>
+                            @Html.Partial("Partials\\ServiceStateCommand", Model)
+
+                            <div class="container-fluid no-padding no-margin escort-duties-btn-group">
+                                <div class="row no-margin no-padding">
+                                    <div class="col-md-6 no-padding">
+                                        <button type="button" id="back" class="btn btn-block blue-btn">Back</button>
+                                    </div>
+                                    <div class="col-md-6 no-padding">
+                                        <button type="submit" class="btn btn-block blue-btn">Proceed</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @Html.Partial("Partials\\SideNotePartial", Model.ServiceNote)
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+    @if (!Model.ViewedTermsAndConditionsModal && Model.Caveat != null)
+    {@Html.Partial("Partials\\PSServiceCaveatPartial", Model.Caveat)}
+    @Html.Partial("Partials\\PCCDocumentUploadPreviewModal")
+    @Html.Partial("Partials\\PCCDocumentUploadConfirmationModal")
+    @Html.Partial("Partials\\PCCPassportUploadGuidelinesModal")
+</div>

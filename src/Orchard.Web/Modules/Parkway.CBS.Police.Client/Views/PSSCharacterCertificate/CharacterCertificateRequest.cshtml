@@ -1,0 +1,348 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+@{
+    Layout.Title = Model.ServiceName;
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Script.Require("CBS.State.LGA.Script").AtFoot();
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("PSS.DatePicker.Script");
+    Script.Require("PSS.Side.Note.Pop.Up.Script").AtFoot();
+    Script.Require("PSS.Character.Certificate.Script");
+    Script.Require("Tooltip.Toggling.Script");
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+    Style.Require("Style.Datepicker");
+
+}
+<style>
+    .tooltip-inner {
+        background-color: #ffffff;
+    }
+
+    .tooltip.show {
+        opacity: 1;
+    }
+
+    .upload-file-container{
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .uploaded-passport-thumbnail img {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+    }
+
+    .uploaded-passport-thumbnail embed {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px 4px 4px 4px;
+        overflow:hidden;
+    }
+
+    .uploaded-passport-thumbnail embed html body{
+        overflow:hidden;
+    }
+
+    .preview-document-embed{ position:relative; }
+
+    .embed-overlay{
+        position:absolute;
+        background-color:rgba(0,0,0,0);
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+</style>
+<script>
+    var internationalRequestType = @Html.Raw(Json.Encode(Parkway.CBS.Police.Core.Models.Enums.PCCRequestType.International));
+    var states = @Html.Raw(Json.Encode(Model.StateLGAs));
+    var stateLGAMap = new Map(states.map(obj => [obj.Id, obj.LGAs]));
+    var reasonsForInquiry = @Html.Raw(Json.Encode(Model.CharacterCertificateReasonsForInquiry));
+    var reasonsForInquiryMap = new Map(reasonsForInquiry.map(obj => [obj.Id, obj]));
+</script>
+<div id="police-extract-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid police-extract-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center police-extract-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Select Service</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Fill Request Form</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Confirm Details and Submit Request</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Fill Request Form</a></div>
+        </div>
+        <div class="container-fluid police-extract-container no-padding">
+            <div class="container police-extract-form-container no-padding">
+                <div class="container-fluid no-margin no-padding service-note-toggle-container">
+                    <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#sideNoteCollapsible" id="serviceNoteToggle">Click here to view note</button>
+                </div>
+                <div class="row no-margin no-padding">
+                    <div class="container col-md-6 no-padding police-extract-form">
+                        <h4>@Model.ServiceName.ToUpper()</h4>
+                        <p class="grey-tip">Fill in the details of your request.</p>
+
+                        <div class="row no-margin no-padding police-extract-nav-list-form">
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Applicant&nbsp;Info</p>
+                            </div>
+                            <div class="container dashed-block no-margin no-padding">
+                                <div style="border:0.5px dashed #E3E3E3"></div>
+                            </div>
+                            <div class="container no-margin no-padding">
+                                <span class="small-blue-circle"></span>
+                                <p>Request&nbsp;Form</p>
+                            </div>
+                        </div>
+                        @using (Html.BeginRouteForm("P.CharacterCertificateRequest", FormMethod.Post, new { @id = "characterCertificateForm", @name = "characterCertificateForm", @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <label for="requestType">Request Types<span class="required-sym">*</span></label>
+                                <select required class="custom-select" name="RequestType" id="requestType">
+                                    <option selected disabled value="">Select a request type</option>
+                                    @if (Model.RequestTypes != null && Model.RequestTypes.Any())
+                                    {
+                                        foreach (var item in Model.RequestTypes)
+                                        {
+                                            <option value="@item.Id" @(Model.RequestType == item.Id ? "selected" : "")>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <small class="form-text text-muted">Specify the purpose of the Certificate. Either within Nigeria or outside Nigeria.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("RequestType", "Selected request type value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reasonForInquiry">Reason for Inquiry<span class="required-sym">*</span></label>
+                                <select required class="custom-select" name="CharacterCertificateReasonForInquiry" id="reasonForInquiry">
+                                    <option selected disabled value="">Select a reason for inquiry</option>
+                                    @if (Model.CharacterCertificateReasonsForInquiry != null && Model.CharacterCertificateReasonsForInquiry.Any())
+                                    {
+                                        foreach (var item in Model.CharacterCertificateReasonsForInquiry)
+                                        {
+                                            <option value="@item.Id" @(Model.CharacterCertificateReasonForInquiry == item.Id ? "selected" : "")>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <small class="form-text text-muted">Select a reason.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("CharacterCertificateReasonForInquiry", "Selected reason value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <div class="form-group" id="otherReasonsContainer" style="display:@(((Model.CharacterCertificateReasonForInquiry > 0) && Model.CharacterCertificateReasonsForInquiry.Where(x => x.Id == Model.CharacterCertificateReasonForInquiry).SingleOrDefault().ShowFreeForm) ? "block" : "none")">
+                                <label for="otherReasons">Other Reason<span class="required-sym">*</span></label>
+                                <input type="text" name="ReasonForInquiryValue" class="form-control" id="otherReasons" value="@(((Model.CharacterCertificateReasonForInquiry > 0) && Model.CharacterCertificateReasonsForInquiry.Where(x => x.Id == Model.CharacterCertificateReasonForInquiry).SingleOrDefault().ShowFreeForm) ? Model.ReasonForInquiryValue : "")" placeholder="Enter your specific reason for inquiry" @(((Model.CharacterCertificateReasonForInquiry > 0) && Model.CharacterCertificateReasonsForInquiry.Where(x => x.Id == Model.CharacterCertificateReasonForInquiry).SingleOrDefault().ShowFreeForm) ? "required" : "") />
+                                <small class="form-text text-muted">Enter your reason for inquiry.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("ReasonForInquiryValue", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            @*<div class="form-group">
+                <label for="tribe">Tribe</label>
+                <input required type="text" placeholder="Enter tribe" class="form-control" list="tribes" id="tribeData" name="tribesData" spellcheck="false" autocomplete="off" value="@((Model.Tribe > 0) ? Model.Tribes.Where(x => x.Id == Model.Tribe).SingleOrDefault().Name : "")" />
+                <datalist id="tribes" name="tribes">
+                    @if (Model.Tribes != null && Model.Tribes.Any())
+                    {
+                        foreach (var item in Model.Tribes)
+                        {
+                            <option data-value="@item.Id" value="@item.Name">@item.Name</option>
+                        }
+                    }
+                </datalist>
+                <input type="hidden" name="Tribe" id="tribeIdentifier" />
+                <small class="form-text text-muted">Specify your tribe.</small>
+                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("Tribe", "Selected tribe value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+            </div>*@
+                            <div class="form-group">
+                                <label for="originCountryData">Country of Origin<span class="required-sym">*</span></label>
+                                <input required type="text" placeholder="Enter the country you're from" class="form-control" list="originCountries" id="originCountryData" name="originCountryData" spellcheck="false" autocomplete="off" value="@((Model.SelectedCountryOfOrigin > 0) ? Model.Countries.Where(x => x.Id == Model.SelectedCountryOfOrigin).SingleOrDefault().Name : "")" />
+                                <datalist id="originCountries" name="originCountries">
+                                    @if (Model.Countries != null && Model.Countries.Any())
+                                    {
+                                        foreach (var country in Model.Countries)
+                                        {
+                                            <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+                                        }
+                                    }
+                                </datalist>
+                                <input type="hidden" name="SelectedCountryOfOrigin" id="originCountryIdentifier" />
+                                <small class="form-text text-muted">Select your country of origin.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCountryOfOrigin", "Selected country of origin value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+
+                            <div class="form-group" id="stateOfOriginContainer" style="display:@((Model.SelectedCountryOfOrigin > 0) && (Model.Countries.Where(x => x.Id == Model.SelectedCountryOfOrigin).SingleOrDefault().Name.ToLower() == "nigeria") ? "block" : "none")">
+                                <label for="stateOfOrigin">State of Origin<span class="required-sym">*</span></label>
+                                <select class="custom-select" name="SelectedStateOfOrigin" id="stateOfOrigin">
+                                    <option selected disabled value="">Select a State</option>
+                                    @foreach (var item in Model.StateLGAs)
+                                    {
+                                        <option value="@item.Id" @(Model.SelectedStateOfOrigin == item.Id ? "selected" : "")>@item.Name</option>
+                                    }
+                                </select>
+                                <small class="form-text text-muted">Select your state of origin.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedStateOfOrigin", "Selected State of origin value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="placeOfBirth">Place of Birth<span class="required-sym">*</span></label>
+                                <input required type="text" name="PlaceOfBirth" class="form-control" id="placeOfBirth" value="@Model.PlaceOfBirth" placeholder="Enter place of birth here" minlength="3" maxlength="50" />
+                                <small class="form-text text-muted">Specify your place of birth.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PlaceOfBirth", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="DateOfBirth">Date of Birth<span class="required-sym">*</span></label>
+                                <input type="text" name="DateOfBirth" class="form-control pickyNoFutureDatePast14Years" id="DateOfBirth" value="@Model.DateOfBirth" autocomplete="off" placeholder="DD/MM/YYYY" required />
+                                <small class="form-text text-muted">Select your date of birth.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("DateOfBirth", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="destinationCountry">Destination Country<span class="required-sym">*</span></label>
+                                <input required type="text" placeholder="Enter your destination country" class="form-control" list="countries" id="countryData" name="countryData" spellcheck="false" autocomplete="off" value="@((Model.DestinationCountry > 0) ? Model.Countries.Where(x => x.Id == Model.DestinationCountry).SingleOrDefault().Name : "")" />
+                                <datalist id="countries" name="countries">
+                                    @if (Model.Countries != null && Model.Countries.Any())
+                                    {
+                                        foreach (var country in Model.Countries)
+                                        {
+                                            <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+                                        }
+                                    }
+                                </datalist>
+                                <input type="hidden" name="DestinationCountry" id="countryIdentifier" />
+                                <small class="form-text text-muted">Select your destination country.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("DestinationCountry", "Selected country value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="passportCountryData">Country of Passport<span class="required-sym">*</span></label>
+                                <input required type="text" placeholder="Enter the country of your passport" class="form-control" list="passportCountries" id="passportCountryData" name="passportCountryData" spellcheck="false" autocomplete="off" value="@((Model.SelectedCountryOfPassport > 0) ? Model.Countries.Where(x => x.Id == Model.SelectedCountryOfPassport).SingleOrDefault().Name : "")" />
+                                <datalist id="passportCountries" name="passportCountries">
+                                    @if (Model.Countries != null && Model.Countries.Any())
+                                    {
+                                        foreach (var country in Model.Countries)
+                                        {
+                                            <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+                                        }
+                                    }
+                                </datalist>
+                                <input type="hidden" name="SelectedCountryOfPassport" id="passportCountryIdentifier" />
+                                <small class="form-text text-muted">Select the country of your passport.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCountryOfPassport", "Selected country of passport value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="passportNumber">Passport Number<span class="required-sym">*</span></label>
+                                <input type="text" name="PassportNumber" class="form-control" id="passportNumber" value="@Model.PassportNumber" minlength="7" maxlength="9" placeholder="Enter passport number here" />
+                                <small class="form-text text-muted">Specify your international passport number.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PassportNumber", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="placeOfIssuance">Place of Issuance<span class="required-sym">*</span></label>
+                                <input type="text" name="PlaceOfIssuance" class="form-control" id="placeOfIssuance" value="@Model.PlaceOfIssuance" maxlength="50" placeholder="Enter place of issuance here" />
+                                <small class="form-text text-muted">Specify where your passport was issued.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PlaceOfIssuance", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateOfIssuance">Date of Issuance<span class="required-sym">*</span></label>
+                                <input type="text" name="DateOfIssuance" class="form-control pickyNoFutureDate" id="dateOfIssuance" value="@Model.DateOfIssuance" autocomplete="off" placeholder="DD/MM/YYYY" />
+                                <small class="form-text text-muted">Specify the date your passport was issued.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("DateOfIssuance", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="container-fluid px-0">
+                                    <label for="PreviouslyConvicted">Have you previously been convicted?</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="PreviouslyConvicted" id="PreviouslyConvictedYES" value="true" required @(Model.PreviouslyConvicted ? "checked" : "") /> YES
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="PreviouslyConvicted" id="PreviouslyConvictedNO" value="false" required @(Model.PreviouslyConvicted ? "" : "checked") /> NO
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="previousConvictionHistoryContainer" style="display: @(Model.PreviouslyConvicted ? "block" : "none")">
+                                <label for="previousConvictionHistory">Previous Conviction History<span class="required-sym">*</span></label>
+                                <textarea name="PreviousConvictionHistory" minlength="10" maxlength="100" class="form-control" id="previousConvictionHistory" placeholder="Enter info about your previous conviction history" style="height:95px" @(Model.PreviouslyConvicted ? "required" : "")>@Model.PreviousConvictionHistory</textarea>
+                                <small class="form-text text-muted">Enter information about your previous conviction history.</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PreviousConvictionHistory", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+
+                            <div class="form-group" style="margin-top:30px">
+                                <label for="uploadPassportPhotograph">Upload Current Passport Photograph<span class="required-sym">*</span></label>
+                                <div class="upload-file-container">
+                                    <input type="file" id="uploadPassportPhotograph" name="passportphotographfile" accept=".png, .jpeg, .jpg" required>
+                                    <div class="uploaded-passport-thumbnail preview-document"><img src='/media/images/placeholder_image.jpg' id="passportThumbnail" alt='uploaded passport' /></div>
+                                </div>
+                                <small class="form-text text-muted">Add your current passport photograph file here. <br /><span id="passportRequirementsTooltipToggle" data-toggle="tooltip" style="color: #E12222;font-size:12px;cursor:pointer" data-placement="right" data-html="true" title="<img src='/media/images/passport_sample_image.jpeg' alt=''><p style='color:#212529;margin:0'>Passport photo information:<br />Kindly note that acceptable passport photographs are:</p><ul style='color:#212529;padding-left:20px'><li>Submit a color photo, taken within the last 6 months</li><li>Use a clear image of your face. Do not use filters commonly used on social media</li><li>Have someone else take your photo, No selfies</li><li>Take off your eyeglasses for your photo</li><li>Use plain white or off-white background</li><li>No face mask(s)</li><li>No headscarf</li><li>The applicant’s ear must be visible</li><li>Full face without smiles</li></ul>">Sample Photo</span><span style="color: #E12222;font-size:12px;cursor:pointer" id="passportRequirementsModalToggle">Sample Photo</span> Maximum size: 2MB</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("PassportPhotographFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:30px">
+                                <label for="uploadInternationalPassport">Upload International Passport Bio Datapage<span class="required-sym">*</span></label>
+                                <div class="upload-file-container">
+                                    <input type="file" id="uploadInternationalPassport" name="intpassportdatapagefile" accept=".pdf,.png, .jpeg, .jpg">
+                                    <div class="uploaded-passport-thumbnail preview-document-embed"><span class="embed-overlay"></span><embed src='/media/images/placeholder_image.jpg' id="passportDatapageThumbnail" /></div>
+                                </div>
+                                <small class="form-text text-muted">Add an image of your international passport bio datapage here. Maximum size: 2MB</small>
+                                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("IntPassportDatapageFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+                            </div>
+
+                            @*<div class="form-group" style="margin-top:30px">
+                <label for="uploadSignature">Upload Signature</label>
+                <input type="file" id="uploadSignature" name="signaturefile" accept=".pdf,.png, .jpeg, .jpg" required>
+                <small class="form-text text-muted">Add an image of your signature here. Maximum size: 2MB</small>
+                <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SignatureFile", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+            </div>*@
+
+                            <h6 style="font-size:18px;margin-top:40px">Select Police Command to Request Character Certificate</h6>
+                            @Html.Partial("Partials\\ServiceStateCommand", Model)
+
+                            <button type="submit" class="btn btn-block">Proceed</button>
+                        }
+                    </div>
+                    @Html.Partial("Partials\\SideNotePartial", Model.ServiceNote)
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+    @if (!Model.ViewedTermsAndConditionsModal && Model.Caveat != null)
+    {@Html.Partial("Partials\\PSServiceCaveatPartial", Model.Caveat)}
+    @Html.Partial("Partials\\PCCDocumentUploadPreviewModal")
+    @Html.Partial("Partials\\PCCDocumentUploadConfirmationModal")
+    @Html.Partial("Partials\\PCCPassportUploadGuidelinesModal")
+</div>

@@ -1,0 +1,109 @@
+﻿@model Parkway.CBS.Core.HelperModels.TCCRequestDetailVM
+@using Parkway.CBS.Core.Models.Enums
+@{
+    Layout.Title = "TCC Application Details";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+}
+<script>
+    var uploads = @Html.Raw(Json.Encode(Model.Attachments));
+    var uploadTypes = @Html.Raw(Json.Encode(Enum.GetValues(typeof(Parkway.CBS.Core.Models.Enums.TCCFileUploadType)).Cast<Parkway.CBS.Core.Models.Enums.TCCFileUploadType>().Select(x => x.ToDescription())))
+    var husbandName = @Html.Raw(Json.Encode(Model.HusbandName))
+</script>
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="tcc-application-form wrapper-payment">
+        <div class="top-banner alt">
+            <div class="banner-bottom">
+                <h3>TCC Application Details</h3>
+            </div>
+        </div>
+        <div class="container breadcrumbs">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container-fluid pb-4">
+
+            <div class="container tcc-application-form-container">
+                <div class="container-fluid">
+                    <h3 class="form-title">
+                        <span>Application: @Model.ApplicationNumber</span>
+                        <span class="end">
+                        </span>
+                    </h3>
+                    <div class="row px-0">
+                        <div class="col-md-3 form-group">
+                            <p class="til">Name of Applicant</p>
+                            <p class="ans">@Model.ApplicantName </p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p class="til"> Applicant Phone Number</p>
+                            <p class="ans"> @Model.PhoneNumber </p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p class="til">Applicant TIN/Payer Id</p>
+                            <p class="ans"> @Model.TIN </p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p class="til">Application Status</p>
+                            <p class="ans"> @Model.Status.ToDescription() </p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p class="til">Invoice Number</p>
+                            <p class="ans"> @Model.DevelopmentLevyInvoiceNumber </p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p class="til">Applicant's Business/Office Address</p>
+                            <p class="ans"> @Model.OfficeAddress </p>
+                        </div>
+                        </div>
+                    <h3 class="form-title">
+                        <span>Additional Files</span>
+                    </h3>
+                    <div class="row">
+                        @{ int uploadFileIndex = 0; }
+                        @if (Model.Attachments != null && Model.Attachments.Any())
+                        {
+                            foreach (var uploadedFile in Model.Attachments)
+                            {
+                                <div class="col-md-4">
+                                    <label class="upload-label" for="@(uploadFileIndex+"uploadCert")">
+                                        <button class="btn download-btn" id="@(uploadFileIndex+"uploadCert")" formaction="@Url.Action("TCCAttachmentDownload", "TCCValidation", new { fileName = uploadedFile.UploadTypeName
+                                           , path = uploadedFile.FilePath, contentType = uploadedFile.ContentType })" hidden formnovalidate>
+                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                        </button>
+                                        <span style="font-size:14px;font-weight: lighter;" id="whollyExemptedFileName"></span>
+                                        <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Styles/images/cloud-download.png"))" alt="" id="uploadImg" />
+                                        <span class="upload-caption" id="uploadInfo">Download @uploadedFile.UploadTypeName here.</span>
+                                    </label>
+                                </div>
+                                uploadFileIndex++;
+                            }
+                        }
+                        else { <div class="container-fluid"><p>No additional files found</p></div> }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@Html.Partial("Partials\\FooterPartial")
+
+<script>
+    $("#closeInfoFlash").click(function (e) {
+        $('#infoFlashMsg').hide();
+    });
+</script>

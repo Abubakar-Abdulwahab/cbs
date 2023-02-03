@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+<section class="alternate">
+    <div class="container">
+        <div class="title">
+            <h1>
+                Select Tax Payer Type
+            </h1>
+            <hr>
+        </div>
+        <div class="register-option">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="option-box">
+                        <div class="option-icon">
+                            <i class="fa-user fa"></i>
+                        </div>
+                        <h2>Individual</h2>
+                        <p>Single persons who engage in any form of economic activity within the state. </p>
+                        <a href="/SignupIndividual/Search" class="btn btn-theme"> Select </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="option-box">
+                        <div class="option-icon">
+                            <i class="fa fa-sitemap"></i>
+                        </div>
+                        <h2>Corporate</h2>
+                        <p>Companies and legal entities who engage in business activities within the state</p>
+                        <a href="/SignupCorporate/Search" class="btn btn-theme"> Select </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="option-box">
+                        <div class="option-icon">
+                            <i class="fa fa-university"></i>
+                        </div>
+                        <h2>Government</h2>
+                        <p>Government bodies and parastatals who operate from within Edo State are classified as separate tax payers</p>
+                        <a href="/SignupGovernment/Search" class="btn btn-theme"> Select </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

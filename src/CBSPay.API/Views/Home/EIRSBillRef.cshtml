@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Bill Settlement";
+    Layout = "~/Views/Shared/_EIRSHomePayLayout.cshtml";
+    var message = ViewBag.Message as string;
+}
+
+    
+@*<div class="col-sm-3">
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                Central Billing
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/Home/Pay"><i class="fa fa-angle-right"></i> Pay A Bill</a>
+                </li>
+                <li>
+                    <a href="~/Home/PayOnAccount"><i class="fa fa-angle-right"></i>  Pay On Account</a>
+                </li>
+                <li>
+                    <a href="~/Home/RegisterForRIN"><i class="fa fa-angle-right"></i>  MDA Service Hub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>*@
+
+<div class="col-sm-12">
+    <div class="title">
+        <h1>
+            Assessment Bill Settlement - Tax Services
+        </h1>
+        <hr>
+       
+    </div>
+    @using (Html.BeginForm("GetReferenceItems", "Home", FormMethod.Post))
+    {
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    Perform a search and pay for an assessment/service bill received from EIRS
+                </div>
+            </div>
+            <div class="portlet-body" id="referenceBody">
+                <div class="row">
+                    <div class="col-sm-7 form-horizontal">
+
+                        <div class="form-group">
+                            <label for="ReferenceNumber" class="control-label col-sm-3">Bill Ref</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="ReferenceNumber" id="ReferenceNumber" class="form-control" placeholder="Enter Bill Ref" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PhoneNumber" class="control-label col-sm-3">Phone Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="PhoneNumber" id="PhoneNumber" class="form-control" placeholder="Enter Phone Number" value="" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group text-right row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6">
+                               
+                                @if (!string.IsNullOrWhiteSpace(message))
+                                {
+                                    <h5 class="caption" style="color:red">@message</h5>
+
+                                }
+                                <button class="btn btn-theme btn-block" id="FetchRefItems"> Search </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="loader" style="margin: auto; display: none">
+                        </div>
+                        <div>
+                            <p>
+                                To prevent showing you someone else's assessment bill, kindly validate your access by providing
+                                the taxpayer number associated with this assessment.
+                            </p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section scripts
+    {
+
+    <script type="text/javascript" src="~/Scripts/EIRSPayWithRefNo.js"></script>
+
+}
+
+
+

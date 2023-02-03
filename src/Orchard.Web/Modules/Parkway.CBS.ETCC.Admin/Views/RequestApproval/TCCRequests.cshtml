@@ -1,0 +1,200 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.ETCC.Admin.VM.TCCRequestReportVM
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("TCC Request Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">From</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.From" name="from" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">To</b>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.End" name="end" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <b style="color:#e97d68;">Search by Payer ID/State TIN</b>
+                        @Html.TextBox("PayerId", Model.PayerId, new { @class = "form-control", @placeholder = "Enter PayerId", @name = "PayerId" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <b style="color:#e97d68;">Search by Applicant Name  </b>
+                        @Html.TextBox("ApplicantName", Model.ApplicantName, new { @class = "form-control", @placeholder = "Enter Applicant Name", @name = "ApplicantName" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">Search by Application Number</b>
+                    @Html.TextBox("ApplicationNumber", Model.ApplicationNumber, new { @class = "form-control", @placeholder = "Search by Application Number" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <b style="color:#e97d68;">&nbsp;</b>
+                    <button class="btn btn-primary" style="width:100%" formaction="@Url.Action("TCCRequests", "RequestApproval" )">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    APPLICANT NAME
+                                </th>
+                                <th>
+                                    APPLICATION NUMBER
+                                </th>
+                                <th>
+                                    RESIDENTIAL ADDRESS
+                                </th>
+                                <th>
+                                    OFFICE ADDRESS
+                                </th>
+                                <th>
+                                    REQUEST REASON
+                                </th>
+                                <th>
+                                    EXEMPTION TYPE
+                                </th>
+                                <th>
+                                    STATE TIN
+                                </th>
+                                <th>
+                                    STATUS
+                                </th>
+                                <th>
+                                    REQUEST DATE
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+                            @if (Model.Requests != null && Model.Requests.Count() > 0)
+                            {
+                                foreach (var item in Model.Requests)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.ApplicantName
+                                        </td>
+                                        <td>
+                                            @item.ApplicationNumber
+                                        </td>
+                                        <td>
+                                            @item.ResidentialAddress
+                                        </td>
+                                        <td>
+                                            @item.OfficeAddress
+                                        </td>
+                                        <td>
+                                            @item.RequestReason
+                                        </td>
+                                        <td>
+                                            @item.ExemptionType
+                                        </td>
+                                        <td>
+                                            @item.PayerId
+                                        </td>
+                                        <td>
+                                            @item.Status
+                                        </td>
+                                        <td>
+                                            @item.RequestDate
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("TCCRequestDetails","RequestApproval",new { applicationNumber=@item.ApplicationNumber })" name="ViewDetails">View Details</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("PreviewApprovalLog","RequestApprovalLog",new { applicationNumber = @item.ApplicationNumber })" name="ViewDetails">View Approvals</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="12">No Records Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total Number of Requests: @String.Format("{0:n2}", Model.TotalRequestRecord) </p>
+            </div>
+        </div>
+
+    </div>
+}
+@Display(Model.Pager)

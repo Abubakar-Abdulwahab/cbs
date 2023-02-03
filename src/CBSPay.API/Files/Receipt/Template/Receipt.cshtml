@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Receipt</title>
+    <style>
+        .body{
+            width: 100%;
+        }
+        .content {
+            width: 500px;
+            margin: 0 auto;
+            margin-left: auto;
+            margin-left: auto;
+        }
+        .receipt-meta{
+            margin-bottom: 50px;
+        }
+        .line{
+            margin-bottom: 20px;
+            clear: both;
+        }
+        .left{
+           float: left;
+        }
+        .right{
+           float: right;
+        }
+        table{
+            width: 100%;
+            border: 1.5px solid #ccc;
+            border-radius: 4px;
+        }
+        table thead{
+           background: #eee;
+           color:brown;
+        }
+        table tbody tr:nth-child(2n){
+            background-color: #eee;
+        }
+        table tr{
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h4 class="" style="color:green;text-align:center;">PAYMENT SYNCHRONIZED SUCCESSFULLY</h4>
+        <img src="~/Content/payment_success.png" />
+        <div class="" style="color:#808080;text-align:center;">
+            <h3>successfully paid</h3>
+        </div>
+        <hr/>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="receipt-meta">
+                            <div class="line">
+                                <div class="left">Tax Payer Name:</div>
+                                <div class="right">@Model.TaxPayerName</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Reference Number:</div>
+                                <div class="right">@Model.ReferenceNumber</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Phone Number:</div>
+                                <div class="right">@Model.PhoneNumber</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Tax Payer RIN:</div>
+                                <div class="right">@Model.TaxPayerRIN</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Tax Payer Service Bill ID:</div>
+                                <div class="right">@Model.ServiceBillID</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Tax Payer Assessment ID:</div>
+                                <div class="right">@Model.AssessmentID</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Payment Date:</div>
+                                <div class="right">@Model.PaymentDate</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Settlement Date:</div>
+                                <div class="right">@Model.SettlementDate</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Settlement Method Name:</div>
+                                <div class="right">@Model.SettlementMethodName</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Total Amount Paid:</div>
+                                <div class="right">@Model.TotalAmountPaid.ToString("N2")</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Transaction Reference Number:</div>
+                                <div class="right">@Model.TransactionRefNo</div>
+                            </div>
+                            <div class="line">
+                                <div class="left">Note:</div>
+                                <div class="right">@Model.Notes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Settlement List Item
+                    </div>
+                    <div class="card-body">
+                        <div class="col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead style="padding:10px;height:40px;font-weight:900;">
+                                        <tr>
+                                            <th>
+                                                Settlement TBPKID
+                                            </th>
+                                            <th>
+                                                Tax Amount
+                                            </th>
+
+                                            <th>
+                                                Settlement Amount
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="">
+
+                                        @if (Model.lstSettlementItems != null)
+                                        {
+                                            foreach (var item in Model.lstSettlementItems)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.TBPKID
+                                                    </td>
+                                                    <td>
+                                                        @item.TaxAmount.ToString("N2")
+                                                    </td>
+
+                                                    <td>
+                                                        @item.ToSettleAmount.ToString("N2")
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="8">No Records Found</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

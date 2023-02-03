@@ -1,0 +1,131 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<CBSPay.Core.Entities.AssessmentRuleItem>
+@{
+    ViewBag.Title = "Assessment Rule Item Report";
+    Layout = "~/Views/Shared/_EIRSReportPageLayout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="~/Scripts/datepickerinitialization.js"></script>
+<style>
+    input[type=text] {
+        width: 100%;
+    }
+    .input-group {
+        width: 100%;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="title">
+        <h1 title="This includes the details of all Assessment Items on the platform">Assessment Rules Item Report</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered" id="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                S/N
+                            </th>
+                            <th>
+                                Reference Number
+                            </th>
+                            <th>
+                                Assessment Item
+                            </th>
+                            <th>
+                                Assessment Rule
+                            </th>
+                            <th>
+                                Tax Amount
+                            </th>
+                            <th>
+                                Settled Amount
+                            </th>
+                            <th>
+                                Pending Amount
+                            </th>
+                            <th>
+                                Payment Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            var i = 0;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @{ i++;}
+                                        <span>@i</span>
+                                    </td>
+                                    <td>
+                                        @item.AssessmentItemReferenceNo
+                                    </td>
+                                    <td>
+                                        @item.AssessmentItemName
+                                    </td>
+                                    <td>
+                                        @item.AssessmentRuleName
+                                    </td>
+                                    <td>
+                                        @item.TaxAmount.ToString("###,###,###.00")
+                                    </td>
+                                    <td>
+                                        @item.SettlementAmount.ToString("###,###,###.00")
+                                    </td>
+                                    <td>
+                                        @item.PendingAmount.ToString("###,###,###.00")
+                                    </td>
+                                    <td>
+                                        @if(item.SettlementAmount == 0.00M)
+                                        {
+                                            <span>No Payment Made</span>
+                                        }
+                                        else if(item.SettlementAmount > 0.00M && item.SettlementAmount < item.TaxAmount)
+                                        {
+                                            <span>Partial Payment</span>
+                                        }
+                                        else if(item.SettlementAmount == item.TaxAmount)
+                                        {
+                                            <span>Fully Paid</span>
+                                        }
+                                        else if(item.SettlementAmount > item.TaxAmount)
+                                        {
+                                            <span>Fully Paid (may need a refund)</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            <p>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </p>
+            <p>
+                @Html.PagedListPager(Model, page => Url.Action("AssessmentRuleItemReport", new { page }))
+            </p>
+        </div>
+    </div>
+}
+

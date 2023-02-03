@@ -1,0 +1,54 @@
+﻿@model Parkway.CBS.Core.HelperModels.PAYESelectOptionVM
+
+@{
+    Layout.Title = "Select PAYE Option";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.Style.Main");
+    Style.Require("CBS.Style.Pages");
+
+
+}
+@Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+<div class="wrapper-payment">
+    <div class="top-banner alt">
+        <div class="banner-bottom">
+            <h3>Select PAYE Option</h3>
+        </div>
+    </div>
+    <div class="container breadcrumbs">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Select PAYE Option</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content-payment">
+        <div class="container form-container">
+            @using (Html.AppendModulePrefixToFormRouteName(Parkway.CBS.Client.Web.RouteName.PAYE.SelectPAYEOption, FormMethod.Post, new { @class = "main-form payment-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="form-title">Select the correct option to proceed</h3>
+                <label for="" class="title">Do you have your PAYE Tax schedule?</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="SelectOption" value="@Parkway.CBS.Core.Models.Enums.PAYEDirection.PAYEWithSchedule" required />
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="SelectOption" value="@Parkway.CBS.Core.Models.Enums.PAYEDirection.PAYEWithNoSchedule" required />
+                    <label class="form-check-label" for="inlineRadio1">No</label>
+                </div>
+                <button type="submit" id="proceedbtn" class="btn">Proceed</button>
+            }
+        </div>
+    </div>
+    <div class="footer-top"/>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+
+

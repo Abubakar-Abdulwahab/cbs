@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Parkway.CBS.Core.Models.InvoiceItems, Parkway.CBS.Core" table="Parkway_CBS_Core_InvoiceItems" lazy="false" >
+		<id name="Id" column="Id" type="Int64">
+			<generator class="identity"/>
+		</id>
+
+		<property name="UnitAmount" column="UnitAmount" />
+		<property name="InvoiceNumber" column="InvoiceNumber" />
+		<property name="Quantity" column="Quantity" />
+		<property name="InvoicingUniqueIdentifier" column="InvoicingUniqueIdentifier" />
+		<property name="CreatedAtUtc" column="CreatedAtUtc" />
+		<property name="UpdatedAtUtc" column="UpdatedAtUtc" />
+
+		<many-to-one name="Mda" column="MDA_Id"/>
+		<many-to-one name="RevenueHead" column="RevenueHead_Id"/>
+		<many-to-one name="Invoice" column="Invoice_Id"/>
+		<many-to-one name="TaxEntity" column="TaxEntity_Id"/>
+		<many-to-one name="TaxEntityCategory" column="TaxEntityCategory_Id"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,170 @@
+﻿@model Parkway.CBS.Module.ViewModels.FormSetupViewModel
+
+@{ Layout.Title = T("User Collection Form Setup").ToString(); }
+<style type="text/css">
+    #wrap {
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+   
+    .col {
+        width: 45%;
+        float: left;
+        margin: 10px;
+    }
+</style>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    int counter = 0;
+    @Html.ValidationSummary()
+    <div id="container">
+        <fieldset>
+            <legend> @string.Format("{0} {1}", Model.RevenueHeadName, T(" - Information Capture Fields"))</legend>
+            <fieldset></fieldset>
+        </fieldset>
+
+        <div id="wrap">
+
+            @foreach(var taxEnityType in Model.ControlsPerEntity)
+            {
+                <div class="col" id="@taxEnityType.TaxEntityCategoryId">
+                    <p>@taxEnityType.TaxEntityCategoryName</p>
+
+                    <table class="items">                      
+                        <thead>
+                            <tr>
+                                <th scope="col">@T("Field")</th>
+                                <th scope="col">@T("Required")</th>
+                            </tr>
+                            @*<tr>
+                                <th scope="col">@T("")</th>
+                                <th scope="col"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">@T("Add New Field")                                  
+                                </button></th>
+                            </tr>*@
+                        </thead>
+                        @if (Model.ControlsPerEntity.Any())
+                        {                         
+                            foreach (var item in taxEnityType.FormControls.ToList())
+                            {
+                                @*switch (item.ControlType(item.ControlTypeNumber))
+                                {
+                                    case Parkway.CBS.Core.Models.Enums.ControlTypes.TextBox:
+                                        <tr>
+                                            <td>
+                                                @Html.Label(item.LabelText)
+                                                @Html.TextBox("[" + counter + "]." + item.Name, null, new { @class = "text large", @disabled = true, @placeholder = item.PlaceHolderText })
+                                                @Html.Hint(T("{0}", item.HintText))
+                                                @Html.Hidden("[" + counter + "].Id", item.Id)
+                                            </td>
+                                            @if (item.DefaultStatus)
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox(item.Name, item.DefaultStatus, new { @disabled = true })
+                                                    <br />@Html.Hidden("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>}
+
+                                        </tr>
+                                        break;
+                                    case Parkway.CBS.Core.Models.Enums.ControlTypes.TextArea:
+                                        <tr>
+                                            <td>
+                                                @Html.Label(item.LabelText)
+                                                @Html.TextArea("[" + counter + "]." + item.Name, null, new { @class = "text large", @disabled = true, @placeholder = item.PlaceHolderText })
+                                                @Html.Hint(T("{0}", item.HintText))
+                                                @Html.Hidden("[" + counter + "].Id", item.Id)
+                                            </td>
+                                            @if (item.DefaultStatus)
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox(item.Name, item.DefaultStatus, new { @disabled = true })
+                                                    <br />@Html.Hidden("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>
+                                            }
+
+                                        </tr>
+                                        break;
+                                    case Parkway.CBS.Core.Models.Enums.ControlTypes.DropDownList:
+                                        <tr>
+                                            <td>
+                                                @Html.Label(item.LabelText)
+                                                <select id="gender" name="gender" style="width:200px" disabled>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                </select>
+                                                @Html.Hint(T("{0}", item.HintText))
+                                                @Html.Hidden("[" + counter + "].Id", item.Id)
+                                            </td>
+                                            @if (item.DefaultStatus)
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox(item.Name, item.DefaultStatus, new { @disabled = true })
+                                                    <br />@Html.Hidden("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td style="width:60px;">
+                                                    <br />@Html.CheckBox("[" + counter + "].DefaultStatus", item.DefaultStatus)
+                                                    <br />@Html.Hidden("[" + counter + "].TaxEntityCategoryId", taxEnityType.TaxEntityCategoryId)
+                                                </td>
+                                            }
+                                             
+                                        </tr>*@
+                                        <!-- Modal -->
+                                        @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add New Field</h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input id="enterText" type="text" placeholder="Enter Name Field"><br />
+                                                        <input id="enterD" type="text" placeholder="Enter Name Field"><br />
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button id="submit" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+
+                                        //        break;
+                                        //}
+                                        //counter++;
+                                }
+                            }
+                        else
+                        {
+                            <tr><td colspan="2">@T("No fields found. Please contact admin.")</td> </tr>
+                        }
+                    </table>
+                </div>
+            }       
+        </div>
+        <fieldset>
+            <button type="submit">@T("Create")</button>
+            <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("List", "MDA")'" class="a-classname">@T("Cancel")</button>
+        </fieldset>
+    </div>
+} 

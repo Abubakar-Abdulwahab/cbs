@@ -1,0 +1,107 @@
+﻿@model Parkway.CBS.OSGOF.Admin.ViewModels.CellSitesVM
+
+@{
+    Layout.Title = T("Cell Sites List").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                    Operator Name
+                                </th>*@
+                                <th>
+                                    Operator Site ID
+                                </th>
+                                <th>
+                                    OSGOF ID
+                                </th>
+                                <th>
+                                    Year Of Deployment
+                                </th>
+                                <th>
+                                    Height Of Tower
+                                </th>
+                                <th>
+                                    Lat Long
+                                </th>
+                                <th>
+                                    Site Address
+                                </th>
+                                <th>
+                                    State
+                                </th>
+                                <th>
+                                    LGA
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+
+                            @if (Model.CellSites != null && Model.CellSites.Any())
+                            {
+                                foreach (var item in Model.CellSites)
+                                {
+                            <tr>
+                                @*<td>
+                                    @item.Operator.Recipient
+                                </td>*@
+                                <td>
+                                    @item.OperatorSiteId
+                                </td>
+                                <td>
+                                    @item.OSGOFID
+                                </td>
+                                <td>
+                                    @item.YearOfDeployment
+                                </td>
+                                <td>
+                                    @item.HeightOfTower
+                                </td>
+                                <td>
+                                    (@item.Lat, @item.Long)
+                                </td>
+                                <td>
+                                    @item.SiteAddress
+                                </td>
+                                <td>
+                                    @item.State
+                                </td>
+                                <td>
+                                    @item.LGA
+                                </td>
+                            </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="9">No Records Found</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@Display(Model.Pager)
+

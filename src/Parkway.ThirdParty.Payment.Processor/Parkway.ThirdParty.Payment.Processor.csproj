@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51A8F13A-6423-421C-AC92-558D9151C514}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.ThirdParty.Payment.Processor</RootNamespace>
+    <AssemblyName>Parkway.ThirdParty.Payment.Processor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IPaymentProcessor.cs" />
+    <Compile Include="Models\BaseRequest.cs" />
+    <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\CustomerInformationResponse.cs" />
+    <Compile Include="Models\CustomerInformationRequest.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\Node.cs" />
+    <Compile Include="Models\PayDirectConfigurations.cs" />
+    <Compile Include="Models\PayDirectWebPaymentModel.cs" />
+    <Compile Include="Models\PayDirectWebPaymentResponseModel.cs" />
+    <Compile Include="Models\PayDirectWebServerResponse.cs" />
+    <Compile Include="Models\PaymentConfigurations.cs" />
+    <Compile Include="Models\BaseProcessorConfigurations.cs" />
+    <Compile Include="Models\PaymentNotifcationRequest.cs" />
+    <Compile Include="Models\PaymentNotificationResponse.cs" />
+    <Compile Include="PaymentProcessor.cs" />
+    <Compile Include="Processors\BaseProcessor.cs" />
+    <Compile Include="Processors\PayDirect\IPayDirect.cs" />
+    <Compile Include="Processors\PayDirect\PayDirect.cs" />
+    <Compile Include="Processors\PaymentProcessorUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Processors\BankCollect\" />
+    <Folder Include="Processors\Contracts\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

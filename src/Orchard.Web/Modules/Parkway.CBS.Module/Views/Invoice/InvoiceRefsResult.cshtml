@@ -1,0 +1,51 @@
+﻿@model Parkway.CBS.Core.HelperModels.InvoiceDetails
+
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Script.Require("CBS.View.Invoice.Script").AtFoot();
+
+    Layout.Title = "Invoice Payment References".ToString();
+}
+
+<div class="container" style="width:100%">
+    <h3 class="form-title">
+        <span>BIN:@Model.InvoiceNumber</span>
+        <span style="float:right">
+            <a href="@Url.RouteUrl("AdminViewInvoice",new { invoiceNumber = Model.InvoiceNumber })" name="viewInvoice">View invoice</a>
+        </span>
+    </h3>
+    <div class="row">
+        <fieldset>
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th scope="col">@T("Payment Reference")</th>
+                        <th scope="col">@T("Provider")</th>
+                        <th scope="col">@T("Date")</th>
+                    </tr>
+                </thead>
+                @if (Model.PaymentReferenceVMs.Any())
+                {
+                    foreach (var entry in Model.PaymentReferenceVMs)
+                    {
+                        <tr>
+                            <td>
+                                @entry.ReferenceNumber
+                            </td>
+                            <td>
+                                @entry.PaymentProvider
+                            </td>
+                            <td>
+                                @entry.DateGenerated.ToString("dd/MM/yyyy HH:mm:ss")
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="3">@T("No record found.") </td> </tr>
+                }
+            </table>
+        </fieldset>
+    </div>
+</div>

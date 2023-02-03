@@ -1,0 +1,94 @@
+﻿@model Parkway.CBS.Module.ViewModels.MDAListViewModel
+
+@{
+    Style.Require("CBS.MDA.Style");
+
+    var userIndex = 0;
+
+    Layout.Title = T("Manage MDAs").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    <div class="manage">@Html.ActionLink(T("Add a new MDA").ToString(), "CreateMDASettings", new { }, new { @class = "button primaryAction" })</div>
+    <fieldset class="bulk-actions">
+        @Html.TextBoxFor(m => m.Options.Search, new { @class = "text", @placeholder = "Search text" })
+        <label for="filterResults">@T("Filter:")</label>
+        <select id="filterResults" name="@Html.NameOf(m => m.Options.Filter)">
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Core.Models.Enums.MDAFilter.All, T("All MDAs").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Core.Models.Enums.MDAFilter.Disabled, T("Disabled MDAs").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Core.Models.Enums.MDAFilter.Enabled, T("Active MDAs").ToString())
+           
+        </select>
+        <label for="sortResults">@T("Sort by:")</label>
+        <select id="sortResults" name="@Html.NameOf(m => m.Options.Order)">
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Core.Models.Enums.MDAOrder.Name, T("Order by Name").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Core.Models.Enums.MDAOrder.Code, T("Order by Code").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Core.Models.Enums.MDAOrder.CreatedAtUtc, T("Order by Creation time").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Core.Models.Enums.MDAOrder.UpdatedAtUtc, T("Order by Last Update").ToString())
+        </select>
+        @Html.CheckBoxFor(c => c.Options.Direction) Ascending
+        <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
+    </fieldset>
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Name")</th>
+                    <th scope="col">@T("Code")</th>
+                    <th scope="col">@T("Updated")</th>
+                    <th scope="col">@T("Created")</th>
+                    <th scope="col">@T("Last Updated By")</th>
+                    <th scope="col">@T("Actions")</th>
+                    @*<th scope="col">@T("Status")</th>*@
+                </tr>
+            </thead>
+            @if (Model.ListOfMDA.Any())
+            {
+                foreach (var entry in Model.ListOfMDA)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(entry.Name, "ViewMDARevenueHeads", "MDA", new { area = "Parkway.CBS.Module", slug = entry.Slug }, null)
+                        </td>
+                        <td>
+                            @entry.Code
+                        </td>
+                        <td>
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.UpdatedAtUtc.Value.AddHours(-1)))
+                        </td>
+                        <td>
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.CreatedAtUtc.AddHours(-1)))
+                        </td>
+                        <td>
+                            @entry.LastUpdatedBy.UserName
+                        </td>
+                        <td>
+                            @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.Slug }) <b>|</b>
+                            @if (entry.IsActive)
+                            {
+                                <button type="submit" name="submit.Disable" formaction="@Url.Action("ChangeStatus", "MDA", new { Id = entry.Id, pageNumber = Model.Pager.Page })" formmethod="post" value="@T("Disable")" class="a-classname">@T("Disable")</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="submit.Enable" value="@T("Enable")" formaction="@Url.Action("ChangeStatus", "MDA", new { Id = entry.Id, pageNumber = Model.Pager.Page})" formmethod="post" class="a-classname">@T("Enable")</button>
+                            }
+                            @if (entry.RevenueHeads.Any())
+                            {
+                                <b>|</b>
+                                @Html.ActionLink(T("View Hierarchy").ToString(), "ViewHierarchy", new { entry.Slug })
+                            }
+                        </td>
+                    </tr>
+                    userIndex++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">@T("No record found.")</td> </tr> }
+        </table>
+        @Display(Model.Pager)
+    </fieldset>
+}

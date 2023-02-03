@@ -1,0 +1,80 @@
+﻿@model Parkway.CBS.Police.Core.VM.SearchByBINVM
+@using Parkway.CBS.Core.HelperModels
+@{
+    Layout.Title = "BIN Search";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("PSS.Select.Service.Script").AtFoot();
+    Script.Require("CBS.Main.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+
+<script>
+    var loggedIn = @Html.Raw(Json.Encode(Model.HeaderObj.IsLoggedIn));
+</script>
+
+<div id="verify-account-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+
+    <div class="container-fluid bin-search-main-content no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Home</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Search by Bin</a>
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-circle"></span>
+                    <a href="#" class="nav-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Search by Bin</a></div>
+        </div>
+
+        <div class="container bin-search-content-container">
+            @if (Model.HasErrors)
+            {
+                @Html.Partial("Partials\\Flash", new FlashObj { Message = Model.ErrorMessage, FlashType = Parkway.CBS.Core.Models.Enums.FlashType.Error, MessageTitle = "Error" })
+            }
+
+            <div class="container bin-search-content no-padding">
+                <div class="container no-padding">
+                    @using (Html.BeginRouteForm("P.BIN.Search", FormMethod.Post, new { @id = "binSearchForm", @name = "binSearchForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="container no-padding">
+                            <h4>Invoice Number <span data-toggle="tooltip" id="binInfoTooltipToggle" style="color: #E12222;font-size:12px;cursor:pointer" data-placement="right" data-html="true" title="<p>The Invoice Number is a unique number that is systematically assigned to each invoice generated on the Police Specialized Services Portal.</p><p>This number identifies each invoice and allow payers make payment for their invoices via any of the available payment channels on the portal.</p><img src='/media/images/invoice.png' alt=''>">What is this?</span><span style="color: #E12222;font-size:12px;cursor:pointer" id="binInfoModalToggle">What is this?</span></h4>
+                            <p>Enter an invoice number below</p>
+                        </div>
+                        <div class="container no-padding">
+                            <div class="form-group">
+                                <input required type="text" placeholder="Invoice Number" class="form-control" id="binSearchId" value="@Model.BIN" name="BIN"/>
+                                <div class="container-fluid no-padding" style="text-align:left"><small class="form-text text-muted">Don’t have an Invoice Number? <a href="/p/select-service" style="color:#E12222">Click here</a></small></div>
+                                <input type="hidden" name="serviceIdentifier" id="serviceIdentifier" />
+
+                            </div>
+                            <button name="proceedBtn" type="submit" class="btn btn-block">Proceed</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Partials\\FooterPartial")
+    @Html.Partial("Partials\\SearchByInvoiceNumberInfoModal")
+</div>
+
+

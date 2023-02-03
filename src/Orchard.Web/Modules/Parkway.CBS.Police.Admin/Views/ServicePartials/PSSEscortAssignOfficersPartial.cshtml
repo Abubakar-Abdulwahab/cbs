@@ -1,0 +1,127 @@
+﻿@model Parkway.CBS.Police.Core.VM.SquadronLeaderApprovalVM
+@{
+    Script.Require("CBS.npf.extract.details.Script").AtFoot();
+    Script.Require("CBS.Admin.Police.Officers.Script").AtFoot();
+    Script.Require("PSS.Admin.Assign.Officers.Submit.Prompt.Script").AtFoot();
+}
+
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 50%;
+        display: none;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<script>
+    var proposedEscortOfficers = @Html.Raw(Json.Encode(Model.ProposedEscortOffficers));
+    var formationAllocationId = @Html.Raw(Json.Encode(Model.FormationAllocationId));
+    var allocationGroupId = @Html.Raw(Json.Encode(Model.AllocationGroupId));
+</script>
+<table class="items">
+    <thead>
+        <tr>
+            <th colspan="2">INSTRUCTIONS FROM AIG</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Number of officers to provide</td>
+            <td>@Model.NumberOfOfficersRequested</td>
+        </tr>
+    </tbody>
+</table>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="7">POLICE COMMAND/FORMATION TO PROVIDE THE SERVICE</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                <label for="serviceNumber">AP/Force No.</label>
+                <input class="extend-width" type="text" name="serviceNumber" id="serviceNumber" style="height:20px" />
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10"></span>
+                <div id="serviceNumberError" style="color:red"></div>
+            </td>
+            <td>
+                <fieldset>
+                    <button type="button" id="addOfficerBtn" style="position: absolute; top: 31px;">+ Add</button>
+                </fieldset>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="officerTable">
+    <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Command</th>
+        <th>Force Number</th>
+        <th>IPPIS</th>
+        <th>Account Number</th>
+        <th></th>
+    </tr>
+    @if(Model.ProposedEscortOffficers != null && Model.ProposedEscortOffficers.Any()) {
+        int index = 0;
+        foreach (var proposedEscortOfficer in Model.ProposedEscortOffficers) {
+            <tr>
+                <td>@proposedEscortOfficer.OfficerRankName</td>
+                <td>@proposedEscortOfficer.OfficerName</td>
+                <td>@proposedEscortOfficer.OfficerCommandName</td>
+                <td>@proposedEscortOfficer.OfficerIdentificationNumber</td>
+                <td>@proposedEscortOfficer.OfficerIPPISNumber</td>
+                <td>@proposedEscortOfficer.OfficerAccountNumber</td>
+                <td><span class="delete-officer-row" Title="Remove Item" onClick="removeOfficer(@index)">Remove</span></td>
+            </tr>
+            index++;
+        }
+    }
+</table>
+
+@Html.AntiForgeryToken()
+
+<label for="comment">Comment</label>
+<textarea class="extend-width" name="Comment" placeholder="Leave a comment" id="comment" required></textarea>
+
+<div class="action-btns page-submit-btns">
+    <div style="position:relative">
+        <button class="btn btn-success" id="squadOfficerApprovalBtn" formaction="@Url.Action("ApproveRequest", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name)">@T("Submit")</button>
+        <span name="profileloader" id="squadfficersLoader" class="profileloader" style="position:absolute;margin:auto;z-index:10;top:3px"></span>
+        <div id="searchError" style="color:red"></div>
+    </div>
+    <div>
+        <button class="btn btn-danger" formaction="@Url.Action("RejectRequest", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name)" formnovalidate>@T("Reject")</button>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Parkway.CBS.Core.HelperModels.FormControlViewModel>
+@{
+    Layout.Title = "RenderFormField";
+    int counter = 0;
+}
+
+<style>
+    body {
+        text-align: center;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+</style>
+
+<div id="formcontrolmain">
+    @foreach (var formControl in Model)
+    {
+        formControl.Index = counter;
+        @Html.Partial("Partials\\Forms\\" + formControl.PartialName, formControl)
+        counter++;
+    }
+</div>
+
+

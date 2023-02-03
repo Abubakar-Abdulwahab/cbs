@@ -1,0 +1,73 @@
+﻿@model Parkway.CBS.Police.Core.VM.ExtractRequestDetailsVM
+
+    <div class="container-fluid no-padding">
+        <div class="row no-padding">
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label" for="name">Applicant Name</label>
+                <p class="bolded-info" id="name">@Model.CbsUser.Name</p>
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label" for="serviceName">Service Name</label>
+                <p class="bolded-info" id="serviceName">@Model.ServiceName<p />
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label" for="cmdName">Command Name</label>
+                <p class="bolded-info" id="cmdName">@Model.CommandName<p />
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label" for="cmdState">Command State</label>
+                <p class="bolded-info" id="cmdState">@Model.StateName<p />
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label" for="cmdLga">Command LGA</label>
+                <p class="bolded-info" id="cmdLga">@Model.LGAName<p />
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Extract Category</label>
+                <p class="bolded-info">
+                    @if (Model.SelectedExtractCategories != null && Model.SelectedExtractCategories.Any())
+                    {
+                        foreach (var category in Model.SelectedExtractCategories.GroupBy(x => x.ExtractCategoryId))
+                        {
+                            @category.First().RequestReason.Split(new char[] { ':' })[0]
+                            <br />
+                        }
+                    }
+                </p>
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Extract sub category</label>
+                <p class="bolded-info">
+                    @if (Model.SelectedExtractCategories != null && Model.SelectedExtractCategories.Any())
+                    {
+                        foreach (var category in Model.SelectedExtractCategories.GroupBy(x => x.ExtractCategoryId))
+                        {
+                            foreach (var subCategory in category)
+                            {
+                                @subCategory.RequestReason.Split(new char[] { ':' })[1]
+                                <br />
+                            }
+                        }
+                    }
+                </p>
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Approval Number</label>
+                <p class="bolded-info">@Model.ApprovalNumber</p>
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Request Date</label>
+                <p class="bolded-info">@Model.RequestDate</p>
+            </div>
+            <div class="col-md-3 pb-1">
+                <label class="no-margin grey-label">Approval Date</label>
+                <p class="bolded-info">@Model.ApprovalDate</p>
+            </div>
+        </div>
+        <div class="row no-padding">
+            <div class="col-9">
+                <label class="no-margin grey-label">Details of Extract</label>
+                <p class="bolded-info">@Model.Content</p>
+            </div>
+        </div>
+    </div>

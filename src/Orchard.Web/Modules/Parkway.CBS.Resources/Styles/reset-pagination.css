@@ -1,0 +1,17 @@
+﻿select.pager {
+    height: 30px;
+}
+
+ul.pager li {
+    text-shadow: none;
+    background: none;
+    margin: 0px;
+}
+
+    ul.pager li a {
+        border: 0px;
+    }
+
+    ul.pager li span {
+        border: 0px;
+    }

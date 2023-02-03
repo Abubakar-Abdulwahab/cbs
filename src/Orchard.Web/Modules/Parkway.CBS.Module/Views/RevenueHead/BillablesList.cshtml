@@ -1,0 +1,132 @@
+﻿@using System.Web.Mvc.Html
+@using System.Web.UI.WebControls
+@model Parkway.CBS.Module.ViewModels.BillablesPageViewModel
+
+@{
+    Style.Require("CBS.MDA.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+
+    var userIndex = 0;
+
+    Layout.Title = T("Revenue Heads").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.PINViewModel.PageNumber)
+
+    @*<div class="manage">@Html.ActionLink(T("Add a new revenue head").ToString(), "CreateFromMDA", new { }, new { @class = "button primaryAction" })</div>*@
+
+    <fieldset class="bulk-actions">
+        @Html.TextBoxFor(m => m.Options.Search, new { @class = "text", @placeholder = "Search text" })
+        <label for="filterResults">@T("Filter:")</label>
+        <select id="filterResults" name="@Html.NameOf(m => m.Options.Filter)">
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.All, T("All Revenue Heads").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.Disabled, T("Disabled Revenue Heads").ToString())
+            @Html.SelectOption(Model.Options.Filter, Parkway.CBS.Module.ViewModels.RevHeadFilter.Enabled, T("Active Revenue Heads").ToString())
+        </select>
+        <label for="sortResults">@T("Sort by:")</label>
+        <select id="sortResults" name="@Html.NameOf(m => m.Options.Order)">
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.Name, T("Order by Name").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.Code, T("Order by Code").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.CreatedAtUtc, T("Order by Creation time").ToString())
+            @Html.SelectOption(Model.Options.Order, Parkway.CBS.Module.ViewModels.RevHeadOrder.UpdatedAtUtc, T("Order by Last Update").ToString())
+        </select>
+        @Html.CheckBoxFor(c => c.Options.Direction) Ascending
+        <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
+    </fieldset>
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Name")</th>
+                    <th scope="col">@T("Code")</th>
+                    @*<th scope="col">@T("Updated")</th>*@
+                    <th scope="col">@T("Amount")</th>
+                    @*<th scope="col">@T("Last Updated By")</th>*@
+                    <th scope="col">@T("Actions")</th>
+                </tr>
+            </thead>
+            @if (Model.RevenueHeadsAndBillings.Any())
+            {
+                foreach (var entry in Model.RevenueHeadsAndBillings)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(entry.RevennueHeadName, "RevenueHeadDashBoard", "RevenueHead", new { revenueHeadSlug = entry.RevennueHeadSlug, revenueHeadId = entry.RevennueHeadId }, null) 
+                        </td>
+                        <td>
+                            @entry.RevennueHeadCode
+                        </td>
+                         
+                        <td>
+                            @String.Format("{0:n0}", entry.Amount)
+                        </td>
+                       
+                        <td>
+                           
+                            
+                            <button type="button" class="a-classname" data-toggle="modal" data-target="#@entry.RevennueHeadId">@T("Generate Invoice")</button>
+                            <div class="modal fade" tabindex="-1" role="dialog" id="@entry.RevennueHeadId">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Generate Invoice</h4>
+                                            
+                                            @Html.ValidationSummary()
+                                            
+
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <input type="hidden" name="revenueHeadId" value="@entry.RevennueHeadId" />
+
+                                            
+                                            <small>Category </small>
+
+                                            <select class="recurring_control form-control day " name="category" >
+                                                <option value="" selected disabled>Select Category</option>
+                                                @foreach (var taxcategory in Model.TaxEntityCategories)
+                                                {
+                                                    <option value="@taxcategory">@taxcategory</option>
+                                                }
+                                            </select>
+                                             
+                                            <br/>
+                                            <small>Customer's TIN/RIN</small> 
+
+                                                <input type="text" class="form-control" id="tinNumber" placeholder="Enter Tin Number" name="tinNumber"> 
+ 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="submit.GenerateInvoiceStart" formaction="@Url.Action("AdminCollectionFormView", "Collection", new { revenueHeadId = entry.RevennueHeadId })" formmethod="get" value="@T("GenerateForm")" class="btn btn-primary">@T("Proceed")</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<b>|</b>
+                            
+                            @Html.ActionLink(T("Make Payment").ToString(), "MakePayment", "RevenueHead", new { revenueHeadSlug = entry.RevennueHeadSlug, revenueHeadId = entry.RevennueHeadId }, null)*@
+                           
+                            
+                        </td>
+                    </tr>
+                    userIndex++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">@T("No record found.") </td> </tr> }
+        </table>
+        @Display(Model.Pager)
+    </fieldset>
+}
+
+@{
+    Script.Require("CBS.MDA.Bootstrap.Script");
+}

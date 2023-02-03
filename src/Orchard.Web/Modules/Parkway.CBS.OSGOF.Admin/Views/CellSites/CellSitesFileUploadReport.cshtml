@@ -1,0 +1,195 @@
+﻿@model Parkway.CBS.OSGOF.Admin.ViewModels.CellSitesStagingReportVM
+
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Cell Sites Staging").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.MDA.PDF.Script");
+    Script.Require("CBS.MDA.PDF_autoTable.Script");
+
+    Script.Require("CBS.MDA.Excel_Export.Script");
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <div class="container-fluid">
+        <fieldset>
+            @if (!Model.Error)
+            {
+                <div class="manage">
+
+                    <button type="submit">@T("Save Valid Records")</button>
+
+                </div>
+
+                <div>
+                    <button type="button" value="@T("Back")" onclick="location.href='@Url.RouteUrl("AddCellSites", new { payerId = Model.PayerId })'">@T("Back")</button>
+                    @Html.ActionLink(T("Cancel").ToString(), "AddOperator", "Operator", new { }, new { @class = "button primaryAction" })
+                </div>
+            }
+        </fieldset>
+
+        @*<div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b style="color:#ff6a00"> Tax Payer Category</b>
+                        @Html.TextBox("ErrorMessage", Model.ErrorMessage, new { @class = "form-control", @placeholder = "Enter Payer Id ", @name = "PayerId" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <b style="color:#e97d68;">Search by Payer Id</b>
+                            @Html.TextBox("ErrorMessage", Model.ErrorMessage, new { @class = "form-control", @placeholder = "Enter Payer Id ", @name = "PayerId" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <b style="color:#e97d68;">Search by TIN</b>
+                            @Html.TextBox("ErrorMessage", Model.ErrorMessage, new { @class = "form-control", @placeholder = "Enter TIN", @name = "TIN" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <b style="color:#e97d68;">Search by Phone number</b>
+                            @Html.TextBox("ErrorMessage", Model.ErrorMessage, new { @class = "form-control", @placeholder = "Enter Phone number", @name = "PhoneNumber" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <b style="color:#e97d68;">Search by Name</b>
+                    @Html.TextBox("ErrorMessage", Model.ErrorMessage, new { @class = "form-control", @placeholder = "Search by Name", @name = "Name" })
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" style="margin-top: 20px;" formaction="@Url.Action("TaxProfilesReport", "Report")">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Operator Site Id
+                                </th>
+                                <th>
+                                    Year of Deployment
+                                </th>
+                                <th>
+                                    Height of Tower
+                                </th>
+                                <th>
+                                    Mast Type
+                                </th>
+                                <th>
+                                    Lat and Long
+                                </th>
+                                <th>
+                                    Address
+                                </th>
+                                <th>
+                                    Region
+                                </th>
+                                <th>
+                                    State
+                                </th>
+                                <th>
+                                    LGA
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#EEEEEE;">
+
+                            @if (Model.CellSites != null && Model.CellSites.Any())
+                            {
+                                foreach (var item in Model.CellSites)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.OperatorSiteId
+                                        </td>
+                                        <td>
+                                            @item.YearOfDeployment
+                                        </td>
+                                        <td>
+                                            @item.HeightOfTower
+                                        </td>
+                                        <td>
+                                            @item.MastType
+                                        </td>
+                                        <td>
+                                            (@item.Lat, @item.Long)
+                                        </td>
+                                        <td>
+                                            @item.SiteAddress
+                                        </td>
+                                        <td>
+                                            @item.Region
+                                        </td>
+                                        <td>
+                                            @item.State
+                                        </td>
+                                        <td>
+                                            @item.LGA
+                                        </td>
+                                        <td>
+                                            @if (item.HasErrors)
+                                            {
+                                                <a href="#"><b title="@item.ErrorMessages" style="color:red; font-size: x-large; font-weight:bolder">*</b></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="10">No Records Found</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="summary">Total Number of Records :  @Model.TotalNumberOfRecords</p>
+                <p class="summary">Total Number of Invalid Records : @Model.TotalNumberOfInvalid</p>
+                <p class="summary">Total Number of Valid Records: @Model.TotalNumberOfValidRecords</p>
+            </div>
+        </div>
+    </div>
+
+}
+@Display(Model.Pager)
+

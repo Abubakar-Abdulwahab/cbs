@@ -1,0 +1,34 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+@{
+    Script.Require("PSS.State.Service.Command.Script").AtFoot();
+}
+
+<div class="form-group">
+    <label for="state">State<span class="required-sym">*</span></label>
+    <select required class="custom-select" name="SelectedState" id="state">
+        <option selected disabled value="">Select a State</option>
+        @foreach (var item in Model.StateLGAs)
+        {
+            <option value="@item.Id" @(Model.SelectedState == item.Id ? "selected" : "")>@item.Name</option>
+        }
+    </select>
+    <small class="form-text text-muted">Select state for the police command.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedState", "Selected State value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+<div class="form-group">
+    <label for="searchPC">Select the Police Formation/Division<span class="required-sym">*</span></label>
+    <input required type="text" class="form-control" name="Command" placeholder="Select a Command" id="commandList" list="commands" autocomplete="off" spellcheck="false" />
+    <input type="text" name="SelectedCommand" id="selectedCommand" hidden />
+    <div id="searchError"></div>
+    <small class="form-text text-muted">Select the Formation/Division.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCommand", "Select a valid Command.", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+    <datalist name="commands" id="commands">
+        @if (Model.ListOfCommands != null && Model.ListOfCommands.Any())
+        {
+            foreach (var item in Model.ListOfCommands)
+            {
+                <option data-value="@item.Id" value="@item.Name"></option>
+            }
+        }
+    </datalist>
+</div>

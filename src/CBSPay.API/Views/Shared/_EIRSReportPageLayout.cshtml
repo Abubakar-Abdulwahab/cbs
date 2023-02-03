@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/datatables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/components.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/layout.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/typeahead.css">
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    @RenderSection("head", false)
+</head>
+<body>
+    <div id="domMessage" style="display:none;">
+        <h4>We are processing your request. Please be patient.</h4>
+    </div>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="~/Home/Index" class="navbar-brand">
+                        <img src="~/Styles/Images/EIRS-logo.png">
+                        <img src="~/Styles/Images/Logo.png">
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="~/Home/Pay">HOME</a></li>
+                    <li><a href="~/Login/Logout">LOGOUT</a></li>
+                </ul>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navMainMenu" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-collapse collapse" id="navMainMenu" aria-expanded="false">
+                    <ul class="nav navbar-nav">
+                        <li class=" switch-li no-hover">
+                            <a href="~/Home/Index">
+                                <label class="switch">
+                                    <input type="checkbox" id="chkMenuSwitch">
+                                    <span class="slider round"></span>
+                                </label>
+                            </a>
+                        </li>
+                        <li class=""><a href="~/Report/Index">DashBoard</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                FLOW TABLES
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @*<li><a>Pay Direct Notifications</a></li>
+                                <li><a>CBS Paydirect</a></li>
+                                <li><a>CBS Queue</a></li>
+                                <li><a>CBS POA</a></li>
+                                <li><a>Bill Settlement</a></li>
+                                <li><a href="~/Report/TaxPayerReport">Tax Payers</a></li>*@
+                                <li><a href="~/Report/AssessmentDetailsReport">Assessment Bills</a></li>
+                                <li><a href="~/Report/AssessmentRuleReport">Assessment Rules</a></li>
+                                <li><a href="~/Report/AssessmentAssetReport">Assessment Assets</a></li>
+                                <li><a href="~/Report/AssessmentProfileReport">Assessment Profile</a></li>
+                                <li><a href="~/Report/AssessmentRuleItemReport">Assessment Items</a></li>
+                                <li><a href="~/Report/ServiceBillReport">MDA Service Bills</a></li>
+                                <li><a href="~/Report/MDAServiceReport">MDA Services</a></li>
+                                <li><a href="~/Report/ServiceBillItemReport">MDA Service Bill Item</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                USER MANAGEMENT
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Permissions</a></li>
+                                <li><a href="#">Roles</a></li>
+                                <li><a href="#">Users</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                REPORTS
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Report/ConsolidatedReport">Consolidated Report</a></li>
+                                <li><a href="~/Report/SettlementReport">Settlement Report</a></li>
+                                <li><a href="~/Report/PendingReport">Pending Report</a></li>
+                                <li><a href="~/Report/FailedReport">Failed Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <section class="alternate" style="min-height:79vh;">
+        <div>
+
+            @RenderSection("ReportPageWelcome", false)
+        </div>
+
+        <section class="alternate">
+            <div class="container">
+                <div class="row" id="ReportStatistics">
+
+                    @RenderBody()
+
+                </div>
+            </div>
+        </section>
+
+        @RenderSection("ReportPageFooter", false)
+        <div>
+            @RenderSection("InnerBillingModal", false)
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="navbar-brand" id="logo">
+                        <img src="~/Styles/Images/Logo.png">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    © Copyright ERAS - Edo State Internal Revenue Service @DateTime.Now.Year. All rights reserved
+                </div>
+                <div class="col-sm-4">
+                    <ul>
+                        <li>
+                            <a>Data Protection</a>
+                        </li>
+                        <li>
+                            <a>Terms of Use</a>
+                        </li>
+                        <li>
+                            <a>Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.all.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/select2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jsCommon.js"></script>
+    <script type="text/javascript" src="~/Scripts/jsCustomValidator.js"></script>
+    <script type="text/javascript" src="~/Scripts/datepickerinitialization.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    @*<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>*@
+    @*<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>*@
+    @*https://code.jquery.com/jquery-3.3.1.js
+    https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js*@
+
+    <script type="text/javascript" src="~/Scripts/html2canvas.js"></script>
+    <script type="text/javascript" src="~/Scripts/jspdf.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/FileSaver.min.js"></script>
+    <script>
+        var captureSection = function (id) { //e.g. "#captureThis"
+            html2canvas(document.querySelector(id)).then(canvas => {
+                var doc = new jsPDF();
+                doc.addImage(canvas.toDataURL(), 'PNG', 15, 40, 180, 180);
+                doc.save();
+            });
+        }
+        var ReportStatisticsImage = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    window.saveAs(blob, "Report statistics.png")
+                });
+            });
+        }
+        var ReportStatisticsPdf = function (id) {
+            html2canvas(document.querySelector(id)).then(canvas => {
+                var doc = new jsPDF({
+                    orientation: 'p',
+                    unit: 'in'
+                });
+                doc.addImage(canvas.toDataURL(), 'PNG', 0, 0, 8.27, 5.52);
+                doc.addImage(logo.toDataURL(), 'PNG', 0, 0, 1.5, 0.3);
+                doc.save('Report statistics.pdf');
+            });
+        }
+
+        $(document).ready(function () {
+            $('#table').DataTable({
+
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E37FB0D7-A11C-407E-9EBA-7328D7C36742}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.Police.Client</RootNamespace>
+    <AssemblyName>Parkway.CBS.Police.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Parkway.CBS.ClientFileServices\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountVerificationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
+    <Compile Include="Controllers\CollectionController.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPCCDiasporaHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IServiceOptionHandler.cs" />
+    <Compile Include="Controllers\Handlers\PCCDiasporaHandler.cs" />
+    <Compile Include="Controllers\Handlers\ServiceOptionHandler.cs" />
+    <Compile Include="Controllers\NotificationMessageController.cs" />
+    <Compile Include="Controllers\ServiceOptionsController.cs" />
+    <Compile Include="Controllers\PSSCharacterCertificateDiasporaController.cs" />
+    <Compile Include="Controllers\RequestServiceStateCommandsAJAXController.cs" />
+    <Compile Include="Controllers\CommandController.cs" />
+    <Compile Include="Controllers\ContactUsAJAXController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\Handlers\AccountVerificationHandler.cs" />
+    <Compile Include="Controllers\Handlers\ContactUsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IAccountVerificationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IContactUsHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IForgotPasswordHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSBranchesHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCharacterCertificateHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSEscortHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSExtractSubCategoryHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSReceiptHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPssInvoiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IGenericRequestHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSSubUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRegisterUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRequestListHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IResetPasswordHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRetrieveEmailHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IRetrieveEmailVerificationHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IValidateDocumentHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IValidateIdentificationNumberAJAXHandler.cs" />
+    <Compile Include="Controllers\Handlers\ForgotPasswordHandler.cs" />
+    <Compile Include="Controllers\Handlers\Handler.cs" />
+    <Compile Include="Controllers\Handlers\PSSBranchesHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCharacterCertificateHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSEscortHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSExtractSubCategoryHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSReceiptHandler.cs" />
+    <Compile Include="Controllers\Handlers\PssInvoiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\GenericRequestHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSSubUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\RegisterUserHandler.cs" />
+    <Compile Include="Controllers\Handlers\RequestListHandler.cs" />
+    <Compile Include="Controllers\Handlers\ResetPasswordHandler.cs" />
+    <Compile Include="Controllers\GenericPoliceRequestController.cs" />
+    <Compile Include="Controllers\Handlers\RetrieveEmailHandler.cs" />
+    <Compile Include="Controllers\Handlers\RetrieveEmailVerificationHandler.cs" />
+    <Compile Include="Controllers\Handlers\ValidateDocumentHandler.cs" />
+    <Compile Include="Controllers\Handlers\ValidateIdentificationNumberAJAXHandler.cs" />
+    <Compile Include="Controllers\PrivacyTermsController.cs" />
+    <Compile Include="Controllers\PSSBranchesAJAXController.cs" />
+    <Compile Include="Controllers\PSSBranchesController.cs" />
+    <Compile Include="Controllers\PSSCharacterCertificateController.cs" />
+    <Compile Include="Controllers\PSSEscortDetailsAJAXController.cs" />
+    <Compile Include="Controllers\PSSExtractSubCategoryAJAXController.cs" />
+    <Compile Include="Controllers\PssInvoiceController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PSSSubUserAJAXController.cs" />
+    <Compile Include="Controllers\PSSSubUserController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
+    <Compile Include="Controllers\PSSEscortController.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSMakePaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSRequestConfirmationHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSMakePaymentHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSCommandHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSCommandHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IPSSExtractHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\ISelectServiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\Contracts\IUserProfileHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSExtractHandler.cs" />
+    <Compile Include="Controllers\Handlers\PSSRequestConfirmationHandler.cs" />
+    <Compile Include="Controllers\Handlers\SelectServiceHandler.cs" />
+    <Compile Include="Controllers\Handlers\UserProfileHandler.cs" />
+    <Compile Include="Controllers\MakePaymentController.cs" />
+    <Compile Include="Controllers\PSSExtractController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\RequestConfirmationController.cs" />
+    <Compile Include="Controllers\RequestDetailsController.cs" />
+    <Compile Include="Controllers\RequestInvoicesController.cs" />
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\ResetPasswordController.cs" />
+    <Compile Include="Controllers\ResetPasswordVerificationController.cs" />
+    <Compile Include="Controllers\RetrieveEmailController.cs" />
+    <Compile Include="Controllers\RetrieveEmailVerificationController.cs" />
+    <Compile Include="Controllers\SelectServiceAJAXController.cs" />
+    <Compile Include="Controllers\SelectServiceController.cs" />
+    <Compile Include="Controllers\ServiceRequestsDashboardController.cs" />
+    <Compile Include="Controllers\SignOutController.cs" />
+    <Compile Include="Controllers\SubUsersRequestListController.cs" />
+    <Compile Include="Controllers\TermsOfUseController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Controllers\ValidateDocumentController.cs" />
+    <Compile Include="Controllers\ValidateIdentificationNumberAJAXController.cs" />
+    <Compile Include="Middleware\CheckIfHasSubUsersFilterHandler.cs" />
+    <Compile Include="Middleware\CheckIfNoSubUsersFilterHandler.cs" />
+    <Compile Include="Middleware\CheckIsAdministratorFilter.cs" />
+    <Compile Include="Middleware\CheckIsAdministratorFilterHandler.cs" />
+    <Compile Include="Middleware\CheckVerificationFilter.cs" />
+    <Compile Include="Middleware\CheckVerificationFilterHandler.cs" />
+    <Compile Include="Middleware\HasSubUsersFilter.cs" />
+    <Compile Include="Middleware\PSSAnonymous.cs" />
+    <Compile Include="Middleware\PSSAnonymousFilterHandler.cs" />
+    <Compile Include="Middleware\PSSAuthorizedAJAX.cs" />
+    <Compile Include="Middleware\PSSAuthorized.cs" />
+    <Compile Include="Middleware\PSSHeaderFilterAttribute.cs" />
+    <Compile Include="Middleware\PSSUnhandledExceptionFilter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSSServiceType\CharacterCertificateDetails.cs" />
+    <Compile Include="PSSServiceType\EscortRegularizationDetails.cs" />
+    <Compile Include="PSSServiceType\ServiceOptions\CharacterCertificate\InCountry.cs" />
+    <Compile Include="PSSServiceType\ServiceOptions\Contracts\IServiceOptionPresentation.cs" />
+    <Compile Include="PSSServiceType\ServiceOptions\CharacterCertificate\Diaspora.cs" />
+    <Compile Include="PSSServiceType\Contracts\IPSSServiceTypeDetails.cs" />
+    <Compile Include="PSSServiceType\EscortDetails.cs" />
+    <Compile Include="PSSServiceType\GenericDetails.cs" />
+    <Compile Include="PSSServiceType\ExtractDetails.cs" />
+    <Compile Include="RouteName\ChangePassword.cs" />
+    <Compile Include="RouteName\ErrorPage.cs" />
+    <Compile Include="RouteName\Login.cs" />
+    <Compile Include="RouteName\NotificationMessage.cs" />
+    <Compile Include="RouteName\PrivacyTerms.cs" />
+    <Compile Include="RouteName\PSSBranches.cs" />
+    <Compile Include="RouteName\PSSBranchesAJAX.cs" />
+    <Compile Include="RouteName\PSSCharacterCertificate.cs" />
+    <Compile Include="RouteName\PSSCharacterCertificateDiaspora.cs" />
+    <Compile Include="RouteName\ServiceOptions.cs" />
+    <Compile Include="RouteName\PSSSubUser.cs" />
+    <Compile Include="RouteName\PSSSubUserAJAX.cs" />
+    <Compile Include="RouteName\RequestDetails.cs" />
+    <Compile Include="RouteName\RequestList.cs" />
+    <Compile Include="RouteName\ResetPasswordVerification.cs" />
+    <Compile Include="RouteName\RetrieveEmail.cs" />
+    <Compile Include="RouteName\RequestServiceStateCommandsAJAX.cs" />
+    <Compile Include="RouteName\RetrieveEmailVerification.cs" />
+    <Compile Include="RouteName\SelectService.cs" />
+    <Compile Include="RouteName\SelectServiceAJAX.cs" />
+    <Compile Include="RouteName\SubUsersRequestList.cs" />
+    <Compile Include="RouteName\TermsOfUse.cs" />
+    <Compile Include="RouteName\ValidateDocument.cs" />
+    <Compile Include="Routes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Views\Partials\Forms\InputBox.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.CBS.CacheProvider\Parkway.CBS.CacheProvider.csproj">
+      <Project>{1636072F-E60D-42FE-8F89-7E78F57ECFFB}</Project>
+      <Name>Parkway.CBS.CacheProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Parkway.DataExporter\Parkway.DataExporter.csproj">
+      <Project>{3590F60E-8887-4BD8-B60B-CBF981ED917C}</Project>
+      <Name>Parkway.DataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79aed36e-abd0-4747-93d3-8722b042454b}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Core\Parkway.CBS.Core.csproj">
+      <Project>{7B02ED5F-5616-492F-8B66-190795D4BEE9}</Project>
+      <Name>Parkway.CBS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.Police.Core\Parkway.CBS.Police.Core.csproj">
+      <Project>{87365E9B-C5BF-44F7-8B5B-EB80E1563C02}</Project>
+      <Name>Parkway.CBS.Police.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Collection\ConfirmationPage.cshtml" />
+    <Content Include="Views\Collection\EscortDutiesOne.cshtml" />
+    <Content Include="Views\Collection\EscortDutiesThree.cshtml" />
+    <Content Include="Views\Collection\EscortDutiesTwo.cshtml" />
+    <Content Include="Views\Collection\Index.cshtml" />
+    <Content Include="Views\MakePayment\MakePayment.cshtml" />
+    <Content Include="Views\Collection\PoliceExtractOne.cshtml" />
+    <Content Include="Views\Collection\PoliceExtractTwo.cshtml" />
+    <Content Include="Views\Collection\RequestConfirmation.cshtml" />
+    <Content Include="Views\SelectService\SelectService.cshtml" />
+    <Content Include="Views\Collection\UserProfile.cshtml" />
+    <Content Include="Views\Collection\UserProfileSecurity.cshtml" />
+    <Content Include="Views\Collection\VerifiedAccount.cshtml" />
+    <Content Include="Views\Collection\VerifyAccountAlert.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\FooterPartial.cshtml" />
+    <Content Include="Views\Partials\HeaderPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Views\Partials\Flash.cshtml" />
+    <Content Include="Views\UserProfile\RequestUserProfile.cshtml" />
+    <Content Include="Views\PSSExtract\ExtractRequest.cshtml" />
+    <Content Include="Views\Partials\PopUpLoginPartial.cshtml" />
+    <Content Include="Views\Partials\ExtractTemplatePartial.cshtml" />
+    <Content Include="Views\Partials\ExtractTemplateConfirmation.cshtml" />
+    <Content Include="Views\Login\SignIn.cshtml" />
+    <Content Include="Views\Registration\RegisterUser.cshtml" />
+    <Content Include="Views\PSSEscort\EscortRequest.cshtml" />
+    <Content Include="Views\RequestConfirmation\ConfirmPSSRequest.cshtml" />
+    <Content Include="Views\Partials\EscortConfirmationPartial.cshtml" />
+    <Content Include="Views\ServiceRequestsDashboard\ServiceRequestsAdminDash.cshtml" />
+    <Content Include="Views\Partials\FlashPartial.cshtml" />
+    <Content Include="Views\AccountVerification\VerifyAccount.cshtml" />
+    <Content Include="Views\AccountVerification\VerificationTransitPage.cshtml" />
+    <Content Include="Views\MakePayment\Success.cshtml" />
+    <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\PssInvoice\SearchByInvoiceNumber.cshtml" />
+    <Content Include="Views\Receipt\Receipts.cshtml" />
+    <Content Include="Views\Receipt\ReceiptDetails.cshtml" />
+    <Content Include="Views\PssInvoice\GetInvoice.cshtml" />
+    <Content Include="Views\About\About.cshtml" />
+    <Content Include="Views\Contact\Contact.cshtml" />
+    <Content Include="Views\Partials\UserProfilePartial.cshtml" />
+    <Content Include="Views\Error\ErrorPage.cshtml" />
+    <Content Include="Views\PSSNotFound.cshtml" />
+    <Content Include="Views\RequestList\RequestList.cshtml" />
+    <Content Include="Views\GenericPoliceRequest\GenericRequest.cshtml" />
+    <Content Include="Views\ForgotPassword\ForgotPassword.cshtml" />
+    <Content Include="Views\ResetPassword\ResetPassword.cshtml" />
+    <Content Include="Views\ResetPasswordVerification\ResetPasswordVerify.cshtml" />
+    <Content Include="Views\PrivacyTerms\PrivacyTerms.cshtml" />
+    <Content Include="Views\RequestDetails\InvestigationReportDetails.cshtml" />
+    <Content Include="Views\ValidateDocument\ValidateDocument.cshtml" />
+    <Content Include="Views\ValidateDocument\ValidatedDocumentInfo.cshtml" />
+    <Content Include="Views\RequestInvoices\RequestInvoices.cshtml" />
+    <Content Include="Views\RequestInvoices\GetInvoice.cshtml" />
+    <Content Include="Views\Partials\SideNotePartial.cshtml" />
+    <Content Include="Views\Partials\ExtractDocumentInfo.cshtml" />
+    <Content Include="Views\Partials\EscortDocumentInfo.cshtml" />
+    <Content Include="Views\Partials\GenericDocumentInfo.cshtml" />
+    <Content Include="Views\Partials\PrivacyPolicyandTermsPartial.cshtml" />
+    <Content Include="Views\Partials\Forms\StateDropDown.cshtml" />
+    <Content Include="Views\TermsOfUse\TermsOfUse.cshtml" />
+    <Content Include="Views\Partials\UserIdentificationDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\UserIdentificationFileUploadPartial.cshtml" />
+    <Content Include="Views\Partials\ExtractConfirmationPartial.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\CharacterCertificateRequest.cshtml" />
+    <Content Include="Views\Partials\CharacterCertificateConfirmationPartial.cshtml" />
+    <Content Include="Views\RequestDetails\RequestDetails.cshtml" />
+    <Content Include="Views\Partials\RequestDetails\EscortDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\RequestDetails\ExtractDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\RequestDetails\CharacterCertificateDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\CharacterCertificateDocumentInfo.cshtml" />
+    <Content Include="Views\Partials\RequestDetails\GenericDetailsPartial.cshtml" />
+    <Content Include="Views\Partials\ContactPersonInfoPartial.cshtml" />
+    <Content Include="Views\Partials\AlternativeContactPersonInfoPartial.cshtml" />
+    <Content Include="Views\PSSSubUser\SubUsers.cshtml" />
+    <Content Include="Views\Partials\SecurityNavBarPartial.cshtml" />
+    <Content Include="Views\RequestDetails\RequestBranchDetails.cshtml" />
+    <Content Include="Views\PSSBranches\Branches.cshtml" />
+    <Content Include="Views\Partials\PSServiceCaveatPartial.cshtml" />
+    <Content Include="Views\SubUsersRequestList\SubUsersRequestList.cshtml" />
+    <Content Include="Views\Partials\SubUserProfilePartial.cshtml" />
+    <Content Include="Views\Partials\PCCDocumentUploadPreviewModal.cshtml" />
+    <Content Include="Views\Partials\PCCDocumentUploadConfirmationModal.cshtml" />
+    <Content Include="Views\Partials\PCCPassportUploadGuidelinesModal.cshtml" />
+    <Content Include="Views\Partials\SearchByInvoiceNumberInfoModal.cshtml" />
+    <Content Include="Views\RetrieveEmail\RetrieveEmail.cshtml" />
+    <Content Include="Views\RetrieveEmailVerification\RetrieveEmailVerify.cshtml" />
+    <Content Include="Views\Partials\ServiceStateCommand.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\InCountryForm.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\CharacterCertificateOptions.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCRequestType.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCCharacterCertificateReasonForInquiry.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCSelectedCountryOfOrigin.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCPlaceOfBirth.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCDateOfBirth.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCDestinationCountry.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCSelectedCountryOfPassport.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCPassportNumber.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCPlaceOfIssuance.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCDateOfIssuance.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCPreviouslyConvicted.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCPassportPhotographFile.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCIntPassportDatapageFile.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\PartialSplitCharacterCertificateRequest.cshtml" />
+    <Content Include="Views\PSSCharacterCertificateDiaspora\CharacterCertificateDiasporaRequest.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCCountryOfResidence.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCProofOfResidenceFile.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCFingerPrintFile.cshtml" />
+    <Content Include="Views\ServiceOptions\SelectOption.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCSelectIdentityType.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCCountryOfOrigin.cshtml" />
+    <Content Include="Views\PSSCharacterCertificate\Partials\PCCDiasporaDestinationCountry.cshtml" />
+    <Content Include="Views\NotificationMessage\List.cshtml" />
+    <Content Include="Views\Partials\NotificationMessage\NotificationMessageContentPartial.cshtml" />
+    <Content Include="Views\Partials\NotificationMessage\NotificationMessageListPartial.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

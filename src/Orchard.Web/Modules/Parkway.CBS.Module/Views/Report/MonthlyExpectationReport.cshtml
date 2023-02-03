@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "MonthlyExpectationReport";
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.RevenueHead");
+    Style.Require("Style.Datepicker");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Datepicker.Script");
+}
+
+<div class="container-fluid">
+    <div class="row row1">
+        <div class="col-md-12 text-center">
+            <form class="form-inline">
+                <div class="form-group">
+                    <!--<label>From</label>-->
+                    <input type="text" placeholder="From " id="pickyDate" class="form-control" />
+                    <span class="add-on">
+                        <i class="icon-calendar"></i>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <!--<label>To</label>-->
+                    <input type="text" placeholder="To" id="pickyDate2" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <div class="selectWrapper">
+                        <select class="form-control selectBox" id="month">
+                            <option>Select MDA</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <div class="selectWrapper">
+                        <select class="form-control selectBox" id="month">
+                            <option>Select revenue head</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                MDA
+                            </th>
+                            <th>
+                                INVOICES GENERATED
+                            </th>
+                            <th>
+                                EXPECTED INCOME
+                            </th>
+                            <th>
+                                INVOICES PAID
+                            </th>
+                            <th>
+                                ACTUAL INCOME
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                MINISTRY OF LANDS AND HOUSING 
+                            </td>
+                            <td>
+                                32
+                            </td>
+                            <td style="word-wrap:break-word;">
+                                200,000
+                            </td>
+
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                156,000
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="pull-right">Total Number of Invoices Generated: 1</p>
+                <p class="pull-right">Total Expected Income:  &#X20A6; 200,000</p>
+                <p class="pull-right">Total Number of Invoices Paid: 1</p>
+                <p class="pull-right">Total Actual Income: &#X20A6; 156,000</p>
+            </div>
+        </div>
+    </div>
+
+</div>

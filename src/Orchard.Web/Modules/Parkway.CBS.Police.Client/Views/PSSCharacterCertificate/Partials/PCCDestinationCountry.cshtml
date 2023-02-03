@@ -1,0 +1,18 @@
+﻿@model Parkway.CBS.Police.Core.VM.CharacterCertificateRequestVM
+
+<div class="form-group">
+    <label for="destinationCountry">Destination Country<span class="required-sym">*</span></label>
+    <input required type="text" placeholder="Enter your destination country" class="form-control" list="countries" id="countryData" name="countryData" spellcheck="false" autocomplete="off" value="@((Model.DestinationCountry > 0) ? Model.Countries.Where(x => x.Id == Model.DestinationCountry).SingleOrDefault().Name : "")" />
+    <datalist id="countries" name="countries">
+        @if (Model.Countries != null && Model.Countries.Any())
+        {
+            foreach (var country in Model.Countries)
+            {
+                <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+            }
+        }
+    </datalist>
+    <input type="hidden" name="DestinationCountry" id="countryIdentifier" />
+    <small class="form-text text-muted">Select your destination country.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("DestinationCountry", "Selected country value is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>

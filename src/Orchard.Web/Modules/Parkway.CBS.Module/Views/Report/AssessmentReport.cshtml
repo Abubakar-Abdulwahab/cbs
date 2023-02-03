@@ -1,0 +1,332 @@
+﻿@using Parkway.CBS.Core.Models.Enums;
+@model Parkway.CBS.Core.HelperModels.MDAReportViewModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    Script.Require("CBS.MDA.Excel_Export.Script");
+
+    Layout.Title = T("Assessment Report").ToString();
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.Assesment");
+    Style.Require("CBS.Report.Reset.Pagination");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.AssessmentDatePicker.Script");
+
+    Script.Require("CBS.Report.Script").AtFoot();
+}
+<style>
+    .textloader {
+        position: absolute;
+        left: 43%;
+        top: 34%;
+        color: #337ab7;
+        display: none;
+    }
+</style>
+<div class="zone zone-messages">
+    <div class="message message-Error" id="errorFlash" style="display:none"></div>
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.HiddenFor(model => model.SelectedMDA)
+    @Html.HiddenFor(model => model.SelectedRevenueHead)
+    @Html.HiddenFor(model => model.Token)
+
+
+<div class="container-fluid">
+    <div class="row" style=" text-transform:uppercase; text-align:center; text-decoration:double">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                From:
+                <p><b style="color:#e97d68;">@Model.FromRange</b></p>
+            </div>
+            <div class="col-md-3">
+                To:
+                <p><b style="color:#e97d68;">@Model.EndRange</b></p>
+            </div>
+            <div class="col-md-3">
+                MDA:
+                <p><b style="color:#e97d68;">@Model.MDAName</b></p>
+            </div>
+            <div class="col-md-3">
+                Revenue Head:
+                <p><b style="color:#e97d68">@Model.RevenueHeadName</b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-3">
+                TIN (Tax Identification Number):
+                <p><b style="color:#e97d68">@Model.Options.TINText</b></p>
+            </div>
+            <div class="col-md-3">
+                Invoice status:
+                <p><b style="color:#e97d68;">@Model.Options.PaymentStatus</b></p>
+            </div>
+            <div class="col-md-3">
+                Invoice Number:
+                <p><b style="color:#e97d68;">@Model.Options.InvoiceNumber</b></p>
+            </div>
+            <div class="col-md-3">
+                Category:
+                <p><b style="color:#e97d68;">@Model.CategoryName</b></p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Date Filter By</b>
+                @Html.DropDownListFor(model => model.DateFilterBy, Enum.GetValues(typeof(Parkway.CBS.Core.Models.Enums.FilterDate)).Cast<Parkway.CBS.Core.Models.Enums.FilterDate>()
+                    .ToList().Select(t => new SelectListItem() { Text = t.ToDescription(), Value = t.ToString() }),
+                    new { @class = "form-control", @name = "filteredby" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">From</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.FromRange" name="from" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">To</b>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" placeholder="click to show datepicker" class="form-control pickyDate" value="@Model.EndRange" name="end" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select MDA</b>
+                <select name="mda" id="mda_selected" required class="form-control selectBox">
+                    <option value="" disabled>Select an MDA</option>
+                    <option value="0" @(Model.SelectedMDA == "0" ? "selected" : "")>All</option>
+                    @foreach (var item in Model.MDAs)
+                    {
+                        <option value="@item.Id" @(Model.SelectedMDA == item.Id.ToString() ? "selected" : "")>@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Select Revenue Head</b>
+                <span name="textloader" id="textloader" class="textloader">Loading..</span>
+                <select name="revenueHeadId" id="revenuehead_selected" class="form-control selectBox">
+                    <option value="" disabled>Select a Revenue Head</option>
+                    <option value="0" @(Model.SelectedRevenueHead == "0" ? "selected" : "")>All Revenue Heads</option>
+                    @foreach (var item in Model.RevenueHeads)
+                    {
+                        <option value="@item.Id" @(Model.SelectedRevenueHead == item.Id.ToString() ? "selected" : "")>@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by TIN</b>
+                @Html.TextBox("TIN", Model.Options.TINText, new { @class = "form-control", @placeholder = "Enter TIN" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by invoice status</b>
+                <select id="filterResults" name="paymentStatus" class="form-control selectBox">
+                    @Html.SelectOption(Model.Options.PaymentStatus, Parkway.CBS.Core.Models.Enums.InvoiceStatus.All, T(Parkway.CBS.Core.Models.Enums.InvoiceStatus.All.ToString()).ToString())
+                    @Html.SelectOption(Model.Options.PaymentStatus, Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid, T(Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid.ToString()).ToString())
+                    @Html.SelectOption(Model.Options.PaymentStatus, Parkway.CBS.Core.Models.Enums.InvoiceStatus.Unpaid, T(Parkway.CBS.Core.Models.Enums.InvoiceStatus.Unpaid.ToString()).ToString())
+                    @Html.SelectOption(Model.Options.PaymentStatus, Parkway.CBS.Core.Models.Enums.InvoiceStatus.Overdue, T(Parkway.CBS.Core.Models.Enums.InvoiceStatus.Overdue.ToString()).ToString())
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by invoice number</b>
+                @Html.TextBox("invoiceNumber", Model.Options.InvoiceNumber, new { @class = "form-control", @placeholder = "Enter Invoice Number" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <b style="color:#e97d68;">Search by Category</b>
+                <div class="input-group">
+                    <select id="sectorSelected" name="sector" class="form-control">
+                        <option value="0" @(Model.SectorSelected == "0" ? "selected" : "")>All Categories</option>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option value="@item.Id" @(Model.SectorSelected == item.Id.ToString() ? "selected" : "")>@item.Name</option>
+                        }
+                    </select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" style="margin-left: 10px" formaction="@Url.Action("AssessmentReport","Report")">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 reportsummary">
+        <button class="btn btn-success" style="margin: 20px 10px 0 0;" title="Export to excel"  formaction="@Url.Action("AssessmentReportDownload", "FileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.Excel } )">
+            <i class=" fa fa-file-excel-o"></i>
+            <span>Excel</span>
+        </button>
+        <button class="btn btn-danger" style="margin: 20px 10px 0 0;" title="Export to PDF" formaction="@Url.Action("AssessmentReportDownload", "FileExport", new { format = Parkway.CBS.Core.Models.Enums.ExportFormat.PDF })">
+            <i class=" pdf fa fa-file-pdf-o"></i>
+            <span>PDF</span>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                INVOICE DATE
+                            </th>
+                            <th>
+                                INVOICE NUMBER
+                            </th>
+                            <th>
+                                PAYER'S NAME
+                            </th>
+                            <th>
+                                PAYER'S TIN/RIN
+                            </th>
+                            <th style="text-align:right">
+                                (₦) INVOICE AMOUNT
+                            </th>
+                            <th>
+                                INVOICE STATUS
+                            </th>
+                            @*<th>
+                                    AMOUNT DUE
+                                </th>*@
+                            <th>
+                                GENERATED BY
+                            </th>
+                            <th>
+                                PAYMENT DATE
+                            </th>
+                            <th>
+                                DUE DATE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model.ReportRecords != null && Model.ReportRecords.Count() > 0)
+                        {
+                            foreach (var item in Model.ReportRecords)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.InvoiceDate.ToString("dd MMM yyyy")
+                                    </td>
+                                    <td>
+                                        <a href="@Url.RouteUrl("AdminViewInvoice",new { invoiceNumber = @item.InvoiceNumber })" name="viewInvoice">@item.InvoiceNumber</a>
+                                    </td>
+                                    <td>
+                                        @item.TaxPayerName
+                                    </td>
+                                    <td>
+                                        @item.PayersTIN
+                                    </td>
+                                    <td style="text-align:right">
+                                        @String.Format("{0:n2}", item.TotalAmount)
+                                    </td>
+                                    <td>
+                                        @if (item.PaymentStatus == Parkway.CBS.Core.Models.Enums.InvoiceStatus.PartPaid)
+                                        {
+                                            <small>Part Paid</small>
+                                        }
+                                        else
+                                        {
+                                            @item.PaymentStatus
+                                        }
+                                    </td>
+                                    @*<td>
+                                            @if (item.PaymentStatus != Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid)
+                                            {
+                                                @String.Format("{0:n2}", item.AmountDue)
+                                            }
+                                            else
+                                            {
+                                                @String.Format("0.00")
+                                            }
+                                        </td>*@
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.AdminUserName))
+                                        {
+                                            @item.AdminUserName
+                                        }
+                                        else
+                                        {
+                                            @item.TaxPayerName
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PaymentDate != null)
+                                        {
+                                            @item.PaymentDate.Value.ToString("dd MMM yyyy")
+                                        }
+                                        else
+                                        {
+                                            <small> - </small>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.DueDate != null)
+                                        {
+                                            @item.DueDate.Value.ToString("dd MMM yyyy")
+                                        }
+                                        else
+                                        {
+                                            <small> - </small>
+                                        }
+                                    </td>
+                                    @*<td>
+                                            @if (item.PaymentStatus != Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid)
+                                            {
+                                                <a href="@Url.RouteUrl("AddPaymentAdmin", new { item.InvoiceNumber })">Add Payment</a>
+                                            }
+                                        </td>*@
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="summary">Total Number of Invoices Generated: @String.Format("{0:n2}", Model.TotalNumberOfInvoicesSent) </p>
+            <p class="summary">Total Amount: &#X20A6; @String.Format("{0:n2}", Model.TotalInvoiceAmount)</p>
+        </div>
+    </div>
+
+</div>
+}
+@Display(Model.Pager)

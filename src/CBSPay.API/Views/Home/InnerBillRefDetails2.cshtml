@@ -1,0 +1,484 @@
+﻿@model CBSPay.Core.ViewModels.InnerBillDetailsViewModel
+@{
+    ViewBag.Title = "Inner Bill Details";
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+    var count = 0;
+}
+<div class="col-sm-3">
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                ERAS
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/Home/Index"><i class="fa fa-angle-right"></i> Home</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-angle-right"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="~/Report"><i class="fa fa-angle-right"></i> Reports</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                TAX PAYERS
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/Home/IndividualCapture"><i class="fa fa-angle-right"></i> Individuals</a>
+                </li>
+                <li>
+                    <a href="~/Home/CorporateCapture"><i class="fa fa-angle-right"></i> Corporates</a>
+                </li>
+                <li>
+                    <a href="~/Home/GovernmentCapture"><i class="fa fa-angle-right"></i> Government</a>
+                </li>
+                <li>
+                    <a href="~/Home/SpecialCapture"><i class="fa fa-angle-right"></i> Special</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                ASSETS
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/home/CaptureBuildingSearch"><i class="fa fa-angle-right"></i> Buildings</a>
+                </li>
+                <li>
+                    <a href="~/Home/CaptureBusinessSearch"><i class="fa fa-angle-right"></i> Businesses</a>
+                </li>
+                <li>
+                    <a href="~/Home/CaptureVehicleSearch"><i class="fa fa-angle-right"></i> Vehicles</a>
+                </li>
+                <li>
+                    <a href="~/Home/CaptureLandSearch"><i class="fa fa-angle-right"></i> Lands</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="portlet light compressed-menu">
+        <div class="portlet-title">
+            <div class="caption">
+                REVENUE DATA
+            </div>
+        </div>
+        <div class="portlet-body">
+            <ul class="nav">
+                <li>
+                    <a href="~/Home/AssessmentBill"><i class="fa fa-angle-right"></i> Assessment Bill</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-angle-right"></i> Service Bill</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-angle-right"></i> Assessment Rules</a>
+                </li>
+                <li>
+                    <a href="~/Home/MDAServiceBill"><i class="fa fa-angle-right"></i> MDA Service</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-sm-9">
+    <div class="title">
+        <h1>
+            Bill Retrieve
+        </h1>
+        <hr>
+    </div>
+    @using (Html.BeginForm("MakeOnlineEIRSPayment", "Home", FormMethod.Post))
+    {
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="portlet light" style="min-height: 270px;">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Record Details
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <table class="table border-top-0">
+                        <tr>
+                            <td>Template Type</td>
+                            <td>@Model.TemplateType </td>
+                            @Html.HiddenFor(x => x.TemplateType)
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>@Model.Date.Date</td>
+                            @Html.HiddenFor(x => x.Date)
+                        </tr>
+                        <tr>
+                            <td>Tax Payer Type</td>
+                            <td>@Model.TaxPayerType</td>
+                            @Html.HiddenFor(x => x.TaxPayerType)
+                        </tr>
+                        <tr>
+                            <td>Tax Payer Name</td>
+                            <td>@Model.TaxPayerName</td>
+                            @Html.HiddenFor(x => x.TaxPayerName)
+                        </tr>
+                        <tr>
+                            <td>Settlement Status</td>
+                            <td>@Model.SettlementStatus</td>
+                            @Html.HiddenFor(x => x.SettlementStatus)
+                            @Html.HiddenFor(x => x.PhoneNumber)
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="portlet light" style="min-height: 270px;">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Notes
+                    </div>
+                </div>
+                <div class="portlet-body link-box">
+                    <p>@Model.Notes</p>
+                    @Html.HiddenFor(x => x.Notes)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                Reference: @Model.RefNumber &nbsp; | &nbsp; Status: @Model.SettlementStatus
+                @Html.HiddenFor(x => x.RefNumber)
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="list-pane" id="dvRequestList">
+           
+               
+    @foreach (var item in @Model.RefRules)
+    {
+        <div class="list-item clearfix">
+            <div class="col-sm-9 list-left-col">
+                <h3>
+                    @item.RuleName
+                    @Html.Hidden("RefRules[" + count + "].RuleName", item.RuleName)
+                    <a href="" data-toggle="modal" data-target="#dvViewAssessmentRuleModal_@item.RefRuleID">[View Items]</a>
+                </h3>
+                <div class="desc-row">
+                    Amount Charged: ₦@item.RuleAmount.ToString("N") <br> 
+                    @Html.Hidden("RefRules[" + count + "].RuleAmount", item.RuleAmount)
+
+                    Amount Paid: ₦@item.SettledAmount.ToString("N") <a href="" data-toggle="modal" data-target="#dvViewPaymentModal_@item.RefRuleID">[View Payments]</a> <br>
+                    @Html.Hidden("RefRules[" + count + "].SettledAmount", item.SettledAmount)
+
+                    Outstanding: ₦@item.OutstandingAmount.ToString("N") <br> @Html.Hidden("RefRules[" + count + "].OutstandingAmount", item.OutstandingAmount)
+
+                    Tax Year: @item.TaxYear
+                    @Html.Hidden("RefRules[" + count + "].TaxYear", item.TaxYear)
+                </div> 
+            </div>
+            <div class="col-sm-3 list-right-col">
+                <h4>Amount to Pay</h4>
+                <div class="count">
+                    <div class="counter-number">₦<p class="pay_amount" name="" id="payamount_@item.RefRuleID">@item.OutstandingAmount.ToString("N")</p></div>
+                    <a class="btn btn-theme btn-icon-only btnRequester" id="btnEdit" data-toggle="modal" data-target="#dvEditAmountModal_@item.RefRuleID">
+                        <b style="font-size: 1.4em;font-weight: bolder">&#10010;</b>
+                    </a>
+                    <div class="small-font-info">
+                        Click on plus(+) to edit amount to pay
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+    
+@{
+    var countI = 0;
+}
+    @foreach (var item in @Model.RefRules)
+    {
+
+        <div class="modal fade custom-modal" id="dvViewAssessmentRuleModal_@item.RefRuleID"  tabindex="-1" role="dialog" aria-labelledby="dvViewAssessmentRuleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dvViewAssessmentRuleModalLabelA_@item.RefRuleID">View Items in @item.RuleName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped ">
+                            <thead class="thead-theme">
+                                <tr>
+                                    <th>Item Ref</th>
+                                    <th>Item Name</th>
+                                    <th>Computation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@item.RuleItemRef</td>
+                                    <td>@item.RuleItemName</td>
+                                    <td>@item.RuleComputation</td>
+                                    @Html.Hidden("RefRules[" + countI + "].RuleComputation", item.RuleComputation)
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade custom-modal" id="dvEditAmountModal_@item.RefRuleID" tabindex="-1" role="dialog" aria-labelledby="dvEditAmountModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dvEditAmountModalLabelA_@item.RefRuleID">Edit Amount to Pay against @item.RuleName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped ">
+                            <thead class="thead-theme">
+                                <tr>
+                                    <th>Item Ref</th>
+                                    <th>Item Name</th>
+                                    <th>Outstanding</th>
+                                    <th>Amount to Pay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@item.RuleItemRef</td>
+                                    @Html.Hidden("RefRules[" + countI + "].RuleItemRef", item.RuleItemRef)
+                                    <td>@item.RuleItemName</td>
+                                    @Html.Hidden("RefRules[" + countI + "].RuleItemName", item.RuleItemName)
+                                    <td id="ruleItemOutstandingAmount_@item.RefRuleID">@item.OutstandingAmount.ToString("N")</td>
+                                    @Html.Hidden("RefRules[" + countI + "].OutstandingAmount", item.OutstandingAmount)
+                                    <td>
+                                        <input type="number" name="RefRules[@countI].RuleAmountToPay" class="form-control" id="txtToPayAmount_@item.RefRuleID" placeholder=@item.OutstandingAmount.ToString("N") data-maxamount=@item.OutstandingAmount value="@item.OutstandingAmount" min="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer">
+                           @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                            <button type="button" class="btn btn-theme" id="saveRuleItemAmount_@item.RefRuleID" data-item-amount-id=@item.RefRuleID onclick="editItemAmount(event)" name="btnSaveAmount" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade custom-modal" id="dvViewPaymentModal_@item.RefRuleID" tabindex="-1" role="dialog" aria-labelledby="dvViewPaymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dvViewPaymentModalLabelA_@item.RefRuleID">View Payments for @item.RuleName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped ">
+                            <thead class="thead-theme">
+                                <tr>
+                                    <th>Payment Ref</th>
+                                    <th>Payment Date</th>
+                                    <th>Amount Paid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@item.RuleItemRef</td>
+                                    <td>@Model.Date.Date</td>
+                                    <td>@item.SettledAmount.ToString("N")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        countI++;
+    }
+
+               
+
+                <div class="row info-row">
+                    <div class="col-sm-6">
+                        Total Amount
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        ₦@Model.TotalAmount.ToString("N")
+                        @Html.HiddenFor(x => x.TotalAmount)
+                    </div>
+                </div>
+                <hr class="margin-0">
+                <div class="row info-row">
+                    <div class="col-sm-6">
+                        Total Paid <a href="" data-toggle="modal" data-target="#dvViewSettlementModal">[View Payments]</a>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        ₦@Model.TotalAmountPaid.ToString("N")
+                        @Html.HiddenFor(x => x.TotalAmountPaid)
+                    </div>
+                </div>
+                <hr class="margin-0">
+                <div class="row info-row">
+                    <div class="col-sm-6">
+                        Outstanding
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        ₦@Model.TotalOutstandingAmount.ToString("N")
+                        @Html.HiddenFor(x => x.TotalOutstandingAmount)
+                    </div>
+                </div>
+                <hr class="margin-0">
+                <div class="row info-row font-red font-17">
+                    <div class="col-sm-6">
+                        Amount to Pay
+                    </div>
+                    <div class="col-sm-6 text-right" id="dvAmountToPay">
+                        <input type="text" name="TotalAmountToPay" value=@Model.TotalOutstandingAmount id="TotalAmountToPay" hidden readonly />
+                        ₦<span name="ShowTotalAmountToPay" id="ShowTotalAmountToPay">@Model.TotalOutstandingAmount.ToString("N")</span>
+                    </div>
+                </div>
+
+                <hr class="margin-top-0">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Settlement Method*</label>
+                        <div class="col-sm-8">
+                            <select name="SettlementMethod" class="form-control bs-select" required readonly>
+                                <option name="SettlementMethod" value="">Select Settlement Method</option>
+                                <option name="SettlementMethod" selected value="1">Internet Web Pay</option>
+                                @*<option name="SettlementMethod" value="2">Bank Transfer</option>
+                                <option name="SettlementMethod" value="3">Point of Sale (POS)</option>
+                                <option name="SettlementMethod" value="4">Mobile Payment</option>
+                                <option name="SettlementMethod" value="5">Scratch Card Payment</option>*@
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Add Notes</label>
+                        <div class="col-sm-8">
+                            <textarea name="AddNotes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <button class="btn btn-theme btn-block" type="submit" name="MakePayment">Make Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+    @section InnerBillingModal{
+        <div class="modal fade custom-modal" id="dvEditAmountModal" tabindex="-1" role="dialog" aria-labelledby="dvEditAmountModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dvEditAmountModalLabel">Edit Amount to Pay against AssessmentRuleName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped ">
+                            <thead class="thead-theme">
+                                <tr>
+                                    <th>Item Ref</th>
+                                    <th>Item Name</th>
+                                    <th>Outstanding</th>
+                                    <th>Amount to Pay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> ReferenceNo</td>
+                                    <td> ItemName</td>
+                                    <td> Amount</td>
+                                    <td>
+                                        <input type="text" name="txtToPayAmount" class="form-control" max="PendingAmount" data-maxamount="PendingAmount" value="PendingAmount" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-theme" data-modalId="AARID" name="btnSaveAmount">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="portlet light">
+        @using (Html.BeginForm("GetReferenceItems", "Home", FormMethod.Post))
+        {
+            <div class="portlet-title">
+                <div class="caption">
+                    New Search
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="module-search">
+                    <div class="search-input-wrap">
+                        <div class="input-box">
+                            <input autocomplete="off" required="" id="txtReferenceNumber" name="ReferenceNumber" placeholder="Enter 10 Digit Reference ID" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="module-search">
+                    <div class="search-input-wrap">
+                        <div class="input-box">
+                            <input autocomplete="off" type="text" name="PhoneNumber" id="PhoneNumber" class="form-control" placeholder="Enter Phone Number" value="" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <input type="submit" value="Search" class="btn btn-theme" autocomplete="off">
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+
+@section scripts
+    {
+
+<script type="text/javascript" src="~/Scripts/EIRSInnerBillDetails.js"></script>
+
+}

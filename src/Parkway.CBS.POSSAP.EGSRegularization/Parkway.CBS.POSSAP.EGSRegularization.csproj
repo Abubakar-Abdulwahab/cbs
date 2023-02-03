@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7CE35D6-788E-4459-B21E-AB95DF10CD0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parkway.CBS.POSSAP.EGSRegularization</RootNamespace>
+    <AssemblyName>Parkway.CBS.POSSAP.EGSRegularization</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelDataReader">
+      <HintPath>..\packages\ExcelDataReader.3.4.1\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.1\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core">
+      <HintPath>..\packages\Hangfire.Core.1.7.6\lib\net45\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer">
+      <HintPath>..\packages\Hangfire.SqlServer.1.7.6\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="InfoGRID.Pulse.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\InfoGRID.Pulse.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Parkway.CBS.ClientFileServices\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.Cashflow.Ng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Users\SD-04\Documents\Dlls (2)\Dlls\Parkway.Cashflow.Ng.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HelperModels\APNumberValidationVM.cs" />
+    <Compile Include="HelperModels\GenerateRequestWithoutOfficersDataResponse.cs" />
+    <Compile Include="HelperModels\GenerateRequestWithoutOfficersUploadBatchDetailsVM.cs" />
+    <Compile Include="HelperModels\GenerateRequestWithoutOfficersUploadItemVM.cs" />
+    <Compile Include="HelperModels\HeaderValidateObject.cs" />
+    <Compile Include="HelperModels\HeaderValidationModel.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersBatchDetailsVM.cs" />
+    <Compile Include="HelperModels\PSSBranchOfficersItemVM.cs" />
+    <Compile Include="HelperModels\PSSBranchSubUsersBatchDetailsVM.cs" />
+    <Compile Include="HelperModels\PSSBranchSubUsersDataResponse.cs" />
+    <Compile Include="HelperModels\PSSBranchSubUsersItemVM.cs" />
+    <Compile Include="HelperModels\PSSRequestTaxEntityViewVM.cs" />
+    <Compile Include="HelperModels\RegularizationInvoiceGenerationResponse.cs" />
+    <Compile Include="Implementations\Contracts\IGenerateRequestWithoutOfficersFileUpload.cs" />
+    <Compile Include="Implementations\Contracts\IGenerateRequestWithoutOfficersUploadValidation.cs" />
+    <Compile Include="Implementations\Contracts\IPSSBranchOfficersFileUpload.cs" />
+    <Compile Include="Implementations\Contracts\IPSSBranchOfficersFileUploadValidation.cs" />
+    <Compile Include="Implementations\Contracts\IPSSBranchSubUsersFileUpload.cs" />
+    <Compile Include="Implementations\Contracts\IPSSBranchSubUsersFileUploadValidation.cs" />
+    <Compile Include="Implementations\Contracts\IServiceNumberValidator.cs" />
+    <Compile Include="Implementations\GenerateRequestWithoutOfficersFileUpload.cs" />
+    <Compile Include="Implementations\GenerateRequestWithoutOfficersUploadValidation.cs" />
+    <Compile Include="Implementations\Logger\Contracts\ILogger.cs" />
+    <Compile Include="Implementations\Logger\Log4netLogger.cs" />
+    <Compile Include="Implementations\PSSBranchOfficersFileUpload.cs" />
+    <Compile Include="Implementations\PSSBranchOfficersFileUploadValidation.cs" />
+    <Compile Include="Implementations\PSSBranchSubUsersFileUpload.cs" />
+    <Compile Include="Implementations\PSSBranchSubUsersFileUploadValidation.cs" />
+    <Compile Include="Implementations\RecurringInvoice\Contracts\IProcessComp.cs" />
+    <Compile Include="Implementations\RecurringInvoice\DoInvoiceGeneration.cs" />
+    <Compile Include="Implementations\RecurringInvoice\ProcessComp.cs" />
+    <Compile Include="Implementations\RecurringInvoice\PSSRegularizationRecurringInvoiceService.cs" />
+    <Compile Include="Implementations\ServiceNumberValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSSRepositories\Contracts\IEscortAmountChartSheetDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IGenerateRequestWithoutOfficersUploadBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IGenerateRequestWithoutOfficersUploadBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPoliceServiceRequestDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSServiceDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSServiceRequestFlowDefinitionLevelDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSServiceRevenueHeadDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSEscortDetailsDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSProposedRegularizationUnknownPoliceOfficerDeploymentLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSRegularizationUnknownOfficerRecurringInvoiceSettingsDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSRequestDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSRequestInvoiceDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IRequestStatusLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IServiceWorkflowDifferentialDAOManager.cs" />
+    <Compile Include="PSSRepositories\EscortAmountChartSheetDAOManager.cs" />
+    <Compile Include="PSSRepositories\GenerateRequestWithoutOfficersUploadBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\GenerateRequestWithoutOfficersUploadBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PolicerOfficerLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPolicerOfficerLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPoliceRankingDAOManager.cs" />
+    <Compile Include="PSSRepositories\PoliceRankingDAOManager.cs" />
+    <Compile Include="PSSRepositories\CommandDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\ICommandDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSBranchOfficersBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSBranchOfficersBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSBranchSubUsersBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\Contracts\IPSSBranchSubUsersBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PoliceServiceRequestDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSBranchOfficersBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSBranchOfficersBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSBranchSubUsersBatchDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSServiceDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSServiceRequestFlowDefinitionLevelDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSServiceRevenueHeadDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSEscortDetailsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSProposedRegularizationUnknownPoliceOfficerDeploymentLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSRegularizationUnknownOfficerRecurringInvoiceSettingsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSBranchSubUsersBatchItemsDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSRequestDAOManager.cs" />
+    <Compile Include="PSSRepositories\PSSRequestInvoiceDAOManager.cs" />
+    <Compile Include="PSSRepositories\RequestStatusLogDAOManager.cs" />
+    <Compile Include="PSSRepositories\ServiceWorkflowDifferentialDAOManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orchard.Web\Modules\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Web\Modules\Parkway.CBS.Core\Parkway.CBS.Core.csproj">
+      <Project>{7B02ED5F-5616-492F-8B66-190795D4BEE9}</Project>
+      <Name>Parkway.CBS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Web\Modules\Parkway.CBS.Police.Core\Parkway.CBS.Police.Core.csproj">
+      <Project>{87365E9B-C5BF-44F7-8B5B-EB80E1563C02}</Project>
+      <Name>Parkway.CBS.Police.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.ClientRepository\Parkway.CBS.ClientRepository.csproj">
+      <Project>{E43FEFA6-FBF8-4FBB-8796-53222160B8BB}</Project>
+      <Name>Parkway.CBS.ClientRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.HangFireInterface\Parkway.CBS.HangFireInterface.csproj">
+      <Project>{1eca1ed8-4bb3-4dba-8d5f-22af1d93e4fd}</Project>
+      <Name>Parkway.CBS.HangFireInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parkway.CBS.RemoteClient\Parkway.CBS.RemoteClient.csproj">
+      <Project>{484E95E0-1C49-4EBD-BE0F-202838F72376}</Project>
+      <Name>Parkway.CBS.RemoteClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

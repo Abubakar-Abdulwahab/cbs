@@ -1,0 +1,199 @@
+﻿@model Parkway.CBS.Module.ViewModels.RevenueHeadDashboardViewModel
+@using Orchard.Utility.Extensions
+
+@{
+    ViewBag.Title = Model.RevenueHead.Name + " DashBoard";
+}
+@{ Layout.Title = Model.RevenueHead.Name; }
+@{
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("CBS.MDA.Style.RevenueDashboard");
+
+    Style.Include("element-browser.css");
+    Script.Require("jQuery");
+    //Script.Include("/OrchardLocal/Modules/Orchard.Layouts/scripts/element-browser.js");
+
+    Script.Require("CBS.Element.Script");
+
+    Script.Require("CBS.Chart.JS").AtFoot();
+    Script.Require("CBS.Dashboard.Chart").AtFoot();
+
+
+    var categories = Model.Categories;
+
+    Layout.LocalNavigation.Add(New.Chart_Tab(Categories: categories));
+}
+
+<style>
+    .bar-chart {
+        display: block;
+        width: 1000px;
+        height: 300px;
+    }
+
+    .content {
+        max-width: 500px;
+        /*margin: auto;*/
+        padding: 16px 32px;
+    }
+
+    .wrapper {
+        min-height: 300px;
+        padding: 10px 0;
+        position: relative;
+    }
+
+        .wrapper.col-3 {
+            display: inline-block;
+            min-height: 100px;
+            width: 49%;
+        }
+
+    #chart-doughnut {
+        display: block;
+        width: 1500px;
+        height: 300px;
+    }
+
+    #chartjs-tooltip {
+        opacity: 1;
+        position: absolute;
+        background: rgba(0, 0, 0, .7);
+        color: white;
+        border-radius: 3px;
+        -webkit-transition: all .1s ease;
+        transition: all .1s ease;
+        pointer-events: none;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+
+    .chartjs-tooltip-key {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+    }
+</style>
+<script>
+    var barChart = @Html.Raw(Json.Encode(Model.ChartViewModel.BarChart));
+    var dougCharts = @Html.Raw(Json.Encode(Model.ChartViewModel.DoughNutCharts));
+    var lineChart = @Html.Raw(Json.Encode(Model.ChartViewModel.LineChart));
+</script>
+
+@Display(Model.AdminBreadCrumb)
+
+
+<div class="element-browser">
+    @foreach (var category in categories.Reverse())
+    {
+        if (category.DisplayName.ToString() == "DashBoard")
+        {
+            <div id="cat-@category.Name.HtmlClassify()" class="elements">
+
+                <h2>DashBoard</h2>
+                    @*@Html.ActionLink(T("Edit Billing").ToString(), "Edit", "Billing", new { revenueHeadSlug = Model.RevenueHead.Slug, revenueHeadId = Model.RevenueHead.Id }, null)
+                <b>|</b>
+                    @Html.ActionLink(T("Edit Form Setup").ToString(), "Edit", "Form", new { revenueHeadSlug = Model.RevenueHead.Slug, revenueHeadId = Model.RevenueHead.Id }, null)*@
+                <div class="container">
+                    <div class="row panelrows col-lg-offset-0">
+                        <div class="col-md-3 first">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Invoices Sent</h3>
+                                </div>
+                                <div class="panel-body">
+                                    @String.Format("{0:n0}", Model.TotalNumberOfInvoices)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Pending Invoices</h3>
+                                </div>
+                                <div class="panel-body">
+                                    @String.Format("{0:n0}", Model.PendingInvoices)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Invoices Paid </h3>
+                                </div>
+                                <div class="panel-body">
+                                    @String.Format("{0:n0}", Model.TotalInvoicePaid)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row panelrows col-lg-offset-0">
+                        <div class="col-md-3 first">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Actual Income </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span>&#x20a6</span> @String.Format("{0:n0}", Model.ActualIncomeOnInvoicesPaid)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Expected Income</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span>&#x20a6</span> @String.Format("{0:n0}", Model.TotalExpectedIncome)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Pending Amount</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span>&#x20a6</span>@String.Format("{0:n0}", Model.PendingAmount)
+                                </div>
+                                <div class="panel-footer">
+                                    <h1 class="panel-footer-text">@Model.Month</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div id="cat-@category.Name.HtmlClassify()" class="elements">
+                <div class="chart-container">
+                    @*<canvas id="barChart" style="display: block; width: 1000px; height: 300px;"></canvas>
+                        <canvas id="doNut" style="display: block; width: 1500px; height: 300px;"></canvas>
+                        <div id="chartjs-tooltip">
+                            <table></table>
+                        </div>*@
+                </div>
+            </div>
+        }
+
+    }
+</div>

@@ -1,0 +1,74 @@
+﻿@{
+
+
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+    Style.Require("CBS.MDA.Style.MonthPicker");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+    Script.Require("CBS.MDA.HighChart.Script");
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.NewDashboard.Script");
+    Script.Require("CBS.MDA.MonthPicker.Script");
+
+    <script type="text/javascript" defer src="https://code.highcharts.com/4.2.2/modules/exporting.js"></script>
+}
+@{
+    ViewBag.Title = "NewDashboard";
+}
+<style>
+    /*text:last-child{
+       display:none;
+   }*/
+    label{
+        display:inline-block !important;
+    }
+</style>
+<h2>NewDashboard</h2>  
+    <form class="form-inline text-center">
+        <div class="form-group">
+            <label>From</label>
+            <input type="text" name="name" value="" class="form-control from"/>
+        </div>
+        <div class="form-group">
+            <label>To</label>
+            <input type="text" name="name" value="" class="form-control to" />
+        </div>
+        <div class="form-group">
+            <select class="form-control">
+                <option value="value">MDA 1</option>
+                <option value="value">MDA 2</option>
+            </select>
+        </div>
+    </form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="pie-chart" style="min-width:310px;height:400px;max-width:600px;margin:0 auto;">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-4">
+                <div class="pie-chart" style="min-width:310px;height:400px;max-width:600px;margin:0 auto;">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pie-chart2" style="min-width:310px;height:400px;max-width:600px;margin:0 auto;">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="container"></div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div id="linechart"></div>
+    </div>
+</div>
+

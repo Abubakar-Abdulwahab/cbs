@@ -1,0 +1,119 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<CBSPay.Core.Entities.TaxPayerDetails>
+@{
+    ViewBag.Title = "TaxPayerReport";
+    Layout = "~/Views/Shared/_EIRSReportPageLayout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="~/Scripts/datepickerinitialization.js"></script>
+<style>
+    input[type=text] {
+        width: 100%;
+    }
+    .input-group {
+        width: 100%;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="title">
+        <h1 title="This are TaxPayer that have, at some point made payment on this platform">Taxpayer Reports</h1>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered" id="table">
+                    <thead>
+                        <tr>
+                            <th style="color:#c00001;">
+                                S/N
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer Name
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer RIN
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer Type
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer Phone Number
+                            </th>
+                            <th style="color:#c00001;">
+                                Tax Payer Address
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#EEEEEE;">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @{var sn = i + 1;}
+                                        @sn
+                                    </td>
+                                    <td>
+                                        @Model[i].TaxPayerName
+                                    </td>
+                                    <td>
+                                        @Model[i].TaxPayerRIN
+                                    </td>
+                                    <td>
+                                        @if (Model[i].TaxPayerTypeID == 1)
+                                        {
+                                            <span>Individual</span>
+                                        }
+                                        else if (Model[i].TaxPayerTypeID == 2)
+                                        {
+                                            <span>Company</span>
+                                        }
+                                        else if (Model[i].TaxPayerTypeID == 3)
+                                        {
+                                            <span>Special</span>
+                                        }
+                                        else if (Model[i].TaxPayerTypeID == 4)
+                                        {
+                                            <span>Government</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Model[i].TaxPayerMobileNumber
+                                    </td>
+                                    <td>
+                                        @Model[i].TaxPayerAddress
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6">No Records Found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            <p>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </p>
+            <p>
+                @Html.PagedListPager(Model, page => Url.Action("TaxPayerReport", new { page }))
+            </p>
+        </div>
+    </div>
+}
+

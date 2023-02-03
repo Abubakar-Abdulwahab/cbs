@@ -1,0 +1,136 @@
+﻿body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    /*background-image: url('bg.png');*/
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 100vh;
+    position: relative;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.form-control {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+label {
+    font-weight:normal !important;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.housing {
+    padding: 0px;
+    margin: 50px auto;
+    max-width: 380px;
+    /*background-color: #fff;*/
+}
+
+    .housing .payment-header {
+        padding: 10px;
+        /*background-color: #f4f4f4;*/
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+        .housing .payment-header .logo {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            background-color: #e2e2e2;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: -50px;
+            line-height: 80px;
+        }
+
+.card-amount {
+    text-align: center;
+    padding: 35px 0px;
+}
+
+.error-code {
+    font-size: 100px;
+    color: #ddd;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.error-message {
+    color: #ddd;
+    font-weight: bold;
+    font-style:italic;
+}
+
+.housing .card-amount-pane {
+    font-weight: 700;
+    margin: 0px;
+}
+
+    .housing .card-amount-pane .whole {
+        font-size: 40px;
+    }
+
+.copyright {
+    float: left;
+}
+
+
+
+.footer {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.finished-payment {
+    border: 1px solid green;
+    margin: 15px;
+    border-radius: 10px;
+}
+
+    .finished-payment h3 {
+        font-size: 20px;
+        margin-top: 10px;
+    }

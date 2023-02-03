@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0EA5930-8ADA-40F3-B395-503F9DE4A606}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CBSPay.Core</RootNamespace>
+    <AssemblyName>CBSPay.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.StringTemplate, Version=3.4.1.9004, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.StringTemplate.3.4.1.9004\lib\net20\Antlr3.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Parkway\Parkway.Tools.NHibernate\Parkway.Tools.NHibernate\bin\Debug\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ParkwayScheduler_Quartz\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ParkwayScheduler_Quartz\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ParkwayScheduler_Quartz\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="Parkway.Tools.NHibernate, Version=1.2.6555.29539, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ParkwayScheduler_Quartz\Parkway.Tools.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.2.2.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ParkwayScheduler_Quartz\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Dependencies\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIModels\EIRSPaymentRequestInfo.cs" />
+    <Compile Include="APIModels\EIRSSettlementInfo.cs" />
+    <Compile Include="APIModels\NetPayPaymentNotificationModel.cs" />
+    <Compile Include="APIModels\PayOnAccountSettlement.cs" />
+    <Compile Include="APIModels\PayWithQuicktellerRequest.cs" />
+    <Compile Include="APIModels\PayWithQuicktellerResponse.cs" />
+    <Compile Include="APIModels\POATaxPayerResponse.cs" />
+    <Compile Include="APIModels\SettlementItem.cs" />
+    <Compile Include="Entities\AssessmentRule.cs" />
+    <Compile Include="Entities\AssessmentRuleItem.cs" />
+    <Compile Include="Entities\EconomicActivities.cs" />
+    <Compile Include="Entities\MDAService.cs" />
+    <Compile Include="Entities\PaymentHistoryItem.cs" />
+    <Compile Include="Entities\RevenueStream.cs" />
+    <Compile Include="Entities\RevenueSubStream.cs" />
+    <Compile Include="Entities\ServiceBillItem.cs" />
+    <Compile Include="Entities\TaxPayerDetails.cs" />
+    <Compile Include="Entities\TaxPayerType.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Helpers\Configuration.cs" />
+    <Compile Include="Helpers\EIRSTaskConfigValues.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="DAL\IBaseRepository.cs" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\IConstantAPIModelService.cs" />
+    <Compile Include="Interfaces\ITaxPayerServiceold.cs" />
+    <Compile Include="Mappings\AssessmentDetailsMap.cs" />
+    <Compile Include="Mappings\AssessmentRuleMap.cs" />
+    <Compile Include="Mappings\EconomicActivitiesMap.cs" />
+    <Compile Include="Mappings\EIRSPaymentRequestItemMap.cs" />
+    <Compile Include="Mappings\EIRSPaymentRequestMap.cs" />
+    <Compile Include="Mappings\MDAServiceMap.cs" />
+    <Compile Include="Mappings\PaymentHistoryMap.cs" />
+    <Compile Include="Mappings\PaymentItemsHistoryMap.cs" />
+    <Compile Include="Mappings\AssessmentRuleItemMap.cs" />
+    <Compile Include="Mappings\RevenueStreamMap.cs" />
+    <Compile Include="Mappings\RevenueSubStreamMap.cs" />
+    <Compile Include="Mappings\RoleMap.cs" />
+    <Compile Include="Mappings\ServiceBillItemMap.cs" />
+    <Compile Include="Mappings\ServiceBillMap.cs" />
+    <Compile Include="Entities\AssessmentDetails.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\EIRSPaymentRequest.cs" />
+    <Compile Include="Interfaces\IRestService.cs" />
+    <Compile Include="Interfaces\ITaxPayerService.cs" />
+    <Compile Include="Interfaces\IPaymentService.cs" />
+    <Compile Include="Entities\EIRSPaymentRequestItem.cs" />
+    <Compile Include="Mappings\TaxPayerDetailsMap.cs" />
+    <Compile Include="Mappings\TaxPayerTypeMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\ConstantAPIModelService.cs" />
+    <Compile Include="Services\PaymentService.cs" />
+    <Compile Include="DAL\Repository.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\TaxPayerService.cs" />
+    <Compile Include="APIModels\APIResponse.cs" />
+    <Compile Include="APIModels\EIRSAPILoginRequest.cs" />
+    <Compile Include="APIModels\PayDirectRequest.cs" />
+    <Compile Include="APIModels\PayDirectResponse.cs" />
+    <Compile Include="APIModels\PaymentDetails.cs" />
+    <Compile Include="Entities\PaymentHistory.cs" />
+    <Compile Include="Entities\ServiceBill.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="APIModels\TaxPayerPaymentInfo.cs" />
+    <Compile Include="Helpers\WebRequestValidationService.cs" />
+    <Compile Include="ViewModels\GetReferenceModel.cs" />
+    <Compile Include="ViewModels\InnerBillDetailsViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\POASearchResponse.cs" />
+    <Compile Include="ViewModels\ReferenceItem.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\TaxPayerTransactionModel.cs" />
+    <Compile Include="ViewModels\ValidateRin.cs" />
+    <Compile Include="ViewModels\WeeklyPaymentTransaction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Parkway.Nhibernate.Cfg.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

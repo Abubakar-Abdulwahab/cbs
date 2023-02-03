@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Parkway.CBS.Core.Models.ReferenceDataRecords, Parkway.CBS.Core" table="Parkway_CBS_Core_ReferenceDataRecords" lazy="false">
+    <id name="Id">
+      <column name="Id" sql-type="bigint" not-null="true" length="8" />
+      <generator class="uuid.hex" />
+    </id>
+    <property name="ReferenceDataBatch_Id">
+      <column name="ReferenceDataBatch_Id" />
+    </property>
+    <property name="Createdatutc">
+      <column name="CreatedAtUtc" />
+    </property>
+    <property name="Updatedatutc">
+      <column name="UpdatedAtUtc" />
+    </property>
+    <property name="Rowid">
+      <column name="RowId" />
+    </property>
+    <property name="Completed">
+      <column name="Completed" />
+    </property>
+    <property name="Completedby">
+      <column name="CompletedBy" />
+    </property>
+    <property name="Started">
+      <column name="Started" />
+    </property>
+    <property name="Received">
+      <column name="Received" />
+    </property>
+    <property name="Completedat">
+      <column name="CompletedAt" />
+    </property>
+    <property name="Title">
+      <column name="Title" />
+    </property>
+    <property name="Sex">
+      <column name="Sex" />
+    </property>
+    <property name="Surname">
+      <column name="Surname" />
+    </property>
+    <property name="Firstname">
+      <column name="Firstname" />
+    </property>
+    <property name="Middlename">
+      <column name="Middlename" />
+    </property>
+    <property name="Nationality">
+      <column name="Nationality" />
+    </property>
+    <property name="Phonenumber1">
+      <column name="PhoneNumber1" />
+    </property>
+    <property name="Phonenumber2">
+      <column name="PhoneNumber2" />
+    </property>
+    <property name="Emailaddress">
+      <column name="EmailAddress" />
+    </property>
+    <property name="Tin">
+      <column name="TIN" />
+    </property>
+    <property name="Houseno">
+      <column name="HouseNo" />
+    </property>
+    <property name="Streetname">
+      <column name="StreetName" />
+    </property>
+    <property name="City">
+      <column name="City" />
+    </property>
+    <property name="Lga">
+      <column name="LGA" />
+    </property>
+    <property name="Employmentstatus">
+      <column name="EmploymentStatus" />
+    </property>
+    <property name="Employername">
+      <column name="EmployerName" />
+    </property>
+    <property name="Employeraddress">
+      <column name="EmployerAddress" />
+    </property>
+    <property name="Propertytype">
+      <column name="PropertyType" />
+    </property>
+    <property name="Propertystructure">
+      <column name="PropertyStructure" />
+    </property>
+    <property name="Propertystructurenumber">
+      <column name="PropertyStructureNumber" />
+    </property>
+    <property name="Propertyaddress">
+      <column name="PropertyAddress" />
+    </property>
+    <property name="Propertyrentamount">
+      <column name="PropertyRentAmount" />
+    </property>
+    <property name="Rentstartdate">
+      <column name="RentStartDate" />
+    </property>
+    <property name="Rentenddate">
+      <column name="RentEndDate" />
+    </property>
+    <property name="Ownertitle">
+      <column name="OwnerTitle" />
+    </property>
+    <property name="Ownersex">
+      <column name="OwnerSex" />
+    </property>
+    <property name="Ownersurname">
+      <column name="OwnerSurname" />
+    </property>
+    <property name="Ownerfirstname">
+      <column name="OwnerFirstname" />
+    </property>
+    <property name="Ownermiddlename">
+      <column name="OwnerMiddlename" />
+    </property>
+    <property name="Ownernationality">
+      <column name="OwnerNationality" />
+    </property>
+    <property name="Ownerphonenumber1">
+      <column name="OwnerPhoneNumber1" />
+    </property>
+    <property name="Ownerphonenumber2">
+      <column name="OwnerPhoneNumber2" />
+    </property>
+    <property name="Owneremailaddress">
+      <column name="OwnerEmailAddress" />
+    </property>
+    <property name="Ownertin">
+      <column name="OwnerTIN" />
+    </property>
+    <property name="Owneremploymentstatus">
+      <column name="OwnerEmploymentStatus" />
+    </property>
+    <property name="Owneremployername">
+      <column name="OwnerEmployerName" />
+    </property>
+    <property name="Owneremployeraddress">
+      <column name="OwnerEmployerAddress" />
+    </property>
+    <property name="Typeoftaxpaid">
+      <column name="TypeOfTaxPaid" />
+    </property>
+    <property name="Businessname">
+      <column name="BusinessName" />
+    </property>
+    <property name="Businessregoffice">
+      <column name="BusinessRegOffice" />
+    </property>
+    <property name="Corporatehouseaddress">
+      <column name="CorporateHouseAddress" />
+    </property>
+    <property name="Corporatestreetname">
+      <column name="CorporateStreetName" />
+    </property>
+    <property name="Corporatecity">
+      <column name="CorporateCity" />
+    </property>
+    <property name="Corporatelga">
+      <column name="CorporateLGA" />
+    </property>
+    <property name="Corporateorganizationtype">
+      <column name="CorporateOrganizationType" />
+    </property>
+    <property name="Corporatetin">
+      <column name="CorporateTin" />
+    </property>
+    <property name="Corporatecontactname">
+      <column name="CorporateContactName" />
+    </property>
+    <property name="Corporatephonenumber">
+      <column name="CorporatePhoneNumber" />
+    </property>
+    <property name="Contactemail">
+      <column name="ContactEmail" />
+    </property>
+    <property name="Businesscommencement">
+      <column name="BusinessCommencement" />
+    </property>
+    <property name="Numberemployees">
+      <column name="NumberEmployees" />
+    </property>
+    <property name="Directortitle">
+      <column name="DirectorTitle" />
+    </property>
+    <property name="Directorsex">
+      <column name="DirectorSex" />
+    </property>
+    <property name="Directorsurname">
+      <column name="DirectorSurname" />
+    </property>
+    <property name="Directorfirstname">
+      <column name="DirectorFirstName" />
+    </property>
+    <property name="Directormiddlename">
+      <column name="DirectorMiddleName" />
+    </property>
+    <property name="Directornationality">
+      <column name="DirectorNationality" />
+    </property>
+    <property name="Directorphone1">
+      <column name="DirectorPhone1" />
+    </property>
+    <property name="Directorphone2">
+      <column name="DirectorPhone2" />
+    </property>
+    <property name="Directoremail">
+      <column name="DirectorEmail" />
+    </property>
+    <property name="Directoraddress">
+      <column name="DirectorAddress" />
+    </property>
+    <property name="Directorcity">
+      <column name="DirectorCity" />
+    </property>
+    <property name="Corporateincomeyr1">
+      <column name="CorporateIncomeYr1" />
+    </property>
+    <property name="Corporateincomeyr2">
+      <column name="CorporateIncomeYr2" />
+    </property>
+    <property name="Corporateincomeyr3">
+      <column name="CorporateIncomeYr3" />
+    </property>
+    <property name="Solprosouincome">
+      <column name="SolProSouIncome" />
+    </property>
+    <property name="Annualgross">
+      <column name="AnnualGross" />
+    </property>
+  </class>
+</hibernate-mapping>

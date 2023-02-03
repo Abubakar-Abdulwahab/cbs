@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="http://fonts.cdnfonts.com/css/d-din" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            color: #171717;
+        }
+
+        .police-logo {
+            width: 55px;
+            height: auto;
+            position: absolute;
+            top: 0;
+            right: 70px;
+        }
+
+        .dispatch-note-container {
+            padding-bottom: 30px;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            height: 100%;
+            background-image: url("@Model.BGPath");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70% 75%;
+            min-width: 768px;
+        }
+
+        .dispatch-note-header {
+            width: 100%;
+            height: 270px;
+        }
+
+        .dispatch-note-content-1 {
+            float: left;
+            width: 50%;
+            padding-top: 30px;
+        }
+
+        .dispatch-note-content-2 {
+            position: relative;
+            float: right;
+            width: 50%;
+            text-align: right;
+            padding-top: 30px;
+        }
+
+        .npf-strip {
+            width: 100%;
+        }
+
+        .dispatch-note-body {
+            width: 100%;
+            margin-bottom: 70px;
+        }
+
+        .dispatch-note-table {
+            width: 100%;
+        }
+
+        .dispatch-note-table table {
+            width: 100%;
+            border-collapse: collapse;
+            border-bottom: 1px solid #ced4da;
+        }
+
+        .dispatch-note-table table thead tr {
+            border-top: 1px solid #ced4da;
+            border-bottom: 1px solid #ced4da;
+            font-weight: bold;
+        }
+
+        .dispatch-note-table table tr td {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .dispatch-note-table table tbody {
+            font-family: 'D-DIN', sans-serif;
+        }
+
+        .blue-font {
+            color: #000D31;
+        }
+
+        .dispatch-note-footer {
+            width: 100%;
+            text-align: center;
+        }
+
+        .command-name {
+            margin: 0;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #171717;
+        }
+
+        .command-addr {
+            margin: 0;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #0D1B4D;
+            font-weight: bold;
+        }
+
+        .footer-content {
+            position: absolute;
+
+        }
+
+        .footer-validation-msg {
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .dispatch-note-footer-content-2 {
+            font-size: 12px;
+            height: auto;
+            margin: 0 auto;
+            width: 435px;
+            height: 100px;
+            position: relative;
+        }
+
+        .details-text {
+            font-weight: bold;
+        }
+
+        .dispatch-note-commands-section {
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .commands-section-title {
+            font-weight: bold;
+        }
+
+        .command-name-addr-container {
+            width: 33.3333%;
+            height: 100px;
+            float: left;
+        }
+
+        .details-label {
+            font-family: 'D-DIN', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dispatch-note-container">
+        <div class="dispatch-note-header" style="height:@((string.IsNullOrEmpty(Model.ServiceOriginLocation)) ? "290px" : "330px" )">
+            <div class="dispatch-note-content-1">
+                <h2 style="font-size: 26px;">DISPATCH NOTE</h2>
+                <p class="details-label">File Number: <span class="details-text">@Model.FileNumber</span></p>
+                <p class="details-label">Document Number: <span class="details-text">@Model.ApprovalNumber</span></p>
+                <p class="details-label">Name of Applicant: <span class="details-text">@Model.ApplicantName</span></p>
+                @if (!string.IsNullOrEmpty(Model.ServiceOriginLocation))
+                {
+                    <p class="details-label">Service Origin Location: <span class="details-text">@Model.ServiceOriginLocation</span></p>
+                }
+                <p class="details-label">Service Delivery Location: <span
+                        class="details-text">@Model.ServiceDeliveryLocation</span></p>
+                <p class="details-label">Duration of service: <span class="details-text">@Model.ServiceDuration</span>
+                </p>
+            </div>
+
+            <div class="dispatch-note-content-2">
+                <img src="@Model.LogoURL" class="police-logo" />
+                <h4 style="font-size: 21px; margin-bottom: 0;">THE NIGERIA POLICE</h4>
+
+            </div>
+        </div>
+
+        <div class="dispatch-note-commands-section">
+            <hr />
+            <p class="commands-section-title">Name of Command(s)</p>
+            @foreach (var command in Model.ServicingCommands)
+            {
+                <div class="command-name-addr-container">
+                    <p class="command-name">@command.Name</p>
+                    <p class="command-addr">@string.Format("{0},{1}",command.Address, command.StateName)</p>
+                </div>
+            }
+        </div>
+
+        <img src="@Model.StripURL" class="npf-strip" />
+
+        <div class="dispatch-note-body">
+            <h4>Approval has been granted for the release of the following officer(s) for Escort and Guard services as
+                indicated above</h4>
+            <div class="dispatch-note-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>S/N</td>
+                            <td>AP/Force No</td>
+                            <td>Rank</td>
+                            <td>Name of Officer</td>
+                            <td>Command</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int officerCounter = 1; }
+                        @foreach (var officer in Model.PoliceOfficers)
+                        {
+                            <tr>
+                                <td>@(officerCounter++)</td>
+                                <td>@officer.IdentificationNumber</td>
+                                <td>@officer.RankName</td>
+                                <td>@officer.Name</td>
+                                <td>@officer.CommandName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="dispatch-note-footer">
+            <p class="footer-validation-msg">To validate this document, please visit: <i
+                    style="color: #2F4CB0;">@Model.ValidateDocumentUrl</i></p>
+            <div class="dispatch-note-footer-content-2">
+                <img src="@Model.PossapLogoUrl" style="width: 35px; height: auto; position: absolute; left: 0;" />
+                <p style="position: absolute; left: 39px;">Powered by Police Specialized Services Automation Project
+                    (POSSAP)</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

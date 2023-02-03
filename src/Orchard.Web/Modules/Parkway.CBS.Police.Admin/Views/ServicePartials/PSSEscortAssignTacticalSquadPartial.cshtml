@@ -1,0 +1,82 @@
+﻿@model Parkway.CBS.Police.Core.VM.DIGApprovalVM
+@{
+    Script.Require("PSS.Assign.Tactical.Squad.Script").AtFoot();
+}
+<script>
+    var assignedSquads = @Html.Raw(Json.Encode(Model.AssignedTacticalSquads));
+</script>
+<table class="items">
+    <thead>
+        <tr>
+            <th scope="col" id="titleHeader" colspan="3">Tactical squad to provide the service</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                <label for="squadDropdown">Select Squad</label>
+                <select id="squadDropdown" class="extend-width">
+                    <option value="" selected disabled>select a tactical squad</option>
+                    @foreach (var tacticalSquad in Model.TacticalSquads)
+                    {
+                        <option value="@tacticalSquad.Id">@tacticalSquad.Name</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <label for="officerQty">Number of officers to provide</label>
+                <input type="text" id="officerQty" class="extend-width" style="height:20px" />
+            </td>
+            <td>
+                <fieldset>
+                    <button type="button" id="addSquadBtn" style="position: absolute; top: 31px;">+ Add</button>
+                </fieldset>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="items" id="squadTable">
+    <tr>
+        <th>Tactical Squad</th>
+        <th>Number of officers</th>
+        <th>Actions</th>
+        <th></th>
+    </tr>
+    @if (Model.AssignedTacticalSquads != null && Model.AssignedTacticalSquads.Any())
+    {
+        int index = 0;
+        foreach (var assignedSquad in Model.AssignedTacticalSquads)
+        {
+
+            <tr>
+                <td>
+                    @assignedSquad.Command.Name
+                </td>
+                <td>
+                    @assignedSquad.NumberOfOfficers
+                </td>
+                <td>
+                    <a href="@Url.RouteUrl(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval.ViewFormations, new { squadAllocationId = assignedSquad.Id, squadAllocationGroupId = assignedSquad.EscortSquadAllocationGroupId })" target="_blank">View Formations</a>
+                </td>
+                <td>
+                    <span class="delete-squad-row" Title="Remove Item" onClick="removeSquad(@index)">Remove</span>
+                </td>
+            </tr>
+            index++;
+        }
+        <input type="hidden" name="AllocationGroupId" value="@Model.AssignedTacticalSquads.ElementAt(0).EscortSquadAllocationGroupId" />
+    }
+</table>
+@Html.AntiForgeryToken()
+<label for="comment">Comment</label>
+<textarea class="extend-width" name="Comment" placeholder="Leave a comment" id="comment" required></textarea>
+
+<div class="action-btns page-submit-btns">
+    <div>
+        <button class="btn btn-success" formaction="@Url.Action("ApproveRequest", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name)">@T("Submit")</button>
+    </div>
+    <div>
+        <button class="btn btn-danger" formaction="@Url.Action("RejectRequest", typeof(Parkway.CBS.Police.Admin.RouteName.PSSEscortApproval).Name)" formnovalidate>@T("Reject")</button>
+    </div>
+</div>

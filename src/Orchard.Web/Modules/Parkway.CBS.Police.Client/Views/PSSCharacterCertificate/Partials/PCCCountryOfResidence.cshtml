@@ -1,0 +1,28 @@
+﻿@model Parkway.CBS.Police.Core.VM.PCCDiasporaUserInputVM
+
+<div class="form-group">
+    <label for="residenceCountryData">Country of Residence<span class="required-sym">*</span></label>
+    <input required type="text" placeholder="Enter the country of residence" class="form-control" list="residenceCountries" id="residenceCountryData" name="residenceCountryData" spellcheck="false" autocomplete="off" value="@((Model.SelectedCountryOfResidence > 0) ? Model.Countries.Where(x => x.Id == Model.SelectedCountryOfResidence).SingleOrDefault().Name : "")" />
+    <datalist id="residenceCountries" name="residenceCountries">
+        @if (Model.Countries != null && Model.Countries.Any())
+        {
+            foreach (var country in Model.Countries)
+            {
+                <option data-value="@country.Id" value="@country.Name">@country.Name</option>
+            }
+        }
+    </datalist>
+    @if (Model.SelectedCountryOfResidence == 0)
+    {
+        <input type="hidden" name="SelectedCountryOfResidence" id="residenceCountryIdentifier"/>
+    }
+    else
+    {
+        <input type="hidden" name="SelectedCountryOfResidence" id="residenceCountryIdentifier" value="@(Model.SelectedCountryOfResidence)" />
+    }
+    <small class="form-text text-muted">Select your the country residence.</small>
+    <div class="container-fluid no-padding validation-msg">@Html.ValidationMessage("SelectedCountryOfResidence", "Selected country of residence is not valid", new { @class = "tiny-caption", @style = "color:#ff0000" })</div>
+</div>
+@{
+    Script.Require("PSS.PCC.Country.Of.Residence.Script").AtFoot();
+}

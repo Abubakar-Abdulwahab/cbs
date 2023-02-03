@@ -1,0 +1,84 @@
+﻿@model Parkway.CBS.Core.HelperModels.FlashObj
+
+
+@switch (Model.FlashType)
+{
+    case Parkway.CBS.Core.Models.Enums.FlashType.Warning:
+
+        <div class="container pss-flash warning-alert-bar" id="flash">
+            <div class="row no-padding no-margin">
+                <div class="container col-2 warning-icon-container no-margin no-padding">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/caution.svg"))" class="img img-responsive pss-flash-icon">
+                </div>
+                <div class="container col-9 no-margin no-padding warning-icon-details">
+                    <h5>@Model.MessageTitle!</h5>
+                    <p>@Model.Message</p>
+                </div>
+                <div class="col-1 delete-warning-alert-icon" id="closeFlash">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                </div>
+            </div>
+        </div>
+
+        break;
+    case Parkway.CBS.Core.Models.Enums.FlashType.Success:
+
+        <div class="container pss-flash success-alert-bar" id="flash">
+            <div class="row no-padding no-margin">
+                <div class="container col-2 success-icon-container no-margin no-padding">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreenTwo.svg"))" class="img img-responsive pss-flash-icon">
+                </div>
+                <div class="container col-9 no-margin no-padding success-icon-details">
+                    <h5>@Model.MessageTitle!</h5>
+                    <p>@Model.Message</p>
+                </div>
+                <div class="col-1 delete-success-alert-icon" id="closeFlash">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                </div>
+            </div>
+        </div>
+
+        break;
+    case Parkway.CBS.Core.Models.Enums.FlashType.Error:
+
+        <div class="container pss-flash error-alert-bar" id="flash">
+            <div class="row no-padding no-margin">
+                <div class="container col-2 error-icon-container no-margin no-padding">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/danger.svg"))" class="img img-responsive pss-flash-icon">
+                </div>
+                <div class="container col-9 no-margin no-padding error-icon-details">
+                    <h5>@Model.MessageTitle!</h5>
+                    <p>@Model.Message</p>
+                </div>
+                <div class="col-1 delete-error-alert-icon" id="closeFlash">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                </div>
+            </div>
+        </div>
+
+        break;
+    default:
+
+        <div class="container pss-flash info-alert-bar" id="flash">
+            <div class="row no-padding no-margin">
+                <div class="container col-2 info-icon-container no-margin no-padding">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/info.svg"))" class="img img-responsive pss-flash-icon">
+                </div>
+                <div class="container col-9 no-margin no-padding info-icon-details">
+                    <h5>@Model.MessageTitle!</h5>
+                    <p>@Model.Message</p>
+                </div>
+                <div class="col-1 delete-info-alert-icon" id="closeFlash">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/delete.svg"))" class="img img-responsive">
+                </div>
+            </div>
+        </div>
+        break;
+}
+
+<script>
+    $("#closeFlash").click(function (e) {
+        $("#flash").fadeOut("slow");
+        //$("#flash").empty();
+    });
+</script>

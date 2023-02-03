@@ -1,0 +1,106 @@
+﻿@model Parkway.CBS.Module.ViewModels.RevenueHeadCreateFromMDAView
+
+@{ Layout.Title = Model.MDAName == null ? @String.Format("Create Revenue Head") : @String.Format("{0} - Create Revenue Head", Model.MDAName);
+    Style.Require("CBS.MDA.Style");
+}
+
+@*@Display(Model.AdminBreadCrumb)*@
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.Hidden("CodePrefix", Model.CodePrefix);
+
+    <fieldset>
+        <div class="manage">@Html.ActionLink(T("Add another Revenue Head").ToString(), null, new { }, new { @href = "#", @class = "button primaryAction", @id = "anotherOne", @name = "Revenue Head" })</div>
+        <div><button type="submit">@T("Save")</button> <button type="button" value="@T("Cancel")" onclick="location.href='@Url.Action("List")'">@T("Cancel")</button></div>
+    </fieldset>
+    if (Model.Mdas.Count > 1)
+    {
+        <fieldset>
+            <br /><br />
+            @Html.DropDownList("slug", Model.Mdas, new { @style = "min-width: 100%;", @required = "true" })
+        </fieldset>
+    }
+    <div id="container">
+        @if (Model.RevenueHeadsCollection.Any())
+        {
+            int counter = Model.RevenueHeadsCollection.Count - 1;
+            <input type="hidden" id="Indexer" value="@Model.RevenueHeadsCollection.Count" />
+            foreach (var item in Model.RevenueHeadsCollection)
+            {
+                <table class="items" id="tab_@counter">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="titleHeader">Revenue Head</th>
+                            <th scope="col">
+                                @if (counter != 0)
+                                {
+                                    <p align="right">@Html.ActionLink(T("x").ToString(), null, new { }, new { @href = "#", @id = "remove_" + counter, @name = "remove", @class = "remove" })</p>
+                                }
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label id="mdaName">@T("Revenue Head Name")</label>
+                                @*@Html.TextBox("Name", null, new { @class = "text large", @required = true })*@
+                                <input required name="RevenueHeadsCollection[@counter].Name" min="1" class="text large" type="text" value="@item.Name">
+
+                                @Html.Hint(T("Add the name of your Revenue Head here. For example {0}.", "Land Use Charge"))
+                                @*@if(!ViewData.ModelState.IsValidField("RevenueHeadsCollection["+@counter+"].Name"))
+                                    {<span class="field-validation-error" style="color:#990808">@ViewData.ModelState["RevenueHeadsCollection["+@counter+"].Name"].Errors.First().ErrorMessage.ToString()</span>}*@
+                                @Html.ValidationMessage("RevenueHeadsCollection[" + counter + "].Name", new { @style = "color:#990808" })
+                            </td>
+                            <td>
+                                <label id="mdaCode">@T("Revenue Head Code")</label>
+                                @*@Html.TextBox("Code", null, new { @class = "text large", @required = true })*@
+                                <input required name="RevenueHeadsCollection[@counter].Code" min="1" class="text large" type="text" value="@item.Code">
+
+                                @Html.Hint(T("Add a Revenue Head identification code. For example {0}.", "MDA/FF/RH-SL/049"))
+                                @*@if (!ViewData.ModelState.IsValidField("RevenueHeadsCollection[" + @counter + "].Code"))
+                                    {<span class="field-validation-error" style="color:#990808">@ViewData.ModelState["RevenueHeadsCollection[" + @counter + "].Code"].Errors.First().ErrorMessage.ToString()</span>}*@
+                                @Html.ValidationMessage("RevenueHeadsCollection[" + counter + "].Code", new { @style = "color:#990808" })
+                                <input type="hidden" name="RevenueHeadsCollection.Index" value="@counter" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                counter--;
+            }
+        }
+        else
+        {
+            <input type="hidden" id="Indexer" value="1" />
+            <table class="items" id="tab_0">
+                <thead>
+                    <tr>
+                        <th scope="col" id="titleHeader">Revenue Head</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label id="mdaName">@T("Revenue Head Name")</label>
+                            @*@Html.TextBox("Name", null, new { @class = "text large", @required = true })*@
+                            @Html.TextBox("RevenueHeadsCollection[" + 0 + "].Name", null, new { @class = "text large", @required = true })
+                            @Html.Hint(T("Add the name of your Revenue Head here. For example {0}.", "Land Use Charge"))
+                        </td>
+                        <td>
+                            <label id="mdaCode">@T("Revenue Head Code")</label>
+                            @*@Html.TextBox("Code", null, new { @class = "text large", @required = true })*@
+                            @Html.TextBox("RevenueHeadsCollection[" + 0 + "].Code", null, new { @class = "text large", @required = true, @Value = Model.CodePrefix })
+                            @Html.Hint(T("Add a Revenue Head identification code. For example {0}.", "MDA/FF/RH-SL/049"))
+                            <input type="hidden" name="RevenueHeadsCollection.Index" value="0" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        <input type="hidden" name="MDAName" value="@Model.MDAName">
+    </div>
+}
+@{ Script.Include("http://code.jquery.com/jquery-1.8.3.min.js").AtFoot();
+    Script.Require("CBS.MDA.General.Script").AtFoot();
+}

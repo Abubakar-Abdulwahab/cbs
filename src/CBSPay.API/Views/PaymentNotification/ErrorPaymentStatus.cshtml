@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_EIRSHomePageLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <p style="color:red;"><b> An error occurred please try again</b></p>
+        <a class="btn btn-success" href="javascript: top.location = '@Url.Action("Pay","Home")';" style="">TRY AGAIN &#10004;</a>
+    </div>
+</body>
+</html>

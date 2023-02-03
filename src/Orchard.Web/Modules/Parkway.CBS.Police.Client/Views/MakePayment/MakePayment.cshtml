@@ -1,0 +1,322 @@
+﻿@model Parkway.CBS.Core.HelperModels.InvoiceGeneratedResponseExtn
+
+@{
+    Layout.Title = "Payment";
+
+    Script.Require("CBS.Popper.Script").AtFoot();
+    Script.Require("CBS.Bootstrap4.Script").AtFoot();
+    Script.Require("CBS.npf.main.Script").AtFoot();
+    Script.Require("CBS.MakePayment.Script").AtFoot();
+    Style.Require("CBS.Bootstrap");
+    Style.Require("CBS.NPF.Main");
+}
+<style>
+    .profileloader {
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid rgb(20, 158, 196);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        position: absolute;
+        margin: auto;
+        left: 48%;
+        top: 37%;
+        display: none;
+    }
+
+    .tiny-loader-caption {
+        display: none;
+        margin: unset;
+        padding: unset;
+        font-size: 12px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+</style>
+<div id="escort-content-one">
+    @Html.Partial("Partials\\HeaderPartial", Model.HeaderObj)
+    @Html.AntiForgeryToken()
+    <div class="container-fluid no-margin no-padding">
+        <div class="container-fluid breadcrumb-nav">
+            <ul class="nav justify-content-center escort-nav-list">
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Home</a>
+
+                </li>
+                <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="checked-task"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/checkedGreen.svg"))" /></span>
+                    <a href="#" class="nav-link">Search by Bin</a>
+                </li>
+               <li class="nav-item">
+                    <span style="float:right;transform:rotate(-90deg)"><img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/arrowDown.svg"))" class="right-arrow-icon" /></span>
+                </li>
+                <li class="nav-item">
+                    <span class="small-active-circle"></span>
+                    <a href="#" class="nav-link active-link">Make Payment</a>
+                </li>
+            </ul>
+            <div class="container-fluid active-center-link-container"><a href="#" class="active-center-link">Make Payment</a></div>
+        </div>
+        <div class="container-fluid payment-content-container">
+            <div class="container payment-container no-padding">
+                <div class="container payment-container-heading no-margin no-padding">
+                    
+                </div>
+                <div class="container-fluid no-margin no-padding">
+                    <div class="row no-margin no-padding">
+                        <div class="container col-md-8 no-margin no-padding">
+                            @if (!string.IsNullOrEmpty(Model.Message))
+                            {
+                                <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda;">
+                                    <small class="message" style="color:#155724;"><small style="white-space: pre-wrap; padding:10px 10px 10px 10px;font-size:14px">@Model.Message</small></small>
+                                </div>
+                            }
+
+                            @if (Model.InvoiceStatus == Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid)
+                            {
+                                <div id="infoFlashMsg" class="container alert-msg" style="background-color:#d4edda;">
+                                    <small class="message" style="color:#155724;"><small style="white-space: pre-wrap; padding:10px 10px 10px 10px;font-size:14px">This invoice has been fully paid for, there are no pending payments left.</small></small>
+                                </div>
+                            }
+                            <div class="container-fluid payment-invoice-info no-margin no-padding">
+                                <div class="row container-fluid no-margin no-padding">
+                                    <div class="container col-7 no-margin no-padding"><p>Invoice Number: @Model.InvoiceNumber</p></div>
+                                    <div class="container col-5 no-margin no-padding" style="text-align:right"><a download href="@Url.RouteUrl("P.ViewInvoice",new { BIN = Model.InvoiceNumber})" name="viewInvoice" class="active-link" style="text-decoration:none">@Url.RouteUrl("P.ViewInvoice")View Invoice</a> | <a href="@Url.RouteUrl("P.Invoice.ReceiptDetails",new { invoiceNumber = Model.InvoiceNumber})" class="active-link">View Receipts</a></div>
+                                </div>
+                                <div class="row container-fluid no-margin no-padding">
+                                    <div class="container col-6 no-margin no-padding"><p>Name:</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>@Model.Recipient</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>Invoice Amount Due:</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>&#x20A6;@String.Format("{0:n2}", @Model.AmountDue)</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>Invoice Desription:</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>@Model.InvoiceDesc</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>Payer ID:</p></div>
+                                    <div class="container col-6 no-margin no-padding"><p>@Model.PayerId</p></div>
+                                </div>
+                            </div>
+                             @if (Model.InvoiceStatus != Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid) {
+                            <div class="container-fluid other-payment-options no-margin no-padding">
+                                <div class="container-fluid no-margin no-padding">
+                                    <h5>Other Payment Methods</h5>
+                                </div>
+                                <div class="nav flex-column" id="payment-options-section">
+                                    <div class="nav-item active">
+                                        <div class="container-fluid no-margin no-padding" data-toggle="collapse" data-target="#bank-transfer-section">
+                                                <svg>
+                                                    <use xlink:href="/Themes/PoliceTheme/Styles/images/pssIcons.svg#mobileIcon"></use>
+                                                </svg>
+                                            BANK TRANSFER
+                                        </div>
+                                    </div>
+                                    <div class="collapse show" data-parent="#payment-options-section" id="bank-transfer-section">
+                                        <div class="container-fluid no-margin no-padding other-payment-options-details">
+                                            <p class="no-padding no-margin details-header">Follow the steps below to make payments on your mobile banking platforms:</p>
+                                            <ul class="no-margin no-padding">
+                                                <li>Login to your bank mobile application and select transfer to bank</li>
+                                                <li>Select Parkway Readycash as the receiving bank and input your invoice number e.g 1000177970 as the receiving bank account number.</li>
+                                                 <li>Enter the exact amount to pay in the “Amount to transfer” field i.e &#x20A6;@String.Format("{0:n2}", @Model.AmountDue) and proceed.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <div class="container-fluid no-margin no-padding" data-toggle="collapse" data-target="#pos-transfer-section">
+                                            <svg>
+                                                <use xlink:href="/Themes/PoliceTheme/Styles/images/pssIcons.svg#payPosIcon"></use>
+                                            </svg>
+                                            POS, ATM, BANK BRANCH
+                                        </div>
+                                    </div>
+                                    <div class="collapse" data-parent="#payment-options-section" id="pos-transfer-section">
+                                        <div class="container-fluid no-margin no-padding other-payment-options-details">
+                                            <p class="no-padding no-margin details-header">Follow the steps below to make payment at any bank branch:</p>
+                                            <ul class="no-margin no-padding">
+                                                <li>Go to any bank branch and give the teller your invoice number.</li>
+                                                <li>Ask the teller to select Bank3D or Ebills- Pay to post payment. You will be issued a receipt and the payment will be uploaded on the POSSAP portal immediately.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @*<div class="nav-item">
+                                        <div class="container-fluid no-margin no-padding" data-toggle="collapse" data-target="#atm-transfer-section">
+                                            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme,"/Styles/images/payATM.svg"))">
+                                            ATM
+                                        </div>
+                                    </div>
+                                    <div class="collapse" data-parent="#payment-options-section" id="atm-transfer-section">
+                                        <div class="container-fluid no-margin no-padding other-payment-options-details">
+                                            <p class="no-padding no-margin details-header">Follow the steps below to make payments on your mobile banking platforms:</p>
+                                            <ul class="no-margin no-padding">
+                                                <li>Login to your bank mobile application and select transfer to bank</li>
+                                                <li>Enter the exact amount to pay in the ‘Amount to transfer’ field i.e &#x20A6;@String.Format("{0:n2}", @Model.AmountDue) and proceed.</li>
+                                            </ul>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div> }
+                        </div>
+                        <div class="container col-md-4 no-margin no-padding">
+                            <div class="container-fluid payment-invoice-summary no-margin no-padding">
+                                <div class="container-fluid no-margin no-padding">
+                                    <p class="payment-invoice-summary-header no-padding no-margin">Summary</p>
+                                </div>
+                                <div class="container-fluid no-margin no-padding">
+                                    <p>Amount Due</p>
+                                    <p>&#x20A6;@String.Format("{0:n2}", @Model.AmountDue)</p>
+                                    <form method="post" id="netPayForm">
+                                        <input type="hidden" name="CustomerName" id="CustomerName" value="@Model.Recipient" />
+                                        <input type="hidden" name="MerchantUniqueId" id="MerchantUniqueId" value="@Model.MerchantKey" />
+                                        <input type="hidden" name="Color" id="Color" value="@Model.NetPayColorCode" />
+                                        <input type="hidden" name="Mode" id="Mode" value="@Model.NetPayMode" />
+                                        <input type="hidden" name="Currency" id="Currency" value="@Model.NetPayCurrencyCode" />
+                                        <input type="hidden" name="Email" id="Email" value="@Model.Email" />
+                                        <input type="hidden" name="PhoneNumber" id="PhoneNumber" value="@Model.PhoneNumber" />
+                                        <input type="hidden" name="InvoiceNumber" id="InvoiceNumber" value="@Model.InvoiceNumber" />
+                                        <input type="hidden" name="InvoiceId" id="InvoiceId" value="@Model.InvoiceId" />
+                                        <input type="hidden" name="Description" id="Description" value="@Model.Description" />
+                                         @if (Model.InvoiceStatus != Parkway.CBS.Core.Models.Enums.InvoiceStatus.Paid)
+                                         {
+                                        <button type="button" class="btn btn-block btn-primary" onclick="getRef()">Pay Online</button>
+                                         }
+                                    </form>
+                                    @*<button type="button" onclick="getRef()" class="btn btn-block btn-primary">Pay Online</button>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="summary-modal" style="display:none;align-items:center;flex-direction:row;justify-content:center;z-index:3;position:fixed;width:100%;height:100%;background-color:rgba(50,50,50,0.9);top:0;left:0;right:0;bottom:0">
+        <div style="position:relative;background-color:white;height:auto;width:550px;border-radius:5px 5px 5px 5px;box-shadow:0 0 2px 2px rgba(255,255,255,0.2)">
+            <div style="padding:35px">
+                <p style="text-align:center;font-size: 20px">Find below your payment reference. Please copy and store it somewhere</p>
+                <p style="text-align:center;font-weight:500;font-size:35px;letter-spacing:2px;padding:20px 0px" id="refText">REFERENCE</p>
+                <span name="profileloader" id="profileloader" class="profileloader" style="position:absolute;margin:auto;z-index:10;bottom:-45px"></span>
+                <button class="btn btn-block" style="bottom:0;background-color:#2F4CB0; color:#FFFFFF; height:53px;" onclick="startPay()" id="proceedBtn">Proceed to make payment</button>
+                <center><p class="tiny-loader-caption">Waiting for the payment gateway</p><small id="progressDots"></small></center>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/media/Assets/bank3d.min.js"></script>
+    <script type="text/javascript">
+        var redirecting = true;
+        var summaryModal = $("#summary-modal");
+        var refText = $("#refText");
+        var clicked = false;
+        var refNumber = "";
+        var progressDots = document.getElementById("progressDots");
+        var counter = -5;
+        function getRef(){
+        if(!clicked){
+        clicked = true;
+                var token = $("input[name=__RequestVerificationToken]").val();
+                var url = '/p/x/getreferencenumber';
+                var inputAmount = "@String.Format("{0:n2}", @Model.AmountDue)";
+                var amountValue = inputAmount.split(",").join("") * 1;
+                var invoiceId = document.forms["netPayForm"].InvoiceId.value;
+                var invoiceNumber = document.forms["netPayForm"].InvoiceNumber.value;
+                var requestData = { "invoiceId": invoiceId, "invoiceNumber": invoiceNumber, "__RequestVerificationToken": token };
+                 $.post(url, requestData, function (data) {
+                     if (data.StatusCode == 205) { location.reload(); return; }
+                     refNumber = data.ResponseObject;
+                        refText.text(refNumber);
+                        summaryModal.css("display","flex");
+                    }).fail(function () { })
+                  .always(function () {
+                      clicked = false;
+                });
+        }
+        }
+        function startPay() {
+            if (!clicked) {
+                clicked = true;
+                $("#proceedBtn").prop("disabled",true);
+                showProgress();
+                var inputAmount = "@String.Format("{0:n2}", @Model.AmountDue)";
+                var amountValue = inputAmount.split(",").join("") * 100;
+                var mode = document.forms["netPayForm"].Mode.value;
+                var merchantKeyValue = document.forms["netPayForm"].MerchantUniqueId.value;
+                var email = document.forms["netPayForm"].Email.value;
+                var phoneNumber = document.forms["netPayForm"].PhoneNumber.value;
+                var color = document.forms["netPayForm"].Color.value;
+                var currency = document.forms["netPayForm"].Currency.value;
+                var intervalId = 0;
+                    $("#profileloader").css("display","block");
+                    $(".tiny-loader-caption").css("display","inline-block");
+                    const payment = Bank3D.createPayment({
+                        reference: refNumber,
+                        currencyCode: currency,
+                        merchantKey: merchantKeyValue,
+                        amount: parseInt(amountValue),
+                        email: email,
+                        phone: phoneNumber,
+                        color: color,
+                        mode: mode,
+                        onReady: () => {
+                            clicked = false;
+                            showProgress();
+                             summaryModal.css("display","none");
+                             $("#proceedBtn").prop("disabled",false)
+                             $("#profileloader").css("display","none");
+                             $(".tiny-loader-caption").css("display","none");
+                        },
+                        callback: () => {
+                            this.disabled = false;
+                            window.location.href = '/p/notify/' + refNumber;
+                        },
+                        onClose: () => {
+                            this.disabled = false;
+                            clicked = false;
+                            clearInterval(intervalId);
+                            summaryModal.css("display","none");
+                            $("#profileloader").css("display","none");
+                            $(".tiny-loader-caption").css("display","none");
+                        }
+                    });
+                    payment.open();
+            }
+        }
+       function showProgress() {
+        if(clicked){
+         intervalId = setInterval(showProgressDots, 500);
+            }
+        if(!clicked){
+            clearInterval(intervalId);
+            progressDots.innerHTML = "";
+            }
+        }
+        function showProgressDots() {
+            if (counter >= 0) {
+                progressDots.innerHTML = ""; counter = -5;
+            } else {
+                progressDots.innerHTML += "."; counter++;
+            }
+        }
+    </script>
+    @Html.Partial("Partials\\FooterPartial")
+</div>
+

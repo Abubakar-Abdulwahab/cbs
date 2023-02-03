@@ -1,0 +1,11 @@
+﻿Name: Parkway.CBS.Payment.ClientWeb
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Parkway.CBS.Payment.ClientWeb:
+        Description: Description for feature Parkway.CBS.Payment.ClientWeb.
+		Dependencies: Parkway.CBS.Module.Web

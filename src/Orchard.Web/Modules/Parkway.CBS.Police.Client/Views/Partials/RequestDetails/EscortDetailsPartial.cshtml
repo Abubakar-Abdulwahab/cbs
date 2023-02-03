@@ -1,0 +1,45 @@
+﻿@model Parkway.CBS.Police.Core.VM.EscortRequestVM
+
+<div class="col-md-6">
+    <p class="mb-0 title">Police Command:</p>
+    <p class="details-content">@Model.CommandName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Number of Officers Required:</p>
+    <p class="details-content">@Model.NumberOfOfficers</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Duration</p>
+    <p class="details-content">@Model.StartDate - @Model.EndDate</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Duration (Days)</p>
+    <p class="details-content">@Model.DurationNumber</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Service Category</p>
+    <p class="details-content">@Model.ServiceCategoryName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Service Category Type</p>
+    <p class="details-content">@Model.ServiceCategoryTypeName</p>
+</div>
+<div class="col-md-6">
+    <p class="mb-0 title">Requester Category</p>
+    <p class="details-content">@Model.TaxEntitySubSubCategoryName</p>
+</div>
+@if (Model.ShowExtraFieldsForServiceCategoryType)
+{
+    <div class="col-md-6">
+        <p class="mb-0 title">Origin State</p>
+        <p class="details-content">@Model.OriginStateName</p>
+    </div>
+    <div class="col-md-6">
+        <p class="mb-0 title">Origin LGA</p>
+        <p class="details-content">@Model.OriginLGAName</p>
+    </div>
+    <div class="col-md-6">
+        <p class="mb-0 title">Origin Address</p>
+        <p class="details-content">@Model.AddressOfOriginLocation</p>
+    </div>
+}

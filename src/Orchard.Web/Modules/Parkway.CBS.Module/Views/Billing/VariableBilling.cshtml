@@ -1,0 +1,94 @@
+﻿@using System.Globalization;
+@model Parkway.CBS.Core.HelperModels.BillingFrequencyModel
+@{
+    var months = DateTimeFormatInfo.CurrentInfo.MonthNames;
+    var days = DateTimeFormatInfo.CurrentInfo.DayNames;
+    var _days = Enumerable.Range(1, 30);
+    var _weeks = Enumerable.Range(1, 28);
+    Style.Require("CBS.Billing.Style");
+    Style.Require("CBS.MDA.Style.BootStrap");
+    Style.Require("Style.Datepicker");
+
+    Script.Require("CBS.MDA.BootstrapDatepicker.Script");
+    Script.Require("CBS.MDA.Bootstrap.Script");
+    Script.Require("CBS.MDA.BillingDatepicker.Script");
+}
+<style>
+    input[type=checkbox] {
+        height: 20px;
+        width: 20px;
+        vertical-align: text-top;
+    }
+</style>
+
+<div class="variable_billing">
+
+    <!-- #region years -->
+
+    <div class="form-group col-md-4 years" id="v_year">
+        <label class="control-label">Repeat every: </label>
+        <select class="recurring_variable_control form-control year" name="VariableBill.Interval">
+            <option value="" selected disabled>Select no of years</option>
+            @for (int i = 1; i <= 30; i++)
+            {
+                <option value="@i" @(Model.VariableBill != null && Model.VariableBill.Interval == @i?"selected":"")>@i</option>
+            }
+        </select>
+        <span>Year(s)</span>
+        @Html.ValidationMessage("Variable", "", new { @style = "color:#990808" })
+    </div>
+
+    <!-- #endregion -->
+
+    <!-- #region Month -->
+
+    <div class="form-group col-md-4 month" id="v_month">
+        <label class="control-label">Repeat every: </label>
+        <select class="recurring_variable_control form-control month" name="VariableBill.Interval">
+            <option value="" selected disabled>Select no of months</option>
+            @for (int i = 1; i <= 30; i++)
+            {
+                <option value="@i" @(Model.VariableBill != null && Model.VariableBill.Interval == @i?"selected":"")>@i</option>
+            }
+        </select>
+        <span>Month(s)</span>
+        @Html.ValidationMessage("Variable", "", new { @style = "color:#990808" })
+    </div>
+
+    <!-- #endregion -->
+
+    <!-- #region week -->
+
+    <div class="form-group col-md-4 week" id="v_week">
+        <label class="control-label">Repeat every: </label>
+        <select class="recurring_variable_control form-control week" name="VariableBill.Interval">
+            <option value="" selected disabled>Select no of weeks</option>
+            @for (int i = 1; i <= 30; i++)
+            {
+                <option value="@i" @(Model.VariableBill != null && Model.VariableBill.Interval == @i?"selected":"")>@i</option>
+            }
+        </select>
+        <span>Week(s)</span>
+        @Html.ValidationMessage("Variable", "", new { @style = "color:#990808" })
+    </div>
+
+    <!-- #endregion -->
+
+    <!-- #region days -->
+
+    <div class="form-group col-md-4 days" id="v_day">
+        <label class="control-label">Repeat every: </label>
+        <select class="recurring_variable_control form-control day" name="VariableBill.Interval">
+            <option value="" selected disabled>Select no of days</option>
+            @for (int i = 1; i <= 30; i++)
+            {
+                <option value="@i" @(Model.VariableBill != null && Model.VariableBill.Interval == @i?"selected":"")>@i</option>
+            }
+        </select>
+        <span>Day(s)</span>
+        @Html.ValidationMessage("Variable", "", new { @style = "color:#990808" })
+    </div>
+</div>
+@{
+    Script.Require("CBS.Billing.Script").AtFoot();
+}
