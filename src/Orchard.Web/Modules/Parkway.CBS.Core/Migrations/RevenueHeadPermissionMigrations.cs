@@ -23,23 +23,23 @@ namespace Parkway.CBS.Core.Migrations
         }
 
 
-        public int UpdateFrom1()
-        {
-            string tableName = SchemaBuilder.TableDbName(typeof(RevenueHeadPermission).Name);
-            string nameCol = nameof(RevenueHeadPermission.Name);
-            string descriptionCol = nameof(RevenueHeadPermission.Description);
-            string isActiveCol = nameof(RevenueHeadPermission.IsActive);
-            string lastUpdatedByCol = nameof(RevenueHeadPermission.LastUpdatedBy) + "_Id";
-            string createdAtCol = nameof(RevenueHeadPermission.CreatedAtUtc);
-            string updatedAtCol = nameof(RevenueHeadPermission.UpdatedAtUtc);
+        //public int UpdateFrom1()
+        //{
+        //    string tableName = SchemaBuilder.TableDbName(typeof(RevenueHeadPermission).Name);
+        //    string nameCol = nameof(RevenueHeadPermission.Name);
+        //    string descriptionCol = nameof(RevenueHeadPermission.Description);
+        //    string isActiveCol = nameof(RevenueHeadPermission.IsActive);
+        //    string lastUpdatedByCol = nameof(RevenueHeadPermission.LastUpdatedBy) + "_Id";
+        //    string createdAtCol = nameof(RevenueHeadPermission.CreatedAtUtc);
+        //    string updatedAtCol = nameof(RevenueHeadPermission.UpdatedAtUtc);
 
-            string queryString = $"INSERT INTO {tableName} ([{nameCol}],[{descriptionCol}],[{isActiveCol}],[{lastUpdatedByCol}],[{createdAtCol}],[{updatedAtCol}]) VALUES ({"'" + EnumExpertSystemPermissions.CanMakePayePayments + "'"},{"'" + EnumExpertSystemPermissions.CanMakePayePayments.ToDescription() + "'"},{"'" + true + "'"},{2},{"'" + DateTime.Now.ToString() + "'"},{"'" + DateTime.Now.ToString() + "'"});";
+        //    string queryString = $"INSERT INTO {tableName} ([{nameCol}],[{descriptionCol}],[{isActiveCol}],[{lastUpdatedByCol}],[{createdAtCol}],[{updatedAtCol}]) VALUES ({"'" + EnumExpertSystemPermissions.CanMakePayePayments + "'"},{"'" + EnumExpertSystemPermissions.CanMakePayePayments.ToDescription() + "'"},{"'" + true + "'"},{2},{"'" + DateTime.Now.ToString() + "'"},{"'" + DateTime.Now.ToString() + "'"});";
 
-            queryString += $"INSERT INTO {tableName} ([{nameCol}],[{descriptionCol}],[{isActiveCol}],[{lastUpdatedByCol}],[{createdAtCol}],[{updatedAtCol}]) VALUES ({"'" + EnumExpertSystemPermissions.GenerateInvoice + "'"},{"'" + EnumExpertSystemPermissions.GenerateInvoice.ToDescription() + "'"},{"'" + true + "'"},{2},{"'" + DateTime.Now.ToString() + "'"},{"'" + DateTime.Now.ToString() + "'"});";
+        //    queryString += $"INSERT INTO {tableName} ([{nameCol}],[{descriptionCol}],[{isActiveCol}],[{lastUpdatedByCol}],[{createdAtCol}],[{updatedAtCol}]) VALUES ({"'" + EnumExpertSystemPermissions.GenerateInvoice + "'"},{"'" + EnumExpertSystemPermissions.GenerateInvoice.ToDescription() + "'"},{"'" + true + "'"},{2},{"'" + DateTime.Now.ToString() + "'"},{"'" + DateTime.Now.ToString() + "'"});";
 
-            SchemaBuilder.ExecuteSql(queryString);
-            return 2;
-        }
+        //    SchemaBuilder.ExecuteSql(queryString);
+        //    return 2;
+        //}
 
     }
 }

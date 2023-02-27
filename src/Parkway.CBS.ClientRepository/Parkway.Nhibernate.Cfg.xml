@@ -32,7 +32,7 @@
     <property name="dialect" value="NHibernate.Dialect.MsSql2008Dialect" />
     <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
     <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
-    <property name="connection.connection_string" value="Server=(local);initial catalog=PSSCentralBillingSystem;User ID=sa;Password=password@1;Connection Timeout=100000"/>
+    <property name="connection.connection_string" value="Server=SIR-ABUBAKAR\SQLEXPRESS;initial catalog=PSSCentralBillingSystem;User ID=Sir-Abubakar;Password=password;Connection Timeout=100000"/>
     <property name="connection.isolation" value="Serializable" />
     <property name="show_sql" value="false" />
     <!--<property name="proxyfactory.factory_class"
@@ -46,7 +46,7 @@
     <property name="dialect" value="NHibernate.Dialect.MsSql2008Dialect" />
     <property name="connection.provider" value="NHibernate.Connection.DriverConnectionProvider" />
     <property name="connection.driver_class" value="NHibernate.Driver.SqlClientDriver" />
-    <property name="connection.connection_string" value="Server=(local);initial catalog=PSSCentralBillingSystem;User ID=sa;Password=password@1;Connection Timeout=100000"/>
+    <property name="connection.connection_string" value="Server=SIR-ABUBAKAR\SQLEXPRESS;initial catalog=PSSCentralBillingSystem;User ID=Sir-Abubakar;Password=password;Connection Timeout=100000"/>
     <property name="connection.isolation" value="Serializable" />
     <property name="show_sql" value="false" />
     <!--<property name="proxyfactory.factory_class"

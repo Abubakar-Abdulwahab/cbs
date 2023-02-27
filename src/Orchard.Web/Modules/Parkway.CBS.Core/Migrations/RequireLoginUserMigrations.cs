@@ -58,58 +58,59 @@ namespace Parkway.CBS.Core.Migrations
         }
 
 
-        //public int UpdateFrom3()
-        //{
-        //    string tableName = SchemaBuilder.TableDbName(typeof(CBSUser).Name);
-        //    string referencedTable = SchemaBuilder.TableDbName(typeof(TaxEntity).Name);
+        public int UpdateFrom3()
+        {
+            string tableName = SchemaBuilder.TableDbName(typeof(CBSUser).Name);
+            string referencedTable = SchemaBuilder.TableDbName(typeof(TaxEntity).Name);
 
-        //    string queryString = string.Format("UPDATE cbsuser SET cbsUser.PhoneNumber = taxEnt.PhoneNumber, cbsUser.Email = taxEnt.Email, cbsUser.Address = taxEnt.Address, cbsUser.IsAdministrator = 1 FROM {0} cbsuser INNER JOIN {1} AS taxEnt ON cbsuser.TaxEntity_Id = taxEnt.Id;",tableName, referencedTable);
-        //    SchemaBuilder.ExecuteSql(queryString);
+            string queryString = string.Format("UPDATE cbsuser SET cbsUser.PhoneNumber = taxEnt.PhoneNumber, cbsUser.Email = taxEnt.Email, cbsUser.Address = taxEnt.Address, cbsUser.IsAdministrator = 1 FROM {0} cbsuser INNER JOIN {1} AS taxEnt ON cbsuser.TaxEntity_Id = taxEnt.Id;", tableName, referencedTable);
+            SchemaBuilder.ExecuteSql(queryString);
 
-        //    return 4;
-        //}
-
-
-        //public int UpdateFrom4()
-        //{
-        //    try
-        //    {
-        //        Node setting = Util.GetTenantConfigBySiteName(_orchardServices.WorkContext.CurrentSite.SiteName)
-        //             .Node.Where(k => k.Key == TenantConfigKeys.SiteNameOnFile.ToString()).FirstOrDefault();
-
-        //        if (setting != null)
-        //        {
-        //            if (setting.Value == "CBSPolice" || setting.Value.Contains("POSSAP") || setting.Value.Contains("Police"))
-        //            {
-        //                string tableName = SchemaBuilder.TableDbName(typeof(CBSUser).Name);
-
-        //                string queryString = string.Format("ALTER TABLE {0} ALTER COLUMN PhoneNumber nvarchar(11) NOT NULL", tableName);
-        //                SchemaBuilder.ExecuteSql(queryString);
-
-        //                queryString = string.Format("ALTER TABLE {0} ALTER COLUMN Email nvarchar(255) NOT NULL", tableName);
-        //                SchemaBuilder.ExecuteSql(queryString);
-
-        //                queryString = string.Format("ALTER TABLE {0} ALTER COLUMN Address nvarchar(500) NOT NULL", tableName);
-        //                SchemaBuilder.ExecuteSql(queryString);
-
-        //                queryString = string.Format("ALTER TABLE {0} ALTER COLUMN IsAdministrator bit NOT NULL", tableName);
-        //                SchemaBuilder.ExecuteSql(queryString);
-        //            }
-        //        }
-            
-        //    }catch(Exception exception)
-        //    {
-        //        Logger.Error(exception, exception.Message + " SN " + _orchardServices.WorkContext.CurrentSite.SiteName);
-        //        throw;
-        //    }
-        //    return 5;
-        //}
+            return 4;
+        }
 
 
-        //public int UpdateFrom5()
-        //{
-        //    SchemaBuilder.AlterTable(typeof(CBSUser).Name, table => table.AddColumn(nameof(CBSUser.IsActive), System.Data.DbType.Boolean, column => column.NotNull().WithDefault(true)));
-        //    return 6;
-        //}
+        public int UpdateFrom4()
+        {
+            try
+            {
+                Node setting = Util.GetTenantConfigBySiteName(_orchardServices.WorkContext.CurrentSite.SiteName)
+                     .Node.Where(k => k.Key == TenantConfigKeys.SiteNameOnFile.ToString()).FirstOrDefault();
+
+                if (setting != null)
+                {
+                    if (setting.Value == "CBSPolice" || setting.Value.Contains("POSSAP") || setting.Value.Contains("Police"))
+                    {
+                        string tableName = SchemaBuilder.TableDbName(typeof(CBSUser).Name);
+
+                        string queryString = string.Format("ALTER TABLE {0} ALTER COLUMN PhoneNumber nvarchar(11) NOT NULL", tableName);
+                        SchemaBuilder.ExecuteSql(queryString);
+
+                        queryString = string.Format("ALTER TABLE {0} ALTER COLUMN Email nvarchar(255) NOT NULL", tableName);
+                        SchemaBuilder.ExecuteSql(queryString);
+
+                        queryString = string.Format("ALTER TABLE {0} ALTER COLUMN Address nvarchar(500) NOT NULL", tableName);
+                        SchemaBuilder.ExecuteSql(queryString);
+
+                        queryString = string.Format("ALTER TABLE {0} ALTER COLUMN IsAdministrator bit NOT NULL", tableName);
+                        SchemaBuilder.ExecuteSql(queryString);
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, exception.Message + " SN " + _orchardServices.WorkContext.CurrentSite.SiteName);
+                throw;
+            }
+            return 5;
+        }
+
+
+        public int UpdateFrom5()
+        {
+            SchemaBuilder.AlterTable(typeof(CBSUser).Name, table => table.AddColumn(nameof(CBSUser.IsActive), System.Data.DbType.Boolean, column => column.NotNull().WithDefault(true)));
+            return 6;
+        }
     }
 }

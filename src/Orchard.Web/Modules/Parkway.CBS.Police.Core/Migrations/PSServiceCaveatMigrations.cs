@@ -33,9 +33,9 @@ namespace Parkway.CBS.Police.Core.Migrations
         {
             string tableName = SchemaBuilder.TableDbName(typeof(PSServiceCaveat).Name);
             var services = _orchardServices.TransactionManager.GetSession().Query<PSService>().Where(x => x.IsActive).Select(x => new DTO.PSServiceVM { ServiceId = x.Id, ServiceType = x.ServiceType });
-            foreach(var service in services)
+            foreach (var service in services)
             {
-                if(service.ServiceType == (int)Models.Enums.PSSServiceTypeDefinition.CharacterCertificate)
+                if (service.ServiceType == (int)Models.Enums.PSSServiceTypeDefinition.CharacterCertificate)
                 {
                     string queryString = $"INSERT INTO {tableName}({nameof(PSServiceCaveat.CaveatHeader)}, {nameof(PSServiceCaveat.CaveatContent)}, {nameof(PSServiceCaveat.Service)}_Id, {nameof(PSServiceCaveat.IsActive)}, {nameof(PSServiceCaveat.CreatedAtUtc)}, {nameof(PSServiceCaveat.UpdatedAtUtc)}) VALUES(:caveatHeader, :caveatContent, :serviceId, :isActive, :createdAt, :updatedAt)";
                     var sqlQuery = _orchardServices.TransactionManager.GetSession().CreateSQLQuery(queryString);

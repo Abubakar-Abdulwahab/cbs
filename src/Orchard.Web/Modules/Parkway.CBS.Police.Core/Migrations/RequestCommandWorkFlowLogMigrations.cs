@@ -32,7 +32,7 @@ namespace Parkway.CBS.Police.Core.Migrations
 
 
             SchemaBuilder.ExecuteSql($"ALTER TABLE[dbo].[{tableName}] ADD constraint RequestCommandWorkFlowLog_Unique_Constraint UNIQUE([{nameof(RequestCommandWorkFlowLog.Request)}_Id], [{nameof(RequestCommandWorkFlowLog.Command)}_Id], [{nameof(RequestCommandWorkFlowLog.DefinitionLevel)}_Id])");
-            ///
+
             return 1;
         }
 

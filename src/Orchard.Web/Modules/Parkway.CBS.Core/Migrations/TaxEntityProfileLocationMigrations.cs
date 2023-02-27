@@ -76,7 +76,7 @@ namespace Parkway.CBS.Core.Migrations
         public int UpdateFrom2()
         {
             SchemaBuilder.AlterTable(typeof(TaxEntityProfileLocation).Name, table => table.AddColumn(nameof(TaxEntityProfileLocation.IsDefault), System.Data.DbType.Boolean, col => col.Nullable()));
-            
+
             return 3;
         }
 

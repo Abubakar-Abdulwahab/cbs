@@ -259,9 +259,9 @@ namespace Parkway.CBS.Police.Core.Migrations
             string tableName = SchemaBuilder.TableDbName(typeof(PSSCharacterCertificateDetails).Name);
             string sourceTableName = "Parkway_CBS_Core_" + typeof(CBS.Core.Models.Country).Name;
 
-            SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfOrigin)+"_Id", System.Data.DbType.Int32, column => column.Nullable()));
+            SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfOrigin) + "_Id", System.Data.DbType.Int32, column => column.Nullable()));
             SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfOriginValue), System.Data.DbType.String, column => column.Nullable()));
-            SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfPassport)+"_Id", System.Data.DbType.Int32, column => column.Nullable()));
+            SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfPassport) + "_Id", System.Data.DbType.Int32, column => column.Nullable()));
             SchemaBuilder.AlterTable(typeof(PSSCharacterCertificateDetails).Name, table => table.AddColumn(nameof(PSSCharacterCertificateDetails.CountryOfPassportValue), System.Data.DbType.String, column => column.Nullable()));
 
 

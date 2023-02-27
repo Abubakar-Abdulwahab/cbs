@@ -25,7 +25,7 @@ namespace Parkway.CBS.Police.Core.Migrations
 
         public int UpdateFrom1()
         {
-            SchemaBuilder.AlterTable(typeof(PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog).Name, table => table.AddColumn(nameof(PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog.Invoice)+"_Id", System.Data.DbType.Int64, column => column.Nullable()));
+            SchemaBuilder.AlterTable(typeof(PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog).Name, table => table.AddColumn(nameof(PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog.Invoice) + "_Id", System.Data.DbType.Int64, column => column.Nullable()));
 
             string tableName = SchemaBuilder.TableDbName(typeof(PSSProposedRegularizationUnknownPoliceOfficerDeploymentLog).Name);
             string requestInvoiceTableName = SchemaBuilder.TableDbName(typeof(PSSRequestInvoice).Name);
