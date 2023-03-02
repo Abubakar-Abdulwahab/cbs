@@ -129,6 +129,18 @@ namespace Parkway.CBS.Police.API
                         action = "ValidateUserName"
                     }
                 },
+                  new HttpRouteDescriptor {
+                    Name = "P.API.PSSExtract.GetPoliceExtractFormData",
+                    Priority = -10,
+                    RouteTemplate = "api/v1/pss/{controller}/formData",
+                    Defaults = new {
+                        area = "Parkway.CBS.Police.API",
+                        controller = "PSSExtract",
+                        action = "GetPSSFormData"
+                    }
+                },
+                   
+                
             };
         }
 
